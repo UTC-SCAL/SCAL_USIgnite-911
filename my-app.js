@@ -21,8 +21,8 @@ function initPage() {
                     if (spl[i].indexOf(",") === -1) {
                         continue;
                     }
-                    var lat = spl[i].split(", ")[0];
-                    var lon = spl[i].split(", ")[1];
+                    var lat = spl[i].split(",")[0];
+                    var lon = spl[i].split(",")[1];
                     markers[i] = new google.maps.Marker(
                         {
                             position: new google.maps.LatLng(lat, lon),
@@ -37,7 +37,7 @@ function initPage() {
                             infowindow.setContent(content);
                             infowindow.open(map, marker);
                         };
-                    })(markers[i], "<p>" + spl[i].split(", ")[2] + "</p>", info_windows[i]));
+                    })(markers[i], "<p>" + spl[i].split(",")[2] + "<br>" + spl[i].split(",")[3] + "</p>", info_windows[i]));
 
                     // markers[i].addListener('click', function () {
                     //     info_windows[i].open(map, markers[i]);
