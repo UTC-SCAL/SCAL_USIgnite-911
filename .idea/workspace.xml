@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09c8b50e-0c0d-40a8-83a5-bcefebc4b8eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/my-app.js" afterPath="$PROJECT_DIR$/my-app.js" />
       <change beforePath="$PROJECT_DIR$/pos.txt" afterPath="$PROJECT_DIR$/pos.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/pos.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="39" lean-forward="false" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+              <caret line="0" column="74" lean-forward="false" selection-start-line="0" selection-start-column="74" selection-end-line="0" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -198,12 +197,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1525701518338</updated>
-      <workItem from="1525701519621" duration="3272000" />
+      <workItem from="1525701519621" duration="3313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3272000" />
+    <option name="totallyTimeSpent" value="3313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -268,7 +267,7 @@
     <entry file="file://$PROJECT_DIR$/pos.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="39" lean-forward="false" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <caret line="0" column="74" lean-forward="false" selection-start-line="0" selection-start-column="74" selection-end-line="0" selection-end-column="74" />
           <folding />
         </state>
       </provider>
