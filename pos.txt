@@ -1,2 +1,2 @@
-35, -85
-35, -86
+35, -85, An accident happened here. This is some information
+35, -86, Another accident happened here. This is the second entry in the txt file
