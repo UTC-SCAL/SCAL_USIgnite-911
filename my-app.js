@@ -7,6 +7,8 @@ function initPage() {
         };
     var map = new google.maps.Map(document.getElementById("map"), options);
     var request = new XMLHttpRequest();
+    var markers = [];
+    var info_windows = [];
     request.open("GET", "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/pos.txt", true);
     request.send(null);
     request.onreadystatechange = function () {
@@ -15,18 +17,13 @@ function initPage() {
             if (type.indexOf("text") !== 1) {
                 var spl = request.responseText.split("\n");
                 for (var i in spl) {
-                    if (spl[i] === undefined) {
-                        break;
+                    // Ignore lines that are empty:
+                    if (spl[i].indexOf(",") === -1) {
+                        continue;
                     }
                     var lat = spl[i].split(", ")[0];
                     var lon = spl[i].split(", ")[1];
-                    var content = "<p>" + spl[i].split(", ")[2] + "</p>";
-                    var infowindow = new google.maps.InfoWindow({
-                        content: content
-                    });
-
-                    // console.log(lat, lon);
-                    var marker = new google.maps.Marker(
+                    markers[i] = new google.maps.Marker(
                         {
                             position: new google.maps.LatLng(lat, lon),
                             animation: google.maps.Animation.DROP,
@@ -34,11 +31,17 @@ function initPage() {
                             label: lat + ", " + lon
                         }
                     );
-                    console.log(infowindow);
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
+                    info_windows[i] = new google.maps.InfoWindow();
+                    google.maps.event.addListener(markers[i], 'click', (function (marker, content, infowindow) {
+                        return function () {
+                            infowindow.setContent(content);
+                            infowindow.open(map, marker);
+                        };
+                    })(markers[i], "<p>" + spl[i].split(", ")[2] + "</p>", info_windows[i]));
 
+                    // markers[i].addListener('click', function () {
+                    //     info_windows[i].open(map, markers[i]);
+                    // });
                 }
             }
         }
