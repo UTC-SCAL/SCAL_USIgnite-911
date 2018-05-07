@@ -15,10 +15,14 @@ function initPage() {
             if (type.indexOf("text") !== 1) {
                 var spl = request.responseText.split("\n");
                 for (var i in spl) {
+                    if (spl[i] === undefined) {
+                        break;
+                    }
                     var lat = spl[i].split(", ")[0];
                     var lon = spl[i].split(", ")[1];
+                    var content = "<p>" + spl[i].split(", ")[2] + "</p>";
                     var infowindow = new google.maps.InfoWindow({
-                        content: spl[i].split(", ")[2]
+                        content: content
                     });
 
                     // console.log(lat, lon);
@@ -30,7 +34,8 @@ function initPage() {
                             label: lat + ", " + lon
                         }
                     );
-                    marker.addListener('click', function() {
+                    console.log(infowindow);
+                    marker.addListener('click', function () {
                         infowindow.open(map, marker);
                     });
 
