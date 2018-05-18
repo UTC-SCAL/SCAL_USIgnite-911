@@ -9,7 +9,7 @@ function initPage() {
     var request = new XMLHttpRequest();
     var markers = [];
     var info_windows = [];
-    request.open("GET", "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/pos.txt", true);
+    request.open("GET", "https://puu.sh/Aoy8b/0adfe6fa37.csv", true);
     request.send(null);
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
@@ -39,9 +39,9 @@ function initPage() {
                         };
                     })(markers[i], "<p>" + spl[i].split(",")[2] + "<br>" + spl[i].split(",")[3] + "</p>", info_windows[i]));
 
-                    // markers[i].addListener('click', function () {
-                    //     info_windows[i].open(map, markers[i]);
-                    // });
+                    markers[i].addListener('click', function () {
+                        info_windows[i].open(map, markers[i]);
+                    });
                 }
             }
         }
