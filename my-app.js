@@ -1,7 +1,13 @@
 function initPage() {
     var center = new google.maps.LatLng(35.0479, -85.2960);
     var icons = [
-
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/mon.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/tues.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/wed.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/thurs.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/fri.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/sat.png",
+        "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/sun.png"
     ];
     var options =
         {
@@ -25,10 +31,11 @@ function initPage() {
                     }
                     var lat = spl[i].split(",")[0];
                     var lon = spl[i].split(",")[1];
+                    var index = getIndex(spl[i].split(",")[2]);
                     markers[i] = new google.maps.Marker(
                         {
                             position: new google.maps.LatLng(lat, lon),
-                            icon: icons[0],
+                            icon: icons[index],
                             map: map
                         }
                     );
@@ -36,4 +43,30 @@ function initPage() {
             }
         }
     };
+}
+
+function getIndex(date) {
+    if (date.indexOf("Monday") !== -1) {
+        return 0;
+    }
+    if (date.indexOf("Tuesday") !== -1) {
+        return 1;
+    }
+    if (date.indexOf("Wednesday") !== -1) {
+        return 2;
+    }
+    if (date.indexOf("Thursday") !== -1) {
+        return 3;
+    }
+    if (date.indexOf("Friday") !== -1) {
+        return 4;
+    }
+    if (date.indexOf("Saturday") !== -1) {
+        return 5;
+    }
+    if (date.indexOf("Sunday") !== -1) {
+        return 6;
+    }
+
+
 }
