@@ -1,15 +1,17 @@
 function initPage() {
     var center = new google.maps.LatLng(35.0479, -85.2960);
+    var icons = [
+
+    ];
     var options =
         {
-            zoom: 10,
+            zoom: 15,
             center: center
         };
     var map = new google.maps.Map(document.getElementById("map"), options);
     var request = new XMLHttpRequest();
     var markers = [];
-    var info_windows = [];
-    request.open("GET", "https://puu.sh/Aoy8b/0adfe6fa37.csv", true);
+    request.open("GET", "https://gist.githubusercontent.com/oitsjustjose/278800f898380a8212bb6b78919c0833/raw/64be83d6a5d00d57ab8595e3e61c15242b124c51/data.csv", true);
     request.send(null);
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
@@ -26,22 +28,10 @@ function initPage() {
                     markers[i] = new google.maps.Marker(
                         {
                             position: new google.maps.LatLng(lat, lon),
-                            animation: google.maps.Animation.DROP,
-                            map: map,
-                            label: lat + ", " + lon
+                            icon: icons[0],
+                            map: map
                         }
                     );
-                    info_windows[i] = new google.maps.InfoWindow();
-                    google.maps.event.addListener(markers[i], 'click', (function (marker, content, infowindow) {
-                        return function () {
-                            infowindow.setContent(content);
-                            infowindow.open(map, marker);
-                        };
-                    })(markers[i], "<p>" + spl[i].split(",")[2] + "<br>" + spl[i].split(",")[3] + "</p>", info_windows[i]));
-
-                    markers[i].addListener('click', function () {
-                        info_windows[i].open(map, markers[i]);
-                    });
                 }
             }
         }
