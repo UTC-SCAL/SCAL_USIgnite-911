@@ -10,7 +10,8 @@ var icons = [
     "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/sun.png"
 ];
 
-function filter(day) {
+function filter_type(criteria){
+
     var request = new XMLHttpRequest();
     request.open("GET", "https://gist.githubusercontent.com/oitsjustjose/278800f898380a8212bb6b78919c0833/raw/64be83d6a5d00d57ab8595e3e61c15242b124c51/data.csv", true);
     request.send(null);
@@ -28,11 +29,52 @@ function filter(day) {
                     if (spl[i].indexOf(",") === -1) {
                         continue;
                     }
-                    if (day !== 'All') {
-                        if (spl[i].split(",")[2].indexOf(day) === -1) {
+                    if (criteria !== 'All') {
+                        if (spl[i].split(",")[6].indexOf(criteria) === -1) {
                             continue;
                         }
                     }
+                    // console.log(spl[i].split(",")[6]);
+                    var lat = spl[i].split(",")[0];
+                    var lon = spl[i].split(",")[1];
+                    var index = getIndex(spl[i].split(",")[2]);
+                    markers[i] = new google.maps.Marker(
+                        {
+                            position: new google.maps.LatLng(lat, lon),
+                            icon: icons[index],
+                            map: map
+                        }
+                    );
+                }
+            }
+        }
+    };
+}
+
+function filter_day(criteria) {
+    var request = new XMLHttpRequest();
+    request.open("GET", "https://gist.githubusercontent.com/oitsjustjose/278800f898380a8212bb6b78919c0833/raw/64be83d6a5d00d57ab8595e3e61c15242b124c51/data.csv", true);
+    request.send(null);
+    for (var i in markers) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            var type = request.getResponseHeader('Content-Type');
+            if (type.indexOf("text") !== 1) {
+                var spl = request.responseText.split("\n");
+                for (var i in spl) {
+                    // Ignore lines that are empty:
+                    if (spl[i].indexOf(",") === -1) {
+                        continue;
+                    }
+                    if (criteria !== 'All') {
+                        if (spl[i].split(",")[2].indexOf(criteria) === -1) {
+                            continue;
+                        }
+                    }
+                    // console.log(spl[i].split(",")[6]);
                     var lat = spl[i].split(",")[0];
                     var lon = spl[i].split(",")[1];
                     var index = getIndex(spl[i].split(",")[2]);

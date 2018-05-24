@@ -4,26 +4,77 @@
     <meta charset="UTF-8">
     <title>USIgnite 911 Data</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR_ZVn_RWxs02qFAiwfwHrBVQbDj7osJU"></script>
+    <script src="./jquery-3.1.1.js"></script>
+    <script src="./semantic/out/semantic.min.js"></script>
     <script src="./my-app.js"></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/semantic.min.css">
 </head>
 <body onload="initPage()">
-<div id="filters">
-    <div>
-        <h2>Filter:</h2>
-    </div>
-    <div>
-        <button class="filter" onclick="filter('Monday')">Monday</button>
-        <button class="filter" onclick="filter('Tuesday')">Tuesday</button>
-        <button class="filter" onclick="filter('Wednesday')">Wednesday</button>
-        <button class="filter" onclick="filter('Thursday')">Thursday</button>
-        <button class="filter" onclick="filter('Friday')">Friday</button>
-        <button class="filter" onclick="filter('Saturday')">Saturday</button>
-        <button class="filter" onclick="filter('Sunday')">Sunday</button>
-        <button class="filter" onclick="filter('All')">All</button>
+<div class="pusher">
+    <div class="ui container">
+        <div class="ui header">
+            <h2>Filter:</h2>
+        </div>
+        <div>
+            <!--</tr>-->
+            <!--<tr style="text-align: center;">-->
+            <!--<td>-->
+            <!--<button onclick="filter_type('Unkown Injuries');">Unknown Injuries</button>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<button onclick="filter_type('No Injuries');">No Injuries</button>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<button onclick="filter_type('Injuries');">Injuries</button>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<button onclick="filter_type('Delayed');">Delayed</button>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<button onclick="filter_type('Entrapment');">Entrapment</button>-->
+            <!--</td>-->
+            <!--</tr>-->
+
+            <!--</table>-->
+            <center>
+                <div class="ui segment">
+                    <div class="ui buttons">
+                        <button class="ui red button" onclick="filter_day('Monday')">Monday</button>
+                        <div class="or"></div>
+                        <button class="ui orange button" onclick="filter_day('Tuesday')">Tuesday</button>
+                        <div class="or"></div>
+                        <button class="ui yellow button" onclick="filter_day('Wednesday')">Wednesday</button>
+                        <div class="or"></div>
+                        <button class="ui green button" onclick="filter_day('Thursday')">Thursday</button>
+                        <div class="or"></div>
+                        <button class="ui teal button" onclick="filter_day('Friday')">Friday</button>
+                        <div class="or"></div>
+                        <button class="ui violet button" onclick="filter_day('Saturday')">Saturday</button>
+                        <div class="or"></div>
+                        <button class="ui purple button" onclick="filter_day('Sunday')">Sunday</button>
+                        <div class="or"></div>
+                        <button class="ui button" onclick="filter_day('Monday')">All</button>
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <div class="ui buttons">
+                        <button class="ui button" onclick="filter_type('Unknown Injuries')">Unknown Injuries</button>
+                        <div class="or"></div>
+                        <button class="ui button" onclick="filter_type('No Injuries')">No Injuries</button>
+                        <div class="or"></div>
+                        <button class="ui button" onclick="filter_type('Injuries')">Injuries</button>
+                        <div class="or"></div>
+                        <button class="ui button" onclick="filter_type('Delayed')">Delayed</button>
+                        <div class="or"></div>
+                        <button class="ui button" onclick="filter_type('Entrapment')">Entrapment</button>
+                    </div>
+                </div>
+            </center>
+        </div>
     </div>
 </div>
-<div id="map">
-</div>
+<div class="line segment"></div>
+<div id="map" style="margin-top: 1em;"></div>
 </body>
 </html>
