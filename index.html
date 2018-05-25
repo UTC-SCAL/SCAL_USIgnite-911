@@ -11,66 +11,36 @@
     <link rel="stylesheet" type="text/css" href="./semantic/out/semantic.min.css">
 </head>
 <body onload="initPage()">
-<div class="pusher">
-    <div class="ui container">
-        <div class="ui header">
-            <h2>Filter:</h2>
-        </div>
-        <div>
-            <!--</tr>-->
-            <!--<tr style="text-align: center;">-->
-            <!--<td>-->
-            <!--<button onclick="filter_type('Unkown Injuries');">Unknown Injuries</button>-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--<button onclick="filter_type('No Injuries');">No Injuries</button>-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--<button onclick="filter_type('Injuries');">Injuries</button>-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--<button onclick="filter_type('Delayed');">Delayed</button>-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--<button onclick="filter_type('Entrapment');">Entrapment</button>-->
-            <!--</td>-->
-            <!--</tr>-->
-
-            <!--</table>-->
-            <center>
-                <div class="ui segment">
-                    <div class="ui buttons">
-                        <button class="ui red button" onclick="filter_day('Monday')">Monday</button>
-                        <div class="or"></div>
-                        <button class="ui orange button" onclick="filter_day('Tuesday')">Tuesday</button>
-                        <div class="or"></div>
-                        <button class="ui yellow button" onclick="filter_day('Wednesday')">Wednesday</button>
-                        <div class="or"></div>
-                        <button class="ui green button" onclick="filter_day('Thursday')">Thursday</button>
-                        <div class="or"></div>
-                        <button class="ui teal button" onclick="filter_day('Friday')">Friday</button>
-                        <div class="or"></div>
-                        <button class="ui violet button" onclick="filter_day('Saturday')">Saturday</button>
-                        <div class="or"></div>
-                        <button class="ui purple button" onclick="filter_day('Sunday')">Sunday</button>
-                        <div class="or"></div>
-                        <button class="ui button" onclick="filter_day('Monday')">All</button>
+<div class="ui vertical center aligned segment">
+    <div class="ui vertical stripe quote segment">
+        <div class="ui container">
+            <div class="ui header">
+                <h2>Filter:</h2>
+            </div>
+            <div class="ui equal width stackable internally celled grid">
+                <div class="center aligned row">
+                    <div class="column">
+                        <div class="ui fluid vertical buttons">
+                            <button class="ui red button" onclick="toggle_day(this, 'Monday')">Monday</button>
+                            <button class="ui orange button" onclick="toggle_day(this, 'Tuesday')">Tuesday</button>
+                            <button class="ui yellow button" onclick="toggle_day(this, 'Wednesday')">Wednesday</button>
+                            <button class="ui green button" onclick="toggle_day(this, 'Thursday')">Thursday</button>
+                            <button class="ui teal button" onclick="toggle_day(this, 'Friday')">Friday</button>
+                            <button class="ui violet button" onclick="toggle_day(this, 'Saturday')">Saturday</button>
+                            <button class="ui purple button" onclick="toggle_day(this, 'Sunday')">Sunday</button>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui fluid vertical buttons">
+                            <button class="ui button" onclick="toggle_type(this, 'Unknown Injuries')">Unknown Injuries</button>
+                            <button class="ui button" onclick="toggle_type(this, 'No Injuries')">No Injuries</button>
+                            <button class="ui button" onclick="toggle_type(this, 'Injuries')">Injuries</button>
+                            <button class="ui button" onclick="toggle_type(this, 'Delayed')">Delayed</button>
+                            <button class="ui button" onclick="toggle_type(this,'Entrapment')">Entrapment</button>
+                        </div>
                     </div>
                 </div>
-                <div class="ui segment">
-                    <div class="ui buttons">
-                        <button class="ui button" onclick="filter_type('Unknown Injuries')">Unknown Injuries</button>
-                        <div class="or"></div>
-                        <button class="ui button" onclick="filter_type('No Injuries')">No Injuries</button>
-                        <div class="or"></div>
-                        <button class="ui button" onclick="filter_type('Injuries')">Injuries</button>
-                        <div class="or"></div>
-                        <button class="ui button" onclick="filter_type('Delayed')">Delayed</button>
-                        <div class="or"></div>
-                        <button class="ui button" onclick="filter_type('Entrapment')">Entrapment</button>
-                    </div>
-                </div>
-            </center>
+            </div>
         </div>
     </div>
 </div>
