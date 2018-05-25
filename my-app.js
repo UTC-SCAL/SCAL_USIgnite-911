@@ -87,7 +87,6 @@ function updateMapMarkers() {
                         continue;
                     }
                     if (!typesAllowed[reportType]) {
-                        console.log("Skipping type " + reportType);
                         continue;
                     }
 
