@@ -27,6 +27,21 @@ var typesAllowed = {
     "Entrapment": false
 };
 
+var timesAllowed = {
+    "00:00-1:59": false,
+    "02:00-3:59": false,
+    "04:00-5:59": false,
+    "06:00-7:59": false,
+    "08:00-9:59": false,
+    "10:00-11:59": false,
+    "12:00-13:59": false,
+    "14:00-15:59": false,
+    "16:00-17:59": false,
+    "18:00-19:59": false,
+    "20:00-21:59": false,
+    "22:00-23:59": false
+};
+
 function toggle_type(element, criteria) {
     if (!typesAllowed[criteria]) {
         typesAllowed[criteria] = true;
@@ -36,7 +51,6 @@ function toggle_type(element, criteria) {
         typesAllowed[criteria] = false;
         element.innerHTML = criteria;
     }
-    console.log(typesAllowed);
     updateMapMarkers();
 }
 
@@ -48,6 +62,18 @@ function toggle_day(element, criteria) {
     }
     else {
         daysAllowed[criteria] = false;
+        element.innerHTML = criteria;
+    }
+    updateMapMarkers();
+}
+
+function toggle_time(element, criteria) {
+    if (!timesAllowed[criteria]) {
+        timesAllowed[criteria] = true;
+        element.innerHTML += "<i class='ui right checkmark icon'></i>"
+    }
+    else {
+        timesAllowed[criteria] = false;
         element.innerHTML = criteria;
     }
     updateMapMarkers();
@@ -82,6 +108,7 @@ function updateMapMarkers() {
                         continue;
                     }
                     var day = spl[i].split(",")[2].substring(1);
+                    var time = spl[i].split(",")[5];
                     var reportType = spl[i].split(",")[6].substring(1);
                     if (!daysAllowed[day]) {
                         continue;
@@ -89,7 +116,9 @@ function updateMapMarkers() {
                     if (!typesAllowed[reportType]) {
                         continue;
                     }
-
+                    if (!isWithinTimeRange(time)) {
+                        continue;
+                    }
                     var lat = spl[i].split(",")[0];
                     var lon = spl[i].split(",")[1];
                     var index = getIndex(day);
@@ -105,6 +134,24 @@ function updateMapMarkers() {
         }
     };
 }
+
+function isWithinTimeRange(time) {
+    var hour = parseInt(time.split(":")[0]);
+    var minute = parseInt(time.split(":")[1]);
+    for (var i in timesAllowed) {
+        var hourStart = parseInt(i.split("-")[0].split(":")[0]);
+        var minuteStart = parseInt(i.split("-")[0].split(":")[1]);
+        var hourEnd = parseInt(i.split("-")[1].split(":")[0]);
+        var minuteEnd = parseInt(i.split("-")[1].split(":")[1]);
+
+        if (hourStart <= hour && hour <= hourEnd) {
+            if (minuteStart <= minute && minute <= minuteEnd) {
+                return timesAllowed[i];
+            }
+        }
+    }
+}
+
 
 function getIndex(date) {
     if (date.indexOf("Monday") !== -1) {

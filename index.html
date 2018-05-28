@@ -16,10 +16,14 @@
         <div class="ui container">
             <div class="ui header">
                 <h2>Filter:</h2>
+                <h4>(Select one or more from each category)</h4>
             </div>
             <div class="ui equal width stackable internally celled grid">
                 <div class="center aligned row">
                     <div class="column">
+                        <div class="ui label" style="margin-bottom: 1em;">
+                            Day of the Week:
+                        </div>
                         <div class="ui fluid vertical buttons">
                             <button class="ui red button" onclick="toggle_day(this, 'Monday')">Monday</button>
                             <button class="ui orange button" onclick="toggle_day(this, 'Tuesday')">Tuesday</button>
@@ -31,14 +35,42 @@
                         </div>
                     </div>
                     <div class="column">
+                        <div class="ui label" style="margin-bottom: 1em;">
+                            Incident Type:
+                        </div>
                         <div class="ui fluid vertical buttons">
-                            <button class="ui button" onclick="toggle_type(this, 'Unknown Injuries')">Unknown Injuries</button>
+                            <button class="ui button" onclick="toggle_type(this, 'Unknown Injuries')">Unknown Injuries
+                            </button>
                             <button class="ui button" onclick="toggle_type(this, 'No Injuries')">No Injuries</button>
                             <button class="ui button" onclick="toggle_type(this, 'Injuries')">Injuries</button>
                             <button class="ui button" onclick="toggle_type(this, 'Delayed')">Delayed</button>
                             <button class="ui button" onclick="toggle_type(this,'Entrapment')">Entrapment</button>
                         </div>
-                        <div class="ui huge button" style="margin-top: 1em;" onclick="document.getElementById('map').scrollIntoView();">Done</div>
+                        <div class="ui huge button" style="margin-top: 1em;"
+                             onclick="document.getElementById('map').scrollIntoView();">Done
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui label" style="margin-bottom: 1em;">
+                            Time Range:
+                        </div>
+                        <div class="ui fluid vertical buttons">
+                            <button class="ui button" onclick="toggle_time(this, '00:00-1:59')">00:00-1:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '02:00-3:59')">02:00-3:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '04:00-5:59')">04:00-5:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '06:00-7:59')">06:00-7:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '08:00-9:59')">08:00-9:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '10:00-11:59')">10:00-11:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '12:00-13:59')">12:00-13:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '14:00-15:59')">14:00-15:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '16:00-17:59')">16:00-17:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '18:00-19:59')">18:00-19:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '20:00-21:59')">20:00-21:59</button>
+                            <button class="ui button" onclick="toggle_time(this, '22:00-23:59')">22:00-23:59</button>
+                        </div>
+                        <div class="ui huge button" style="margin-top: 1em;"
+                             onclick="document.getElementById('map').scrollIntoView();">Done
+                        </div>
                     </div>
                 </div>
             </div>
