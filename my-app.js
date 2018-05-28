@@ -150,6 +150,7 @@ function isWithinTimeRange(time) {
             }
         }
     }
+    return false;
 }
 
 
