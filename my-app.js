@@ -97,6 +97,9 @@ function initPage() {
             center: center
         };
     map = new google.maps.Map(document.getElementById("map"), options);
+    $('#dropdown')
+        .dropdown()
+    ;
 }
 
 function updateMapMarkers() {
