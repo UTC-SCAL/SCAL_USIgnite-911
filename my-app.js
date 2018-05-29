@@ -28,65 +28,94 @@ var typesAllowed = {
 };
 
 var timesAllowed = {
-    "00:00-1:59": false,
-    "02:00-3:59": false,
-    "04:00-5:59": false,
-    "06:00-7:59": false,
-    "08:00-9:59": false,
-    "10:00-11:59": false,
-    "12:00-13:59": false,
-    "14:00-15:59": false,
-    "16:00-17:59": false,
-    "18:00-19:59": false,
-    "20:00-21:59": false,
-    "22:00-23:59": false
+    "00:00-00:59": false,
+    "01:00-01:59": false,
+    "02:00-02:59": false,
+    "03:00-03:59": false,
+    "04:00-04:59": false,
+    "05:00-05:59": false,
+    "06:00-06:59": false,
+    "07:00-07:59": false,
+    "08:00-08:59": false,
+    "09:00-09:59": false,
+    "10:00-10:59": false,
+    "11:00-11:59": false,
+    "12:00-12:59": false,
+    "13:00-13:59": false,
+    "14:00-14:59": false,
+    "15:00-15:59": false,
+    "16:00-16:59": false,
+    "17:00-17:59": false,
+    "18:00-18:59": false,
+    "19:00-19:59": false,
+    "20:00-20:59": false,
+    "21:00-21:59": false,
+    "22:00-22:59": false,
+    "23:00-23:59": false
 };
 
-function toggle_type(element, criteria) {
-    if (!typesAllowed[criteria]) {
-        typesAllowed[criteria] = true;
-        element.innerHTML += "<i class='ui right checkmark icon'></i>"
+function update_type() {
+    var selectVals = $('#type_dropdown').val();
+
+    typesAllowed = {
+        "Unknown Injuries": false,
+        "No Injuries": false,
+        "Injuries": false,
+        "Delayed": false,
+        "Entrapment": false
+    };
+    for (var i in selectVals) {
+        typesAllowed[selectVals[i]] = true;
     }
-    else {
-        typesAllowed[criteria] = false;
-        element.innerHTML = criteria;
-    }
-    updateMapMarkers();
 }
 
-function toggle_day(element, criteria) {
-    // Indicates that there IS an icon:
-    if (!daysAllowed[criteria]) {
-        daysAllowed[criteria] = true;
-        element.innerHTML += "<i class='ui right checkmark icon'></i>"
+function update_day() {
+    var selectVals = $('#day_dropdown').val();
+    daysAllowed = {
+        "Monday": false,
+        "Tuesday": false,
+        "Wednesday": false,
+        "Thursday": false,
+        "Friday": false,
+        "Saturday": false,
+        "Sunday": false
+    };
+    for (var i in selectVals) {
+        daysAllowed[selectVals[i]] = true;
     }
-    else {
-        daysAllowed[criteria] = false;
-        element.innerHTML = criteria;
-    }
-    updateMapMarkers();
 }
 
 function update_time() {
-    var selectVals = $('#dropdown').val();
+    var selectVals = $('#timeframe_dropdown').val();
     timesAllowed = {
-        "00:00-1:59": false,
-        "02:00-3:59": false,
-        "04:00-5:59": false,
-        "06:00-7:59": false,
-        "08:00-9:59": false,
-        "10:00-11:59": false,
-        "12:00-13:59": false,
-        "14:00-15:59": false,
-        "16:00-17:59": false,
-        "18:00-19:59": false,
-        "20:00-21:59": false,
-        "22:00-23:59": false
+        "00:00-00:59": false,
+        "01:00-01:59": false,
+        "02:00-02:59": false,
+        "03:00-03:59": false,
+        "04:00-04:59": false,
+        "05:00-05:59": false,
+        "06:00-06:59": false,
+        "07:00-07:59": false,
+        "08:00-08:59": false,
+        "09:00-09:59": false,
+        "10:00-10:59": false,
+        "11:00-11:59": false,
+        "12:00-12:59": false,
+        "13:00-13:59": false,
+        "14:00-14:59": false,
+        "15:00-15:59": false,
+        "16:00-16:59": false,
+        "17:00-17:59": false,
+        "18:00-18:59": false,
+        "19:00-19:59": false,
+        "20:00-20:59": false,
+        "21:00-21:59": false,
+        "22:00-22:59": false,
+        "23:00-23:59": false
     };
     for (var i in selectVals) {
         timesAllowed[selectVals[i]] = true;
     }
-    updateMapMarkers();
 }
 
 function initPage() {
@@ -97,7 +126,13 @@ function initPage() {
             center: center
         };
     map = new google.maps.Map(document.getElementById("map"), options);
-    $('#dropdown')
+    $('#timeframe_dropdown')
+        .dropdown()
+    ;
+    $('#type_dropdown')
+        .dropdown()
+    ;
+    $('#day_dropdown')
         .dropdown()
     ;
 }
@@ -143,6 +178,8 @@ function updateMapMarkers() {
                         }
                     );
                 }
+                document.getElementById('map').style.removeProperty('display');
+                document.getElementById('map').scrollIntoView();
             }
         }
     };

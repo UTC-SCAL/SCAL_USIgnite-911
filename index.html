@@ -24,27 +24,34 @@
                         <div class="ui label" style="margin-bottom: 1em;">
                             Day of the Week:
                         </div>
-                        <div class="ui fluid vertical buttons">
-                            <button class="ui red button" onclick="toggle_day(this, 'Monday')">Monday</button>
-                            <button class="ui orange button" onclick="toggle_day(this, 'Tuesday')">Tuesday</button>
-                            <button class="ui yellow button" onclick="toggle_day(this, 'Wednesday')">Wednesday</button>
-                            <button class="ui green button" onclick="toggle_day(this, 'Thursday')">Thursday</button>
-                            <button class="ui teal button" onclick="toggle_day(this, 'Friday')">Friday</button>
-                            <button class="ui violet button" onclick="toggle_day(this, 'Saturday')">Saturday</button>
-                            <button class="ui purple button" onclick="toggle_day(this, 'Sunday')">Sunday</button>
+                        <div class="ui form" onclick="update_day()">
+                            <select name="type" multiple="" class="label ui selection fluid dropdown"
+                                    id="day_dropdown">
+                                <option value="">Select Multiple Days</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
                         </div>
                     </div>
                     <div class="column">
                         <div class="ui label" style="margin-bottom: 1em;">
                             Incident Type:
                         </div>
-                        <div class="ui fluid vertical buttons">
-                            <button class="ui button" onclick="toggle_type(this, 'Unknown Injuries')">Unknown Injuries
-                            </button>
-                            <button class="ui button" onclick="toggle_type(this, 'No Injuries')">No Injuries</button>
-                            <button class="ui button" onclick="toggle_type(this, 'Injuries')">Injuries</button>
-                            <button class="ui button" onclick="toggle_type(this, 'Delayed')">Delayed</button>
-                            <button class="ui button" onclick="toggle_type(this,'Entrapment')">Entrapment</button>
+                        <div class="ui form" onclick="update_type()">
+                            <select name="type" multiple="" class="label ui selection fluid dropdown"
+                                    id="type_dropdown">
+                                <option value="">Select Multiple Types</option>
+                                <option value="Unknown Injuries">Unknown Injuries</option>
+                                <option value="No Injuries">No Injuries</option>
+                                <option value="Injuries">Injuries</option>
+                                <option value="Delayed">Delayed</option>
+                                <option value="Entrapment">Entrapment</option>
+                            </select>
                         </div>
                     </div>
                     <div class="column">
@@ -52,37 +59,80 @@
                             Time range:
                         </div>
                         <div class="ui form" onclick="update_time()">
-                            <select name="skills" multiple="" class="label ui selection fluid dropdown" id="dropdown">
+                            <select name="timeframe" multiple="" class="label ui selection fluid dropdown"
+                                    id="timeframe_dropdown">
                                 <option value="">Select Multiple Timeframes</option>
-                                <option value="00:00-1:59">00:00-1:59</option>
-                                <option value="02:00-3:59">02:00-3:59</option>
-                                <option value="04:00-5:59">04:00-5:59</option>
-                                <option value="06:00-7:59">06:00-7:59</option>
-                                <option value="08:00-9:59">08:00-9:59</option>
-                                <option value="10:00-11:59">10:00-11:59</option>
-                                <option value="12:00-13:59">12:00-13:59</option>
-                                <option value="14:00-15:59">14:00-15:59</option>
-                                <option value="16:00-17:59">16:00-17:59</option>
-                                <option value="18:00-19:59">18:00-19:59</option>
-                                <option value="20:00-21:59">20:00-21:59</option>
-                                <option value="22:00-23:59">22:00-23:59</option>
+                                <option value="00:00-00:59">00:00-00:59</option>
+                                <option value="01:00-01:59">01:00-01:59</option>
+                                <option value="02:00-02:59">02:00-02:59</option>
+                                <option value="03:00-03:59">03:00-03:59</option>
+                                <option value="04:00-04:59">04:00-04:59</option>
+                                <option value="05:00-05:59">05:00-05:59</option>
+                                <option value="06:00-06:59">06:00-06:59</option>
+                                <option value="07:00-07:59">07:00-07:59</option>
+                                <option value="08:00-08:59">08:00-08:59</option>
+                                <option value="09:00-09:59">09:00-09:59</option>
+                                <option value="10:00-10:59">10:00-10:59</option>
+                                <option value="11:00-11:59">11:00-11:59</option>
+                                <option value="12:00-12:59">12:00-12:59</option>
+                                <option value="13:00-13:59">13:00-13:59</option>
+                                <option value="14:00-14:59">14:00-14:59</option>
+                                <option value="15:00-15:59">15:00-15:59</option>
+                                <option value="16:00-16:59">16:00-16:59</option>
+                                <option value="17:00-17:59">17:00-17:59</option>
+                                <option value="18:00-18:59">18:00-18:59</option>
+                                <option value="19:00-19:59">19:00-19:59</option>
+                                <option value="20:00-20:59">20:00-20:59</option>
+                                <option value="21:00-21:59">21:00-21:59</option>
+                                <option value="22:00-22:59">22:00-22:59</option>
+                                <option value="23:00-23:59">23:00-23:59</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="ui huge button" style="margin-top: 1em" onclick="updateMapMarkers();">Done</div>
+
+    <div class="ui segment">
+        <div class="ui label" style="margin-bottom: 1em;">
+            Map Key:
+        </div>
+        <div class="ui equal width stackable internally celled grid">
             <div class="center aligned row">
                 <div class="column">
-                    <div class="ui huge button" onclick="document.getElementById('map').scrollIntoView();">
-                        Done
-                    </div>
+                    <img src="icons/mon.png">
+                    <div class="ui header"><h4>Monday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/tues.png">
+                    <div class="ui header"><h4>Tuesday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/wed.png">
+                    <div class="ui header"><h4>Wednesday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/thurs.png">
+                    <div class="ui header"><h4>Thursday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/fri.png">
+                    <div class="ui header"><h4>Friday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/sat.png">
+                    <div class="ui header"><h4>Saturday</h4></div>
+                </div>
+                <div class="column">
+                    <img src="icons/sun.png">
+                    <div class="ui header"><h4>Sunday</h4></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-<div class="line segment"></div>
-<div id="map" style="margin-top: 1em;"></div>
+<div id="map" style="display: none;"></div>
 </body>
 </html>

@@ -1,5 +1,10 @@
 #map {
-    margin-left: 1%;
-    width: 98%;
+    width: 100%;
+    height: 100%;
+    border-radius: 1em;
+}
+
+#map_segment {
+    width: 100%;
     height: 100%;
 }
