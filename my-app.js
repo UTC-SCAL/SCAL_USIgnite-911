@@ -67,14 +67,24 @@ function toggle_day(element, criteria) {
     updateMapMarkers();
 }
 
-function toggle_time(element, criteria) {
-    if (!timesAllowed[criteria]) {
-        timesAllowed[criteria] = true;
-        element.innerHTML += "<i class='ui right checkmark icon'></i>"
-    }
-    else {
-        timesAllowed[criteria] = false;
-        element.innerHTML = criteria;
+function update_time() {
+    var selectVals = $('#dropdown').val();
+    timesAllowed = {
+        "00:00-1:59": false,
+        "02:00-3:59": false,
+        "04:00-5:59": false,
+        "06:00-7:59": false,
+        "08:00-9:59": false,
+        "10:00-11:59": false,
+        "12:00-13:59": false,
+        "14:00-15:59": false,
+        "16:00-17:59": false,
+        "18:00-19:59": false,
+        "20:00-21:59": false,
+        "22:00-23:59": false
+    };
+    for (var i in selectVals) {
+        timesAllowed[selectVals[i]] = true;
     }
     updateMapMarkers();
 }
