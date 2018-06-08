@@ -6,11 +6,12 @@
     <script src="./jquery-3.1.1.js"></script>
     <script src="./semantic/out/semantic.min.js"></script>
     <script src="./my-app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR_ZVn_RWxs02qFAiwfwHrBVQbDj7osJU"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR_ZVn_RWxs02qFAiwfwHrBVQbDj7osJU&libraries=visualization&callback=initPage"></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
     <link rel="stylesheet" type="text/css" href="./semantic/out/semantic.min.css">
 </head>
-<body onload="initPage()">
+<body>
 <div class="ui vertical center aligned segment">
     <div class="ui vertical stripe quote segment">
         <div class="ui container">
@@ -93,46 +94,8 @@
             </div>
         </div>
     </div>
-    <div class="ui huge button" style="margin-top: 1em" onclick="updateMapMarkers();">Done</div>
-
-    <div class="ui segment">
-        <div class="ui label" style="margin-bottom: 1em;">
-            Map Key:
-        </div>
-        <div class="ui equal width stackable internally celled grid">
-            <div class="center aligned row">
-                <div class="column">
-                    <img src="icons/mon.png">
-                    <div class="ui header"><h4>Monday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/tues.png">
-                    <div class="ui header"><h4>Tuesday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/wed.png">
-                    <div class="ui header"><h4>Wednesday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/thurs.png">
-                    <div class="ui header"><h4>Thursday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/fri.png">
-                    <div class="ui header"><h4>Friday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/sat.png">
-                    <div class="ui header"><h4>Saturday</h4></div>
-                </div>
-                <div class="column">
-                    <img src="icons/sun.png">
-                    <div class="ui header"><h4>Sunday</h4></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="ui huge button" style="margin-top: 1em" onclick="update_points();">Done</div>
 </div>
-<div id="map" style="display: none;"></div>
+<div id="map"></div>
 </body>
 </html>

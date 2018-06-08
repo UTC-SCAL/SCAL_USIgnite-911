@@ -1,14 +1,6 @@
-var markers = [];
+var heatmap_layer;
 var map;
-var icons = [
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/mon.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/tues.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/wed.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/thurs.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/fri.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/sat.png",
-    "https://raw.githubusercontent.com/oitsjustjose/SCAL_USIgnite-911/gh-pages/icons/sun.png"
-];
+
 var daysAllowed = {
     "Monday": false,
     "Tuesday": false,
@@ -119,13 +111,15 @@ function update_time() {
 }
 
 function initPage() {
-    var center = new google.maps.LatLng(35.0479, -85.2960);
-    var options =
-        {
-            zoom: 15,
-            center: center
-        };
-    map = new google.maps.Map(document.getElementById("map"), options);
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: new google.maps.LatLng(35.0479, -85.2960)
+    });
+    heatmap_layer = new google.maps.visualization.HeatmapLayer({
+        data: getPoints(),
+        map: map
+    });
+    heatmap_layer.setMap(map);
     $('#timeframe_dropdown')
         .dropdown()
     ;
@@ -137,11 +131,21 @@ function initPage() {
     ;
 }
 
-function updateMapMarkers() {
-    for (var i in markers) {
-        markers[i].setMap(null);
-    }
-    markers = [];
+function update_points() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: new google.maps.LatLng(35.0479, -85.2960)
+    });
+    heatmap_layer.setMap(null)
+    heatmap_layer = new google.maps.visualization.HeatmapLayer({
+        data: getPoints(),
+        map: map
+    });
+    heatmap_layer.setMap(map);
+}
+
+function getPoints() {
+    var points = [];
     var request = new XMLHttpRequest();
     request.open("GET", "https://gist.githubusercontent.com/oitsjustjose/278800f898380a8212bb6b78919c0833/raw/64be83d6a5d00d57ab8595e3e61c15242b124c51/data.csv", true);
     request.send(null);
@@ -169,20 +173,13 @@ function updateMapMarkers() {
                     }
                     var lat = spl[i].split(",")[0];
                     var lon = spl[i].split(",")[1];
-                    var index = getIndex(day);
-                    markers[i] = new google.maps.Marker(
-                        {
-                            position: new google.maps.LatLng(lat, lon),
-                            icon: icons[index],
-                            map: map
-                        }
-                    );
+                    points[i] = new google.maps.LatLng(parseFloat(lat), parseFloat(lon));
                 }
-                document.getElementById('map').style.removeProperty('display');
-                document.getElementById('map').scrollIntoView();
+                heatmap_layer.setMap(map);
             }
         }
     };
+    return points;
 }
 
 function isWithinTimeRange(time) {
