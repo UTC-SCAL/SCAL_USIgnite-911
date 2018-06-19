@@ -129,6 +129,7 @@ function initPage() {
     $('#day_dropdown')
         .dropdown()
     ;
+    $('#map').hide();
 }
 
 function update_points() {
@@ -139,9 +140,12 @@ function update_points() {
     heatmap_layer.setMap(null)
     heatmap_layer = new google.maps.visualization.HeatmapLayer({
         data: getPoints(),
+        radius: 20,
         map: map
     });
     heatmap_layer.setMap(map);
+
+    $('#map').show('slow');
 }
 
 function getPoints() {
