@@ -6,9 +6,6 @@ from darksky import forecast
 import pytz
 import pandas
 import math
-from openpyxl import load_workbook
-from openpyxl import load_workbook
-from openpyxl.utils.dataframe import dataframe_to_rows
 
 
 def get_Email():
@@ -72,20 +69,22 @@ def split_datetime(calldata):
 
     for i, value in enumerate(calldata.values):
         header_list = ('Response_Date', 'Fixed_Time_CallClosed', 'Address', 'City',
-                       'Latitude','Longitude' ,'Problem', 'Date','Time','Hour' )
+                       'Latitude','Longitude' ,'Problem', 'Date','Time','Hour', 'Month')
+
         calldata = calldata.reindex(columns=header_list)
         # next three lines are a necessary workaround due to pandas error
         calldata.Date = calldata.Date.astype(str)
         calldata.Time = calldata.Time.astype(str)
         calldata.Hour = calldata.Hour.astype(str)
 
-        # date = datetime.strptime(calldata.Response_Date.values[i], '%m/%d/%Y %I:%M:%S %p')
         dateof = datetime.strptime(calldata.Response_Date.values[i], '%m/%d/%Y %H:%M:%S %p')
-
 
         calldata.Date.values[i] = str(dateof.date())
         calldata.Time.values[i] = str(dateof.time())
         calldata.Hour.values[i] = dateof.hour
+        moa = int(calldata.Date.values[i].split('-')[1])
+        calldata.Month.values[i] = moa
+
     print('Time/Date Split complete.')
     return calldata
 
@@ -190,9 +189,9 @@ def main():
     # Run this line each morning
     calldata, file = get_Email()
     #
-    # # Reading file directly for testing.
-    # # file = ""
-    # # calldata = pandas.read_csv(file, sep=",")
+    # Reading file directly for testing.
+    # file = ""
+    # calldata = pandas.read_csv(file, sep=",")
     #
     # dayname_csv = file.split("/")[-1]
     # dayname_xlsx = dayname_csv.split(".")[0]
@@ -205,7 +204,7 @@ def main():
     #
     # # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
     # header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-    #                'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Visibility')
+    #                'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility')
     #
     # calldata.index.name = "Index"
     # calldata = calldata.reindex(columns=header_list)
@@ -219,17 +218,17 @@ def main():
     #     # All variables are blank-of-accident, thus year is yoa.
     #     hoa = int(calldata.Hour.values[k])
     #     toa = calldata.Time.values[k]
-    #     moa = int(toa.split(':')[1])
+    #     mioa = int(toa.split(':')[1])
     #     soa = int(toa.split(':')[2])
     #     doa = calldata.Date.values[k]
     #     yoa = int(doa.split('-')[0])
     #     moa = int(doa.split('-')[1])
-    #     doa = int(doa.split('-')[2])
+    #     dayoa = int(doa.split('-')[2])
     #     lat = (calldata.Latitude.values[k] / 1000000)
     #     long = (calldata.Longitude.values[k] / -1000000)
     #
     #     # The following line needs to have this format:
-    #     t = datetime(yoa, moa, doa, hoa, moa, soa).isoformat()
+    #     t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
     #     call = key, lat, long
     #     # print(call)
     #     forecastcall = forecast(*call, time=t)
@@ -244,6 +243,7 @@ def main():
     #                 calldata.Dewpoint.values[k] = value.dewPoint
     #                 calldata.Event.values[k] = value.icon
     #                 calldata.Humidity.values[k] = value.humidity
+    #                 calldata.Month.values[k] = moa
     #                 calldata.Visibility.values[k] = value.visibility
     #                 calldata.Conditions.values[k] = value.summary
     #     except:
@@ -260,7 +260,7 @@ def main():
     #     + dayname_xlsx + ".xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
     #
     # find_Duplicates(calldata, occurrence_list)
@@ -275,7 +275,7 @@ def main():
     #     + dayname_xlsx + "_Dropped_Dupes.xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
     #
     # calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
@@ -290,6 +290,9 @@ def main():
     # for k, info in enumerate(calldata.values):
     #     calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
     #     calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
+    #
+    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
+    #                 + dayname_xlsx + "_MonthTests.xlsx", "DarkSky Weather", calldata)
     # append_data(calldata)
 
 if __name__ == "__main__":
