@@ -239,11 +239,7 @@ def main():
     # calldata.drop(['Event'],axis=1,inplace=True)
     # print(calldata.head())
     # save_excel_file('File.xlsx','Sheet',calldata)
-<<<<<<< HEAD
     # calldata = easy_import_excel_file('Agg_CallData.xlsx')
-=======
-    calldata = easy_import_excel_file('Agg_CallData.xlsx')
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 
     # calldata = agg_options(calldata)
 

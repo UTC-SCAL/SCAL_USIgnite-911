@@ -31,7 +31,6 @@ def fill_blanks(calldata, column_to_fill):
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 # Read in the weather stations and the 911 data
 
-<<<<<<< HEAD
 # All Weather Stations Reduced to Stations that actually have useful info #
 # weather_stations = data_file_name = \
 #     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/All_Weather_Stations_Reduced.xlsx")
@@ -56,41 +55,12 @@ calldata = data_file_name = \
 # calldata = data_file_name = \
 #     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Agg_CallData.xlsx"))
 
-=======
-# All Weather Stations #
-# weather_stations = data_file_name = \
-#     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Updated_Weather_Stations.xlsx"))
-
-# Currently Used Weather Stations #
-# weather_stations = data_file_name = \
-#     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Current Weather Stations.xlsx"))
-
-# Weather Stations That Cover 2017 #
-# weather_stations = data_file_name = \
-#     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Stations_Covering_2017.xlsx"))
-
-# Weather Stations That Cover 2017 Reduced #
-weather_stations = data_file_name = \
-    pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Stations_Covering_2017_Reduced.xlsx"))
-
-# Currently used weather stations and NOAA stations #
-# weather_stations = data_file_name = \
-#     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/NOAA Station Finder.xlsx"))
-
-# Call Data #
-calldata = data_file_name = \
-    pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Agg_CallData2017_NoBlanks.xlsx"))
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 calldata["Station"] = ""
 
 # print(calldata.head())
 # Call Data Lat = 1, Long = 2
 # print(weather_stations.head())
-<<<<<<< HEAD
 # Weather Stations Lat = 4, Long = 5
-=======
-# Weather Stations Lat = 4, Long = 5, Station name = 1
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 
 # Storing the 911 incidents
 # for i in enumerate(calldata.values):
@@ -128,7 +98,6 @@ for i, value in enumerate(latcoords[0:len(latcoords)]):
     gmap.marker(latcoords[i], longcoords[i], 'c', title=stations[i])
 
 # Placing all of the 911 incident pins on the map, marked by gray and red pins
-<<<<<<< HEAD
 for i, value in enumerate(calldata.values):
     lat = (value[1] / 1000000)
     long = (value[2] / -1000000)
@@ -150,17 +119,6 @@ for i, value in enumerate(calldata.values):
 #         gmap.marker(lat, long, 'b', title=i)
 
 
-=======
-# for i, value in enumerate(calldata.values):
-#     lat = (value[1] / 1000000)
-#     long = (value[2] / -1000000)
-#     if value[0] == 0:
-#         gmap.marker(lat, long, '#DCDCDC', title=i) # Places a gray marker if no injury
-#     elif value[0] == 1:
-#         gmap.marker(lat, long, '#FF0000', title=i) # Places a red marker if injury
-
-# print(weather_stations.head())
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 for i in range(0, len(latcoords)):
     # Center for the polygon (the weather station)
     poly_lat = latcoords[i]
@@ -183,17 +141,10 @@ for i in range(0, len(latcoords)):
     station_lats, station_longs = zip(*[(A_lat, A_long), (P1_lat, P1_long), (B_lat, B_long), (P2_lat, P2_long),
                                         (C_lat, C_long), (P3_lat, P3_long), (D_lat, D_long), (P4_lat, P4_long),
                                         (E_lat, E_long)])
-<<<<<<< HEAD
     # Placing the previously drawn octagon on the map (just a visual assistant)
     gmap.plot(station_lats, station_longs, 'cornflowerblue', edge_width=10)
 
     # Making the actual polygon using the coordinates above
-=======
-#     # Placing the previously drawn octagon on the map (just a visual assistant)
-    gmap.plot(station_lats, station_longs, 'cornflowerblue', edge_width=10)
-#
-#     # Making the actual polygon using the coordinates above
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 #     poly_coords = ((A_lat, A_long), (P1_lat, P1_long), (B_lat, B_long), (P2_lat, P2_long), (C_lat, C_long),
 #                    (P3_lat, P3_long), (D_lat, D_long), (P4_lat, P4_long), (E_lat, E_long))
 #     poly = Polygon(poly_coords)
@@ -210,7 +161,6 @@ for i in range(0, len(latcoords)):
 # #
 # #
 # # print(station_matches.head())
-<<<<<<< HEAD
 # writer = pandas.ExcelWriter("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Weather Station Matches 2018 Only.xlsx",
 #                             engine='xlsxwriter')
 # station_matches.to_excel(writer)
@@ -220,16 +170,6 @@ for i in range(0, len(latcoords)):
 # Taking out the 0's in weather station matches
 # my_dwindling_sanity = []
 # match_list = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Weather Station Matches 2018 Only.xlsx")
-=======
-# writer = pandas.ExcelWriter("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Weather Station Matches.xlsx", engine='xlsxwriter')
-# station_matches.to_excel(writer)
-# workbook = writer.book
-# writer.save()
-#
-# # Taking out the 0's in weather station matches
-# my_dwindling_sanity = []
-# match_list = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Weather Station Matches.xlsx")
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 # for i, value in enumerate(match_list.values):
 #     call_lat = (calldata.Latitude.values[i]) / 1000000
 #     call_long = (calldata.Longitude.values[i]) / -1000000
@@ -262,11 +202,7 @@ for i in range(0, len(latcoords)):
 # #     print(o)
 # # print(len(my_dwindling_sanity))
 # calldata["Station"] = my_dwindling_sanity
-<<<<<<< HEAD
 # writer = pandas.ExcelWriter("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/Agg_CallData2018_Stations.xlsx", engine='xlsxwriter')
-=======
-# writer = pandas.ExcelWriter("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Agg_CallData2017_Stations.xlsx", engine='xlsxwriter')
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 # calldata.to_excel(writer)
 # workbook = writer.book
 # writer.save()

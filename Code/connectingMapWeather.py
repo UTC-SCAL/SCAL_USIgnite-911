@@ -63,7 +63,6 @@ def agg_options(calldata, savename):
     save_excel_file(savename, 'Aggregated Weather', calldata)
 
 
-<<<<<<< HEAD
 def add_weather(calldata, weatherdata, i):
     value = calldata.values[i]
     # print("\tLooking at value: ", value)
@@ -88,36 +87,6 @@ def add_weather(calldata, weatherdata, i):
                 calldata.Precipitation_Rate.values[i] = weatherdata.loc[j, 'precip_rate']
             except:
                 pass
-=======
-def add_weather(calldata, weatherdata):
-    print('Call Info: ')
-    for i, value in enumerate(calldata.values):
-        header_list = ('Date', 'Time', 'Problem', 'Hour', 'Temperature', 'Dewpoint',
-                       'Humidity', 'Event', 'Weekday', 'Month')
-        date = value[0].strftime('%Y-%m-%d')
-        time = value[1]
-        hour = value[2]
-        hour = int(hour)
-        day = value[0].strftime('%w')
-        month = value[0].strftime('%-m')
-        calldata = calldata.reindex(columns=header_list)
-
-        for j, info in enumerate(weatherdata.values):
-            weatherdate = info[0].strftime('%Y-%m-%d')
-            weathertime = info[1].strftime('%-H:%M:%S')
-            weatherhour = info[1].strftime('%-H')
-            weatherhour = int(weatherhour)
-
-            if (weatherdate == date) and (weatherhour == hour):
-                calldata.loc[i, 'Temperature'] = weatherdata.loc[j, 'temperature']
-                calldata.loc[i, 'Dewpoint'] = weatherdata.loc[j, 'dewpoint']
-                calldata.loc[i, 'Humidity'] = weatherdata.loc[j, 'humidity']
-                if weatherdata.loc[j, 'event'] is None:
-                    pass
-                else:
-                    calldata.loc[i, 'Event'] = weatherdata.loc[j, 'event']
-    save_excel_file('Call_Data_2017_NewStations.xlsx', 'Updated Call Log', calldata)
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
     return calldata
 
 
@@ -130,7 +99,6 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 
 def main():
-<<<<<<< HEAD
     # MAIN: Weather Stations for 2017 #
     # weather_stations = data_file_name = \
     #     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Stations_Covering_2017_Reduced.xlsx")
@@ -177,14 +145,6 @@ def main():
     ktnsoddy11 = pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNSODDY11_2018.csv", sep=",")
     ktntenne3 = pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNTENNE3_2018.csv", sep=",")
 
-=======
-    # Currently Used Weather Stations #
-    weather_stations = data_file_name = \
-        pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Current Weather Stations.xlsx")
-    # Call Data #
-    calldata = data_file_name = \
-        pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Agg_CallData2017_Stations.xlsx")
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 
     latcoords = []  # Weather station latitudes
     longcoords = []  # Weather station longitudes
@@ -195,7 +155,6 @@ def main():
         latcoords.append((value[4]))
         longcoords.append((value[5]))
 
-<<<<<<< HEAD
     for i in range(len(calldata.values)):
         print(i)
         if calldata.Station.values[i] == "KTNCHATT14": # 2017 & 2018
@@ -251,96 +210,6 @@ def main():
             #                          "ktnsoddy29", "ktnchatt57", "ktnsoddy12", "ktnsoddy6"] # 2017
             weather_station_names = ["ktnchatt14", "ktnchatt20", "ktnchatt88", "ktneastr2", "ktnharri26", "ktnoolte32",
                                      "ktnsoddy29", "ktnsoddy11", "ktntenne3"]  # 2018
-=======
-    for i in range(len(calldata.columns)):
-        # if calldata.loc[i, "Station"] == "KTNCHATT14":
-        if calldata.Station.values[i] == "KTNCHATT14":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT14_2017_Only.csv",
-                                sep=",")
-            for i, value in enumerate(calldata.values):
-                header_list = ('Date', 'Time', 'Problem', 'Hour', 'Temperature', 'Dewpoint',
-                               'Humidity', 'Event', 'Weekday', 'Month')
-                # I adjusted the original values for data and hour, as the numbers used for the index #
-                print(calldata.head())
-                date = value[3].strftime('%Y-%m-%d')
-                # print("The date: ", date)
-                hour = value[6]
-                # print("The hour: ", hour)
-                hour = int(hour)
-                calldata = calldata.reindex(columns=header_list)
-
-                for j, info in enumerate(weatherdata.values):
-                    print(weatherdata.head())
-                    # This throws an error, likey becuase it tries to reference something that we don't intend it to #
-                    print(info[1])
-                    weatherdate = datetime.strptime(info[0],'%m/%d/%Y')
-                    weatherhour = info[1].strftime('%-H')
-                    weatherhour = int(weatherhour)
-
-                    if (weatherdate == date) and (weatherhour == hour):
-                        calldata.loc[i, 'Temperature'] = weatherdata.loc[j, 'temperature']
-                        calldata.loc[i, 'Dewpoint'] = weatherdata.loc[j, 'dewpoint']
-                        calldata.loc[i, 'Humidity'] = weatherdata.loc[j, 'humidity']
-                        if weatherdata.loc[j, 'event'] is None:
-                            pass
-                        else:
-                            calldata.loc[i, 'Event'] = weatherdata.loc[j, 'event']
-        elif calldata.Station.values[i] == "KTNCHATT20":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT20_2017_Only.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNCHATT77":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT77_2017-01-01_2017-12-31.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNEASTR2":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNEASTR2_2017_Only.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNSODDY29":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY29_2017_Only.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNCHATT57":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT57_2017-01-01_2017-12-31.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNSODDY12":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY12_2017-01-01_2017-12-31.csv",
-                    sep=",", index_col=[0])
-
-        elif calldata.Station.values[i] == "KTNSODDY6":
-            # load in the corresponding weather station file #
-            weatherdata = \
-                pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY6_2017-01-01_2017-12-31.csv",
-                    sep=",", index_col=[0])
-
-        else:
-            weather_station_paths = [
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT14_2017_Only.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT20_2017_Only.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT77_2017-01-01_2017-12-31.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNEASTR2_2017_Only.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY29_2017_Only.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNCHATT57_2017-01-01_2017-12-31.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY12_2017-01-01_2017-12-31.csv",
-                "/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2017/KTNSODDY6_2017-01-01_2017-12-31.csv"
-            ]
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
             call_lat = (calldata.Latitude.values[i]) / 1000000
             call_long = (calldata.Longitude.values[i]) / -1000000
             index = 0
@@ -354,17 +223,11 @@ def main():
                         pass
                 break
             # load in the corresponding weather station file #
-<<<<<<< HEAD
             weatherdata = weather_station_paths[index]
             # Here, set the call log's weather station from "Out of Range" to the specified weather station found above
             calldata.Station.values[i] = weather_station_names[index]
         calldata = add_weather(calldata, weatherdata, i)
 
     save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData 2018 Stations.xlsx', 'Updated Call Log', calldata)
-=======
-
-    save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Call_Data_2017_NewStations.xlsx', 'Updated Call Log', calldata)
-
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 if __name__ == "__main__":
     main()

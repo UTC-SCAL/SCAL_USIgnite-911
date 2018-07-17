@@ -1,28 +1,12 @@
-<<<<<<< HEAD
-=======
-import pprint
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 import seaborn as sns
 import pandas
 import numpy as np
 import matplotlib.pyplot as plt
 from pylab import rcParams
 from sklearn.linear_model import LogisticRegression
-<<<<<<< HEAD
 # from sklearn.cross_validation import train_test_split
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
-=======
-from sklearn.cross_validation import train_test_split
-from sklearn.metrics import classification_report, accuracy_score, recall_score, roc_curve, auc, roc_auc_score
-import statsmodels.api as sm
-from sklearn.preprocessing import label_binarize
-import scikitplot as skplt
-from sklearn.multiclass import OneVsRestClassifier
-from sklearn import svm, metrics
-import scipy.stats as stats
-from scipy import interp
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 import sklearn
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 
@@ -66,98 +50,6 @@ def save_excel_file_with_format(save_file_name, sheet, data_file_name):
     writer.save()
 
 
-<<<<<<< HEAD
-=======
-def agg_options(calldata):
-    # This section aggs the rainy conditions into just 'Rainy'
-    for i, value in enumerate(calldata.values):
-        # print (i, value)
-        if 1 == calldata.loc[i, 'Rain'] or 1 == calldata.loc[i, 'Light Rain'] or \
-                        1 == calldata.loc[i, 'Drizzle'] or 1 == calldata.loc[i, 'Light Drizzle'] \
-                or 1 == calldata.loc[i, 'Light Thunderstorms and Rain'] or 1 == calldata.loc[i, 'Thunderstorm'] \
-                or 1 == calldata.loc[i, 'Thunderstorms and Rain']:
-            calldata.loc[i, 'Rainy'] = 1
-        else:
-            calldata.loc[i, 'Rainy'] = 0
-    # This section aggs the heavy rain/thunderstorm options into just 'Rainstorm'
-    for i, value in enumerate(calldata.values):
-        if 1 == calldata.loc[i, 'Heavy Thunderstorms and Rain'] or 1 == calldata.loc[i, 'Heavy Rain']:
-            calldata.loc[i, 'Rainstorm'] = 1
-        else:
-            calldata.loc[i, 'Rainstorm'] = 0
-    # This sections aggs the cloud options together into just 'Cloudy'
-    for i, value in enumerate(calldata.values):
-        if 1 == calldata.loc[i, 'Overcast'] or 1 == calldata.loc[i, 'Partly Cloudy'] or 1 == calldata.loc[
-            i, 'Mostly Cloudy'] \
-                or 1 == calldata.loc[i, 'Scattered Clouds']:
-            calldata.loc[i, 'Cloudy'] = 1
-        else:
-            calldata.loc[i, 'Cloudy'] = 0
-    # This section aggs the fog options into 'Foggy'
-    for i, value in enumerate(calldata.values):
-        if 1 == calldata.loc[i, 'Fog'] or 1 == calldata.loc[i, 'Light Freezing Fog'] or \
-                        1 == calldata.loc[i, 'Haze'] \
-                or 1 == calldata.loc[i, 'Mist'] or 1 == calldata.loc[i, 'Patches of Fog'] or \
-                        1 == calldata.loc[i, 'Shallow Fog']:
-            calldata.loc[i, 'Foggy'] = 1
-        else:
-            calldata.loc[i, 'Foggy'] = 0
-
-    save_excel_file('Agg_CallData.xlsx', 'Aggregated Call Log', calldata)
-
-
-def add_weather(calldata, weatherdata):
-    print('Call Info: ')
-    for i, value in enumerate(calldata.values):
-        header_list = (
-            'Date', 'Time', 'Problem', 'Hour', 'Temperature', 'Dewpoint', 'Humidity',
-            'Wind Speed', 'Wind Gust Speed', 'Wind Direction in Degrees', 'Wind Direction', 'Pressure', 'Event',
-            'Weekday', 'Month')
-        date = value[0].strftime('%Y-%m-%d')
-        time = value[1]
-        hour = value[2]
-        hour = int(hour)
-        day = value[0].strftime('%w')
-        month = value[0].strftime('%-m')
-        calldata = calldata.reindex(columns=header_list)
-
-        for j, info in enumerate(weatherdata.values):
-            weatherdate = info[0].strftime('%Y-%m-%d')
-            weathertime = info[1].strftime('%-H:%M:%S')
-            weatherhour = info[1].strftime('%-H')
-            weatherhour = int(weatherhour)
-
-            if (weatherdate == date) and (weatherhour == hour):
-                calldata.loc[i, 'Temperature'] = weatherdata.loc[j, 'temperature']
-                calldata.loc[i, 'Dewpoint'] = weatherdata.loc[j, 'dewpoint']
-                calldata.loc[i, 'Humidity'] = weatherdata.loc[j, 'humidity']
-                calldata.loc[i, 'Wind Speed'] = weatherdata.loc[j, 'wind_speed']
-                calldata.loc[i, 'Wind Gust Speed'] = weatherdata.loc[j, 'wind_gust_speed']
-                calldata.loc[i, 'Wind Direction in Degrees'] = weatherdata.loc[j, 'wind_dir_degrees']
-                calldata.loc[i, 'Wind Direction'] = weatherdata.loc[j, 'wind_dir']
-                calldata.loc[i, 'Pressure'] = weatherdata.loc[j, 'pressure']
-                calldata.loc[i, 'Event'] = weatherdata.loc[j, 'event']
-                # calldata.loc[i, 'Conditions'] = weatherdata.loc[j, 'conditions']
-                calldata.loc[i, 'Weekday'] = day
-                calldata.ix[i, 'Month'] = month
-
-                # print(weatherdate, date, " : ", weathertime, time, ";",)
-    save_excel_file_with_format('All_call_with_Weather.xlsx', 'Updated Call Log', calldata)
-    return calldata
-
-
-def find_y(calldata):
-    for i, value in enumerate(calldata.values):
-        if 'No Injuries' in calldata.loc[i, 'Problem'] or 'Unknown Injuries' in calldata.loc[
-            i, 'Problem'] or 'Delayed' in calldata.loc[i, 'Problem']:
-            calldata.ix[i, 'Y'] = 0
-        else:
-            calldata.ix[i, 'Y'] = 1
-    save_excel_file_with_format('Oct16_Updated_Call_Log_with_Y.xlsx', 'Updated Call Log', calldata)
-    return calldata
-
-
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 def find_options(calldata, column):
     list = calldata[column].unique()
 
@@ -168,15 +60,6 @@ def find_options(calldata, column):
     print(*list, sep="\n")
 
 
-<<<<<<< HEAD
-=======
-def fill_blanks(calldata, column_to_fill):
-    for i, value in enumerate(calldata[column_to_fill].values):
-        if pandas.isnull(calldata.loc[i, column_to_fill]) == True or calldata.loc[i, column_to_fill] == None:
-            calldata.ix[i, column_to_fill] = 0
-
-
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 def find_occur(calldata, col):
     occured = 0
     for i, value in enumerate(calldata.values):
@@ -192,11 +75,7 @@ def find_occur(calldata, col):
 def specify_stats(names, mini, maxi, calldata):
     X = calldata.ix[:, mini:maxi].values
     Y = calldata.ix[:, 0].values
-<<<<<<< HEAD
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
-=======
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3, random_state=50)
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
     LogReg = LogisticRegression()
     LogReg.fit(X, Y)
     print(LogReg.fit(X_train, Y_train))
@@ -288,7 +167,6 @@ def odds(mini, maxi, LogReg, calldata):
               '{0:25} {1:3} {2:4}'.format(calldata.columns[i], "is 0:.4f" % np.exp(LogReg.coef_)[0, j]))
 
 
-<<<<<<< HEAD
 # Aggregate dummy variables
 def agg_options(calldata):
     # event = pandas.get_dummies(calldata['Event'])
@@ -377,24 +255,12 @@ def main():
     # print(mini)
     maxi = len(calldata.columns)
     # print(maxi)
-=======
-def main():
-    calldata = easy_import_excel_file('Agg_CallData2017_NoBlanks.xlsx')
-
-    # Drop certain values for testing
-    calldata = calldata.drop(["Wind Speed", "Wind Gust Speed", "Wind Direction in Degrees",
-                              "Pressure", "Weekday", "Clear"], axis=1)
-
-    mini = 6
-    maxi = len(calldata.columns)
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 
     # Add in the intercept for the Jin table
     names = ['Intercept']
     for i in range(mini, maxi):
         names.append(calldata.columns.values[i])
 
-<<<<<<< HEAD
     # print(calldata.head())
 
 # Y count graph #
@@ -408,38 +274,11 @@ def main():
 #     Y = calldata.values[:, 0]
 #     Y = Y.astype('int')
 #     #Build a forest and compute the feature importances
-=======
-
-# Modifying Independent Variable Inputs #
-    # No Humidity (No BC)
-    # calldata = calldata.drop(["Humidity"], axis=1)
-
-    # No Humidity, Dewpoint (No ABC)
-    # calldata = calldata.drop(["Humidity", "Dewpoint"], axis=1)
-
-
-# Y count graph #
-    # calldata["Y"].value_counts()
-    # sns.countplot(x="Y", data=calldata, palette="hls")
-    # plt.title("Y Count")
-    # plt.show()
-
-# Printing Variable Importance #
-#     X = calldata.values[:, mini:maxi]
-#     Y = calldata.values[:, 1]
-#     Y = Y.astype('int')
-#     # Build a forest and compute the feature importances
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 #     forest = ExtraTreesClassifier()
 #
 #     forest.fit(X, Y)
 #     importances = forest.feature_importances_
-<<<<<<< HEAD
 #     std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
-=======
-#     std = np.std([tree.feature_importances_ for tree in forest.estimators_],
-#                  axis=0)
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 #     indices = np.argsort(importances)[::-1]
 #
 #     # Print the feature ranking
@@ -447,23 +286,14 @@ def main():
 #     features_list = calldata.columns.values[mini:maxi]
 #     features_list.tolist()
 #     for f in range(X.shape[1]):
-<<<<<<< HEAD
 #         print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
-=======
-#         print("%d. %s (%f)" % (f + 1, features_list[f], importances[indices[f]]))
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 #
 #
 #     # Plot the feature importances of the forest
 #     plt.figure()
 #     plt.rcParams.update({'font.size': 20})
 #     plt.title("Feature Importance")
-<<<<<<< HEAD
 #     plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
-=======
-#     plt.bar(range(X.shape[1]), importances[indices],
-#            color="r", yerr=std[indices], align="center")
->>>>>>> 3602d32382d95fc62485b59d217c34f707050040
 #     plt.xticks(range(X.shape[1]), features_list)
 #     plt.xlim([-1, X.shape[1]])
 #     plt.xlabel("Feature Name")
