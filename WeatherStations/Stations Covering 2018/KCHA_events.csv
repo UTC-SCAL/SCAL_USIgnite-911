@@ -1,0 +1,5581 @@
+date,time,event
+01/01/2018,00:53:00,Clear
+01/01/2018,01:53:00,Clear
+01/01/2018,02:53:00,Clear
+01/01/2018,03:53:00,Clear
+01/01/2018,04:53:00,Clear
+01/01/2018,05:53:00,Scattered Clouds
+01/01/2018,06:53:00,Scattered Clouds
+01/01/2018,07:53:00,Scattered Clouds
+01/01/2018,08:53:00,Scattered Clouds
+01/01/2018,09:53:00,Scattered Clouds
+01/01/2018,10:53:00,Scattered Clouds
+01/01/2018,11:53:00,Scattered Clouds
+01/01/2018,12:53:00,Scattered Clouds
+01/01/2018,13:53:00,Scattered Clouds
+01/01/2018,14:53:00,Scattered Clouds
+01/01/2018,15:53:00,Scattered Clouds
+01/01/2018,16:53:00,Scattered Clouds
+01/01/2018,17:53:00,Scattered Clouds
+01/01/2018,18:53:00,Scattered Clouds
+01/01/2018,19:53:00,Partly Cloudy
+01/01/2018,20:53:00,Partly Cloudy
+01/01/2018,21:53:00,Partly Cloudy
+01/01/2018,22:53:00,Partly Cloudy
+01/01/2018,23:53:00,Partly Cloudy
+01/02/2018,00:53:00,Clear
+01/02/2018,01:53:00,Clear
+01/02/2018,02:53:00,Clear
+01/02/2018,03:53:00,Clear
+01/02/2018,04:53:00,Clear
+01/02/2018,05:53:00,Clear
+01/02/2018,06:53:00,Clear
+01/02/2018,07:53:00,Clear
+01/02/2018,08:53:00,Clear
+01/02/2018,09:53:00,Clear
+01/02/2018,10:53:00,Clear
+01/02/2018,11:53:00,Partly Cloudy
+01/02/2018,12:53:00,Partly Cloudy
+01/02/2018,13:53:00,Scattered Clouds
+01/02/2018,14:53:00,Scattered Clouds
+01/02/2018,15:53:00,Partly Cloudy
+01/02/2018,16:53:00,Partly Cloudy
+01/02/2018,17:53:00,Partly Cloudy
+01/02/2018,18:53:00,Partly Cloudy
+01/02/2018,19:53:00,Partly Cloudy
+01/02/2018,20:53:00,Scattered Clouds
+01/02/2018,21:53:00,Mostly Cloudy
+01/02/2018,22:53:00,Mostly Cloudy
+01/02/2018,23:53:00,Mostly Cloudy
+01/03/2018,00:53:00,Clear
+01/03/2018,01:53:00,Clear
+01/03/2018,02:53:00,Partly Cloudy
+01/03/2018,03:53:00,Scattered Clouds
+01/03/2018,04:53:00,Overcast
+01/03/2018,05:53:00,Overcast
+01/03/2018,06:53:00,Overcast
+01/03/2018,07:53:00,Mostly Cloudy
+01/03/2018,08:53:00,Overcast
+01/03/2018,09:53:00,Overcast
+01/03/2018,10:53:00,Overcast
+01/03/2018,11:53:00,Mostly Cloudy
+01/03/2018,12:53:00,Mostly Cloudy
+01/03/2018,13:53:00,Mostly Cloudy
+01/03/2018,14:53:00,Partly Cloudy
+01/03/2018,23:53:00,Partly Cloudy
+01/04/2018,00:53:00,Clear
+01/04/2018,01:53:00,Clear
+01/04/2018,02:53:00,Clear
+01/04/2018,03:53:00,Clear
+01/04/2018,04:53:00,Clear
+01/04/2018,05:53:00,Scattered Clouds
+01/04/2018,06:53:00,Scattered Clouds
+01/04/2018,07:53:00,Scattered Clouds
+01/04/2018,08:53:00,Scattered Clouds
+01/04/2018,09:53:00,Scattered Clouds
+01/04/2018,10:53:00,Scattered Clouds
+01/04/2018,11:53:00,Scattered Clouds
+01/04/2018,12:53:00,Scattered Clouds
+01/04/2018,13:53:00,Scattered Clouds
+01/04/2018,14:53:00,Partly Cloudy
+01/04/2018,15:53:00,Partly Cloudy
+01/04/2018,16:53:00,Partly Cloudy
+01/04/2018,17:53:00,Partly Cloudy
+01/04/2018,18:53:00,Partly Cloudy
+01/04/2018,19:53:00,Clear
+01/04/2018,20:53:00,Clear
+01/04/2018,21:53:00,Clear
+01/04/2018,22:53:00,Clear
+01/04/2018,23:53:00,Clear
+01/05/2018,00:53:00,Clear
+01/05/2018,01:53:00,Clear
+01/05/2018,02:53:00,Clear
+01/05/2018,03:53:00,Clear
+01/05/2018,04:53:00,Clear
+01/05/2018,05:53:00,Mostly Cloudy
+01/05/2018,06:53:00,Mostly Cloudy
+01/05/2018,07:53:00,Mostly Cloudy
+01/05/2018,08:53:00,Scattered Clouds
+01/05/2018,09:53:00,Mostly Cloudy
+01/05/2018,10:53:00,Scattered Clouds
+01/05/2018,11:53:00,Partly Cloudy
+01/05/2018,12:53:00,Partly Cloudy
+01/05/2018,13:53:00,Partly Cloudy
+01/05/2018,14:53:00,Partly Cloudy
+01/05/2018,15:53:00,Scattered Clouds
+01/05/2018,16:53:00,Scattered Clouds
+01/05/2018,17:53:00,Scattered Clouds
+01/05/2018,18:53:00,Mostly Cloudy
+01/05/2018,19:53:00,Mostly Cloudy
+01/05/2018,20:53:00,Mostly Cloudy
+01/05/2018,21:53:00,Mostly Cloudy
+01/05/2018,22:53:00,Overcast
+01/05/2018,23:53:00,Overcast
+01/06/2018,00:53:00,Overcast
+01/06/2018,01:53:00,Overcast
+01/06/2018,02:53:00,Overcast
+01/06/2018,03:53:00,Overcast
+01/06/2018,04:53:00,Overcast
+01/06/2018,05:53:00,Scattered Clouds
+01/06/2018,06:53:00,Scattered Clouds
+01/06/2018,07:53:00,Scattered Clouds
+01/06/2018,08:53:00,Clear
+01/06/2018,09:53:00,Clear
+01/06/2018,10:53:00,Clear
+01/06/2018,11:53:00,Clear
+01/06/2018,12:53:00,Clear
+01/06/2018,13:53:00,Clear
+01/06/2018,14:53:00,Clear
+01/06/2018,15:53:00,Clear
+01/06/2018,16:53:00,Clear
+01/06/2018,17:53:00,Clear
+01/06/2018,18:53:00,Clear
+01/06/2018,19:53:00,Clear
+01/06/2018,20:53:00,Clear
+01/06/2018,21:53:00,Clear
+01/06/2018,22:53:00,Clear
+01/06/2018,23:53:00,Clear
+01/07/2018,00:53:00,Clear
+01/07/2018,01:53:00,Clear
+01/07/2018,02:53:00,Clear
+01/07/2018,03:53:00,Clear
+01/07/2018,04:53:00,Clear
+01/07/2018,05:53:00,Clear
+01/07/2018,06:53:00,Clear
+01/07/2018,07:53:00,Mostly Cloudy
+01/07/2018,08:53:00,Mostly Cloudy
+01/07/2018,09:53:00,Mostly Cloudy
+01/07/2018,10:53:00,Mostly Cloudy
+01/07/2018,11:53:00,Mostly Cloudy
+01/07/2018,12:53:00,Mostly Cloudy
+01/07/2018,13:53:00,Mostly Cloudy
+01/07/2018,14:53:00,Mostly Cloudy
+01/07/2018,15:53:00,Mostly Cloudy
+01/07/2018,16:53:00,Mostly Cloudy
+01/07/2018,17:53:00,Mostly Cloudy
+01/07/2018,18:53:00,Mostly Cloudy
+01/07/2018,19:53:00,Mostly Cloudy
+01/07/2018,20:53:00,Mostly Cloudy
+01/07/2018,21:53:00,Mostly Cloudy
+01/07/2018,22:53:00,Mostly Cloudy
+01/07/2018,23:53:00,Overcast
+01/08/2018,00:53:00,Clear
+01/08/2018,01:53:00,Overcast
+01/08/2018,02:53:00,Overcast
+01/08/2018,03:53:00,Partly Cloudy
+01/08/2018,04:34:00,Mostly Cloudy
+01/08/2018,04:53:00,Overcast
+01/08/2018,05:53:00,Light Freezing Rain
+01/08/2018,06:53:00,Light Freezing Rain
+01/08/2018,07:53:00,Light Freezing Rain
+01/08/2018,08:53:00,Light Freezing Rain
+01/08/2018,09:53:00,Light Freezing Rain
+01/08/2018,10:53:00,Light Freezing Rain
+01/08/2018,11:36:00,Mostly Cloudy
+01/08/2018,11:53:00,Mostly Cloudy
+01/08/2018,12:53:00,Mostly Cloudy
+01/08/2018,13:39:00,Light Rain
+01/08/2018,13:53:00,Light Rain
+01/08/2018,14:26:00,Light Rain
+01/08/2018,14:53:00,Light Rain
+01/08/2018,15:53:00,Light Rain
+01/08/2018,16:08:00,Light Rain
+01/08/2018,16:53:00,Light Rain
+01/08/2018,17:04:00,Light Rain
+01/08/2018,17:32:00,Overcast
+01/08/2018,17:53:00,Overcast
+01/08/2018,18:06:00,Overcast
+01/08/2018,18:20:00,Overcast
+01/08/2018,18:50:00,Overcast
+01/08/2018,18:53:00,Overcast
+01/08/2018,19:26:00,Overcast
+01/08/2018,19:53:00,Overcast
+01/08/2018,20:21:00,Overcast
+01/08/2018,20:53:00,Light Drizzle
+01/08/2018,21:49:00,Overcast
+01/08/2018,21:53:00,Overcast
+01/08/2018,22:30:00,Light Drizzle
+01/08/2018,22:47:00,Light Drizzle
+01/08/2018,22:53:00,Light Drizzle
+01/08/2018,23:04:00,Light Drizzle
+01/08/2018,23:53:00,Overcast
+01/09/2018,00:18:00,Overcast
+01/09/2018,00:30:00,Overcast
+01/09/2018,00:53:00,Overcast
+01/09/2018,01:09:00,Overcast
+01/09/2018,01:16:00,Overcast
+01/09/2018,01:45:00,Overcast
+01/09/2018,01:53:00,Overcast
+01/09/2018,02:07:00,Overcast
+01/09/2018,02:39:00,Overcast
+01/09/2018,02:53:00,Overcast
+01/09/2018,03:35:00,Overcast
+01/09/2018,03:53:00,Overcast
+01/09/2018,04:53:00,Overcast
+01/09/2018,05:53:00,Overcast
+01/09/2018,06:53:00,Overcast
+01/09/2018,07:47:00,Overcast
+01/09/2018,07:53:00,Overcast
+01/09/2018,08:53:00,Overcast
+01/09/2018,09:53:00,Mostly Cloudy
+01/09/2018,10:53:00,Mostly Cloudy
+01/09/2018,11:09:00,Mostly Cloudy
+01/09/2018,11:53:00,Mostly Cloudy
+01/09/2018,12:53:00,Mostly Cloudy
+01/09/2018,13:53:00,Mostly Cloudy
+01/09/2018,14:53:00,Overcast
+01/09/2018,15:53:00,Overcast
+01/09/2018,16:53:00,Overcast
+01/09/2018,17:53:00,Overcast
+01/09/2018,18:53:00,Overcast
+01/09/2018,19:53:00,Overcast
+01/09/2018,20:40:00,Scattered Clouds
+01/09/2018,20:53:00,Scattered Clouds
+01/09/2018,21:53:00,Scattered Clouds
+01/09/2018,22:53:00,Mostly Cloudy
+01/09/2018,23:53:00,Scattered Clouds
+01/10/2018,00:06:00,Mist
+01/10/2018,00:20:00,Partly Cloudy
+01/10/2018,00:29:00,Partly Cloudy
+01/10/2018,00:37:00,Partly Cloudy
+01/10/2018,00:45:00,Partly Cloudy
+01/10/2018,00:53:00,Clear
+01/10/2018,00:55:00,Partly Cloudy
+01/10/2018,00:57:00,Scattered Clouds
+01/10/2018,01:13:00,Mostly Cloudy
+01/10/2018,01:23:00,Fog
+01/10/2018,01:39:00,Overcast
+01/10/2018,01:48:00,Fog
+01/10/2018,01:49:00,Fog
+01/10/2018,02:00:00,Mist
+01/10/2018,02:06:00,Overcast
+01/10/2018,02:09:00,Overcast
+01/10/2018,02:18:00,Overcast
+01/10/2018,02:22:00,Overcast
+01/10/2018,02:26:00,Overcast
+01/10/2018,02:44:00,Overcast
+01/10/2018,02:53:00,Overcast
+01/10/2018,03:07:00,Overcast
+01/10/2018,03:53:00,Overcast
+01/10/2018,04:28:00,Overcast
+01/10/2018,04:46:00,Overcast
+01/10/2018,04:53:00,Overcast
+01/10/2018,05:40:00,Overcast
+01/10/2018,05:48:00,Overcast
+01/10/2018,05:53:00,Overcast
+01/10/2018,06:53:00,Overcast
+01/10/2018,07:53:00,Overcast
+01/10/2018,08:35:00,Mostly Cloudy
+01/10/2018,08:53:00,Mostly Cloudy
+01/10/2018,09:34:00,Mostly Cloudy
+01/10/2018,09:53:00,Mostly Cloudy
+01/10/2018,10:50:00,Mostly Cloudy
+01/10/2018,10:53:00,Mostly Cloudy
+01/10/2018,11:53:00,Mostly Cloudy
+01/10/2018,12:53:00,Overcast
+01/10/2018,13:53:00,Mostly Cloudy
+01/10/2018,14:53:00,Mostly Cloudy
+01/10/2018,15:53:00,Mostly Cloudy
+01/10/2018,16:53:00,Mostly Cloudy
+01/10/2018,17:53:00,Mostly Cloudy
+01/10/2018,18:53:00,Mostly Cloudy
+01/10/2018,19:53:00,Overcast
+01/10/2018,20:53:00,Mostly Cloudy
+01/10/2018,21:53:00,Mostly Cloudy
+01/10/2018,22:53:00,Overcast
+01/10/2018,23:53:00,Overcast
+01/11/2018,00:53:00,Overcast
+01/11/2018,01:19:00,Overcast
+01/11/2018,01:53:00,Overcast
+01/11/2018,02:53:00,Overcast
+01/11/2018,03:53:00,Overcast
+01/11/2018,04:53:00,Overcast
+01/11/2018,05:53:00,Overcast
+01/11/2018,06:53:00,Light Rain
+01/11/2018,06:55:00,Light Rain
+01/11/2018,07:49:00,Light Rain
+01/11/2018,07:53:00,Light Rain
+01/11/2018,08:19:00,Light Rain
+01/11/2018,08:34:00,Light Rain
+01/11/2018,08:39:00,Light Rain
+01/11/2018,08:53:00,Light Rain
+01/11/2018,09:15:00,Overcast
+01/11/2018,09:53:00,Mostly Cloudy
+01/11/2018,10:44:00,Mostly Cloudy
+01/11/2018,10:53:00,Mostly Cloudy
+01/11/2018,11:50:00,Overcast
+01/11/2018,11:53:00,Overcast
+01/11/2018,12:53:00,Light Drizzle
+01/11/2018,13:50:00,Light Rain
+01/11/2018,13:53:00,Light Rain
+01/11/2018,14:11:00,Light Rain
+01/11/2018,14:46:00,Light Drizzle
+01/11/2018,14:53:00,Light Drizzle
+01/11/2018,15:53:00,Overcast
+01/11/2018,16:46:00,Overcast
+01/11/2018,16:53:00,Overcast
+01/11/2018,17:53:00,Overcast
+01/11/2018,18:53:00,Overcast
+01/11/2018,19:53:00,Overcast
+01/11/2018,20:53:00,Overcast
+01/11/2018,21:10:00,Overcast
+01/11/2018,21:53:00,Overcast
+01/11/2018,22:22:00,Overcast
+01/11/2018,22:53:00,Overcast
+01/11/2018,23:44:00,Overcast
+01/11/2018,23:53:00,Overcast
+01/12/2018,00:53:00,Overcast
+01/12/2018,01:53:00,Light Rain
+01/12/2018,02:53:00,Overcast
+01/12/2018,03:34:00,Light Rain
+01/12/2018,03:53:00,Light Rain
+01/12/2018,04:07:00,Light Rain
+01/12/2018,04:31:00,Rain
+01/12/2018,04:53:00,Light Rain
+01/12/2018,05:00:00,Light Rain
+01/12/2018,05:30:00,Light Rain
+01/12/2018,05:43:00,Overcast
+01/12/2018,05:53:00,Mostly Cloudy
+01/12/2018,06:53:00,Mostly Cloudy
+01/12/2018,07:36:00,Overcast
+01/12/2018,07:53:00,Overcast
+01/12/2018,08:01:00,Rain
+01/12/2018,08:30:00,Overcast
+01/12/2018,08:53:00,Mostly Cloudy
+01/12/2018,09:21:00,Mostly Cloudy
+01/12/2018,09:53:00,Mostly Cloudy
+01/12/2018,10:53:00,Mostly Cloudy
+01/12/2018,11:53:00,Mostly Cloudy
+01/12/2018,12:53:00,Mostly Cloudy
+01/12/2018,13:17:00,Light Rain
+01/12/2018,13:27:00,Overcast
+01/12/2018,13:53:00,Overcast
+01/12/2018,14:45:00,Mostly Cloudy
+01/12/2018,14:53:00,Mostly Cloudy
+01/12/2018,15:53:00,Mostly Cloudy
+01/12/2018,16:53:00,Mostly Cloudy
+01/12/2018,17:53:00,Mostly Cloudy
+01/12/2018,18:53:00,Mostly Cloudy
+01/12/2018,19:53:00,Overcast
+01/12/2018,20:53:00,Overcast
+01/12/2018,21:53:00,Overcast
+01/12/2018,22:53:00,Overcast
+01/12/2018,23:53:00,Overcast
+01/13/2018,00:53:00,Overcast
+01/13/2018,01:53:00,Overcast
+01/13/2018,02:53:00,Overcast
+01/13/2018,03:53:00,Overcast
+01/13/2018,04:53:00,Overcast
+01/13/2018,05:53:00,Overcast
+01/13/2018,06:53:00,Overcast
+01/13/2018,07:53:00,Overcast
+01/13/2018,08:53:00,Overcast
+01/13/2018,09:53:00,Mostly Cloudy
+01/13/2018,10:53:00,Overcast
+01/13/2018,11:53:00,Overcast
+01/13/2018,12:53:00,Overcast
+01/13/2018,13:53:00,Overcast
+01/13/2018,14:12:00,Mostly Cloudy
+01/13/2018,14:53:00,Mostly Cloudy
+01/13/2018,15:53:00,Mostly Cloudy
+01/13/2018,16:53:00,Scattered Clouds
+01/13/2018,17:53:00,Scattered Clouds
+01/13/2018,18:53:00,Partly Cloudy
+01/13/2018,19:53:00,Partly Cloudy
+01/13/2018,20:53:00,Clear
+01/13/2018,21:53:00,Clear
+01/13/2018,22:53:00,Clear
+01/13/2018,23:53:00,Clear
+01/14/2018,00:53:00,Clear
+01/14/2018,01:53:00,Clear
+01/14/2018,02:53:00,Clear
+01/14/2018,03:53:00,Clear
+01/14/2018,04:53:00,Clear
+01/14/2018,05:53:00,Scattered Clouds
+01/14/2018,06:53:00,Scattered Clouds
+01/14/2018,07:53:00,Mostly Cloudy
+01/14/2018,08:53:00,Mostly Cloudy
+01/14/2018,09:53:00,Mostly Cloudy
+01/14/2018,10:53:00,Mostly Cloudy
+01/14/2018,11:53:00,Mostly Cloudy
+01/14/2018,12:53:00,Mostly Cloudy
+01/14/2018,13:53:00,Scattered Clouds
+01/14/2018,14:53:00,Scattered Clouds
+01/14/2018,15:53:00,Scattered Clouds
+01/14/2018,16:53:00,Scattered Clouds
+01/14/2018,17:53:00,Scattered Clouds
+01/14/2018,18:53:00,Partly Cloudy
+01/14/2018,19:53:00,Clear
+01/14/2018,20:53:00,Clear
+01/14/2018,21:53:00,Clear
+01/14/2018,22:53:00,Partly Cloudy
+01/14/2018,23:53:00,Partly Cloudy
+01/15/2018,00:53:00,Clear
+01/15/2018,01:53:00,Overcast
+01/15/2018,02:53:00,Overcast
+01/15/2018,03:53:00,Overcast
+01/15/2018,04:53:00,Overcast
+01/15/2018,05:53:00,Overcast
+01/15/2018,06:53:00,Overcast
+01/15/2018,07:53:00,Overcast
+01/15/2018,08:53:00,Overcast
+01/15/2018,09:53:00,Scattered Clouds
+01/15/2018,10:53:00,Scattered Clouds
+01/15/2018,11:53:00,Clear
+01/15/2018,12:53:00,Partly Cloudy
+01/15/2018,13:53:00,Scattered Clouds
+01/15/2018,14:53:00,Scattered Clouds
+01/15/2018,15:53:00,Scattered Clouds
+01/15/2018,16:53:00,Mostly Cloudy
+01/15/2018,17:53:00,Mostly Cloudy
+01/15/2018,18:53:00,Scattered Clouds
+01/15/2018,19:53:00,Partly Cloudy
+01/15/2018,20:53:00,Clear
+01/15/2018,21:53:00,Clear
+01/15/2018,22:53:00,Clear
+01/15/2018,23:53:00,Clear
+01/16/2018,00:53:00,Clear
+01/16/2018,01:53:00,Clear
+01/16/2018,02:53:00,Clear
+01/16/2018,03:53:00,Clear
+01/16/2018,04:53:00,Clear
+01/16/2018,05:53:00,Mostly Cloudy
+01/16/2018,06:53:00,Mostly Cloudy
+01/16/2018,07:53:00,Mostly Cloudy
+01/16/2018,08:53:00,Mostly Cloudy
+01/16/2018,09:53:00,Overcast
+01/16/2018,10:53:00,Mostly Cloudy
+01/16/2018,11:53:00,Overcast
+01/16/2018,12:53:00,Light Snow
+01/16/2018,13:37:00,Light Snow
+01/16/2018,13:53:00,Light Snow
+01/16/2018,14:53:00,Light Snow
+01/16/2018,15:09:00,Light Snow
+01/16/2018,15:16:00,Light Snow
+01/16/2018,15:39:00,Light Snow
+01/16/2018,15:46:00,Light Snow
+01/16/2018,15:53:00,Light Snow
+01/16/2018,16:24:00,Light Snow
+01/16/2018,16:43:00,Light Snow
+01/16/2018,16:53:00,Light Snow
+01/16/2018,17:06:00,Light Snow
+01/16/2018,17:21:00,Light Snow
+01/16/2018,17:50:00,Light Snow
+01/16/2018,17:53:00,Light Snow
+01/16/2018,18:23:00,Light Snow
+01/16/2018,18:53:00,Light Snow
+01/16/2018,19:53:00,Overcast
+01/16/2018,20:53:00,Overcast
+01/16/2018,21:53:00,Overcast
+01/16/2018,22:53:00,Overcast
+01/16/2018,23:53:00,Mostly Cloudy
+01/17/2018,00:53:00,Clear
+01/17/2018,01:53:00,Clear
+01/17/2018,02:13:00,Mostly Cloudy
+01/17/2018,02:53:00,Overcast
+01/17/2018,03:53:00,Overcast
+01/17/2018,04:53:00,Overcast
+01/17/2018,05:53:00,Mostly Cloudy
+01/17/2018,06:53:00,Mostly Cloudy
+01/17/2018,07:00:00,Mostly Cloudy
+01/17/2018,07:53:00,Scattered Clouds
+01/17/2018,08:53:00,Partly Cloudy
+01/17/2018,09:53:00,Partly Cloudy
+01/17/2018,10:53:00,Partly Cloudy
+01/17/2018,11:53:00,Partly Cloudy
+01/17/2018,12:53:00,Partly Cloudy
+01/17/2018,13:53:00,Partly Cloudy
+01/17/2018,14:53:00,Partly Cloudy
+01/17/2018,15:53:00,Partly Cloudy
+01/17/2018,16:53:00,Partly Cloudy
+01/17/2018,17:53:00,Partly Cloudy
+01/17/2018,18:53:00,Partly Cloudy
+01/17/2018,19:53:00,Clear
+01/17/2018,20:53:00,Clear
+01/17/2018,21:53:00,Clear
+01/17/2018,22:53:00,Clear
+01/17/2018,23:53:00,Clear
+01/18/2018,00:53:00,Clear
+01/18/2018,01:53:00,Clear
+01/18/2018,02:53:00,Clear
+01/18/2018,03:53:00,Clear
+01/18/2018,04:53:00,Clear
+01/18/2018,05:53:00,Clear
+01/18/2018,06:53:00,Clear
+01/18/2018,07:53:00,Clear
+01/18/2018,08:53:00,Clear
+01/18/2018,09:53:00,Clear
+01/18/2018,10:53:00,Clear
+01/18/2018,11:53:00,Clear
+01/18/2018,12:53:00,Clear
+01/18/2018,13:53:00,Clear
+01/18/2018,14:53:00,Clear
+01/18/2018,15:53:00,Clear
+01/18/2018,16:53:00,Clear
+01/18/2018,17:53:00,Clear
+01/18/2018,18:53:00,Clear
+01/18/2018,19:53:00,Clear
+01/18/2018,20:53:00,Clear
+01/18/2018,21:53:00,Clear
+01/18/2018,22:53:00,Clear
+01/18/2018,23:53:00,Clear
+01/19/2018,00:53:00,Clear
+01/19/2018,01:53:00,Clear
+01/19/2018,02:53:00,Clear
+01/19/2018,03:53:00,Clear
+01/19/2018,04:53:00,Clear
+01/19/2018,05:53:00,Clear
+01/19/2018,06:53:00,Clear
+01/19/2018,07:53:00,Clear
+01/19/2018,08:53:00,Clear
+01/19/2018,09:53:00,Clear
+01/19/2018,10:53:00,Clear
+01/19/2018,11:53:00,Clear
+01/19/2018,12:53:00,Clear
+01/19/2018,13:53:00,Clear
+01/19/2018,14:53:00,Partly Cloudy
+01/19/2018,15:53:00,Partly Cloudy
+01/19/2018,16:53:00,Partly Cloudy
+01/19/2018,17:53:00,Partly Cloudy
+01/19/2018,18:53:00,Partly Cloudy
+01/19/2018,19:53:00,Partly Cloudy
+01/19/2018,20:53:00,Clear
+01/19/2018,21:53:00,Scattered Clouds
+01/19/2018,22:53:00,Mostly Cloudy
+01/19/2018,23:53:00,Mostly Cloudy
+01/20/2018,00:53:00,Mostly Cloudy
+01/20/2018,01:53:00,Overcast
+01/20/2018,02:53:00,Overcast
+01/20/2018,03:53:00,Overcast
+01/20/2018,04:53:00,Overcast
+01/20/2018,05:53:00,Overcast
+01/20/2018,06:53:00,Overcast
+01/20/2018,07:53:00,Overcast
+01/20/2018,08:53:00,Overcast
+01/20/2018,09:53:00,Overcast
+01/20/2018,10:53:00,Scattered Clouds
+01/20/2018,11:53:00,Scattered Clouds
+01/20/2018,12:53:00,Mostly Cloudy
+01/20/2018,13:53:00,Scattered Clouds
+01/20/2018,14:53:00,Mostly Cloudy
+01/20/2018,15:53:00,Mostly Cloudy
+01/20/2018,16:53:00,Scattered Clouds
+01/20/2018,17:53:00,Scattered Clouds
+01/20/2018,18:53:00,Scattered Clouds
+01/20/2018,19:53:00,Partly Cloudy
+01/20/2018,20:53:00,Partly Cloudy
+01/20/2018,21:53:00,Clear
+01/20/2018,22:53:00,Partly Cloudy
+01/20/2018,23:53:00,Partly Cloudy
+01/21/2018,00:53:00,Clear
+01/21/2018,01:53:00,Clear
+01/21/2018,02:53:00,Clear
+01/21/2018,03:53:00,Clear
+01/21/2018,04:53:00,Clear
+01/21/2018,05:53:00,Scattered Clouds
+01/21/2018,06:53:00,Scattered Clouds
+01/21/2018,07:53:00,Mostly Cloudy
+01/21/2018,08:53:00,Mostly Cloudy
+01/21/2018,09:53:00,Mostly Cloudy
+01/21/2018,10:53:00,Mostly Cloudy
+01/21/2018,11:53:00,Scattered Clouds
+01/21/2018,12:53:00,Scattered Clouds
+01/21/2018,13:53:00,Scattered Clouds
+01/21/2018,14:53:00,Scattered Clouds
+01/21/2018,15:53:00,Scattered Clouds
+01/21/2018,16:53:00,Scattered Clouds
+01/21/2018,17:53:00,Scattered Clouds
+01/21/2018,18:53:00,Scattered Clouds
+01/21/2018,19:53:00,Partly Cloudy
+01/21/2018,20:53:00,Clear
+01/21/2018,21:53:00,Clear
+01/21/2018,22:53:00,Clear
+01/21/2018,23:53:00,Clear
+01/22/2018,00:53:00,Clear
+01/22/2018,01:53:00,Clear
+01/22/2018,02:53:00,Clear
+01/22/2018,03:53:00,Clear
+01/22/2018,04:53:00,Clear
+01/22/2018,05:53:00,Mostly Cloudy
+01/22/2018,06:53:00,Mostly Cloudy
+01/22/2018,07:53:00,Mostly Cloudy
+01/22/2018,08:53:00,Mostly Cloudy
+01/22/2018,09:53:00,Mostly Cloudy
+01/22/2018,10:53:00,Mostly Cloudy
+01/22/2018,11:53:00,Light Rain
+01/22/2018,12:53:00,Light Rain
+01/22/2018,13:34:00,Light Rain
+01/22/2018,13:53:00,Overcast
+01/22/2018,14:14:00,Light Rain
+01/22/2018,14:53:00,Heavy Rain
+01/22/2018,15:02:00,Light Rain
+01/22/2018,15:53:00,Light Rain
+01/22/2018,16:53:00,Mostly Cloudy
+01/22/2018,17:53:00,Overcast
+01/22/2018,18:53:00,Overcast
+01/22/2018,19:53:00,Overcast
+01/22/2018,20:53:00,Overcast
+01/22/2018,21:37:00,Mostly Cloudy
+01/22/2018,21:53:00,Mostly Cloudy
+01/22/2018,22:53:00,Mostly Cloudy
+01/22/2018,23:53:00,Partly Cloudy
+01/23/2018,00:53:00,Clear
+01/23/2018,01:53:00,Clear
+01/23/2018,02:53:00,Clear
+01/23/2018,03:53:00,Clear
+01/23/2018,04:53:00,Clear
+01/23/2018,05:53:00,Clear
+01/23/2018,06:53:00,Clear
+01/23/2018,07:53:00,Partly Cloudy
+01/23/2018,08:53:00,Partly Cloudy
+01/23/2018,09:53:00,Partly Cloudy
+01/23/2018,10:53:00,Scattered Clouds
+01/23/2018,11:53:00,Scattered Clouds
+01/23/2018,12:53:00,Scattered Clouds
+01/23/2018,13:53:00,Scattered Clouds
+01/23/2018,14:53:00,Scattered Clouds
+01/23/2018,15:53:00,Mostly Cloudy
+01/23/2018,16:53:00,Mostly Cloudy
+01/23/2018,17:53:00,Mostly Cloudy
+01/23/2018,18:53:00,Mostly Cloudy
+01/23/2018,19:53:00,Mostly Cloudy
+01/23/2018,20:53:00,Mostly Cloudy
+01/23/2018,21:53:00,Mostly Cloudy
+01/23/2018,22:53:00,Mostly Cloudy
+01/23/2018,23:53:00,Overcast
+01/24/2018,00:53:00,Overcast
+01/24/2018,01:53:00,Overcast
+01/24/2018,02:53:00,Overcast
+01/24/2018,03:53:00,Mostly Cloudy
+01/24/2018,04:53:00,Overcast
+01/24/2018,05:53:00,Overcast
+01/24/2018,06:53:00,Scattered Clouds
+01/24/2018,07:53:00,Scattered Clouds
+01/24/2018,08:53:00,Scattered Clouds
+01/24/2018,09:53:00,Scattered Clouds
+01/24/2018,10:53:00,Partly Cloudy
+01/24/2018,11:53:00,Partly Cloudy
+01/24/2018,12:53:00,Partly Cloudy
+01/24/2018,13:53:00,Partly Cloudy
+01/24/2018,14:53:00,Partly Cloudy
+01/24/2018,15:53:00,Partly Cloudy
+01/24/2018,16:53:00,Partly Cloudy
+01/24/2018,17:53:00,Partly Cloudy
+01/24/2018,18:53:00,Partly Cloudy
+01/24/2018,19:53:00,Clear
+01/24/2018,20:53:00,Clear
+01/24/2018,21:53:00,Clear
+01/24/2018,22:53:00,Clear
+01/24/2018,23:53:00,Clear
+01/25/2018,00:53:00,Clear
+01/25/2018,01:53:00,Clear
+01/25/2018,02:53:00,Clear
+01/25/2018,03:53:00,Clear
+01/25/2018,04:53:00,Clear
+01/25/2018,05:53:00,Partly Cloudy
+01/25/2018,06:53:00,Partly Cloudy
+01/25/2018,07:53:00,Clear
+01/25/2018,08:53:00,Clear
+01/25/2018,09:53:00,Clear
+01/25/2018,10:53:00,Clear
+01/25/2018,11:53:00,Clear
+01/25/2018,12:53:00,Clear
+01/25/2018,13:53:00,Clear
+01/25/2018,14:53:00,Partly Cloudy
+01/25/2018,15:53:00,Partly Cloudy
+01/25/2018,16:53:00,Partly Cloudy
+01/25/2018,17:53:00,Partly Cloudy
+01/25/2018,18:53:00,Partly Cloudy
+01/25/2018,19:53:00,Clear
+01/25/2018,20:53:00,Clear
+01/25/2018,21:53:00,Clear
+01/25/2018,22:53:00,Clear
+01/25/2018,23:53:00,Clear
+01/26/2018,00:53:00,Clear
+01/26/2018,01:53:00,Clear
+01/26/2018,02:53:00,Clear
+01/26/2018,03:53:00,Clear
+01/26/2018,04:53:00,Clear
+01/26/2018,05:53:00,Scattered Clouds
+01/26/2018,06:53:00,Scattered Clouds
+01/26/2018,07:53:00,Scattered Clouds
+01/26/2018,08:53:00,Mostly Cloudy
+01/26/2018,09:53:00,Mostly Cloudy
+01/26/2018,10:53:00,Mostly Cloudy
+01/26/2018,11:53:00,Mostly Cloudy
+01/26/2018,12:53:00,Mostly Cloudy
+01/26/2018,13:53:00,Mostly Cloudy
+01/26/2018,14:53:00,Scattered Clouds
+01/26/2018,15:53:00,Scattered Clouds
+01/26/2018,16:53:00,Scattered Clouds
+01/26/2018,17:53:00,Scattered Clouds
+01/26/2018,18:53:00,Scattered Clouds
+01/26/2018,19:53:00,Scattered Clouds
+01/26/2018,20:53:00,Scattered Clouds
+01/26/2018,21:53:00,Scattered Clouds
+01/26/2018,22:53:00,Scattered Clouds
+01/26/2018,23:53:00,Scattered Clouds
+01/27/2018,00:53:00,Mostly Cloudy
+01/27/2018,01:53:00,Overcast
+01/27/2018,02:53:00,Overcast
+01/27/2018,03:23:00,Overcast
+01/27/2018,03:53:00,Overcast
+01/27/2018,04:25:00,Overcast
+01/27/2018,04:53:00,Partly Cloudy
+01/27/2018,05:53:00,Mostly Cloudy
+01/27/2018,06:53:00,Overcast
+01/27/2018,07:53:00,Overcast
+01/27/2018,08:53:00,Overcast
+01/27/2018,09:53:00,Overcast
+01/27/2018,10:53:00,Overcast
+01/27/2018,11:10:00,Overcast
+01/27/2018,11:53:00,Overcast
+01/27/2018,12:53:00,Mostly Cloudy
+01/27/2018,13:53:00,Mostly Cloudy
+01/27/2018,14:53:00,Overcast
+01/27/2018,15:53:00,Overcast
+01/27/2018,16:36:00,Light Rain
+01/27/2018,16:53:00,Light Rain
+01/27/2018,17:53:00,Overcast
+01/27/2018,18:16:00,Overcast
+01/27/2018,18:53:00,Overcast
+01/27/2018,19:36:00,Overcast
+01/27/2018,19:53:00,Overcast
+01/27/2018,20:53:00,Overcast
+01/27/2018,21:32:00,Overcast
+01/27/2018,21:53:00,Overcast
+01/27/2018,22:37:00,Overcast
+01/27/2018,22:53:00,Overcast
+01/27/2018,23:53:00,Mostly Cloudy
+01/28/2018,00:34:00,Overcast
+01/28/2018,00:53:00,Overcast
+01/28/2018,01:03:00,Overcast
+01/28/2018,01:11:00,Mostly Cloudy
+01/28/2018,01:53:00,Overcast
+01/28/2018,02:01:00,Overcast
+01/28/2018,02:40:00,Overcast
+01/28/2018,02:53:00,Overcast
+01/28/2018,03:03:00,Overcast
+01/28/2018,03:12:00,Overcast
+01/28/2018,03:28:00,Overcast
+01/28/2018,03:48:00,Overcast
+01/28/2018,03:53:00,Overcast
+01/28/2018,04:18:00,Overcast
+01/28/2018,04:33:00,Mostly Cloudy
+01/28/2018,04:45:00,Overcast
+01/28/2018,04:53:00,Overcast
+01/28/2018,05:40:00,Overcast
+01/28/2018,05:53:00,Overcast
+01/28/2018,06:41:00,Overcast
+01/28/2018,06:53:00,Overcast
+01/28/2018,07:53:00,Overcast
+01/28/2018,08:40:00,Light Rain
+01/28/2018,08:53:00,Light Rain
+01/28/2018,09:25:00,Fog
+01/28/2018,09:53:00,Fog
+01/28/2018,10:53:00,Light Rain
+01/28/2018,11:11:00,Light Rain
+01/28/2018,11:28:00,Rain
+01/28/2018,11:53:00,Light Rain
+01/28/2018,12:53:00,Light Rain
+01/28/2018,13:53:00,Light Rain
+01/28/2018,14:08:00,Overcast
+01/28/2018,14:53:00,Light Rain
+01/28/2018,14:54:00,Light Rain
+01/28/2018,15:53:00,Light Rain
+01/28/2018,16:42:00,Overcast
+01/28/2018,16:53:00,Overcast
+01/28/2018,17:00:00,Overcast
+01/28/2018,17:53:00,Mostly Cloudy
+01/28/2018,18:53:00,Overcast
+01/28/2018,19:35:00,Overcast
+01/28/2018,19:53:00,Overcast
+01/28/2018,20:14:00,Overcast
+01/28/2018,20:27:00,Overcast
+01/28/2018,20:53:00,Overcast
+01/28/2018,21:53:00,Overcast
+01/28/2018,22:53:00,Overcast
+01/28/2018,23:53:00,Overcast
+01/29/2018,00:53:00,Overcast
+01/29/2018,01:53:00,Overcast
+01/29/2018,02:18:00,Partly Cloudy
+01/29/2018,02:53:00,Scattered Clouds
+01/29/2018,03:53:00,Partly Cloudy
+01/29/2018,04:53:00,Partly Cloudy
+01/29/2018,05:53:00,Partly Cloudy
+01/29/2018,06:53:00,Partly Cloudy
+01/29/2018,07:53:00,Partly Cloudy
+01/29/2018,08:53:00,Clear
+01/29/2018,09:53:00,Clear
+01/29/2018,10:53:00,Clear
+01/29/2018,11:53:00,Clear
+01/29/2018,12:53:00,Clear
+01/29/2018,13:53:00,Partly Cloudy
+01/29/2018,14:53:00,Scattered Clouds
+01/29/2018,15:53:00,Scattered Clouds
+01/29/2018,16:53:00,Partly Cloudy
+01/29/2018,17:53:00,Scattered Clouds
+01/29/2018,18:53:00,Scattered Clouds
+01/29/2018,19:53:00,Partly Cloudy
+01/29/2018,20:53:00,Mostly Cloudy
+01/29/2018,21:50:00,Mostly Cloudy
+01/29/2018,21:53:00,Mostly Cloudy
+01/29/2018,22:53:00,Overcast
+01/29/2018,23:45:00,Mostly Cloudy
+01/29/2018,23:53:00,Mostly Cloudy
+01/30/2018,00:53:00,Overcast
+01/30/2018,01:53:00,Overcast
+01/30/2018,02:53:00,Overcast
+01/30/2018,03:53:00,Overcast
+01/30/2018,04:53:00,Overcast
+01/30/2018,05:53:00,Mostly Cloudy
+01/30/2018,06:53:00,Mostly Cloudy
+01/30/2018,07:53:00,Mostly Cloudy
+01/30/2018,08:53:00,Scattered Clouds
+01/30/2018,09:53:00,Scattered Clouds
+01/30/2018,10:53:00,Partly Cloudy
+01/30/2018,11:53:00,Scattered Clouds
+01/30/2018,12:53:00,Scattered Clouds
+01/30/2018,13:53:00,Scattered Clouds
+01/30/2018,14:53:00,Scattered Clouds
+01/30/2018,15:53:00,Mostly Cloudy
+01/30/2018,16:53:00,Mostly Cloudy
+01/30/2018,17:53:00,Mostly Cloudy
+01/30/2018,18:53:00,Mostly Cloudy
+01/30/2018,19:53:00,Mostly Cloudy
+01/30/2018,20:53:00,Scattered Clouds
+01/30/2018,21:53:00,Partly Cloudy
+01/30/2018,22:53:00,Clear
+01/30/2018,23:53:00,Clear
+01/31/2018,00:53:00,Clear
+01/31/2018,01:53:00,Clear
+01/31/2018,02:53:00,Clear
+01/31/2018,03:53:00,Clear
+01/31/2018,04:53:00,Clear
+01/31/2018,05:53:00,Mostly Cloudy
+01/31/2018,06:53:00,Mostly Cloudy
+01/31/2018,07:53:00,Mostly Cloudy
+01/31/2018,08:53:00,Scattered Clouds
+01/31/2018,09:53:00,Scattered Clouds
+01/31/2018,10:53:00,Scattered Clouds
+01/31/2018,11:53:00,Scattered Clouds
+01/31/2018,12:53:00,Mostly Cloudy
+01/31/2018,13:53:00,Scattered Clouds
+01/31/2018,14:53:00,Scattered Clouds
+01/31/2018,15:53:00,Scattered Clouds
+01/31/2018,16:53:00,Partly Cloudy
+01/31/2018,17:53:00,Partly Cloudy
+01/31/2018,18:53:00,Partly Cloudy
+01/31/2018,19:53:00,Clear
+01/31/2018,20:53:00,Clear
+01/31/2018,21:53:00,Clear
+01/31/2018,22:53:00,Partly Cloudy
+01/31/2018,23:53:00,Partly Cloudy
+02/01/2018,00:53:00,Clear
+02/01/2018,01:53:00,Overcast
+02/01/2018,02:53:00,Overcast
+02/01/2018,03:53:00,Overcast
+02/01/2018,04:53:00,Overcast
+02/01/2018,05:53:00,Mostly Cloudy
+02/01/2018,06:49:00,Mostly Cloudy
+02/01/2018,06:53:00,Mostly Cloudy
+02/01/2018,07:51:00,Overcast
+02/01/2018,07:53:00,Overcast
+02/01/2018,08:53:00,Overcast
+02/01/2018,09:53:00,Overcast
+02/01/2018,10:53:00,Overcast
+02/01/2018,11:53:00,Overcast
+02/01/2018,12:53:00,Mostly Cloudy
+02/01/2018,13:53:00,Overcast
+02/01/2018,14:53:00,Mostly Cloudy
+02/01/2018,15:53:00,Overcast
+02/01/2018,16:53:00,Overcast
+02/01/2018,17:53:00,Overcast
+02/01/2018,18:53:00,Light Rain
+02/01/2018,19:09:00,Rain
+02/01/2018,19:18:00,Light Rain
+02/01/2018,19:47:00,Light Rain
+02/01/2018,19:53:00,Light Rain
+02/01/2018,20:53:00,Light Rain
+02/01/2018,21:53:00,Light Rain
+02/01/2018,22:53:00,Rain
+02/01/2018,23:53:00,Overcast
+02/02/2018,00:53:00,Overcast
+02/02/2018,01:20:00,Overcast
+02/02/2018,01:53:00,Clear
+02/02/2018,02:24:00,Mostly Cloudy
+02/02/2018,02:53:00,Overcast
+02/02/2018,03:14:00,Scattered Clouds
+02/02/2018,03:53:00,Partly Cloudy
+02/02/2018,04:53:00,Clear
+02/02/2018,05:53:00,Scattered Clouds
+02/02/2018,06:53:00,Scattered Clouds
+02/02/2018,07:53:00,Mostly Cloudy
+02/02/2018,08:53:00,Mostly Cloudy
+02/02/2018,09:53:00,Mostly Cloudy
+02/02/2018,10:53:00,Mostly Cloudy
+02/02/2018,11:53:00,Scattered Clouds
+02/02/2018,12:53:00,Scattered Clouds
+02/02/2018,13:53:00,Scattered Clouds
+02/02/2018,14:53:00,Scattered Clouds
+02/02/2018,15:53:00,Scattered Clouds
+02/02/2018,16:53:00,Scattered Clouds
+02/02/2018,17:53:00,Scattered Clouds
+02/02/2018,18:53:00,Scattered Clouds
+02/02/2018,19:53:00,Scattered Clouds
+02/02/2018,20:53:00,Scattered Clouds
+02/02/2018,21:53:00,Scattered Clouds
+02/02/2018,22:53:00,Scattered Clouds
+02/02/2018,23:53:00,Scattered Clouds
+02/03/2018,00:53:00,Clear
+02/03/2018,01:53:00,Clear
+02/03/2018,02:53:00,Clear
+02/03/2018,03:53:00,Clear
+02/03/2018,04:53:00,Clear
+02/03/2018,05:53:00,Mostly Cloudy
+02/03/2018,06:53:00,Mostly Cloudy
+02/03/2018,07:53:00,Mostly Cloudy
+02/03/2018,08:53:00,Mostly Cloudy
+02/03/2018,09:53:00,Mostly Cloudy
+02/03/2018,10:53:00,Mostly Cloudy
+02/03/2018,11:53:00,Mostly Cloudy
+02/03/2018,12:53:00,Mostly Cloudy
+02/03/2018,13:53:00,Mostly Cloudy
+02/03/2018,14:53:00,Mostly Cloudy
+02/03/2018,15:53:00,Mostly Cloudy
+02/03/2018,16:53:00,Mostly Cloudy
+02/03/2018,17:53:00,Mostly Cloudy
+02/03/2018,18:53:00,Mostly Cloudy
+02/03/2018,19:53:00,Mostly Cloudy
+02/03/2018,20:53:00,Mostly Cloudy
+02/03/2018,21:53:00,Mostly Cloudy
+02/03/2018,22:53:00,Overcast
+02/03/2018,23:53:00,Overcast
+02/04/2018,00:53:00,Overcast
+02/04/2018,01:53:00,Overcast
+02/04/2018,02:53:00,Light Rain
+02/04/2018,03:53:00,Rain
+02/04/2018,04:24:00,Rain
+02/04/2018,04:53:00,Rain
+02/04/2018,05:24:00,Rain
+02/04/2018,05:48:00,Rain
+02/04/2018,05:53:00,Heavy Rain
+02/04/2018,06:53:00,Rain
+02/04/2018,07:53:00,Light Rain
+02/04/2018,08:22:00,Light Rain
+02/04/2018,08:53:00,Overcast
+02/04/2018,09:13:00,Light Rain
+02/04/2018,09:53:00,Overcast
+02/04/2018,10:53:00,Overcast
+02/04/2018,11:16:00,Overcast
+02/04/2018,11:53:00,Overcast
+02/04/2018,12:33:00,Overcast
+02/04/2018,12:53:00,Overcast
+02/04/2018,13:53:00,Overcast
+02/04/2018,14:53:00,Overcast
+02/04/2018,15:53:00,Overcast
+02/04/2018,16:53:00,Overcast
+02/04/2018,17:53:00,Overcast
+02/04/2018,18:53:00,Overcast
+02/04/2018,19:53:00,Overcast
+02/04/2018,20:13:00,Overcast
+02/04/2018,20:53:00,Overcast
+02/04/2018,21:53:00,Overcast
+02/04/2018,22:53:00,Overcast
+02/04/2018,23:53:00,Mostly Cloudy
+02/05/2018,00:53:00,Overcast
+02/05/2018,01:07:00,Overcast
+02/05/2018,01:14:00,Overcast
+02/05/2018,01:44:00,Overcast
+02/05/2018,01:53:00,Overcast
+02/05/2018,02:53:00,Overcast
+02/05/2018,03:53:00,Mostly Cloudy
+02/05/2018,04:53:00,Overcast
+02/05/2018,05:53:00,Overcast
+02/05/2018,06:53:00,Overcast
+02/05/2018,07:53:00,Overcast
+02/05/2018,08:53:00,Overcast
+02/05/2018,09:53:00,Overcast
+02/05/2018,10:53:00,Overcast
+02/05/2018,11:53:00,Mostly Cloudy
+02/05/2018,12:14:00,Scattered Clouds
+02/05/2018,12:53:00,Scattered Clouds
+02/05/2018,13:53:00,Scattered Clouds
+02/05/2018,14:53:00,Scattered Clouds
+02/05/2018,15:53:00,Partly Cloudy
+02/05/2018,16:53:00,Partly Cloudy
+02/05/2018,17:53:00,Partly Cloudy
+02/05/2018,18:53:00,Partly Cloudy
+02/05/2018,19:53:00,Partly Cloudy
+02/05/2018,20:53:00,Partly Cloudy
+02/05/2018,21:53:00,Clear
+02/05/2018,22:53:00,Clear
+02/05/2018,23:53:00,Clear
+02/06/2018,00:53:00,Overcast
+02/06/2018,01:53:00,Overcast
+02/06/2018,02:53:00,Overcast
+02/06/2018,03:53:00,Overcast
+02/06/2018,04:26:00,Overcast
+02/06/2018,04:53:00,Overcast
+02/06/2018,05:53:00,Overcast
+02/06/2018,06:53:00,Overcast
+02/06/2018,07:53:00,Overcast
+02/06/2018,08:49:00,Light Drizzle
+02/06/2018,08:53:00,Light Drizzle
+02/06/2018,09:49:00,Light Drizzle
+02/06/2018,09:53:00,Light Drizzle
+02/06/2018,10:53:00,Overcast
+02/06/2018,11:53:00,Haze
+02/06/2018,12:06:00,Haze
+02/06/2018,12:53:00,Haze
+02/06/2018,13:53:00,Overcast
+02/06/2018,14:53:00,Overcast
+02/06/2018,15:01:00,Overcast
+02/06/2018,15:53:00,Overcast
+02/06/2018,16:53:00,Light Rain
+02/06/2018,17:53:00,Overcast
+02/06/2018,18:53:00,Overcast
+02/06/2018,19:53:00,Overcast
+02/06/2018,20:53:00,Light Rain
+02/06/2018,21:53:00,Mostly Cloudy
+02/06/2018,22:53:00,Mostly Cloudy
+02/06/2018,23:53:00,Mostly Cloudy
+02/07/2018,00:53:00,Partly Cloudy
+02/07/2018,01:53:00,Light Rain
+02/07/2018,02:53:00,Light Rain
+02/07/2018,03:53:00,Light Rain
+02/07/2018,04:00:00,Rain
+02/07/2018,04:08:00,Heavy Rain
+02/07/2018,04:17:00,Rain
+02/07/2018,04:37:00,Heavy Rain
+02/07/2018,04:53:00,Heavy Rain
+02/07/2018,05:03:00,Heavy Rain
+02/07/2018,05:18:00,Heavy Rain
+02/07/2018,05:27:00,Heavy Rain
+02/07/2018,05:33:00,Heavy Rain
+02/07/2018,05:50:00,Heavy Rain
+02/07/2018,05:53:00,Heavy Rain
+02/07/2018,06:14:00,Heavy Rain
+02/07/2018,06:18:00,Heavy Rain
+02/07/2018,06:24:00,Heavy Rain
+02/07/2018,06:40:00,Heavy Rain
+02/07/2018,06:53:00,Heavy Rain
+02/07/2018,07:53:00,Light Rain
+02/07/2018,08:45:00,Overcast
+02/07/2018,08:53:00,Overcast
+02/07/2018,09:26:00,Light Drizzle
+02/07/2018,09:49:00,Overcast
+02/07/2018,09:53:00,Overcast
+02/07/2018,10:11:00,Overcast
+02/07/2018,10:40:00,Overcast
+02/07/2018,10:53:00,Overcast
+02/07/2018,11:28:00,Mostly Cloudy
+02/07/2018,11:53:00,Overcast
+02/07/2018,12:53:00,Overcast
+02/07/2018,13:15:00,Overcast
+02/07/2018,13:53:00,Overcast
+02/07/2018,14:07:00,Overcast
+02/07/2018,14:53:00,Overcast
+02/07/2018,15:32:00,Overcast
+02/07/2018,15:53:00,Overcast
+02/07/2018,16:35:00,Overcast
+02/07/2018,16:53:00,Overcast
+02/07/2018,17:42:00,Overcast
+02/07/2018,17:53:00,Overcast
+02/07/2018,18:53:00,Overcast
+02/07/2018,19:22:00,Overcast
+02/07/2018,19:53:00,Overcast
+02/07/2018,20:34:00,Overcast
+02/07/2018,20:53:00,Mostly Cloudy
+02/07/2018,21:18:00,Mostly Cloudy
+02/07/2018,21:53:00,Mostly Cloudy
+02/07/2018,22:53:00,Mostly Cloudy
+02/07/2018,23:53:00,Mostly Cloudy
+02/08/2018,00:53:00,Clear
+02/08/2018,01:53:00,Clear
+02/08/2018,02:53:00,Clear
+02/08/2018,03:53:00,Clear
+02/08/2018,04:53:00,Clear
+02/08/2018,05:53:00,Partly Cloudy
+02/08/2018,06:53:00,Partly Cloudy
+02/08/2018,07:53:00,Partly Cloudy
+02/08/2018,08:53:00,Partly Cloudy
+02/08/2018,09:53:00,Partly Cloudy
+02/08/2018,10:53:00,Clear
+02/08/2018,11:53:00,Clear
+02/08/2018,12:53:00,Clear
+02/08/2018,13:53:00,Clear
+02/08/2018,14:53:00,Partly Cloudy
+02/08/2018,15:53:00,Partly Cloudy
+02/08/2018,16:53:00,Partly Cloudy
+02/08/2018,17:53:00,Partly Cloudy
+02/08/2018,18:53:00,Partly Cloudy
+02/08/2018,19:53:00,Clear
+02/08/2018,20:53:00,Clear
+02/08/2018,21:53:00,Clear
+02/08/2018,22:53:00,Clear
+02/08/2018,23:53:00,Clear
+02/09/2018,00:53:00,Clear
+02/09/2018,01:53:00,Clear
+02/09/2018,02:53:00,Clear
+02/09/2018,03:53:00,Clear
+02/09/2018,04:53:00,Clear
+02/09/2018,05:53:00,Clear
+02/09/2018,06:02:00,Partly Cloudy
+02/09/2018,06:53:00,Partly Cloudy
+02/09/2018,07:36:00,Partly Cloudy
+02/09/2018,07:53:00,Scattered Clouds
+02/09/2018,08:53:00,Scattered Clouds
+02/09/2018,09:53:00,Scattered Clouds
+02/09/2018,10:53:00,Scattered Clouds
+02/09/2018,11:53:00,Scattered Clouds
+02/09/2018,12:53:00,Scattered Clouds
+02/09/2018,13:53:00,Scattered Clouds
+02/09/2018,14:53:00,Mostly Cloudy
+02/09/2018,15:53:00,Mostly Cloudy
+02/09/2018,16:53:00,Mostly Cloudy
+02/09/2018,17:53:00,Mostly Cloudy
+02/09/2018,18:53:00,Mostly Cloudy
+02/09/2018,19:53:00,Mostly Cloudy
+02/09/2018,20:53:00,Mostly Cloudy
+02/09/2018,21:53:00,Mostly Cloudy
+02/09/2018,22:53:00,Mostly Cloudy
+02/09/2018,23:53:00,Light Rain
+02/10/2018,00:00:00,Overcast
+02/10/2018,00:53:00,Light Rain
+02/10/2018,01:34:00,Rain
+02/10/2018,01:53:00,Light Rain
+02/10/2018,02:53:00,Overcast
+02/10/2018,03:53:00,Overcast
+02/10/2018,04:18:00,Overcast
+02/10/2018,04:53:00,Overcast
+02/10/2018,05:53:00,Overcast
+02/10/2018,06:53:00,Overcast
+02/10/2018,07:35:00,Overcast
+02/10/2018,07:53:00,Overcast
+02/10/2018,08:53:00,Light Rain
+02/10/2018,09:53:00,Light Rain
+02/10/2018,10:53:00,Light Rain
+02/10/2018,11:53:00,Light Rain
+02/10/2018,12:53:00,Light Rain
+02/10/2018,13:53:00,Light Rain
+02/10/2018,14:53:00,Light Rain
+02/10/2018,15:53:00,Rain
+02/10/2018,16:53:00,Rain
+02/10/2018,17:42:00,Rain
+02/10/2018,17:53:00,Heavy Rain
+02/10/2018,18:26:00,Heavy Rain
+02/10/2018,18:53:00,Rain
+02/10/2018,19:53:00,Light Rain
+02/10/2018,20:18:00,Light Rain
+02/10/2018,20:37:00,Light Rain
+02/10/2018,20:53:00,Light Rain
+02/10/2018,21:45:00,Heavy Rain
+02/10/2018,21:53:00,Heavy Rain
+02/10/2018,22:04:00,Rain
+02/10/2018,22:32:00,Light Rain
+02/10/2018,22:53:00,Light Rain
+02/10/2018,23:35:00,Light Rain
+02/10/2018,23:53:00,Light Rain
+02/10/2018,23:57:00,Light Rain
+02/11/2018,00:01:00,Light Rain
+02/11/2018,00:07:00,Light Rain
+02/11/2018,00:24:00,Light Rain
+02/11/2018,00:28:00,Light Rain
+02/11/2018,00:34:00,Light Rain
+02/11/2018,00:41:00,Light Rain
+02/11/2018,00:51:00,Light Rain
+02/11/2018,00:53:00,Light Rain
+02/11/2018,01:44:00,Overcast
+02/11/2018,01:53:00,Light Rain
+02/11/2018,02:15:00,Light Rain
+02/11/2018,02:43:00,Light Rain
+02/11/2018,02:53:00,Light Rain
+02/11/2018,03:53:00,Light Rain
+02/11/2018,04:25:00,Rain
+02/11/2018,04:53:00,Rain
+02/11/2018,05:00:00,Light Rain
+02/11/2018,05:27:00,Heavy Rain
+02/11/2018,05:30:00,Heavy Rain
+02/11/2018,05:39:00,Rain
+02/11/2018,05:53:00,Heavy Rain
+02/11/2018,06:30:00,Light Rain
+02/11/2018,06:53:00,Light Rain
+02/11/2018,07:53:00,Mostly Cloudy
+02/11/2018,08:28:00,Mostly Cloudy
+02/11/2018,08:53:00,Mostly Cloudy
+02/11/2018,09:53:00,Mostly Cloudy
+02/11/2018,10:16:00,Mostly Cloudy
+02/11/2018,10:53:00,Mostly Cloudy
+02/11/2018,11:53:00,Mostly Cloudy
+02/11/2018,12:16:00,Overcast
+02/11/2018,12:53:00,Overcast
+02/11/2018,13:53:00,Mostly Cloudy
+02/11/2018,14:53:00,Mostly Cloudy
+02/11/2018,15:53:00,Mostly Cloudy
+02/11/2018,16:16:00,Mostly Cloudy
+02/11/2018,16:53:00,Mostly Cloudy
+02/11/2018,17:53:00,Mostly Cloudy
+02/11/2018,18:53:00,Mostly Cloudy
+02/11/2018,19:53:00,Light Rain
+02/11/2018,20:00:00,Overcast
+02/11/2018,20:43:00,Mostly Cloudy
+02/11/2018,20:53:00,Mostly Cloudy
+02/11/2018,21:53:00,Mostly Cloudy
+02/11/2018,22:53:00,Overcast
+02/11/2018,23:53:00,Overcast
+02/12/2018,00:53:00,Overcast
+02/12/2018,01:20:00,Light Rain
+02/12/2018,01:45:00,Light Rain
+02/12/2018,01:53:00,Light Rain
+02/12/2018,02:44:00,Overcast
+02/12/2018,02:53:00,Overcast
+02/12/2018,03:53:00,Overcast
+02/12/2018,04:53:00,Overcast
+02/12/2018,05:53:00,Overcast
+02/12/2018,06:13:00,Rain
+02/12/2018,06:53:00,Light Rain
+02/12/2018,07:53:00,Overcast
+02/12/2018,08:53:00,Overcast
+02/12/2018,09:53:00,Overcast
+02/12/2018,10:53:00,Overcast
+02/12/2018,11:27:00,Overcast
+02/12/2018,11:53:00,Overcast
+02/12/2018,12:53:00,Overcast
+02/12/2018,13:53:00,Overcast
+02/12/2018,14:53:00,Overcast
+02/12/2018,15:53:00,Mostly Cloudy
+02/12/2018,16:53:00,Overcast
+02/12/2018,17:53:00,Mostly Cloudy
+02/12/2018,18:53:00,Overcast
+02/12/2018,19:53:00,Overcast
+02/12/2018,20:53:00,Overcast
+02/12/2018,21:53:00,Overcast
+02/12/2018,22:53:00,Mostly Cloudy
+02/12/2018,23:43:00,Overcast
+02/12/2018,23:53:00,Overcast
+02/13/2018,00:53:00,Overcast
+02/13/2018,01:42:00,Overcast
+02/13/2018,01:53:00,Overcast
+02/13/2018,02:17:00,Mostly Cloudy
+02/13/2018,02:53:00,Overcast
+02/13/2018,03:21:00,Overcast
+02/13/2018,03:53:00,Overcast
+02/13/2018,04:53:00,Overcast
+02/13/2018,05:35:00,Overcast
+02/13/2018,05:53:00,Overcast
+02/13/2018,06:53:00,Overcast
+02/13/2018,07:53:00,Overcast
+02/13/2018,08:27:00,Light Drizzle
+02/13/2018,08:53:00,Light Drizzle
+02/13/2018,09:49:00,Light Drizzle
+02/13/2018,09:53:00,Light Drizzle
+02/13/2018,10:32:00,Light Drizzle
+02/13/2018,10:48:00,Light Drizzle
+02/13/2018,10:53:00,Light Drizzle
+02/13/2018,10:55:00,Light Drizzle
+02/13/2018,11:53:00,Light Drizzle
+02/13/2018,12:00:00,Overcast
+02/13/2018,12:53:00,Overcast
+02/13/2018,13:53:00,Overcast
+02/13/2018,14:53:00,Overcast
+02/13/2018,15:53:00,Overcast
+02/13/2018,16:41:00,Overcast
+02/13/2018,16:53:00,Overcast
+02/13/2018,17:53:00,Overcast
+02/13/2018,18:09:00,Overcast
+02/13/2018,18:53:00,Haze
+02/13/2018,19:53:00,Overcast
+02/13/2018,20:53:00,Overcast
+02/13/2018,21:53:00,Overcast
+02/13/2018,22:53:00,Overcast
+02/13/2018,23:53:00,Overcast
+02/14/2018,00:53:00,Overcast
+02/14/2018,01:53:00,Overcast
+02/14/2018,02:53:00,Overcast
+02/14/2018,03:09:00,Overcast
+02/14/2018,03:53:00,Overcast
+02/14/2018,04:53:00,Overcast
+02/14/2018,05:53:00,Rain
+02/14/2018,06:28:00,Rain
+02/14/2018,06:53:00,Rain
+02/14/2018,07:48:00,Light Rain
+02/14/2018,07:53:00,Light Rain
+02/14/2018,08:49:00,Light Rain
+02/14/2018,08:53:00,Light Rain
+02/14/2018,09:53:00,Light Rain
+02/14/2018,10:53:00,Light Rain
+02/14/2018,11:53:00,Rain
+02/14/2018,12:53:00,Overcast
+02/14/2018,13:53:00,Overcast
+02/14/2018,14:38:00,Overcast
+02/14/2018,14:53:00,Overcast
+02/14/2018,15:50:00,Overcast
+02/14/2018,15:53:00,Overcast
+02/14/2018,16:53:00,Overcast
+02/14/2018,17:53:00,Light Rain
+02/14/2018,18:10:00,Light Rain
+02/14/2018,18:23:00,Light Rain
+02/14/2018,18:39:00,Light Rain
+02/14/2018,18:53:00,Rain
+02/14/2018,19:00:00,Rain
+02/14/2018,19:06:00,Rain
+02/14/2018,19:19:00,Light Rain
+02/14/2018,19:45:00,Overcast
+02/14/2018,19:53:00,Overcast
+02/14/2018,20:53:00,Overcast
+02/14/2018,21:53:00,Overcast
+02/14/2018,22:22:00,Rain
+02/14/2018,22:28:00,Heavy Rain
+02/14/2018,22:35:00,Light Rain
+02/14/2018,22:45:00,Light Rain
+02/14/2018,22:53:00,Light Rain
+02/14/2018,23:22:00,Light Rain
+02/14/2018,23:34:00,Light Rain
+02/14/2018,23:53:00,Light Rain
+02/15/2018,00:53:00,Overcast
+02/15/2018,01:53:00,Overcast
+02/15/2018,02:17:00,Overcast
+02/15/2018,02:53:00,Overcast
+02/15/2018,03:32:00,Overcast
+02/15/2018,03:53:00,Overcast
+02/15/2018,04:15:00,Overcast
+02/15/2018,04:53:00,Overcast
+02/15/2018,05:47:00,Overcast
+02/15/2018,05:53:00,Overcast
+02/15/2018,06:53:00,Overcast
+02/15/2018,07:05:00,Overcast
+02/15/2018,07:53:00,Overcast
+02/15/2018,08:53:00,Mostly Cloudy
+02/15/2018,09:53:00,Mostly Cloudy
+02/15/2018,09:56:00,Mostly Cloudy
+02/15/2018,10:53:00,Mostly Cloudy
+02/15/2018,11:42:00,Mostly Cloudy
+02/15/2018,11:53:00,Mostly Cloudy
+02/15/2018,12:49:00,Mostly Cloudy
+02/15/2018,12:53:00,Mostly Cloudy
+02/15/2018,13:53:00,Mostly Cloudy
+02/15/2018,14:53:00,Mostly Cloudy
+02/15/2018,15:53:00,Mostly Cloudy
+02/15/2018,16:53:00,Mostly Cloudy
+02/15/2018,17:53:00,Mostly Cloudy
+02/15/2018,18:53:00,Mostly Cloudy
+02/15/2018,19:53:00,Mostly Cloudy
+02/15/2018,20:53:00,Mostly Cloudy
+02/15/2018,21:53:00,Mostly Cloudy
+02/15/2018,22:53:00,Mostly Cloudy
+02/15/2018,23:53:00,Scattered Clouds
+02/16/2018,00:53:00,Mostly Cloudy
+02/16/2018,01:03:00,Overcast
+02/16/2018,01:53:00,Mostly Cloudy
+02/16/2018,02:50:00,Overcast
+02/16/2018,02:53:00,Overcast
+02/16/2018,03:53:00,Light Rain
+02/16/2018,04:19:00,Overcast
+02/16/2018,04:29:00,Overcast
+02/16/2018,04:53:00,Overcast
+02/16/2018,05:53:00,Mostly Cloudy
+02/16/2018,06:24:00,Overcast
+02/16/2018,06:53:00,Overcast
+02/16/2018,07:53:00,Overcast
+02/16/2018,08:53:00,Overcast
+02/16/2018,09:53:00,Overcast
+02/16/2018,10:53:00,Overcast
+02/16/2018,11:53:00,Overcast
+02/16/2018,12:53:00,Overcast
+02/16/2018,13:20:00,Light Rain
+02/16/2018,13:53:00,Light Drizzle
+02/16/2018,14:06:00,Light Rain
+02/16/2018,14:15:00,Light Rain
+02/16/2018,14:53:00,Overcast
+02/16/2018,15:36:00,Mostly Cloudy
+02/16/2018,15:53:00,Mostly Cloudy
+02/16/2018,16:53:00,Mostly Cloudy
+02/16/2018,17:53:00,Overcast
+02/16/2018,18:08:00,Overcast
+02/16/2018,18:53:00,Overcast
+02/16/2018,19:53:00,Overcast
+02/16/2018,20:53:00,Mostly Cloudy
+02/16/2018,21:00:00,Overcast
+02/16/2018,21:17:00,Overcast
+02/16/2018,21:53:00,Overcast
+02/16/2018,22:53:00,Overcast
+02/16/2018,23:53:00,Overcast
+02/17/2018,00:53:00,Overcast
+02/17/2018,01:53:00,Overcast
+02/17/2018,02:19:00,Overcast
+02/17/2018,02:53:00,Partly Cloudy
+02/17/2018,03:28:00,Mostly Cloudy
+02/17/2018,03:49:00,Scattered Clouds
+02/17/2018,03:53:00,Scattered Clouds
+02/17/2018,04:42:00,Mostly Cloudy
+02/17/2018,04:53:00,Overcast
+02/17/2018,05:53:00,Overcast
+02/17/2018,07:53:00,Overcast
+02/17/2018,08:53:00,Mostly Cloudy
+02/17/2018,09:35:00,Overcast
+02/17/2018,09:53:00,Overcast
+02/17/2018,10:38:00,Light Rain
+02/17/2018,10:53:00,Light Rain
+02/17/2018,11:14:00,Rain
+02/17/2018,11:53:00,Light Rain
+02/17/2018,12:53:00,Light Drizzle
+02/17/2018,13:53:00,Overcast
+02/17/2018,13:55:00,Mostly Cloudy
+02/17/2018,14:22:00,Mostly Cloudy
+02/17/2018,14:53:00,Light Drizzle
+02/17/2018,15:53:00,Mostly Cloudy
+02/17/2018,16:53:00,Light Rain
+02/17/2018,17:17:00,Light Rain
+02/17/2018,17:53:00,Light Rain
+02/17/2018,18:53:00,Rain
+02/17/2018,19:40:00,Light Rain
+02/17/2018,19:53:00,Light Rain
+02/17/2018,20:53:00,Mostly Cloudy
+02/17/2018,21:11:00,Mostly Cloudy
+02/17/2018,21:53:00,Mostly Cloudy
+02/17/2018,22:53:00,Mostly Cloudy
+02/17/2018,23:06:00,Overcast
+02/17/2018,23:53:00,Mostly Cloudy
+02/18/2018,00:53:00,Mostly Cloudy
+02/18/2018,01:53:00,Overcast
+02/18/2018,02:53:00,Overcast
+02/18/2018,03:53:00,Mostly Cloudy
+02/18/2018,04:06:00,Partly Cloudy
+02/18/2018,04:53:00,Clear
+02/18/2018,05:53:00,Mostly Cloudy
+02/18/2018,06:53:00,Mostly Cloudy
+02/18/2018,07:53:00,Mostly Cloudy
+02/18/2018,08:53:00,Scattered Clouds
+02/18/2018,09:53:00,Mostly Cloudy
+02/18/2018,10:53:00,Scattered Clouds
+02/18/2018,11:53:00,Scattered Clouds
+02/18/2018,12:53:00,Scattered Clouds
+02/18/2018,13:53:00,Scattered Clouds
+02/18/2018,14:53:00,Mostly Cloudy
+02/18/2018,15:53:00,Mostly Cloudy
+02/18/2018,16:53:00,Mostly Cloudy
+02/18/2018,17:53:00,Mostly Cloudy
+02/18/2018,18:53:00,Mostly Cloudy
+02/18/2018,19:53:00,Overcast
+02/18/2018,20:53:00,Overcast
+02/18/2018,21:40:00,Overcast
+02/18/2018,21:53:00,Light Rain
+02/18/2018,22:10:00,Rain
+02/18/2018,22:53:00,Light Rain
+02/18/2018,23:06:00,Light Rain
+02/18/2018,23:12:00,Light Rain
+02/18/2018,23:21:00,Overcast
+02/18/2018,23:53:00,Overcast
+02/19/2018,00:00:00,Overcast
+02/19/2018,00:36:00,Overcast
+02/19/2018,00:53:00,Overcast
+02/19/2018,01:18:00,Overcast
+02/19/2018,01:53:00,Overcast
+02/19/2018,02:53:00,Overcast
+02/19/2018,03:50:00,Overcast
+02/19/2018,03:53:00,Overcast
+02/19/2018,04:53:00,Overcast
+02/19/2018,05:46:00,Overcast
+02/19/2018,05:53:00,Overcast
+02/19/2018,06:53:00,Patches of Fog
+02/19/2018,07:10:00,Patches of Fog
+02/19/2018,07:53:00,Patches of Fog
+02/19/2018,08:53:00,Patches of Fog
+02/19/2018,09:40:00,Patches of Fog
+02/19/2018,09:53:00,Patches of Fog
+02/19/2018,10:53:00,Overcast
+02/19/2018,11:53:00,Overcast
+02/19/2018,12:53:00,Overcast
+02/19/2018,13:53:00,Overcast
+02/19/2018,14:53:00,Overcast
+02/19/2018,15:53:00,Mostly Cloudy
+02/19/2018,16:11:00,Mostly Cloudy
+02/19/2018,16:53:00,Mostly Cloudy
+02/19/2018,17:53:00,Mostly Cloudy
+02/19/2018,18:53:00,Mostly Cloudy
+02/19/2018,19:53:00,Mostly Cloudy
+02/19/2018,20:53:00,Mostly Cloudy
+02/19/2018,21:53:00,Mostly Cloudy
+02/19/2018,22:53:00,Scattered Clouds
+02/19/2018,23:53:00,Partly Cloudy
+02/20/2018,00:53:00,Clear
+02/20/2018,01:53:00,Mostly Cloudy
+02/20/2018,02:53:00,Partly Cloudy
+02/20/2018,03:53:00,Scattered Clouds
+02/20/2018,04:53:00,Scattered Clouds
+02/20/2018,05:53:00,Scattered Clouds
+02/20/2018,06:51:00,Mostly Cloudy
+02/20/2018,06:53:00,Mostly Cloudy
+02/20/2018,07:53:00,Overcast
+02/20/2018,08:53:00,Overcast
+02/20/2018,09:53:00,Mostly Cloudy
+02/20/2018,10:53:00,Mostly Cloudy
+02/20/2018,11:00:00,Scattered Clouds
+02/20/2018,11:53:00,Overcast
+02/20/2018,12:53:00,Mostly Cloudy
+02/20/2018,13:25:00,Mostly Cloudy
+02/20/2018,13:53:00,Mostly Cloudy
+02/20/2018,14:53:00,Mostly Cloudy
+02/20/2018,15:53:00,Mostly Cloudy
+02/20/2018,16:53:00,Mostly Cloudy
+02/20/2018,17:53:00,Mostly Cloudy
+02/20/2018,18:53:00,Mostly Cloudy
+02/20/2018,19:53:00,Mostly Cloudy
+02/20/2018,20:53:00,Mostly Cloudy
+02/20/2018,21:53:00,Mostly Cloudy
+02/20/2018,22:53:00,Mostly Cloudy
+02/20/2018,23:53:00,Mostly Cloudy
+02/21/2018,00:53:00,Mostly Cloudy
+02/21/2018,01:53:00,Scattered Clouds
+02/21/2018,02:31:00,Mostly Cloudy
+02/21/2018,02:53:00,Overcast
+02/21/2018,03:53:00,Mostly Cloudy
+02/21/2018,04:06:00,Mostly Cloudy
+02/21/2018,04:35:00,Mostly Cloudy
+02/21/2018,04:44:00,Mostly Cloudy
+02/21/2018,04:53:00,Mostly Cloudy
+02/21/2018,05:21:00,Mostly Cloudy
+02/21/2018,05:53:00,Mostly Cloudy
+02/21/2018,06:53:00,Mostly Cloudy
+02/21/2018,07:53:00,Overcast
+02/21/2018,08:53:00,Mostly Cloudy
+02/21/2018,09:53:00,Overcast
+02/21/2018,10:53:00,Mostly Cloudy
+02/21/2018,11:53:00,Mostly Cloudy
+02/21/2018,12:32:00,Mostly Cloudy
+02/21/2018,12:53:00,Mostly Cloudy
+02/21/2018,13:53:00,Mostly Cloudy
+02/21/2018,14:53:00,Scattered Clouds
+02/21/2018,15:53:00,Scattered Clouds
+02/21/2018,16:53:00,Scattered Clouds
+02/21/2018,17:53:00,Mostly Cloudy
+02/21/2018,18:53:00,Mostly Cloudy
+02/21/2018,19:53:00,Mostly Cloudy
+02/21/2018,20:53:00,Scattered Clouds
+02/21/2018,21:53:00,Mostly Cloudy
+02/21/2018,22:53:00,Mostly Cloudy
+02/21/2018,23:53:00,Mostly Cloudy
+02/22/2018,00:53:00,Clear
+02/22/2018,01:53:00,Clear
+02/22/2018,02:53:00,Clear
+02/22/2018,03:53:00,Clear
+02/22/2018,04:53:00,Clear
+02/22/2018,05:53:00,Scattered Clouds
+02/22/2018,06:53:00,Partly Cloudy
+02/22/2018,07:50:00,Mostly Cloudy
+02/22/2018,07:53:00,Mostly Cloudy
+02/22/2018,08:51:00,Scattered Clouds
+02/22/2018,08:53:00,Scattered Clouds
+02/22/2018,09:32:00,Overcast
+02/22/2018,09:53:00,Overcast
+02/22/2018,10:53:00,Mostly Cloudy
+02/22/2018,11:53:00,Mostly Cloudy
+02/22/2018,12:08:00,Mostly Cloudy
+02/22/2018,12:53:00,Mostly Cloudy
+02/22/2018,13:53:00,Scattered Clouds
+02/22/2018,14:53:00,Mostly Cloudy
+02/22/2018,14:56:00,Rain
+02/22/2018,14:58:00,Heavy Rain
+02/22/2018,15:02:00,Light Rain
+02/22/2018,15:53:00,Mostly Cloudy
+02/22/2018,16:53:00,Mostly Cloudy
+02/22/2018,17:53:00,Mostly Cloudy
+02/22/2018,18:53:00,Mostly Cloudy
+02/22/2018,19:53:00,Scattered Clouds
+02/22/2018,20:53:00,Partly Cloudy
+02/22/2018,21:53:00,Clear
+02/22/2018,22:53:00,Partly Cloudy
+02/22/2018,23:53:00,Clear
+02/23/2018,00:53:00,Clear
+02/23/2018,01:53:00,Clear
+02/23/2018,02:53:00,Clear
+02/23/2018,03:53:00,Clear
+02/23/2018,04:53:00,Clear
+02/23/2018,05:53:00,Scattered Clouds
+02/23/2018,06:53:00,Shallow Fog
+02/23/2018,07:53:00,Mostly Cloudy
+02/23/2018,08:53:00,Scattered Clouds
+02/23/2018,09:53:00,Scattered Clouds
+02/23/2018,10:53:00,Scattered Clouds
+02/23/2018,11:53:00,Scattered Clouds
+02/23/2018,12:53:00,Scattered Clouds
+02/23/2018,13:53:00,Scattered Clouds
+02/23/2018,14:53:00,Scattered Clouds
+02/23/2018,15:53:00,Scattered Clouds
+02/23/2018,16:53:00,Scattered Clouds
+02/23/2018,17:53:00,Mostly Cloudy
+02/23/2018,18:53:00,Mostly Cloudy
+02/23/2018,19:53:00,Mostly Cloudy
+02/23/2018,20:53:00,Mostly Cloudy
+02/23/2018,21:53:00,Mostly Cloudy
+02/23/2018,22:53:00,Mostly Cloudy
+02/23/2018,23:53:00,Mostly Cloudy
+02/24/2018,00:53:00,Overcast
+02/24/2018,01:53:00,Scattered Clouds
+02/24/2018,02:53:00,Mostly Cloudy
+02/24/2018,03:53:00,Overcast
+02/24/2018,04:53:00,Overcast
+02/24/2018,05:53:00,Mostly Cloudy
+02/24/2018,06:53:00,Mostly Cloudy
+02/24/2018,07:53:00,Mostly Cloudy
+02/24/2018,08:53:00,Mostly Cloudy
+02/24/2018,09:53:00,Mostly Cloudy
+02/24/2018,10:53:00,Mostly Cloudy
+02/24/2018,11:53:00,Mostly Cloudy
+02/24/2018,12:53:00,Mostly Cloudy
+02/24/2018,13:53:00,Mostly Cloudy
+02/24/2018,14:53:00,Light Rain
+02/24/2018,15:53:00,Mostly Cloudy
+02/24/2018,16:53:00,Mostly Cloudy
+02/24/2018,17:53:00,Mostly Cloudy
+02/24/2018,18:53:00,Mostly Cloudy
+02/24/2018,19:53:00,Mostly Cloudy
+02/24/2018,20:53:00,Mostly Cloudy
+02/24/2018,21:53:00,Mostly Cloudy
+02/24/2018,22:30:00,Rain
+02/24/2018,22:53:00,Mostly Cloudy
+02/24/2018,23:53:00,Mostly Cloudy
+02/25/2018,00:53:00,Mostly Cloudy
+02/25/2018,01:53:00,Overcast
+02/25/2018,02:53:00,Mostly Cloudy
+02/25/2018,03:53:00,Overcast
+02/25/2018,04:35:00,Rain
+02/25/2018,04:43:00,Heavy Rain
+02/25/2018,04:46:00,Heavy Rain
+02/25/2018,04:53:00,Rain
+02/25/2018,05:53:00,Light Rain
+02/25/2018,06:14:00,Light Rain
+02/25/2018,06:53:00,Light Rain
+02/25/2018,07:20:00,Light Rain
+02/25/2018,07:39:00,Light Rain
+02/25/2018,07:53:00,Patches of Fog
+02/25/2018,08:23:00,Light Rain
+02/25/2018,08:53:00,Light Rain
+02/25/2018,09:53:00,Overcast
+02/25/2018,10:53:00,Overcast
+02/25/2018,11:53:00,Mostly Cloudy
+02/25/2018,12:53:00,Mostly Cloudy
+02/25/2018,13:53:00,Mostly Cloudy
+02/25/2018,14:14:00,Mostly Cloudy
+02/25/2018,14:53:00,Mostly Cloudy
+02/25/2018,15:45:00,Mostly Cloudy
+02/25/2018,15:53:00,Mostly Cloudy
+02/25/2018,16:53:00,Mostly Cloudy
+02/25/2018,17:53:00,Mostly Cloudy
+02/25/2018,18:53:00,Mostly Cloudy
+02/25/2018,19:53:00,Mostly Cloudy
+02/25/2018,20:53:00,Mostly Cloudy
+02/25/2018,21:53:00,Light Rain
+02/25/2018,22:29:00,Light Rain
+02/25/2018,22:53:00,Light Rain
+02/25/2018,23:53:00,Light Rain
+02/26/2018,00:46:00,Light Rain
+02/26/2018,00:53:00,Light Rain
+02/26/2018,01:53:00,Light Rain
+02/26/2018,02:40:00,Overcast
+02/26/2018,02:53:00,Light Rain
+02/26/2018,03:53:00,Light Rain
+02/26/2018,04:43:00,Rain
+02/26/2018,04:53:00,Light Rain
+02/26/2018,05:53:00,Light Rain
+02/26/2018,06:22:00,Light Rain
+02/26/2018,06:53:00,Overcast
+02/26/2018,07:37:00,Patches of Fog
+02/26/2018,07:53:00,Patches of Fog
+02/26/2018,08:53:00,Patches of Fog
+02/26/2018,09:13:00,Light Drizzle
+02/26/2018,09:53:00,Overcast
+02/26/2018,10:53:00,Overcast
+02/26/2018,11:53:00,Overcast
+02/26/2018,12:53:00,Overcast
+02/26/2018,13:53:00,Mostly Cloudy
+02/26/2018,14:53:00,Mostly Cloudy
+02/26/2018,15:15:00,Mostly Cloudy
+02/26/2018,15:53:00,Scattered Clouds
+02/26/2018,16:53:00,Scattered Clouds
+02/26/2018,17:53:00,Partly Cloudy
+02/26/2018,18:53:00,Partly Cloudy
+02/26/2018,19:53:00,Clear
+02/26/2018,20:53:00,Clear
+02/26/2018,21:53:00,Clear
+02/26/2018,22:53:00,Clear
+02/26/2018,23:53:00,Clear
+02/27/2018,00:53:00,Clear
+02/27/2018,01:53:00,Clear
+02/27/2018,02:08:00,Partly Cloudy
+02/27/2018,02:17:00,Partly Cloudy
+02/27/2018,02:24:00,Partly Cloudy
+02/27/2018,02:53:00,Partly Cloudy
+02/27/2018,02:55:00,Mist
+02/27/2018,02:57:00,Mist
+02/27/2018,03:05:00,Fog
+02/27/2018,03:25:00,Mist
+02/27/2018,03:35:00,Fog
+02/27/2018,03:53:00,Fog
+02/27/2018,04:17:00,Fog
+02/27/2018,04:29:00,Fog
+02/27/2018,04:37:00,Fog
+02/27/2018,04:51:00,Fog
+02/27/2018,04:53:00,Fog
+02/27/2018,04:56:00,Fog
+02/27/2018,05:27:00,Fog
+02/27/2018,05:34:00,Fog
+02/27/2018,05:53:00,Fog
+02/27/2018,06:06:00,Fog
+02/27/2018,06:16:00,Fog
+02/27/2018,06:26:00,Fog
+02/27/2018,06:53:00,Fog
+02/27/2018,07:42:00,Fog
+02/27/2018,07:53:00,Fog
+02/27/2018,08:53:00,Fog
+02/27/2018,09:15:00,Fog
+02/27/2018,09:32:00,Fog
+02/27/2018,09:53:00,Overcast
+02/27/2018,10:08:00,Mostly Cloudy
+02/27/2018,10:25:00,Scattered Clouds
+02/27/2018,10:53:00,Partly Cloudy
+02/27/2018,11:53:00,Clear
+02/27/2018,12:53:00,Clear
+02/27/2018,13:53:00,Clear
+02/27/2018,14:53:00,Clear
+02/27/2018,15:53:00,Partly Cloudy
+02/27/2018,16:53:00,Scattered Clouds
+02/27/2018,17:53:00,Mostly Cloudy
+02/27/2018,18:53:00,Mostly Cloudy
+02/27/2018,19:53:00,Overcast
+02/27/2018,20:53:00,Overcast
+02/27/2018,21:53:00,Overcast
+02/27/2018,22:53:00,Overcast
+02/27/2018,23:53:00,Overcast
+02/28/2018,00:53:00,Clear
+02/28/2018,01:53:00,Clear
+02/28/2018,02:53:00,Overcast
+02/28/2018,03:53:00,Light Rain
+02/28/2018,04:53:00,Light Rain
+02/28/2018,05:53:00,Light Rain
+02/28/2018,06:53:00,Light Rain
+02/28/2018,07:28:00,Light Rain
+02/28/2018,07:53:00,Heavy Rain
+02/28/2018,08:40:00,Rain
+02/28/2018,08:53:00,Rain
+02/28/2018,09:15:00,Heavy Rain
+02/28/2018,09:53:00,Heavy Rain
+02/28/2018,10:34:00,Rain
+02/28/2018,10:36:00,Rain
+02/28/2018,10:53:00,Heavy Rain
+02/28/2018,11:48:00,Light Rain
+02/28/2018,11:53:00,Light Rain
+02/28/2018,12:17:00,Rain
+02/28/2018,12:53:00,Light Rain
+02/28/2018,12:56:00,Rain
+02/28/2018,13:34:00,Light Rain
+02/28/2018,13:51:00,Light Rain
+02/28/2018,13:53:00,Light Rain
+02/28/2018,13:58:00,Light Rain
+02/28/2018,14:42:00,Rain
+02/28/2018,14:53:00,Light Rain
+02/28/2018,15:50:00,Light Rain
+02/28/2018,15:53:00,Light Rain
+02/28/2018,16:53:00,Rain
+02/28/2018,17:53:00,Heavy Rain
+02/28/2018,18:07:00,Heavy Rain
+02/28/2018,18:38:00,Heavy Rain
+02/28/2018,18:53:00,Heavy Rain
+02/28/2018,19:13:00,Light Rain
+02/28/2018,19:22:00,Rain
+02/28/2018,19:53:00,Light Rain
+02/28/2018,20:02:00,Light Rain
+02/28/2018,20:19:00,Rain
+02/28/2018,20:44:00,Heavy Rain
+02/28/2018,20:53:00,Rain
+02/28/2018,21:20:00,Rain
+02/28/2018,21:36:00,Rain
+02/28/2018,21:53:00,Light Rain
+02/28/2018,22:53:00,Rain
+02/28/2018,23:29:00,Rain
+02/28/2018,23:47:00,Light Rain
+02/28/2018,23:53:00,Overcast
+03/01/2018,00:12:00,Overcast
+03/01/2018,00:49:00,Overcast
+03/01/2018,00:53:00,Overcast
+03/01/2018,01:10:00,Overcast
+03/01/2018,01:45:00,Overcast
+03/01/2018,01:53:00,Light Rain
+03/01/2018,02:08:00,Rain
+03/01/2018,02:53:00,Rain
+03/01/2018,03:05:00,Light Rain
+03/01/2018,03:45:00,Light Rain
+03/01/2018,03:53:00,Overcast
+03/01/2018,04:31:00,Overcast
+03/01/2018,04:53:00,Overcast
+03/01/2018,05:00:00,Overcast
+03/01/2018,05:35:00,Overcast
+03/01/2018,05:53:00,Overcast
+03/01/2018,06:53:00,Overcast
+03/01/2018,07:21:00,Rain
+03/01/2018,07:40:00,Light Rain
+03/01/2018,07:53:00,Light Rain
+03/01/2018,08:06:00,Rain
+03/01/2018,08:17:00,Light Rain
+03/01/2018,08:53:00,Light Rain
+03/01/2018,09:21:00,Light Rain
+03/01/2018,09:53:00,Light Rain
+03/01/2018,10:53:00,Light Rain
+03/01/2018,11:53:00,Light Rain
+03/01/2018,12:53:00,Light Rain
+03/01/2018,13:53:00,Light Rain
+03/01/2018,17:53:00,Light Rain
+03/01/2018,18:53:00,Scattered Clouds
+03/01/2018,19:53:00,Mostly Cloudy
+03/01/2018,20:53:00,Mostly Cloudy
+03/01/2018,21:53:00,Mostly Cloudy
+03/01/2018,22:53:00,Scattered Clouds
+03/01/2018,23:53:00,Mostly Cloudy
+03/02/2018,00:53:00,Overcast
+03/02/2018,01:53:00,Mostly Cloudy
+03/02/2018,02:53:00,Clear
+03/02/2018,03:53:00,Partly Cloudy
+03/02/2018,04:53:00,Overcast
+03/02/2018,05:53:00,Scattered Clouds
+03/02/2018,06:53:00,Scattered Clouds
+03/02/2018,07:53:00,Scattered Clouds
+03/02/2018,08:53:00,Partly Cloudy
+03/02/2018,09:53:00,Clear
+03/02/2018,10:53:00,Clear
+03/02/2018,11:53:00,Clear
+03/02/2018,12:53:00,Clear
+03/02/2018,13:53:00,Clear
+03/02/2018,14:53:00,Clear
+03/02/2018,15:53:00,Clear
+03/02/2018,16:53:00,Clear
+03/02/2018,17:53:00,Clear
+03/02/2018,18:53:00,Clear
+03/02/2018,19:53:00,Clear
+03/02/2018,20:53:00,Clear
+03/02/2018,21:53:00,Clear
+03/02/2018,22:53:00,Clear
+03/02/2018,23:53:00,Clear
+03/03/2018,00:53:00,Clear
+03/03/2018,01:53:00,Clear
+03/03/2018,02:53:00,Clear
+03/03/2018,03:53:00,Clear
+03/03/2018,04:53:00,Clear
+03/03/2018,05:53:00,Clear
+03/03/2018,06:53:00,Clear
+03/03/2018,07:53:00,Clear
+03/03/2018,08:53:00,Clear
+03/03/2018,09:53:00,Clear
+03/03/2018,10:53:00,Clear
+03/03/2018,11:53:00,Clear
+03/03/2018,12:53:00,Partly Cloudy
+03/03/2018,13:53:00,Partly Cloudy
+03/03/2018,14:53:00,Clear
+03/03/2018,15:53:00,Clear
+03/03/2018,16:53:00,Clear
+03/03/2018,17:53:00,Clear
+03/03/2018,18:53:00,Clear
+03/03/2018,19:53:00,Clear
+03/03/2018,20:53:00,Clear
+03/03/2018,21:53:00,Clear
+03/03/2018,22:53:00,Clear
+03/03/2018,23:53:00,Clear
+03/04/2018,00:53:00,Clear
+03/04/2018,01:53:00,Clear
+03/04/2018,02:53:00,Clear
+03/04/2018,03:53:00,Clear
+03/04/2018,04:53:00,Clear
+03/04/2018,05:53:00,Clear
+03/04/2018,06:53:00,Clear
+03/04/2018,07:53:00,Clear
+03/04/2018,08:53:00,Clear
+03/04/2018,09:53:00,Clear
+03/04/2018,10:53:00,Clear
+03/04/2018,11:53:00,Clear
+03/04/2018,12:53:00,Partly Cloudy
+03/04/2018,13:53:00,Partly Cloudy
+03/04/2018,14:53:00,Partly Cloudy
+03/04/2018,15:53:00,Scattered Clouds
+03/04/2018,16:53:00,Scattered Clouds
+03/04/2018,17:53:00,Scattered Clouds
+03/04/2018,18:53:00,Scattered Clouds
+03/04/2018,19:53:00,Partly Cloudy
+03/04/2018,20:53:00,Partly Cloudy
+03/04/2018,21:53:00,Mostly Cloudy
+03/04/2018,22:53:00,Mostly Cloudy
+03/04/2018,23:53:00,Mostly Cloudy
+03/05/2018,00:53:00,Clear
+03/05/2018,01:53:00,Clear
+03/05/2018,02:53:00,Clear
+03/05/2018,03:53:00,Clear
+03/05/2018,04:53:00,Clear
+03/05/2018,05:53:00,Scattered Clouds
+03/05/2018,06:53:00,Mostly Cloudy
+03/05/2018,07:53:00,Overcast
+03/05/2018,08:53:00,Overcast
+03/05/2018,09:53:00,Overcast
+03/05/2018,10:53:00,Overcast
+03/05/2018,11:53:00,Overcast
+03/05/2018,12:53:00,Overcast
+03/05/2018,13:53:00,Light Rain
+03/05/2018,14:53:00,Overcast
+03/05/2018,15:53:00,Overcast
+03/05/2018,16:53:00,Overcast
+03/05/2018,17:53:00,Rain
+03/05/2018,18:53:00,Overcast
+03/05/2018,19:53:00,Overcast
+03/05/2018,20:53:00,Overcast
+03/05/2018,21:53:00,Overcast
+03/05/2018,22:53:00,Overcast
+03/05/2018,23:53:00,Overcast
+03/06/2018,00:53:00,Overcast
+03/06/2018,01:53:00,Overcast
+03/06/2018,02:53:00,Overcast
+03/06/2018,03:53:00,Overcast
+03/06/2018,04:07:00,Light Rain
+03/06/2018,04:48:00,Overcast
+03/06/2018,04:53:00,Overcast
+03/06/2018,05:45:00,Overcast
+03/06/2018,05:53:00,Light Rain
+03/06/2018,06:53:00,Overcast
+03/06/2018,07:53:00,Overcast
+03/06/2018,08:48:00,Overcast
+03/06/2018,08:53:00,Overcast
+03/06/2018,09:50:00,Mostly Cloudy
+03/06/2018,09:53:00,Mostly Cloudy
+03/06/2018,10:53:00,Scattered Clouds
+03/06/2018,11:53:00,Scattered Clouds
+03/06/2018,12:53:00,Scattered Clouds
+03/06/2018,13:53:00,Scattered Clouds
+03/06/2018,14:53:00,Partly Cloudy
+03/06/2018,15:53:00,Partly Cloudy
+03/06/2018,16:53:00,Partly Cloudy
+03/06/2018,17:53:00,Partly Cloudy
+03/06/2018,18:53:00,Partly Cloudy
+03/06/2018,19:53:00,Clear
+03/06/2018,20:53:00,Clear
+03/06/2018,21:53:00,Clear
+03/06/2018,22:53:00,Clear
+03/06/2018,23:53:00,Clear
+03/07/2018,00:53:00,Clear
+03/07/2018,01:53:00,Clear
+03/07/2018,02:53:00,Clear
+03/07/2018,03:53:00,Mostly Cloudy
+03/07/2018,04:53:00,Partly Cloudy
+03/07/2018,05:53:00,Partly Cloudy
+03/07/2018,06:53:00,Scattered Clouds
+03/07/2018,07:53:00,Scattered Clouds
+03/07/2018,08:53:00,Mostly Cloudy
+03/07/2018,09:53:00,Mostly Cloudy
+03/07/2018,10:53:00,Mostly Cloudy
+03/07/2018,11:53:00,Mostly Cloudy
+03/07/2018,12:53:00,Overcast
+03/07/2018,13:53:00,Overcast
+03/07/2018,14:53:00,Overcast
+03/07/2018,15:53:00,Mostly Cloudy
+03/07/2018,16:53:00,Mostly Cloudy
+03/07/2018,17:53:00,Mostly Cloudy
+03/07/2018,18:53:00,Overcast
+03/07/2018,19:53:00,Overcast
+03/07/2018,20:53:00,Overcast
+03/07/2018,21:53:00,Overcast
+03/07/2018,22:53:00,Mostly Cloudy
+03/07/2018,23:53:00,Overcast
+03/08/2018,00:53:00,Overcast
+03/08/2018,01:53:00,Clear
+03/08/2018,02:53:00,Clear
+03/08/2018,03:53:00,Clear
+03/08/2018,04:53:00,Mostly Cloudy
+03/08/2018,05:53:00,Overcast
+03/08/2018,06:53:00,Light Snow
+03/08/2018,07:53:00,Scattered Clouds
+03/08/2018,08:53:00,Overcast
+03/08/2018,09:53:00,Mostly Cloudy
+03/08/2018,10:53:00,Mostly Cloudy
+03/08/2018,11:53:00,Mostly Cloudy
+03/08/2018,12:53:00,Mostly Cloudy
+03/08/2018,13:53:00,Mostly Cloudy
+03/08/2018,14:53:00,Mostly Cloudy
+03/08/2018,15:53:00,Scattered Clouds
+03/08/2018,16:53:00,Scattered Clouds
+03/08/2018,17:53:00,Scattered Clouds
+03/08/2018,18:53:00,Scattered Clouds
+03/08/2018,19:53:00,Clear
+03/08/2018,20:53:00,Clear
+03/08/2018,21:53:00,Clear
+03/08/2018,22:53:00,Clear
+03/08/2018,23:53:00,Clear
+03/09/2018,00:53:00,Clear
+03/09/2018,01:53:00,Clear
+03/09/2018,02:53:00,Clear
+03/09/2018,03:53:00,Clear
+03/09/2018,05:53:00,Clear
+03/09/2018,06:53:00,Scattered Clouds
+03/09/2018,07:53:00,Scattered Clouds
+03/09/2018,08:53:00,Scattered Clouds
+03/09/2018,09:53:00,Scattered Clouds
+03/09/2018,10:53:00,Scattered Clouds
+03/09/2018,11:53:00,Scattered Clouds
+03/09/2018,12:53:00,Scattered Clouds
+03/09/2018,13:53:00,Scattered Clouds
+03/09/2018,14:53:00,Scattered Clouds
+03/09/2018,15:53:00,Mostly Cloudy
+03/09/2018,16:53:00,Mostly Cloudy
+03/09/2018,17:53:00,Mostly Cloudy
+03/09/2018,18:53:00,Mostly Cloudy
+03/09/2018,19:53:00,Scattered Clouds
+03/09/2018,20:53:00,Scattered Clouds
+03/09/2018,21:53:00,Scattered Clouds
+03/09/2018,22:53:00,Scattered Clouds
+03/09/2018,23:53:00,Scattered Clouds
+03/10/2018,00:53:00,Clear
+03/10/2018,01:53:00,Clear
+03/10/2018,02:53:00,Scattered Clouds
+03/10/2018,03:53:00,Partly Cloudy
+03/10/2018,04:53:00,Clear
+03/10/2018,05:53:00,Mostly Cloudy
+03/10/2018,06:53:00,Overcast
+03/10/2018,07:53:00,Overcast
+03/10/2018,08:53:00,Overcast
+03/10/2018,09:53:00,Light Rain
+03/10/2018,10:53:00,Light Rain
+03/10/2018,11:25:00,Light Rain
+03/10/2018,11:53:00,Overcast
+03/10/2018,12:53:00,Overcast
+03/10/2018,13:53:00,Overcast
+03/10/2018,14:53:00,Overcast
+03/10/2018,15:53:00,Overcast
+03/10/2018,16:53:00,Overcast
+03/10/2018,17:53:00,Overcast
+03/10/2018,18:53:00,Overcast
+03/10/2018,19:25:00,Overcast
+03/10/2018,19:53:00,Overcast
+03/10/2018,20:53:00,Overcast
+03/10/2018,21:34:00,Overcast
+03/10/2018,21:53:00,Overcast
+03/10/2018,22:53:00,Light Rain
+03/10/2018,23:53:00,Overcast
+03/11/2018,00:08:00,Overcast
+03/11/2018,00:15:00,Overcast
+03/11/2018,00:29:00,Overcast
+03/11/2018,00:48:00,Overcast
+03/11/2018,00:53:00,Overcast
+03/11/2018,01:04:00,Overcast
+03/11/2018,01:20:00,Overcast
+03/11/2018,01:53:00,Overcast
+03/11/2018,03:08:00,Overcast
+03/11/2018,03:33:00,Overcast
+03/11/2018,03:53:00,Overcast
+03/11/2018,04:30:00,Overcast
+03/11/2018,04:40:00,Overcast
+03/11/2018,04:48:00,Overcast
+03/11/2018,04:53:00,Overcast
+03/11/2018,05:19:00,Overcast
+03/11/2018,05:44:00,Overcast
+03/11/2018,05:53:00,Overcast
+03/11/2018,06:53:00,Overcast
+03/11/2018,07:07:00,Mostly Cloudy
+03/11/2018,07:28:00,Overcast
+03/11/2018,07:53:00,Light Drizzle
+03/11/2018,08:10:00,Light Drizzle
+03/11/2018,08:53:00,Mostly Cloudy
+03/11/2018,09:32:00,Mostly Cloudy
+03/11/2018,09:53:00,Mostly Cloudy
+03/11/2018,10:43:00,Mostly Cloudy
+03/11/2018,10:53:00,Mostly Cloudy
+03/11/2018,11:05:00,Mostly Cloudy
+03/11/2018,11:53:00,Mostly Cloudy
+03/11/2018,12:25:00,Mostly Cloudy
+03/11/2018,12:53:00,Mostly Cloudy
+03/11/2018,13:53:00,Mostly Cloudy
+03/11/2018,14:53:00,Mostly Cloudy
+03/11/2018,15:53:00,Overcast
+03/11/2018,16:53:00,Overcast
+03/11/2018,17:05:00,Overcast
+03/11/2018,17:53:00,Overcast
+03/11/2018,18:30:00,Rain
+03/11/2018,18:53:00,Rain
+03/11/2018,19:53:00,Rain
+03/11/2018,20:11:00,Light Drizzle
+03/11/2018,20:53:00,Light Drizzle
+03/11/2018,21:53:00,Light Drizzle
+03/11/2018,22:53:00,Light Drizzle
+03/11/2018,23:00:00,Light Drizzle
+03/11/2018,23:08:00,Heavy Rain
+03/11/2018,23:17:00,Light Rain
+03/11/2018,23:53:00,Light Rain
+03/12/2018,00:00:00,Overcast
+03/12/2018,00:53:00,Overcast
+03/12/2018,01:06:00,Overcast
+03/12/2018,01:42:00,Overcast
+03/12/2018,01:53:00,Overcast
+03/12/2018,02:53:00,Overcast
+03/12/2018,03:20:00,Overcast
+03/12/2018,03:53:00,Overcast
+03/12/2018,04:53:00,Overcast
+03/12/2018,05:35:00,Overcast
+03/12/2018,05:53:00,Mostly Cloudy
+03/12/2018,06:34:00,Mostly Cloudy
+03/12/2018,06:53:00,Overcast
+03/12/2018,07:53:00,Overcast
+03/12/2018,08:53:00,Overcast
+03/12/2018,09:53:00,Overcast
+03/12/2018,10:16:00,Overcast
+03/12/2018,10:53:00,Mostly Cloudy
+03/12/2018,11:53:00,Mostly Cloudy
+03/12/2018,12:53:00,Scattered Clouds
+03/12/2018,13:53:00,Scattered Clouds
+03/12/2018,14:53:00,Partly Cloudy
+03/12/2018,15:53:00,Partly Cloudy
+03/12/2018,16:53:00,Scattered Clouds
+03/12/2018,17:53:00,Mostly Cloudy
+03/12/2018,18:53:00,Mostly Cloudy
+03/12/2018,19:53:00,Mostly Cloudy
+03/12/2018,20:53:00,Scattered Clouds
+03/12/2018,21:53:00,Mostly Cloudy
+03/12/2018,22:53:00,Mostly Cloudy
+03/12/2018,23:53:00,Overcast
+03/13/2018,00:53:00,Overcast
+03/13/2018,01:53:00,Overcast
+03/13/2018,02:53:00,Clear
+03/13/2018,03:53:00,Clear
+03/13/2018,04:53:00,Clear
+03/13/2018,05:53:00,Clear
+03/13/2018,06:53:00,Clear
+03/13/2018,07:53:00,Scattered Clouds
+03/13/2018,08:53:00,Scattered Clouds
+03/13/2018,09:53:00,Scattered Clouds
+03/13/2018,10:53:00,Mostly Cloudy
+03/13/2018,11:53:00,Mostly Cloudy
+03/13/2018,12:53:00,Mostly Cloudy
+03/13/2018,13:53:00,Mostly Cloudy
+03/13/2018,14:53:00,Scattered Clouds
+03/13/2018,15:53:00,Partly Cloudy
+03/13/2018,16:53:00,Partly Cloudy
+03/13/2018,17:53:00,Partly Cloudy
+03/13/2018,18:53:00,Partly Cloudy
+03/13/2018,19:53:00,Partly Cloudy
+03/13/2018,20:53:00,Partly Cloudy
+03/13/2018,21:53:00,Clear
+03/13/2018,22:53:00,Scattered Clouds
+03/13/2018,23:53:00,Mostly Cloudy
+03/14/2018,00:53:00,Clear
+03/14/2018,01:53:00,Clear
+03/14/2018,02:53:00,Clear
+03/14/2018,03:53:00,Clear
+03/14/2018,04:53:00,Scattered Clouds
+03/14/2018,05:53:00,Scattered Clouds
+03/14/2018,06:53:00,Scattered Clouds
+03/14/2018,07:53:00,Partly Cloudy
+03/14/2018,08:53:00,Clear
+03/14/2018,09:53:00,Scattered Clouds
+03/14/2018,10:53:00,Partly Cloudy
+03/14/2018,11:53:00,Partly Cloudy
+03/14/2018,12:53:00,Clear
+03/14/2018,13:53:00,Clear
+03/14/2018,14:53:00,Clear
+03/14/2018,15:53:00,Partly Cloudy
+03/14/2018,16:53:00,Partly Cloudy
+03/14/2018,17:53:00,Partly Cloudy
+03/14/2018,18:53:00,Partly Cloudy
+03/14/2018,19:53:00,Clear
+03/14/2018,20:53:00,Clear
+03/14/2018,21:53:00,Clear
+03/14/2018,22:53:00,Clear
+03/14/2018,23:53:00,Clear
+03/15/2018,00:53:00,Clear
+03/15/2018,01:53:00,Clear
+03/15/2018,02:53:00,Clear
+03/15/2018,03:53:00,Clear
+03/15/2018,04:53:00,Clear
+03/15/2018,05:53:00,Clear
+03/15/2018,06:53:00,Clear
+03/15/2018,07:53:00,Clear
+03/15/2018,08:53:00,Scattered Clouds
+03/15/2018,09:53:00,Scattered Clouds
+03/15/2018,10:53:00,Scattered Clouds
+03/15/2018,11:53:00,Scattered Clouds
+03/15/2018,12:53:00,Clear
+03/15/2018,13:53:00,Clear
+03/15/2018,14:53:00,Partly Cloudy
+03/15/2018,15:53:00,Partly Cloudy
+03/15/2018,16:53:00,Partly Cloudy
+03/15/2018,17:53:00,Partly Cloudy
+03/15/2018,18:53:00,Partly Cloudy
+03/15/2018,19:53:00,Scattered Clouds
+03/15/2018,20:53:00,Clear
+03/15/2018,21:53:00,Clear
+03/15/2018,22:53:00,Clear
+03/15/2018,23:53:00,Clear
+03/16/2018,00:53:00,Clear
+03/16/2018,01:53:00,Clear
+03/16/2018,02:53:00,Clear
+03/16/2018,03:53:00,Clear
+03/16/2018,04:53:00,Clear
+03/16/2018,05:53:00,Scattered Clouds
+03/16/2018,06:53:00,Scattered Clouds
+03/16/2018,07:53:00,Mostly Cloudy
+03/16/2018,08:53:00,Mostly Cloudy
+03/16/2018,09:53:00,Mostly Cloudy
+03/16/2018,10:53:00,Mostly Cloudy
+03/16/2018,11:53:00,Mostly Cloudy
+03/16/2018,12:53:00,Mostly Cloudy
+03/16/2018,13:53:00,Mostly Cloudy
+03/16/2018,14:53:00,Mostly Cloudy
+03/16/2018,15:53:00,Mostly Cloudy
+03/16/2018,16:53:00,Mostly Cloudy
+03/16/2018,17:53:00,Mostly Cloudy
+03/16/2018,18:53:00,Scattered Clouds
+03/16/2018,19:53:00,Scattered Clouds
+03/16/2018,20:53:00,Scattered Clouds
+03/16/2018,21:53:00,Partly Cloudy
+03/16/2018,22:53:00,Scattered Clouds
+03/16/2018,23:53:00,Scattered Clouds
+03/17/2018,00:53:00,Clear
+03/17/2018,01:53:00,Overcast
+03/17/2018,02:53:00,Overcast
+03/17/2018,03:26:00,Overcast
+03/17/2018,03:53:00,Overcast
+03/17/2018,04:53:00,Overcast
+03/17/2018,05:53:00,Overcast
+03/17/2018,06:45:00,Overcast
+03/17/2018,06:53:00,Overcast
+03/17/2018,07:53:00,Overcast
+03/17/2018,08:02:00,Overcast
+03/17/2018,08:15:00,Light Thunderstorms and Rain
+03/17/2018,08:32:00,Light Thunderstorms and Rain
+03/17/2018,08:44:00,Light Thunderstorms and Rain
+03/17/2018,08:53:00,Light Thunderstorms and Rain
+03/17/2018,09:06:00,Light Rain
+03/17/2018,09:53:00,Mostly Cloudy
+03/17/2018,10:20:00,Mostly Cloudy
+03/17/2018,10:53:00,Mostly Cloudy
+03/17/2018,11:17:00,Mostly Cloudy
+03/17/2018,11:53:00,Mostly Cloudy
+03/17/2018,12:53:00,Mostly Cloudy
+03/17/2018,13:53:00,Mostly Cloudy
+03/17/2018,14:53:00,Mostly Cloudy
+03/17/2018,15:53:00,Mostly Cloudy
+03/17/2018,16:53:00,Mostly Cloudy
+03/17/2018,17:53:00,Mostly Cloudy
+03/17/2018,18:53:00,Mostly Cloudy
+03/17/2018,19:53:00,Mostly Cloudy
+03/17/2018,20:53:00,Mostly Cloudy
+03/17/2018,21:53:00,Mostly Cloudy
+03/17/2018,22:53:00,Mostly Cloudy
+03/17/2018,23:53:00,Scattered Clouds
+03/18/2018,00:53:00,Clear
+03/18/2018,01:53:00,Clear
+03/18/2018,02:53:00,Clear
+03/18/2018,03:53:00,Clear
+03/18/2018,04:53:00,Clear
+03/18/2018,05:53:00,Mostly Cloudy
+03/18/2018,06:53:00,Mostly Cloudy
+03/18/2018,07:53:00,Mostly Cloudy
+03/18/2018,08:53:00,Scattered Clouds
+03/18/2018,09:53:00,Scattered Clouds
+03/18/2018,10:53:00,Scattered Clouds
+03/18/2018,11:53:00,Scattered Clouds
+03/18/2018,12:53:00,Mostly Cloudy
+03/18/2018,13:53:00,Mostly Cloudy
+03/18/2018,14:53:00,Mostly Cloudy
+03/18/2018,15:53:00,Mostly Cloudy
+03/18/2018,16:53:00,Mostly Cloudy
+03/18/2018,17:53:00,Mostly Cloudy
+03/18/2018,18:53:00,Mostly Cloudy
+03/18/2018,19:53:00,Mostly Cloudy
+03/18/2018,20:53:00,Overcast
+03/18/2018,21:53:00,Overcast
+03/18/2018,22:53:00,Overcast
+03/18/2018,23:53:00,Overcast
+03/19/2018,00:53:00,Overcast
+03/19/2018,01:53:00,Scattered Clouds
+03/19/2018,02:53:00,Overcast
+03/19/2018,03:53:00,Overcast
+03/19/2018,04:53:00,Mostly Cloudy
+03/19/2018,05:53:00,Mostly Cloudy
+03/19/2018,06:53:00,Mostly Cloudy
+03/19/2018,07:53:00,Overcast
+03/19/2018,08:53:00,Overcast
+03/19/2018,09:34:00,Overcast
+03/19/2018,09:53:00,Overcast
+03/19/2018,09:56:00,Overcast
+03/19/2018,10:25:00,Rain
+03/19/2018,10:42:00,Light Thunderstorms and Rain
+03/19/2018,10:45:00,Thunderstorms and Rain
+03/19/2018,10:53:00,Thunderstorms and Rain
+03/19/2018,11:17:00,Rain
+03/19/2018,11:22:00,Rain
+03/19/2018,11:40:00,Light Rain
+03/19/2018,11:53:00,Light Rain
+03/19/2018,11:56:00,Light Rain
+03/19/2018,12:37:00,Overcast
+03/19/2018,12:51:00,Overcast
+03/19/2018,12:53:00,Overcast
+03/19/2018,13:45:00,Overcast
+03/19/2018,13:53:00,Overcast
+03/19/2018,14:53:00,Overcast
+03/19/2018,15:53:00,Overcast
+03/19/2018,16:30:00,Rain
+03/19/2018,16:41:00,Light Rain
+03/19/2018,16:53:00,Light Rain
+03/19/2018,17:36:00,Overcast
+03/19/2018,17:49:00,Overcast
+03/19/2018,17:53:00,Overcast
+03/19/2018,18:02:00,Overcast
+03/19/2018,18:11:00,Rain
+03/19/2018,18:14:00,Rain
+03/19/2018,18:31:00,Rain
+03/19/2018,18:38:00,Overcast
+03/19/2018,18:53:00,Overcast
+03/19/2018,19:53:00,Overcast
+03/19/2018,20:53:00,Overcast
+03/19/2018,21:41:00,Light Thunderstorms and Rain
+03/19/2018,21:53:00,Light Thunderstorms and Rain
+03/19/2018,21:56:00,Light Thunderstorms and Rain
+03/19/2018,22:03:00,Light Thunderstorms and Rain
+03/19/2018,22:31:00,Mostly Cloudy
+03/19/2018,22:53:00,Mostly Cloudy
+03/19/2018,23:53:00,Overcast
+03/20/2018,00:10:00,Mostly Cloudy
+03/20/2018,00:19:00,Mostly Cloudy
+03/20/2018,00:29:00,Fog
+03/20/2018,00:53:00,Fog
+03/20/2018,01:29:00,Fog
+03/20/2018,01:39:00,Fog
+03/20/2018,01:46:00,Fog
+03/20/2018,01:53:00,Fog
+03/20/2018,02:53:00,Fog
+03/20/2018,03:20:00,Fog
+03/20/2018,03:30:00,Fog
+03/20/2018,03:53:00,Fog
+03/20/2018,04:53:00,Fog
+03/20/2018,05:53:00,Fog
+03/20/2018,06:22:00,Fog
+03/20/2018,06:29:00,Fog
+03/20/2018,06:53:00,Fog
+03/20/2018,06:55:00,Fog
+03/20/2018,07:27:00,Fog
+03/20/2018,07:51:00,Fog
+03/20/2018,07:53:00,Fog
+03/20/2018,08:53:00,Fog
+03/20/2018,09:10:00,Fog
+03/20/2018,09:51:00,Scattered Clouds
+03/20/2018,09:53:00,Mostly Cloudy
+03/20/2018,10:28:00,Mostly Cloudy
+03/20/2018,10:53:00,Mostly Cloudy
+03/20/2018,11:53:00,Overcast
+03/20/2018,12:53:00,Mostly Cloudy
+03/20/2018,13:53:00,Overcast
+03/20/2018,14:53:00,Light Drizzle
+03/20/2018,15:34:00,Overcast
+03/20/2018,15:53:00,Mostly Cloudy
+03/20/2018,16:53:00,Overcast
+03/20/2018,17:53:00,Light Rain
+03/20/2018,18:18:00,Light Rain
+03/20/2018,18:53:00,Light Rain
+03/20/2018,19:53:00,Overcast
+03/20/2018,20:53:00,Light Rain
+03/20/2018,21:04:00,Overcast
+03/20/2018,21:53:00,Mostly Cloudy
+03/20/2018,22:53:00,Overcast
+03/20/2018,23:14:00,Overcast
+03/20/2018,23:35:00,Overcast
+03/20/2018,23:53:00,Overcast
+03/21/2018,00:53:00,Overcast
+03/21/2018,01:48:00,Overcast
+03/21/2018,01:53:00,Overcast
+03/21/2018,02:53:00,Overcast
+03/21/2018,03:53:00,Overcast
+03/21/2018,04:53:00,Overcast
+03/21/2018,05:53:00,Overcast
+03/21/2018,06:53:00,Overcast
+03/21/2018,07:53:00,Overcast
+03/21/2018,08:53:00,Mostly Cloudy
+03/21/2018,09:31:00,Overcast
+03/21/2018,09:53:00,Overcast
+03/21/2018,10:53:00,Mostly Cloudy
+03/21/2018,11:53:00,Mostly Cloudy
+03/21/2018,12:53:00,Mostly Cloudy
+03/21/2018,13:53:00,Mostly Cloudy
+03/21/2018,14:53:00,Mostly Cloudy
+03/21/2018,15:53:00,Mostly Cloudy
+03/21/2018,16:53:00,Mostly Cloudy
+03/21/2018,17:53:00,Scattered Clouds
+03/21/2018,18:53:00,Scattered Clouds
+03/21/2018,19:53:00,Partly Cloudy
+03/21/2018,20:53:00,Clear
+03/21/2018,21:53:00,Clear
+03/21/2018,22:53:00,Clear
+03/21/2018,23:53:00,Clear
+03/22/2018,00:53:00,Clear
+03/22/2018,01:53:00,Clear
+03/22/2018,02:53:00,Clear
+03/22/2018,03:53:00,Clear
+03/22/2018,04:53:00,Clear
+03/22/2018,05:53:00,Clear
+03/22/2018,06:53:00,Clear
+03/22/2018,07:53:00,Partly Cloudy
+03/22/2018,08:53:00,Clear
+03/22/2018,09:53:00,Clear
+03/22/2018,10:53:00,Partly Cloudy
+03/22/2018,11:53:00,Partly Cloudy
+03/22/2018,12:53:00,Partly Cloudy
+03/22/2018,13:53:00,Partly Cloudy
+03/22/2018,14:53:00,Partly Cloudy
+03/22/2018,15:53:00,Partly Cloudy
+03/22/2018,16:53:00,Partly Cloudy
+03/22/2018,17:53:00,Partly Cloudy
+03/22/2018,18:53:00,Partly Cloudy
+03/22/2018,19:53:00,Partly Cloudy
+03/22/2018,20:53:00,Clear
+03/22/2018,21:53:00,Clear
+03/22/2018,22:53:00,Clear
+03/22/2018,23:53:00,Clear
+03/23/2018,00:53:00,Clear
+03/23/2018,01:53:00,Clear
+03/23/2018,02:53:00,Clear
+03/23/2018,03:53:00,Clear
+03/23/2018,04:53:00,Mostly Cloudy
+03/23/2018,05:53:00,Overcast
+03/23/2018,06:53:00,Overcast
+03/23/2018,07:53:00,Mostly Cloudy
+03/23/2018,08:53:00,Mostly Cloudy
+03/23/2018,09:53:00,Mostly Cloudy
+03/23/2018,10:53:00,Scattered Clouds
+03/23/2018,11:53:00,Scattered Clouds
+03/23/2018,12:53:00,Scattered Clouds
+03/23/2018,13:53:00,Mostly Cloudy
+03/23/2018,14:53:00,Mostly Cloudy
+03/23/2018,15:53:00,Mostly Cloudy
+03/23/2018,16:53:00,Mostly Cloudy
+03/23/2018,17:53:00,Mostly Cloudy
+03/23/2018,18:53:00,Mostly Cloudy
+03/23/2018,19:53:00,Mostly Cloudy
+03/23/2018,20:53:00,Mostly Cloudy
+03/23/2018,21:53:00,Mostly Cloudy
+03/23/2018,22:53:00,Mostly Cloudy
+03/23/2018,23:53:00,Overcast
+03/24/2018,00:53:00,Overcast
+03/24/2018,01:53:00,Overcast
+03/24/2018,02:53:00,Mostly Cloudy
+03/24/2018,03:53:00,Overcast
+03/24/2018,04:53:00,Overcast
+03/24/2018,05:53:00,Overcast
+03/24/2018,06:53:00,Overcast
+03/24/2018,07:53:00,Overcast
+03/24/2018,08:53:00,Overcast
+03/24/2018,09:32:00,Overcast
+03/24/2018,09:53:00,Overcast
+03/24/2018,10:53:00,Light Drizzle
+03/24/2018,11:53:00,Overcast
+03/24/2018,12:53:00,Overcast
+03/24/2018,13:53:00,Overcast
+03/24/2018,14:53:00,Overcast
+03/24/2018,15:53:00,Overcast
+03/24/2018,16:53:00,Overcast
+03/24/2018,17:53:00,Overcast
+03/24/2018,18:53:00,Overcast
+03/24/2018,19:53:00,Light Rain
+03/24/2018,20:53:00,Overcast
+03/24/2018,21:53:00,Overcast
+03/24/2018,22:53:00,Mostly Cloudy
+03/24/2018,23:35:00,Overcast
+03/24/2018,23:53:00,Overcast
+03/25/2018,00:53:00,Overcast
+03/25/2018,01:39:00,Mostly Cloudy
+03/25/2018,01:53:00,Light Rain
+03/25/2018,02:15:00,Light Rain
+03/25/2018,02:34:00,Light Rain
+03/25/2018,02:41:00,Overcast
+03/25/2018,02:53:00,Mostly Cloudy
+03/25/2018,03:03:00,Mostly Cloudy
+03/25/2018,03:37:00,Overcast
+03/25/2018,03:44:00,Overcast
+03/25/2018,03:53:00,Overcast
+03/25/2018,04:14:00,Overcast
+03/25/2018,04:23:00,Overcast
+03/25/2018,04:53:00,Overcast
+03/25/2018,05:53:00,Overcast
+03/25/2018,06:53:00,Overcast
+03/25/2018,07:53:00,Overcast
+03/25/2018,08:53:00,Overcast
+03/25/2018,09:20:00,Overcast
+03/25/2018,09:53:00,Overcast
+03/25/2018,10:53:00,Overcast
+03/25/2018,11:53:00,Overcast
+03/25/2018,12:53:00,Overcast
+03/25/2018,13:53:00,Overcast
+03/25/2018,14:19:00,Overcast
+03/25/2018,14:53:00,Overcast
+03/25/2018,15:30:00,Haze
+03/25/2018,15:53:00,Haze
+03/25/2018,16:17:00,Haze
+03/25/2018,16:53:00,Haze
+03/25/2018,17:53:00,Overcast
+03/25/2018,18:53:00,Overcast
+03/25/2018,19:53:00,Overcast
+03/25/2018,20:53:00,Overcast
+03/25/2018,21:53:00,Overcast
+03/25/2018,22:53:00,Overcast
+03/25/2018,23:53:00,Overcast
+03/26/2018,00:15:00,Overcast
+03/26/2018,00:53:00,Overcast
+03/26/2018,01:53:00,Overcast
+03/26/2018,02:53:00,Overcast
+03/26/2018,04:53:00,Overcast
+03/26/2018,05:53:00,Overcast
+03/26/2018,06:53:00,Overcast
+03/26/2018,07:53:00,Overcast
+03/26/2018,08:53:00,Overcast
+03/26/2018,09:53:00,Overcast
+03/26/2018,10:53:00,Overcast
+03/26/2018,11:53:00,Overcast
+03/26/2018,12:53:00,Overcast
+03/26/2018,13:53:00,Overcast
+03/26/2018,14:53:00,Overcast
+03/26/2018,15:53:00,Overcast
+03/26/2018,16:53:00,Overcast
+03/26/2018,17:53:00,Overcast
+03/26/2018,18:53:00,Overcast
+03/26/2018,20:53:00,Overcast
+03/26/2018,21:34:00,Overcast
+03/26/2018,21:53:00,Overcast
+03/26/2018,22:53:00,Overcast
+03/26/2018,23:53:00,Overcast
+03/27/2018,00:05:00,Unknown
+03/27/2018,00:53:00,Overcast
+03/27/2018,01:53:00,Overcast
+03/27/2018,02:17:00,Overcast
+03/27/2018,02:48:00,Overcast
+03/27/2018,02:53:00,Overcast
+03/27/2018,03:53:00,Overcast
+03/27/2018,04:53:00,Overcast
+03/27/2018,05:53:00,Overcast
+03/27/2018,06:53:00,Overcast
+03/27/2018,07:53:00,Overcast
+03/27/2018,08:53:00,Overcast
+03/27/2018,09:53:00,Overcast
+03/27/2018,10:53:00,Overcast
+03/27/2018,11:53:00,Overcast
+03/27/2018,12:53:00,Overcast
+03/27/2018,13:53:00,Overcast
+03/27/2018,14:53:00,Overcast
+03/27/2018,15:53:00,Overcast
+03/27/2018,16:53:00,Overcast
+03/27/2018,17:15:00,Overcast
+03/27/2018,17:53:00,Mostly Cloudy
+03/27/2018,18:53:00,Mostly Cloudy
+03/27/2018,19:53:00,Mostly Cloudy
+03/27/2018,20:53:00,Mostly Cloudy
+03/27/2018,21:53:00,Mostly Cloudy
+03/27/2018,22:53:00,Mostly Cloudy
+03/27/2018,23:53:00,Mostly Cloudy
+03/28/2018,00:53:00,Partly Cloudy
+03/28/2018,01:53:00,Clear
+03/28/2018,02:53:00,Unknown
+03/28/2018,03:53:00,Scattered Clouds
+03/28/2018,04:32:00,Mostly Cloudy
+03/28/2018,04:42:00,Scattered Clouds
+03/28/2018,04:53:00,Partly Cloudy
+03/28/2018,05:53:00,Mostly Cloudy
+03/28/2018,06:49:00,Overcast
+03/28/2018,06:53:00,Overcast
+03/28/2018,07:53:00,Overcast
+03/28/2018,08:48:00,Overcast
+03/28/2018,08:53:00,Overcast
+03/28/2018,09:53:00,Overcast
+03/28/2018,10:53:00,Mostly Cloudy
+03/28/2018,10:59:00,Mostly Cloudy
+03/28/2018,11:53:00,Mostly Cloudy
+03/28/2018,12:53:00,Mostly Cloudy
+03/28/2018,13:53:00,Mostly Cloudy
+03/28/2018,14:53:00,Overcast
+03/28/2018,15:53:00,Overcast
+03/28/2018,16:53:00,Overcast
+03/28/2018,17:53:00,Overcast
+03/28/2018,18:53:00,Overcast
+03/28/2018,19:53:00,Overcast
+03/28/2018,20:53:00,Overcast
+03/28/2018,21:53:00,Overcast
+03/28/2018,22:53:00,Overcast
+03/28/2018,23:53:00,Overcast
+03/29/2018,00:53:00,Clear
+03/29/2018,01:53:00,Clear
+03/29/2018,02:53:00,Clear
+03/29/2018,03:53:00,Unknown
+03/29/2018,04:53:00,Overcast
+03/29/2018,05:53:00,Mostly Cloudy
+03/29/2018,06:53:00,Mostly Cloudy
+03/29/2018,07:53:00,Overcast
+03/29/2018,08:53:00,Overcast
+03/29/2018,09:53:00,Overcast
+03/29/2018,10:24:00,Mostly Cloudy
+03/29/2018,10:53:00,Mostly Cloudy
+03/29/2018,11:53:00,Mostly Cloudy
+03/29/2018,12:53:00,Mostly Cloudy
+03/29/2018,13:53:00,Mostly Cloudy
+03/29/2018,14:53:00,Overcast
+03/29/2018,15:53:00,Overcast
+03/29/2018,16:47:00,Light Rain
+03/29/2018,16:53:00,Light Rain
+03/29/2018,17:43:00,Rain
+03/29/2018,17:46:00,Heavy Rain
+03/29/2018,17:53:00,Heavy Rain
+03/29/2018,18:02:00,Rain
+03/29/2018,18:08:00,Rain
+03/29/2018,18:53:00,Rain
+03/29/2018,19:10:00,Heavy Rain
+03/29/2018,19:26:00,Light Rain
+03/29/2018,19:53:00,Light Rain
+03/29/2018,20:53:00,Mostly Cloudy
+03/29/2018,21:53:00,Overcast
+03/29/2018,22:47:00,Mostly Cloudy
+03/29/2018,22:53:00,Mostly Cloudy
+03/29/2018,23:30:00,Mostly Cloudy
+03/29/2018,23:53:00,Mostly Cloudy
+03/30/2018,00:51:00,Partly Cloudy
+03/30/2018,00:53:00,Partly Cloudy
+03/30/2018,01:53:00,Clear
+03/30/2018,02:53:00,Scattered Clouds
+03/30/2018,03:53:00,Clear
+03/30/2018,04:53:00,Scattered Clouds
+03/30/2018,05:53:00,Light Rain
+03/30/2018,06:53:00,Mostly Cloudy
+03/30/2018,07:53:00,Mostly Cloudy
+03/30/2018,08:43:00,Overcast
+03/30/2018,08:53:00,Overcast
+03/30/2018,09:02:00,Overcast
+03/30/2018,09:53:00,Overcast
+03/30/2018,10:27:00,Overcast
+03/30/2018,10:53:00,Overcast
+03/30/2018,11:53:00,Mostly Cloudy
+03/30/2018,12:53:00,Mostly Cloudy
+03/30/2018,13:53:00,Mostly Cloudy
+03/30/2018,14:53:00,Mostly Cloudy
+03/30/2018,15:53:00,Mostly Cloudy
+03/30/2018,16:53:00,Mostly Cloudy
+03/30/2018,17:53:00,Mostly Cloudy
+03/30/2018,18:53:00,Scattered Clouds
+03/30/2018,19:53:00,Scattered Clouds
+03/30/2018,20:53:00,Partly Cloudy
+03/30/2018,21:53:00,Partly Cloudy
+03/30/2018,22:53:00,Clear
+03/30/2018,23:53:00,Clear
+03/31/2018,00:53:00,Clear
+03/31/2018,01:53:00,Clear
+03/31/2018,02:53:00,Clear
+03/31/2018,03:53:00,Clear
+03/31/2018,04:53:00,Clear
+03/31/2018,05:53:00,Clear
+03/31/2018,06:20:00,Scattered Clouds
+03/31/2018,06:34:00,Scattered Clouds
+03/31/2018,06:53:00,Scattered Clouds
+03/31/2018,07:25:00,Mostly Cloudy
+03/31/2018,07:42:00,Scattered Clouds
+03/31/2018,07:53:00,Scattered Clouds
+03/31/2018,08:06:00,Scattered Clouds
+03/31/2018,08:53:00,Scattered Clouds
+03/31/2018,09:53:00,Scattered Clouds
+03/31/2018,10:53:00,Scattered Clouds
+03/31/2018,11:53:00,Mostly Cloudy
+03/31/2018,12:53:00,Mostly Cloudy
+03/31/2018,13:53:00,Mostly Cloudy
+03/31/2018,14:53:00,Mostly Cloudy
+03/31/2018,15:53:00,Mostly Cloudy
+03/31/2018,16:53:00,Mostly Cloudy
+03/31/2018,17:53:00,Mostly Cloudy
+03/31/2018,18:53:00,Mostly Cloudy
+03/31/2018,19:53:00,Mostly Cloudy
+03/31/2018,20:53:00,Scattered Clouds
+03/31/2018,21:53:00,Partly Cloudy
+03/31/2018,22:53:00,Partly Cloudy
+03/31/2018,23:53:00,Partly Cloudy
+04/01/2018,00:53:00,Clear
+04/01/2018,01:53:00,Clear
+04/01/2018,02:53:00,Clear
+04/01/2018,03:53:00,Clear
+04/01/2018,04:53:00,Clear
+04/01/2018,05:53:00,Scattered Clouds
+04/01/2018,06:53:00,Scattered Clouds
+04/01/2018,07:53:00,Scattered Clouds
+04/01/2018,08:53:00,Mostly Cloudy
+04/01/2018,09:53:00,Mostly Cloudy
+04/01/2018,10:53:00,Mostly Cloudy
+04/01/2018,11:53:00,Mostly Cloudy
+04/01/2018,12:53:00,Mostly Cloudy
+04/01/2018,13:53:00,Mostly Cloudy
+04/01/2018,14:53:00,Mostly Cloudy
+04/01/2018,15:53:00,Mostly Cloudy
+04/01/2018,16:53:00,Mostly Cloudy
+04/01/2018,17:53:00,Mostly Cloudy
+04/01/2018,18:53:00,Mostly Cloudy
+04/01/2018,19:53:00,Mostly Cloudy
+04/01/2018,20:53:00,Mostly Cloudy
+04/01/2018,21:53:00,Mostly Cloudy
+04/01/2018,22:53:00,Mostly Cloudy
+04/01/2018,23:53:00,Mostly Cloudy
+04/02/2018,00:53:00,Scattered Clouds
+04/02/2018,01:53:00,Clear
+04/02/2018,02:53:00,Partly Cloudy
+04/02/2018,03:53:00,Clear
+04/02/2018,04:53:00,Partly Cloudy
+04/02/2018,05:53:00,Overcast
+04/02/2018,06:53:00,Overcast
+04/02/2018,07:53:00,Mostly Cloudy
+04/02/2018,08:53:00,Mostly Cloudy
+04/02/2018,09:53:00,Mostly Cloudy
+04/02/2018,10:53:00,Mostly Cloudy
+04/02/2018,11:53:00,Mostly Cloudy
+04/02/2018,12:53:00,Mostly Cloudy
+04/02/2018,13:53:00,Mostly Cloudy
+04/02/2018,14:53:00,Mostly Cloudy
+04/02/2018,15:53:00,Mostly Cloudy
+04/02/2018,16:53:00,Scattered Clouds
+04/02/2018,17:53:00,Scattered Clouds
+04/02/2018,18:53:00,Scattered Clouds
+04/02/2018,19:53:00,Partly Cloudy
+04/02/2018,20:53:00,Partly Cloudy
+04/02/2018,21:53:00,Partly Cloudy
+04/02/2018,22:53:00,Partly Cloudy
+04/02/2018,23:53:00,Clear
+04/03/2018,00:53:00,Clear
+04/03/2018,01:53:00,Clear
+04/03/2018,02:53:00,Clear
+04/03/2018,03:53:00,Clear
+04/03/2018,04:53:00,Clear
+04/03/2018,05:53:00,Mostly Cloudy
+04/03/2018,06:53:00,Mostly Cloudy
+04/03/2018,07:53:00,Mostly Cloudy
+04/03/2018,08:53:00,Mostly Cloudy
+04/03/2018,09:53:00,Overcast
+04/03/2018,10:53:00,Mostly Cloudy
+04/03/2018,11:53:00,Mostly Cloudy
+04/03/2018,12:53:00,Mostly Cloudy
+04/03/2018,13:53:00,Mostly Cloudy
+04/03/2018,14:53:00,Mostly Cloudy
+04/03/2018,15:53:00,Mostly Cloudy
+04/03/2018,16:53:00,Mostly Cloudy
+04/03/2018,17:53:00,Scattered Clouds
+04/03/2018,18:53:00,Scattered Clouds
+04/03/2018,19:53:00,Scattered Clouds
+04/03/2018,20:53:00,Scattered Clouds
+04/03/2018,21:53:00,Mostly Cloudy
+04/03/2018,22:53:00,Overcast
+04/03/2018,23:53:00,Overcast
+04/04/2018,00:53:00,Mostly Cloudy
+04/04/2018,01:51:00,Mostly Cloudy
+04/04/2018,01:53:00,Mostly Cloudy
+04/04/2018,02:09:00,Light Rain
+04/04/2018,02:53:00,Light Rain
+04/04/2018,03:53:00,Scattered Clouds
+04/04/2018,04:13:00,Mostly Cloudy
+04/04/2018,04:53:00,Light Rain
+04/04/2018,05:53:00,Overcast
+04/04/2018,06:45:00,Mostly Cloudy
+04/04/2018,06:53:00,Mostly Cloudy
+04/04/2018,07:53:00,Mostly Cloudy
+04/04/2018,08:53:00,Mostly Cloudy
+04/04/2018,09:53:00,Mostly Cloudy
+04/04/2018,10:53:00,Mostly Cloudy
+04/04/2018,11:53:00,Mostly Cloudy
+04/04/2018,12:53:00,Scattered Clouds
+04/04/2018,13:53:00,Scattered Clouds
+04/04/2018,14:53:00,Partly Cloudy
+04/04/2018,15:53:00,Partly Cloudy
+04/04/2018,16:53:00,Clear
+04/04/2018,17:53:00,Clear
+04/04/2018,18:53:00,Clear
+04/04/2018,19:53:00,Clear
+04/04/2018,20:53:00,Clear
+04/04/2018,22:53:00,Clear
+04/04/2018,23:53:00,Clear
+04/05/2018,00:53:00,Clear
+04/05/2018,01:53:00,Clear
+04/05/2018,02:53:00,Clear
+04/05/2018,03:53:00,Clear
+04/05/2018,04:53:00,Clear
+04/05/2018,05:53:00,Clear
+04/05/2018,06:53:00,Clear
+04/05/2018,07:53:00,Scattered Clouds
+04/05/2018,08:53:00,Scattered Clouds
+04/05/2018,09:53:00,Scattered Clouds
+04/05/2018,10:53:00,Mostly Cloudy
+04/05/2018,11:53:00,Mostly Cloudy
+04/05/2018,12:53:00,Mostly Cloudy
+04/05/2018,13:53:00,Mostly Cloudy
+04/05/2018,14:53:00,Mostly Cloudy
+04/05/2018,15:53:00,Mostly Cloudy
+04/05/2018,16:53:00,Mostly Cloudy
+04/05/2018,17:53:00,Mostly Cloudy
+04/05/2018,18:53:00,Mostly Cloudy
+04/05/2018,19:53:00,Mostly Cloudy
+04/05/2018,20:53:00,Mostly Cloudy
+04/05/2018,21:53:00,Mostly Cloudy
+04/05/2018,22:53:00,Mostly Cloudy
+04/05/2018,23:53:00,Mostly Cloudy
+04/06/2018,00:53:00,Clear
+04/06/2018,01:53:00,Clear
+04/06/2018,02:53:00,Clear
+04/06/2018,03:53:00,Clear
+04/06/2018,05:53:00,Mostly Cloudy
+04/06/2018,06:53:00,Mostly Cloudy
+04/06/2018,07:53:00,Mostly Cloudy
+04/06/2018,08:53:00,Light Rain
+04/06/2018,09:53:00,Rain
+04/06/2018,10:53:00,Light Rain
+04/06/2018,11:53:00,Overcast
+04/06/2018,12:53:00,Light Rain
+04/06/2018,13:53:00,Overcast
+04/06/2018,14:53:00,Light Rain
+04/06/2018,15:53:00,Light Rain
+04/06/2018,16:53:00,Light Rain
+04/06/2018,17:22:00,Rain
+04/06/2018,17:53:00,Light Rain
+04/06/2018,18:53:00,Rain
+04/06/2018,19:53:00,Light Rain
+04/06/2018,20:53:00,Light Rain
+04/06/2018,21:53:00,Light Rain
+04/06/2018,22:53:00,Rain
+04/06/2018,23:53:00,Light Rain
+04/07/2018,00:00:00,Light Rain
+04/07/2018,00:53:00,Light Rain
+04/07/2018,01:43:00,Overcast
+04/07/2018,01:53:00,Overcast
+04/07/2018,02:11:00,Overcast
+04/07/2018,02:53:00,Overcast
+04/07/2018,03:35:00,Light Rain
+04/07/2018,03:53:00,Light Rain
+04/07/2018,04:15:00,Light Rain
+04/07/2018,04:44:00,Light Rain
+04/07/2018,04:53:00,Light Rain
+04/07/2018,04:59:00,Light Rain
+04/07/2018,05:23:00,Light Rain
+04/07/2018,05:53:00,Light Rain
+04/07/2018,07:53:00,Overcast
+04/07/2018,08:53:00,Light Rain
+04/07/2018,09:30:00,Overcast
+04/07/2018,09:53:00,Overcast
+04/07/2018,10:33:00,Haze
+04/07/2018,10:53:00,Overcast
+04/07/2018,11:53:00,Overcast
+04/07/2018,12:53:00,Overcast
+04/07/2018,14:53:00,Overcast
+04/07/2018,15:53:00,Light Rain
+04/07/2018,16:53:00,Overcast
+04/07/2018,17:53:00,Overcast
+04/07/2018,18:53:00,Overcast
+04/07/2018,19:53:00,Overcast
+04/07/2018,20:53:00,Overcast
+04/07/2018,21:53:00,Overcast
+04/07/2018,22:53:00,Overcast
+04/07/2018,23:53:00,Overcast
+04/08/2018,00:53:00,Overcast
+04/08/2018,01:53:00,Overcast
+04/08/2018,02:53:00,Overcast
+04/08/2018,03:53:00,Overcast
+04/08/2018,04:53:00,Overcast
+04/08/2018,05:53:00,Mostly Cloudy
+04/08/2018,06:53:00,Mostly Cloudy
+04/08/2018,07:53:00,Mostly Cloudy
+04/08/2018,08:53:00,Mostly Cloudy
+04/08/2018,09:53:00,Mostly Cloudy
+04/08/2018,10:53:00,Mostly Cloudy
+04/08/2018,11:53:00,Overcast
+04/08/2018,12:53:00,Mostly Cloudy
+04/08/2018,13:53:00,Mostly Cloudy
+04/08/2018,14:53:00,Mostly Cloudy
+04/08/2018,15:53:00,Mostly Cloudy
+04/08/2018,16:53:00,Mostly Cloudy
+04/08/2018,17:53:00,Mostly Cloudy
+04/08/2018,18:53:00,Mostly Cloudy
+04/08/2018,19:53:00,Mostly Cloudy
+04/08/2018,20:53:00,Mostly Cloudy
+04/08/2018,21:53:00,Mostly Cloudy
+04/08/2018,22:53:00,Mostly Cloudy
+04/08/2018,23:53:00,Mostly Cloudy
+04/09/2018,00:53:00,Mostly Cloudy
+04/09/2018,01:53:00,Overcast
+04/09/2018,02:53:00,Overcast
+04/09/2018,03:53:00,Overcast
+04/09/2018,04:53:00,Overcast
+04/09/2018,05:50:00,Light Rain
+04/09/2018,05:53:00,Overcast
+04/09/2018,06:53:00,Light Drizzle
+04/09/2018,07:53:00,Light Drizzle
+04/09/2018,08:50:00,Overcast
+04/09/2018,08:53:00,Overcast
+04/09/2018,09:53:00,Overcast
+04/09/2018,10:53:00,Haze
+04/09/2018,11:53:00,Mostly Cloudy
+04/09/2018,12:39:00,Scattered Clouds
+04/09/2018,12:53:00,Scattered Clouds
+04/09/2018,13:53:00,Mostly Cloudy
+04/09/2018,14:53:00,Mostly Cloudy
+04/09/2018,15:53:00,Mostly Cloudy
+04/09/2018,16:53:00,Scattered Clouds
+04/09/2018,17:53:00,Scattered Clouds
+04/09/2018,18:53:00,Partly Cloudy
+04/09/2018,19:53:00,Scattered Clouds
+04/09/2018,20:53:00,Scattered Clouds
+04/09/2018,21:53:00,Scattered Clouds
+04/09/2018,22:53:00,Scattered Clouds
+04/09/2018,23:53:00,Scattered Clouds
+04/10/2018,00:53:00,Clear
+04/10/2018,01:53:00,Clear
+04/10/2018,02:53:00,Unknown
+04/10/2018,03:53:00,Clear
+04/10/2018,04:53:00,Clear
+04/10/2018,05:53:00,Scattered Clouds
+04/10/2018,06:53:00,Scattered Clouds
+04/10/2018,07:53:00,Scattered Clouds
+04/10/2018,08:53:00,Scattered Clouds
+04/10/2018,09:53:00,Scattered Clouds
+04/10/2018,10:53:00,Scattered Clouds
+04/10/2018,11:53:00,Partly Cloudy
+04/10/2018,12:53:00,Partly Cloudy
+04/10/2018,13:53:00,Partly Cloudy
+04/10/2018,14:53:00,Partly Cloudy
+04/10/2018,15:53:00,Scattered Clouds
+04/10/2018,16:53:00,Scattered Clouds
+04/10/2018,17:53:00,Scattered Clouds
+04/10/2018,18:53:00,Scattered Clouds
+04/10/2018,19:53:00,Scattered Clouds
+04/10/2018,20:53:00,Partly Cloudy
+04/10/2018,21:53:00,Clear
+04/10/2018,22:53:00,Clear
+04/11/2018,01:53:00,Clear
+04/11/2018,02:53:00,Clear
+04/11/2018,03:53:00,Clear
+04/11/2018,04:53:00,Clear
+04/11/2018,05:53:00,Clear
+04/11/2018,06:53:00,Clear
+04/11/2018,07:53:00,Scattered Clouds
+04/11/2018,08:53:00,Scattered Clouds
+04/11/2018,09:53:00,Mostly Cloudy
+04/11/2018,10:53:00,Mostly Cloudy
+04/11/2018,11:53:00,Mostly Cloudy
+04/11/2018,12:53:00,Mostly Cloudy
+04/11/2018,13:53:00,Mostly Cloudy
+04/11/2018,14:53:00,Mostly Cloudy
+04/11/2018,15:53:00,Mostly Cloudy
+04/11/2018,16:53:00,Mostly Cloudy
+04/11/2018,17:53:00,Mostly Cloudy
+04/11/2018,18:53:00,Mostly Cloudy
+04/11/2018,19:53:00,Mostly Cloudy
+04/11/2018,20:53:00,Mostly Cloudy
+04/11/2018,21:53:00,Mostly Cloudy
+04/11/2018,22:53:00,Overcast
+04/11/2018,23:53:00,Overcast
+04/12/2018,00:53:00,Clear
+04/12/2018,01:53:00,Clear
+04/12/2018,02:53:00,Clear
+04/12/2018,03:53:00,Clear
+04/12/2018,04:53:00,Clear
+04/12/2018,05:53:00,Mostly Cloudy
+04/12/2018,06:53:00,Mostly Cloudy
+04/12/2018,07:53:00,Mostly Cloudy
+04/12/2018,08:53:00,Mostly Cloudy
+04/12/2018,09:53:00,Scattered Clouds
+04/12/2018,10:53:00,Scattered Clouds
+04/12/2018,11:53:00,Scattered Clouds
+04/12/2018,12:53:00,Partly Cloudy
+04/12/2018,13:53:00,Partly Cloudy
+04/12/2018,14:53:00,Partly Cloudy
+04/12/2018,15:53:00,Partly Cloudy
+04/12/2018,16:53:00,Partly Cloudy
+04/12/2018,17:53:00,Clear
+04/12/2018,18:53:00,Clear
+04/12/2018,19:53:00,Clear
+04/12/2018,20:53:00,Clear
+04/12/2018,21:53:00,Clear
+04/12/2018,22:53:00,Clear
+04/12/2018,23:53:00,Clear
+04/13/2018,00:53:00,Clear
+04/13/2018,01:53:00,Clear
+04/13/2018,02:53:00,Clear
+04/13/2018,03:53:00,Clear
+04/13/2018,04:53:00,Clear
+04/13/2018,05:53:00,Clear
+04/13/2018,06:53:00,Scattered Clouds
+04/13/2018,07:53:00,Scattered Clouds
+04/13/2018,08:53:00,Scattered Clouds
+04/13/2018,09:53:00,Mostly Cloudy
+04/13/2018,10:53:00,Mostly Cloudy
+04/13/2018,11:53:00,Mostly Cloudy
+04/13/2018,12:53:00,Scattered Clouds
+04/13/2018,13:53:00,Scattered Clouds
+04/13/2018,14:53:00,Scattered Clouds
+04/13/2018,15:53:00,Scattered Clouds
+04/13/2018,16:53:00,Scattered Clouds
+04/13/2018,17:53:00,Scattered Clouds
+04/13/2018,18:53:00,Scattered Clouds
+04/13/2018,19:53:00,Mostly Cloudy
+04/13/2018,20:53:00,Mostly Cloudy
+04/13/2018,21:53:00,Mostly Cloudy
+04/13/2018,22:53:00,Mostly Cloudy
+04/13/2018,23:53:00,Mostly Cloudy
+04/14/2018,00:53:00,Clear
+04/14/2018,01:53:00,Clear
+04/14/2018,02:53:00,Partly Cloudy
+04/14/2018,03:53:00,Clear
+04/14/2018,04:53:00,Clear
+04/14/2018,05:53:00,Scattered Clouds
+04/14/2018,06:53:00,Mostly Cloudy
+04/14/2018,07:53:00,Mostly Cloudy
+04/14/2018,08:53:00,Mostly Cloudy
+04/14/2018,09:53:00,Mostly Cloudy
+04/14/2018,10:53:00,Mostly Cloudy
+04/14/2018,11:53:00,Mostly Cloudy
+04/14/2018,12:53:00,Mostly Cloudy
+04/14/2018,13:53:00,Overcast
+04/14/2018,14:53:00,Mostly Cloudy
+04/14/2018,15:53:00,Mostly Cloudy
+04/14/2018,16:53:00,Mostly Cloudy
+04/14/2018,17:53:00,Light Rain
+04/14/2018,18:07:00,Light Rain
+04/14/2018,18:53:00,Mostly Cloudy
+04/14/2018,19:22:00,Mostly Cloudy
+04/14/2018,19:39:00,Rain
+04/14/2018,19:53:00,Rain
+04/14/2018,19:56:00,Rain
+04/14/2018,20:09:00,Light Rain
+04/14/2018,20:36:00,Rain
+04/14/2018,20:53:00,Light Rain
+04/14/2018,21:22:00,Light Rain
+04/14/2018,21:53:00,Rain
+04/14/2018,21:58:00,Rain
+04/14/2018,22:22:00,Light Rain
+04/14/2018,22:53:00,Rain
+04/14/2018,23:07:00,Light Rain
+04/14/2018,23:53:00,Rain
+04/15/2018,00:00:00,Heavy Rain
+04/15/2018,00:05:00,Rain
+04/15/2018,00:25:00,Heavy Rain
+04/15/2018,00:37:00,Light Rain
+04/15/2018,00:53:00,Light Rain
+04/15/2018,01:07:00,Rain
+04/15/2018,01:15:00,Light Rain
+04/15/2018,01:22:00,Overcast
+04/15/2018,01:53:00,Light Rain
+04/15/2018,02:07:00,Overcast
+04/15/2018,02:17:00,Light Rain
+04/15/2018,02:33:00,Light Rain
+04/15/2018,02:53:00,Light Rain
+04/15/2018,03:09:00,Light Rain
+04/15/2018,03:53:00,Light Rain
+04/15/2018,04:53:00,Light Rain
+04/15/2018,05:53:00,Light Rain
+04/15/2018,06:53:00,Light Rain
+04/15/2018,07:46:00,Overcast
+04/15/2018,07:53:00,Overcast
+04/15/2018,08:39:00,Rain
+04/15/2018,08:50:00,Rain
+04/15/2018,08:53:00,Rain
+04/15/2018,09:53:00,Rain
+04/15/2018,10:32:00,Rain
+04/15/2018,10:53:00,Light Rain
+04/15/2018,11:42:00,Rain
+04/15/2018,11:53:00,Heavy Rain
+04/15/2018,11:56:00,Heavy Rain
+04/15/2018,12:05:00,Heavy Rain
+04/15/2018,12:53:00,Light Rain
+04/15/2018,13:53:00,Overcast
+04/15/2018,14:53:00,Mostly Cloudy
+04/15/2018,15:17:00,Mostly Cloudy
+04/15/2018,15:53:00,Mostly Cloudy
+04/15/2018,16:53:00,Overcast
+04/15/2018,17:53:00,Mostly Cloudy
+04/15/2018,18:53:00,Overcast
+04/15/2018,19:53:00,Overcast
+04/15/2018,20:53:00,Overcast
+04/15/2018,21:53:00,Overcast
+04/15/2018,22:53:00,Overcast
+04/15/2018,23:53:00,Overcast
+04/16/2018,00:53:00,Light Rain
+04/16/2018,01:16:00,Light Rain
+04/16/2018,01:50:00,Overcast
+04/16/2018,01:53:00,Overcast
+04/16/2018,02:53:00,Overcast
+04/16/2018,03:53:00,Overcast
+04/16/2018,04:53:00,Overcast
+04/16/2018,05:39:00,Overcast
+04/16/2018,05:46:00,Overcast
+04/16/2018,06:53:00,Overcast
+04/16/2018,07:42:00,Rain
+04/16/2018,07:53:00,Light Rain
+04/16/2018,08:53:00,Overcast
+04/16/2018,09:53:00,Overcast
+04/16/2018,10:53:00,Overcast
+04/16/2018,11:45:00,Overcast
+04/16/2018,11:53:00,Overcast
+04/16/2018,12:53:00,Overcast
+04/16/2018,13:53:00,Overcast
+04/16/2018,14:36:00,Mostly Cloudy
+04/16/2018,14:53:00,Mostly Cloudy
+04/16/2018,15:53:00,Mostly Cloudy
+04/16/2018,16:53:00,Scattered Clouds
+04/16/2018,17:53:00,Scattered Clouds
+04/16/2018,18:53:00,Scattered Clouds
+04/16/2018,19:53:00,Mostly Cloudy
+04/16/2018,20:53:00,Scattered Clouds
+04/16/2018,21:53:00,Partly Cloudy
+04/16/2018,22:53:00,Clear
+04/16/2018,23:53:00,Clear
+04/17/2018,00:53:00,Clear
+04/17/2018,01:53:00,Clear
+04/17/2018,02:53:00,Clear
+04/17/2018,03:53:00,Clear
+04/17/2018,04:53:00,Clear
+04/17/2018,05:53:00,Clear
+04/17/2018,05:55:00,Partly Cloudy
+04/17/2018,06:53:00,Partly Cloudy
+04/17/2018,07:53:00,Partly Cloudy
+04/17/2018,08:53:00,Clear
+04/17/2018,09:53:00,Clear
+04/17/2018,10:53:00,Clear
+04/17/2018,11:53:00,Clear
+04/17/2018,12:53:00,Clear
+04/17/2018,13:53:00,Partly Cloudy
+04/17/2018,14:53:00,Partly Cloudy
+04/17/2018,15:53:00,Partly Cloudy
+04/17/2018,16:53:00,Partly Cloudy
+04/17/2018,17:53:00,Partly Cloudy
+04/17/2018,18:53:00,Partly Cloudy
+04/17/2018,19:53:00,Partly Cloudy
+04/17/2018,20:53:00,Partly Cloudy
+04/17/2018,21:53:00,Clear
+04/17/2018,22:53:00,Clear
+04/17/2018,23:53:00,Clear
+04/18/2018,00:53:00,Clear
+04/18/2018,01:53:00,Clear
+04/18/2018,02:53:00,Clear
+04/18/2018,03:53:00,Clear
+04/18/2018,04:53:00,Clear
+04/18/2018,05:53:00,Clear
+04/18/2018,06:53:00,Partly Cloudy
+04/18/2018,07:53:00,Scattered Clouds
+04/18/2018,08:53:00,Partly Cloudy
+04/18/2018,09:53:00,Partly Cloudy
+04/18/2018,10:53:00,Scattered Clouds
+04/18/2018,11:53:00,Scattered Clouds
+04/18/2018,12:53:00,Scattered Clouds
+04/18/2018,13:53:00,Scattered Clouds
+04/18/2018,14:53:00,Scattered Clouds
+04/18/2018,15:53:00,Scattered Clouds
+04/18/2018,16:53:00,Scattered Clouds
+04/18/2018,17:53:00,Scattered Clouds
+04/18/2018,18:53:00,Scattered Clouds
+04/18/2018,19:53:00,Mostly Cloudy
+04/18/2018,20:53:00,Mostly Cloudy
+04/18/2018,21:53:00,Mostly Cloudy
+04/18/2018,22:53:00,Mostly Cloudy
+04/18/2018,23:53:00,Mostly Cloudy
+04/19/2018,00:53:00,Mostly Cloudy
+04/19/2018,01:53:00,Mostly Cloudy
+04/19/2018,02:53:00,Overcast
+04/19/2018,03:53:00,Overcast
+04/19/2018,04:53:00,Scattered Clouds
+04/19/2018,05:53:00,Partly Cloudy
+04/19/2018,06:53:00,Partly Cloudy
+04/19/2018,07:53:00,Partly Cloudy
+04/19/2018,08:53:00,Mostly Cloudy
+04/19/2018,09:53:00,Mostly Cloudy
+04/19/2018,10:53:00,Mostly Cloudy
+04/19/2018,11:53:00,Mostly Cloudy
+04/19/2018,12:53:00,Mostly Cloudy
+04/19/2018,13:53:00,Scattered Clouds
+04/19/2018,14:53:00,Scattered Clouds
+04/19/2018,15:53:00,Partly Cloudy
+04/19/2018,16:53:00,Partly Cloudy
+04/19/2018,17:53:00,Partly Cloudy
+04/19/2018,18:53:00,Partly Cloudy
+04/19/2018,19:53:00,Partly Cloudy
+04/19/2018,20:53:00,Partly Cloudy
+04/19/2018,21:53:00,Clear
+04/19/2018,22:53:00,Clear
+04/19/2018,23:53:00,Clear
+04/20/2018,00:53:00,Clear
+04/20/2018,01:53:00,Clear
+04/20/2018,02:53:00,Clear
+04/20/2018,03:53:00,Clear
+04/20/2018,04:53:00,Clear
+04/20/2018,05:53:00,Clear
+04/20/2018,06:53:00,Clear
+04/20/2018,07:53:00,Clear
+04/20/2018,08:53:00,Clear
+04/20/2018,09:53:00,Clear
+04/20/2018,10:53:00,Clear
+04/20/2018,11:53:00,Clear
+04/20/2018,12:53:00,Clear
+04/20/2018,13:53:00,Clear
+04/20/2018,14:53:00,Clear
+04/20/2018,15:53:00,Clear
+04/20/2018,16:53:00,Clear
+04/20/2018,17:53:00,Clear
+04/20/2018,18:53:00,Partly Cloudy
+04/20/2018,19:53:00,Partly Cloudy
+04/20/2018,20:53:00,Partly Cloudy
+04/20/2018,21:53:00,Partly Cloudy
+04/20/2018,22:53:00,Partly Cloudy
+04/20/2018,23:53:00,Partly Cloudy
+04/21/2018,00:53:00,Clear
+04/21/2018,01:53:00,Clear
+04/21/2018,02:53:00,Clear
+04/21/2018,03:53:00,Clear
+04/21/2018,04:53:00,Clear
+04/21/2018,05:53:00,Clear
+04/21/2018,06:53:00,Scattered Clouds
+04/21/2018,07:53:00,Scattered Clouds
+04/21/2018,08:53:00,Scattered Clouds
+04/21/2018,09:53:00,Scattered Clouds
+04/21/2018,10:53:00,Scattered Clouds
+04/21/2018,11:53:00,Scattered Clouds
+04/21/2018,12:53:00,Scattered Clouds
+04/21/2018,13:53:00,Mostly Cloudy
+04/21/2018,14:53:00,Mostly Cloudy
+04/21/2018,15:53:00,Mostly Cloudy
+04/21/2018,16:53:00,Mostly Cloudy
+04/21/2018,17:53:00,Mostly Cloudy
+04/21/2018,18:53:00,Mostly Cloudy
+04/21/2018,19:53:00,Mostly Cloudy
+04/21/2018,20:53:00,Mostly Cloudy
+04/21/2018,21:53:00,Mostly Cloudy
+04/21/2018,22:53:00,Mostly Cloudy
+04/21/2018,23:53:00,Mostly Cloudy
+04/22/2018,00:53:00,Mostly Cloudy
+04/22/2018,01:53:00,Overcast
+04/22/2018,02:53:00,Overcast
+04/22/2018,03:53:00,Overcast
+04/22/2018,04:53:00,Overcast
+04/22/2018,05:53:00,Overcast
+04/22/2018,06:53:00,Mostly Cloudy
+04/22/2018,07:53:00,Overcast
+04/22/2018,08:53:00,Mostly Cloudy
+04/22/2018,09:53:00,Light Rain
+04/22/2018,10:40:00,Rain
+04/22/2018,10:44:00,Heavy Rain
+04/22/2018,10:53:00,Heavy Rain
+04/22/2018,11:03:00,Heavy Rain
+04/22/2018,11:53:00,Light Rain
+04/22/2018,12:34:00,Light Rain
+04/22/2018,12:53:00,Light Rain
+04/22/2018,13:25:00,Overcast
+04/22/2018,13:41:00,Heavy Rain
+04/22/2018,13:53:00,Rain
+04/22/2018,14:11:00,Rain
+04/22/2018,14:53:00,Heavy Rain
+04/22/2018,15:37:00,Heavy Rain
+04/22/2018,15:48:00,Rain
+04/22/2018,15:53:00,Rain
+04/22/2018,16:07:00,Light Rain
+04/22/2018,16:53:00,Heavy Rain
+04/22/2018,17:38:00,Rain
+04/22/2018,17:53:00,Light Rain
+04/22/2018,18:06:00,Overcast
+04/22/2018,18:53:00,Light Rain
+04/22/2018,19:53:00,Light Rain
+04/22/2018,20:27:00,Rain
+04/22/2018,20:53:00,Light Rain
+04/22/2018,21:53:00,Light Rain
+04/22/2018,22:05:00,Rain
+04/22/2018,22:53:00,Light Rain
+04/22/2018,23:53:00,Rain
+04/23/2018,00:53:00,Rain
+04/23/2018,01:24:00,Heavy Rain
+04/23/2018,01:29:00,Rain
+04/23/2018,01:36:00,Heavy Rain
+04/23/2018,01:44:00,Heavy Rain
+04/23/2018,01:51:00,Rain
+04/23/2018,01:53:00,Light Rain
+04/23/2018,02:08:00,Overcast
+04/23/2018,02:19:00,Overcast
+04/23/2018,02:53:00,Light Rain
+04/23/2018,03:23:00,Light Rain
+04/23/2018,03:53:00,Light Rain
+04/23/2018,04:08:00,Rain
+04/23/2018,04:53:00,Light Rain
+04/23/2018,05:48:00,Light Rain
+04/23/2018,05:53:00,Light Rain
+04/23/2018,06:53:00,Light Rain
+04/23/2018,07:53:00,Light Rain
+04/23/2018,08:48:00,Overcast
+04/23/2018,08:49:00,Overcast
+04/23/2018,08:53:00,Overcast
+04/23/2018,09:49:00,Overcast
+04/23/2018,09:53:00,Overcast
+04/23/2018,10:53:00,Overcast
+04/23/2018,11:53:00,Overcast
+04/23/2018,12:50:00,Overcast
+04/23/2018,12:53:00,Overcast
+04/23/2018,13:53:00,Light Drizzle
+04/23/2018,14:53:00,Overcast
+04/23/2018,15:53:00,Overcast
+04/23/2018,16:22:00,Overcast
+04/23/2018,16:53:00,Overcast
+04/23/2018,17:33:00,Overcast
+04/23/2018,17:53:00,Overcast
+04/23/2018,18:53:00,Overcast
+04/23/2018,19:48:00,Overcast
+04/23/2018,19:53:00,Overcast
+04/23/2018,20:26:00,Heavy Rain
+04/23/2018,20:31:00,Heavy Rain
+04/23/2018,20:40:00,Rain
+04/23/2018,20:53:00,Rain
+04/23/2018,21:53:00,Rain
+04/23/2018,22:01:00,Light Rain
+04/23/2018,22:12:00,Light Rain
+04/23/2018,22:50:00,Rain
+04/23/2018,22:53:00,Rain
+04/23/2018,23:11:00,Rain
+04/23/2018,23:19:00,Light Rain
+04/23/2018,23:42:00,Light Rain
+04/23/2018,23:53:00,Light Rain
+04/24/2018,00:05:00,Rain
+04/24/2018,00:27:00,Rain
+04/24/2018,00:34:00,Rain
+04/24/2018,00:42:00,Light Rain
+04/24/2018,00:53:00,Light Rain
+04/24/2018,01:35:00,Overcast
+04/24/2018,01:53:00,Rain
+04/24/2018,02:20:00,Light Rain
+04/24/2018,02:53:00,Light Rain
+04/24/2018,03:15:00,Overcast
+04/24/2018,03:46:00,Overcast
+04/24/2018,03:53:00,Overcast
+04/24/2018,04:15:00,Overcast
+04/24/2018,04:53:00,Overcast
+04/24/2018,05:53:00,Overcast
+04/24/2018,06:53:00,Overcast
+04/24/2018,07:53:00,Overcast
+04/24/2018,08:53:00,Mostly Cloudy
+04/24/2018,09:51:00,Overcast
+04/24/2018,09:53:00,Overcast
+04/24/2018,10:53:00,Mostly Cloudy
+04/24/2018,11:53:00,Mostly Cloudy
+04/24/2018,12:53:00,Mostly Cloudy
+04/24/2018,13:53:00,Mostly Cloudy
+04/24/2018,14:53:00,Mostly Cloudy
+04/24/2018,15:53:00,Mostly Cloudy
+04/24/2018,16:53:00,Mostly Cloudy
+04/24/2018,17:53:00,Mostly Cloudy
+04/24/2018,18:53:00,Scattered Clouds
+04/24/2018,19:53:00,Mostly Cloudy
+04/24/2018,20:53:00,Mostly Cloudy
+04/24/2018,21:53:00,Mostly Cloudy
+04/24/2018,22:53:00,Light Rain
+04/24/2018,23:53:00,Mostly Cloudy
+04/25/2018,00:13:00,Overcast
+04/25/2018,00:53:00,Overcast
+04/25/2018,01:00:00,Overcast
+04/25/2018,01:20:00,Overcast
+04/25/2018,01:53:00,Mostly Cloudy
+04/25/2018,02:38:00,Overcast
+04/25/2018,02:53:00,Mostly Cloudy
+04/25/2018,03:00:00,Scattered Clouds
+04/25/2018,03:53:00,Mostly Cloudy
+04/25/2018,04:31:00,Scattered Clouds
+04/25/2018,04:48:00,Mostly Cloudy
+04/25/2018,04:53:00,Mostly Cloudy
+04/25/2018,05:20:00,Scattered Clouds
+04/25/2018,05:51:00,Mostly Cloudy
+04/25/2018,05:53:00,Mostly Cloudy
+04/25/2018,06:53:00,Mostly Cloudy
+04/25/2018,07:53:00,Mostly Cloudy
+04/25/2018,08:53:00,Mostly Cloudy
+04/25/2018,09:33:00,Mostly Cloudy
+04/25/2018,09:53:00,Mostly Cloudy
+04/25/2018,10:53:00,Mostly Cloudy
+04/25/2018,11:49:00,Mostly Cloudy
+04/25/2018,11:53:00,Mostly Cloudy
+04/25/2018,12:53:00,Mostly Cloudy
+04/25/2018,13:53:00,Overcast
+04/25/2018,14:53:00,Overcast
+04/25/2018,15:53:00,Overcast
+04/25/2018,16:53:00,Overcast
+04/25/2018,17:53:00,Overcast
+04/25/2018,18:53:00,Mostly Cloudy
+04/25/2018,19:53:00,Scattered Clouds
+04/25/2018,20:53:00,Scattered Clouds
+04/25/2018,21:53:00,Scattered Clouds
+04/25/2018,22:53:00,Scattered Clouds
+04/25/2018,23:53:00,Scattered Clouds
+04/26/2018,00:53:00,Overcast
+04/26/2018,01:53:00,Overcast
+04/26/2018,02:53:00,Partly Cloudy
+04/26/2018,03:53:00,Clear
+04/26/2018,04:53:00,Mostly Cloudy
+04/26/2018,05:53:00,Scattered Clouds
+04/26/2018,06:53:00,Light Rain
+04/26/2018,07:53:00,Light Rain
+04/26/2018,08:53:00,Light Rain
+04/26/2018,09:53:00,Light Rain
+04/26/2018,10:53:00,Rain
+04/26/2018,11:53:00,Light Rain
+04/26/2018,12:42:00,Rain
+04/26/2018,12:53:00,Light Rain
+04/26/2018,13:49:00,Overcast
+04/26/2018,13:53:00,Overcast
+04/26/2018,14:45:00,Overcast
+04/26/2018,14:53:00,Mostly Cloudy
+04/26/2018,15:12:00,Overcast
+04/26/2018,15:53:00,Overcast
+04/26/2018,16:53:00,Overcast
+04/26/2018,16:59:00,Overcast
+04/26/2018,17:53:00,Overcast
+04/26/2018,18:34:00,Light Rain
+04/26/2018,18:53:00,Overcast
+04/26/2018,19:28:00,Overcast
+04/26/2018,19:53:00,Mostly Cloudy
+04/26/2018,20:12:00,Mostly Cloudy
+04/26/2018,20:53:00,Mostly Cloudy
+04/26/2018,21:04:00,Overcast
+04/26/2018,21:41:00,Overcast
+04/26/2018,21:53:00,Overcast
+04/26/2018,22:53:00,Scattered Clouds
+04/26/2018,23:53:00,Partly Cloudy
+04/27/2018,00:53:00,Clear
+04/27/2018,01:17:00,Partly Cloudy
+04/27/2018,01:29:00,Partly Cloudy
+04/27/2018,01:53:00,Clear
+04/27/2018,02:22:00,Clear
+04/27/2018,02:29:00,Clear
+04/27/2018,02:32:00,Clear
+04/27/2018,02:39:00,Clear
+04/27/2018,02:51:00,Scattered Clouds
+04/27/2018,02:53:00,Scattered Clouds
+04/27/2018,03:53:00,Partly Cloudy
+04/27/2018,04:31:00,Clear
+04/27/2018,04:41:00,Partly Cloudy
+04/27/2018,04:53:00,Mostly Cloudy
+04/27/2018,05:46:00,Patches of Fog
+04/27/2018,05:53:00,Patches of Fog
+04/27/2018,06:27:00,Patches of Fog
+04/27/2018,06:34:00,Patches of Fog
+04/27/2018,06:40:00,Fog
+04/27/2018,06:48:00,Fog
+04/27/2018,06:53:00,Fog
+04/27/2018,07:00:00,Patches of Fog
+04/27/2018,07:46:00,Patches of Fog
+04/27/2018,07:53:00,Patches of Fog
+04/27/2018,08:20:00,Patches of Fog
+04/27/2018,08:53:00,Scattered Clouds
+04/27/2018,09:53:00,Scattered Clouds
+04/27/2018,10:53:00,Scattered Clouds
+04/27/2018,11:53:00,Scattered Clouds
+04/27/2018,12:53:00,Scattered Clouds
+04/27/2018,13:53:00,Scattered Clouds
+04/27/2018,14:53:00,Scattered Clouds
+04/27/2018,15:53:00,Scattered Clouds
+04/27/2018,16:53:00,Scattered Clouds
+04/27/2018,17:53:00,Scattered Clouds
+04/27/2018,18:53:00,Scattered Clouds
+04/27/2018,19:53:00,Scattered Clouds
+04/27/2018,20:53:00,Scattered Clouds
+04/27/2018,21:53:00,Scattered Clouds
+04/27/2018,22:53:00,Scattered Clouds
+04/27/2018,23:53:00,Partly Cloudy
+04/28/2018,00:53:00,Clear
+04/28/2018,01:53:00,Clear
+04/28/2018,03:53:00,Clear
+04/28/2018,04:53:00,Clear
+04/28/2018,05:53:00,Clear
+04/28/2018,06:53:00,Shallow Fog
+04/28/2018,07:53:00,Clear
+04/28/2018,08:53:00,Clear
+04/28/2018,09:53:00,Clear
+04/28/2018,10:53:00,Clear
+04/28/2018,11:53:00,Clear
+04/28/2018,12:53:00,Clear
+04/28/2018,13:53:00,Scattered Clouds
+04/28/2018,14:53:00,Scattered Clouds
+04/28/2018,15:53:00,Scattered Clouds
+04/28/2018,16:53:00,Scattered Clouds
+04/28/2018,17:53:00,Scattered Clouds
+04/28/2018,18:53:00,Scattered Clouds
+04/28/2018,19:53:00,Scattered Clouds
+04/28/2018,20:53:00,Partly Cloudy
+04/28/2018,21:53:00,Partly Cloudy
+04/28/2018,22:53:00,Partly Cloudy
+04/28/2018,23:53:00,Partly Cloudy
+04/29/2018,00:53:00,Clear
+04/29/2018,01:53:00,Clear
+04/29/2018,02:53:00,Clear
+04/29/2018,03:53:00,Clear
+04/29/2018,04:53:00,Clear
+04/29/2018,05:53:00,Clear
+04/29/2018,06:53:00,Clear
+04/29/2018,07:53:00,Clear
+04/29/2018,08:53:00,Clear
+04/29/2018,09:53:00,Clear
+04/29/2018,10:53:00,Clear
+04/29/2018,11:53:00,Clear
+04/29/2018,12:53:00,Clear
+04/29/2018,13:53:00,Clear
+04/29/2018,14:53:00,Clear
+04/29/2018,15:53:00,Clear
+04/29/2018,16:53:00,Clear
+04/29/2018,17:53:00,Clear
+04/29/2018,18:53:00,Clear
+04/29/2018,19:53:00,Clear
+04/29/2018,20:53:00,Clear
+04/29/2018,21:53:00,Clear
+04/29/2018,22:53:00,Clear
+04/29/2018,23:53:00,Clear
+04/30/2018,00:53:00,Clear
+04/30/2018,01:53:00,Clear
+04/30/2018,02:53:00,Clear
+04/30/2018,03:53:00,Clear
+04/30/2018,04:53:00,Clear
+04/30/2018,05:53:00,Clear
+04/30/2018,06:53:00,Clear
+04/30/2018,07:53:00,Clear
+04/30/2018,08:53:00,Clear
+04/30/2018,09:53:00,Clear
+04/30/2018,10:53:00,Clear
+04/30/2018,11:53:00,Clear
+04/30/2018,12:53:00,Clear
+04/30/2018,13:53:00,Clear
+04/30/2018,14:53:00,Clear
+04/30/2018,15:53:00,Clear
+04/30/2018,16:53:00,Clear
+04/30/2018,17:53:00,Clear
+04/30/2018,18:53:00,Clear
+04/30/2018,19:53:00,Clear
+04/30/2018,20:53:00,Clear
+04/30/2018,21:53:00,Clear
+04/30/2018,22:53:00,Clear
+04/30/2018,23:53:00,Clear
+05/01/2018,00:53:00,Clear
+05/01/2018,01:53:00,Clear
+05/01/2018,02:53:00,Clear
+05/01/2018,03:53:00,Clear
+05/01/2018,04:53:00,Clear
+05/01/2018,05:53:00,Clear
+05/01/2018,06:53:00,Shallow Fog
+05/01/2018,07:53:00,Partly Cloudy
+05/01/2018,08:53:00,Clear
+05/01/2018,09:53:00,Clear
+05/01/2018,10:53:00,Clear
+05/01/2018,11:53:00,Clear
+05/01/2018,12:53:00,Partly Cloudy
+05/01/2018,13:53:00,Partly Cloudy
+05/01/2018,14:53:00,Partly Cloudy
+05/01/2018,15:53:00,Scattered Clouds
+05/01/2018,16:53:00,Scattered Clouds
+05/01/2018,17:53:00,Scattered Clouds
+05/01/2018,18:53:00,Scattered Clouds
+05/01/2018,20:53:00,Scattered Clouds
+05/01/2018,21:53:00,Partly Cloudy
+05/01/2018,22:53:00,Clear
+05/01/2018,23:53:00,Clear
+05/02/2018,00:53:00,Clear
+05/02/2018,01:53:00,Clear
+05/02/2018,02:53:00,Clear
+05/02/2018,03:53:00,Clear
+05/02/2018,04:53:00,Clear
+05/02/2018,05:53:00,Partly Cloudy
+05/02/2018,06:53:00,Scattered Clouds
+05/02/2018,07:53:00,Mostly Cloudy
+05/02/2018,08:53:00,Mostly Cloudy
+05/02/2018,09:53:00,Mostly Cloudy
+05/02/2018,10:53:00,Scattered Clouds
+05/02/2018,11:53:00,Scattered Clouds
+05/02/2018,12:53:00,Scattered Clouds
+05/02/2018,13:53:00,Mostly Cloudy
+05/02/2018,14:53:00,Mostly Cloudy
+05/02/2018,15:53:00,Mostly Cloudy
+05/02/2018,16:53:00,Scattered Clouds
+05/02/2018,17:53:00,Scattered Clouds
+05/02/2018,18:53:00,Scattered Clouds
+05/02/2018,19:53:00,Scattered Clouds
+05/02/2018,20:53:00,Scattered Clouds
+05/02/2018,21:53:00,Scattered Clouds
+05/02/2018,22:53:00,Scattered Clouds
+05/02/2018,23:53:00,Scattered Clouds
+05/03/2018,00:53:00,Clear
+05/03/2018,01:53:00,Clear
+05/03/2018,02:53:00,Clear
+05/03/2018,03:53:00,Clear
+05/03/2018,04:53:00,Clear
+05/03/2018,05:53:00,Mostly Cloudy
+05/03/2018,06:53:00,Shallow Fog
+05/03/2018,07:53:00,Mostly Cloudy
+05/03/2018,08:53:00,Mostly Cloudy
+05/03/2018,09:53:00,Mostly Cloudy
+05/03/2018,10:53:00,Mostly Cloudy
+05/03/2018,11:53:00,Overcast
+05/03/2018,12:53:00,Mostly Cloudy
+05/03/2018,13:53:00,Mostly Cloudy
+05/03/2018,14:53:00,Mostly Cloudy
+05/03/2018,15:53:00,Mostly Cloudy
+05/03/2018,16:53:00,Mostly Cloudy
+05/03/2018,17:53:00,Mostly Cloudy
+05/03/2018,18:53:00,Mostly Cloudy
+05/03/2018,19:53:00,Mostly Cloudy
+05/03/2018,20:53:00,Mostly Cloudy
+05/03/2018,21:53:00,Scattered Clouds
+05/03/2018,22:53:00,Scattered Clouds
+05/03/2018,23:53:00,Scattered Clouds
+05/04/2018,00:53:00,Clear
+05/04/2018,01:53:00,Clear
+05/04/2018,02:53:00,Clear
+05/04/2018,03:53:00,Clear
+05/04/2018,04:53:00,Clear
+05/04/2018,05:53:00,Mostly Cloudy
+05/04/2018,06:53:00,Mostly Cloudy
+05/04/2018,07:53:00,Mostly Cloudy
+05/04/2018,08:53:00,Mostly Cloudy
+05/04/2018,09:53:00,Mostly Cloudy
+05/04/2018,10:53:00,Mostly Cloudy
+05/04/2018,11:53:00,Mostly Cloudy
+05/04/2018,12:53:00,Mostly Cloudy
+05/04/2018,13:53:00,Mostly Cloudy
+05/04/2018,14:53:00,Mostly Cloudy
+05/04/2018,15:53:00,Mostly Cloudy
+05/04/2018,16:53:00,Mostly Cloudy
+05/04/2018,17:53:00,Mostly Cloudy
+05/04/2018,18:53:00,Mostly Cloudy
+05/04/2018,19:53:00,Mostly Cloudy
+05/04/2018,20:53:00,Mostly Cloudy
+05/04/2018,21:53:00,Mostly Cloudy
+05/04/2018,22:53:00,Mostly Cloudy
+05/04/2018,23:53:00,Mostly Cloudy
+05/05/2018,00:53:00,Clear
+05/05/2018,01:53:00,Clear
+05/05/2018,02:53:00,Clear
+05/05/2018,03:53:00,Clear
+05/05/2018,04:53:00,Clear
+05/05/2018,05:53:00,Mostly Cloudy
+05/05/2018,06:53:00,Mostly Cloudy
+05/05/2018,07:53:00,Mostly Cloudy
+05/05/2018,08:53:00,Mostly Cloudy
+05/05/2018,09:53:00,Mostly Cloudy
+05/05/2018,10:53:00,Mostly Cloudy
+05/05/2018,11:53:00,Mostly Cloudy
+05/05/2018,12:53:00,Mostly Cloudy
+05/05/2018,13:53:00,Mostly Cloudy
+05/05/2018,14:53:00,Mostly Cloudy
+05/05/2018,15:53:00,Mostly Cloudy
+05/05/2018,16:53:00,Mostly Cloudy
+05/05/2018,17:53:00,Mostly Cloudy
+05/05/2018,17:58:00,Mostly Cloudy
+05/05/2018,18:16:00,Mostly Cloudy
+05/05/2018,18:53:00,Mostly Cloudy
+05/05/2018,19:53:00,Mostly Cloudy
+05/05/2018,20:53:00,Mostly Cloudy
+05/05/2018,21:53:00,Overcast
+05/05/2018,22:53:00,Overcast
+05/05/2018,23:53:00,Scattered Clouds
+05/06/2018,00:53:00,Clear
+05/06/2018,01:53:00,Mostly Cloudy
+05/06/2018,02:53:00,Clear
+05/06/2018,03:53:00,Partly Cloudy
+05/06/2018,04:48:00,Mostly Cloudy
+05/06/2018,04:53:00,Mostly Cloudy
+05/06/2018,05:35:00,Mostly Cloudy
+05/06/2018,05:53:00,Mostly Cloudy
+05/06/2018,06:53:00,Scattered Clouds
+05/06/2018,07:53:00,Clear
+05/06/2018,08:53:00,Partly Cloudy
+05/06/2018,09:53:00,Scattered Clouds
+05/06/2018,10:53:00,Scattered Clouds
+05/06/2018,11:53:00,Scattered Clouds
+05/06/2018,12:53:00,Scattered Clouds
+05/06/2018,14:53:00,Scattered Clouds
+05/06/2018,15:53:00,Mostly Cloudy
+05/06/2018,16:53:00,Mostly Cloudy
+05/06/2018,17:53:00,Mostly Cloudy
+05/06/2018,18:53:00,Mostly Cloudy
+05/06/2018,19:53:00,Mostly Cloudy
+05/06/2018,20:53:00,Mostly Cloudy
+05/06/2018,21:53:00,Mostly Cloudy
+05/06/2018,22:53:00,Mostly Cloudy
+05/06/2018,23:53:00,Mostly Cloudy
+05/07/2018,00:53:00,Mostly Cloudy
+05/07/2018,01:53:00,Clear
+05/07/2018,02:53:00,Clear
+05/07/2018,03:53:00,Clear
+05/07/2018,04:53:00,Clear
+05/07/2018,05:53:00,Scattered Clouds
+05/07/2018,06:53:00,Scattered Clouds
+05/07/2018,07:53:00,Scattered Clouds
+05/07/2018,08:53:00,Scattered Clouds
+05/07/2018,09:53:00,Partly Cloudy
+05/07/2018,10:53:00,Clear
+05/07/2018,11:53:00,Scattered Clouds
+05/07/2018,12:53:00,Scattered Clouds
+05/07/2018,13:53:00,Mostly Cloudy
+05/07/2018,14:53:00,Mostly Cloudy
+05/07/2018,15:53:00,Scattered Clouds
+05/07/2018,16:53:00,Scattered Clouds
+05/07/2018,17:53:00,Scattered Clouds
+05/07/2018,18:53:00,Scattered Clouds
+05/07/2018,19:53:00,Scattered Clouds
+05/07/2018,20:53:00,Scattered Clouds
+05/07/2018,21:53:00,Clear
+05/07/2018,22:53:00,Clear
+05/07/2018,23:53:00,Clear
+05/08/2018,00:53:00,Clear
+05/08/2018,01:53:00,Clear
+05/08/2018,02:53:00,Clear
+05/08/2018,03:53:00,Clear
+05/08/2018,04:53:00,Clear
+05/08/2018,05:53:00,Clear
+05/08/2018,06:53:00,Scattered Clouds
+05/08/2018,07:53:00,Scattered Clouds
+05/08/2018,08:53:00,Scattered Clouds
+05/08/2018,09:53:00,Partly Cloudy
+05/08/2018,10:53:00,Partly Cloudy
+05/08/2018,11:53:00,Partly Cloudy
+05/08/2018,12:53:00,Scattered Clouds
+05/08/2018,13:53:00,Scattered Clouds
+05/08/2018,14:53:00,Scattered Clouds
+05/08/2018,15:53:00,Scattered Clouds
+05/08/2018,16:53:00,Scattered Clouds
+05/08/2018,17:53:00,Scattered Clouds
+05/08/2018,18:53:00,Partly Cloudy
+05/08/2018,19:53:00,Partly Cloudy
+05/08/2018,20:53:00,Partly Cloudy
+05/08/2018,21:53:00,Clear
+05/08/2018,22:53:00,Clear
+05/08/2018,23:53:00,Clear
+05/09/2018,03:53:00,Clear
+05/09/2018,04:53:00,Clear
+05/09/2018,05:53:00,Clear
+05/09/2018,06:53:00,Partly Cloudy
+05/09/2018,07:53:00,Partly Cloudy
+05/09/2018,08:53:00,Scattered Clouds
+05/09/2018,09:53:00,Scattered Clouds
+05/09/2018,10:53:00,Scattered Clouds
+05/09/2018,11:53:00,Scattered Clouds
+05/09/2018,12:53:00,Scattered Clouds
+05/09/2018,13:53:00,Partly Cloudy
+05/09/2018,14:53:00,Scattered Clouds
+05/09/2018,15:53:00,Mostly Cloudy
+05/09/2018,16:53:00,Scattered Clouds
+05/09/2018,17:53:00,Scattered Clouds
+05/09/2018,18:53:00,Mostly Cloudy
+05/09/2018,19:53:00,Mostly Cloudy
+05/09/2018,20:53:00,Scattered Clouds
+05/09/2018,21:53:00,Scattered Clouds
+05/09/2018,22:53:00,Partly Cloudy
+05/09/2018,23:53:00,Partly Cloudy
+05/10/2018,02:53:00,Clear
+05/10/2018,03:53:00,Clear
+05/10/2018,04:53:00,Clear
+05/10/2018,05:53:00,Scattered Clouds
+05/10/2018,06:53:00,Scattered Clouds
+05/10/2018,07:53:00,Scattered Clouds
+05/10/2018,08:53:00,Scattered Clouds
+05/10/2018,09:53:00,Scattered Clouds
+05/10/2018,10:53:00,Mostly Cloudy
+05/10/2018,11:53:00,Mostly Cloudy
+05/10/2018,12:53:00,Mostly Cloudy
+05/10/2018,13:53:00,Mostly Cloudy
+05/10/2018,14:53:00,Mostly Cloudy
+05/10/2018,15:06:00,Mostly Cloudy
+05/10/2018,15:17:00,Thunderstorm
+05/10/2018,15:29:00,Light Thunderstorms and Rain
+05/10/2018,15:33:00,Heavy Thunderstorms and Rain
+05/10/2018,15:37:00,Light Thunderstorms and Rain
+05/10/2018,15:53:00,Light Thunderstorms and Rain
+05/10/2018,15:59:00,Mostly Cloudy
+05/10/2018,16:18:00,Thunderstorms and Rain
+05/10/2018,16:53:00,Light Thunderstorms and Rain
+05/10/2018,17:11:00,Scattered Clouds
+05/10/2018,17:53:00,Scattered Clouds
+05/10/2018,18:53:00,Scattered Clouds
+05/10/2018,19:53:00,Scattered Clouds
+05/10/2018,20:53:00,Scattered Clouds
+05/10/2018,21:53:00,Partly Cloudy
+05/10/2018,22:53:00,Clear
+05/10/2018,23:53:00,Clear
+05/11/2018,00:53:00,Clear
+05/11/2018,01:53:00,Clear
+05/11/2018,02:53:00,Clear
+05/11/2018,03:53:00,Clear
+05/11/2018,04:53:00,Clear
+05/11/2018,05:53:00,Clear
+05/11/2018,06:53:00,Patches of Fog
+05/11/2018,07:53:00,Scattered Clouds
+05/11/2018,08:53:00,Scattered Clouds
+05/11/2018,09:53:00,Scattered Clouds
+05/11/2018,10:53:00,Scattered Clouds
+05/11/2018,11:53:00,Scattered Clouds
+05/11/2018,12:53:00,Scattered Clouds
+05/11/2018,13:53:00,Scattered Clouds
+05/11/2018,14:53:00,Scattered Clouds
+05/11/2018,15:53:00,Scattered Clouds
+05/11/2018,16:53:00,Scattered Clouds
+05/11/2018,17:53:00,Scattered Clouds
+05/11/2018,18:53:00,Scattered Clouds
+05/11/2018,19:53:00,Scattered Clouds
+05/11/2018,20:53:00,Scattered Clouds
+05/11/2018,21:53:00,Scattered Clouds
+05/11/2018,22:53:00,Scattered Clouds
+05/11/2018,23:53:00,Scattered Clouds
+05/12/2018,00:53:00,Clear
+05/12/2018,01:53:00,Clear
+05/12/2018,02:53:00,Clear
+05/12/2018,03:53:00,Clear
+05/12/2018,04:53:00,Clear
+05/12/2018,05:53:00,Clear
+05/12/2018,06:53:00,Partly Cloudy
+05/12/2018,07:53:00,Partly Cloudy
+05/12/2018,08:53:00,Partly Cloudy
+05/12/2018,09:53:00,Partly Cloudy
+05/12/2018,10:53:00,Partly Cloudy
+05/12/2018,11:53:00,Partly Cloudy
+05/12/2018,12:53:00,Partly Cloudy
+05/12/2018,13:53:00,Scattered Clouds
+05/12/2018,14:53:00,Scattered Clouds
+05/12/2018,15:53:00,Scattered Clouds
+05/12/2018,16:53:00,Scattered Clouds
+05/12/2018,17:53:00,Scattered Clouds
+05/12/2018,18:53:00,Scattered Clouds
+05/12/2018,19:53:00,Scattered Clouds
+05/12/2018,20:53:00,Mostly Cloudy
+05/12/2018,21:53:00,Scattered Clouds
+05/12/2018,22:53:00,Scattered Clouds
+05/12/2018,23:53:00,Clear
+05/13/2018,00:53:00,Clear
+05/13/2018,01:53:00,Clear
+05/13/2018,02:53:00,Clear
+05/13/2018,03:53:00,Clear
+05/13/2018,04:53:00,Clear
+05/13/2018,05:53:00,Partly Cloudy
+05/13/2018,06:53:00,Partly Cloudy
+05/13/2018,07:53:00,Partly Cloudy
+05/13/2018,08:53:00,Clear
+05/13/2018,09:53:00,Clear
+05/13/2018,10:53:00,Clear
+05/13/2018,11:53:00,Clear
+05/13/2018,12:53:00,Partly Cloudy
+05/13/2018,13:53:00,Scattered Clouds
+05/13/2018,14:53:00,Scattered Clouds
+05/13/2018,15:53:00,Scattered Clouds
+05/13/2018,16:53:00,Scattered Clouds
+05/13/2018,17:53:00,Partly Cloudy
+05/13/2018,18:53:00,Partly Cloudy
+05/13/2018,19:53:00,Partly Cloudy
+05/13/2018,20:53:00,Partly Cloudy
+05/13/2018,21:53:00,Partly Cloudy
+05/13/2018,22:53:00,Partly Cloudy
+05/13/2018,23:53:00,Clear
+05/14/2018,00:53:00,Clear
+05/14/2018,01:53:00,Clear
+05/14/2018,02:53:00,Clear
+05/14/2018,03:53:00,Clear
+05/14/2018,04:53:00,Clear
+05/14/2018,05:53:00,Clear
+05/14/2018,06:53:00,Partly Cloudy
+05/14/2018,07:53:00,Clear
+05/14/2018,08:53:00,Clear
+05/14/2018,09:53:00,Clear
+05/14/2018,10:53:00,Scattered Clouds
+05/14/2018,11:53:00,Scattered Clouds
+05/14/2018,12:53:00,Scattered Clouds
+05/14/2018,13:53:00,Scattered Clouds
+05/14/2018,14:53:00,Scattered Clouds
+05/14/2018,15:53:00,Scattered Clouds
+05/14/2018,16:53:00,Scattered Clouds
+05/14/2018,17:53:00,Scattered Clouds
+05/14/2018,18:53:00,Mostly Cloudy
+05/14/2018,19:53:00,Mostly Cloudy
+05/14/2018,20:53:00,Mostly Cloudy
+05/14/2018,21:53:00,Scattered Clouds
+05/14/2018,22:53:00,Mostly Cloudy
+05/14/2018,23:53:00,Mostly Cloudy
+05/15/2018,00:53:00,Clear
+05/15/2018,01:53:00,Clear
+05/15/2018,02:53:00,Clear
+05/15/2018,03:53:00,Mostly Cloudy
+05/15/2018,04:53:00,Clear
+05/15/2018,05:53:00,Mostly Cloudy
+05/15/2018,06:53:00,Partly Cloudy
+05/15/2018,07:53:00,Mostly Cloudy
+05/15/2018,08:53:00,Mostly Cloudy
+05/15/2018,09:53:00,Mostly Cloudy
+05/15/2018,10:53:00,Mostly Cloudy
+05/15/2018,11:53:00,Mostly Cloudy
+05/15/2018,12:53:00,Mostly Cloudy
+05/15/2018,13:53:00,Scattered Clouds
+05/15/2018,14:53:00,Scattered Clouds
+05/15/2018,15:53:00,Scattered Clouds
+05/15/2018,16:53:00,Mostly Cloudy
+05/15/2018,17:11:00,Thunderstorms and Rain
+05/15/2018,17:16:00,Light Rain
+05/15/2018,17:21:00,Light Thunderstorms and Rain
+05/15/2018,17:53:00,Light Thunderstorms and Rain
+05/15/2018,18:18:00,Light Rain
+05/15/2018,18:53:00,Light Rain
+05/15/2018,19:53:00,Mostly Cloudy
+05/15/2018,20:53:00,Overcast
+05/15/2018,21:53:00,Mostly Cloudy
+05/15/2018,22:53:00,Overcast
+05/15/2018,23:53:00,Overcast
+05/16/2018,00:53:00,Clear
+05/16/2018,01:53:00,Clear
+05/16/2018,02:53:00,Clear
+05/16/2018,03:53:00,Clear
+05/16/2018,04:53:00,Clear
+05/16/2018,05:48:00,Mostly Cloudy
+05/16/2018,05:53:00,Mostly Cloudy
+05/16/2018,06:53:00,Overcast
+05/16/2018,07:53:00,Mostly Cloudy
+05/16/2018,08:50:00,Mostly Cloudy
+05/16/2018,08:53:00,Mostly Cloudy
+05/16/2018,09:53:00,Mostly Cloudy
+05/16/2018,10:53:00,Mostly Cloudy
+05/16/2018,11:53:00,Mostly Cloudy
+05/16/2018,12:53:00,Mostly Cloudy
+05/16/2018,13:53:00,Mostly Cloudy
+05/16/2018,14:53:00,Mostly Cloudy
+05/16/2018,15:53:00,Mostly Cloudy
+05/16/2018,16:34:00,Mostly Cloudy
+05/16/2018,16:53:00,Mostly Cloudy
+05/16/2018,17:17:00,Light Rain
+05/16/2018,17:53:00,Light Rain
+05/16/2018,18:53:00,Mostly Cloudy
+05/16/2018,19:53:00,Mostly Cloudy
+05/16/2018,20:53:00,Mostly Cloudy
+05/16/2018,21:53:00,Mostly Cloudy
+05/16/2018,22:53:00,Overcast
+05/16/2018,23:53:00,Mostly Cloudy
+05/17/2018,00:53:00,Partly Cloudy
+05/17/2018,01:53:00,Scattered Clouds
+05/17/2018,02:53:00,Mostly Cloudy
+05/17/2018,03:53:00,Scattered Clouds
+05/17/2018,04:53:00,Overcast
+05/17/2018,05:28:00,Overcast
+05/17/2018,05:46:00,Overcast
+05/17/2018,05:53:00,Overcast
+05/17/2018,06:31:00,Mostly Cloudy
+05/17/2018,06:53:00,Mostly Cloudy
+05/17/2018,07:25:00,Mostly Cloudy
+05/17/2018,07:53:00,Mostly Cloudy
+05/17/2018,08:17:00,Mostly Cloudy
+05/17/2018,08:53:00,Mostly Cloudy
+05/17/2018,09:33:00,Mostly Cloudy
+05/17/2018,09:53:00,Mostly Cloudy
+05/17/2018,10:53:00,Mostly Cloudy
+05/17/2018,11:31:00,Mostly Cloudy
+05/17/2018,11:53:00,Mostly Cloudy
+05/17/2018,12:53:00,Mostly Cloudy
+05/17/2018,13:53:00,Mostly Cloudy
+05/17/2018,14:53:00,Mostly Cloudy
+05/17/2018,15:50:00,Thunderstorm
+05/17/2018,15:53:00,Light Thunderstorms and Rain
+05/17/2018,16:01:00,Heavy Thunderstorms and Rain
+05/17/2018,16:10:00,Heavy Thunderstorms and Rain
+05/17/2018,16:20:00,Heavy Thunderstorms and Rain
+05/17/2018,16:28:00,Thunderstorms and Rain
+05/17/2018,16:53:00,Light Thunderstorms and Rain
+05/17/2018,17:04:00,Light Rain
+05/17/2018,17:53:00,Light Rain
+05/17/2018,18:53:00,Mostly Cloudy
+05/17/2018,19:53:00,Mostly Cloudy
+05/17/2018,20:53:00,Mostly Cloudy
+05/17/2018,21:53:00,Mostly Cloudy
+05/17/2018,22:53:00,Mostly Cloudy
+05/17/2018,23:53:00,Mostly Cloudy
+05/18/2018,00:53:00,Mostly Cloudy
+05/18/2018,01:26:00,Mostly Cloudy
+05/18/2018,01:41:00,Mostly Cloudy
+05/18/2018,01:53:00,Mostly Cloudy
+05/18/2018,02:11:00,Scattered Clouds
+05/18/2018,02:53:00,Clear
+05/18/2018,03:01:00,Scattered Clouds
+05/18/2018,03:28:00,Mostly Cloudy
+05/18/2018,03:53:00,Overcast
+05/18/2018,04:01:00,Overcast
+05/18/2018,04:53:00,Overcast
+05/18/2018,05:53:00,Overcast
+05/18/2018,06:12:00,Mostly Cloudy
+05/18/2018,06:53:00,Overcast
+05/18/2018,07:15:00,Overcast
+05/18/2018,07:39:00,Mostly Cloudy
+05/18/2018,07:53:00,Mostly Cloudy
+05/18/2018,08:30:00,Mostly Cloudy
+05/18/2018,08:53:00,Mostly Cloudy
+05/18/2018,09:07:00,Mostly Cloudy
+05/18/2018,09:53:00,Mostly Cloudy
+05/18/2018,10:25:00,Haze
+05/18/2018,10:53:00,Overcast
+05/18/2018,11:53:00,Mostly Cloudy
+05/18/2018,12:30:00,Mostly Cloudy
+05/18/2018,12:53:00,Mostly Cloudy
+05/18/2018,13:53:00,Mostly Cloudy
+05/18/2018,14:53:00,Mostly Cloudy
+05/18/2018,15:53:00,Mostly Cloudy
+05/18/2018,16:53:00,Mostly Cloudy
+05/18/2018,17:53:00,Mostly Cloudy
+05/18/2018,18:53:00,Mostly Cloudy
+05/18/2018,19:53:00,Mostly Cloudy
+05/18/2018,20:43:00,Thunderstorm
+05/18/2018,20:53:00,Thunderstorm
+05/18/2018,21:33:00,Mostly Cloudy
+05/18/2018,21:53:00,Mostly Cloudy
+05/18/2018,22:53:00,Mostly Cloudy
+05/18/2018,23:53:00,Scattered Clouds
+05/19/2018,00:53:00,Mostly Cloudy
+05/19/2018,01:53:00,Mostly Cloudy
+05/19/2018,02:05:00,Mostly Cloudy
+05/19/2018,02:14:00,Mostly Cloudy
+05/19/2018,02:53:00,Scattered Clouds
+05/19/2018,03:53:00,Scattered Clouds
+05/19/2018,04:07:00,Mostly Cloudy
+05/19/2018,04:18:00,Mostly Cloudy
+05/19/2018,04:32:00,Overcast
+05/19/2018,04:53:00,Mostly Cloudy
+05/19/2018,05:53:00,Mostly Cloudy
+05/19/2018,06:40:00,Mostly Cloudy
+05/19/2018,06:53:00,Mostly Cloudy
+05/19/2018,07:53:00,Mostly Cloudy
+05/19/2018,08:09:00,Mostly Cloudy
+05/19/2018,08:53:00,Mostly Cloudy
+05/19/2018,09:53:00,Mostly Cloudy
+05/19/2018,10:53:00,Mostly Cloudy
+05/19/2018,11:53:00,Scattered Clouds
+05/19/2018,12:53:00,Mostly Cloudy
+05/19/2018,13:53:00,Mostly Cloudy
+05/19/2018,14:53:00,Scattered Clouds
+05/19/2018,15:53:00,Scattered Clouds
+05/19/2018,16:53:00,Scattered Clouds
+05/19/2018,17:53:00,Scattered Clouds
+05/19/2018,18:53:00,Scattered Clouds
+05/19/2018,19:53:00,Scattered Clouds
+05/19/2018,20:53:00,Scattered Clouds
+05/19/2018,21:53:00,Scattered Clouds
+05/19/2018,22:53:00,Scattered Clouds
+05/19/2018,23:53:00,Scattered Clouds
+05/20/2018,00:53:00,Clear
+05/20/2018,01:53:00,Clear
+05/20/2018,02:53:00,Clear
+05/20/2018,03:53:00,Clear
+05/20/2018,04:53:00,Clear
+05/20/2018,05:53:00,Scattered Clouds
+05/20/2018,06:53:00,Shallow Fog
+05/20/2018,07:53:00,Mostly Cloudy
+05/20/2018,08:53:00,Mostly Cloudy
+05/20/2018,10:53:00,Mostly Cloudy
+05/20/2018,11:53:00,Mostly Cloudy
+05/20/2018,12:53:00,Mostly Cloudy
+05/20/2018,13:53:00,Mostly Cloudy
+05/20/2018,14:53:00,Mostly Cloudy
+05/20/2018,15:53:00,Mostly Cloudy
+05/20/2018,16:06:00,Thunderstorm
+05/20/2018,16:53:00,Thunderstorm
+05/20/2018,17:53:00,Thunderstorm
+05/20/2018,18:26:00,Thunderstorm
+05/20/2018,18:53:00,Overcast
+05/20/2018,19:53:00,Mostly Cloudy
+05/20/2018,20:53:00,Mostly Cloudy
+05/20/2018,21:53:00,Mostly Cloudy
+05/20/2018,22:53:00,Mostly Cloudy
+05/20/2018,23:53:00,Scattered Clouds
+05/21/2018,00:53:00,Clear
+05/21/2018,01:53:00,Clear
+05/21/2018,02:10:00,Mostly Cloudy
+05/21/2018,02:53:00,Scattered Clouds
+05/21/2018,03:53:00,Clear
+05/21/2018,04:40:00,Mostly Cloudy
+05/21/2018,04:53:00,Mostly Cloudy
+05/21/2018,05:06:00,Scattered Clouds
+05/21/2018,05:53:00,Mostly Cloudy
+05/21/2018,06:53:00,Scattered Clouds
+05/21/2018,07:53:00,Scattered Clouds
+05/21/2018,08:50:00,Mostly Cloudy
+05/21/2018,08:53:00,Mostly Cloudy
+05/21/2018,09:22:00,Mostly Cloudy
+05/21/2018,09:53:00,Mostly Cloudy
+05/21/2018,10:53:00,Scattered Clouds
+05/21/2018,11:53:00,Mostly Cloudy
+05/21/2018,12:53:00,Mostly Cloudy
+05/21/2018,13:53:00,Mostly Cloudy
+05/21/2018,14:53:00,Scattered Clouds
+05/21/2018,15:53:00,Scattered Clouds
+05/21/2018,16:53:00,Scattered Clouds
+05/21/2018,17:53:00,Scattered Clouds
+05/21/2018,18:53:00,Mostly Cloudy
+05/21/2018,19:53:00,Mostly Cloudy
+05/21/2018,20:53:00,Mostly Cloudy
+05/21/2018,21:53:00,Mostly Cloudy
+05/21/2018,22:53:00,Overcast
+05/21/2018,23:53:00,Overcast
+05/22/2018,00:53:00,Overcast
+05/22/2018,01:53:00,Overcast
+05/22/2018,02:53:00,Clear
+05/22/2018,03:53:00,Mostly Cloudy
+05/22/2018,04:53:00,Mostly Cloudy
+05/22/2018,05:46:00,Mostly Cloudy
+05/22/2018,05:53:00,Mostly Cloudy
+05/22/2018,06:53:00,Overcast
+05/22/2018,07:53:00,Mostly Cloudy
+05/22/2018,08:53:00,Overcast
+05/22/2018,09:50:00,Mostly Cloudy
+05/22/2018,09:53:00,Mostly Cloudy
+05/22/2018,09:57:00,Mostly Cloudy
+05/22/2018,10:53:00,Overcast
+05/22/2018,11:00:00,Overcast
+05/22/2018,11:53:00,Mostly Cloudy
+05/22/2018,12:53:00,Mostly Cloudy
+05/22/2018,13:53:00,Mostly Cloudy
+05/22/2018,14:53:00,Mostly Cloudy
+05/22/2018,15:53:00,Mostly Cloudy
+05/22/2018,16:53:00,Scattered Clouds
+05/22/2018,17:53:00,Mostly Cloudy
+05/22/2018,18:53:00,Light Rain
+05/22/2018,19:53:00,Mostly Cloudy
+05/22/2018,20:53:00,Mostly Cloudy
+05/22/2018,21:53:00,Mostly Cloudy
+05/22/2018,22:53:00,Scattered Clouds
+05/22/2018,23:53:00,Mostly Cloudy
+05/23/2018,00:53:00,Clear
+05/23/2018,01:53:00,Clear
+05/23/2018,02:53:00,Clear
+05/23/2018,03:21:00,Mostly Cloudy
+05/23/2018,03:53:00,Scattered Clouds
+05/23/2018,04:53:00,Clear
+05/23/2018,05:53:00,Mostly Cloudy
+05/23/2018,06:53:00,Mostly Cloudy
+05/23/2018,07:53:00,Mostly Cloudy
+05/23/2018,08:53:00,Mostly Cloudy
+05/23/2018,09:53:00,Scattered Clouds
+05/23/2018,10:53:00,Mostly Cloudy
+05/23/2018,11:53:00,Mostly Cloudy
+05/23/2018,12:53:00,Scattered Clouds
+05/23/2018,13:53:00,Mostly Cloudy
+05/23/2018,14:53:00,Mostly Cloudy
+05/23/2018,15:53:00,Mostly Cloudy
+05/23/2018,16:53:00,Mostly Cloudy
+05/23/2018,17:53:00,Mostly Cloudy
+05/23/2018,18:53:00,Mostly Cloudy
+05/23/2018,19:53:00,Mostly Cloudy
+05/23/2018,20:53:00,Mostly Cloudy
+05/23/2018,21:53:00,Mostly Cloudy
+05/23/2018,22:53:00,Mostly Cloudy
+05/23/2018,23:53:00,Mostly Cloudy
+05/24/2018,00:53:00,Scattered Clouds
+05/24/2018,01:53:00,Clear
+05/24/2018,02:53:00,Clear
+05/24/2018,03:53:00,Clear
+05/24/2018,04:53:00,Clear
+05/24/2018,05:53:00,Mostly Cloudy
+05/24/2018,06:53:00,Mostly Cloudy
+05/24/2018,07:53:00,Scattered Clouds
+05/24/2018,08:53:00,Scattered Clouds
+05/24/2018,09:53:00,Scattered Clouds
+05/24/2018,10:53:00,Scattered Clouds
+05/24/2018,11:53:00,Mostly Cloudy
+05/24/2018,12:53:00,Mostly Cloudy
+05/24/2018,13:53:00,Mostly Cloudy
+05/24/2018,14:53:00,Mostly Cloudy
+05/24/2018,15:53:00,Scattered Clouds
+05/24/2018,16:53:00,Scattered Clouds
+05/24/2018,17:53:00,Scattered Clouds
+05/24/2018,18:53:00,Scattered Clouds
+05/24/2018,19:53:00,Scattered Clouds
+05/24/2018,20:53:00,Mostly Cloudy
+05/24/2018,21:53:00,Mostly Cloudy
+05/24/2018,22:53:00,Mostly Cloudy
+05/24/2018,23:53:00,Mostly Cloudy
+05/25/2018,00:53:00,Clear
+05/25/2018,01:53:00,Clear
+05/25/2018,02:53:00,Clear
+05/25/2018,03:53:00,Clear
+05/25/2018,04:53:00,Clear
+05/25/2018,05:53:00,Mostly Cloudy
+05/25/2018,06:53:00,Mostly Cloudy
+05/25/2018,07:53:00,Overcast
+05/25/2018,08:53:00,Mostly Cloudy
+05/25/2018,09:53:00,Mostly Cloudy
+05/25/2018,10:53:00,Mostly Cloudy
+05/25/2018,11:53:00,Mostly Cloudy
+05/25/2018,12:53:00,Mostly Cloudy
+05/25/2018,13:53:00,Mostly Cloudy
+05/25/2018,14:53:00,Mostly Cloudy
+05/25/2018,15:53:00,Mostly Cloudy
+05/25/2018,16:53:00,Mostly Cloudy
+05/25/2018,17:53:00,Mostly Cloudy
+05/25/2018,18:53:00,Mostly Cloudy
+05/25/2018,19:53:00,Mostly Cloudy
+05/25/2018,20:53:00,Mostly Cloudy
+05/25/2018,21:53:00,Mostly Cloudy
+05/25/2018,22:53:00,Mostly Cloudy
+05/25/2018,23:53:00,Mostly Cloudy
+05/26/2018,00:53:00,Mostly Cloudy
+05/26/2018,01:03:00,Scattered Clouds
+05/26/2018,01:39:00,Mostly Cloudy
+05/26/2018,01:53:00,Overcast
+05/26/2018,02:17:00,Scattered Clouds
+05/26/2018,02:53:00,Scattered Clouds
+05/26/2018,03:53:00,Mostly Cloudy
+05/26/2018,04:53:00,Overcast
+05/26/2018,05:06:00,Overcast
+05/26/2018,05:41:00,Mostly Cloudy
+05/26/2018,05:53:00,Mostly Cloudy
+05/26/2018,06:53:00,Mostly Cloudy
+05/26/2018,07:08:00,Mostly Cloudy
+05/26/2018,07:53:00,Mostly Cloudy
+05/26/2018,08:53:00,Overcast
+05/26/2018,09:53:00,Overcast
+05/26/2018,10:41:00,Overcast
+05/26/2018,10:53:00,Overcast
+05/26/2018,11:53:00,Light Rain
+05/26/2018,12:45:00,Scattered Clouds
+05/26/2018,12:53:00,Scattered Clouds
+05/26/2018,13:42:00,Mostly Cloudy
+05/26/2018,13:53:00,Mostly Cloudy
+05/26/2018,14:37:00,Mostly Cloudy
+05/26/2018,14:53:00,Mostly Cloudy
+05/26/2018,15:53:00,Mostly Cloudy
+05/26/2018,16:53:00,Mostly Cloudy
+05/26/2018,17:53:00,Light Rain
+05/26/2018,18:53:00,Mostly Cloudy
+05/26/2018,19:53:00,Mostly Cloudy
+05/26/2018,20:53:00,Mostly Cloudy
+05/26/2018,21:53:00,Mostly Cloudy
+05/26/2018,22:53:00,Mostly Cloudy
+05/26/2018,23:14:00,Heavy Rain
+05/26/2018,23:22:00,Light Rain
+05/26/2018,23:53:00,Light Rain
+05/27/2018,00:53:00,Mostly Cloudy
+05/27/2018,01:53:00,Heavy Rain
+05/27/2018,02:53:00,Light Rain
+05/27/2018,03:53:00,Light Rain
+05/27/2018,04:53:00,Scattered Clouds
+05/27/2018,05:46:00,Patches of Fog
+05/27/2018,05:53:00,Patches of Fog
+05/27/2018,06:53:00,Mostly Cloudy
+05/27/2018,07:53:00,Patches of Fog
+05/27/2018,08:22:00,Patches of Fog
+05/27/2018,08:53:00,Patches of Fog
+05/27/2018,09:36:00,Mostly Cloudy
+05/27/2018,09:53:00,Mostly Cloudy
+05/27/2018,10:53:00,Mostly Cloudy
+05/27/2018,11:39:00,Mostly Cloudy
+05/27/2018,11:53:00,Mostly Cloudy
+05/27/2018,12:18:00,Mostly Cloudy
+05/27/2018,12:53:00,Mostly Cloudy
+05/27/2018,13:53:00,Mostly Cloudy
+05/27/2018,14:53:00,Mostly Cloudy
+05/27/2018,15:53:00,Mostly Cloudy
+05/27/2018,16:53:00,Mostly Cloudy
+05/27/2018,17:53:00,Mostly Cloudy
+05/27/2018,18:53:00,Mostly Cloudy
+05/27/2018,19:53:00,Mostly Cloudy
+05/27/2018,20:53:00,Mostly Cloudy
+05/27/2018,21:53:00,Mostly Cloudy
+05/27/2018,22:53:00,Mostly Cloudy
+05/27/2018,23:53:00,Mostly Cloudy
+05/28/2018,00:40:00,Partly Cloudy
+05/28/2018,00:53:00,Clear
+05/28/2018,01:53:00,Clear
+05/28/2018,02:53:00,Clear
+05/28/2018,03:53:00,Clear
+05/28/2018,04:53:00,Scattered Clouds
+05/28/2018,05:53:00,Light Rain
+05/28/2018,06:53:00,Mostly Cloudy
+05/28/2018,07:05:00,Mostly Cloudy
+05/28/2018,07:40:00,Mostly Cloudy
+05/28/2018,07:53:00,Mostly Cloudy
+05/28/2018,08:27:00,Mostly Cloudy
+05/28/2018,08:53:00,Light Rain
+05/28/2018,09:16:00,Light Rain
+05/28/2018,09:53:00,Light Rain
+05/28/2018,10:03:00,Light Rain
+05/28/2018,10:40:00,Rain
+05/28/2018,10:53:00,Rain
+05/28/2018,11:53:00,Rain
+05/28/2018,12:38:00,Heavy Rain
+05/28/2018,12:53:00,Heavy Rain
+05/28/2018,13:53:00,Rain
+05/28/2018,14:53:00,Light Rain
+05/28/2018,15:32:00,Overcast
+05/28/2018,15:53:00,Light Rain
+05/28/2018,16:39:00,Mostly Cloudy
+05/28/2018,16:53:00,Mostly Cloudy
+05/28/2018,17:29:00,Overcast
+05/28/2018,17:53:00,Overcast
+05/28/2018,18:53:00,Mostly Cloudy
+05/28/2018,19:53:00,Mostly Cloudy
+05/28/2018,20:53:00,Scattered Clouds
+05/28/2018,21:53:00,Scattered Clouds
+05/28/2018,22:53:00,Scattered Clouds
+05/28/2018,23:53:00,Mostly Cloudy
+05/29/2018,00:53:00,Light Rain
+05/29/2018,01:53:00,Partly Cloudy
+05/29/2018,02:53:00,Partly Cloudy
+05/29/2018,03:42:00,Mostly Cloudy
+05/29/2018,03:51:00,Mostly Cloudy
+05/29/2018,03:53:00,Mostly Cloudy
+05/29/2018,04:53:00,Overcast
+05/29/2018,05:49:00,Overcast
+05/29/2018,05:53:00,Overcast
+05/29/2018,06:53:00,Light Drizzle
+05/29/2018,06:56:00,Light Drizzle
+05/29/2018,07:53:00,Light Drizzle
+05/29/2018,08:49:00,Light Rain
+05/29/2018,08:53:00,Light Rain
+05/29/2018,09:53:00,Light Rain
+05/29/2018,10:53:00,Overcast
+05/29/2018,11:53:00,Overcast
+05/29/2018,12:53:00,Light Rain
+05/29/2018,13:53:00,Mostly Cloudy
+05/29/2018,14:25:00,Light Rain
+05/29/2018,14:53:00,Overcast
+05/29/2018,15:53:00,Light Rain
+05/29/2018,17:06:00,Light Thunderstorms and Rain
+05/29/2018,17:48:00,Light Thunderstorms and Rain
+05/29/2018,17:53:00,Light Thunderstorms and Rain
+05/29/2018,18:04:00,Light Thunderstorms and Rain
+05/29/2018,18:28:00,Mostly Cloudy
+05/29/2018,18:53:00,Mostly Cloudy
+05/29/2018,19:53:00,Mostly Cloudy
+05/29/2018,20:02:00,Light Thunderstorms and Rain
+05/29/2018,20:15:00,Light Thunderstorms and Rain
+05/29/2018,20:29:00,Light Thunderstorms and Rain
+05/29/2018,20:53:00,Light Thunderstorms and Rain
+05/29/2018,21:09:00,Light Thunderstorms and Rain
+05/29/2018,21:24:00,Light Thunderstorms and Rain
+05/29/2018,21:53:00,Light Thunderstorms and Rain
+05/29/2018,22:40:00,Light Rain
+05/29/2018,22:53:00,Light Rain
+05/29/2018,23:53:00,Light Rain
+05/30/2018,00:09:00,Overcast
+05/30/2018,00:53:00,Overcast
+05/30/2018,01:39:00,Light Rain
+05/30/2018,01:53:00,Overcast
+05/30/2018,02:09:00,Scattered Clouds
+05/30/2018,02:30:00,Mostly Cloudy
+05/30/2018,02:53:00,Overcast
+05/30/2018,03:42:00,Overcast
+05/30/2018,03:53:00,Overcast
+05/30/2018,04:28:00,Overcast
+05/30/2018,04:53:00,Overcast
+05/30/2018,05:53:00,Mostly Cloudy
+05/30/2018,06:53:00,Light Drizzle
+05/30/2018,07:53:00,Overcast
+05/30/2018,08:17:00,Overcast
+05/30/2018,08:53:00,Mostly Cloudy
+05/30/2018,09:16:00,Mostly Cloudy
+05/30/2018,09:53:00,Light Rain
+05/30/2018,10:30:00,Mostly Cloudy
+05/30/2018,10:41:00,Mostly Cloudy
+05/30/2018,10:53:00,Mostly Cloudy
+05/30/2018,11:29:00,Overcast
+05/30/2018,11:53:00,Overcast
+05/30/2018,12:51:00,Mostly Cloudy
+05/30/2018,12:53:00,Mostly Cloudy
+05/30/2018,13:53:00,Mostly Cloudy
+05/30/2018,14:53:00,Mostly Cloudy
+05/30/2018,15:53:00,Mostly Cloudy
+05/30/2018,16:53:00,Mostly Cloudy
+05/30/2018,17:53:00,Mostly Cloudy
+05/30/2018,18:53:00,Mostly Cloudy
+05/30/2018,19:53:00,Mostly Cloudy
+05/30/2018,20:53:00,Mostly Cloudy
+05/30/2018,21:53:00,Scattered Clouds
+05/30/2018,22:53:00,Mostly Cloudy
+05/30/2018,23:04:00,Mostly Cloudy
+05/30/2018,23:53:00,Mostly Cloudy
+05/31/2018,00:53:00,Clear
+05/31/2018,01:53:00,Clear
+05/31/2018,02:53:00,Mostly Cloudy
+05/31/2018,03:06:00,Mostly Cloudy
+05/31/2018,03:14:00,Scattered Clouds
+05/31/2018,03:53:00,Clear
+05/31/2018,04:53:00,Scattered Clouds
+05/31/2018,05:53:00,Scattered Clouds
+05/31/2018,06:53:00,Mostly Cloudy
+05/31/2018,07:46:00,Mostly Cloudy
+05/31/2018,07:53:00,Mostly Cloudy
+05/31/2018,08:14:00,Thunderstorm
+05/31/2018,08:35:00,Mostly Cloudy
+05/31/2018,08:53:00,Mostly Cloudy
+05/31/2018,09:51:00,Thunderstorm
+05/31/2018,09:53:00,Thunderstorm
+05/31/2018,10:15:00,Mostly Cloudy
+05/31/2018,10:53:00,Mostly Cloudy
+05/31/2018,11:53:00,Mostly Cloudy
+05/31/2018,12:53:00,Mostly Cloudy
+05/31/2018,13:53:00,Mostly Cloudy
+05/31/2018,14:49:00,Light Thunderstorms and Rain
+05/31/2018,14:53:00,Light Thunderstorms and Rain
+05/31/2018,15:53:00,Thunderstorm
+05/31/2018,16:53:00,Mostly Cloudy
+05/31/2018,17:53:00,Mostly Cloudy
+05/31/2018,18:53:00,Mostly Cloudy
+05/31/2018,19:53:00,Mostly Cloudy
+05/31/2018,20:53:00,Mostly Cloudy
+05/31/2018,21:23:00,Thunderstorm
+05/31/2018,21:53:00,Thunderstorm
+05/31/2018,22:53:00,Thunderstorm
+05/31/2018,23:08:00,Heavy Thunderstorms and Rain
+05/31/2018,23:15:00,Thunderstorms and Rain
+05/31/2018,23:45:00,Thunderstorms and Rain
+05/31/2018,23:53:00,Thunderstorms and Rain
+06/01/2018,00:02:00,Light Thunderstorms and Rain
+06/01/2018,00:09:00,Light Rain
+06/01/2018,00:46:00,Light Rain
+06/01/2018,00:53:00,Light Rain
+06/01/2018,01:11:00,Light Rain
+06/01/2018,01:27:00,Scattered Clouds
+06/01/2018,01:53:00,Clear
+06/01/2018,02:53:00,Partly Cloudy
+06/01/2018,03:53:00,Clear
+06/01/2018,04:36:00,Mostly Cloudy
+06/01/2018,04:53:00,Mostly Cloudy
+06/01/2018,05:29:00,Scattered Clouds
+06/01/2018,05:53:00,Mostly Cloudy
+06/01/2018,06:53:00,Light Rain
+06/01/2018,07:43:00,Patches of Fog
+06/01/2018,07:53:00,Patches of Fog
+06/01/2018,08:03:00,Patches of Fog
+06/01/2018,08:12:00,Light Rain
+06/01/2018,08:29:00,Light Rain
+06/01/2018,08:53:00,Light Rain
+06/01/2018,09:31:00,Light Rain
+06/01/2018,09:53:00,Light Rain
+06/01/2018,10:53:00,Mostly Cloudy
+06/01/2018,11:53:00,Mostly Cloudy
+06/01/2018,12:53:00,Mostly Cloudy
+06/01/2018,13:53:00,Mostly Cloudy
+06/01/2018,14:53:00,Mostly Cloudy
+06/01/2018,15:53:00,Mostly Cloudy
+06/01/2018,16:53:00,Mostly Cloudy
+06/01/2018,17:53:00,Mostly Cloudy
+06/01/2018,18:53:00,Mostly Cloudy
+06/01/2018,19:53:00,Mostly Cloudy
+06/01/2018,20:53:00,Mostly Cloudy
+06/01/2018,21:53:00,Mostly Cloudy
+06/01/2018,22:53:00,Scattered Clouds
+06/01/2018,23:53:00,Mostly Cloudy
+06/02/2018,00:53:00,Clear
+06/02/2018,01:53:00,Partly Cloudy
+06/02/2018,02:53:00,Clear
+06/02/2018,03:53:00,Partly Cloudy
+06/02/2018,04:53:00,Partly Cloudy
+06/02/2018,05:53:00,Mostly Cloudy
+06/02/2018,06:53:00,Partly Cloudy
+06/02/2018,07:53:00,Partly Cloudy
+06/02/2018,08:53:00,Scattered Clouds
+06/02/2018,09:53:00,Scattered Clouds
+06/02/2018,10:53:00,Scattered Clouds
+06/02/2018,11:53:00,Mostly Cloudy
+06/02/2018,12:53:00,Mostly Cloudy
+06/02/2018,13:53:00,Mostly Cloudy
+06/02/2018,14:53:00,Scattered Clouds
+06/02/2018,15:53:00,Mostly Cloudy
+06/02/2018,16:53:00,Scattered Clouds
+06/02/2018,17:53:00,Scattered Clouds
+06/02/2018,18:53:00,Scattered Clouds
+06/02/2018,19:53:00,Scattered Clouds
+06/02/2018,20:53:00,Scattered Clouds
+06/02/2018,21:53:00,Scattered Clouds
+06/02/2018,22:53:00,Scattered Clouds
+06/02/2018,23:53:00,Scattered Clouds
+06/03/2018,00:53:00,Clear
+06/03/2018,01:53:00,Scattered Clouds
+06/03/2018,02:53:00,Scattered Clouds
+06/03/2018,03:53:00,Clear
+06/03/2018,04:53:00,Clear
+06/03/2018,05:53:00,Scattered Clouds
+06/03/2018,06:53:00,Mostly Cloudy
+06/03/2018,07:53:00,Mostly Cloudy
+06/03/2018,08:53:00,Mostly Cloudy
+06/03/2018,09:53:00,Mostly Cloudy
+06/03/2018,10:53:00,Mostly Cloudy
+06/03/2018,11:53:00,Mostly Cloudy
+06/03/2018,12:53:00,Mostly Cloudy
+06/03/2018,13:53:00,Mostly Cloudy
+06/03/2018,14:38:00,Thunderstorm
+06/03/2018,14:53:00,Thunderstorm
+06/03/2018,15:53:00,Thunderstorm
+06/03/2018,16:37:00,Mostly Cloudy
+06/03/2018,16:44:00,Mostly Cloudy
+06/03/2018,16:53:00,Mostly Cloudy
+06/03/2018,17:53:00,Scattered Clouds
+06/03/2018,18:53:00,Scattered Clouds
+06/03/2018,19:53:00,Scattered Clouds
+06/03/2018,20:53:00,Scattered Clouds
+06/03/2018,21:53:00,Scattered Clouds
+06/03/2018,22:53:00,Partly Cloudy
+06/03/2018,23:53:00,Partly Cloudy
+06/04/2018,00:53:00,Clear
+06/04/2018,01:53:00,Clear
+06/04/2018,02:53:00,Clear
+06/04/2018,03:53:00,Clear
+06/04/2018,04:53:00,Clear
+06/04/2018,05:53:00,Partly Cloudy
+06/04/2018,06:53:00,Clear
+06/04/2018,07:53:00,Clear
+06/04/2018,08:53:00,Clear
+06/04/2018,09:53:00,Clear
+06/04/2018,10:53:00,Clear
+06/04/2018,11:53:00,Partly Cloudy
+06/04/2018,12:53:00,Partly Cloudy
+06/04/2018,13:53:00,Scattered Clouds
+06/04/2018,14:53:00,Scattered Clouds
+06/04/2018,15:53:00,Scattered Clouds
+06/04/2018,16:53:00,Scattered Clouds
+06/04/2018,17:53:00,Mostly Cloudy
+06/04/2018,18:53:00,Mostly Cloudy
+06/04/2018,19:53:00,Mostly Cloudy
+06/04/2018,20:53:00,Mostly Cloudy
+06/04/2018,21:53:00,Mostly Cloudy
+06/04/2018,22:53:00,Mostly Cloudy
+06/04/2018,23:53:00,Mostly Cloudy
+06/05/2018,00:53:00,Clear
+06/05/2018,01:53:00,Clear
+06/05/2018,02:53:00,Clear
+06/05/2018,03:53:00,Clear
+06/05/2018,04:53:00,Clear
+06/05/2018,05:53:00,Mostly Cloudy
+06/05/2018,06:53:00,Mostly Cloudy
+06/05/2018,07:53:00,Mostly Cloudy
+06/05/2018,08:53:00,Mostly Cloudy
+06/05/2018,09:53:00,Mostly Cloudy
+06/05/2018,10:53:00,Mostly Cloudy
+06/05/2018,11:53:00,Mostly Cloudy
+06/05/2018,12:53:00,Mostly Cloudy
+06/05/2018,13:53:00,Scattered Clouds
+06/05/2018,14:53:00,Scattered Clouds
+06/05/2018,15:53:00,Scattered Clouds
+06/05/2018,16:53:00,Scattered Clouds
+06/05/2018,17:53:00,Scattered Clouds
+06/05/2018,18:53:00,Scattered Clouds
+06/05/2018,19:53:00,Scattered Clouds
+06/05/2018,20:53:00,Scattered Clouds
+06/05/2018,21:53:00,Partly Cloudy
+06/05/2018,22:53:00,Partly Cloudy
+06/05/2018,23:53:00,Partly Cloudy
+06/06/2018,00:53:00,Clear
+06/06/2018,01:53:00,Clear
+06/06/2018,02:53:00,Clear
+06/06/2018,03:53:00,Clear
+06/06/2018,04:53:00,Clear
+06/06/2018,05:53:00,Partly Cloudy
+06/06/2018,06:53:00,Partly Cloudy
+06/06/2018,07:53:00,Partly Cloudy
+06/06/2018,08:53:00,Partly Cloudy
+06/06/2018,09:53:00,Partly Cloudy
+06/06/2018,10:53:00,Partly Cloudy
+06/06/2018,11:53:00,Partly Cloudy
+06/06/2018,12:53:00,Partly Cloudy
+06/06/2018,13:53:00,Partly Cloudy
+06/06/2018,14:53:00,Partly Cloudy
+06/06/2018,15:53:00,Partly Cloudy
+06/06/2018,16:53:00,Partly Cloudy
+06/06/2018,17:53:00,Scattered Clouds
+06/06/2018,18:53:00,Scattered Clouds
+06/06/2018,19:53:00,Partly Cloudy
+06/06/2018,20:53:00,Partly Cloudy
+06/06/2018,21:53:00,Clear
+06/06/2018,22:53:00,Clear
+06/06/2018,23:53:00,Clear
+06/07/2018,00:53:00,Clear
+06/07/2018,01:53:00,Clear
+06/07/2018,02:53:00,Clear
+06/07/2018,03:53:00,Clear
+06/07/2018,04:53:00,Clear
+06/07/2018,05:53:00,Scattered Clouds
+06/07/2018,06:53:00,Mostly Cloudy
+06/07/2018,07:53:00,Mostly Cloudy
+06/07/2018,08:53:00,Mostly Cloudy
+06/07/2018,09:53:00,Mostly Cloudy
+06/07/2018,10:53:00,Scattered Clouds
+06/07/2018,11:53:00,Scattered Clouds
+06/07/2018,12:53:00,Scattered Clouds
+06/07/2018,13:53:00,Scattered Clouds
+06/07/2018,14:53:00,Scattered Clouds
+06/07/2018,15:53:00,Scattered Clouds
+06/07/2018,16:53:00,Mostly Cloudy
+06/07/2018,17:53:00,Mostly Cloudy
+06/07/2018,18:53:00,Mostly Cloudy
+06/07/2018,19:53:00,Mostly Cloudy
+06/07/2018,20:53:00,Mostly Cloudy
+06/07/2018,21:53:00,Mostly Cloudy
+06/07/2018,22:53:00,Scattered Clouds
+06/07/2018,23:53:00,Scattered Clouds
+06/08/2018,00:53:00,Clear
+06/08/2018,01:53:00,Clear
+06/08/2018,02:53:00,Clear
+06/08/2018,03:53:00,Clear
+06/08/2018,04:53:00,Clear
+06/08/2018,05:53:00,Scattered Clouds
+06/08/2018,06:53:00,Mostly Cloudy
+06/08/2018,07:53:00,Scattered Clouds
+06/08/2018,08:53:00,Scattered Clouds
+06/08/2018,09:53:00,Scattered Clouds
+06/08/2018,10:53:00,Mostly Cloudy
+06/08/2018,11:53:00,Mostly Cloudy
+06/08/2018,12:53:00,Mostly Cloudy
+06/08/2018,13:53:00,Mostly Cloudy
+06/08/2018,14:53:00,Mostly Cloudy
+06/08/2018,15:53:00,Mostly Cloudy
+06/08/2018,16:53:00,Mostly Cloudy
+06/08/2018,17:53:00,Mostly Cloudy
+06/08/2018,18:53:00,Mostly Cloudy
+06/08/2018,19:53:00,Mostly Cloudy
+06/08/2018,20:53:00,Mostly Cloudy
+06/08/2018,21:53:00,Mostly Cloudy
+06/08/2018,22:53:00,Scattered Clouds
+06/08/2018,23:53:00,Scattered Clouds
+06/09/2018,00:53:00,Clear
+06/09/2018,01:53:00,Clear
+06/09/2018,02:53:00,Clear
+06/09/2018,03:53:00,Clear
+06/09/2018,04:53:00,Clear
+06/09/2018,05:53:00,Scattered Clouds
+06/09/2018,06:53:00,Mostly Cloudy
+06/09/2018,07:53:00,Mostly Cloudy
+06/09/2018,08:53:00,Mostly Cloudy
+06/09/2018,09:53:00,Mostly Cloudy
+06/09/2018,10:53:00,Mostly Cloudy
+06/09/2018,11:53:00,Mostly Cloudy
+06/09/2018,12:53:00,Mostly Cloudy
+06/09/2018,13:53:00,Scattered Clouds
+06/09/2018,14:53:00,Scattered Clouds
+06/09/2018,15:53:00,Scattered Clouds
+06/09/2018,16:53:00,Scattered Clouds
+06/09/2018,17:53:00,Scattered Clouds
+06/09/2018,18:53:00,Mostly Cloudy
+06/09/2018,19:53:00,Mostly Cloudy
+06/09/2018,20:53:00,Mostly Cloudy
+06/09/2018,21:53:00,Mostly Cloudy
+06/09/2018,22:53:00,Scattered Clouds
+06/09/2018,23:53:00,Scattered Clouds
+06/10/2018,00:53:00,Clear
+06/10/2018,01:53:00,Clear
+06/10/2018,02:53:00,Clear
+06/10/2018,03:53:00,Clear
+06/10/2018,04:53:00,Clear
+06/10/2018,05:53:00,Mostly Cloudy
+06/10/2018,06:53:00,Mostly Cloudy
+06/10/2018,07:53:00,Mostly Cloudy
+06/10/2018,08:53:00,Mostly Cloudy
+06/10/2018,09:53:00,Mostly Cloudy
+06/10/2018,10:53:00,Mostly Cloudy
+06/10/2018,11:53:00,Mostly Cloudy
+06/10/2018,12:42:00,Thunderstorm
+06/10/2018,12:53:00,Thunderstorm
+06/10/2018,13:37:00,Mostly Cloudy
+06/10/2018,13:53:00,Mostly Cloudy
+06/10/2018,14:23:00,Thunderstorm
+06/10/2018,14:53:00,Thunderstorm
+06/10/2018,15:23:00,Mostly Cloudy
+06/10/2018,15:53:00,Mostly Cloudy
+06/10/2018,16:53:00,Mostly Cloudy
+06/10/2018,17:53:00,Mostly Cloudy
+06/10/2018,18:53:00,Mostly Cloudy
+06/10/2018,19:53:00,Mostly Cloudy
+06/10/2018,20:53:00,Mostly Cloudy
+06/10/2018,21:53:00,Mostly Cloudy
+06/10/2018,22:53:00,Mostly Cloudy
+06/10/2018,23:53:00,Scattered Clouds
+06/11/2018,00:53:00,Clear
+06/11/2018,01:53:00,Scattered Clouds
+06/11/2018,02:53:00,Clear
+06/11/2018,03:53:00,Clear
+06/11/2018,04:53:00,Partly Cloudy
+06/11/2018,05:53:00,Mostly Cloudy
+06/11/2018,06:53:00,Mostly Cloudy
+06/11/2018,07:53:00,Mostly Cloudy
+06/11/2018,08:53:00,Mostly Cloudy
+06/11/2018,09:53:00,Mostly Cloudy
+06/11/2018,10:53:00,Mostly Cloudy
+06/11/2018,11:53:00,Mostly Cloudy
+06/11/2018,12:51:00,Mostly Cloudy
+06/11/2018,12:53:00,Mostly Cloudy
+06/11/2018,13:07:00,Thunderstorm
+06/11/2018,13:53:00,Thunderstorm
+06/11/2018,14:06:00,Thunderstorm
+06/11/2018,14:53:00,Thunderstorm
+06/11/2018,15:38:00,Light Rain
+06/11/2018,15:53:00,Light Rain
+06/11/2018,16:53:00,Mostly Cloudy
+06/11/2018,17:53:00,Mostly Cloudy
+06/11/2018,18:53:00,Mostly Cloudy
+06/11/2018,19:53:00,Mostly Cloudy
+06/11/2018,20:53:00,Mostly Cloudy
+06/11/2018,21:53:00,Mostly Cloudy
+06/11/2018,22:53:00,Scattered Clouds
+06/11/2018,23:53:00,Partly Cloudy
+06/12/2018,00:53:00,Clear
+06/12/2018,01:53:00,Clear
+06/12/2018,02:53:00,Clear
+06/12/2018,04:53:00,Clear
+06/12/2018,05:53:00,Scattered Clouds
+06/12/2018,06:34:00,Scattered Clouds
+06/12/2018,06:53:00,Scattered Clouds
+06/12/2018,07:53:00,Scattered Clouds
+06/12/2018,08:53:00,Partly Cloudy
+06/12/2018,09:53:00,Scattered Clouds
+06/12/2018,10:26:00,Mostly Cloudy
+06/12/2018,10:38:00,Mostly Cloudy
+06/12/2018,10:53:00,Mostly Cloudy
+06/12/2018,11:53:00,Mostly Cloudy
+06/12/2018,12:53:00,Scattered Clouds
+06/12/2018,13:53:00,Mostly Cloudy
+06/12/2018,14:53:00,Mostly Cloudy
+06/12/2018,15:53:00,Scattered Clouds
+06/12/2018,16:53:00,Scattered Clouds
+06/12/2018,17:53:00,Scattered Clouds
+06/12/2018,18:53:00,Scattered Clouds
+06/12/2018,19:53:00,Scattered Clouds
+06/12/2018,20:53:00,Scattered Clouds
+06/12/2018,21:53:00,Scattered Clouds
+06/12/2018,22:53:00,Scattered Clouds
+06/12/2018,23:53:00,Mostly Cloudy
+06/13/2018,00:53:00,Partly Cloudy
+06/13/2018,01:53:00,Partly Cloudy
+06/13/2018,02:53:00,Clear
+06/13/2018,03:27:00,Mostly Cloudy
+06/13/2018,03:43:00,Scattered Clouds
+06/13/2018,03:53:00,Partly Cloudy
+06/13/2018,04:17:00,Mostly Cloudy
+06/13/2018,04:53:00,Mostly Cloudy
+06/13/2018,05:06:00,Mostly Cloudy
+06/13/2018,05:13:00,Mostly Cloudy
+06/13/2018,05:53:00,Overcast
+06/13/2018,07:53:00,Haze
+06/13/2018,08:41:00,Overcast
+06/13/2018,08:53:00,Overcast
+06/13/2018,09:53:00,Mostly Cloudy
+06/13/2018,10:22:00,Overcast
+06/13/2018,10:53:00,Light Rain
+06/13/2018,11:40:00,Mostly Cloudy
+06/13/2018,11:53:00,Mostly Cloudy
+06/13/2018,12:47:00,Rain
+06/13/2018,12:53:00,Light Rain
+06/13/2018,12:56:00,Light Thunderstorms and Rain
+06/13/2018,13:39:00,Light Rain
+06/13/2018,13:53:00,Mostly Cloudy
+06/13/2018,14:00:00,Mostly Cloudy
+06/13/2018,14:53:00,Light Rain
+06/13/2018,15:53:00,Thunderstorm
+06/13/2018,16:29:00,Mostly Cloudy
+06/13/2018,16:53:00,Light Rain
+06/13/2018,17:53:00,Mostly Cloudy
+06/13/2018,18:53:00,Mostly Cloudy
+06/13/2018,19:53:00,Mostly Cloudy
+06/13/2018,20:53:00,Mostly Cloudy
+06/13/2018,21:53:00,Mostly Cloudy
+06/13/2018,22:53:00,Mostly Cloudy
+06/13/2018,23:53:00,Scattered Clouds
+06/14/2018,00:31:00,Scattered Clouds
+06/14/2018,00:53:00,Scattered Clouds
+06/14/2018,01:53:00,Clear
+06/14/2018,02:53:00,Clear
+06/14/2018,03:31:00,Mostly Cloudy
+06/14/2018,03:42:00,Mostly Cloudy
+06/14/2018,03:53:00,Overcast
+06/14/2018,04:53:00,Mostly Cloudy
+06/14/2018,05:51:00,Overcast
+06/14/2018,05:53:00,Overcast
+06/14/2018,06:13:00,Overcast
+06/14/2018,06:15:00,Overcast
+06/14/2018,06:53:00,Mostly Cloudy
+06/14/2018,07:53:00,Overcast
+06/14/2018,08:53:00,Mostly Cloudy
+06/14/2018,09:17:00,Mostly Cloudy
+06/14/2018,09:51:00,Mostly Cloudy
+06/14/2018,09:53:00,Mostly Cloudy
+06/14/2018,10:49:00,Mostly Cloudy
+06/14/2018,10:53:00,Mostly Cloudy
+06/14/2018,11:53:00,Mostly Cloudy
+06/14/2018,12:53:00,Scattered Clouds
+06/14/2018,13:53:00,Scattered Clouds
+06/14/2018,14:53:00,Scattered Clouds
+06/14/2018,15:53:00,Scattered Clouds
+06/14/2018,16:53:00,Scattered Clouds
+06/14/2018,17:53:00,Scattered Clouds
+06/14/2018,18:53:00,Scattered Clouds
+06/14/2018,19:53:00,Scattered Clouds
+06/14/2018,20:53:00,Scattered Clouds
+06/14/2018,21:53:00,Scattered Clouds
+06/14/2018,22:53:00,Partly Cloudy
+06/14/2018,23:53:00,Partly Cloudy
+06/15/2018,00:53:00,Clear
+06/15/2018,01:53:00,Clear
+06/15/2018,02:53:00,Clear
+06/15/2018,03:53:00,Clear
+06/15/2018,04:53:00,Clear
+06/15/2018,05:53:00,Partly Cloudy
+06/15/2018,06:53:00,Scattered Clouds
+06/15/2018,07:53:00,Scattered Clouds
+06/15/2018,08:53:00,Scattered Clouds
+06/15/2018,09:53:00,Scattered Clouds
+06/15/2018,10:53:00,Scattered Clouds
+06/15/2018,11:53:00,Scattered Clouds
+06/15/2018,12:53:00,Scattered Clouds
+06/15/2018,13:53:00,Scattered Clouds
+06/15/2018,14:53:00,Scattered Clouds
+06/15/2018,15:53:00,Scattered Clouds
+06/15/2018,16:53:00,Scattered Clouds
+06/15/2018,17:53:00,Scattered Clouds
+06/15/2018,18:53:00,Scattered Clouds
+06/15/2018,19:53:00,Scattered Clouds
+06/15/2018,20:53:00,Scattered Clouds
+06/15/2018,21:53:00,Scattered Clouds
+06/15/2018,22:53:00,Scattered Clouds
+06/15/2018,23:53:00,Scattered Clouds
+06/16/2018,00:53:00,Clear
+06/16/2018,01:53:00,Clear
+06/16/2018,02:53:00,Clear
+06/16/2018,03:53:00,Clear
+06/16/2018,04:53:00,Clear
+06/16/2018,05:53:00,Clear
+06/16/2018,06:53:00,Shallow Fog
+06/16/2018,07:53:00,Scattered Clouds
+06/16/2018,08:53:00,Scattered Clouds
+06/16/2018,09:53:00,Scattered Clouds
+06/16/2018,10:53:00,Scattered Clouds
+06/16/2018,11:53:00,Scattered Clouds
+06/16/2018,12:53:00,Scattered Clouds
+06/16/2018,13:53:00,Scattered Clouds
+06/16/2018,14:53:00,Scattered Clouds
+06/16/2018,15:53:00,Scattered Clouds
+06/16/2018,16:53:00,Scattered Clouds
+06/16/2018,17:53:00,Scattered Clouds
+06/16/2018,18:53:00,Mostly Cloudy
+06/16/2018,19:53:00,Scattered Clouds
+06/16/2018,20:53:00,Scattered Clouds
+06/16/2018,21:53:00,Scattered Clouds
+06/16/2018,22:53:00,Partly Cloudy
+06/16/2018,23:53:00,Partly Cloudy
+06/17/2018,00:53:00,Clear
+06/17/2018,01:53:00,Clear
+06/17/2018,02:53:00,Clear
+06/17/2018,03:53:00,Clear
+06/17/2018,04:53:00,Clear
+06/17/2018,05:53:00,Scattered Clouds
+06/17/2018,06:53:00,Scattered Clouds
+06/17/2018,07:53:00,Clear
+06/17/2018,08:53:00,Clear
+06/17/2018,09:53:00,Clear
+06/17/2018,10:53:00,Partly Cloudy
+06/17/2018,11:53:00,Scattered Clouds
+06/17/2018,12:53:00,Scattered Clouds
+06/17/2018,13:53:00,Mostly Cloudy
+06/17/2018,14:53:00,Light Rain
+06/17/2018,15:53:00,Thunderstorm
+06/17/2018,16:11:00,Mostly Cloudy
+06/17/2018,16:53:00,Mostly Cloudy
+06/17/2018,17:03:00,Thunderstorm
+06/17/2018,17:53:00,Light Thunderstorms and Rain
+06/17/2018,18:06:00,Thunderstorm
+06/17/2018,18:53:00,Thunderstorm
+06/17/2018,19:53:00,Light Thunderstorms and Rain
+06/17/2018,20:26:00,Mostly Cloudy
+06/17/2018,20:53:00,Mostly Cloudy
+06/17/2018,21:53:00,Mostly Cloudy
+06/17/2018,22:53:00,Mostly Cloudy
+06/17/2018,23:53:00,Scattered Clouds
+06/18/2018,00:53:00,Clear
+06/18/2018,01:53:00,Clear
+06/18/2018,02:53:00,Clear
+06/18/2018,03:53:00,Clear
+06/18/2018,04:53:00,Clear
+06/18/2018,05:53:00,Clear
+06/18/2018,06:53:00,Scattered Clouds
+06/18/2018,07:53:00,Scattered Clouds
+06/18/2018,08:53:00,Scattered Clouds
+06/18/2018,09:53:00,Scattered Clouds
+06/18/2018,10:53:00,Partly Cloudy
+06/18/2018,11:53:00,Scattered Clouds
+06/18/2018,12:53:00,Scattered Clouds
+06/18/2018,13:53:00,Scattered Clouds
+06/18/2018,14:53:00,Scattered Clouds
+06/18/2018,15:53:00,Mostly Cloudy
+06/18/2018,16:53:00,Mostly Cloudy
+06/18/2018,17:53:00,Mostly Cloudy
+06/18/2018,18:53:00,Mostly Cloudy
+06/18/2018,19:53:00,Scattered Clouds
+06/18/2018,20:53:00,Scattered Clouds
+06/18/2018,21:53:00,Scattered Clouds
+06/18/2018,22:53:00,Scattered Clouds
+06/18/2018,23:53:00,Scattered Clouds
+06/19/2018,00:53:00,Clear
+06/19/2018,01:53:00,Clear
+06/19/2018,02:53:00,Clear
+06/19/2018,03:53:00,Clear
+06/19/2018,04:53:00,Clear
+06/19/2018,05:53:00,Partly Cloudy
+06/19/2018,06:53:00,Clear
+06/19/2018,07:53:00,Clear
+06/19/2018,08:53:00,Clear
+06/19/2018,09:53:00,Partly Cloudy
+06/19/2018,10:53:00,Partly Cloudy
+06/19/2018,11:53:00,Scattered Clouds
+06/19/2018,12:53:00,Scattered Clouds
+06/19/2018,13:53:00,Light Rain
+06/19/2018,14:53:00,Light Rain
+06/19/2018,15:53:00,Scattered Clouds
+06/19/2018,16:53:00,Scattered Clouds
+06/19/2018,17:53:00,Scattered Clouds
+06/19/2018,18:53:00,Scattered Clouds
+06/19/2018,19:53:00,Partly Cloudy
+06/19/2018,20:53:00,Partly Cloudy
+06/19/2018,21:53:00,Partly Cloudy
+06/19/2018,22:53:00,Scattered Clouds
+06/19/2018,23:53:00,Clear
+06/20/2018,00:53:00,Clear
+06/20/2018,01:53:00,Clear
+06/20/2018,02:53:00,Scattered Clouds
+06/20/2018,03:53:00,Clear
+06/20/2018,04:53:00,Clear
+06/20/2018,05:53:00,Mostly Cloudy
+06/20/2018,06:53:00,Mostly Cloudy
+06/20/2018,07:53:00,Mostly Cloudy
+06/20/2018,08:53:00,Mostly Cloudy
+06/20/2018,09:53:00,Mostly Cloudy
+06/20/2018,10:53:00,Mostly Cloudy
+06/20/2018,11:53:00,Mostly Cloudy
+06/20/2018,12:53:00,Mostly Cloudy
+06/20/2018,13:53:00,Mostly Cloudy
+06/20/2018,14:53:00,Mostly Cloudy
+06/20/2018,15:53:00,Mostly Cloudy
+06/20/2018,16:53:00,Mostly Cloudy
+06/20/2018,17:53:00,Mostly Cloudy
+06/20/2018,18:53:00,Mostly Cloudy
+06/20/2018,19:53:00,Mostly Cloudy
+06/20/2018,20:53:00,Mostly Cloudy
+06/20/2018,21:53:00,Mostly Cloudy
+06/20/2018,22:53:00,Overcast
+06/20/2018,23:53:00,Overcast
+06/21/2018,00:53:00,Overcast
+06/21/2018,01:53:00,Mostly Cloudy
+06/21/2018,02:53:00,Light Rain
+06/21/2018,03:53:00,Partly Cloudy
+06/21/2018,04:53:00,Overcast
+06/21/2018,05:53:00,Mostly Cloudy
+06/21/2018,06:31:00,Heavy Rain
+06/21/2018,06:40:00,Light Rain
+06/21/2018,06:53:00,Light Rain
+06/21/2018,07:53:00,Rain
+06/21/2018,08:21:00,Light Rain
+06/21/2018,08:53:00,Light Rain
+06/21/2018,09:53:00,Overcast
+06/21/2018,10:53:00,Overcast
+06/21/2018,11:53:00,Light Rain
+06/21/2018,12:00:00,Rain
+06/21/2018,12:28:00,Light Rain
+06/21/2018,12:53:00,Mostly Cloudy
+06/21/2018,13:53:00,Light Rain
+06/21/2018,14:00:00,Light Rain
+06/21/2018,14:17:00,Mostly Cloudy
+06/21/2018,14:53:00,Mostly Cloudy
+06/21/2018,15:53:00,Mostly Cloudy
+06/21/2018,16:53:00,Mostly Cloudy
+06/21/2018,17:53:00,Mostly Cloudy
+06/21/2018,18:53:00,Scattered Clouds
+06/21/2018,19:53:00,Scattered Clouds
+06/21/2018,20:53:00,Scattered Clouds
+06/21/2018,21:53:00,Partly Cloudy
+06/21/2018,22:53:00,Partly Cloudy
+06/21/2018,23:53:00,Mostly Cloudy
+06/22/2018,00:53:00,Clear
+06/22/2018,01:53:00,Light Rain
+06/22/2018,02:53:00,Scattered Clouds
+06/22/2018,03:53:00,Clear
+06/22/2018,04:53:00,Light Rain
+06/22/2018,05:53:00,Mostly Cloudy
+06/22/2018,06:53:00,Scattered Clouds
+06/22/2018,07:53:00,Scattered Clouds
+06/22/2018,08:53:00,Scattered Clouds
+06/22/2018,09:53:00,Scattered Clouds
+06/22/2018,10:53:00,Scattered Clouds
+06/22/2018,11:53:00,Scattered Clouds
+06/22/2018,12:53:00,Scattered Clouds
+06/22/2018,13:53:00,Scattered Clouds
+06/22/2018,14:53:00,Light Rain
+06/22/2018,15:53:00,Light Rain
+06/22/2018,16:02:00,Heavy Rain
+06/22/2018,16:07:00,Heavy Thunderstorms and Rain
+06/22/2018,16:17:00,Heavy Thunderstorms and Rain
+06/22/2018,16:31:00,Overcast
+06/22/2018,16:48:00,Heavy Rain
+06/22/2018,16:53:00,Rain
+06/22/2018,17:01:00,Light Rain
+06/22/2018,17:53:00,Mostly Cloudy
+06/22/2018,18:53:00,Overcast
+06/22/2018,19:53:00,Overcast
+06/22/2018,20:02:00,Heavy Rain
+06/22/2018,20:08:00,Rain
+06/22/2018,20:53:00,Light Rain
+06/22/2018,21:53:00,Mostly Cloudy
+06/22/2018,22:10:00,Mostly Cloudy
+06/22/2018,22:32:00,Overcast
+06/22/2018,22:53:00,Overcast
+06/22/2018,23:17:00,Light Rain
+06/22/2018,23:32:00,Light Rain
+06/22/2018,23:53:00,Mostly Cloudy
+06/23/2018,00:53:00,Mostly Cloudy
+06/23/2018,01:53:00,Mostly Cloudy
+06/23/2018,02:53:00,Clear
+06/23/2018,03:40:00,Scattered Clouds
+06/23/2018,03:53:00,Mostly Cloudy
+06/23/2018,04:22:00,Overcast
+06/23/2018,04:48:00,Overcast
+06/23/2018,04:53:00,Overcast
+06/23/2018,05:05:00,Overcast
+06/23/2018,05:32:00,Mostly Cloudy
+06/23/2018,05:43:00,Mostly Cloudy
+06/23/2018,05:53:00,Mostly Cloudy
+06/23/2018,06:44:00,Mostly Cloudy
+06/23/2018,06:53:00,Mostly Cloudy
+06/23/2018,07:17:00,Scattered Clouds
+06/23/2018,07:53:00,Scattered Clouds
+06/23/2018,08:53:00,Scattered Clouds
+06/23/2018,09:53:00,Scattered Clouds
+06/23/2018,10:53:00,Scattered Clouds
+06/23/2018,11:53:00,Mostly Cloudy
+06/23/2018,12:53:00,Mostly Cloudy
+06/23/2018,13:53:00,Mostly Cloudy
+06/23/2018,13:56:00,Light Thunderstorms and Rain
+06/23/2018,14:12:00,Heavy Thunderstorms and Rain
+06/23/2018,14:15:00,Thunderstorms and Rain
+06/23/2018,14:41:00,Light Rain
+06/23/2018,14:53:00,Light Rain
+06/23/2018,15:09:00,Thunderstorm
+06/23/2018,15:29:00,Light Rain
+06/23/2018,15:53:00,Mostly Cloudy
+06/23/2018,16:53:00,Mostly Cloudy
+06/23/2018,17:53:00,Mostly Cloudy
+06/23/2018,18:53:00,Mostly Cloudy
+06/23/2018,19:53:00,Mostly Cloudy
+06/23/2018,20:53:00,Mostly Cloudy
+06/23/2018,21:53:00,Mostly Cloudy
+06/23/2018,22:53:00,Mostly Cloudy
+06/23/2018,23:53:00,Mostly Cloudy
+06/24/2018,00:53:00,Scattered Clouds
+06/24/2018,01:32:00,Mostly Cloudy
+06/24/2018,01:53:00,Overcast
+06/24/2018,02:35:00,Scattered Clouds
+06/24/2018,02:53:00,Mostly Cloudy
+06/24/2018,03:02:00,Scattered Clouds
+06/24/2018,03:53:00,Clear
+06/24/2018,04:53:00,Mostly Cloudy
+06/24/2018,05:53:00,Scattered Clouds
+06/24/2018,06:53:00,Scattered Clouds
+06/24/2018,07:53:00,Scattered Clouds
+06/24/2018,08:53:00,Scattered Clouds
+06/24/2018,09:53:00,Scattered Clouds
+06/24/2018,10:53:00,Scattered Clouds
+06/24/2018,11:53:00,Scattered Clouds
+06/24/2018,12:53:00,Scattered Clouds
+06/24/2018,13:53:00,Scattered Clouds
+06/24/2018,14:53:00,Mostly Cloudy
+06/24/2018,15:53:00,Mostly Cloudy
+06/24/2018,16:53:00,Mostly Cloudy
+06/24/2018,17:06:00,Thunderstorm
+06/24/2018,17:35:00,Thunderstorms and Rain
+06/24/2018,17:42:00,Light Thunderstorms and Rain
+06/24/2018,17:53:00,Light Thunderstorms and Rain
+06/24/2018,18:05:00,Mostly Cloudy
+06/24/2018,18:53:00,Mostly Cloudy
+06/24/2018,19:53:00,Mostly Cloudy
+06/24/2018,20:53:00,Mostly Cloudy
+06/24/2018,21:53:00,Mostly Cloudy
+06/24/2018,22:53:00,Mostly Cloudy
+06/25/2018,00:53:00,Clear
+06/25/2018,01:53:00,Clear
+06/25/2018,02:53:00,Clear
+06/25/2018,03:53:00,Clear
+06/25/2018,04:53:00,Clear
+06/25/2018,05:53:00,Scattered Clouds
+06/25/2018,06:53:00,Scattered Clouds
+06/25/2018,07:53:00,Mostly Cloudy
+06/25/2018,08:53:00,Scattered Clouds
+06/25/2018,09:53:00,Scattered Clouds
+06/25/2018,10:53:00,Scattered Clouds
+06/25/2018,11:53:00,Scattered Clouds
+06/25/2018,12:53:00,Scattered Clouds
+06/25/2018,13:27:00,Thunderstorm
+06/25/2018,13:58:00,Light Thunderstorms and Rain
+06/25/2018,14:50:00,Thunderstorm
+06/25/2018,14:53:00,Thunderstorm
+06/25/2018,15:06:00,Mostly Cloudy
+06/25/2018,15:19:00,Thunderstorm
+06/25/2018,15:36:00,Thunderstorms and Rain
+06/25/2018,15:41:00,Heavy Thunderstorms and Rain
+06/25/2018,15:48:00,Thunderstorms and Rain
+06/25/2018,15:53:00,Light Thunderstorms and Rain
+06/25/2018,16:03:00,Overcast
+06/25/2018,16:53:00,Light Rain
+06/25/2018,17:05:00,Thunderstorm
+06/25/2018,17:44:00,Light Rain
+06/25/2018,17:53:00,Light Rain
+06/25/2018,18:53:00,Mostly Cloudy
+06/25/2018,19:53:00,Mostly Cloudy
+06/25/2018,20:53:00,Mostly Cloudy
+06/25/2018,21:53:00,Mostly Cloudy
+06/25/2018,22:53:00,Scattered Clouds
+06/25/2018,23:53:00,Mostly Cloudy
+06/26/2018,00:53:00,Overcast
+06/26/2018,01:53:00,Mostly Cloudy
+06/26/2018,02:38:00,Overcast
+06/26/2018,02:53:00,Overcast
+06/26/2018,03:45:00,Overcast
+06/26/2018,03:53:00,Overcast
+06/26/2018,04:09:00,Overcast
+06/26/2018,04:53:00,Scattered Clouds
+06/26/2018,05:20:00,Mostly Cloudy
+06/26/2018,05:53:00,Mostly Cloudy
+06/26/2018,06:23:00,Patches of Fog
+06/26/2018,06:53:00,Patches of Fog
+06/26/2018,06:55:00,Patches of Fog
+06/26/2018,07:20:00,Patches of Fog
+06/26/2018,07:49:00,Patches of Fog
+06/26/2018,07:53:00,Patches of Fog
+06/26/2018,08:50:00,Overcast
+06/26/2018,08:53:00,Overcast
+06/26/2018,09:53:00,Haze
+06/26/2018,10:09:00,Haze
+06/26/2018,10:53:00,Mostly Cloudy
+06/26/2018,11:01:00,Scattered Clouds
+06/26/2018,11:53:00,Scattered Clouds
+06/26/2018,12:53:00,Scattered Clouds
+06/26/2018,13:53:00,Scattered Clouds
+06/26/2018,14:53:00,Scattered Clouds
+06/26/2018,15:36:00,Scattered Clouds
+06/26/2018,15:53:00,Scattered Clouds
+06/26/2018,16:53:00,Scattered Clouds
+06/26/2018,17:53:00,Scattered Clouds
+06/26/2018,18:53:00,Scattered Clouds
+06/26/2018,19:53:00,Mostly Cloudy
+06/26/2018,20:02:00,Thunderstorm
+06/26/2018,20:22:00,Heavy Thunderstorms and Rain
+06/26/2018,20:29:00,Thunderstorms and Rain
+06/26/2018,20:53:00,Thunderstorms and Rain
+06/26/2018,21:16:00,Thunderstorms and Rain
+06/26/2018,21:49:00,Light Rain
+06/26/2018,21:53:00,Mostly Cloudy
+06/26/2018,22:53:00,Mostly Cloudy
+06/26/2018,23:46:00,Light Thunderstorms and Rain
+06/26/2018,23:53:00,Light Thunderstorms and Rain
+06/27/2018,00:05:00,Light Rain
+06/27/2018,00:53:00,Clear
+06/27/2018,01:53:00,Clear
+06/27/2018,02:53:00,Clear
+06/27/2018,03:53:00,Clear
+06/27/2018,04:53:00,Overcast
+06/27/2018,05:39:00,Thunderstorm
+06/27/2018,05:53:00,Thunderstorm
+06/27/2018,05:55:00,Mostly Cloudy
+06/27/2018,06:23:00,Scattered Clouds
+06/27/2018,06:53:00,Mostly Cloudy
+06/27/2018,07:53:00,Mostly Cloudy
+06/27/2018,08:53:00,Mostly Cloudy
+06/27/2018,09:53:00,Mostly Cloudy
+06/27/2018,10:53:00,Mostly Cloudy
+06/27/2018,11:50:00,Mostly Cloudy
+06/27/2018,11:53:00,Mostly Cloudy
+06/27/2018,12:53:00,Scattered Clouds
+06/27/2018,14:53:00,Mostly Cloudy
+06/27/2018,15:53:00,Scattered Clouds
+06/27/2018,16:53:00,Scattered Clouds
+06/27/2018,17:53:00,Mostly Cloudy
+06/27/2018,18:38:00,Mostly Cloudy
+06/27/2018,18:45:00,Thunderstorm
+06/27/2018,18:53:00,Thunderstorm
+06/27/2018,19:43:00,Heavy Thunderstorms and Rain
+06/27/2018,19:47:00,Heavy Thunderstorms and Rain
+06/27/2018,19:53:00,Heavy Thunderstorms and Rain
+06/27/2018,20:02:00,Heavy Thunderstorms and Rain
+06/27/2018,20:12:00,Light Thunderstorms and Rain
+06/27/2018,20:19:00,Light Thunderstorms and Rain
+06/27/2018,20:53:00,Light Thunderstorms and Rain
+06/27/2018,21:01:00,Heavy Thunderstorms and Rain
+06/27/2018,21:04:00,Heavy Thunderstorms and Rain
+06/27/2018,21:06:00,Heavy Thunderstorms and Rain
+06/27/2018,21:19:00,Thunderstorms and Rain
+06/27/2018,21:27:00,Light Thunderstorms and Rain
+06/27/2018,21:53:00,Light Thunderstorms and Rain
+06/27/2018,22:23:00,Light Rain
+06/27/2018,22:53:00,Overcast
+06/27/2018,23:53:00,Mostly Cloudy
+06/28/2018,00:53:00,Partly Cloudy
+06/28/2018,01:53:00,Partly Cloudy
+06/28/2018,02:53:00,Mostly Cloudy
+06/28/2018,03:53:00,Mostly Cloudy
+06/28/2018,04:53:00,Scattered Clouds
+06/28/2018,05:53:00,Mostly Cloudy
+06/28/2018,06:53:00,Mostly Cloudy
+06/28/2018,07:53:00,Mostly Cloudy
+06/28/2018,08:53:00,Mostly Cloudy
+06/28/2018,09:53:00,Mostly Cloudy
+06/28/2018,10:35:00,Mostly Cloudy
+06/28/2018,10:42:00,Thunderstorm
+06/28/2018,10:50:00,Light Thunderstorms and Rain
+06/28/2018,10:53:00,Light Thunderstorms and Rain
+06/28/2018,11:18:00,Light Thunderstorms and Rain
+06/28/2018,11:27:00,Thunderstorms and Rain
+06/28/2018,11:29:00,Heavy Thunderstorms and Rain
+06/28/2018,11:31:00,Thunderstorms and Rain
+06/28/2018,11:40:00,Heavy Thunderstorms and Rain
+06/28/2018,11:41:00,Heavy Thunderstorms and Rain
+06/28/2018,11:44:00,Thunderstorms and Rain
+06/28/2018,11:46:00,Light Thunderstorms and Rain
+06/28/2018,11:53:00,Light Thunderstorms and Rain
+06/28/2018,12:06:00,Light Thunderstorms and Rain
+06/28/2018,12:47:00,Mostly Cloudy
+06/28/2018,12:53:00,Mostly Cloudy
+06/28/2018,13:14:00,Overcast
+06/28/2018,13:41:00,Overcast
+06/28/2018,13:53:00,Overcast
+06/28/2018,14:11:00,Overcast
+06/28/2018,14:16:00,Mostly Cloudy
+06/28/2018,14:29:00,Overcast
+06/28/2018,14:53:00,Overcast
+06/28/2018,15:53:00,Overcast
+06/28/2018,16:53:00,Overcast
+06/28/2018,17:53:00,Overcast
+07/01/2018,07:53:00,Mostly Cloudy
+07/01/2018,08:53:00,Mostly Cloudy
+07/01/2018,09:53:00,Mostly Cloudy
+07/01/2018,10:53:00,Mostly Cloudy
+07/01/2018,11:53:00,Mostly Cloudy
+07/01/2018,12:53:00,Mostly Cloudy
+07/01/2018,13:53:00,Mostly Cloudy
+07/01/2018,14:53:00,Mostly Cloudy
+07/01/2018,15:53:00,Mostly Cloudy
+07/01/2018,16:53:00,Mostly Cloudy
+07/01/2018,17:07:00,Mostly Cloudy
+07/01/2018,17:22:00,Mostly Cloudy
+07/01/2018,17:53:00,Rain
+07/01/2018,17:55:00,Thunderstorms and Rain
+07/01/2018,18:02:00,Heavy Thunderstorms and Rain
+07/01/2018,18:09:00,Heavy Thunderstorms and Rain
+07/01/2018,18:53:00,Thunderstorm
+07/01/2018,19:06:00,Mostly Cloudy
+07/01/2018,19:53:00,Mostly Cloudy
+07/01/2018,20:53:00,Mostly Cloudy
+07/01/2018,21:53:00,Scattered Clouds
+07/01/2018,22:53:00,Scattered Clouds
+07/01/2018,23:53:00,Scattered Clouds
+07/02/2018,00:53:00,Scattered Clouds
+07/02/2018,01:53:00,Overcast
+07/02/2018,02:53:00,Mostly Cloudy
+07/02/2018,03:53:00,Overcast
+07/02/2018,04:53:00,Mostly Cloudy
+07/02/2018,05:53:00,Mostly Cloudy
+07/02/2018,06:53:00,Patches of Fog
+07/02/2018,07:24:00,Patches of Fog
+07/02/2018,07:53:00,Mostly Cloudy
+07/02/2018,08:53:00,Mostly Cloudy
+07/02/2018,09:31:00,Overcast
+07/02/2018,09:53:00,Overcast
+07/02/2018,10:53:00,Mostly Cloudy
+07/02/2018,11:53:00,Mostly Cloudy
+07/02/2018,12:53:00,Mostly Cloudy
+07/02/2018,13:53:00,Mostly Cloudy
+07/02/2018,14:53:00,Mostly Cloudy
+07/02/2018,15:53:00,Scattered Clouds
+07/02/2018,16:53:00,Mostly Cloudy
+07/02/2018,17:53:00,Scattered Clouds
+07/02/2018,18:53:00,Mostly Cloudy
+07/02/2018,19:53:00,Mostly Cloudy
+07/02/2018,20:53:00,Mostly Cloudy
+07/02/2018,21:53:00,Mostly Cloudy
+07/02/2018,22:53:00,Overcast
+07/02/2018,23:09:00,Rain
+07/02/2018,23:18:00,Light Rain
+07/02/2018,23:37:00,Light Rain
+07/02/2018,23:45:00,Thunderstorm
+07/02/2018,23:53:00,Thunderstorm
+07/03/2018,00:05:00,Overcast
+07/03/2018,00:24:00,Scattered Clouds
+07/03/2018,00:53:00,Partly Cloudy
+07/03/2018,01:53:00,Clear
+07/03/2018,02:53:00,Clear
+07/03/2018,03:53:00,Clear
+07/03/2018,04:53:00,Clear
+07/03/2018,05:50:00,Mostly Cloudy
+07/03/2018,05:53:00,Mostly Cloudy
+07/03/2018,06:53:00,Mostly Cloudy
+07/03/2018,07:53:00,Mostly Cloudy
+07/03/2018,08:53:00,Mostly Cloudy
+07/03/2018,09:53:00,Mostly Cloudy
+07/03/2018,10:53:00,Scattered Clouds
+07/03/2018,11:53:00,Scattered Clouds
+07/03/2018,12:53:00,Mostly Cloudy
+07/03/2018,13:53:00,Mostly Cloudy
+07/03/2018,14:53:00,Scattered Clouds
+07/03/2018,15:53:00,Scattered Clouds
+07/03/2018,16:53:00,Scattered Clouds
+07/03/2018,17:53:00,Scattered Clouds
+07/03/2018,18:53:00,Scattered Clouds
+07/03/2018,19:53:00,Scattered Clouds
+07/03/2018,20:53:00,Scattered Clouds
+07/03/2018,21:53:00,Scattered Clouds
+07/03/2018,22:53:00,Partly Cloudy
+07/03/2018,23:53:00,Scattered Clouds
+07/04/2018,00:53:00,Clear
+07/04/2018,01:53:00,Clear
+07/04/2018,02:53:00,Clear
+07/04/2018,03:53:00,Mostly Cloudy
+07/04/2018,04:53:00,Scattered Clouds
+07/04/2018,05:53:00,Mostly Cloudy
+07/04/2018,06:53:00,Scattered Clouds
+07/04/2018,07:53:00,Clear
+07/04/2018,08:53:00,Partly Cloudy
+07/04/2018,09:53:00,Clear
+07/04/2018,10:53:00,Partly Cloudy
+07/04/2018,11:53:00,Scattered Clouds
+07/04/2018,12:53:00,Scattered Clouds
+07/04/2018,13:53:00,Scattered Clouds
+07/04/2018,14:53:00,Scattered Clouds
+07/04/2018,15:53:00,Scattered Clouds
+07/04/2018,16:53:00,Scattered Clouds
+07/04/2018,17:53:00,Scattered Clouds
+07/04/2018,18:39:00,Mostly Cloudy
+07/04/2018,18:53:00,Mostly Cloudy
+07/04/2018,19:22:00,Thunderstorm
+07/04/2018,19:53:00,Light Thunderstorms and Rain
+07/04/2018,20:19:00,Mostly Cloudy
+07/04/2018,20:53:00,Scattered Clouds
+07/04/2018,21:50:00,Thunderstorm
+07/04/2018,21:53:00,Light Thunderstorms and Rain
+07/04/2018,22:04:00,Heavy Thunderstorms and Rain
+07/04/2018,22:14:00,Light Thunderstorms and Rain
+07/04/2018,22:20:00,Light Rain
+07/04/2018,22:53:00,Mostly Cloudy
+07/04/2018,23:46:00,Mostly Cloudy
+07/04/2018,23:53:00,Mostly Cloudy
+07/05/2018,00:05:00,Scattered Clouds
+07/05/2018,00:32:00,Partly Cloudy
+07/05/2018,00:53:00,Scattered Clouds
+07/05/2018,01:14:00,Mostly Cloudy
+07/05/2018,01:53:00,Partly Cloudy
+07/05/2018,02:53:00,Partly Cloudy
+07/05/2018,03:53:00,Partly Cloudy
+07/05/2018,04:53:00,Clear
+07/05/2018,05:53:00,Patches of Fog
+07/05/2018,06:19:00,Patches of Fog
+07/05/2018,06:53:00,Patches of Fog
+07/05/2018,07:53:00,Scattered Clouds
+07/05/2018,08:53:00,Haze
+07/05/2018,09:53:00,Mostly Cloudy
+07/05/2018,10:53:00,Scattered Clouds
+07/05/2018,11:53:00,Mostly Cloudy
+07/05/2018,12:53:00,Mostly Cloudy
+07/05/2018,13:53:00,Mostly Cloudy
+07/05/2018,14:47:00,Mostly Cloudy
+07/05/2018,14:53:00,Mostly Cloudy
+07/05/2018,15:04:00,Thunderstorm
+07/05/2018,15:20:00,Mostly Cloudy
+07/05/2018,15:53:00,Mostly Cloudy
+07/05/2018,16:53:00,Mostly Cloudy
+07/05/2018,17:53:00,Mostly Cloudy
+07/05/2018,18:53:00,Mostly Cloudy
+07/05/2018,19:53:00,Mostly Cloudy
+07/05/2018,20:53:00,Mostly Cloudy
+07/05/2018,21:53:00,Mostly Cloudy
+07/05/2018,22:53:00,Mostly Cloudy
+07/05/2018,23:53:00,Mostly Cloudy
+07/06/2018,00:53:00,Clear
+07/06/2018,01:53:00,Clear
+07/06/2018,02:53:00,Clear
+07/06/2018,03:53:00,Clear
+07/06/2018,04:53:00,Clear
+07/06/2018,05:53:00,Scattered Clouds
+07/06/2018,06:53:00,Mostly Cloudy
+07/06/2018,07:53:00,Scattered Clouds
+07/06/2018,08:53:00,Scattered Clouds
+07/06/2018,09:53:00,Mostly Cloudy
+07/06/2018,10:53:00,Scattered Clouds
+07/06/2018,11:53:00,Mostly Cloudy
+07/06/2018,12:53:00,Mostly Cloudy
+07/06/2018,13:53:00,Mostly Cloudy
+07/06/2018,13:58:00,Thunderstorm
+07/06/2018,14:53:00,Mostly Cloudy
+07/06/2018,15:53:00,Mostly Cloudy
+07/06/2018,16:53:00,Mostly Cloudy
+07/06/2018,17:36:00,Mostly Cloudy
+07/06/2018,17:53:00,Mostly Cloudy
+07/06/2018,18:47:00,Mostly Cloudy
+07/06/2018,18:53:00,Mostly Cloudy
+07/06/2018,19:19:00,Thunderstorm
+07/06/2018,19:53:00,Light Thunderstorms and Rain
+07/06/2018,20:18:00,Rain
+07/06/2018,20:53:00,Light Rain
+07/06/2018,21:53:00,Mostly Cloudy
+07/06/2018,22:16:00,Mostly Cloudy
+07/06/2018,22:53:00,Mostly Cloudy
+07/06/2018,23:13:00,Mostly Cloudy
+07/06/2018,23:53:00,Mostly Cloudy
+07/07/2018,00:00:00,Mostly Cloudy
+07/07/2018,00:07:00,Mostly Cloudy
+07/07/2018,00:44:00,Mostly Cloudy
+07/07/2018,00:53:00,Mostly Cloudy
+07/07/2018,01:53:00,Mostly Cloudy
+07/07/2018,02:09:00,Partly Cloudy
+07/07/2018,02:53:00,Clear
+07/07/2018,03:53:00,Partly Cloudy
+07/07/2018,04:20:00,Scattered Clouds
+07/07/2018,04:30:00,Light Rain
+07/07/2018,04:53:00,Overcast
+07/07/2018,05:53:00,Overcast
+07/07/2018,06:53:00,Mostly Cloudy
+07/07/2018,07:53:00,Mostly Cloudy
+07/07/2018,08:24:00,Overcast
+07/07/2018,08:53:00,Mostly Cloudy
+07/07/2018,09:18:00,Mostly Cloudy
+07/07/2018,09:53:00,Mostly Cloudy
+07/07/2018,10:53:00,Mostly Cloudy
+07/07/2018,11:53:00,Mostly Cloudy
+07/07/2018,12:53:00,Mostly Cloudy
+07/07/2018,13:53:00,Mostly Cloudy
+07/07/2018,14:53:00,Mostly Cloudy
+07/07/2018,15:53:00,Mostly Cloudy
+07/07/2018,16:15:00,Scattered Clouds
+07/07/2018,16:23:00,Thunderstorm
+07/07/2018,16:53:00,Thunderstorm
+07/07/2018,17:34:00,Mostly Cloudy
+07/07/2018,17:48:00,Mostly Cloudy
+07/07/2018,17:53:00,Mostly Cloudy
+07/07/2018,18:53:00,Mostly Cloudy
+07/07/2018,19:53:00,Mostly Cloudy
+07/07/2018,20:53:00,Mostly Cloudy
+07/07/2018,21:53:00,Mostly Cloudy
+07/07/2018,22:53:00,Mostly Cloudy
+07/07/2018,23:53:00,Mostly Cloudy
+07/08/2018,00:53:00,Mostly Cloudy
+07/08/2018,01:53:00,Overcast
+07/08/2018,02:53:00,Overcast
+07/08/2018,03:51:00,Overcast
+07/08/2018,03:53:00,Overcast
+07/08/2018,04:30:00,Overcast
+07/08/2018,04:53:00,Mostly Cloudy
+07/08/2018,05:53:00,Mostly Cloudy
+07/08/2018,06:53:00,Mostly Cloudy
+07/08/2018,07:53:00,Mostly Cloudy
+07/08/2018,08:53:00,Mostly Cloudy
+07/08/2018,09:53:00,Mostly Cloudy
+07/08/2018,10:53:00,Mostly Cloudy
+07/08/2018,11:53:00,Mostly Cloudy
+07/08/2018,12:53:00,Partly Cloudy
+07/08/2018,13:53:00,Scattered Clouds
+07/08/2018,14:53:00,Mostly Cloudy
+07/08/2018,15:53:00,Mostly Cloudy
+07/08/2018,16:53:00,Mostly Cloudy
+07/08/2018,17:53:00,Mostly Cloudy
+07/08/2018,18:53:00,Mostly Cloudy
+07/08/2018,19:53:00,Mostly Cloudy
+07/08/2018,20:53:00,Scattered Clouds
+07/08/2018,21:53:00,Scattered Clouds
+07/08/2018,22:53:00,Scattered Clouds
+07/08/2018,23:53:00,Scattered Clouds
+07/09/2018,00:53:00,Partly Cloudy
+07/09/2018,01:53:00,Clear
+07/09/2018,02:53:00,Clear
+07/09/2018,03:53:00,Clear
+07/09/2018,04:53:00,Clear
+07/09/2018,05:53:00,Partly Cloudy
+07/09/2018,06:53:00,Scattered Clouds
+07/09/2018,07:53:00,Scattered Clouds
+07/09/2018,08:53:00,Scattered Clouds
+07/09/2018,09:53:00,Scattered Clouds
+07/09/2018,10:53:00,Scattered Clouds
+07/09/2018,11:53:00,Scattered Clouds
+07/09/2018,12:53:00,Scattered Clouds
+07/09/2018,13:53:00,Scattered Clouds
+07/09/2018,14:53:00,Scattered Clouds
+07/09/2018,15:53:00,Scattered Clouds
+07/09/2018,16:53:00,Scattered Clouds
+07/09/2018,17:53:00,Scattered Clouds
+07/09/2018,18:53:00,Partly Cloudy
+07/09/2018,19:53:00,Partly Cloudy
+07/09/2018,20:53:00,Partly Cloudy
+07/09/2018,21:53:00,Partly Cloudy
+07/09/2018,22:53:00,Clear
+07/09/2018,23:53:00,Partly Cloudy
+07/10/2018,00:53:00,Mostly Cloudy
+07/10/2018,01:53:00,Partly Cloudy
+07/10/2018,02:53:00,Clear
+07/10/2018,03:53:00,Clear
+07/10/2018,04:53:00,Clear
+07/10/2018,05:53:00,Mostly Cloudy
+07/10/2018,06:53:00,Scattered Clouds
+07/10/2018,07:53:00,Scattered Clouds
+07/10/2018,08:53:00,Scattered Clouds
+07/10/2018,09:53:00,Scattered Clouds
+07/10/2018,10:53:00,Scattered Clouds
+07/10/2018,11:53:00,Scattered Clouds
+07/10/2018,12:53:00,Mostly Cloudy
+07/10/2018,13:53:00,Scattered Clouds
+07/10/2018,14:53:00,Scattered Clouds
+07/10/2018,15:53:00,Scattered Clouds
+07/10/2018,16:53:00,Scattered Clouds
+07/10/2018,17:53:00,Mostly Cloudy
+07/10/2018,18:53:00,Mostly Cloudy
+07/10/2018,19:53:00,Mostly Cloudy
+07/10/2018,20:53:00,Scattered Clouds
+07/10/2018,21:53:00,Scattered Clouds
+07/10/2018,22:53:00,Partly Cloudy
+07/10/2018,23:53:00,Clear
+07/11/2018,00:53:00,Clear
+07/11/2018,01:53:00,Clear
+07/11/2018,02:53:00,Clear
+07/11/2018,03:53:00,Clear
+07/11/2018,04:53:00,Clear
+07/11/2018,05:53:00,Mostly Cloudy
+07/11/2018,06:53:00,Scattered Clouds
+07/11/2018,07:53:00,Scattered Clouds
+07/11/2018,08:53:00,Scattered Clouds
+07/11/2018,09:53:00,Mostly Cloudy
+07/11/2018,10:53:00,Scattered Clouds
+07/11/2018,11:53:00,Scattered Clouds
+07/11/2018,12:53:00,Scattered Clouds
+07/11/2018,13:53:00,Scattered Clouds
+07/11/2018,14:53:00,Scattered Clouds
+07/11/2018,15:53:00,Scattered Clouds
+07/11/2018,16:53:00,Scattered Clouds
+07/11/2018,17:53:00,Scattered Clouds
+07/11/2018,18:53:00,Scattered Clouds
+07/11/2018,19:53:00,Scattered Clouds
+07/11/2018,20:53:00,Mostly Cloudy
+07/11/2018,21:53:00,Scattered Clouds
+07/11/2018,22:53:00,Partly Cloudy
+07/11/2018,23:53:00,Partly Cloudy
+07/12/2018,00:53:00,Clear
+07/12/2018,01:53:00,Clear
+07/12/2018,02:53:00,Clear
+07/12/2018,03:53:00,Clear
+07/12/2018,04:53:00,Clear
+07/12/2018,05:53:00,Partly Cloudy
+07/12/2018,06:53:00,Mostly Cloudy
+07/12/2018,07:53:00,Mostly Cloudy
+07/12/2018,08:53:00,Mostly Cloudy
+07/12/2018,09:53:00,Mostly Cloudy
+07/12/2018,10:53:00,Mostly Cloudy
+07/12/2018,11:53:00,Mostly Cloudy
+07/12/2018,12:53:00,Mostly Cloudy
+07/12/2018,13:53:00,Mostly Cloudy
+07/12/2018,14:53:00,Scattered Clouds
+07/12/2018,15:53:00,Scattered Clouds
+07/12/2018,16:46:00,Scattered Clouds
+07/12/2018,16:53:00,Scattered Clouds
+07/12/2018,17:22:00,Mostly Cloudy
+07/12/2018,17:53:00,Mostly Cloudy
+07/12/2018,18:53:00,Scattered Clouds
+07/12/2018,19:53:00,Scattered Clouds
+07/12/2018,20:53:00,Scattered Clouds
+07/12/2018,21:53:00,Scattered Clouds
+07/12/2018,22:53:00,Partly Cloudy
+07/12/2018,23:53:00,Scattered Clouds
+07/13/2018,00:53:00,Clear
+07/13/2018,01:53:00,Clear
+07/13/2018,02:53:00,Clear
+07/13/2018,03:53:00,Clear
+07/13/2018,04:53:00,Clear
+07/13/2018,05:53:00,Mostly Cloudy
+07/13/2018,06:53:00,Mostly Cloudy
+07/13/2018,07:53:00,Mostly Cloudy
+07/13/2018,08:53:00,Mostly Cloudy
+07/13/2018,09:53:00,Mostly Cloudy
