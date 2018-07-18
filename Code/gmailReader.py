@@ -109,7 +109,9 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 def drop_duplicates(calldata):
     print(calldata.values[0:5])
-    datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
+    # datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
+    datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/DailyReports/ToRemoveFile.xlsx")
+
     listing = list(datafile.Index.values)
     for i in listing:
         print(i)
@@ -127,8 +129,10 @@ def find_Duplicates(data_file_name, occurrence_list):
     for id1, id in enumerate(data_file_copy.values):
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
-            save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
-                            'Call Info', remove)
+            # save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
+            #                 'Call Info', remove)
+            save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/DailyReports/ToRemoveFile.xlsx',
+                'Call Info', remove)
             break
         else:
             id2 = data_file_copy.index[id1 + 1]
@@ -188,11 +192,12 @@ def append_data(calldata):
 def main():
     # Run this line each morning
     calldata, file = get_Email()
-    #
+
     # Reading file directly for testing.
-    # file = ""
+    # # file = ""
+
     # calldata = pandas.read_csv(file, sep=",")
-    #
+
     # dayname_csv = file.split("/")[-1]
     # dayname_xlsx = dayname_csv.split(".")[0]
     #
@@ -202,7 +207,7 @@ def main():
     # # Splitting and tidying the Response Date to the accident.
     # calldata = split_datetime(calldata)
     #
-    # # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
+    # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
     # header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
     #                'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility')
     #
@@ -215,6 +220,7 @@ def main():
     # key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
     #
     # for k, info in enumerate(calldata.values):
+    #     print(k)
     #     # All variables are blank-of-accident, thus year is yoa.
     #     hoa = int(calldata.Hour.values[k])
     #     toa = calldata.Time.values[k]
@@ -228,6 +234,7 @@ def main():
     #     long = (calldata.Longitude.values[k] / -1000000)
     #
     #     # The following line needs to have this format:
+    #     print(lat, long)
     #     t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
     #     call = key, lat, long
     #     # print(call)
@@ -280,6 +287,7 @@ def main():
     #
     # calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
     #                              + dayname_xlsx + "_Dropped_Dupes.xlsx")
+    #
     # calldata = find_y(calldata)
     #
     # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
@@ -287,12 +295,14 @@ def main():
     #
     # # Use this calldata for reading in 1 specific file for appending
     # # calldata = pandas.read_excel("")
-    # for k, info in enumerate(calldata.values):
-    #     calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
-    #     calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
     #
-    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
-    #                 + dayname_xlsx + "_MonthTests.xlsx", "DarkSky Weather", calldata)
+    # calldata.Latitude = calldata.Latitude.astype(float)
+    # calldata.Longitude = calldata.Longitude.astype(float)
+    # for k, info in enumerate(calldata.values):
+    #     if calldata.Latitude.values[k] > 40:
+    #         calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
+    #         calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
+    # #
     # append_data(calldata)
 
 if __name__ == "__main__":

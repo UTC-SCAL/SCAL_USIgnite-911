@@ -3,16 +3,15 @@ import pandas
 import seaborn as sns
 import sklearn
 import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 from pylab import rcParams
 from sklearn.linear_model import LogisticRegression
-# from sklearn.cross_validation import train_test_split
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr
 from sklearn.ensemble import ExtraTreesClassifier
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import pylab as pl
 from datetime import datetime, timedelta, date
-
 
 # %matplotlib inline
 rcParams['figure.figsize'] = 10, 8
@@ -79,6 +78,7 @@ def find_occur(calldata, col):
 def specify_stats(names, mini, maxi, calldata):
     X = calldata.ix[:, mini:maxi].values
     Y = calldata.ix[:, 0].values
+    y, x = patsy.dematrices("Testing", X, calldata, return_type="dataframe")
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
     LogReg.fit(X, Y)
@@ -98,9 +98,11 @@ def specify_stats(names, mini, maxi, calldata):
     est_t_fit = est_t.fit()
 
     print("Printing Description:")
-    print(calldata.describe())
-    # print("Printing CrossTab:")
-    # print(pandas.crosstab(calldata["Y"], calldata["Rainy"], rownames=["Y"]))
+    for i, value in enumerate(calldata.columns.values[mini:maxi]):
+        print("________________________")
+        print(calldata[value].describe())
+        print("________________________")
+
     print("Printing Histogram")
     calldata.hist()
     pl.show()
@@ -190,8 +192,8 @@ def agg_options(calldata):
     # calldata.drop(['Conditions'], axis=1, inplace=True)
 
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility', 'Clear', 'Humid', 'Rain', 'Snow',
-                   'Cloudy', 'Foggy', 'Overcast')
+                   'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility', 'Clear', 'Rain', 'Snow',
+                   'Cloudy', 'Foggy')
 
     calldata = calldata.reindex(columns=header_list)
     # print(calldata.head())
@@ -213,12 +215,6 @@ def agg_options(calldata):
         else:
             calldata.Clear.values[i] = 0
 
-        if "humid" in calldata.Event.values[i] or "humid" in calldata.Conditions.values[i] \
-                or "Humid" in calldata.Event.values[i] or "Humid" in calldata.Conditions.values[i]:
-            calldata.Humid.values[i] = 1
-        else:
-            calldata.Humid.values[i] = 0
-
         if "rain" in calldata.Event.values[i] or "rain" in calldata.Conditions.values[i] \
                 or "Rain" in calldata.Event.values[i] or "Rain" in calldata.Conditions.values[i]:
             calldata.Rain.values[i] = 1
@@ -232,7 +228,9 @@ def agg_options(calldata):
             calldata.Snow.values[i] = 0
 
         if "cloudy" in calldata.Event.values[i] or "cloudy" in calldata.Conditions.values[i] \
-                or "Cloudy" in calldata.Event.values[i] or "Cloudy" in calldata.Conditions.values[i]:
+                or "Cloudy" in calldata.Event.values[i] or "Cloudy" in calldata.Conditions.values[i] \
+                or "overcast" in calldata.Event.values[i] or "overcast" in calldata.Conditions.values[i] \
+                or "Overcast" in calldata.Event.values[i] or "Overcast" in calldata.Conditions.values[i]:
             calldata.Cloudy.values[i] = 1
         else:
             calldata.Cloudy.values[i] = 0
@@ -242,35 +240,78 @@ def agg_options(calldata):
             calldata.Foggy.values[i] = 1
         else:
             calldata.Foggy.values[i] = 0
-
-        if "overcast" in calldata.Event.values[i] or "overcast" in calldata.Conditions.values[i] \
-                or "Overcast" in calldata.Event.values[i] or "Overcast" in calldata.Conditions.values[i]:
-            calldata.Overcast.values[i] = 1
-        else:
-            calldata.Overcast.values[i] = 0
     # print(calldata.head())
+    # save_excel_file(
+    #     "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
+    #     "DarkSky Weather", calldata)
     save_excel_file(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
+        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx",
         "DarkSky Weather", calldata)
+
+
+def graph_maker(calldata, wsdata):
+    ordered = calldata.groupby(
+        [pandas.to_datetime(calldata.Date.values).strftime('%Y-%m-%d')])['Temperature'].mean().reset_index(
+        name='DailyAverage')
+    # print(ordered.head())
+    x = ordered.index.values
+    y = ordered.DailyAverage.values
+
+    orderedws = wsdata.groupby(
+        [pandas.to_datetime(wsdata.Date.values).strftime('%Y-%m-%d')])['Temperature_in_F'].mean().reset_index(
+        name='DailyAverage')
+    # print(orderedws.head())
+
+
+    x1 = orderedws.index.values
+    y1 = orderedws.DailyAverage.values
+    xdif = []
+
+    for i, value in enumerate(ordered.DailyAverage.values):
+        xdif.append(abs((ordered.DailyAverage.values[i]) - (orderedws.DailyAverage.values[i])))
+
+    # print(orderedws.index.values)
+    plt.plot(x, y, label='DarkSky', linewidth=2)
+    plt.plot(x1, y1, label='Stations', linewidth=2)
+    # plt.plot(xdif, y, label='Difference')
+    plt.xlabel('Date')
+    plt.ylabel('Temperature')
+    plt.title('Temperature Comparison')
+    # plt.legend()
+    # plt.show()
+
+    diffframe = pandas.DataFrame(columns=['Day', 'Difference'])
+    diffframe.Day = ordered.index.values
+    diffframe.Difference = xdif
+
+    print(diffframe.values)
+
+    plt.plot(diffframe.Day.values, diffframe.Difference.values, label='Difference', linewidth=2)
+    # plt.xlabel('Date')
+    # plt.ylabel('Temperature Difference')
+    # plt.title('Temperature Comparison')
+    plt.legend()
+    plt.show()
 
 
 def main():
     # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
-    # MAIN: 2018 call data
-    # calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List.xlsx")
+
+    # calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Raw.xlsx")
     # agg_options(calldata)
 
+    # MAIN CallData 2018 #
     calldata = easy_import_excel_file(
         "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
 
-    # Testing 2018 with Stations #
+    # Testing  #
     # calldata = easy_import_excel_file("")
-    # calldata.drop(["Visibility", "Clear", "Humid", "Snow", "Overcast"], axis=1, inplace=True)
+    # calldata.drop(["Clear", "Rain", "Snow", "Cloudy", "Foggy"], axis=1, inplace=True)
+    # calldata.drop([""], axis=1, inplace=True)
+    #
 
     mini = calldata.columns.get_loc("Hour")
-    # print(mini)
     maxi = len(calldata.columns)
-    # print(maxi)
 
     # Add in the intercept for the Jin table
     names = ["Intercept"]
@@ -293,61 +334,41 @@ def main():
 
 
     # Y count graph #
-    #     calldata["Y"].value_counts()
-    #     sns.countplot(x="Y", data=calldata, palette="hls")
-    #     plt.title("Y Count")
-    #     plt.show()
+    # calldata["Y"].value_counts()
+    # sns.countplot(x="Y", data=calldata, palette="hls")
+    # plt.title("Y Count")
+    # plt.show()
 
     # Printing Variable Importance #
-    #     X = calldata.values[:, mini:maxi]
-    #     Y = calldata.values[:, 0]
-    #     Y = Y.astype('int')
-    #     #Build a forest and compute the feature importances
-    #     forest = ExtraTreesClassifier()
+    # X = calldata.values[:, mini:maxi]
+    # Y = calldata.values[:, 0]
+    # Y = Y.astype('int')
+    # #Build a forest and compute the feature importances
+    # forest = ExtraTreesClassifier()
     #
-    #     forest.fit(X, Y)
-    #     importances = forest.feature_importances_
-    #     std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
-    #     indices = np.argsort(importances)[::-1]
+    # forest.fit(X, Y)
+    # importances = forest.feature_importances_
+    # std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
+    # indices = np.argsort(importances)[::-1]
     #
-    #     # Print the feature ranking
-    #     print("Feature ranking:")
-    #     features_list = calldata.columns.values[mini:maxi]
-    #     features_list.tolist()
-    #     for f in range(X.shape[1]):
-    #         print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
+    # # Print the feature ranking
+    # print("Feature ranking:")
+    # features_list = calldata.columns.values[mini:maxi]
+    # features_list.tolist()
+    # for f in range(X.shape[1]):
+    #     print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
     #
     #
-    #     # Plot the feature importances of the forest
-    #     plt.figure()
-    #     plt.rcParams.update({'font.size': 20})
-    #     plt.title("Feature Importance")
-    #     plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
-    #     plt.xticks(range(X.shape[1]), features_list)
-    #     plt.xlim([-1, X.shape[1]])
-    #     plt.xlabel("Feature Name")
-    #     plt.ylabel("Variable Importance Level")
-    #     plt.show()
-
-# Graphing certain variables #
-#     calldata = darksky data
-#     wsdata = stations data
-#     x1 = calldata.Temperature.values[0:1948]
-#     x2 = wsdata.Temperature_in_F.values[0:1948]
-#     x = abs(x1 - x2)
-#     y = []
-#     for value in calldata.Date.values[0:1948]:
-#         calldate = datetime.strptime(value, '%Y-%m-%d')
-#         calldate = calldate.timetuple().tm_yday
-#         y.append(calldate)
-#
-#     plt.plot(y, x, label='DarkSky')
-#     plt.plot(y, x2 ,label='Stations')
-#     plt.xlabel('Date')
-#     plt.ylabel('Temperature')
-#     plt.title('Temperature Comparison')
-#     plt.legend()
-#     plt.show()
+    # # Plot the feature importances of the forest
+    # plt.figure()
+    # plt.rcParams.update({'font.size': 20})
+    # plt.title("Feature Importance")
+    # plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
+    # plt.xticks(range(X.shape[1]), features_list)
+    # plt.xlim([-1, X.shape[1]])
+    # plt.xlabel("Feature Name")
+    # plt.ylabel("Variable Importance Level")
+    # plt.show()
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
