@@ -109,9 +109,7 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 def drop_duplicates(calldata):
     print(calldata.values[0:5])
-    # datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
-    datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/DailyReports/ToRemoveFile.xlsx")
-
+    datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
     listing = list(datafile.Index.values)
     for i in listing:
         print(i)
@@ -129,10 +127,8 @@ def find_Duplicates(data_file_name, occurrence_list):
     for id1, id in enumerate(data_file_copy.values):
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
-            # save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
-            #                 'Call Info', remove)
-            save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/DailyReports/ToRemoveFile.xlsx',
-                'Call Info', remove)
+            save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
+                            'Call Info', remove)
             break
         else:
             id2 = data_file_copy.index[id1 + 1]
@@ -184,7 +180,7 @@ def append_data(calldata):
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
 
-    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List.xlsx",
+    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 + 2017 Accident Report List.xlsx",
                     "DarkSky Weather", results)
 
 
@@ -194,14 +190,14 @@ def main():
     calldata, file = get_Email()
 
     # Reading file directly for testing.
-    # # file = ""
+    # file = "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-18.csv"
 
     # calldata = pandas.read_csv(file, sep=",")
 
     # dayname_csv = file.split("/")[-1]
     # dayname_xlsx = dayname_csv.split(".")[0]
-    #
-    # # Removing the excess text from the problem column.
+
+    # Removing the excess text from the problem column.
     # calldata = clean_problems(calldata)
     #
     # # Splitting and tidying the Response Date to the accident.
@@ -302,7 +298,7 @@ def main():
     #     if calldata.Latitude.values[k] > 40:
     #         calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
     #         calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-    # #
+    #
     # append_data(calldata)
 
 if __name__ == "__main__":

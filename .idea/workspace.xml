@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/RolandProjects.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Variable Importance 2018 Top5.png" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Variable Importance 2018 Top5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Variable Importance 2018.png" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Variable Importance 2018.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Y Count 2018.png" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Y Count 2018.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
@@ -28,17 +21,18 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="461">
+              <caret line="309" column="22" lean-forward="true" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
               <folding>
-                <element signature="e#689#851#0" expanded="false" />
-                <element signature="e#918#1144#0" expanded="false" />
-                <element signature="e#1223#1890#0" expanded="false" />
-                <element signature="e#1933#2077#0" expanded="false" />
-                <element signature="e#2115#2457#0" expanded="false" />
-                <element signature="e#6418#6628#0" expanded="false" />
-                <element signature="e#6687#9837#0" expanded="false" />
-                <element signature="e#9879#11301#0" expanded="false" />
+                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#876#1038#0" expanded="false" />
+                <element signature="e#1105#1331#0" expanded="false" />
+                <element signature="e#1410#2077#0" expanded="false" />
+                <element signature="e#2120#2264#0" expanded="false" />
+                <element signature="e#2302#2644#0" expanded="false" />
+                <element signature="e#2699#5653#0" expanded="false" />
+                <element signature="e#5700#5910#0" expanded="false" />
+                <element signature="e#5969#8949#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -47,18 +41,18 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+            <state relative-caret-position="449">
+              <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#175#3207#0" expanded="false" />
                 <element signature="e#3245#4146#0" expanded="false" />
                 <element signature="e#4183#4501#0" expanded="false" />
                 <element signature="e#4568#4794#0" expanded="false" />
-                <element signature="e#4832#5330#0" expanded="false" />
-                <element signature="e#5391#7982#0" expanded="false" />
-                <element signature="e#8042#8537#0" expanded="false" />
-                <element signature="e#8571#8956#0" expanded="false" />
+                <element signature="e#4832#5188#0" expanded="false" />
+                <element signature="e#5249#7665#0" expanded="false" />
+                <element signature="e#7725#8220#0" expanded="false" />
+                <element signature="e#8254#8646#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -125,10 +119,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="73" />
-    <option name="y" value="450" />
-    <option name="width" value="1538" />
-    <option name="height" value="1121" />
+    <option name="y" value="-4" />
+    <option name="width" value="1920" />
+    <option name="height" value="1145" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -148,7 +141,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,10 +148,22 @@
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
+              <item name="2017+2018 Data" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -170,10 +174,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets" />
+      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports" />
       <recent name="$PROJECT_DIR$/Code" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data" />
-      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/Weather Stations" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -309,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531854162241</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changes made">
+      <created>1531935734358</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1531935734358</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -322,14 +334,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="450" width="1922" height="1153" extended-state="6" />
+    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17449306" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19530416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.374761" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -369,7 +381,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes made to ConnectingWeather, gmailReader, and some new files for testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes made to ConnectingWeather, gmailReader, and some new files for testing" />
+    <MESSAGE value="Changes made" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes made" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,7 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
           <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -562,7 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -570,41 +581,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+        <state relative-caret-position="449">
+          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#175#3207#0" expanded="false" />
             <element signature="e#3245#4146#0" expanded="false" />
             <element signature="e#4183#4501#0" expanded="false" />
             <element signature="e#4568#4794#0" expanded="false" />
-            <element signature="e#4832#5330#0" expanded="false" />
-            <element signature="e#5391#7982#0" expanded="false" />
-            <element signature="e#8042#8537#0" expanded="false" />
-            <element signature="e#8571#8956#0" expanded="false" />
+            <element signature="e#4832#5188#0" expanded="false" />
+            <element signature="e#5249#7665#0" expanded="false" />
+            <element signature="e#7725#8220#0" expanded="false" />
+            <element signature="e#8254#8646#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="461">
+          <caret line="309" column="22" lean-forward="true" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
           <folding>
-            <element signature="e#689#851#0" expanded="false" />
-            <element signature="e#918#1144#0" expanded="false" />
-            <element signature="e#1223#1890#0" expanded="false" />
-            <element signature="e#1933#2077#0" expanded="false" />
-            <element signature="e#2115#2457#0" expanded="false" />
-            <element signature="e#6418#6628#0" expanded="false" />
-            <element signature="e#6687#9837#0" expanded="false" />
-            <element signature="e#9879#11301#0" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#876#1038#0" expanded="false" />
+            <element signature="e#1105#1331#0" expanded="false" />
+            <element signature="e#1410#2077#0" expanded="false" />
+            <element signature="e#2120#2264#0" expanded="false" />
+            <element signature="e#2302#2644#0" expanded="false" />
+            <element signature="e#2699#5653#0" expanded="false" />
+            <element signature="e#5700#5910#0" expanded="false" />
+            <element signature="e#5969#8949#0" expanded="false" />
           </folding>
         </state>
       </provider>

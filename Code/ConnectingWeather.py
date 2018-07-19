@@ -3,6 +3,8 @@ import pandas
 import seaborn as sns
 import sklearn
 import statsmodels.api as sm
+# from patsy import dmatrices, build_design_matrices
+from statsmodels.tools.tools import add_constant
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from pylab import rcParams
 from sklearn.linear_model import LogisticRegression
@@ -12,6 +14,10 @@ from sklearn.ensemble import ExtraTreesClassifier
 import matplotlib.pyplot as plt
 import pylab as pl
 from datetime import datetime, timedelta, date
+from sklearn import preprocessing
+import warnings
+
+warnings.filterwarnings("ignore")
 
 # %matplotlib inline
 rcParams['figure.figsize'] = 10, 8
@@ -78,12 +84,28 @@ def find_occur(calldata, col):
 def specify_stats(names, mini, maxi, calldata):
     X = calldata.ix[:, mini:maxi].values
     Y = calldata.ix[:, 0].values
-    y, x = patsy.dematrices("Testing", X, calldata, return_type="dataframe")
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
     LogReg.fit(X, Y)
     print(LogReg.fit(X_train, Y_train))
     Y_pred = LogReg.predict(X_test)
+
+    # Finding VIF #
+    # calldata_df = calldata
+    # calldata_df.dropna()
+    # # drop the non-numerical columns
+    # calldata_df = calldata_df._get_numeric_data()
+    # # subset of the calldata_df
+    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility",
+    #                            "Rain", "Cloudy", "Foggy"]].dropna()
+    # min_max_scalar = preprocessing.MinMaxScaler()
+    # calldata_df = min_max_scalar.fit_transform(calldata_df)
+    # # calldata_df = calldata_df.values
+    # vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
+    #                          index=names)
+    # print("Printing VIF Test:")
+    # print(vif_test)
+
     from sklearn.metrics import confusion_matrix
     confusion_matrix = confusion_matrix(Y_test, Y_pred)
     accscore = sklearn.metrics.accuracy_score(Y_test, Y_pred)
@@ -97,15 +119,27 @@ def specify_stats(names, mini, maxi, calldata):
     est_t = sm.Logit(Y, X2)
     est_t_fit = est_t.fit()
 
-    print("Printing Description:")
-    for i, value in enumerate(calldata.columns.values[mini:maxi]):
-        print("________________________")
-        print(calldata[value].describe())
-        print("________________________")
+    # print("Printing Description:")
+    # for i, value in enumerate(calldata.columns.values[mini:maxi]):
+    #     print("________________________")
+    #     print(calldata[value].describe())
+    #     print("________________________")
 
-    print("Printing Histogram")
-    calldata.hist()
-    pl.show()
+    # print("Printing Crosstab:")
+    # column_name = "Foggy"
+    # print(pandas.crosstab(calldata.Y, calldata.Foggy, rownames=["Y"], colnames=[column_name]))
+
+    # print("Printing Histogram")
+    # calldata.hist()
+    # pl.show()
+
+    # print("Printing Correlation Matrix:")
+    # corr = calldata.corr()
+    # fig, ax = plt.subplots(figsize=(50, 50))
+    # ax.matshow(corr)
+    # plt.xticks(range(len(corr.columns)), corr.columns, rotation=90)
+    # plt.yticks(range(len(corr.columns)), corr.columns)
+    # plt.show()
 
     print(est_t_fit.summary(xname=names))
     for i in range(mini, maxi + 1):
@@ -118,55 +152,6 @@ def specify_stats(names, mini, maxi, calldata):
         except:
             print('End of Odds List')
             break
-            # print("\t\t\t\t\t\t\t\tParams: ",est_t_fit.params[j])
-
-    # Printing an ROC curve #
-    # print("Printing out ROC curve")
-    # random_state = np.random.RandomState(0)
-    # classifier = OneVsRestClassifier(svm.SVC(kernel="linear", probability=True, random_state=random_state))
-    # Y_score = classifier.fit(X_train, Y_train).decision_function(X_test)
-    # # Compute ROC curve and ROC area for each class
-    # fpr = dict()
-    # tpr = dict()
-    # roc_auc = dict()
-    # for i in range(7, 20):
-    #     fpr[i], tpr[i], _ = roc_curve(Y_test, Y_score)
-    #     roc_auc[i] = auc(fpr[i], tpr[i])
-    #
-    # fpr["micro"], tpr["micro"], _ = roc_curve(Y_test.ravel(), Y_score.ravel())
-    # roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
-    # # Aggregate all false positive rates
-    # all_fpr = np.unique(np.concatenate([fpr[i] for i in range(7, 20)]))
-    # # Interpolate all ROC curves at this point
-    # mean_tpr = np.zeros_like(all_fpr)
-    # for i in range(7, 20):
-    #     mean_tpr += interp(all_fpr, fpr[i], tpr[i])
-    # # Average it and compute AUC
-    # mean_tpr /= 14
-    #
-    # fpr["macro"] = all_fpr
-    # tpr["macro"] = mean_tpr
-    # roc_auc["macro"] = auc(fpr["macro"], tpr["macro"])
-    #
-    # # Plot all ROC curves
-    # plt.figure()
-    # plt.plot(fpr["micro"], tpr["micro"],
-    #          label='micro-average ROC curve (area = {0:0.2f})'''.format(roc_auc["micro"]), linewidth=2)
-    #
-    # plt.plot(fpr["macro"], tpr["macro"],
-    #          label='macro-average ROC curve (area = {0:0.2f})'''.format(roc_auc["macro"]), linewidth=2)
-    #
-    # for i in range(7, 20):
-    #     plt.plot(fpr[i], tpr[i], label='ROC curve of class {0} (area = {1:0.2f})'''.format(i, roc_auc[i]))
-    #
-    # plt.plot([0, 1], [0, 1], 'k--')
-    # plt.xlim([0.0, 1.0])
-    # plt.ylim([0.0, 1.05])
-    # plt.xlabel('False Positive Rate')
-    # plt.ylabel('True Positive Rate')
-    # plt.title('Some extension of Receiver operating characteristic to multi-class')
-    # plt.legend(loc="lower right")
-    # plt.show()
 
     print("\n")
     print("Printing EST:", est_t_fit, "Printing LogReg:", LogReg)
@@ -241,11 +226,8 @@ def agg_options(calldata):
         else:
             calldata.Foggy.values[i] = 0
     # print(calldata.head())
-    # save_excel_file(
-    #     "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
-    #     "DarkSky Weather", calldata)
     save_excel_file(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx",
+        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
         "DarkSky Weather", calldata)
 
 
@@ -297,26 +279,47 @@ def graph_maker(calldata, wsdata):
 def main():
     # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
 
-    # calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Raw.xlsx")
+    # calldata = easy_import_excel_file("")
     # agg_options(calldata)
 
     # MAIN CallData 2018 #
-    calldata = easy_import_excel_file(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
+    # calldata =
+    # easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
 
-    # Testing  #
-    # calldata = easy_import_excel_file("")
-    # calldata.drop(["Clear", "Rain", "Snow", "Cloudy", "Foggy"], axis=1, inplace=True)
-    # calldata.drop([""], axis=1, inplace=True)
+    # MAIN Calldata 2018 + 2017 #
+    # calldata = \
+    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
+
+    # Testing 2017 with DarkSky  #
+    # calldata = \
+    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2017 Accident Report List Agg Options 4 Months.xlsx")
+    # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
+
+    # Graph testing #
+    calldata_injury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx")
+    calldata_noInjury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData No Injury Only.xlsx")
+    x = calldata_injury.index.values[0:100]
+    x2 = calldata_noInjury.index.values[0:100]
+    y = calldata_injury.Temperature.values[0:100]
+    y2 = calldata_noInjury.Temperature.values[0:100]
+
+    plt.scatter(x, y, label='Injury', marker="X")
+    plt.scatter(x2, y2, label='No Injury', marker="o")
+
+    plt.xlabel('Call Number')
+    plt.ylabel('Temp')
+    plt.title('Injury vs Non Injury')
+    plt.legend()
+    plt.show()
+
+
+    # mini = calldata.columns.get_loc("Hour")
+    # maxi = len(calldata.columns)
     #
-
-    mini = calldata.columns.get_loc("Hour")
-    maxi = len(calldata.columns)
-
-    # Add in the intercept for the Jin table
-    names = ["Intercept"]
-    for i in range(mini, maxi):
-        names.append(calldata.columns.values[i])
+    # # Add in the intercept for the Jin table
+    # names = ["Intercept"]
+    # for i in range(mini, maxi):
+    #     names.append(calldata.columns.values[i])
 
     # for i, value in enumerate(calldata.values[0:10]):
     #     str_date = str(calldata.Date.values[i])
@@ -372,7 +375,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    LogReg = specify_stats(names, mini, maxi, calldata)
+    # LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":
