@@ -96,8 +96,7 @@ def specify_stats(names, mini, maxi, calldata):
     # # drop the non-numerical columns
     # calldata_df = calldata_df._get_numeric_data()
     # # subset of the calldata_df
-    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility",
-    #                            "Rain", "Cloudy", "Foggy"]].dropna()
+    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility"]].dropna()
     # min_max_scalar = preprocessing.MinMaxScaler()
     # calldata_df = min_max_scalar.fit_transform(calldata_df)
     # # calldata_df = calldata_df.values
@@ -132,7 +131,7 @@ def specify_stats(names, mini, maxi, calldata):
     # print("Printing Histogram")
     # calldata.hist()
     # pl.show()
-
+    #
     # print("Printing Correlation Matrix:")
     # corr = calldata.corr()
     # fig, ax = plt.subplots(figsize=(50, 50))
@@ -283,8 +282,7 @@ def main():
     # agg_options(calldata)
 
     # MAIN CallData 2018 #
-    # calldata =
-    # easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
+    calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
 
     # MAIN Calldata 2018 + 2017 #
     # calldata = \
@@ -293,33 +291,50 @@ def main():
     # Testing 2017 with DarkSky  #
     # calldata = \
     #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2017 Accident Report List Agg Options 4 Months.xlsx")
-    # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
+    calldata.drop(["Clear", "Snow", "Rain", "Cloudy", "Foggy"], axis=1, inplace=True)
 
     # Graph testing #
-    calldata_injury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx")
-    calldata_noInjury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData No Injury Only.xlsx")
-    x = calldata_injury.index.values[0:100]
-    x2 = calldata_noInjury.index.values[0:100]
-    y = calldata_injury.Temperature.values[0:100]
-    y2 = calldata_noInjury.Temperature.values[0:100]
+    # calldata_injury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx")
+    # calldata_noInjury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData No Injury Only.xlsx")
+    # x = calldata_injury.index.values[0:418]
+    # x2 = calldata_noInjury.index.values[0:1469]
+    # y = calldata_injury.Visibility.values[0:418]
+    # y2 = calldata_noInjury.Visibility.values[0:1469]
+    # novis = 0
+    # for i, value in enumerate(calldata_injury.values):
+    #     if calldata_injury.Visibility.values[i] < 2:
+    #         novis += 1
+    # total = len(calldata_noInjury.values)
+    # print("Total number of injuries sustained:", total )
+    # print("Low visibility injuries:", novis)
+    # print("Odds:", novis/total )
 
-    plt.scatter(x, y, label='Injury', marker="X")
-    plt.scatter(x2, y2, label='No Injury', marker="o")
+    # action = 0
+    # for i, value in enumerate(calldata_injury.values):
+    #     if calldata_injury.Clear.values[i] == 1:
+    #         action += 1
+    # total = len(calldata_noInjury.values)
+    # print("Total number of injuries sustained:", total)
+    # print("Clear injuries:", action)
+    # print("Odds:", action / total)
 
-    plt.xlabel('Call Number')
-    plt.ylabel('Temp')
-    plt.title('Injury vs Non Injury')
-    plt.legend()
-    plt.show()
-
-
-    # mini = calldata.columns.get_loc("Hour")
-    # maxi = len(calldata.columns)
+    # plt.scatter(x2, y2, label='No Injury', marker="x", linewidths=.025, c='b')
+    # plt.scatter(x, y, label='Injury', marker="H", linewidths=.05, c='r')
     #
-    # # Add in the intercept for the Jin table
-    # names = ["Intercept"]
-    # for i in range(mini, maxi):
-    #     names.append(calldata.columns.values[i])
+    # plt.xlabel('Call Number')
+    # plt.ylabel('Visibility')
+    # plt.title('Injury vs Non Injury')
+    # plt.legend()
+    # plt.show()
+
+
+    mini = calldata.columns.get_loc("Hour")
+    maxi = len(calldata.columns)
+
+    # Add in the intercept for the Jin table
+    names = ["Intercept"]
+    for i in range(mini, maxi):
+        names.append(calldata.columns.values[i])
 
     # for i, value in enumerate(calldata.values[0:10]):
     #     str_date = str(calldata.Date.values[i])
@@ -375,7 +390,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    # LogReg = specify_stats(names, mini, maxi, calldata)
+    LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":

@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +17,8 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="309" column="22" lean-forward="true" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
+            <state relative-caret-position="-1754">
+              <caret line="83" column="47" lean-forward="false" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#876#1038#0" expanded="false" />
@@ -30,9 +26,10 @@
                 <element signature="e#1410#2077#0" expanded="false" />
                 <element signature="e#2120#2264#0" expanded="false" />
                 <element signature="e#2302#2644#0" expanded="false" />
-                <element signature="e#2699#5653#0" expanded="false" />
-                <element signature="e#5700#5910#0" expanded="false" />
-                <element signature="e#5969#8949#0" expanded="false" />
+                <element signature="e#2699#5598#0" expanded="false" />
+                <element signature="e#5645#5855#0" expanded="false" />
+                <element signature="e#5914#8894#0" expanded="false" />
+                <element signature="e#8936#10358#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -147,17 +144,6 @@
             <path>
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
-              <item name="2017+2018 Data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -321,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531935734358</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Changes made">
+      <created>1532018899525</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1532018899525</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -336,12 +329,12 @@
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19530416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1547492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.374761" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.79445505" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -604,8 +597,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="309" column="22" lean-forward="true" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
+        <state relative-caret-position="-1754">
+          <caret line="83" column="47" lean-forward="false" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#876#1038#0" expanded="false" />
@@ -613,9 +606,10 @@
             <element signature="e#1410#2077#0" expanded="false" />
             <element signature="e#2120#2264#0" expanded="false" />
             <element signature="e#2302#2644#0" expanded="false" />
-            <element signature="e#2699#5653#0" expanded="false" />
-            <element signature="e#5700#5910#0" expanded="false" />
-            <element signature="e#5969#8949#0" expanded="false" />
+            <element signature="e#2699#5598#0" expanded="false" />
+            <element signature="e#5645#5855#0" expanded="false" />
+            <element signature="e#5914#8894#0" expanded="false" />
+            <element signature="e#8936#10358#0" expanded="false" />
           </folding>
         </state>
       </provider>
