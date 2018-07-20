@@ -3,7 +3,6 @@ import pandas
 import seaborn as sns
 import sklearn
 import statsmodels.api as sm
-# from patsy import dmatrices, build_design_matrices
 from statsmodels.tools.tools import add_constant
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from pylab import rcParams
@@ -16,6 +15,7 @@ import pylab as pl
 from datetime import datetime, timedelta, date
 from sklearn import preprocessing
 import warnings
+import os, sys
 
 warnings.filterwarnings("ignore")
 
@@ -23,6 +23,8 @@ warnings.filterwarnings("ignore")
 rcParams['figure.figsize'] = 10, 8
 sns.set_style('whitegrid')
 
+path = os.path.dirname(sys.argv[0])
+folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # sns.set(style='white')
 # sns.set(style='whitegrid', color_codes=True)
@@ -225,7 +227,7 @@ def agg_options(calldata):
         else:
             calldata.Foggy.values[i] = 0
     # print(calldata.head())
-    save_excel_file(
+    save_excel_file(folderpath +"/"+
         "",
         "DarkSky Weather", calldata)
 
@@ -316,16 +318,16 @@ def main():
     # agg_options(calldata)
 
     # MAIN CallData 2018 #
-    # calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
+    # calldata = easy_import_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
 
     # MAIN Calldata 2018 + 2017 #
     calldata = \
-        easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
+        easy_import_excel_file(folderpath + "/"+"Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
     calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = \
-    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx")
+    #     easy_import_excel_file(folderpath + "Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx")
     # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
 
 
@@ -391,7 +393,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    LogReg = specify_stats(names, mini, maxi, calldata)
+    # LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":

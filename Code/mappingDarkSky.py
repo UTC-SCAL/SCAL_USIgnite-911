@@ -1,7 +1,9 @@
 import gmplot
 import pandas
+import os, sys
 
-
+path = os.path.dirname(sys.argv[0])
+folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # Place map
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
@@ -16,7 +18,7 @@ gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
 # MAIN: Call Data for 2018 + 2017  #
 calldata = data_file_name = \
-    pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
+    pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
 
 
 # print(calldata.head())

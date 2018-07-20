@@ -6,7 +6,10 @@ from darksky import forecast
 import pytz
 import pandas
 import math
+import os, sys
 
+path = os.path.dirname(sys.argv[0])
+folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 def get_Email():
     # connecting to the gmail imap server
@@ -54,13 +57,13 @@ def get_Email():
                     # print("Downloading this email: ", mail["Subject"])
 
                     if filename is not None:    #Saves the attachment in the daily record folder with a tidy name.
-                        sv_path = os.path.join('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
+                        sv_path = os.path.join(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
                         if not os.path.isfile(sv_path):
                             # print(sv_path)
                             fp = open(sv_path, 'wb')
                             fp.write(part.get_payload(decode=True))
                             fp.close()
-    file = '/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
+    file = folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
     calllog = pandas.read_csv(file,sep=",")
     return calllog, file
 
@@ -109,7 +112,7 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 def drop_duplicates(calldata):
     print(calldata.values[0:5])
-    datafile = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
+    datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
     listing = list(datafile.Index.values)
     for i in listing:
         print(i)
@@ -127,7 +130,7 @@ def find_Duplicates(data_file_name, occurrence_list):
     for id1, id in enumerate(data_file_copy.values):
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
-            save_excel_file('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
+            save_excel_file(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
                             'Call Info', remove)
             break
         else:
@@ -182,22 +185,23 @@ def append_data(calldata):
     results = pandas.concat(frames)
 
     # Saving new data to 2018+2017 File #
-    save_excel_file("",
+    save_excel_file(folderpath + "",
                     "DarkSky Weather", results)
 
 
 
 def main():
-    # Run this line each morning
+
+    # # Run this line each morning
     calldata, file = get_Email()
 
     # Reading file directly for testing.
-    # file = "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-18.csv"
+    # file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-18.csv"
 
     # calldata = pandas.read_csv(file, sep=",")
 
-    # dayname_csv = file.split("/")[-1]
-    # dayname_xlsx = dayname_csv.split(".")[0]
+    dayname_csv = file.split("/")[-1]
+    dayname_xlsx = dayname_csv.split(".")[0]
     #
     # # Removing the excess text from the problem column.
     # calldata = clean_problems(calldata)
@@ -215,8 +219,9 @@ def main():
     # calldata.Event = calldata.Temperature.astype(str)
     # calldata.Conditions = calldata.Dewpoint.astype(str)
     #
-    # key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-    #
+    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+
+
     # for k, info in enumerate(calldata.values):
     #     print(k)
     #     # All variables are blank-of-accident, thus year is yoa.
@@ -253,16 +258,14 @@ def main():
     #                 calldata.Conditions.values[k] = value.summary
     #     except:
     #         pass
-    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
     #                 "DarkSky Weather", calldata)
     #
     # # Here, run the above code first, then run the below code after adjusting placement of index in the xlsx file #
     #
     # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
     #
-    # calldata = pandas.read_excel(
-    #     "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
-    #     + dayname_xlsx + ".xlsx",
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
     #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
@@ -271,24 +274,22 @@ def main():
     # find_Duplicates(calldata, occurrence_list)
     # calldata = drop_duplicates(calldata)
     #
-    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
-    #                 + dayname_xlsx + "_Dropped_Dupes.xlsx",
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
     #                 "DarkSky Weather", calldata)
     #
-    # calldata = pandas.read_excel(
-    #     "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
     #     + dayname_xlsx + "_Dropped_Dupes.xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
     #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
     #
-    # calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
     #                              + dayname_xlsx + "_Dropped_Dupes.xlsx")
     #
     # calldata = find_y(calldata)
     #
-    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/"
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
     #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
     #
     # # Use this calldata for reading in 1 specific file for appending
