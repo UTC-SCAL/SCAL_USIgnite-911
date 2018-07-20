@@ -101,7 +101,7 @@ def specify_stats(names, mini, maxi, calldata):
     # calldata_df = min_max_scalar.fit_transform(calldata_df)
     # # calldata_df = calldata_df.values
     # vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
-    #                          index=names)
+    #                          index=calldata_df.columns.values)
     # print("Printing VIF Test:")
     # print(vif_test)
 
@@ -123,15 +123,15 @@ def specify_stats(names, mini, maxi, calldata):
     #     print("________________________")
     #     print(calldata[value].describe())
     #     print("________________________")
-
-    # print("Printing Crosstab:")
-    # column_name = "Foggy"
-    # print(pandas.crosstab(calldata.Y, calldata.Foggy, rownames=["Y"], colnames=[column_name]))
-
+    #
+    # # print("Printing Crosstab:")
+    # # column_name = "Foggy"
+    # # print(pandas.crosstab(calldata.Y, calldata.Foggy, rownames=["Y"], colnames=[column_name]))
+    #
     # print("Printing Histogram")
     # calldata.hist()
     # pl.show()
-    #
+    # #
     # print("Printing Correlation Matrix:")
     # corr = calldata.corr()
     # fig, ax = plt.subplots(figsize=(50, 50))
@@ -226,7 +226,7 @@ def agg_options(calldata):
             calldata.Foggy.values[i] = 0
     # print(calldata.head())
     save_excel_file(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
+        "",
         "DarkSky Weather", calldata)
 
 
@@ -274,25 +274,6 @@ def graph_maker(calldata, wsdata):
     plt.legend()
     plt.show()
 
-
-def main():
-    # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
-
-    # calldata = easy_import_excel_file("")
-    # agg_options(calldata)
-
-    # MAIN CallData 2018 #
-    calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
-
-    # MAIN Calldata 2018 + 2017 #
-    # calldata = \
-    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
-
-    # Testing 2017 with DarkSky  #
-    # calldata = \
-    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2017 Accident Report List Agg Options 4 Months.xlsx")
-    calldata.drop(["Clear", "Snow", "Rain", "Cloudy", "Foggy"], axis=1, inplace=True)
-
     # Graph testing #
     # calldata_injury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx")
     # calldata_noInjury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData No Injury Only.xlsx")
@@ -326,6 +307,26 @@ def main():
     # plt.title('Injury vs Non Injury')
     # plt.legend()
     # plt.show()
+
+
+def main():
+    # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
+
+    # calldata = easy_import_excel_file("")
+    # agg_options(calldata)
+
+    # MAIN CallData 2018 #
+    # calldata = easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
+
+    # MAIN Calldata 2018 + 2017 #
+    calldata = \
+        easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
+    calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
+
+    # Testing 2017 with DarkSky  #
+    # calldata = \
+    #     easy_import_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx")
+    # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
 
 
     mini = calldata.columns.get_loc("Hour")

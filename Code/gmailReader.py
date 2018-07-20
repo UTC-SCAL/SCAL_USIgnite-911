@@ -176,11 +176,13 @@ def find_y(calldata):
 
 
 def append_data(calldata):
-    og_calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 Accident Report List.xlsx")
+    # Appending new data to 2018+2017 File #
+    og_calldata = pandas.read_excel("")
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
 
-    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/2018 + 2017 Accident Report List.xlsx",
+    # Saving new data to 2018+2017 File #
+    save_excel_file("",
                     "DarkSky Weather", results)
 
 
@@ -196,8 +198,8 @@ def main():
 
     # dayname_csv = file.split("/")[-1]
     # dayname_xlsx = dayname_csv.split(".")[0]
-
-    # Removing the excess text from the problem column.
+    #
+    # # Removing the excess text from the problem column.
     # calldata = clean_problems(calldata)
     #
     # # Splitting and tidying the Response Date to the accident.
@@ -290,7 +292,7 @@ def main():
     #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
     #
     # # Use this calldata for reading in 1 specific file for appending
-    # # calldata = pandas.read_excel("")
+    # calldata = pandas.read_excel("")
     #
     # calldata.Latitude = calldata.Latitude.astype(float)
     # calldata.Longitude = calldata.Longitude.astype(float)
