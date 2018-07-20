@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="Changes made">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/mappingDarkSky.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
+    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data/2017 Accident Report List Agg Options 4 Months.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data/2017 CallData Agg.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data/2017 CallData Raw.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/CallData No Injury Only.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2018 Accident Report List Agg Options 4 Months.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report 7-16-2018_FinalForm.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report 7-17-2018 _FinalForm.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report 7-18-2018_FinalForm.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report 7-19-2018_FinalForm.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/2018 Histogram.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Correlation Matrix.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/DarkSky Logit Table.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/2018 DarkSky Description.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/2018 DarkSky JinTable.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/2018 Histogram Injury Only.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyTemp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDewpoint.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinDewpoint.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinHumidity.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinTemp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinTempByCallFirst100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinTempScatter50.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationDifferenceinTempScatterJan1st.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationHumidity.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/DarkSkyVSStationTemp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/Histogram DarkSky.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/Pearson DarkSky 2018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/Pearson for WeatherStations 2017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/StationTemp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/WeatherStations Description.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/WeatherStations Histogram.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018 Data/Testing/WeatherStations JinTable.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/2018+2017 JinTable.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/2018+2017 Logit Results.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/2018+2017 Pearson Test.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/Correlation Matrix 2018+2017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/Histogram 2018+2017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/Variable Importance 2018+2017 Top5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/Variable Importance 2018+2017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/Y Count 2018+2017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/2017+2018 Cloudy Map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/2017+2018 Foggy Map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/2017+2018 Rain Map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/2017+2018 Snow Map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/2018+2017 Map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data/2017 CallData Raw.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-19.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +68,8 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
+            <state relative-caret-position="816">
+              <caret line="336" column="31" lean-forward="false" selection-start-line="336" selection-start-column="31" selection-end-line="336" selection-end-column="31" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#876#1038#0" expanded="false" />
@@ -43,8 +89,8 @@
       <file leaf-file-name="mappingDarkSky.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/mappingDarkSky.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="156">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -55,7 +101,7 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="832">
               <caret line="177" column="26" lean-forward="false" selection-start-line="177" selection-start-column="26" selection-end-line="177" selection-end-column="26" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -158,7 +204,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,21 +211,11 @@
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
-              <item name="2017+2018 Data" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532021794374</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changes made">
+      <created>1532103543516</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532103543516</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -364,26 +406,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
+    <frame x="0" y="433" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15635005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15955175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -602,13 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#46#0" expanded="false" />
-            <element signature="e#165#503#0" expanded="false" />
-            <element signature="e#546#3126#0" expanded="false" />
-            <element signature="e#3176#4333#0" expanded="false" />
-            <element signature="e#4400#4626#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -616,17 +651,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="839">
           <caret line="211" column="0" lean-forward="true" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
-          <folding>
-            <element signature="e#290#628#0" expanded="false" />
-            <element signature="e#678#896#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/mappingDarkSky.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="156">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -635,7 +666,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
+        <state relative-caret-position="832">
           <caret line="177" column="26" lean-forward="false" selection-start-line="177" selection-start-column="26" selection-end-line="177" selection-end-column="26" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -655,14 +686,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
+        <state relative-caret-position="816">
+          <caret line="336" column="31" lean-forward="false" selection-start-line="336" selection-start-column="31" selection-end-line="336" selection-end-column="31" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#876#1038#0" expanded="false" />
