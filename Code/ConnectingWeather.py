@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import pylab as pl
 from datetime import datetime, timedelta, date
 from sklearn import preprocessing
+from matplotlib import cm as cm
 import warnings
 import os, sys
 
@@ -86,24 +87,54 @@ def find_occur(calldata, col):
 def specify_stats(names, mini, maxi, calldata):
     X = calldata.ix[:, mini:maxi].values
     Y = calldata.ix[:, 0].values
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
+    train = calldata[0:26166]  # 2017 data
+    print(type(train))
+    test = calldata[26166:-1]  # 2018 data
+    # print(test)
+
+    X_train = train.ix[:, mini:maxi].values
+    # print(X_train[0:5])
+    Y_train = train.ix[:, 0].values
+
+    X_test = test.ix[:, mini:maxi].values
+    # print(X_test[0:5])
+    Y_test = test.ix[:, 0].values
+
+    # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
     LogReg.fit(X, Y)
     print(LogReg.fit(X_train, Y_train))
     Y_pred = LogReg.predict(X_test)
 
+    count = 0
+    countzero =0
+    countone = 0
+    for i in range(0,len(Y_pred)):
+        if Y_pred[i] == Y_test[i]:
+            count += 1
+        # print("Y_pred: ", Y_pred[i], "\t","Y_test: ", Y_test[i])
+    print("The number of times the prediction got it right was:",count)
+
+    for i in range(0, len(Y_test)):
+        if Y_test[i] == 0:
+            countzero +=1
+        else:
+            countone +=1
+    print("The number of times the actual Y was zero was:", countzero)
+    print("The number of times the actual Y was one was:", countone)
     # Finding VIF #
     # calldata_df = calldata
     # calldata_df.dropna()
     # # drop the non-numerical columns
     # calldata_df = calldata_df._get_numeric_data()
     # # subset of the calldata_df
-    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility"]].dropna()
+    # # calldata_df = calldata_df[["Y", "Humidity", "Month", "Visibility", "Rain", "Cloudy"]].dropna()
+    # calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
     # min_max_scalar = preprocessing.MinMaxScaler()
     # calldata_df = min_max_scalar.fit_transform(calldata_df)
     # # calldata_df = calldata_df.values
     # vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
-    #                          index=calldata_df.columns.values)
+    #                          index=names)
     # print("Printing VIF Test:")
     # print(vif_test)
 
@@ -133,10 +164,18 @@ def specify_stats(names, mini, maxi, calldata):
     # print("Printing Histogram")
     # calldata.hist()
     # pl.show()
-    # #
+    #
     # print("Printing Correlation Matrix:")
-    # corr = calldata.corr()
-    # fig, ax = plt.subplots(figsize=(50, 50))
+    # # drop the non-numerical columns
+    # calldata_cm = calldata
+    # calldata_cm = calldata_cm._get_numeric_data()
+    # # subset of the calldata_df
+    # calldata_cm = calldata_cm[["Hour", "Temperature", "Humidity", "Month", "Rain", "Cloudy",
+    #                            "Foggy"]].dropna()
+    # corr = calldata_cm.corr()
+    # print(corr)
+    # Include the code below for a heat-map version of the correlation matrix #
+    # fig, ax = plt.subplots()
     # ax.matshow(corr)
     # plt.xticks(range(len(corr.columns)), corr.columns, rotation=90)
     # plt.yticks(range(len(corr.columns)), corr.columns)
@@ -233,48 +272,48 @@ def agg_options(calldata):
 
 
 def graph_maker(calldata, wsdata):
-    ordered = calldata.groupby(
-        [pandas.to_datetime(calldata.Date.values).strftime('%Y-%m-%d')])['Temperature'].mean().reset_index(
-        name='DailyAverage')
-    # print(ordered.head())
-    x = ordered.index.values
-    y = ordered.DailyAverage.values
-
-    orderedws = wsdata.groupby(
-        [pandas.to_datetime(wsdata.Date.values).strftime('%Y-%m-%d')])['Temperature_in_F'].mean().reset_index(
-        name='DailyAverage')
+    # ordered = calldata.groupby(
+    #     [pandas.to_datetime(calldata.Date.values).strftime('%Y-%m-%d')])['Temperature'].mean().reset_index(
+    #     name='DailyAverage')
+    # # print(ordered.head())
+    # x = ordered.index.values
+    # y = ordered.DailyAverage.values
+    #
+    # orderedws = wsdata.groupby(
+    #     [pandas.to_datetime(wsdata.Date.values).strftime('%Y-%m-%d')])['Temperature_in_F'].mean().reset_index(
+    #     name='DailyAverage')
     # print(orderedws.head())
 
 
-    x1 = orderedws.index.values
-    y1 = orderedws.DailyAverage.values
-    xdif = []
-
-    for i, value in enumerate(ordered.DailyAverage.values):
-        xdif.append(abs((ordered.DailyAverage.values[i]) - (orderedws.DailyAverage.values[i])))
+    # x1 = orderedws.index.values
+    # y1 = orderedws.DailyAverage.values
+    # xdif = []
+    #
+    # for i, value in enumerate(ordered.DailyAverage.values):
+    #     xdif.append(abs((ordered.DailyAverage.values[i]) - (orderedws.DailyAverage.values[i])))
 
     # print(orderedws.index.values)
-    plt.plot(x, y, label='DarkSky', linewidth=2)
-    plt.plot(x1, y1, label='Stations', linewidth=2)
-    # plt.plot(xdif, y, label='Difference')
-    plt.xlabel('Date')
-    plt.ylabel('Temperature')
-    plt.title('Temperature Comparison')
+    # plt.plot(x, y, label='DarkSky', linewidth=2)
+    # plt.plot(x1, y1, label='Stations', linewidth=2)
+    # # plt.plot(xdif, y, label='Difference')
+    # plt.xlabel('Date')
+    # plt.ylabel('Temperature')
+    # plt.title('Temperature Comparison')
     # plt.legend()
     # plt.show()
 
-    diffframe = pandas.DataFrame(columns=['Day', 'Difference'])
-    diffframe.Day = ordered.index.values
-    diffframe.Difference = xdif
+    # diffframe = pandas.DataFrame(columns=['Day', 'Difference'])
+    # diffframe.Day = ordered.index.values
+    # diffframe.Difference = xdif
 
-    print(diffframe.values)
+    # print(diffframe.values)
 
-    plt.plot(diffframe.Day.values, diffframe.Difference.values, label='Difference', linewidth=2)
+    # plt.plot(diffframe.Day.values, diffframe.Difference.values, label='Difference', linewidth=2)
     # plt.xlabel('Date')
     # plt.ylabel('Temperature Difference')
     # plt.title('Temperature Comparison')
-    plt.legend()
-    plt.show()
+    # plt.legend()
+    # plt.show()
 
     # Graph testing #
     # calldata_injury = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/CallData Injury Only.xlsx")
@@ -310,6 +349,20 @@ def graph_maker(calldata, wsdata):
     # plt.legend()
     # plt.show()
 
+    x = calldata.Temperature.values[0:26165]
+    x1 = calldata.Hour.values[0:26165]
+    x2 = calldata.Month.values[0:26165]
+    y = calldata.index.values[0:26165]
+    plt.plot(y, x, label='Temp', linewidth=2)
+    plt.plot(y, x1, label='Hour', linewidth=2)
+    plt.plot(y, x2, label='Month', linewidth=2)
+    plt.plot(xdif, y, label='Difference')
+    plt.xlabel('Calls')
+    plt.ylabel('Variables')
+    plt.title('Variable Comparison')
+    plt.legend()
+    plt.show()
+
 
 def main():
     # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
@@ -323,7 +376,8 @@ def main():
     # MAIN Calldata 2018 + 2017 #
     calldata = \
         easy_import_excel_file(folderpath + "/"+"Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
-    calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
+    # calldata.drop(["Clear", "Snow", "Dewpoint", "Hour", "Foggy", "Visibility"], axis=1, inplace=True)
+    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = \
@@ -331,13 +385,14 @@ def main():
     # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
 
 
-    mini = calldata.columns.get_loc("Hour")
+    mini = calldata.columns.get_loc("Conditions") + 1
     maxi = len(calldata.columns)
 
     # Add in the intercept for the Jin table
     names = ["Intercept"]
     for i in range(mini, maxi):
         names.append(calldata.columns.values[i])
+
 
     # for i, value in enumerate(calldata.values[0:10]):
     #     str_date = str(calldata.Date.values[i])
@@ -351,7 +406,7 @@ def main():
     # for column in calldata.columns[mini:maxi]:
     #     # print(calldata[column])
     #     print("Pearson for :", column, "is", pearsonr(calldata[column], Y))
-        # print(len(calldata[column]))
+    #     print(len(calldata[column]))
 
 
     # Y count graph #
@@ -373,14 +428,14 @@ def main():
     # indices = np.argsort(importances)[::-1]
     #
     # # Print the feature ranking
+    #
     # print("Feature ranking:")
     # features_list = calldata.columns.values[mini:maxi]
     # features_list.tolist()
     # for f in range(X.shape[1]):
     #     print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
-    #
-    #
-    # # Plot the feature importances of the forest
+
+    # Plot the feature importances of the forest
     # plt.figure()
     # plt.rcParams.update({'font.size': 20})
     # plt.title("Feature Importance")
@@ -393,7 +448,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    # LogReg = specify_stats(names, mini, maxi, calldata)
+    LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":

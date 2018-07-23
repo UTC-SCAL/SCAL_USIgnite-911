@@ -111,7 +111,6 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 
 def drop_duplicates(calldata):
-    print(calldata.values[0:5])
     datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
     listing = list(datafile.Index.values)
     for i in listing:
@@ -180,12 +179,12 @@ def find_y(calldata):
 
 def append_data(calldata):
     # Appending new data to 2018+2017 File #
-    og_calldata = pandas.read_excel("")
+    og_calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx")
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
 
     # Saving new data to 2018+2017 File #
-    save_excel_file(folderpath + "",
+    save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx",
                     "DarkSky Weather", results)
 
 
@@ -196,12 +195,12 @@ def main():
     calldata, file = get_Email()
 
     # Reading file directly for testing.
-    # file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-18.csv"
-
+    # file = folderpath + ""
+    #
     # calldata = pandas.read_csv(file, sep=",")
-
-    dayname_csv = file.split("/")[-1]
-    dayname_xlsx = dayname_csv.split(".")[0]
+    #
+    # dayname_csv = file.split("/")[-1]
+    # dayname_xlsx = dayname_csv.split(".")[0]
     #
     # # Removing the excess text from the problem column.
     # calldata = clean_problems(calldata)
@@ -219,9 +218,9 @@ def main():
     # calldata.Event = calldata.Temperature.astype(str)
     # calldata.Conditions = calldata.Dewpoint.astype(str)
     #
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-
-
+    # key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+    #
+    #
     # for k, info in enumerate(calldata.values):
     #     print(k)
     #     # All variables are blank-of-accident, thus year is yoa.
@@ -237,7 +236,7 @@ def main():
     #     long = (calldata.Longitude.values[k] / -1000000)
     #
     #     # The following line needs to have this format:
-    #     print(lat, long)
+    #     # print(lat, long)
     #     t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
     #     call = key, lat, long
     #     # print(call)
@@ -293,7 +292,7 @@ def main():
     #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
     #
     # # Use this calldata for reading in 1 specific file for appending
-    # calldata = pandas.read_excel("")
+    # # calldata = pandas.read_excel("")
     #
     # calldata.Latitude = calldata.Latitude.astype(float)
     # calldata.Longitude = calldata.Longitude.astype(float)
