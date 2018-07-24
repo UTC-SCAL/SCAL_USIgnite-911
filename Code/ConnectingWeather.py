@@ -109,7 +109,7 @@ def specify_stats(names, mini, maxi, calldata):
     plt.plot(Y_pred)
     plt.legend()
     # plt.plot(Y_test, color='b')
-    plt.show()
+    # plt.show()
 
     # for i in range(0,5):
     #     print(Y_pred[i,:], Y_test[i])
@@ -130,21 +130,25 @@ def specify_stats(names, mini, maxi, calldata):
     #         countone +=1
     # print("The number of times the actual Y was zero was:", countzero)
     # print("The number of times the actual Y was one was:", countone)
+
     # Finding VIF #
-    # calldata_df = calldata
-    # calldata_df.dropna()
-    # # drop the non-numerical columns
-    # calldata_df = calldata_df._get_numeric_data()
-    # # subset of the calldata_df
-    # # calldata_df = calldata_df[["Y", "Humidity", "Month", "Visibility", "Rain", "Cloudy"]].dropna()
+    calldata_df = calldata
+    calldata_df.dropna()
+    # drop the non-numerical columns
+    calldata_df = calldata_df._get_numeric_data()
+    # subset of the calldata_df
     # calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
-    # min_max_scalar = preprocessing.MinMaxScaler()
-    # calldata_df = min_max_scalar.fit_transform(calldata_df)
-    # # calldata_df = calldata_df.values
-    # vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
-    #                          index=names)
-    # print("Printing VIF Test:")
-    # print(vif_test)
+    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility",
+    #                            "Rain", "Snow", "Cloudy", "Foggy"]].dropna()
+    calldata_df = calldata_df[["Y", "Hour", "Humidity", "Month",
+                               "Rain", "Cloudy", "Foggy"]].dropna()
+    min_max_scalar = preprocessing.MinMaxScaler()
+    calldata_df = min_max_scalar.fit_transform(calldata_df)
+    # calldata_df = calldata_df.values
+    vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
+                             index=names)
+    print("Printing VIF Test:")
+    print(vif_test)
 
     from sklearn.metrics import confusion_matrix
     confusion_matrix = confusion_matrix(Y_test, Y_pred)
@@ -397,7 +401,8 @@ def main():
                 'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
                 'Visibility': float, 'Conditions': str})
 
-    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
+    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
+    calldata.drop(["Clear", "Dewpoint", "Visibility", "Snow", "Temperature"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = pandas.read_excel(
@@ -434,40 +439,40 @@ def main():
 
 
     # Y count graph #
-    calldata["Y"].value_counts()
-    sns.countplot(x="Y", data=calldata, palette="hls")
-    plt.title("Y Count")
-    plt.show()
+    # calldata["Y"].value_counts()
+    # sns.countplot(x="Y", data=calldata, palette="hls")
+    # plt.title("Y Count")
+    # plt.show()
 
     # Printing Variable Importance #
-    X = calldata.values[:, mini:maxi]
-    Y = calldata.values[:, 0]
-    Y = Y.astype('int')
-    #Build a forest and compute the feature importances
-    forest = ExtraTreesClassifier()
-
-    forest.fit(X, Y)
-    importances = forest.feature_importances_
-    std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
-    indices = np.argsort(importances)[::-1]
-
-    # Print the feature ranking
-    print("Feature ranking:")
-    features_list = calldata.columns.values[mini:maxi]
-    features_list.tolist()
-    # for f in range(X.shape[1]):
-    #     print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
-
-    # Plot the feature importances of the forest
-    plt.figure()
-    plt.rcParams.update({'font.size': 20})
-    plt.title("Feature Importance")
-    plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
-    plt.xticks(range(X.shape[1]), features_list)
-    plt.xlim([-1, X.shape[1]])
-    plt.xlabel("Feature Name")
-    plt.ylabel("Variable Importance Level")
-    plt.show()
+    # X = calldata.values[:, mini:maxi]
+    # Y = calldata.values[:, 0]
+    # Y = Y.astype('int')
+    # #Build a forest and compute the feature importances
+    # forest = ExtraTreesClassifier()
+    #
+    # forest.fit(X, Y)
+    # importances = forest.feature_importances_
+    # std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
+    # indices = np.argsort(importances)[::-1]
+    #
+    # # Print the feature ranking
+    # print("Feature ranking:")
+    # features_list = calldata.columns.values[mini:maxi]
+    # features_list.tolist()
+    # # for f in range(X.shape[1]):
+    # #     print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
+    #
+    # # Plot the feature importances of the forest
+    # plt.figure()
+    # plt.rcParams.update({'font.size': 20})
+    # plt.title("Feature Importance")
+    # plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
+    # plt.xticks(range(X.shape[1]), features_list)
+    # plt.xlim([-1, X.shape[1]])
+    # plt.xlabel("Feature Name")
+    # plt.ylabel("Variable Importance Level")
+    # plt.show()
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
