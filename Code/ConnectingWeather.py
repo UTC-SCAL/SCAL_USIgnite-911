@@ -17,6 +17,8 @@ from sklearn import preprocessing
 from matplotlib import cm as cm
 import warnings
 import os, sys
+from sklearn import svm
+from sklearn.preprocessing import MinMaxScaler
 
 warnings.filterwarnings("ignore")
 
@@ -29,13 +31,6 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # sns.set(style='white')
 # sns.set(style='whitegrid', color_codes=True)
-
-def easy_import_excel_file(file_name):
-    data_file_name = pandas.read_excel(file_name)
-    print('Import complete')
-    return data_file_name
-
-    # Saving this set to a new excel sheet, when you're done
 
 
 def save_excel_file(save_file_name, sheet, data_file_name):
@@ -99,29 +94,42 @@ def specify_stats(names, mini, maxi, calldata):
     X_test = test.ix[:, mini:maxi].values
     # print(X_test[0:5])
     Y_test = test.ix[:, 0].values
-
+    # plt.plot(Y_test)
+    # plt.show()
+    scaler = MinMaxScaler()
+    X_train_norm = scaler.fit_transform(X_train)
+    X_test_norm = scaler.transform(X_test)
+    print(X_train_norm)
     # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
-    LogReg.fit(X, Y)
-    print(LogReg.fit(X_train, Y_train))
-    Y_pred = LogReg.predict(X_test)
+    LogReg.fit(X_train_norm, Y_train)
+    # print(LogReg.fit(X_train, Y_train))
+    Y_pred = LogReg.predict(X_test_norm)
 
-    count = 0
-    countzero =0
-    countone = 0
-    for i in range(0,len(Y_pred)):
-        if Y_pred[i] == Y_test[i]:
-            count += 1
-        # print("Y_pred: ", Y_pred[i], "\t","Y_test: ", Y_test[i])
-    print("The number of times the prediction got it right was:",count)
+    plt.plot(Y_pred)
+    plt.legend()
+    # plt.plot(Y_test, color='b')
+    plt.show()
 
-    for i in range(0, len(Y_test)):
-        if Y_test[i] == 0:
-            countzero +=1
-        else:
-            countone +=1
-    print("The number of times the actual Y was zero was:", countzero)
-    print("The number of times the actual Y was one was:", countone)
+    # for i in range(0,5):
+    #     print(Y_pred[i,:], Y_test[i])
+
+    # count = 0
+    # countzero =0
+    # countone = 0
+    # for i in range(0,len(Y_pred)):
+    #     if Y_pred[i] == Y_test[i]:
+    #         count += 1
+    #     # print("Y_pred: ", Y_pred[i], "\t","Y_test: ", Y_test[i])
+    # print("The number of times the prediction got it right was:",count)
+    # print(len(Y_pred))
+    # for i in range(0, len(Y_test)):
+    #     if Y_test[i] == 0:
+    #         countzero +=1
+    #     else:
+    #         countone +=1
+    # print("The number of times the actual Y was zero was:", countzero)
+    # print("The number of times the actual Y was one was:", countone)
     # Finding VIF #
     # calldata_df = calldata
     # calldata_df.dropna()
@@ -266,7 +274,7 @@ def agg_options(calldata):
         else:
             calldata.Foggy.values[i] = 0
     # print(calldata.head())
-    save_excel_file(folderpath +"/"+
+    save_excel_file(folderpath +
         "",
         "DarkSky Weather", calldata)
 
@@ -356,7 +364,7 @@ def graph_maker(calldata, wsdata):
     plt.plot(y, x, label='Temp', linewidth=2)
     plt.plot(y, x1, label='Hour', linewidth=2)
     plt.plot(y, x2, label='Month', linewidth=2)
-    plt.plot(xdif, y, label='Difference')
+    # plt.plot(xdif, y, label='Difference')
     plt.xlabel('Calls')
     plt.ylabel('Variables')
     plt.title('Variable Comparison')
@@ -367,21 +375,37 @@ def graph_maker(calldata, wsdata):
 def main():
     # Link for example: https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8
 
-    # calldata = easy_import_excel_file("")
+    # calldata = pandas.read_excel(folderpath + "",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
     # agg_options(calldata)
 
     # MAIN CallData 2018 #
-    # calldata = easy_import_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx")
+    # calldata = pandas.read_excel(
+    #     folderpath + "Excel & CSV Sheets/2018 Data/2018 Accident Report List Agg Options.xlsx",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
 
     # MAIN Calldata 2018 + 2017 #
-    calldata = \
-        easy_import_excel_file(folderpath + "/"+"Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx")
-    # calldata.drop(["Clear", "Snow", "Dewpoint", "Hour", "Foggy", "Visibility"], axis=1, inplace=True)
-    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
+    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx",
+        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+                'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+                'Visibility': float, 'Conditions': str})
+
+    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
-    # calldata = \
-    #     easy_import_excel_file(folderpath + "Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx")
+    # calldata = pandas.read_excel(
+    #     folderpath + "Excel & CSV Sheets/2017 Data/2017 CallData Agg.xlsx",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
     # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
 
 
@@ -410,41 +434,40 @@ def main():
 
 
     # Y count graph #
-    # calldata["Y"].value_counts()
-    # sns.countplot(x="Y", data=calldata, palette="hls")
-    # plt.title("Y Count")
-    # plt.show()
+    calldata["Y"].value_counts()
+    sns.countplot(x="Y", data=calldata, palette="hls")
+    plt.title("Y Count")
+    plt.show()
 
     # Printing Variable Importance #
-    # X = calldata.values[:, mini:maxi]
-    # Y = calldata.values[:, 0]
-    # Y = Y.astype('int')
-    # #Build a forest and compute the feature importances
-    # forest = ExtraTreesClassifier()
-    #
-    # forest.fit(X, Y)
-    # importances = forest.feature_importances_
-    # std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
-    # indices = np.argsort(importances)[::-1]
-    #
-    # # Print the feature ranking
-    #
-    # print("Feature ranking:")
-    # features_list = calldata.columns.values[mini:maxi]
-    # features_list.tolist()
+    X = calldata.values[:, mini:maxi]
+    Y = calldata.values[:, 0]
+    Y = Y.astype('int')
+    #Build a forest and compute the feature importances
+    forest = ExtraTreesClassifier()
+
+    forest.fit(X, Y)
+    importances = forest.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
+    indices = np.argsort(importances)[::-1]
+
+    # Print the feature ranking
+    print("Feature ranking:")
+    features_list = calldata.columns.values[mini:maxi]
+    features_list.tolist()
     # for f in range(X.shape[1]):
     #     print("%d. %s (%f)" % (f + 1, features_list, importances[indices[f]]))
 
     # Plot the feature importances of the forest
-    # plt.figure()
-    # plt.rcParams.update({'font.size': 20})
-    # plt.title("Feature Importance")
-    # plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
-    # plt.xticks(range(X.shape[1]), features_list)
-    # plt.xlim([-1, X.shape[1]])
-    # plt.xlabel("Feature Name")
-    # plt.ylabel("Variable Importance Level")
-    # plt.show()
+    plt.figure()
+    plt.rcParams.update({'font.size': 20})
+    plt.title("Feature Importance")
+    plt.bar(range(X.shape[1]), importances[indices], color="r", yerr=std[indices], align="center")
+    plt.xticks(range(X.shape[1]), features_list)
+    plt.xlim([-1, X.shape[1]])
+    plt.xlabel("Feature Name")
+    plt.ylabel("Variable Importance Level")
+    plt.show()
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table

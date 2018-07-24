@@ -1,7 +1,8 @@
 import email
 import imaplib
 import os
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, time
+import time
 from darksky import forecast
 import pytz
 import pandas
@@ -80,10 +81,10 @@ def split_datetime(calldata):
         calldata.Time = calldata.Time.astype(str)
         calldata.Hour = calldata.Hour.astype(str)
 
-        dateof = datetime.strptime(calldata.Response_Date.values[i], '%m/%d/%Y %H:%M:%S %p')
+        dateof = datetime.strptime(calldata.Response_Date.values[i], '%m/%d/%Y %I:%M:%S %p')
 
-        calldata.Date.values[i] = str(dateof.date())
-        calldata.Time.values[i] = str(dateof.time())
+        calldata.Date.values[i] = dateof.date()
+        calldata.Time.values[i] = dateof.time()
         calldata.Hour.values[i] = dateof.hour
         moa = int(calldata.Date.values[i].split('-')[1])
         calldata.Month.values[i] = moa
@@ -112,11 +113,11 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 def drop_duplicates(calldata):
     datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
-    listing = list(datafile.Index.values)
-    for i in listing:
-        print(i)
+    listing = list(datafile.index.values)
     calldata.drop(calldata.index[listing], inplace=True)
-    print(calldata.values[0:5])
+    save_excel_file(
+        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 DroppedDupes.xlsx",
+        "DarkSky Weather", calldata)
     return calldata
 
 
@@ -127,6 +128,7 @@ def find_Duplicates(data_file_name, occurrence_list):
     # id1 = 0
     # id2 = data_file_copy.index[id1 + 1]
     for id1, id in enumerate(data_file_copy.values):
+        print(id1)
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
             save_excel_file(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
@@ -136,22 +138,22 @@ def find_Duplicates(data_file_name, occurrence_list):
             id2 = data_file_copy.index[id1 + 1]
             # print(id1, id2)
             # print(data_file_copy.Time[id1])
-            time1 = datetime.strptime(data_file_copy.Time.values[id1], '%H:%M:%S').time()
-            time2 = datetime.strptime(data_file_copy.Time.values[id2], '%H:%M:%S').time()
+            time1 = data_file_copy.Time.values[id1]
+            time2 = data_file_copy.Time.values[id2]
             duration = datetime.combine(date.min, time2) - datetime.combine(date.min, time1)
             duration = duration.total_seconds()
             minutes = math.fabs(duration / 60.0)
             if minutes < 4:
-                lat1= (int(data_file_copy.Latitude[id1]) / 1000000)
-                long1 = (int(data_file_copy.Longitude[id1]) / 1000000)
-                lat2 = (int(data_file_copy.Latitude[id2]) / 1000000)
-                long2 = (int(data_file_copy.Longitude[id2]) / 1000000)
+                lat1= int(data_file_copy.Latitude.values[id1])
+                long1 = int(data_file_copy.Longitude.values[id1])
+                lat2 = int(data_file_copy.Latitude.values[id2])
+                long2 = int(data_file_copy.Longitude.values[id2])
                 latChange = math.fabs(lat1 - lat2)
                 longChange = math.fabs(long1 - long2)
                 if latChange < 0.0001 and longChange < 0.0001:
                     count_doubles += 1
-                    problem1 = data_file_copy.Problem[id1].lstrip()
-                    problem2 = data_file_copy.Problem[id2].lstrip()
+                    problem1 = data_file_copy.Problem.values[id1].lstrip()
+                    problem2 = data_file_copy.Problem.values[id2].lstrip()
                     if occurrence_list.index(problem1) >= occurrence_list.index(problem2):
                         #print("Dropping id at: ", id2)
                         remove = remove.append(data_file_copy.iloc[[id2]], ignore_index=False)
@@ -179,7 +181,13 @@ def find_y(calldata):
 
 def append_data(calldata):
     # Appending new data to 2018+2017 File #
-    og_calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx")
+    calldata = calldata.iloc[::-1]
+    og_calldata = pandas.read_excel(
+        folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx",
+        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+                'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+                'Visibility': float, 'Conditions': str})
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
 
@@ -192,29 +200,34 @@ def append_data(calldata):
 def main():
 
     # # Run this line each morning
-    calldata, file = get_Email()
-
-    # Reading file directly for testing.
+    # calldata, file = get_Email()
+    #
+    # # Reading file directly for testing
     # file = folderpath + ""
-    #
-    # calldata = pandas.read_csv(file, sep=",")
-    #
+    # #
+    # calldata = pandas.read_csv(
+    #     folderpath + "", sep=",",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
+    # #
     # dayname_csv = file.split("/")[-1]
     # dayname_xlsx = dayname_csv.split(".")[0]
     #
     # # Removing the excess text from the problem column.
     # calldata = clean_problems(calldata)
-    #
-    # # Splitting and tidying the Response Date to the accident.
+    # #
+    # # # Splitting and tidying the Response Date to the accident.
     # calldata = split_datetime(calldata)
-    #
+    # #
     # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
     # header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
     #                'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility')
     #
     # calldata.index.name = "Index"
     # calldata = calldata.reindex(columns=header_list)
-    #
+    # #
     # calldata.Event = calldata.Temperature.astype(str)
     # calldata.Conditions = calldata.Dewpoint.astype(str)
     #
@@ -259,20 +272,21 @@ def main():
     #         pass
     # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
     #                 "DarkSky Weather", calldata)
-    #
-    # # Here, run the above code first, then run the below code after adjusting placement of index in the xlsx file #
-    #
-    # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
-    #
+    # #
+    # # # Here, run the above code first, then run the below code after adjusting placement of index in the xlsx file #
+    # #
+    occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
+
     # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
     #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
-    #
+
     # find_Duplicates(calldata, occurrence_list)
     # calldata = drop_duplicates(calldata)
-    #
+
+
     # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
     #                 "DarkSky Weather", calldata)
     #
@@ -290,9 +304,9 @@ def main():
     #
     # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
     #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
-    #
+    # #
     # # Use this calldata for reading in 1 specific file for appending
-    # # calldata = pandas.read_excel("")
+    # calldata = pandas.read_excel(folderpath + "")
     #
     # calldata.Latitude = calldata.Latitude.astype(float)
     # calldata.Longitude = calldata.Longitude.astype(float)
@@ -300,7 +314,7 @@ def main():
     #     if calldata.Latitude.values[k] > 40:
     #         calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
     #         calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-    #
+
     # append_data(calldata)
 
 if __name__ == "__main__":
