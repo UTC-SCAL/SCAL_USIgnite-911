@@ -99,7 +99,7 @@ def specify_stats(names, mini, maxi, calldata):
     scaler = MinMaxScaler()
     X_train_norm = scaler.fit_transform(X_train)
     X_test_norm = scaler.transform(X_test)
-    print(X_train_norm)
+    # print(X_train_norm)
     # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
     LogReg.fit(X_train_norm, Y_train)
@@ -137,14 +137,11 @@ def specify_stats(names, mini, maxi, calldata):
     # drop the non-numerical columns
     calldata_df = calldata_df._get_numeric_data()
     # subset of the calldata_df
-    # calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
-    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility",
+    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility", "Clear",
     #                            "Rain", "Snow", "Cloudy", "Foggy"]].dropna()
-    calldata_df = calldata_df[["Y", "Hour", "Humidity", "Month",
-                               "Rain", "Cloudy", "Foggy"]].dropna()
+    calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
     min_max_scalar = preprocessing.MinMaxScaler()
     calldata_df = min_max_scalar.fit_transform(calldata_df)
-    # calldata_df = calldata_df.values
     vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
                              index=names)
     print("Printing VIF Test:")
@@ -400,9 +397,8 @@ def main():
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
                 'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
                 'Visibility': float, 'Conditions': str})
-
-    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
-    calldata.drop(["Clear", "Dewpoint", "Visibility", "Snow", "Temperature"], axis=1, inplace=True)
+    # calldata.drop(["Clear", "Dewpoint", "Visibility", "Snow"], axis=1, inplace=True)
+    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = pandas.read_excel(
@@ -411,7 +407,8 @@ def main():
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
     #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
-    # calldata.drop(["Clear", "Snow"], axis=1, inplace=True)
+    # agg_options(calldata)
+    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
 
 
     mini = calldata.columns.get_loc("Conditions") + 1
