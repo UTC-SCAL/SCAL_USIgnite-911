@@ -139,7 +139,8 @@ def specify_stats(names, mini, maxi, calldata):
     # subset of the calldata_df
     # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility", "Clear",
     #                            "Rain", "Snow", "Cloudy", "Foggy"]].dropna()
-    calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
+    # calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
+    calldata_df = calldata_df[["Y", "Clear", "Month"]].dropna()
     min_max_scalar = preprocessing.MinMaxScaler()
     calldata_df = min_max_scalar.fit_transform(calldata_df)
     vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
@@ -397,8 +398,10 @@ def main():
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
                 'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
                 'Visibility': float, 'Conditions': str})
-    # calldata.drop(["Clear", "Dewpoint", "Visibility", "Snow"], axis=1, inplace=True)
-    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
+
+    # calldata.drop(["Hour", "Temperature", "Dewpoint", "Humidity", "Visibility", "Rain", "Snow", "Cloudy", "Foggy"],
+    #               axis=1, inplace=True)
+    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = pandas.read_excel(
@@ -411,13 +414,13 @@ def main():
     # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
 
 
-    mini = calldata.columns.get_loc("Conditions") + 1
-    maxi = len(calldata.columns)
+    # mini = calldata.columns.get_loc("Conditions") + 1
+    # maxi = len(calldata.columns)
 
     # Add in the intercept for the Jin table
-    names = ["Intercept"]
-    for i in range(mini, maxi):
-        names.append(calldata.columns.values[i])
+    # names = ["Intercept"]
+    # for i in range(mini, maxi):
+    #     names.append(calldata.columns.values[i])
 
 
     # for i, value in enumerate(calldata.values[0:10]):
@@ -473,7 +476,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    LogReg = specify_stats(names, mini, maxi, calldata)
+    # LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":
