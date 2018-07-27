@@ -95,21 +95,21 @@ print("Variables in X: ", calldata.columns.values[mini:maxi])
 # Create a 3D plot
 
 # https://www.kaggle.com/kashnitsky/topic-7-unsupervised-learning-pca-and-clustering
-fig = plt.figure(1)
-plt.clf()
-ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
-plt.cla()
-
-for name, label in [("Setosa", 0), ("Versicolour", 1), ("Virginica", 2)]:
-    ax.test3D(X[Y == label, 0].mean(),
-              X[Y == label, 1].mean() + 1.5,
-              X[Y == label, 2].mean(), name,
-              horizonatalalignment="center",
-              bbox=dict(alpha=.5, edgecolor="w", facecolor="w"))
-# Change order of labels so they match
-y_clr = np.choose(Y, [1, 2, 0]).astype(np.float)
-ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y_clr, cmap=plt.cm.nipy_spectral)
-
-ax.w_xaxis.set_ticklabels([])
-ax.w_xaxis.set_ticklabels([])
-ax.w_xaxis.set_ticklabels([])
+# fig = plt.figure(1)
+# plt.clf()
+# ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
+# plt.cla()
+#
+# for name, label in [("Setosa", 0), ("Versicolour", 1), ("Virginica", 2)]:
+#     ax.test3D(X[Y == label, 0].mean(),
+#               X[Y == label, 1].mean() + 1.5,
+#               X[Y == label, 2].mean(), name,
+#               horizonatalalignment="center",
+#               bbox=dict(alpha=.5, edgecolor="w", facecolor="w"))
+# # Change order of labels so they match
+# y_clr = np.choose(Y, [1, 2, 0]).astype(np.float)
+# ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y_clr, cmap=plt.cm.nipy_spectral)
+#
+# ax.w_xaxis.set_ticklabels([])
+# ax.w_yaxis.set_ticklabels([])
+# ax.w_zaxis.set_ticklabels([])

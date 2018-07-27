@@ -19,6 +19,8 @@ import warnings
 import os, sys
 from sklearn import svm
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.decomposition import PCA
+
 
 warnings.filterwarnings("ignore")
 
@@ -82,32 +84,34 @@ def find_occur(calldata, col):
 def specify_stats(names, mini, maxi, calldata):
     X = calldata.ix[:, mini:maxi].values
     Y = calldata.ix[:, 0].values
+
+    # Jeremy's stupid way of testing #
+    # X_train, X_test, Y_train, Y_test = train_test_split(X_pca, Y, test_size=.3)
+    # LogReg = LogisticRegression()
+    # LogReg.fit(X_train, Y_train)
+    # print(LogReg.fit(X_train, Y_train))
+    # Y_pred = LogReg.predict(X_test)
+    # Optional inclusion of PCA code #
+    # pca = PCA(n_components=4)  # number of components
+    # pca.fit(X)
+    # X_pca = pca.transform(X)
+
+
+    # Jin's fancy testing #
     train = calldata[0:26166]  # 2017 data
-    print(type(train))
     test = calldata[26166:-1]  # 2018 data
-    # print(test)
-
     X_train = train.ix[:, mini:maxi].values
-    # print(X_train[0:5])
     Y_train = train.ix[:, 0].values
-
     X_test = test.ix[:, mini:maxi].values
-    # print(X_test[0:5])
     Y_test = test.ix[:, 0].values
-    # plt.plot(Y_test)
-    # plt.show()
     scaler = MinMaxScaler()
     X_train_norm = scaler.fit_transform(X_train)
     X_test_norm = scaler.transform(X_test)
-    # print(X_train_norm)
-    # X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.3)
     LogReg = LogisticRegression()
     LogReg.fit(X_train_norm, Y_train)
-    # print(LogReg.fit(X_train, Y_train))
     Y_pred = LogReg.predict(X_test_norm)
-
-    plt.plot(Y_pred)
-    plt.legend()
+    # plt.plot(Y_pred)
+    # plt.legend()
     # plt.plot(Y_test, color='b')
     # plt.show()
 
@@ -139,8 +143,9 @@ def specify_stats(names, mini, maxi, calldata):
     # subset of the calldata_df
     # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility", "Clear",
     #                            "Rain", "Snow", "Cloudy", "Foggy"]].dropna()
-    # calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
-    calldata_df = calldata_df[["Y", "Clear", "Month"]].dropna()
+    calldata_df = calldata_df[["Y", "Temperature", "Humidity", "Month", "Rain", "Cloudy"]].dropna()
+    # calldata_df = calldata_df[["Y", "Hour", "Temperature", "Dewpoint", "Humidity", "Month", "Visibility",
+    #                                                       "Rain", "Cloudy", "Foggy"]].dropna()
     min_max_scalar = preprocessing.MinMaxScaler()
     calldata_df = min_max_scalar.fit_transform(calldata_df)
     vif_test = pandas.Series([variance_inflation_factor(calldata_df, i) for i in range(calldata_df.shape[1])],
@@ -401,7 +406,7 @@ def main():
 
     # calldata.drop(["Hour", "Temperature", "Dewpoint", "Humidity", "Visibility", "Rain", "Snow", "Cloudy", "Foggy"],
     #               axis=1, inplace=True)
-    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
+    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = pandas.read_excel(
@@ -414,13 +419,13 @@ def main():
     # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy"], axis=1, inplace=True)
 
 
-    # mini = calldata.columns.get_loc("Conditions") + 1
-    # maxi = len(calldata.columns)
+    mini = calldata.columns.get_loc("Conditions") + 1
+    maxi = len(calldata.columns)
 
     # Add in the intercept for the Jin table
-    # names = ["Intercept"]
-    # for i in range(mini, maxi):
-    #     names.append(calldata.columns.values[i])
+    names = ["Intercept"]
+    for i in range(mini, maxi):
+        names.append(calldata.columns.values[i])
 
 
     # for i, value in enumerate(calldata.values[0:10]):
@@ -476,7 +481,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    # LogReg = specify_stats(names, mini, maxi, calldata)
+    LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":

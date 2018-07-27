@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/PCA.py" afterPath="$PROJECT_DIR$/Code/PCA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,21 +15,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1404">
-              <caret line="219" column="26" lean-forward="false" selection-start-line="219" selection-start-column="26" selection-end-line="219" selection-end-column="26" />
+            <state relative-caret-position="527">
+              <caret line="107" column="48" lean-forward="true" selection-start-line="107" selection-start-column="48" selection-end-line="107" selection-end-column="48" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1050#1276#0" expanded="false" />
-                <element signature="e#1355#2022#0" expanded="false" />
-                <element signature="e#2065#2209#0" expanded="false" />
-                <element signature="e#2247#2589#0" expanded="false" />
-                <element signature="e#2644#7435#0" expanded="false" />
-                <element signature="e#7482#7692#0" expanded="false" />
-                <element signature="e#7751#10629#0" expanded="false" />
-                <element signature="e#10671#14123#0" expanded="false" />
+                <element signature="e#1089#1315#0" expanded="false" />
+                <element signature="e#1394#2061#0" expanded="false" />
+                <element signature="e#2104#2248#0" expanded="false" />
+                <element signature="e#2286#2628#0" expanded="false" />
+                <element signature="e#7829#8039#0" expanded="false" />
+                <element signature="e#8098#10976#0" expanded="false" />
+                <element signature="e#11018#14470#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -77,15 +77,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PCA.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PCA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/PCA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="96" column="2" lean-forward="false" selection-start-line="96" selection-start-column="2" selection-end-line="96" selection-end-column="2" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-                <element signature="e#1372#1404#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,11 +151,11 @@
         <option value="$PROJECT_DIR$/Code/mappingDarkSky.py" />
         <option value="$PROJECT_DIR$/pcaExample.py" />
         <option value="$PROJECT_DIR$/featureSelectionTesting.py" />
-        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
         <option value="$PROJECT_DIR$/Code/featureSelectionTesting.py" />
         <option value="$PROJECT_DIR$/PCA.py" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
         <option value="$PROJECT_DIR$/Code/PCA.py" />
+        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
       </list>
     </option>
   </component>
@@ -186,6 +183,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -208,8 +207,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,7 +238,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.PCA">
+  <component name="RunManager" selected="Python.ConnectingWeather">
     <configuration name="ConnectingWeather" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -336,10 +333,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.PCA" />
-        <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="2" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
-        <item index="3" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="0" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="1" class="java.lang.String" itemvalue="Python.PCA" />
+        <item index="2" class="java.lang.String" itemvalue="Python.gmailReader" />
+        <item index="3" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
         <item index="4" class="java.lang.String" itemvalue="Python.pcaExample" />
       </list>
     </recent_temporary>
@@ -446,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532708607863</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Changes made">
+      <created>1532708713687</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1532708713687</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -461,24 +465,24 @@
   <component name="ToolWindowManager">
     <frame x="850" y="24" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20064034" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20277481" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.956979" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2555024" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -761,31 +765,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
+    <entry file="file://$PROJECT_DIR$/Code/PCA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="219" column="26" lean-forward="false" selection-start-line="219" selection-start-column="26" selection-end-line="219" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1050#1276#0" expanded="false" />
-            <element signature="e#1355#2022#0" expanded="false" />
-            <element signature="e#2065#2209#0" expanded="false" />
-            <element signature="e#2247#2589#0" expanded="false" />
-            <element signature="e#2644#7435#0" expanded="false" />
-            <element signature="e#7482#7692#0" expanded="false" />
-            <element signature="e#7751#10629#0" expanded="false" />
-            <element signature="e#10671#14123#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/PCA.py">
+    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="96" column="2" lean-forward="false" selection-start-line="96" selection-start-column="2" selection-end-line="96" selection-end-column="2" />
+        <state relative-caret-position="527">
+          <caret line="107" column="48" lean-forward="true" selection-start-line="107" selection-start-column="48" selection-end-line="107" selection-end-column="48" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
-            <element signature="e#1372#1404#0" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#1089#1315#0" expanded="false" />
+            <element signature="e#1394#2061#0" expanded="false" />
+            <element signature="e#2104#2248#0" expanded="false" />
+            <element signature="e#2286#2628#0" expanded="false" />
+            <element signature="e#7829#8039#0" expanded="false" />
+            <element signature="e#8098#10976#0" expanded="false" />
+            <element signature="e#11018#14470#0" expanded="false" />
           </folding>
         </state>
       </provider>
