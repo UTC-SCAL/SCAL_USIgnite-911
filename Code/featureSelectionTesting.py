@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from sklearn.model_selection import StratifiedKFold
 import numpy as np
-from sklearn.decomposition import PCA
+
 
 
 warnings.filterwarnings("ignore")
@@ -53,10 +53,3 @@ Y = calldata.ix[:, 0].values
 # plt.ylabel("Cross validation score (# of correct classifications)")
 # plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
 # plt.show()
-
-# Principal Component Analysis #
-# Link to website covering PCA: https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
-pca = PCA(n_components=4)
-pca.fit(X)
-print("Explained Variance Ratio: \n", pca.explained_variance_ratio_)
-print("Singular Values: \n", pca.singular_values_)
