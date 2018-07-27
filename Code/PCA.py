@@ -93,6 +93,8 @@ print("Variables in X: ", calldata.columns.values[mini:maxi])
 # top k of them
 
 # Create a 3D plot
+
+# https://www.kaggle.com/kashnitsky/topic-7-unsupervised-learning-pca-and-clustering
 fig = plt.figure(1)
 plt.clf()
 ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
