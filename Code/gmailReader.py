@@ -195,133 +195,127 @@ def append_data(calldata):
 
 def main():
 
-    # # Run this line each morning
+    # Run this line each morning
     calldata, file = get_Email()
     # Reading file directly for testing
-    # file = folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-07-24.xlsx"
-
+    # file = folderpath + ""
+    #
     # calldata = pandas.read_csv(
     #     file, sep=",",
     #     dtype={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': str,
     #             'Time': str, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
     #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
     #             'Visibility': float, 'Conditions': str})
-    # calldata = pandas.read_excel(file,
-    #                              dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
-    #                                      'Date': datetime,
-    #                                      'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str,
-    #                                      'City': str,
-    #                                      'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
-    #                                      'Month': int,
-    #                                      'Visibility': float, 'Conditions': str})
-
-    dayname_csv = file.split("/")[-1]
-    dayname_xlsx = dayname_csv.split(".")[0]
+    # # calldata = pandas.read_excel(file,
+    # #                              dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
+    # #                                      'Date': datetime,
+    # #                                      'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str,
+    # #                                      'City': str,
+    # #                                      'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
+    # #                                      'Month': int,
+    # #                                      'Visibility': float, 'Conditions': str})
     #
-    # Removing the excess text from the problem column.
-    calldata = clean_problems(calldata)
-    # # #
-    # # # # Splitting and tidying the Response Date to the accident.
-    calldata = split_datetime(calldata)
-    # # #
-    calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
-    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility')
+    # dayname_csv = file.split("/")[-1]
+    # dayname_xlsx = dayname_csv.split(".")[0]
     # #
-    calldata.index.name = "Index"
-    calldata = calldata.reindex(columns=header_list)
-
-    calldata.Event = calldata.Event.astype(str)
-    calldata.Conditions = calldata.Conditions.astype(str)
-    # calldata.Time = calldata.Time.astype(datetime.time)
-    # calldata.Date = calldata.Date.astype(datetime)
-
-    # print(type(calldata.Date.values[0]))
-    # print(type(calldata.Time.values[0]))
-
-    calldata.Latitude = calldata.Latitude.astype(float)
-    calldata.Longitude = calldata.Longitude.astype(float)
-    for k, info in enumerate(calldata.values):
-        if calldata.Latitude.values[k] > 40:
-            calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
-            calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-
-
+    # # Removing the excess text from the problem column.
+    # calldata = clean_problems(calldata)
+    # # # #
+    # # # # # Splitting and tidying the Response Date to the accident.
+    # calldata = split_datetime(calldata)
+    # # # #
+    # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
+    # header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
+    #                'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility')
+    # # #
+    # calldata.index.name = "Index"
+    # calldata = calldata.reindex(columns=header_list)
     #
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+    # calldata.Event = calldata.Event.astype(str)
+    # calldata.Conditions = calldata.Conditions.astype(str)
     #
-    for k, info in enumerate(calldata.values[0:-1]):
-        print(k)
-        # All variables are blank-of-accident, thus year is yoa.
-        hoa = int(calldata.Hour.values[k])
-        toa = calldata.Time.values[k]
-        mioa = int(toa.split(':')[1])
-        # mioa = toa.minute
-        soa = int(toa.split(':')[2])
-        # soa = toa.second
-        doa = calldata.Date.values[k]
-        yoa = int(doa.split('-')[0])
-        moa = int(doa.split('-')[1])
-        dayoa = int(doa.split('-')[2])
-        lat = calldata.Latitude.values[k]
-        long = calldata.Longitude.values[k]
-
-        # The following line needs to have this format:
-        t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
-        call = key, lat, long
-
-        # print(forecastcall.currently)
-        try:
-            forecastcall = forecast(*call, time=t)
-            for i, value in enumerate(forecastcall.hourly):
-                if i == hoa:
-                    # These two lines take in unix time and make it readable by peoplefolk
-                    # tz = pytz.timezone('America/New_York')
-                    # dt = datetime.fromtimestamp(value.time, tz)
-                    calldata.Temperature.values[k] = value.temperature
-                    calldata.Dewpoint.values[k] = value.dewPoint
-                    calldata.Event.values[k] = value.icon
-                    calldata.Humidity.values[k] = value.humidity
-                    calldata.Month.values[k] = moa
-                    calldata.Visibility.values[k] = value.visibility
-                    calldata.Conditions.values[k] = value.summary
-        except:
-            pass
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
-                    "DarkSky Weather", calldata)
-
-    # Here, run the above code first, then run the below code after adjusting placement of index in the xlsx file #
-
-    occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
-
-    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-                'Visibility': float, 'Conditions': str})
-
-    find_Duplicates(calldata, occurrence_list)
-    calldata = drop_duplicates(calldata)
-
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
-                    "DarkSky Weather", calldata)
-
-    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
-        + dayname_xlsx + "_Dropped_Dupes.xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-                'Visibility': float, 'Conditions': str})
-
-    calldata = find_y(calldata)
-
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
-                    + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
-
-    # Use this calldata for reading in 1 specific file for appending
-    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-07-24_FinalForm.xlsx")
-
-    append_data(calldata)
+    #
+    # calldata.Latitude = calldata.Latitude.astype(float)
+    # calldata.Longitude = calldata.Longitude.astype(float)
+    # for k, info in enumerate(calldata.values):
+    #     if calldata.Latitude.values[k] > 40:
+    #         calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
+    #         calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
+    #
+    #
+    # #
+    # key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+    # #
+    # for k, info in enumerate(calldata.values[0:-1]):
+    #     print(k)
+    #     # All variables are blank-of-accident, thus year is yoa.
+    #     hoa = int(calldata.Hour.values[k])
+    #     toa = calldata.Time.values[k]
+    #     mioa = int(toa.split(':')[1])
+    #     soa = int(toa.split(':')[2])
+    #     doa = calldata.Date.values[k]
+    #     yoa = int(doa.split('-')[0])
+    #     moa = int(doa.split('-')[1])
+    #     dayoa = int(doa.split('-')[2])
+    #     lat = calldata.Latitude.values[k]
+    #     long = calldata.Longitude.values[k]
+    #
+    #     # The following line needs to have this format:
+    #     t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+    #     call = key, lat, long
+    #
+    #     # print(forecastcall.currently)
+    #     try:
+    #         forecastcall = forecast(*call, time=t)
+    #         for i, value in enumerate(forecastcall.hourly):
+    #             if i == hoa:
+    #                 # These two lines take in unix time and make it readable by peoplefolk
+    #                 # tz = pytz.timezone('America/New_York')
+    #                 # dt = datetime.fromtimestamp(value.time, tz)
+    #                 calldata.Temperature.values[k] = value.temperature
+    #                 calldata.Dewpoint.values[k] = value.dewPoint
+    #                 calldata.Event.values[k] = value.icon
+    #                 calldata.Humidity.values[k] = value.humidity
+    #                 calldata.Month.values[k] = moa
+    #                 calldata.Visibility.values[k] = value.visibility
+    #                 calldata.Conditions.values[k] = value.summary
+    #     except:
+    #         pass
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
+    #                 "DarkSky Weather", calldata)
+    #
+    # # Here, run the above code first, then run the below code after adjusting placement of index in the xlsx file #
+    #
+    # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
+    #
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
+    #
+    # find_Duplicates(calldata, occurrence_list)
+    # calldata = drop_duplicates(calldata)
+    #
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
+    #                 "DarkSky Weather", calldata)
+    #
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
+    #     + dayname_xlsx + "_Dropped_Dupes.xlsx",
+    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
+    #             'Visibility': float, 'Conditions': str})
+    #
+    # calldata = find_y(calldata)
+    #
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
+    #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
+    #
+    # # Use this calldata for reading in 1 specific file for appending
+    # # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-07-24_FinalForm.xlsx")
+    #
+    # append_data(calldata)
 
 if __name__ == "__main__":
     main()

@@ -1,25 +1,28 @@
 from sklearn.decomposition import PCA
 import pandas
-import numpy as np
-import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 import os, sys
 from datetime import datetime
 from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model, decomposition, datasets
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
 
 warnings.filterwarnings("ignore")
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 
-def draw_vector(v0, v1, ax=None):
-    ax = ax or plt.gca()
-    arrowprops = dict(arrowstyle="->", linewidth=2, shrinkA=0, shrinkB=0)
-    ax.annotate("", v1, v0, arrowprops=arrowprops)
-
-
-# MAIN Calldata 2018 + 2017 #
+# def draw_vector(v0, v1, ax=None):
+#     ax = ax or plt.gca()
+#     arrowprops = dict(arrowstyle="->", linewidth=2, shrinkA=0, shrinkB=0)
+#     ax.annotate("", v1, v0, arrowprops=arrowprops)
+#
+#
+# # MAIN Calldata 2018 + 2017 #
 calldata = pandas.read_excel(folderpath +
                              "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx",
                              dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
@@ -29,9 +32,9 @@ calldata = pandas.read_excel(folderpath +
 
 mini = calldata.columns.get_loc("Conditions") + 1
 maxi = len(calldata.columns)
-X = calldata.ix[:, mini:maxi].values
-Y = calldata.ix[:, 0].values
-print("Variables in X: ", calldata.columns.values[mini:maxi])
+# X = calldata.ix[:, mini:maxi].values
+# Y = calldata.ix[:, 0].values
+# print("Variables in X: ", calldata.columns.values[mini:maxi])
 
 # Principal Component Analysis #
 # Link to website covering PCA: https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
@@ -113,3 +116,47 @@ print("Variables in X: ", calldata.columns.values[mini:maxi])
 # ax.w_xaxis.set_ticklabels([])
 # ax.w_yaxis.set_ticklabels([])
 # ax.w_zaxis.set_ticklabels([])
+
+
+logistic = linear_model.LogisticRegression()
+
+pca = decomposition.PCA()
+pipe = Pipeline(steps=[('pca', pca), ('logistic', logistic)])
+
+X_digits = calldata.ix[:, mini:maxi].values
+y_digits = calldata.ix[:, 0].values
+
+# digits = datasets.load_digits()
+# X_digits = digits.data
+# y_digits = digits.target
+print("X_digits: ", X_digits)
+print(type(X_digits))
+print("Y_digits: ", y_digits)
+print(type(y_digits))
+
+# Plot the PCA spectrum
+pca.fit(X_digits)
+
+plt.figure(1, figsize=(4, 3))
+plt.clf()
+plt.axes([.2, .2, .7, .7])
+plt.plot(pca.explained_variance_, linewidth=2)
+plt.axis('tight')
+plt.xlabel('n_components')
+plt.ylabel('explained_variance_')
+
+print(pca.components_.shape)
+# Prediction
+n_components = [5, 8, 11]
+Cs = np.logspace(-4, 4, 3)
+
+# Parameters of pipelines can be set using ‘__’ separated parameter names:
+estimator = GridSearchCV(pipe,
+                         dict(pca__n_components=n_components,
+                              logistic__C=Cs))
+estimator.fit(X_digits, y_digits)
+
+plt.axvline(estimator.best_estimator_.named_steps['pca'].n_components,
+            linestyle=':', label='n_components chosen')
+plt.legend(prop=dict(size=12))
+plt.show()
