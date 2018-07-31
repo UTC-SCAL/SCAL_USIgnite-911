@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/PCA Testing/Jin vs PCA.doc" afterPath="$PROJECT_DIR$/Graphs &amp; Images/2018+2017 Data/PCA Testing/Jin vs PCA.doc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/PCA.py" afterPath="$PROJECT_DIR$/Code/PCA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/featureSelectionTesting.py" afterPath="$PROJECT_DIR$/Code/featureSelectionTesting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-26">
-              <caret line="111" column="34" lean-forward="true" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+            <state relative-caret-position="598">
+              <caret line="23" column="48" lean-forward="true" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#1205#1431#0" expanded="false" />
@@ -54,8 +50,8 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="199" column="39" lean-forward="true" selection-start-line="199" selection-start-column="39" selection-end-line="199" selection-end-column="39" />
+            <state relative-caret-position="839">
+              <caret line="320" column="10" lean-forward="true" selection-start-line="320" selection-start-column="10" selection-end-line="320" selection-end-column="10" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#295#3267#0" expanded="false" />
@@ -75,7 +71,7 @@
       <file leaf-file-name="featureSelectionTesting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="787">
+            <state relative-caret-position="780">
               <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
               <folding>
                 <element signature="e#0#81#0" expanded="true" />
@@ -84,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PCA.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PCA.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/PCA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="766">
-              <caret line="149" column="24" lean-forward="false" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
+            <state relative-caret-position="2139">
+              <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -161,10 +157,12 @@
         <option value="$PROJECT_DIR$/pcaExample.py" />
         <option value="$PROJECT_DIR$/featureSelectionTesting.py" />
         <option value="$PROJECT_DIR$/PCA.py" />
-        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
-        <option value="$PROJECT_DIR$/Code/PCA.py" />
         <option value="$PROJECT_DIR$/Code/featureSelectionTesting.py" />
         <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
+        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/PCA.py" />
+        <option value="$PROJECT_DIR$/scratchSheet.py" />
+        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
       </list>
     </option>
   </component>
@@ -192,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -215,7 +214,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -224,15 +222,15 @@
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Code" />
       <recent name="$PROJECT_DIR$/Graphs &amp; Images" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -247,7 +245,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.featureSelectionTesting">
+  <component name="RunManager" selected="Python.scratchSheet">
     <configuration name="ConnectingWeather" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -316,7 +314,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="pcaExample" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scratchSheet" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -328,7 +326,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/pcaExample.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/scratchSheet.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,17 +334,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
       <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
-      <item index="2" class="java.lang.String" itemvalue="Python.pcaExample" />
-      <item index="3" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
-      <item index="4" class="java.lang.String" itemvalue="Python.PCA" />
+      <item index="2" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
+      <item index="3" class="java.lang.String" itemvalue="Python.PCA" />
+      <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
+        <item index="0" class="java.lang.String" itemvalue="Python.scratchSheet" />
         <item index="1" class="java.lang.String" itemvalue="Python.PCA" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
-        <item index="3" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="4" class="java.lang.String" itemvalue="Python.pcaExample" />
+        <item index="2" class="java.lang.String" itemvalue="Python.gmailReader" />
+        <item index="3" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
+        <item index="4" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
       </list>
     </recent_temporary>
   </component>
@@ -466,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532711944610</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Changes made">
+      <created>1532968746201</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1532968746201</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -479,14 +484,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
+    <frame x="887" y="-4" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18943436" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19156884" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7351816" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30688336" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -536,7 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/practiceCode.py" />
     <entry file="file://$PROJECT_DIR$/mappingEx.py" />
     <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -751,14 +755,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="199" column="39" lean-forward="true" selection-start-line="199" selection-start-column="39" selection-end-line="199" selection-end-column="39" />
+        <state relative-caret-position="839">
+          <caret line="320" column="10" lean-forward="true" selection-start-line="320" selection-start-column="10" selection-end-line="320" selection-end-column="10" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#295#3267#0" expanded="false" />
@@ -774,30 +787,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/PCA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="149" column="24" lean-forward="false" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="787">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="111" column="34" lean-forward="true" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
+        <state relative-caret-position="598">
+          <caret line="23" column="48" lean-forward="true" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#1205#1431#0" expanded="false" />
@@ -807,6 +800,24 @@
             <element signature="e#8980#9190#0" expanded="false" />
             <element signature="e#9249#12127#0" expanded="false" />
             <element signature="e#12169#15621#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/PCA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2139">
+          <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
