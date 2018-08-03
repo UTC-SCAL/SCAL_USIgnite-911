@@ -24,6 +24,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 
 
+
 warnings.filterwarnings("ignore")
 
 # %matplotlib inline
@@ -264,10 +265,35 @@ def agg_options(calldata):
 
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
                    'Hour', 'Temperature', 'Dewpoint', 'Humidity', 'Month', 'Visibility', 'Clear', 'Rain', 'Snow',
-                   'Cloudy', 'Foggy')
+                   'Cloudy', 'Foggy', "DMT 0-10", "DMT 10-20", "DMT 20-30", "DMT 30-40", "DMT 40-50", "DMT 50-60",
+                   "DMT 60+", "Min Temp", "Max Temp", "Relative Temp", "Monthly Average Temperature")
 
     calldata = calldata.reindex(columns=header_list)
     # print(calldata.head())
+
+    # daily_temps = []
+    # daily_avg_temp = 0
+    # count = 0
+    # day_num = 1
+    #
+    # for j, value in enumerate(calldata.values):
+    #     doa = calldata.Date.values[j]
+    #     yoa = int(doa.split('-')[0])
+    #     moa = int(doa.split('-')[1])
+    #     dayoa = int(doa.split('-')[2])
+    #     if dayoa == day_num:
+    #         daily_avg_temp += calldata.Temperature.values[j]
+    #         count = count + 1
+    #     else:
+    #         daily_avg_temp = daily_avg_temp / count
+    #         daily_temps.append(daily_avg_temp)
+    #         daily_avg_temp = 0
+    #         count = 0
+    #         day_num = day_num + 1
+
+
+
+
 
     for i, value in enumerate(calldata.values):
         # clear = "Clear"
@@ -434,10 +460,12 @@ def main():
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
                 'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
                 'Visibility': float, 'Conditions': str})
+    print(calldata.head())
+    # agg_options(calldata)
 
     # calldata.drop(["Hour", "Temperature", "Dewpoint", "Humidity", "Visibility", "Rain", "Snow", "Cloudy", "Foggy"],
     #               axis=1, inplace=True)
-    calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
+    # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
     # calldata = pandas.read_excel(
@@ -512,7 +540,7 @@ def main():
 
 
     # Call the specify_stats method, running Logistic Regression Analysis and making the Jin Table
-    LogReg = specify_stats(names, mini, maxi, calldata)
+    # LogReg = specify_stats(names, mini, maxi, calldata)
 
 
 if __name__ == "__main__":

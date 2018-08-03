@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/scratchSheet.py" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,28 +21,28 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+            <state relative-caret-position="407">
+              <caret line="463" column="27" lean-forward="true" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1205#1431#0" expanded="false" />
-                <element signature="e#1510#2177#0" expanded="false" />
-                <element signature="e#2220#2364#0" expanded="false" />
-                <element signature="e#2402#2744#0" expanded="false" />
-                <element signature="e#2799#8933#0" expanded="false" />
-                <element signature="e#8980#9190#0" expanded="false" />
-                <element signature="e#9249#12127#0" expanded="false" />
-                <element signature="e#12169#15621#0" expanded="false" />
+                <element signature="e#1206#1432#0" expanded="false" />
+                <element signature="e#1511#2178#0" expanded="false" />
+                <element signature="e#2221#2365#0" expanded="false" />
+                <element signature="e#2403#2745#0" expanded="false" />
+                <element signature="e#2800#8934#0" expanded="false" />
+                <element signature="e#8981#9191#0" expanded="false" />
+                <element signature="e#9250#12947#0" expanded="false" />
+                <element signature="e#12989#16441#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mappingDarkSky.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/mappingDarkSky.py">
+      <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="858">
+              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -50,43 +53,18 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="306" column="103" lean-forward="true" selection-start-line="306" selection-start-column="103" selection-end-line="306" selection-end-column="103" />
+            <state relative-caret-position="416">
+              <caret line="268" column="24" lean-forward="false" selection-start-line="268" selection-start-column="12" selection-end-line="268" selection-end-column="24" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#295#3267#0" expanded="false" />
                 <element signature="e#861#3087#0" expanded="false" />
-                <element signature="e#3305#4204#0" expanded="false" />
                 <element signature="e#4241#4559#0" expanded="false" />
                 <element signature="e#4626#4852#0" expanded="false" />
                 <element signature="e#4890#5113#0" expanded="false" />
                 <element signature="e#5174#7475#0" expanded="false" />
                 <element signature="e#7535#8030#0" expanded="false" />
                 <element signature="e#8064#9158#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="featureSelectionTesting.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#81#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PCA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/PCA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2808">
-              <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,18 +136,17 @@
         <option value="$PROJECT_DIR$/featureSelectionTesting.py" />
         <option value="$PROJECT_DIR$/PCA.py" />
         <option value="$PROJECT_DIR$/Code/featureSelectionTesting.py" />
-        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
         <option value="$PROJECT_DIR$/Code/PCA.py" />
         <option value="$PROJECT_DIR$/scratchSheet.py" />
-        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
+        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="887" />
     <option name="y" value="-4" />
-    <option name="width" value="1067" />
+    <option name="width" value="1131" />
     <option name="height" value="1145" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -190,8 +167,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -245,7 +222,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
+  <component name="RunManager" selected="Python.scratchSheet">
     <configuration name="ConnectingWeather" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -340,11 +317,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="2" class="java.lang.String" itemvalue="Python.PCA" />
-        <item index="3" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
-        <item index="4" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="0" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="2" class="java.lang.String" itemvalue="Python.gmailReader" />
+        <item index="3" class="java.lang.String" itemvalue="Python.PCA" />
+        <item index="4" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
       </list>
     </recent_temporary>
   </component>
@@ -492,7 +469,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533148518950</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Changes made">
+      <created>1533235850393</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1533235850393</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -505,14 +489,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="887" y="-4" width="1922" height="1153" extended-state="6" />
+    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19797225" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19423692" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30688336" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3605108" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -760,7 +744,7 @@
         <state relative-caret-position="390">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -784,55 +768,57 @@
         <state relative-caret-position="780">
           <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
           <folding>
-            <element signature="e#0#81#0" expanded="true" />
+            <element signature="e#0#81#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/PCA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2808">
+        <state relative-caret-position="2191">
           <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+        <state relative-caret-position="407">
+          <caret line="463" column="27" lean-forward="true" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1205#1431#0" expanded="false" />
-            <element signature="e#1510#2177#0" expanded="false" />
-            <element signature="e#2220#2364#0" expanded="false" />
-            <element signature="e#2402#2744#0" expanded="false" />
-            <element signature="e#2799#8933#0" expanded="false" />
-            <element signature="e#8980#9190#0" expanded="false" />
-            <element signature="e#9249#12127#0" expanded="false" />
-            <element signature="e#12169#15621#0" expanded="false" />
+            <element signature="e#1206#1432#0" expanded="false" />
+            <element signature="e#1511#2178#0" expanded="false" />
+            <element signature="e#2221#2365#0" expanded="false" />
+            <element signature="e#2403#2745#0" expanded="false" />
+            <element signature="e#2800#8934#0" expanded="false" />
+            <element signature="e#8981#9191#0" expanded="false" />
+            <element signature="e#9250#12947#0" expanded="false" />
+            <element signature="e#12989#16441#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="306" column="103" lean-forward="true" selection-start-line="306" selection-start-column="103" selection-end-line="306" selection-end-column="103" />
+        <state relative-caret-position="416">
+          <caret line="268" column="24" lean-forward="false" selection-start-line="268" selection-start-column="12" selection-end-line="268" selection-end-column="24" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#295#3267#0" expanded="false" />
             <element signature="e#861#3087#0" expanded="false" />
-            <element signature="e#3305#4204#0" expanded="false" />
             <element signature="e#4241#4559#0" expanded="false" />
             <element signature="e#4626#4852#0" expanded="false" />
             <element signature="e#4890#5113#0" expanded="false" />
