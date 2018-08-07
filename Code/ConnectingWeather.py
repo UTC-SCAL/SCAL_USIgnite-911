@@ -460,7 +460,7 @@ def main():
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
                 'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
                 'Visibility': float, 'Conditions': str})
-    print(calldata.head())
+    # print(calldata.head())
     # agg_options(calldata)
 
     # calldata.drop(["Hour", "Temperature", "Dewpoint", "Humidity", "Visibility", "Rain", "Snow", "Cloudy", "Foggy"],
