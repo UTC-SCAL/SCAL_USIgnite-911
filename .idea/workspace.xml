@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="Changes made">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-26.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-26_Dropped_Dupes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-26_FinalForm.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-30.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-30_Dropped_Dupes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-30_FinalForm.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-31.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-31_Dropped_Dupes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-07-31_FinalForm.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-01.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-01_Dropped_Dupes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-01_FinalForm.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-02.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-02_Dropped_Dupes.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-08-02_FinalForm.xlsx" afterPath="" />
+    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List New Data_ErrorFound.xlsx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="$PROJECT_DIR$/Code/ConnectingWeather.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,7 +22,7 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2340">
+            <state relative-caret-position="995">
               <caret line="463" column="27" lean-forward="false" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -55,7 +42,7 @@
       <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="806">
+            <state relative-caret-position="858">
               <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -64,21 +51,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="278" column="106" lean-forward="false" selection-start-line="278" selection-start-column="106" selection-end-line="278" selection-end-column="106" />
+            <state relative-caret-position="-1047">
+              <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#314#3286#0" expanded="false" />
                 <element signature="e#880#3106#0" expanded="false" />
                 <element signature="e#4260#4578#0" expanded="false" />
-                <element signature="e#4645#4871#0" expanded="false" />
-                <element signature="e#4909#5132#0" expanded="false" />
-                <element signature="e#5193#7494#0" expanded="false" />
-                <element signature="e#7554#8049#0" expanded="false" />
-                <element signature="e#8083#9177#0" expanded="false" />
+                <element signature="e#4645#4873#0" expanded="false" />
+                <element signature="e#4911#5134#0" expanded="false" />
+                <element signature="e#5195#7496#0" expanded="false" />
+                <element signature="e#7556#8051#0" expanded="false" />
+                <element signature="e#8085#9179#0" expanded="false" />
+                <marker date="1533667145977" expanded="true" signature="15828:15917" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gmailReaderBackup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2633">
+              <caret line="314" column="68" lean-forward="true" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="68" />
+              <folding>
+                <element signature="e#295#3267#0" expanded="false" />
+                <element signature="e#3305#4204#0" expanded="false" />
+                <element signature="e#4241#4559#0" expanded="false" />
+                <element signature="e#4626#4852#0" expanded="false" />
+                <element signature="e#4890#5113#0" expanded="false" />
+                <element signature="e#5174#7475#0" expanded="false" />
+                <element signature="e#7535#8030#0" expanded="false" />
+                <element signature="e#8064#9158#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -154,15 +161,17 @@
         <option value="$PROJECT_DIR$/scratchSheet.py" />
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
+        <option value="$PROJECT_DIR$/gmailReaderBackup.py" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="922" />
-    <option name="y" value="3" />
-    <option name="width" value="998" />
-    <option name="height" value="1137" />
+    <option name="x" value="521" />
+    <option name="y" value="169" />
+    <option name="width" value="996" />
+    <option name="height" value="1129" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -182,6 +191,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,8 +215,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -214,15 +223,15 @@
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Code" />
       <recent name="$PROJECT_DIR$/Graphs &amp; Images" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets" />
       <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017 Data" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -272,23 +281,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="featureSelectionTesting" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/featureSelectionTesting.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="gmailReader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -302,6 +294,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="gmailReaderBackup" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RolandProjects" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -326,17 +335,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
       <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
-      <item index="2" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
-      <item index="3" class="java.lang.String" itemvalue="Python.PCA" />
-      <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
+      <item index="2" class="java.lang.String" itemvalue="Python.PCA" />
+      <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
+      <item index="4" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
-        <item index="3" class="java.lang.String" itemvalue="Python.PCA" />
-        <item index="4" class="java.lang.String" itemvalue="Python.featureSelectionTesting" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
+        <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="3" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="4" class="java.lang.String" itemvalue="Python.PCA" />
       </list>
     </recent_temporary>
   </component>
@@ -498,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533318912602</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Changes made">
+      <created>1533645498933</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1533645498933</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -511,26 +527,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="922" y="3" width="1922" height="1153" extended-state="6" />
+    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19103523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19316968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28871894" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36042064" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -568,17 +584,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mappingEx.py" />
-    <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/pandas/core/indexing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeoFence.py" />
-    <entry file="file://$PROJECT_DIR$/CW_Backup.py" />
-    <entry file="file://$PROJECT_DIR$/mapping.py" />
     <entry file="file://$PROJECT_DIR$/connectingMapWeather.py" />
     <entry file="file://$PROJECT_DIR$/ConnectingWeather.py" />
     <entry file="file://$PROJECT_DIR$/Code/Chattanooga Polygons.html">
@@ -796,19 +801,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="806">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
+        <state relative-caret-position="995">
           <caret line="463" column="27" lean-forward="false" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -824,20 +827,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-06.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-01.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3276">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Only Testing.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="278" column="106" lean-forward="false" selection-start-line="278" selection-start-column="106" selection-end-line="278" selection-end-column="106" />
+        <state relative-caret-position="-1047">
+          <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#314#3286#0" expanded="false" />
             <element signature="e#880#3106#0" expanded="false" />
             <element signature="e#4260#4578#0" expanded="false" />
-            <element signature="e#4645#4871#0" expanded="false" />
-            <element signature="e#4909#5132#0" expanded="false" />
-            <element signature="e#5193#7494#0" expanded="false" />
-            <element signature="e#7554#8049#0" expanded="false" />
-            <element signature="e#8083#9177#0" expanded="false" />
+            <element signature="e#4645#4873#0" expanded="false" />
+            <element signature="e#4911#5134#0" expanded="false" />
+            <element signature="e#5195#7496#0" expanded="false" />
+            <element signature="e#7556#8051#0" expanded="false" />
+            <element signature="e#8085#9179#0" expanded="false" />
+            <marker date="1533667145977" expanded="true" signature="15828:15917" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2633">
+          <caret line="314" column="68" lean-forward="true" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="68" />
+          <folding>
+            <element signature="e#295#3267#0" expanded="false" />
+            <element signature="e#3305#4204#0" expanded="false" />
+            <element signature="e#4241#4559#0" expanded="false" />
+            <element signature="e#4626#4852#0" expanded="false" />
+            <element signature="e#4890#5113#0" expanded="false" />
+            <element signature="e#5174#7475#0" expanded="false" />
+            <element signature="e#7535#8030#0" expanded="false" />
+            <element signature="e#8064#9158#0" expanded="false" />
           </folding>
         </state>
       </provider>
