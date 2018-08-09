@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List New Data_ErrorFound.xlsx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Only Reverse.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Only Testing.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Only Testing.xlsx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReaderBackup.py" afterPath="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +22,7 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="995">
+            <state relative-caret-position="2340">
               <caret line="463" column="27" lean-forward="false" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -42,7 +42,7 @@
       <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
+            <state relative-caret-position="806">
               <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -54,8 +54,8 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1047">
-              <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
+            <state relative-caret-position="4940">
+              <caret line="325" column="63" lean-forward="false" selection-start-line="325" selection-start-column="63" selection-end-line="326" selection-end-column="63" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#314#3286#0" expanded="false" />
@@ -66,7 +66,7 @@
                 <element signature="e#5195#7496#0" expanded="false" />
                 <element signature="e#7556#8051#0" expanded="false" />
                 <element signature="e#8085#9179#0" expanded="false" />
-                <marker date="1533667145977" expanded="true" signature="15828:15917" ph="..." />
+                <marker date="1533733673416" expanded="true" signature="15826:15915" ph="..." />
               </folding>
             </state>
           </provider>
@@ -75,8 +75,8 @@
       <file leaf-file-name="gmailReaderBackup.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2633">
-              <caret line="314" column="68" lean-forward="true" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="68" />
+            <state relative-caret-position="416">
+              <caret line="321" column="6" lean-forward="false" selection-start-line="321" selection-start-column="6" selection-end-line="321" selection-end-column="6" />
               <folding>
                 <element signature="e#295#3267#0" expanded="false" />
                 <element signature="e#3305#4204#0" expanded="false" />
@@ -168,10 +168,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="521" />
-    <option name="y" value="169" />
-    <option name="width" value="996" />
-    <option name="height" value="1129" />
+    <option name="x" value="2599" />
+    <option name="y" value="27" />
+    <option name="width" value="992" />
+    <option name="height" value="1113" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -192,7 +192,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -215,6 +214,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -246,7 +246,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
+  <component name="RunManager" selected="Python.gmailReaderBackup">
     <configuration name="ConnectingWeather" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -341,8 +341,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
+        <item index="0" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
         <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
         <item index="3" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
         <item index="4" class="java.lang.String" itemvalue="Python.PCA" />
@@ -514,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533645498933</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Changes made">
+      <created>1533671977686</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1533671977686</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -527,26 +534,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
+    <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19316968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19743863" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28871894" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3460803" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -579,7 +586,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -805,13 +812,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="995">
+        <state relative-caret-position="2340">
           <caret line="463" column="27" lean-forward="false" selection-start-line="463" selection-start-column="27" selection-end-line="463" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -829,7 +835,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
+        <state relative-caret-position="806">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -841,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -849,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3276">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -857,14 +861,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1047">
-          <caret line="210" column="5" lean-forward="true" selection-start-line="210" selection-start-column="5" selection-end-line="210" selection-end-column="5" />
+        <state relative-caret-position="4940">
+          <caret line="325" column="63" lean-forward="false" selection-start-line="325" selection-start-column="63" selection-end-line="326" selection-end-column="63" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#314#3286#0" expanded="false" />
@@ -875,15 +878,15 @@
             <element signature="e#5195#7496#0" expanded="false" />
             <element signature="e#7556#8051#0" expanded="false" />
             <element signature="e#8085#9179#0" expanded="false" />
-            <marker date="1533667145977" expanded="true" signature="15828:15917" ph="..." />
+            <marker date="1533733673416" expanded="true" signature="15826:15915" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2633">
-          <caret line="314" column="68" lean-forward="true" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="68" />
+        <state relative-caret-position="416">
+          <caret line="321" column="6" lean-forward="false" selection-start-line="321" selection-start-column="6" selection-end-line="321" selection-end-column="6" />
           <folding>
             <element signature="e#295#3267#0" expanded="false" />
             <element signature="e#3305#4204#0" expanded="false" />

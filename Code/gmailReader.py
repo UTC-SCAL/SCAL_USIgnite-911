@@ -269,8 +269,7 @@ def main():
         # print(type(calldata.Date.values[k]))
         # print(calldata.Date.values[k])
 
-
-        # All variables are blank-of-accident, thus year is yoa.
+        # All variables are blank-of-accident, thus year is yoa
         hoa = int(calldata.Hour.values[k])
         # print("hoa:", hoa, type(hoa))
         toa = calldata.Time.values[k]
