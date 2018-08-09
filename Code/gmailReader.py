@@ -265,7 +265,7 @@ def main():
 
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
 
-    for k, info in enumerate(calldata.values[0:-1]):
+    for k, info in enumerate(calldata.values[0:10]):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
@@ -302,7 +302,6 @@ def main():
             tz = pytz.timezone('America/New_York')
             dt = datetime.fromtimestamp(calldata.Precip_Intensity_Time.values[k], tz)
             calldata.Precip_Intensity_Time.values[k] = dt
-
 
 
         # try:
@@ -352,11 +351,18 @@ def main():
         #     pass
     # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
     #                 "DarkSky Weather", calldata)
+
     # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
     #                 "DarkSky Weather", calldata)
 
+    print(calldata.head())
+    # calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(str)
+    # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Time Test.xlsx", "Time",
+    #                 calldata)
 
-    # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
+
+
+            # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
     #
     # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
     #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
