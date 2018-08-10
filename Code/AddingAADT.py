@@ -12,26 +12,22 @@ gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
-R = 6373.0
-#
+R = 6373.0  # Radius of the globe
+
 start = datetime.now()
-#
-# # MAIN Calldata 2018 + 2017 #
-# calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx",
-#     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-#             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-#             'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-#             'Visibility': float, 'Conditions': str})
 
-calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/2018_Early.xlsx",
-    dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-            'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-            'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-            'Visibility': float, 'Conditions': str})
+# MAIN Calldata 2018 + 2017 #
+calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx",
+                             dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+                                     'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+                                     'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float,
+                                     'Event': str, 'Humidity': float, 'Month': int, 'Visibility': float,
+                                     'Conditions': str, "Cloud_Coverage": float, "Precipitation_Type": str,
+                                     "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+                                     "Precip_Intensity_Time": datetime.time})
 
 
-
-roadwaydata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/Roadways_with_Roadnames.xlsx")
+roadwaydata = pandas.read_excel(folderpath + "Excel & CSV Sheets/Roadways_with_Roadnames.xlsx")
 
 
 def save_excel_file(save_file_name, sheet, data_file_name):
@@ -42,8 +38,7 @@ def save_excel_file(save_file_name, sheet, data_file_name):
     writer.save()
 
 
-
-##          Mapping the Calls and their AADT Stations           ##
+#          Mapping the Calls and their AADT Stations           #
 
 # for i, value in enumerate(calldata.values[0:1000]):
 #     lat = calldata.Latitude.values[i]
@@ -52,23 +47,17 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 #     roadlat = calldata.Road_Lat.values[i]
 #     roadlong = calldata.Road_Long.values[i]
-#     gmap.marker(roadlat, roadlong, 'b', title=roadwaydata.StationNumber.values[i])
-#
-# for i, value in enumerate(roadwaydata.values):
-#     roadlat = roadwaydata.Latitude.values[i]
-#     roadlong = roadwaydata.Longitude.values[i]
-#     gmap.marker(roadlat, roadlong, 'b', title=roadwaydata.StationNumber.values[i])
+#     gmap.marker(roadlat, roadlong, 'b', title=calldata.index.values[i])
 
 
-calldata["Road_Station"] = pandas.Series( index= calldata.index)
-calldata["AADT"] = pandas.Series(index= calldata.index)
-calldata["Road_Lat"] = pandas.Series( index= calldata.index)
-calldata["Road_Long"] = pandas.Series( index= calldata.index)
+calldata["Road_Station"] = pandas.Series(index=calldata.index)
+calldata["AADT"] = pandas.Series(index=calldata.index)
+calldata["Road_Lat"] = pandas.Series(index=calldata.index)
+calldata["Road_Long"] = pandas.Series(index=calldata.index)
 calldata.Road_Station = calldata.Road_Station.astype(str)
 calldata.AADT = calldata.AADT.astype(float)
 calldata.Road_Lat = calldata.Road_Lat.astype(float)
 calldata.Road_Long = calldata.Road_Long.astype(float)
-
 
 
 def get_AADT_no_road(j):
@@ -102,6 +91,7 @@ def get_AADT_no_road(j):
         roadwaydata.loc[roadwaydata['StationNumber'] == match, 'Latitude'].iloc[0]
     calldata.Road_Long.values[j] = \
         roadwaydata.loc[roadwaydata['StationNumber'] == match, 'Longitude'].iloc[0]
+
 
 def get_AADT(j):
     calldata.Address = calldata.Address.astype(str)
@@ -159,6 +149,7 @@ def get_AADT(j):
     except:
         get_AADT_no_road(j)
 
+
 # #Finding addresses for the AADT stations.
 def find_address(i):
     if (calldata.Address.values[i] == 'Address not found'):
@@ -175,7 +166,8 @@ def find_address(i):
     else:
         pass
 
+
 for i, value in enumerate(calldata.values):
     get_AADT(i)
-save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Early_2018_Roads.xlsx", "DarkSky Weather", calldata)
 
+save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Early_2018_Roads.xlsx", "DarkSky Weather", calldata)
