@@ -183,13 +183,13 @@ def append_data(calldata):
                 'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
                 'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
                 "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float})
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   'Hour', 'Temperature', "Temp_Max", "Temp_Min", 'Dewpoint', 'Humidity', 'Month', 'Visibility',
-                   "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max",
-                   "Precip_Intensity_Time")
+                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", 'Dewpoint',
+                   'Humidity', 'Month', 'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time")
     results = results.reindex(columns=header_list)
     # # Saving new data to 2018+2017 File #
     save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
@@ -203,8 +203,8 @@ def main():
     # calldata, file = get_Email()
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2017+2018 Data/Before Fix.xlsx"
-    # calldata = pandas.read_csv(file, sep=",")
+    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-13.csv"
+    calldata = pandas.read_csv(file, sep=",")
     # calldata = pandas.read_excel(file)
 
     # Use for reading csv versions of calldata #
@@ -212,36 +212,39 @@ def main():
     #                                                  'Date': str, 'Time': str, 'Problem': str, 'Hour': int,
     #                                                  'Address': str, 'City': str, 'Temperature': float,
     #                                                  'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-    #                                                  'Visibility': float, 'Conditions': str})
+    #                                                  'Visibility': float, 'Conditions': str, "EventBefore": str,
+    #                                                  "ConditionBefore": str})
 
     # Use for reading xlsx versions of calldata #
-    calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
-                                               'Date': datetime, 'Time': datetime.time, 'Problem': str, 'Hour': int,
-                                               'Address': str, 'City': str, 'Temperature': float, "Temp_Max": float,
-                                               "Temp_Min": float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
-                                               'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-                                               "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                                               "Precip_Intensity_Time": datetime.time})
-    #
+    # calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
+    #                                            'Date': datetime, 'Time': datetime.time, 'Problem': str, 'Hour': int,
+    #                                            'Address': str, 'City': str, 'Temperature': float, "Temp_Max": float,
+    #                                            "Temp_Min": float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
+    #                                            'Month': int, 'Visibility': float, 'Conditions': str,
+    #                                            "Cloud_Coverage": float, "Precipitation_Type": str,
+    #                                            "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+    #                                            "Precip_Intensity_Time": datetime.time, "EventBefore": str,
+    #                                            "ConditionBefore": str})
+
     dayname_csv = file.split("/")[-1]
     dayname_xlsx = dayname_csv.split(".")[0]
 
     # Removing the excess text from the problem column.
-    # calldata = clean_problems(calldata)
+    calldata = clean_problems(calldata)
 
     # Splitting and tidying the Response Date to the accident.
-    # calldata = split_datetime(calldata)
+    calldata = split_datetime(calldata)
 
-    # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
+    calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
-    # header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-    #                'Hour', 'Temperature', "Temp_Max", "Temp_Min", 'Dewpoint', 'Humidity', 'Month', 'Visibility',
-    #                "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max",
-    #                "Precip_Intensity_Time", "EventBefore", "ConditionBefore")
-    #
-    # calldata.index.name = "Index"
-    # calldata = calldata.reindex(columns=header_list)
-    #
+    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
+                   'Hour', 'Temperature', "Temp_Max", "Temp_Min", 'Dewpoint', 'Humidity', 'Month', 'Visibility',
+                   "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max",
+                   "Precip_Intensity_Time", "EventBefore", "ConditionBefore")
+
+    calldata.index.name = "Index"
+    calldata = calldata.reindex(columns=header_list)
+
     calldata.Event = calldata.Event.astype(str)
     calldata.Conditions = calldata.Conditions.astype(str)
     calldata.Precipitation_Type = calldata.Precipitation_Type.astype(str)
@@ -266,7 +269,7 @@ def main():
 
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
 
-    for k, info in enumerate(calldata.values[0:10]):
+    for k, info in enumerate(calldata.values):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
@@ -488,93 +491,89 @@ def main():
         else:
             print("One of the hours was 0 and didn't register")
 
-        # try:
-        #     forecastcall = forecast(*call, time=t)
-        #     for i, value in enumerate(forecastcall.hourly):
+        try:
+            forecastcall = forecast(*call, time=t)
+            for i, value in enumerate(forecastcall.hourly):
                 # Retrieving weather for previous weather
-                # if i == hoa:
-                #     calldata.Temperature.values[k] = value.temperature
-                #     calldata.Dewpoint.values[k] = value.dewPoint
-                #     calldata.Event.values[k] = value.icon
-                #     calldata.Humidity.values[k] = value.humidity
-                #     calldata.Month.values[k] = moa
-                #     calldata.Visibility.values[k] = value.visibility
-                #     calldata.Conditions.values[k] = value.summary
+                if i == hoa:
+                    calldata.Temperature.values[k] = value.temperature
+                    calldata.Dewpoint.values[k] = value.dewPoint
+                    calldata.Event.values[k] = value.icon
+                    calldata.Humidity.values[k] = value.humidity
+                    calldata.Month.values[k] = moa
+                    calldata.Visibility.values[k] = value.visibility
+                    calldata.Conditions.values[k] = value.summary
 
-            # for j, value2 in enumerate(forecastcall.daily):
-            #     try:
-            #         calldata.Precipitation_Type.values[k] = value2.precipType
-            #     except:
-            #         calldata.Precipitation_Type.values[k] = "NA"
-            #     try:
-            #         calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
-            #     except:
-            #         calldata.Precipitation_Intensity.values[k] = -1000
-            #     try:
-            #         calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
-            #     except:
-            #         calldata.Precip_Intensity_Max.values[k] = -1000
-            #     try:
-            #         calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
-            #     except:
-            #         calldata.Precipitation_Intensity_Time.values[k] = -1000
-            #     try:
-            #         calldata.Temp_Max.values[k] = value2.temperatureMax
-            #     except:
-            #         calldata.Temp_Max.values[k] = -1000
-            #     try:
-            #         calldata.Temp_Min.values[k] = value2.temperatureMin
-            #     except:
-            #         calldata.Temp_Min.values[k] = -1000
-            #     try:
-            #         calldata.Cloud_Coverage.values[k] = value2.cloudCover
-            #     except:
-            #         calldata.Cloud_Coverage.values[k] = -1000
-        # except:
-        #     print("There was an exception")
-        #     pass
-    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Before Test Fix.xlsx",
+            for j, value2 in enumerate(forecastcall.daily):
+                try:
+                    calldata.Precipitation_Type.values[k] = value2.precipType
+                except:
+                    calldata.Precipitation_Type.values[k] = "NA"
+                try:
+                    calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
+                except:
+                    calldata.Precipitation_Intensity.values[k] = -1000
+                try:
+                    calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
+                except:
+                    calldata.Precip_Intensity_Max.values[k] = -1000
+                try:
+                    calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
+                except:
+                    calldata.Precipitation_Intensity_Time.values[k] = -1000
+                try:
+                    calldata.Temp_Max.values[k] = value2.temperatureMax
+                except:
+                    calldata.Temp_Max.values[k] = -1000
+                try:
+                    calldata.Temp_Min.values[k] = value2.temperatureMin
+                except:
+                    calldata.Temp_Min.values[k] = -1000
+                try:
+                    calldata.Cloud_Coverage.values[k] = value2.cloudCover
+                except:
+                    calldata.Cloud_Coverage.values[k] = -1000
+        except:
+            print("There was an exception")
+            pass
+
+    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
                     "DarkSky Weather", calldata)
 
-    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + ".xlsx",
-    #                 "DarkSky Weather", calldata)
+    occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
 
+    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
+        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
 
+    find_Duplicates(calldata, occurrence_list)
+    calldata = drop_duplicates(calldata)
 
-            # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
-    #
-    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
-    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
-    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float})
-    #
-    # find_Duplicates(calldata, occurrence_list)
-    # calldata = drop_duplicates(calldata)
-    #
-    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
-    #                 "DarkSky Weather", calldata)
-    #
-    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
-    #     + dayname_xlsx + "_Dropped_Dupes.xlsx",
-    #     dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
-    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float})
-    #
-    # calldata = find_y(calldata)
-    #
-    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
-    #                 + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
+    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
+                    "DarkSky Weather", calldata)
+
+    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
+        + dayname_xlsx + "_Dropped_Dupes.xlsx",
+        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
+
+    calldata = find_y(calldata)
+
+    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
+                    + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
 
     # Use this calldata for reading in 1 specific file for appending
     # calldata = pandas.read_excel(folderpath + "")
 
-    # append_data(calldata)
+    append_data(calldata)
 
 if __name__ == "__main__":
     main()
