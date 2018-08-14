@@ -200,31 +200,30 @@ def append_data(calldata):
 def main():
 
     # Run this line each morning
-    # calldata, file = get_Email()
+    calldata, file = get_Email()
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-13.csv"
-    calldata = pandas.read_csv(file, sep=",")
+    # file = folderpath + ""
+    # calldata = pandas.read_csv(file, sep=",")
     # calldata = pandas.read_excel(file)
 
     # Use for reading csv versions of calldata #
-    # calldata = pandas.read_csv(file, sep=",", dtype={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
-    #                                                  'Date': str, 'Time': str, 'Problem': str, 'Hour': int,
-    #                                                  'Address': str, 'City': str, 'Temperature': float,
-    #                                                  'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int,
-    #                                                  'Visibility': float, 'Conditions': str, "EventBefore": str,
-    #                                                  "ConditionBefore": str})
+    # calldata = pandas.read_csv(file, sep=",", dtype={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+    #             "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     # Use for reading xlsx versions of calldata #
-    # calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float,
-    #                                            'Date': datetime, 'Time': datetime.time, 'Problem': str, 'Hour': int,
-    #                                            'Address': str, 'City': str, 'Temperature': float, "Temp_Max": float,
-    #                                            "Temp_Min": float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
-    #                                            'Month': int, 'Visibility': float, 'Conditions': str,
-    #                                            "Cloud_Coverage": float, "Precipitation_Type": str,
-    #                                            "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #                                            "Precip_Intensity_Time": datetime.time, "EventBefore": str,
-    #                                            "ConditionBefore": str})
+    # calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
+    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
+    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+    #             "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     dayname_csv = file.split("/")[-1]
     dayname_xlsx = dayname_csv.split(".")[0]
@@ -548,7 +547,8 @@ def main():
                 'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
                 'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
                 "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     find_Duplicates(calldata, occurrence_list)
     calldata = drop_duplicates(calldata)
@@ -563,12 +563,77 @@ def main():
                 'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
                 'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
                 "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     calldata = find_y(calldata)
+    # Convert the unix times in the Precipitation Intensity Time column to clock time
+    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
 
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"
-                    + dayname_xlsx + "_FinalForm.xlsx", "DarkSky Weather", calldata)
+    for k, value in enumerate(calldata.values):
+        print(k)
+        if calldata.Precip_Intensity_Time.values[k] == 0:
+            pass
+        else:
+            tz = pytz.timezone('America/New_York')
+            dt = datetime.fromtimestamp(calldata.Precip_Intensity_Time.values[k], tz)
+            calldata.Precip_Intensity_Time.values[k] = dt
+    # Caste the column as a string, since excel doesn't like the format that the column's values currently are
+    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(str)
+    # Take the substring of the column that actually has the time
+    # Once in excel, convert the column values into numbers again
+    for i, value2 in enumerate(calldata.values):
+        x = calldata.Precip_Intensity_Time.values[i]
+        calldata.Precip_Intensity_Time.values[i] = x[11:19]
+
+    # Create non-overlapping intervals to hold the temperature values
+    calldata.Temperature = calldata.Temperature.astype(float)
+    for i, values in enumerate(calldata.values):
+        if calldata.Temperature.values[i] < 0:
+            calldata.iloc[i, 14] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+        elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
+            calldata.iloc[i, 15] = 1
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+        elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
+            calldata.iloc[i, 16] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+        elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
+            calldata.iloc[i, 17] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+        elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
+            calldata.iloc[i, 18] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 19] = 0
+        elif calldata.Temperature.values[i] >= 40:
+            calldata.iloc[i, 19] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 14] = 0
+
+    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + "_FinalForm.xlsx",
+                    "DarkSky Weather", calldata)
 
     # Use this calldata for reading in 1 specific file for appending
     # calldata = pandas.read_excel(folderpath + "")
