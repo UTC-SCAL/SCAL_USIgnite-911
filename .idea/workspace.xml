@@ -4,9 +4,10 @@
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Road Diet/MLK Data for Khashi.xlsx" afterPath="$PROJECT_DIR$/Road Diet/MLK Data for Khashi.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AddingAADT.py" afterPath="$PROJECT_DIR$/Code/AddingAADT.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/scratchSheet.py" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="438" column="0" lean-forward="false" selection-start-line="438" selection-start-column="0" selection-end-line="438" selection-end-column="0" />
+            <state relative-caret-position="2860">
+              <caret line="483" column="0" lean-forward="false" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#1207#1433#0" expanded="false" />
@@ -40,8 +41,8 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="626" column="0" lean-forward="true" selection-start-line="626" selection-start-column="0" selection-end-line="626" selection-end-column="0" />
+            <state relative-caret-position="501">
+              <caret line="682" column="0" lean-forward="true" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#296#3268#0" expanded="false" />
@@ -49,12 +50,35 @@
                 <element signature="e#4242#4560#0" expanded="false" />
                 <element signature="e#4627#4853#0" expanded="false" />
                 <element signature="e#4891#5114#0" expanded="false" />
+                <element signature="e#5175#7473#0" expanded="false" />
                 <element signature="e#7502#7997#0" expanded="false" />
-                <element signature="e#8033#10170#0" expanded="false" />
-                <element signature="e#10212#27011#0" expanded="false" />
-                <element signature="e#27045#28592#0" expanded="false" />
-                <marker date="1534345239771" expanded="false" signature="5170:7473" ph="..." />
+                <element signature="e#8033#10110#0" expanded="false" />
+                <element signature="e#10152#26951#0" expanded="false" />
+                <element signature="e#26985#28532#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddingAADT.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/AddingAADT.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="35">
+              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+              <folding>
+                <element signature="e#1861#2966#0" expanded="false" />
+                <element signature="e#2990#4933#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="khashiMapping.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/khashiMapping.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="728">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,8 +86,8 @@
       <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="839">
-              <caret line="44" column="33" lean-forward="true" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+            <state relative-caret-position="1014">
+              <caret line="44" column="33" lean-forward="false" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#110#336#0" expanded="false" />
@@ -142,20 +166,19 @@
         <option value="$PROJECT_DIR$/scratchSheet.py" />
         <option value="$PROJECT_DIR$/gmailReaderBackup.py" />
         <option value="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
-        <option value="$PROJECT_DIR$/Code/AddingAADT.py" />
         <option value="$PROJECT_DIR$/khashiMapping.py" />
         <option value="$PROJECT_DIR$/Code/khashiMapping.py" />
-        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
+        <option value="$PROJECT_DIR$/Code/ConnectingWeather.py" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/AddingAADT.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2543" />
-    <option name="y" value="95" />
-    <option name="width" value="992" />
-    <option name="height" value="1113" />
+    <option name="y" value="-4" />
+    <option name="width" value="1920" />
+    <option name="height" value="1145" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -175,6 +198,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,8 +222,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -231,6 +254,23 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.gmailReader">
+    <configuration name="AddingAADT" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RolandProjects" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/AddingAADT.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="ConnectingWeather" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -261,23 +301,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReader.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="gmailReaderBackup" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -320,16 +343,16 @@
       <item index="0" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
       <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
       <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
-      <item index="3" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
-      <item index="4" class="java.lang.String" itemvalue="Python.khashiMapping" />
+      <item index="3" class="java.lang.String" itemvalue="Python.khashiMapping" />
+      <item index="4" class="java.lang.String" itemvalue="Python.AddingAADT" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="2" class="java.lang.String" itemvalue="Python.khashiMapping" />
-        <item index="3" class="java.lang.String" itemvalue="Python.gmailReaderBackup" />
-        <item index="4" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="1" class="java.lang.String" itemvalue="Python.AddingAADT" />
+        <item index="2" class="java.lang.String" itemvalue="Python.ConnectingWeather" />
+        <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="4" class="java.lang.String" itemvalue="Python.khashiMapping" />
       </list>
     </recent_temporary>
   </component>
@@ -561,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534271751680</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Changes made">
+      <created>1534346110020</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1534346110020</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -574,9 +604,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2543" y="95" width="1922" height="1153" extended-state="6" />
+    <frame x="0" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20384204" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2145144" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -626,7 +656,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -866,13 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/khashiMapping.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-08.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -887,10 +910,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="44" column="33" lean-forward="false" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#110#336#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-14.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="438" column="0" lean-forward="false" selection-start-line="438" selection-start-column="0" selection-end-line="438" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2860">
+          <caret line="483" column="0" lean-forward="false" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#1207#1433#0" expanded="false" />
@@ -905,36 +946,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/khashiMapping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="728">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/AddingAADT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="839">
-          <caret line="44" column="33" lean-forward="true" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+        <state relative-caret-position="35">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#110#336#0" expanded="false" />
+            <element signature="e#1861#2966#0" expanded="false" />
+            <element signature="e#2990#4933#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-14.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="626" column="0" lean-forward="true" selection-start-line="626" selection-start-column="0" selection-end-line="626" selection-end-column="0" />
+        <state relative-caret-position="501">
+          <caret line="682" column="0" lean-forward="true" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#296#3268#0" expanded="false" />
@@ -942,11 +976,11 @@
             <element signature="e#4242#4560#0" expanded="false" />
             <element signature="e#4627#4853#0" expanded="false" />
             <element signature="e#4891#5114#0" expanded="false" />
+            <element signature="e#5175#7473#0" expanded="false" />
             <element signature="e#7502#7997#0" expanded="false" />
-            <element signature="e#8033#10170#0" expanded="false" />
-            <element signature="e#10212#27011#0" expanded="false" />
-            <element signature="e#27045#28592#0" expanded="false" />
-            <marker date="1534345239771" expanded="false" signature="5170:7473" ph="..." />
+            <element signature="e#8033#10110#0" expanded="false" />
+            <element signature="e#10152#26951#0" expanded="false" />
+            <element signature="e#26985#28532#0" expanded="false" />
           </folding>
         </state>
       </provider>

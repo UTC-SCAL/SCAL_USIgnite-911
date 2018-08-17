@@ -182,7 +182,6 @@ def data_cleaning(calldata):
             pass
         else:
             tz = pytz.timezone('America/New_York')
-            print(calldata.Precip_Intensity_Time.values[k])
             dt = datetime.fromtimestamp(calldata.Precip_Intensity_Time.values[k], tz)
             calldata.Precip_Intensity_Time.values[k] = dt
 

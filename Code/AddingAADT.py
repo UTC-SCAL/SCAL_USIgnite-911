@@ -17,14 +17,7 @@ R = 6373.0  # Radius of the globe
 start = datetime.now()
 
 # MAIN Calldata 2018 + 2017 #
-calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List.xlsx",
-                             dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                                     'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                                     'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float,
-                                     'Event': str, 'Humidity': float, 'Month': int, 'Visibility': float,
-                                     'Conditions': str, "Cloud_Coverage": float, "Precipitation_Type": str,
-                                     "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                                     "Precip_Intensity_Time": datetime.time})
+calldata = pandas.read_excel(folderpath + "Road Diet/MLK Data for Khashi.xlsx")
 
 
 roadwaydata = pandas.read_excel(folderpath + "Excel & CSV Sheets/Roadways_with_Roadnames.xlsx")
@@ -152,22 +145,28 @@ def get_AADT(j):
 
 # #Finding addresses for the AADT stations.
 def find_address(i):
-    if (calldata.Address.values[i] == 'Address not found'):
-        latlong = calldata.Latitude.values[i], calldata.Longitude.values[i]
-        print(i)
-        try:
-            geolocator = Nominatim()
-            location = geolocator.reverse(latlong)
-            location = str(location).split(",")
-            road = str(location[0:2])
-            calldata.Address.values[i] = road
-        except:
-            calldata.Address.values[i] = "Address not found"
+    calldata.Address = calldata.Address.astype(str)
+    # empty_test = pandas.isnull(calldata.Address.values[i])
+    # if empty_test is True:
+    latlong = calldata.Latitude.values[i], calldata.Longitude.values[i]
+    print(i)
+    try:
+        geolocator = Nominatim()
+        location = geolocator.reverse(latlong)
+        location = str(location).split(",")
+        road = str(location[0:2])
+        calldata.Address.values[i] = road
+    except:
+        calldata.Address.values[i] = "Address not found"
     else:
         pass
 
+for k, info in enumerate(calldata.values):
+    if calldata.Latitude.values[k] > 40:
+        calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
+        calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
 
 for i, value in enumerate(calldata.values):
-    get_AADT(i)
+    find_address(i)
 
 save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Early_2018_Roads.xlsx", "DarkSky Weather", calldata)
