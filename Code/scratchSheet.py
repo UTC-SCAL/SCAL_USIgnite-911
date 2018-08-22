@@ -43,17 +43,17 @@ for j, value in enumerate(calldata.values[0:25947]):  # covering 2017 only
             daily_avg_temp = 0
             count = 0
             day_num = day_num + 1
-    # else:
-    #     # print("End of month ", month_num, " reached")
-    #     monthly_avg = sum(daily_temps)
-    #     monthly_avg = round(monthly_avg / (day_num - 1), 2)
-    #     monthly_avg_temps.append(monthly_avg)
-    #
-    #     month_num = month_num + 1
-    #     # print("moa = ", moa)
-    #     # print("yoa = ", yoa)
-    #     day_num = 1
-    #     daily_avg_temp = 0
-    #     monthly_avg = 0
-    #     daily_temps = []
+    else:
+        # print("End of month ", month_num, " reached")
+        monthly_avg = sum(daily_temps)
+        monthly_avg = round(monthly_avg / (day_num - 1), 2)
+        monthly_avg_temps.append(monthly_avg)
+
+        month_num = month_num + 1
+        # print("moa = ", moa)
+        # print("yoa = ", yoa)
+        day_num = 1
+        daily_avg_temp = 0
+        monthly_avg = 0
+        daily_temps = []
 print("Monthly Averages: ", monthly_avg_temps)
