@@ -1,4 +1,4 @@
-Date,Time,Vehicles Involved,Number Injured,Number Dead,Latitude,Longitude,Roadway Name
+Date,Time,Vehicles_Involved,Number_Injured,Number_Dead,Latitude,Longitude,Roadway_Name
 2017-01-01,00:40:00,2,0,0,35.05309,-85.30414,E 3RD ST
 2017-01-01,01:21:00,2,0,0,35.0431,-85.15756,SHALLOWFORD RD
 2017-01-01,03:45:00,3,0,0,35.02726,-85.22384,MIDLAND PIKE
