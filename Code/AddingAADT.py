@@ -17,7 +17,7 @@ R = 6373.0  # Radius of the globe
 start = datetime.now()
 
 # MAIN Calldata 2018 + 2017 #
-calldata = pandas.read_excel(folderpath + "Road Diet/MLK Data for Khashi.xlsx")
+calldata = pandas.read_excel(folderpath + "Road Diet/Brainerd18.xlsx")
 
 
 roadwaydata = pandas.read_excel(folderpath + "Excel & CSV Sheets/Roadways_with_Roadnames.xlsx")
@@ -165,8 +165,7 @@ for k, info in enumerate(calldata.values):
     if calldata.Latitude.values[k] > 40:
         calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
         calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-
-for i, value in enumerate(calldata.values):
+for i, info in enumerate(calldata.values):
     find_address(i)
 
-save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Early_2018_Roads.xlsx", "DarkSky Weather", calldata)
+save_excel_file(folderpath + "Road Diet/Brainerd18.xlsx", "Brainerd18", calldata)
