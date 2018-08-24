@@ -516,47 +516,47 @@ def add_data(calldata, save_name):
     calldata.Temperature = calldata.Temperature.astype(float)
     for i, values in enumerate(calldata.values):
         if calldata.Temperature.values[i] < 0:
-            calldata.Temp_below_0.values[i] = 1
-            calldata.Temp_0to10.values[i] = 0
-            calldata.Temp_10to20.values[i] = 0
-            calldata.Temp_20to30.values[i] = 0
-            calldata.Temp_30to40.values[i] = 0
-            calldata.Temp_above_40.values[i] = 0
+            calldata.iloc[i, 14] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
         elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
-            calldata.Temp_below_0.values[i] = 0
-            calldata.Temp_0to10.values[i] = 1
-            calldata.Temp_10to20.values[i] = 0
-            calldata.Temp_20to30.values[i] = 0
-            calldata.Temp_30to40.values[i] = 0
-            calldata.Temp_above_40.values[i] = 0
+            calldata.iloc[i, 15] = 1
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
         elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
-            calldata.Temp_below_0.values[i] = 0
-            calldata.Temp_0to10.values[i] = 0
-            calldata.Temp_10to20.values[i] = 1
-            calldata.Temp_20to30.values[i] = 0
-            calldata.Temp_30to40.values[i] = 0
-            calldata.Temp_above_40.values[i] = 0
+            calldata.iloc[i, 16] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
         elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
-            calldata.Temp_below_0.values[i] = 0
-            calldata.Temp_0to10.values[i] = 0
-            calldata.Temp_10to20.values[i] = 0
-            calldata.Temp_20to30.values[i] = 1
-            calldata.Temp_30to40.values[i] = 0
-            calldata.Temp_above_40.values[i] = 0
+            calldata.iloc[i, 17] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
         elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
-            calldata.Temp_below_0.values[i] = 0
-            calldata.Temp_0to10.values[i] = 0
-            calldata.Temp_10to20.values[i] = 0
-            calldata.Temp_20to30.values[i] = 0
-            calldata.Temp_30to40.values[i] = 1
-            calldata.Temp_above_40.values[i] = 0
+            calldata.iloc[i, 18] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 14] = 0
+            calldata.iloc[i, 19] = 0
         elif calldata.Temperature.values[i] >= 40:
-            calldata.Temp_below_0.values[i] = 0
-            calldata.Temp_0to10.values[i] = 0
-            calldata.Temp_10to20.values[i] = 0
-            calldata.Temp_20to30.values[i] = 0
-            calldata.Temp_30to40.values[i] = 0
-            calldata.Temp_above_40.values[i] = 1
+            calldata.iloc[i, 19] = 1
+            calldata.iloc[i, 15] = 0
+            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 14] = 0
 
     save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + save_name + ".xlsx",
                     "DarkSky Weather", calldata)
@@ -583,6 +583,7 @@ def append_data(calldata):
     # # Saving new data to 2018+2017 File #
     save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
                     "DarkSky Weather", results)
+
 
 
 def main():
@@ -630,10 +631,10 @@ def main():
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Mean_Temp",
-                   "Temp_below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_above_40",
-                   'Dewpoint', 'Humidity', 'Month', 'Visibility', "Cloud_Coverage", "Precipitation_Type",
-                   "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time")
+                   'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Temp_<0", "Temp_0-10", "Temp_10-20", "Temp_20-30",
+                   "Temp_30-40", "Temp_40+", 'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage",
+                   "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time",
+                   "EventBefore", "ConditionBefore")
 
     calldata.index.name = "Index"
     calldata = calldata.reindex(columns=header_list)
@@ -650,12 +651,11 @@ def main():
     calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
         dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Mean_Temp": float, "Temp_below_0": int,
-                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_above_40": int,
-                'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int, 'Visibility': float,
-                'Conditions': str, "Cloud_Coverage": float, "Precipitation_Type": str, "Precipitation_Intensity": float,
-                "Precip_Intensity_Max": float, "Precip_Intensity_Time": float, "EventBefore": str,
-                "ConditionBefore": str})
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     # Find the duplicate calls and drop them
     find_Duplicates(calldata, occurrence_list)
@@ -672,12 +672,11 @@ def main():
         + dayname_xlsx + "_Dropped_Dupes.xlsx",
         dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Mean_Temp": float, "Temp_below_0": int,
-                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_above_40": int,
-                'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int, 'Visibility': float,
-                'Conditions': str, "Cloud_Coverage": float, "Precipitation_Type": str, "Precipitation_Intensity": float,
-                "Precip_Intensity_Max": float, "Precip_Intensity_Time": float, "EventBefore": str,
-                "ConditionBefore": str})
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
+                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
+                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
 
     # Find the Y values for injury vs no injury
     calldata = find_y(calldata)
