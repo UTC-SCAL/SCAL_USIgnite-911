@@ -232,6 +232,7 @@ def add_data(calldata, save_name):
     calldata.EventBefore = calldata.EventBefore.astype(str)
     calldata.ConditionBefore = calldata.ConditionBefore.astype(str)
 
+    print("Fixing Latitude and Longitude")
     # Format the latitude and longitude values into the appropriate formats, if they need to be formatted
     for k, info in enumerate(calldata.values):
         if calldata.Latitude.values[k] > 40:
@@ -241,6 +242,7 @@ def add_data(calldata, save_name):
     # The key for using DarkSky API
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
 
+    print("Adding in DarkSky Weather")
     # Iterate through calldata and assign weather data for each incident
     for k, info in enumerate(calldata.values):
         print(k)
@@ -513,51 +515,55 @@ def add_data(calldata, save_name):
             print("There was an exception")
 
     # Create non-overlapping intervals to hold the temperature values
+    # These specific columns don't like to use the easy method of reference by typing calldata.column_name, instead it
+    # insists that I have to use iloc[row, column] for proper referencing.  So, if new variables are added, double check
+    # to see what the current column numbers are for the temperature intervals
     calldata.Temperature = calldata.Temperature.astype(float)
+    print("Adding in Temperature Intervals")
     for i, values in enumerate(calldata.values):
+        print(i)
         if calldata.Temperature.values[i] < 0:
-            calldata.iloc[i, 14] = 1
-            calldata.iloc[i, 15] = 0
-            calldata.iloc[i, 16] = 0
-            calldata.iloc[i, 17] = 0
-            calldata.iloc[i, 18] = 0
-            calldata.iloc[i, 19] = 0
-        elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
-            calldata.iloc[i, 15] = 1
-            calldata.iloc[i, 14] = 0
-            calldata.iloc[i, 16] = 0
-            calldata.iloc[i, 17] = 0
-            calldata.iloc[i, 18] = 0
-            calldata.iloc[i, 19] = 0
-        elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
-            calldata.iloc[i, 16] = 1
-            calldata.iloc[i, 15] = 0
-            calldata.iloc[i, 14] = 0
-            calldata.iloc[i, 17] = 0
-            calldata.iloc[i, 18] = 0
-            calldata.iloc[i, 19] = 0
-        elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
             calldata.iloc[i, 17] = 1
-            calldata.iloc[i, 15] = 0
-            calldata.iloc[i, 16] = 0
-            calldata.iloc[i, 14] = 0
             calldata.iloc[i, 18] = 0
             calldata.iloc[i, 19] = 0
-        elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+        elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
+            calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 1
-            calldata.iloc[i, 15] = 0
-            calldata.iloc[i, 16] = 0
-            calldata.iloc[i, 17] = 0
-            calldata.iloc[i, 14] = 0
             calldata.iloc[i, 19] = 0
-        elif calldata.Temperature.values[i] >= 40:
-            calldata.iloc[i, 19] = 1
-            calldata.iloc[i, 15] = 0
-            calldata.iloc[i, 16] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+        elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 0
-            calldata.iloc[i, 14] = 0
-
+            calldata.iloc[i, 19] = 1
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+        elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 1
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+        elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 1
+            calldata.iloc[i, 22] = 0
+        elif calldata.Temperature.values[i] >= 40:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 1
     save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + save_name + ".xlsx",
                     "DarkSky Weather", calldata)
 
@@ -566,19 +572,14 @@ def append_data(calldata):
     # Appending new data to 2018+2017 File #
     calldata = calldata.iloc[::-1]
     og_calldata = pandas.read_excel(
-        folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
-                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str})
+        folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", 'Dewpoint',
-                   'Humidity', 'Month', 'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-                   "Precip_Intensity_Max", "Precip_Intensity_Time")
+                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
+                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_Above_40",
+                   'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage", "Precipitation_Type",
+                   "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time")
     results = results.reindex(columns=header_list)
     # # Saving new data to 2018+2017 File #
     save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
@@ -588,30 +589,30 @@ def append_data(calldata):
 
 def main():
     # Run this line each morning
-    calldata, file = get_Email()
+    # calldata, file = get_Email()
 
     # Reading file directly for testing
-    # file = folderpath + ""
-    # calldata = pandas.read_csv(file, sep=",")
+    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-22.csv"
+    calldata = pandas.read_csv(file, sep=",")
     # calldata = pandas.read_excel(file)
 
     # Use for reading csv versions of calldata #
     # calldata = pandas.read_csv(file, sep=",", dtype={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
     #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
     #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
-    #             "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
+    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
+    #             "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
 
     # Use for reading xlsx versions of calldata #
     # calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
     #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
     #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
     #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
-    #             "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
+    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
+    #             "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
 
     # Specific save names for files
     # This makes the saving process less tedious since we don't have to change the name of the file we're saving
@@ -621,7 +622,7 @@ def main():
     dayname_csv = file.split("/")[-1]
     dayname_xlsx = dayname_csv.split(".")[0]
 
-    # Removing the excess text from the problem column.
+    # Removing the excess text from the problem column
     calldata = clean_problems(calldata)
 
     # Splitting and tidying the Response Date to the accident.
@@ -631,10 +632,10 @@ def main():
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
-                   'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Temp_<0", "Temp_0-10", "Temp_10-20", "Temp_20-30",
-                   "Temp_30-40", "Temp_40+", 'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage",
-                   "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time",
-                   "EventBefore", "ConditionBefore")
+                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
+                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_Above_40",
+                   'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage", "Precipitation_Type",
+                   "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time")
 
     calldata.index.name = "Index"
     calldata = calldata.reindex(columns=header_list)
@@ -651,11 +652,11 @@ def main():
     calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
         dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
                 'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
                 "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
-                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
+                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
 
     # Find the duplicate calls and drop them
     find_Duplicates(calldata, occurrence_list)
@@ -672,11 +673,11 @@ def main():
         + dayname_xlsx + "_Dropped_Dupes.xlsx",
         dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
                 'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, 'Dewpoint': float, 'Event': str,
+                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
                 'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
                 "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_<0": int,
-                "Temp_0-10": int, "Temp_10-20": int, "Temp_20-30": int, "Temp_30-40": int, "Temp_40+": int})
+                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
+                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
 
     # Find the Y values for injury vs no injury
     calldata = find_y(calldata)
