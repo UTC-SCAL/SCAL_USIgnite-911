@@ -529,6 +529,9 @@ def add_data(calldata, save_name):
             calldata.iloc[i, 20] = 0
             calldata.iloc[i, 21] = 0
             calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
         elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 1
@@ -536,6 +539,9 @@ def add_data(calldata, save_name):
             calldata.iloc[i, 20] = 0
             calldata.iloc[i, 21] = 0
             calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
         elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 0
@@ -543,6 +549,9 @@ def add_data(calldata, save_name):
             calldata.iloc[i, 20] = 0
             calldata.iloc[i, 21] = 0
             calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
         elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 0
@@ -550,6 +559,9 @@ def add_data(calldata, save_name):
             calldata.iloc[i, 20] = 1
             calldata.iloc[i, 21] = 0
             calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
         elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 0
@@ -557,13 +569,49 @@ def add_data(calldata, save_name):
             calldata.iloc[i, 20] = 0
             calldata.iloc[i, 21] = 1
             calldata.iloc[i, 22] = 0
-        elif calldata.Temperature.values[i] >= 40:
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
+        elif calldata.Temperature.values[i] >= 40 and calldata.Temperature.values[i] < 50:
             calldata.iloc[i, 17] = 0
             calldata.iloc[i, 18] = 0
             calldata.iloc[i, 19] = 0
             calldata.iloc[i, 20] = 0
             calldata.iloc[i, 21] = 0
             calldata.iloc[i, 22] = 1
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
+        elif calldata.Temperature.values[i] >= 50 and calldata.Temperature.values[i] < 60:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 1
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 0
+        elif calldata.Temperature.values[i] >= 60 and calldata.Temperature.values[i] < 70:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 1
+            calldata.iloc[i, 25] = 0
+        elif calldata.Temperature.values[i] >= 70:
+            calldata.iloc[i, 17] = 0
+            calldata.iloc[i, 18] = 0
+            calldata.iloc[i, 19] = 0
+            calldata.iloc[i, 20] = 0
+            calldata.iloc[i, 21] = 0
+            calldata.iloc[i, 22] = 0
+            calldata.iloc[i, 23] = 0
+            calldata.iloc[i, 24] = 0
+            calldata.iloc[i, 25] = 1
     save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + save_name + ".xlsx",
                     "DarkSky Weather", calldata)
 
@@ -577,9 +625,10 @@ def append_data(calldata):
     results = pandas.concat(frames)
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
                    "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
-                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_Above_40",
-                   'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage", "Precipitation_Type",
-                   "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time")
+                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
+                   "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time")
     results = results.reindex(columns=header_list)
     # # Saving new data to 2018+2017 File #
     save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
@@ -633,9 +682,10 @@ def main():
 
     header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
                    "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
-                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_Above_40",
-                   'Dewpoint', 'Humidity', 'Month', 'Visibility',"Cloud_Coverage", "Precipitation_Type",
-                   "Precipitation_Intensity", "Precip_Intensity_Max", "Precip_Intensity_Time")
+                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
+                   "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time")
 
     calldata.index.name = "Index"
     calldata = calldata.reindex(columns=header_list)
