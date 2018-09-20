@@ -110,64 +110,64 @@ def specify_stats(names, mini, maxi, calldata):
     # est_t_fit = est_t.fit()
 
     # Jeremy's stupid way of testing #
-    # pca = PCA(n_components=4)  # number of components
-    # pca.fit(X)
-    # X_pca = pca.transform(X)
-    # X_train, X_test, Y_train, Y_test = train_test_split(X_pca, Y, test_size=.3)
-    # LogReg = LogisticRegression()
-    # LogReg.fit(X_train, np.ravel(Y_train.astype(int)))
-    # # LogReg.fit(X, np.ravel(Y.astype(int)))
-    # print(LogReg.fit(X_train, np.ravel(Y_train.astype(int))))
-    # Y_pred = LogReg.predict(X_test)
-    # logistic = linear_model.LogisticRegression()
-    # pca = decomposition.PCA()
-    # pipe = Pipeline(steps=[("pca", pca), ("logistic", logistic)])
-    # # Plot the PCA spectrum
-    # pca.fit(X)
-    # X_pca = pca.transform(X)
-    # plt.figure(1, figsize=(4, 3))
-    # plt.clf()
-    # plt.axes([.2, .2, .7, .7])
-    # plt.plot(pca.explained_variance_, linewidth=2)
-    # plt.axis("tight")
-    # plt.xlabel("n_components")
-    # plt.ylabel("Explained Variance")
-    # # print(pca.components_.shape)
-    #
-    # # Prediction
-    # n_components = [0, 3, 5]
-    # Cs = np.logspace(-4, 4, 3)
-    #
-    #
-    # # Parameters of piplines can be set using "__" separated parameter names
-    # estimator = GridSearchCV(pipe, dict(pca__n_components=n_components, logistic__C=Cs))
-    # # print(estimator.get_params().keys())
-    # estimator.fit(X_pca, np.ravel(Y.astype(int)))
-    # plt.axvline(estimator.best_estimator_.named_steps["pca"].n_components, linestyle=":", label="n_components chosen")
-    # plt.legend(prop=dict(size=12))
-    # plt.show()
+    pca = PCA(n_components=4)  # number of components
+    pca.fit(X)
+    X_pca = pca.transform(X)
+    X_train, X_test, Y_train, Y_test = train_test_split(X_pca, Y, test_size=.3)
+    LogReg = LogisticRegression()
+    LogReg.fit(X_train, np.ravel(Y_train.astype(int)))
+    # LogReg.fit(X, np.ravel(Y.astype(int)))
+    print(LogReg.fit(X_train, np.ravel(Y_train.astype(int))))
+    Y_pred = LogReg.predict(X_test)
+    logistic = linear_model.LogisticRegression()
+    pca = decomposition.PCA()
+    pipe = Pipeline(steps=[("pca", pca), ("logistic", logistic)])
+    # Plot the PCA spectrum
+    pca.fit(X)
+    X_pca = pca.transform(X)
+    plt.figure(1, figsize=(4, 3))
+    plt.clf()
+    plt.axes([.2, .2, .7, .7])
+    plt.plot(pca.explained_variance_, linewidth=2)
+    plt.axis("tight")
+    plt.xlabel("n_components")
+    plt.ylabel("Explained Variance")
+    # print(pca.components_.shape)
+
+    # Prediction
+    n_components = [0, 3, 5]
+    Cs = np.logspace(-4, 4, 3)
+
+
+    # Parameters of piplines can be set using "__" separated parameter names
+    estimator = GridSearchCV(pipe, dict(pca__n_components=n_components, logistic__C=Cs))
+    # print(estimator.get_params().keys())
+    estimator.fit(X_pca, np.ravel(Y.astype(int)))
+    plt.axvline(estimator.best_estimator_.named_steps["pca"].n_components, linestyle=":", label="n_components chosen")
+    plt.legend(prop=dict(size=12))
+    plt.show()
 
 
 
 
     # Jin's fancy testing
-    train = calldata[0:26166]  # 2017 data
-    test = calldata[26166:-1]  # 2018 data
-    X_train = train.ix[:, mini:maxi].values
-    Y_train = train.ix[:, 0].values
-    X_test = test.ix[:, mini:maxi].values
-    Y_test = test.ix[:, 0].values
-    scaler = MinMaxScaler()
-    X_train_norm = scaler.fit_transform(X_train)
-    X_test_norm = scaler.transform(X_test)
-    LogReg = LogisticRegression()
-    LogReg.fit(X_train_norm, Y_train)
-    Y_pred = LogReg.predict(X_test_norm)
-    plt.plot(Y_pred)
-    plt.legend()
-    plt.plot(Y_test, color='b')
-    plt.show()
-
+    # train = calldata[0:25947]  # 2017 data
+    # test = calldata[25947:-1]  # 2018 data
+    # X_train = train.ix[:, mini:maxi].values
+    # Y_train = train.ix[:, 0].values
+    # X_test = test.ix[:, mini:maxi].values
+    # Y_test = test.ix[:, 0].values
+    # scaler = MinMaxScaler()
+    # X_train_norm = scaler.fit_transform(X_train)
+    # X_test_norm = scaler.transform(X_test)
+    # LogReg = LogisticRegression()
+    # LogReg.fit(X_train_norm, Y_train)
+    # Y_pred = LogReg.predict(X_test_norm)
+    # plt.plot(Y_pred)
+    # plt.legend()
+    # plt.plot(Y_test, color='b')
+    # plt.show()
+    #
     from sklearn.metrics import confusion_matrix
     confusion_matrix = confusion_matrix(Y_test, Y_pred)
     accscore = sklearn.metrics.accuracy_score(Y_test, Y_pred)
@@ -478,18 +478,12 @@ def main():
 
     # MAIN Calldata 2018 + 2017 #
     calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Mean_Temp": float, "Temp_below_0": int,
-                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_above_40": int,
-                'Dewpoint': float, 'Event': str, 'Humidity': float, 'Month': int, 'Visibility': float,
-                'Conditions': str, "Cloud_Coverage": float, "Precipitation_Type": str, "Precipitation_Intensity": float,
-                "Precip_Intensity_Max": float, "Precip_Intensity_Time": float, "EventBefore": str,
-                "ConditionBefore": str})
+                                 dtypes={'Date': datetime,'Time': datetime.time})
     # print(calldata.head())
     # agg_options(calldata)
 
-    calldata.drop(["Precipitation_Type", "Precip_Intensity_Time", "Monthly_Mean_Temp", "Temp_below_0"], axis=1, inplace=True)
+    calldata.drop(["Monthly_Avg_Temp", "Temp_Below_0", "Dewpoint", "Precip_Intensity_Time", "Precipitation_Type",
+                   "Event", "Conditions", "EventBefore", "ConditionBefore", "Daily_Avg_Temp"], axis=1, inplace=True)
     # calldata.drop(["Clear", "Snow", "Dewpoint", "Visibility", "Foggy", "Hour"], axis=1, inplace=True)
 
     # Testing 2017 with DarkSky  #
