@@ -197,18 +197,14 @@ def data_cleaning(calldata):
     # (just so I don't have to do it by hand)
     # However, you will need to go in and replace the blanks in the Precip_Intensity_Time column with 0 by hand
     # For some reason, the code doesn't want to replace the blanks with a 0
-    for o, value3 in enumerate(calldata.values):
-        empty_type_test = pandas.isnull(calldata.Precipitation_Type.values[o])
-        if empty_type_test is True:
-            calldata.Precipitation_Type.values[o] = "none"
     for n, value4 in enumerate(calldata.values):
         empty_intensity_test = pandas.isnull(calldata.Precip_Intensity_Max.values[n])
         if empty_intensity_test is True:
             calldata.Precip_Intensity_Max.values[n] = 0
     for c, value5 in enumerate(calldata.values):
-        empty_cover_test = pandas.isnull(calldata.iloc[c, 25])
+        empty_cover_test = pandas.isnull(calldata.Cloud_Coverage.values[c])
         if empty_cover_test is True:
-            calldata.iloc[c, 25] = 0
+            calldata.Cloud_Coverage.values[c] = 0
 
     return calldata
 
@@ -481,38 +477,41 @@ def add_data(calldata, save_name):
                     calldata.Month.values[k] = moa
                     calldata.Visibility.values[k] = value.visibility
                     calldata.Conditions.values[k] = value.summary
-            # Daily data, which requires individual try/except statements, otherwise the code crashes for some reason
-            for j, value2 in enumerate(forecastcall.daily):
-                try:
-                    calldata.Precipitation_Type.values[k] = value2.precipType
-                except:
-                    calldata.Precipitation_Type.values[k] = "NA"
-                try:
-                    calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
-                except:
-                    calldata.Precipitation_Intensity.values[k] = -1000
-                try:
-                    calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
-                except:
-                    calldata.Precip_Intensity_Max.values[k] = -1000
-                try:
-                    calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
-                except:
-                    calldata.Precipitation_Intensity_Time.values[k] = -1000
-                try:
-                    calldata.Temp_Max.values[k] = value2.temperatureMax
-                except:
-                    calldata.Temp_Max.values[k] = -1000
-                try:
-                    calldata.Temp_Min.values[k] = value2.temperatureMin
-                except:
-                    calldata.Temp_Min.values[k] = -1000
-                try:
-                    calldata.Cloud_Coverage.values[k] = value2.cloudCover
-                except:
-                    calldata.Cloud_Coverage.values[k] = -1000
         except:
-            print("There was an exception")
+            print("Hourly Lookup Failed")
+        # try:
+            # Daily data, which requires individual try/except statements, otherwise the code crashes for some reason
+        for j, value2 in enumerate(forecastcall.daily):
+            try:
+                calldata.Precipitation_Type.values[k] = value2.precipType
+            except:
+                calldata.Precipitation_Type.values[k] = "NA"
+            try:
+                calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
+            except:
+                calldata.Precipitation_Intensity.values[k] = -1000
+            try:
+                calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
+            except:
+                calldata.Precip_Intensity_Max.values[k] = -1000
+            try:
+                calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
+            except:
+                calldata.Precip_Intensity_Time.values[k] = -1000
+            try:
+                calldata.Temp_Max.values[k] = value2.temperatureMax
+            except:
+                calldata.Temp_Max.values[k] = -1000
+            try:
+                calldata.Temp_Min.values[k] = value2.temperatureMin
+            except:
+                calldata.Temp_Min.values[k] = -1000
+            try:
+                calldata.Cloud_Coverage.values[k] = value2.cloudCover
+            except:
+                calldata.Cloud_Coverage.values[k] = -1000
+        # except:
+        #     print("Daily Lookup Failed")
 
     # Create non-overlapping intervals to hold the temperature values
     # These specific columns don't like to use the easy method of reference by typing calldata.column_name, instead it
@@ -635,33 +634,36 @@ def append_data(calldata):
                     "DarkSky Weather", results)
 
 
-
 def main():
     # Run this line each morning
-    # calldata, file = get_Email()
+    calldata, file = get_Email()
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-22.csv"
-    calldata = pandas.read_csv(file, sep=",")
+    # file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-09-23.csv"
+    # calldata = pandas.read_csv(file, sep=",")
     # calldata = pandas.read_excel(file)
 
     # Use for reading csv versions of calldata #
-    # calldata = pandas.read_csv(file, sep=",", dtype={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
-    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
-    #             "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
+    # calldata = pandas.read_csv(file, sep=",",
+    #                     dtype={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
+    #                           "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    #                           "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
+    #                           "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
+    #                           "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
+    #                           "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
+    #                           "Precipitation_Type": str, "Precipitation_Intensity": float,
+    #                           "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
 
     # Use for reading xlsx versions of calldata #
-    # calldata = pandas.read_excel(file, dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-    #             'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-    #             'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
-    #             'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-    #             "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-    #             "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
-    #             "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
+    # calldata = pandas.read_excel(file,
+    #                     dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
+    #                           "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    #                           "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
+    #                           "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
+    #                           "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
+    #                           "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
+    #                           "Precipitation_Type": str, "Precipitation_Intensity": float,
+    #                           "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
 
     # Specific save names for files
     # This makes the saving process less tedious since we don't have to change the name of the file we're saving
@@ -700,13 +702,14 @@ def main():
     # Read in the calldata file that was saved in the add_data method
     # Assign particular dtypes to avoid errors
     calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
-                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
-                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
+            dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
+                              "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+                              "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
+                              "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
+                              "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
+                              "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
+                              "Precipitation_Type": str, "Precipitation_Intensity": float,
+                              "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
 
     # Find the duplicate calls and drop them
     find_Duplicates(calldata, occurrence_list)
@@ -721,13 +724,14 @@ def main():
     # Read in the calldata file that was previously saved
     calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
         + dayname_xlsx + "_Dropped_Dupes.xlsx",
-        dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
-                'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
-                'Temperature': float, "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": str, 'Dewpoint': float, 'Event': str,
-                'Humidity': float, 'Month': int, 'Visibility': float, 'Conditions': str, "Cloud_Coverage": float,
-                "Precipitation_Type": str, "Precipitation_Intensity": float, "Precip_Intensity_Max": float,
-                "Precip_Intensity_Time": float, "EventBefore": str, "ConditionBefore": str, "Temp_Below_0": int,
-                "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int, "Temp_Above_40": int})
+            dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
+                              "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+                              "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
+                              "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
+                              "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
+                              "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
+                              "Precipitation_Type": str, "Precipitation_Intensity": float,
+                              "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
 
     # Find the Y values for injury vs no injury
     calldata = find_y(calldata)
