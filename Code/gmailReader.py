@@ -622,7 +622,7 @@ def append_data(calldata):
         folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
-    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
+    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', "Route", 'City', 'Event', 'Conditions',
                    "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
                    "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
                    "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
@@ -682,7 +682,7 @@ def main():
     # Reset the Column names for the data
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
-    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', 'City', 'Event', 'Conditions',
+    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', "Route", 'City', 'Event', 'Conditions',
                    "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
                    "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
                    "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
