@@ -121,91 +121,91 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # save_excel_file("",
 #                 "Time and Temp", timedata_2018)
 
-
-calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Negative Samples (Date).xlsx")
-
-header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-               'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
-               "Daily_Avg_Temp", "Monthly_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', 'Visibility',
-               "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max",
-               "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore")
-
-calldata = calldata.reindex(columns=header_list)
-
-for i, value in enumerate(calldata.values):
-    print(i)
-    if "clear" in calldata.Event.values[i] or "clear" in calldata.Conditions.values[i] \
-            or "Clear" in calldata.Event.values[i] or "Clear" in calldata.Conditions.values[i]:
-        calldata.Clear.values[i] = 1
-    else:
-        calldata.Clear.values[i] = 0
-
-    if "rain" in calldata.Event.values[i] or "rain" in calldata.Conditions.values[i] \
-            or "Rain" in calldata.Event.values[i] or "Rain" in calldata.Conditions.values[i] \
-            or "Drizzle" in calldata.Event.values[i] or "Drizzle" in calldata.Conditions.values[i] \
-            or "drizzle" in calldata.Event.values[i] or "drizzle" in calldata.Conditions.values[i]:
-        calldata.Rain.values[i] = 1
-    else:
-        calldata.Rain.values[i] = 0
-
-    if "snow" in calldata.Event.values[i] or "snow" in calldata.Conditions.values[i] \
-            or "Snow" in calldata.Event.values[i] or "Snow" in calldata.Conditions.values[i]:
-        calldata.Snow.values[i] = 1
-    else:
-        calldata.Snow.values[i] = 0
-
-    if "cloudy" in calldata.Event.values[i] or "cloudy" in calldata.Conditions.values[i] \
-            or "Cloudy" in calldata.Event.values[i] or "Cloudy" in calldata.Conditions.values[i] \
-            or "overcast" in calldata.Event.values[i] or "overcast" in calldata.Conditions.values[i] \
-            or "Overcast" in calldata.Event.values[i] or "Overcast" in calldata.Conditions.values[i]:
-        calldata.Cloudy.values[i] = 1
-    else:
-        calldata.Cloudy.values[i] = 0
-
-    if "fog" in calldata.Event.values[i] or "foggy" in calldata.Conditions.values[i] \
-            or "Fog" in calldata.Event.values[i] or "Foggy" in calldata.Conditions.values[i]:
-        calldata.Fog.values[i] = 1
-    else:
-        calldata.Fog.values[i] = 0
-    if "rain" in calldata.EventBefore.values[i] or "rain" in calldata.ConditionBefore.values[i] \
-            or "Rain" in calldata.EventBefore.values[i] or "Rain" in calldata.ConditionBefore.values[i]:
-        calldata.RainBefore.values[i] = 1
-    else:
-        calldata.RainBefore.values[i] = 0
-calldata.drop(["Precipitation_Type", "Event", "Conditions", "EventBefore", "ConditionBefore"], axis=1, inplace=True)
-
-dayHolder_2017 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
-dayHolder_2018 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
-dayHolder_2017.Date = dayHolder_2017.Date.astype(str)
-dayHolder_2018.Date = dayHolder_2018.Date.astype(str)
-calldata.Date = calldata.Date.astype(str)
-print("Starting Temp Matching")
-for k, value2 in enumerate(calldata.values):
-    print(k)
-    doa = calldata.Date.values[k]
-    moa = int(doa.split('-')[1])
-    yoa = int(doa.split('-')[0])
-    if yoa == 2017:
-        for o, value3 in enumerate(dayHolder_2017.values):
-            dh_doa = dayHolder_2017.Date.values[o]
-            dh_moa = int(dh_doa.split('-')[1])
-            if calldata.Date.values[k] == dayHolder_2017.Date.values[o]:
-                calldata.Daily_Avg_Temp.values[k] = dayHolder_2017.Daily_Average.values[o]
-            if moa == dh_moa:
-                calldata.Monthly_Avg_Temp.values[k] = dayHolder_2017.Monthly_Average.values[o]
-    elif yoa == 2018:
-        for a, value4 in enumerate(dayHolder_2018.values):
-            dh_doa = dayHolder_2018.Date.values[a]
-            dh_moa = int(dh_doa.split('-')[1])
-            if calldata.Date.values[k] == dayHolder_2018.Date.values[a]:
-                calldata.Daily_Avg_Temp.values[k] = dayHolder_2018.Daily_Average.values[a]
-            if moa == dh_moa:
-                calldata.Monthly_Avg_Temp.values[k] = dayHolder_2018.Monthly_Average.values[a]
-
-print("Relative Temps")
-for h, value6 in enumerate(calldata.values):
-    calldata.Relative_Temp.values[h] = abs(calldata.Daily_Avg_Temp.values[h] - calldata.Monthly_Avg_Temp.values[h])
-
-save_excel_file(folderpath +
-                "Excel & CSV Sheets/2017+2018 Data/Accident Data NS (Date).xlsx",
-                "Aggregated Weather", calldata)
+# Code for aggregating data and converting them into numerical forms for modelling #
+# calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Negative Samples (Date).xlsx")
+#
+# header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+#                'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+#                "Daily_Avg_Temp", "Monthly_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', 'Visibility',
+#                "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity", "Precip_Intensity_Max",
+#                "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore")
+#
+# calldata = calldata.reindex(columns=header_list)
+#
+# for i, value in enumerate(calldata.values):
+#     print(i)
+#     if "clear" in calldata.Event.values[i] or "clear" in calldata.Conditions.values[i] \
+#             or "Clear" in calldata.Event.values[i] or "Clear" in calldata.Conditions.values[i]:
+#         calldata.Clear.values[i] = 1
+#     else:
+#         calldata.Clear.values[i] = 0
+#
+#     if "rain" in calldata.Event.values[i] or "rain" in calldata.Conditions.values[i] \
+#             or "Rain" in calldata.Event.values[i] or "Rain" in calldata.Conditions.values[i] \
+#             or "Drizzle" in calldata.Event.values[i] or "Drizzle" in calldata.Conditions.values[i] \
+#             or "drizzle" in calldata.Event.values[i] or "drizzle" in calldata.Conditions.values[i]:
+#         calldata.Rain.values[i] = 1
+#     else:
+#         calldata.Rain.values[i] = 0
+#
+#     if "snow" in calldata.Event.values[i] or "snow" in calldata.Conditions.values[i] \
+#             or "Snow" in calldata.Event.values[i] or "Snow" in calldata.Conditions.values[i]:
+#         calldata.Snow.values[i] = 1
+#     else:
+#         calldata.Snow.values[i] = 0
+#
+#     if "cloudy" in calldata.Event.values[i] or "cloudy" in calldata.Conditions.values[i] \
+#             or "Cloudy" in calldata.Event.values[i] or "Cloudy" in calldata.Conditions.values[i] \
+#             or "overcast" in calldata.Event.values[i] or "overcast" in calldata.Conditions.values[i] \
+#             or "Overcast" in calldata.Event.values[i] or "Overcast" in calldata.Conditions.values[i]:
+#         calldata.Cloudy.values[i] = 1
+#     else:
+#         calldata.Cloudy.values[i] = 0
+#
+#     if "fog" in calldata.Event.values[i] or "foggy" in calldata.Conditions.values[i] \
+#             or "Fog" in calldata.Event.values[i] or "Foggy" in calldata.Conditions.values[i]:
+#         calldata.Fog.values[i] = 1
+#     else:
+#         calldata.Fog.values[i] = 0
+#     if "rain" in calldata.EventBefore.values[i] or "rain" in calldata.ConditionBefore.values[i] \
+#             or "Rain" in calldata.EventBefore.values[i] or "Rain" in calldata.ConditionBefore.values[i]:
+#         calldata.RainBefore.values[i] = 1
+#     else:
+#         calldata.RainBefore.values[i] = 0
+# calldata.drop(["Precipitation_Type", "Event", "Conditions", "EventBefore", "ConditionBefore"], axis=1, inplace=True)
+#
+# dayHolder_2017 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
+# dayHolder_2018 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
+# dayHolder_2017.Date = dayHolder_2017.Date.astype(str)
+# dayHolder_2018.Date = dayHolder_2018.Date.astype(str)
+# calldata.Date = calldata.Date.astype(str)
+# print("Starting Temp Matching")
+# for k, value2 in enumerate(calldata.values):
+#     print(k)
+#     doa = calldata.Date.values[k]
+#     moa = int(doa.split('-')[1])
+#     yoa = int(doa.split('-')[0])
+#     if yoa == 2017:
+#         for o, value3 in enumerate(dayHolder_2017.values):
+#             dh_doa = dayHolder_2017.Date.values[o]
+#             dh_moa = int(dh_doa.split('-')[1])
+#             if calldata.Date.values[k] == dayHolder_2017.Date.values[o]:
+#                 calldata.Daily_Avg_Temp.values[k] = dayHolder_2017.Daily_Average.values[o]
+#             if moa == dh_moa:
+#                 calldata.Monthly_Avg_Temp.values[k] = dayHolder_2017.Monthly_Average.values[o]
+#     elif yoa == 2018:
+#         for a, value4 in enumerate(dayHolder_2018.values):
+#             dh_doa = dayHolder_2018.Date.values[a]
+#             dh_moa = int(dh_doa.split('-')[1])
+#             if calldata.Date.values[k] == dayHolder_2018.Date.values[a]:
+#                 calldata.Daily_Avg_Temp.values[k] = dayHolder_2018.Daily_Average.values[a]
+#             if moa == dh_moa:
+#                 calldata.Monthly_Avg_Temp.values[k] = dayHolder_2018.Monthly_Average.values[a]
+#
+# print("Relative Temps")
+# for h, value6 in enumerate(calldata.values):
+#     calldata.Relative_Temp.values[h] = abs(calldata.Daily_Avg_Temp.values[h] - calldata.Monthly_Avg_Temp.values[h])
+#
+# save_excel_file(folderpath +
+#                 "",
+#                 "Aggregated Weather", calldata)
