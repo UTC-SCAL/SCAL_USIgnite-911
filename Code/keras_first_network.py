@@ -1,4 +1,4 @@
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Dense
 import numpy
 import os, sys
@@ -81,6 +81,7 @@ print(Y.shape)
 
 #           2. Defining a Neural Network
 #creating the model
+ckpt_name = "911_Model.hdf5"
 model = Sequential()
 
 # Fully connected layers are made using the Dense class. So, you can specify the number of neurons in the layer as the
@@ -114,7 +115,18 @@ print(model.summary())
 # performed in the network. (That's batch size, set with, you guessed it: batch_size.)
 # The numbers used here are quite small, but the right number can be discovered via trial and error.
 
-model.fit(X_train, y_train, epochs=10, batch_size=8)
+if os.path.exists(ckpt_name):
+    print("Loading model {}".format(ckpt_name))
+    load_model(ckpt_name)
+    # model.load_weights(ckpt_name)
+    print("Done!")
+else:
+    print("Model not found, making it!")
+    model.fit(X_train, y_train, epochs=200, batch_size=128)
+    model.model.save(ckpt_name)
+    # model.save_weights(ckpt_name)
+    print("Done creating and training model, saved to {}".format(ckpt_name))
+
 
 # Evaluating the model
 # This part tells us how well we've modeled the data set.
@@ -127,7 +139,7 @@ model.fit(X_train, y_train, epochs=10, batch_size=8)
 
 #           5. Evaluate that model!
 #This is evaluating the model, and printing the results of the epochs.
-scores = model.evaluate(X_train, y_train)
+scores = model.evaluate(X_train, y_train, batch_size=128)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 # Okay, now let's calculate predictions.
@@ -144,8 +156,8 @@ print("Rounded:",accscore1)
 print(len(predictions))
 print(len(y_test))
 generate_results(y_test, predictions_round)
-# plt.plot(predictions[0:100], color='red', label="Predictions")
+plt.plot(predictions[0:100], color='red', label="Predictions", linewidth= 3)
 plt.plot(y_test[0:100], color='blue', label="Y Values")
-plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
-plt.legend()
+# plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
+plt.legend(loc='upper right', fontsize=15)
 plt.show()
