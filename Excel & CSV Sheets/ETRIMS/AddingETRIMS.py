@@ -4,7 +4,7 @@ from datetime import datetime
 
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
-# sep = "\\" if platform.system() is "Windows" else "/"
+sep = "\\" if platform.system() is "Windows" else "/"
 
 start = datetime.now()
 
