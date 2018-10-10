@@ -60,7 +60,7 @@ dataset = pandas.read_csv(folderpath + "Excel & CSV Sheets/2017+2018 Data/Accide
 
 #Splitting the data with an excel file:
 # dataset = dataset[dataset.columns[dataset.dtypes != object]]
-# dataset = dataset.drop(['Latitude', 'Longitude', 'Temperature', 'Daily_Avg_Temp', 'Monthly_Avg_Temp', 'Dewpoint'], axis=1)
+dataset = dataset.drop(["Illumination", "Land_Use", "Terrain"], axis=1)
 # dataset = dataset.dropna()
 # dataset = dataset.drop(dataset[dataset.Speed_Limit < 0].index)
 # dataset = dataset.drop(['Illumination'],axis=1)
@@ -92,7 +92,10 @@ model = Sequential()
 # and the activation function as Rectifier. (Better performance than using sigmoid or tanh)
 model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu'))
 # This layer has 8 neurons, with Rectifier still being the activation.
-model.add(Dense(8,activation='sigmoid'))
+model.add(Dense(25,activation='relu'))
+model.add(Dense(20,activation='relu'))
+model.add(Dense(18,activation='relu'))
+model.add(Dense(15,activation='sigmoid'))
 # Last layer has 1 neuron, so it can predict the class (diabetes or not)
 model.add(Dense(1,activation='sigmoid'))
 
@@ -114,7 +117,7 @@ print(model.summary())
 # performed in the network. (That's batch size, set with, you guessed it: batch_size.)
 # The numbers used here are quite small, but the right number can be discovered via trial and error.
 
-model.fit(X_train, y_train, epochs=200, batch_size=128)
+model.fit(X_train, y_train, epochs=300, batch_size=128)
 
 # Evaluating the model
 # This part tells us how well we've modeled the data set.
