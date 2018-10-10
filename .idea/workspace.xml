@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/RolandProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RolandProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/911_Model_asdf.hdf5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/911_Model.hdf5" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/keras_first_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/keras_first_network.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,41 +16,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1470">
-              <caret line="487" selection-start-line="487" selection-end-line="487" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1207#1433#0" />
-                <element signature="e#1512#2179#0" />
-                <element signature="e#2222#2366#0" />
-                <element signature="e#2404#2746#0" />
-                <element signature="e#2801#9860#0" />
-                <element signature="e#10176#13873#0" />
-                <element signature="e#13915#17367#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="negativeSampling.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/negativeSampling.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="461" column="55" selection-start-line="461" selection-start-column="55" selection-end-line="461" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#180#406#0" />
-                <element signature="e#437#19741#0" />
-                <element signature="e#19831#19859#0" />
-                <element signature="e#22468#22605#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -91,13 +56,40 @@
       <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="83" column="26" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+            <state relative-caret-position="570">
+              <caret line="55" column="36" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="36" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
                 <element signature="e#468#694#0" />
                 <element signature="e#740#1158#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/tensorflow/python/keras/engine/training.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="1368" column="24" selection-start-line="1368" selection-start-column="10" selection-end-line="1368" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="network.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/keras/engine/network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="1147" column="47" selection-start-line="1147" selection-end-line="1148" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/keras/engine/training.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-262">
+              <caret line="982" column="32" selection-start-line="982" selection-end-line="983" />
             </state>
           </provider>
         </entry>
@@ -142,15 +134,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SVMTry.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -175,6 +158,7 @@
       <find>calldata</find>
       <find>geometrics</find>
       <find>hours</find>
+      <find>diab</find>
     </findStrings>
     <replaceStrings>
       <replace>maxi</replace>
@@ -248,8 +232,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="-220" />
+    <option name="y" value="-1080" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -263,8 +249,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="SCAL_USIgnite-911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SCAL_USIgnite-911" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SCAL_USIgnite-911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SCAL_USIgnite-911" type="462c0819:PsiDirectoryNode" />
+              <item name="Code" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -764,13 +755,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-220" y="-1080" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28055555" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21041666" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49786553" visible="true" weight="0.30424243" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3283582" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49786553" visible="true" weight="0.24975124" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3298279" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24919957" />
@@ -784,7 +776,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32919848" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -847,18 +838,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/.~lock.2018 + 2017 Accident Report List.xlsx#" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-22.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-23.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-24.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1326" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/.~lock.2018 + 2017 Accident Report List Agg Options.xlsx#" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-07-25.csv">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1144,10 +1123,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/keras/engine/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-262">
+          <caret line="982" column="32" selection-start-line="982" selection-end-line="983" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/keras/engine/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="1147" column="47" selection-start-line="1147" selection-end-line="1148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/tensorflow/python/keras/optimizers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="417" column="6" selection-start-line="417" selection-start-column="6" selection-end-line="417" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/tensorflow/python/keras/engine/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="1368" column="24" selection-start-line="1368" selection-start-column="10" selection-end-line="1368" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="83" column="26" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+        <state relative-caret-position="570">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="36" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
             <element signature="e#468#694#0" />

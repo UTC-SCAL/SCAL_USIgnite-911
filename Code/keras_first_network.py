@@ -1,5 +1,6 @@
-from keras.models import Sequential, load_model
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.callbacks import ModelCheckpoint
 import numpy
 import os, sys
 import pandas
@@ -42,7 +43,7 @@ def generate_results(y_test, y_score):
     # 4. Train a model on some data.
     # 5. Evaluate that model on some data!
 
-numpy.random.seed(7)
+# numpy.random.seed(7)
 
 
 #           1. Load Data
@@ -91,9 +92,13 @@ model = Sequential()
 
 # Adding the first layer, with 12 neurons, the input dimensions being the size of X,
 # and the activation function as Rectifier. (Better performance than using sigmoid or tanh)
-model.add(Dense(31, input_dim=X_train.shape[1], activation='relu'))
+model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu'))
 # This layer has 8 neurons, with Rectifier still being the activation.
-model.add(Dense(8,activation='sigmoid'))
+model.add(Dense(25,activation='relu'))
+model.add(Dense(20,activation='relu'))
+model.add(Dense(18,activation='relu'))
+model.add(Dropout(.5))
+model.add(Dense(15,activation='sigmoid'))
 # Last layer has 1 neuron, so it can predict the class (diabetes or not)
 model.add(Dense(1,activation='sigmoid'))
 
@@ -104,7 +109,7 @@ model.add(Dense(1,activation='sigmoid'))
 # The optimizer is used to search through different weights. We're using Adam before it's efficient and the default.
 # Finally, we collect/report the classification accuracy as the metric.
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-print(model.summary())
+model.summary()
 
 
 
@@ -117,14 +122,15 @@ print(model.summary())
 
 if os.path.exists(ckpt_name):
     print("Loading model {}".format(ckpt_name))
-    load_model(ckpt_name)
-    # model.load_weights(ckpt_name)
+    # load_model(ckpt_name)
+    model.load_weights(ckpt_name)
     print("Done!")
 else:
     print("Model not found, making it!")
-    model.fit(X_train, y_train, epochs=200, batch_size=128)
-    model.model.save(ckpt_name)
-    # model.save_weights(ckpt_name)
+    # callbacks_list = [ModelCheckpoint(ckpt_name)]
+    model.fit(X, Y, epochs=300, batch_size=128, validation_split=0.3, shuffle=True, callbacks=[])
+    # model.model.save(ckpt_name)
+    model.save_weights(ckpt_name)
     print("Done creating and training model, saved to {}".format(ckpt_name))
 
 
