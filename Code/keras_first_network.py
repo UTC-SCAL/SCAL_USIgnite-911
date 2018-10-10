@@ -90,7 +90,7 @@ model = Sequential()
 
 # Adding the first layer, with 12 neurons, the input dimensions being the size of X,
 # and the activation function as Rectifier. (Better performance than using sigmoid or tanh)
-model.add(Dense(31, input_dim=X_train.shape[1], activation='relu'))
+model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu'))
 # This layer has 8 neurons, with Rectifier still being the activation.
 model.add(Dense(8,activation='sigmoid'))
 # Last layer has 1 neuron, so it can predict the class (diabetes or not)
@@ -114,7 +114,7 @@ print(model.summary())
 # performed in the network. (That's batch size, set with, you guessed it: batch_size.)
 # The numbers used here are quite small, but the right number can be discovered via trial and error.
 
-model.fit(X_train, y_train, epochs=10, batch_size=8)
+model.fit(X_train, y_train, epochs=200, batch_size=128)
 
 # Evaluating the model
 # This part tells us how well we've modeled the data set.
@@ -127,7 +127,7 @@ model.fit(X_train, y_train, epochs=10, batch_size=8)
 
 #           5. Evaluate that model!
 #This is evaluating the model, and printing the results of the epochs.
-scores = model.evaluate(X_train, y_train)
+scores = model.evaluate(X_train, y_train, batch_size=128)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 # Okay, now let's calculate predictions.
@@ -144,8 +144,8 @@ print("Rounded:",accscore1)
 print(len(predictions))
 print(len(y_test))
 generate_results(y_test, predictions_round)
-# plt.plot(predictions[0:100], color='red', label="Predictions")
-plt.plot(y_test[0:100], color='blue', label="Y Values")
-plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
-plt.legend()
+plt.plot(predictions[0:100], color='red', label="Predictions")
+plt.plot(y_test[0:100], color='blue', label="Accident Occurred")
+# plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
+plt.legend(loc='upper right', fontsize=15)
 plt.show()

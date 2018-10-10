@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/I24AccidentHours.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/I24Work.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/JinsPlayfile.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/I24Accidents.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Accident Data Full.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Accident Data Full.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/convertingTime.py" afterPath="$PROJECT_DIR$/Code/convertingTime.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" afterPath="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/JinsPlayfile.py" afterPath="$PROJECT_DIR$/Code/JinsPlayfile.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/keras_first_network.py" afterPath="$PROJECT_DIR$/Code/keras_first_network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/scratchSheet.py" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,99 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConnectingWeather.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="487" column="0" lean-forward="false" selection-start-line="487" selection-start-column="0" selection-end-line="487" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1207#1433#0" expanded="false" />
-                <element signature="e#1512#2179#0" expanded="false" />
-                <element signature="e#2222#2366#0" expanded="false" />
-                <element signature="e#2404#2746#0" expanded="false" />
-                <element signature="e#2801#9860#0" expanded="false" />
-                <element signature="e#9907#10117#0" expanded="false" />
-                <element signature="e#10176#13873#0" expanded="false" />
-                <element signature="e#13915#17367#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="negativeSampling.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/negativeSampling.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="461" column="55" lean-forward="false" selection-start-line="461" selection-start-column="55" selection-end-line="461" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#180#406#0" expanded="false" />
-                <element signature="e#437#19741#0" expanded="false" />
-                <element signature="e#19831#19859#0" expanded="false" />
-                <element signature="e#22468#22605#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-                <element signature="e#296#3268#0" expanded="false" />
-                <element signature="e#3306#4205#0" expanded="false" />
-                <element signature="e#4242#4560#0" expanded="false" />
-                <element signature="e#4627#4853#0" expanded="false" />
-                <element signature="e#4891#5114#0" expanded="false" />
-                <element signature="e#5175#7473#0" expanded="false" />
-                <element signature="e#7502#7997#0" expanded="false" />
-                <element signature="e#8033#9913#0" expanded="false" />
-                <element signature="e#9955#29293#0" expanded="false" />
-                <element signature="e#29327#30478#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="521" column="0" lean-forward="true" selection-start-line="521" selection-start-column="0" selection-end-line="521" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#270#15136#0" expanded="false" />
-                <element signature="e#15203#15429#0" expanded="false" />
-                <element signature="e#15519#15626#0" expanded="false" />
-                <marker date="1539029091488" expanded="true" signature="17074:17120" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="140" column="27" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="150" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#468#694#0" expanded="false" />
-                <element signature="e#740#1158#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="JinsPlayfile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/JinsPlayfile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1638">
-              <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
+            <state relative-caret-position="1352">
+              <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#468#694#0" expanded="false" />
@@ -124,38 +30,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Jins24HourPlayfile.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="813">
+              <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#468#694#0" expanded="false" />
+                <element signature="e#740#1158#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Jins24HourPlayfile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/Jins24HourPlayfile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="117" column="10" lean-forward="false" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="10" />
+            <state relative-caret-position="1014">
+              <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#467#885#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="I24Work.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/I24Work.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="37" column="33" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="117" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#467#885#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVMTry.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="42" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -250,9 +147,9 @@
         <option value="$PROJECT_DIR$/Code/convertingTime.py" />
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/Code/I24Work.py" />
-        <option value="$PROJECT_DIR$/Code/keras_first_network.py" />
         <option value="$PROJECT_DIR$/Code/JinsPlayfile.py" />
         <option value="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" />
+        <option value="$PROJECT_DIR$/Code/keras_first_network.py" />
       </list>
     </option>
   </component>
@@ -287,12 +184,17 @@
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -343,7 +245,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="SVMTry" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Jins24HourPlayfile" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -355,7 +257,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/SVMTry.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -414,17 +316,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.scratchSheet" />
       <item index="1" class="java.lang.String" itemvalue="Python.keras_first_network" />
-      <item index="2" class="java.lang.String" itemvalue="Python.SVMTry" />
-      <item index="3" class="java.lang.String" itemvalue="Python.I24Work" />
-      <item index="4" class="java.lang.String" itemvalue="Python.convertingTime" />
+      <item index="2" class="java.lang.String" itemvalue="Python.I24Work" />
+      <item index="3" class="java.lang.String" itemvalue="Python.convertingTime" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Jins24HourPlayfile" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.keras_first_network" />
-        <item index="1" class="java.lang.String" itemvalue="Python.convertingTime" />
-        <item index="2" class="java.lang.String" itemvalue="Python.I24Work" />
-        <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="4" class="java.lang.String" itemvalue="Python.SVMTry" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Jins24HourPlayfile" />
+        <item index="2" class="java.lang.String" itemvalue="Python.convertingTime" />
+        <item index="3" class="java.lang.String" itemvalue="Python.I24Work" />
+        <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
       </list>
     </recent_temporary>
   </component>
@@ -768,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539001470144</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Changes made">
+      <created>1539032844674</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1539032844674</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView">
@@ -781,26 +690,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
+    <frame x="2533" y="55" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28068304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28708646" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1074,11 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1300">
           <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#1852#2957#0" expanded="false" />
-            <element signature="e#2981#4924#0" expanded="false" />
-            <element signature="e#4993#5516#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1087,9 +991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6760">
           <caret line="269" column="57" lean-forward="false" selection-start-line="269" selection-start-column="57" selection-end-line="269" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#12#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,13 +998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="461" column="55" lean-forward="false" selection-start-line="461" selection-start-column="55" selection-end-line="461" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#180#406#0" expanded="false" />
-            <element signature="e#437#19741#0" expanded="false" />
-            <element signature="e#19831#19859#0" expanded="false" />
-            <element signature="e#22468#22605#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1114,10 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2808">
           <caret line="113" column="37" lean-forward="false" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-            <element signature="e#225#451#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1125,7 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1133,7 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1141,7 +1029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
           <caret line="21" column="72" lean-forward="true" selection-start-line="21" selection-start-column="72" selection-end-line="21" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,17 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="487" column="0" lean-forward="false" selection-start-line="487" selection-start-column="0" selection-end-line="487" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1207#1433#0" expanded="false" />
-            <element signature="e#1512#2179#0" expanded="false" />
-            <element signature="e#2222#2366#0" expanded="false" />
-            <element signature="e#2404#2746#0" expanded="false" />
-            <element signature="e#2801#9860#0" expanded="false" />
-            <element signature="e#9907#10117#0" expanded="false" />
-            <element signature="e#10176#13873#0" expanded="false" />
-            <element signature="e#13915#17367#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1167,19 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#296#3268#0" expanded="false" />
-            <element signature="e#3306#4205#0" expanded="false" />
-            <element signature="e#4242#4560#0" expanded="false" />
-            <element signature="e#4627#4853#0" expanded="false" />
-            <element signature="e#4891#5114#0" expanded="false" />
-            <element signature="e#5175#7473#0" expanded="false" />
-            <element signature="e#7502#7997#0" expanded="false" />
-            <element signature="e#8033#9913#0" expanded="false" />
-            <element signature="e#9955#29293#0" expanded="false" />
-            <element signature="e#29327#30478#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1187,13 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="521" column="0" lean-forward="true" selection-start-line="521" selection-start-column="0" selection-end-line="521" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#270#15136#0" expanded="false" />
-            <element signature="e#15203#15429#0" expanded="false" />
-            <element signature="e#15519#15626#0" expanded="false" />
-            <marker date="1539029091488" expanded="true" signature="17074:17120" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1201,31 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="140" column="27" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="150" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#468#694#0" expanded="false" />
-            <element signature="e#740#1158#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/JinsPlayfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1638">
-          <caret line="150" column="10" lean-forward="false" selection-start-line="150" selection-start-column="10" selection-end-line="150" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#468#694#0" expanded="false" />
-            <element signature="e#740#1158#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1233,6 +1064,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="37" column="33" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="117" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Jins24HourPlayfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
             <element signature="e#467#885#0" expanded="false" />
@@ -1240,13 +1078,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Jins24HourPlayfile.py">
+    <entry file="file://$PROJECT_DIR$/Code/JinsPlayfile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="117" column="10" lean-forward="false" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="10" />
+        <state relative-caret-position="1352">
+          <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#467#885#0" expanded="false" />
+            <element signature="e#468#694#0" expanded="false" />
+            <element signature="e#740#1158#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="813">
+          <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#468#694#0" expanded="false" />
+            <element signature="e#740#1158#0" expanded="false" />
           </folding>
         </state>
       </provider>
