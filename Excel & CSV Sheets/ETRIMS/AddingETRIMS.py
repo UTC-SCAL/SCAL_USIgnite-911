@@ -17,13 +17,15 @@ dataset = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CS
                                           'Precipitation_Intensity':float, 'Precip_Intensity_Max':float, 'Precip_Intensity_Time':str,
                                           'Clear':int, 'Cloudy':int, 'Rain':int, 'Fog':int, 'Snow':int, 'RainBefore':int,
                                           'Terrain':float, 'Land_Use':float, 'Access_Control':float, 'Illumination':float,
-                                          'Operation':float, 'Speed_Limit':float, 'Thru_Lanes':int, 'Num_Lanes':int, 'Weekday':int },
+                                          'Operation':float, 'Speed_Limit':float, 'Thru_Lanes':int, 'Num_Lanes':int,
+                                          'Weekday':int, 'Ad_Sys':int, 'Gov_Cont':int, 'Func_Class':int, 'AADT':int,
+                                          'DHV':int, 'Pavement_Width':int, 'Pavement_Type':str, 'Turn_Lane':int},
                                            parse_dates = True)
-geometrics = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",sep=",")
-segments = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",sep=",")
-descriptions = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON.csv",sep=",")
+geometrics = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv".replace("/", sep),sep=",")
+segments = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv".replace("/", sep),sep=",")
+descriptions = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON.csv".replace("/", sep),sep=",")
 # features = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Route_Feature_County_HAMILTON.csv".replace("/", sep),sep=",")
-traffic = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",sep=",")
+traffic = pandas.read_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv".replace("/", sep),sep=",")
 
 for k, info in enumerate(dataset.values):
     print(k)
@@ -32,26 +34,32 @@ for k, info in enumerate(dataset.values):
             if geometrics.ELM.values[i] > dataset.Log_Mile.values[k] > geometrics.BLM.values[i]:
                 dataset.Num_Lanes.values[k] = geometrics.Num_Lns.values[i]
                 dataset.Thru_Lanes.values[k] = geometrics.Thru_Lanes.values[i]
+                # break
     for l, value in enumerate(segments.values):
         if dataset.Route.values[k] == segments.ID_NUMBER.values[l]:
             if segments.ELM.values[l] > dataset.Log_Mile.values[k] > segments.BLM.values[l]:
                 dataset.Ad_Sys.values[k] = segments.Ad_Sys.values[l]
                 dataset.Gov_Cont.values[k] = segments.Gov_Cont.values[l]
                 dataset.Func_Class.values[k] = segments.Func_Class.values[l]
+                # break
     for m, value in enumerate(traffic.values):
         if dataset.Route.values[k] == traffic.ID_NUMBER.values[m]:
             if traffic.ELM.values[m] > dataset.Log_Mile.values[k] > traffic.BLM.values[m]:
                 dataset.AADT.values[k] = traffic.AADT.values[m]
                 dataset.DHV.values[k] = traffic.DHV.values[m]
+                # break
     for n, value in enumerate(descriptions.values):
         if dataset.Route.values[k] == descriptions.ID_NUMBER.values[n]:
-            if segments.ELM.values[n] > dataset.Log_Mile.values[k] > descriptions.BLM.values[n]:
-                if descriptions.Feature_Type.value[n] == 'PAVEMENT':
+            if descriptions.ELM.values[n] > dataset.Log_Mile.values[k] > descriptions.BLM.values[n]:
+                if descriptions.Feature_Type[n] == 'PAVEMENT':
                     dataset.Pavement_Width.values[k] = descriptions.Feat_Width.values[n]
                     dataset.Pavement_Type.values[k] = descriptions.Feature_Composition.values[n]
-                if descriptions.Feature_Type.value[n] == 'ACCELERATION/DECELERATION LANE':
+                if descriptions.Feature_Type[n] == 'ACCELERATION/DECELERATION LANE':
                     dataset.Turn_Lane.values[k] = 1
-            else:
-                print("Not found")
+                else:
+                    dataset.Turn_Lane.values[k] = 0
+                # break
 
-dataset.to_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/GeoTest.csv")
+
+dataset.to_csv("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/GeoTest2.csv")
+print(datetime.now()-start)

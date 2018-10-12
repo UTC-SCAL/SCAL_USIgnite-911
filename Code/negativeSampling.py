@@ -419,99 +419,99 @@ def add_data(calldata):
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
-# # Hour Negative Sampling #
-# calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
-# # Make a negative samples dataframe to hold the negative samples from calldata
-# negative_samples = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.xlsx")
-# neg_loc = 0  # Used for positioning
-# calldata.Time = calldata.Time.astype(str)
-# calldata.Date = calldata.Date.astype(str)
-# # For selecting a random hour, use random.choice on a list while excluding the particular hour from the range
-# for i, info in enumerate(calldata.values):
-#     print(i)
-#     # Get the hour
-#     n = calldata.Hour.values[i]  # Number to remove from list of hours
-#     hours = range(0, 24)
-#     r = [x for x in hours if x != n]  # A list of numbers without n
-#     # Replace hour in calldata with a random hour
-#     calldata.Hour.values[i] = random.choice(r)
-#     # Check other entries if there's a match
-#     for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
-#         if calldata.Hour.values[k] == calldata.Hour.values[i] and calldata.Date.values[k] is calldata.Date.values[i]:
-#             # If match, skip
-#             pass
-#         else:
-#             # print("No match found, negative sample added to new dataframe")
-#             new_hour = str(calldata.Hour.values[i])
-#             toa = calldata.Time.values[i]
-#             mioa = str(toa.split(':')[1])
-#             soa = str(toa.split(':')[2])
-#             new_time = new_hour + ":" + mioa + ":" + soa
-#             calldata.Date = calldata.Date.astype(datetime)
-#             negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
-#             negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
-#             negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
-#             negative_samples.loc[neg_loc, "Time"] = new_time
-#             negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
-#             negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
-#             negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
-#             negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
-#             neg_loc = neg_loc + 1
-#             break
-# save_excel_file("",
-#                 "Negative Samples", negative_samples)
+# Hour Negative Sampling #
+calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
+# Make a negative samples dataframe to hold the negative samples from calldata
+negative_samples = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.xlsx")
+neg_loc = 0  # Used for positioning
+calldata.Time = calldata.Time.astype(str)
+calldata.Date = calldata.Date.astype(str)
+# For selecting a random hour, use random.choice on a list while excluding the particular hour from the range
+for i, info in enumerate(calldata.values):
+    print(i)
+    # Get the hour
+    n = calldata.Hour.values[i]  # Number to remove from list of hours
+    hours = range(0, 24)
+    r = [x for x in hours if x != n]  # A list of numbers without n
+    # Replace hour in calldata with a random hour
+    calldata.Hour.values[i] = random.choice(r)
+    # Check other entries if there's a match
+    for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+        if calldata.Hour.values[k] == calldata.Hour.values[i] and calldata.Date.values[k] is calldata.Date.values[i]:
+            # If match, skip
+            pass
+        else:
+            # print("No match found, negative sample added to new dataframe")
+            new_hour = str(calldata.Hour.values[i])
+            toa = calldata.Time.values[i]
+            mioa = str(toa.split(':')[1])
+            soa = str(toa.split(':')[2])
+            new_time = new_hour + ":" + mioa + ":" + soa
+            calldata.Date = calldata.Date.astype(datetime)
+            negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
+            negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
+            negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
+            negative_samples.loc[neg_loc, "Time"] = new_time
+            negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
+            negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
+            negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
+            negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
+            neg_loc = neg_loc + 1
+            break
+save_excel_file("",
+                "Negative Samples", negative_samples)
 
 calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Negative Samples by Date Raw.xlsx")
 add_data(calldata)
 
-# calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
-# day_holder2017 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
-# day_holder2018 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
-#
-# # Make a negative samples dataframe to hold the negative samples from calldata
-# negative_samples = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.xlsx")
-# neg_loc = 0  # Used for positioning
-# calldata.Date = calldata.Date.astype(str)
-# day_holder2017.Date = day_holder2017.Date.astype(str)
-# day_holder2018.Date = day_holder2018.Date.astype(str)
-#
-# # For selecting a random day, use random.choice on a list while excluding the particular day from the range
-# for i, info in enumerate(calldata.values):
-#     print(i)
-#     # Get the day
-#     doa = calldata.Date.values[i]  # Date of a 911 call
-#     day_num = pandas.to_datetime(doa).strftime('%-j')
-#     # Note: When selecting the corresponding date from the excel file, it's the Day_Num value - 1 #
-#     # So, for the ranges, have them be from 0 to max Day_Num value + 1
-#     days_2017 = range(0, 365)
-#     # This variable needs to be updated for the current day, since 2018 is still going on
-#     days_2018 = range(0, 269)
-#
-#     r_2017 = [x for x in days_2017 if x != day_num]  # A list of numbers without dayoa, covering the days in 2017
-#     r_2018 = [y for y in days_2018 if y != day_num]  # A list of numbers without dayoa, covering the days in 2018
-#     # Check to see what the year is; based on this, you use one of the above variables
-#     yoa = int(doa.split('-')[0])  # Get the year
-#     if yoa == 2017:
-#         # Replace day in calldata with a random day
-#         calldata.Date.values[i] = day_holder2017.Date.values[random.choice(r_2017)]
-#     elif yoa == 2018:
-#         calldata.Date.values[i] = day_holder2018.Date.values[random.choice(r_2018)]
-#     # Check other entries if there's a match
-#     for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
-#         if calldata.Date.values[k] == calldata.Date.values[i]:
-#             # If match, skip
-#             pass
-#         else:
-#             # print("No match found, negative sample added to new dataframe")
-#             calldata.Date = calldata.Date.astype(datetime)
-#             negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
-#             negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
-#             negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
-#             negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[i]
-#             negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
-#             negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
-#             negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
-#             neg_loc = neg_loc + 1
-#             break
-# save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Negative Samples by Date Raw.xlsx",
-#                 "Negative Samples", negative_samples)
+calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
+day_holder2017 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
+day_holder2018 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
+
+# Make a negative samples dataframe to hold the negative samples from calldata
+negative_samples = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.xlsx")
+neg_loc = 0  # Used for positioning
+calldata.Date = calldata.Date.astype(str)
+day_holder2017.Date = day_holder2017.Date.astype(str)
+day_holder2018.Date = day_holder2018.Date.astype(str)
+
+# For selecting a random day, use random.choice on a list while excluding the particular day from the range
+for i, info in enumerate(calldata.values):
+    print(i)
+    # Get the day
+    doa = calldata.Date.values[i]  # Date of a 911 call
+    day_num = pandas.to_datetime(doa).strftime('%-j')
+    # Note: When selecting the corresponding date from the excel file, it's the Day_Num value - 1 #
+    # So, for the ranges, have them be from 0 to max Day_Num value + 1
+    days_2017 = range(0, 365)
+    # This variable needs to be updated for the current day, since 2018 is still going on
+    days_2018 = range(0, 269)
+
+    r_2017 = [x for x in days_2017 if x != day_num]  # A list of numbers without dayoa, covering the days in 2017
+    r_2018 = [y for y in days_2018 if y != day_num]  # A list of numbers without dayoa, covering the days in 2018
+    # Check to see what the year is; based on this, you use one of the above variables
+    yoa = int(doa.split('-')[0])  # Get the year
+    if yoa == 2017:
+        # Replace day in calldata with a random day
+        calldata.Date.values[i] = day_holder2017.Date.values[random.choice(r_2017)]
+    elif yoa == 2018:
+        calldata.Date.values[i] = day_holder2018.Date.values[random.choice(r_2018)]
+    # Check other entries if there's a match
+    for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+        if calldata.Date.values[k] == calldata.Date.values[i]:
+            # If match, skip
+            pass
+        else:
+            # print("No match found, negative sample added to new dataframe")
+            calldata.Date = calldata.Date.astype(datetime)
+            negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
+            negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
+            negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
+            negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[i]
+            negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
+            negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
+            negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
+            neg_loc = neg_loc + 1
+            break
+save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Negative Samples by Date Raw.xlsx",
+                "Negative Samples", negative_samples)
