@@ -21,19 +21,25 @@ def save_excel_file(save_file_name, sheet, data_file_name):
     writer.save()
 
 
-def generate_results(y_test, y_score):
-    fpr, tpr, _ = roc_curve(y_test, y_score)
+def generate_results(y_test, y_score, predictions):
+    fpr, tpr, _ = roc_curve(y_test, predictions)
     roc_auc = auc(fpr, tpr)
+    # print("This is the ROC",roc_auc)
     plt.figure()
+    plt.subplot(2,1,1)
     plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
-    plt.xlim([0.0, 1.05])
-    plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic curve')
-    plt.show()
     print('AUC: %f' % roc_auc)
+
+    plt.subplot(2,1,2)
+    plt.plot(predictions[0:100], color='red', label="Predictions")
+    plt.plot(y_test[0:100], color='blue', label="Accident Occurred")
+    # plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
+    plt.legend(loc='upper right', fontsize=8)
+    plt.show()
 
 ## The steps of creating a neural network or deep learning model ##
     # 1. Load Data
@@ -87,16 +93,20 @@ model = Sequential()
 # first argument, the initialization method as the second argument (using init) and the activation function using the
 # activation argument.
 
+##Add a convolutional layer?
 
 # Adding the first layer, with 12 neurons, the input dimensions being the size of X,
 # and the activation function as Rectifier. (Better performance than using sigmoid or tanh)
+print(X_train.shape[1])
 model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu'))
 # This layer has 8 neurons, with Rectifier still being the activation.
-model.add(Dense(25,activation='relu'))
 model.add(Dense(20,activation='relu'))
-model.add(Dense(18,activation='relu'))
-model.add(Dense(15,activation='sigmoid'))
-# Last layer has 1 neuron, so it can predict the class (diabetes or not)
+model.add(Dense(15,activation='relu'))
+model.add(Dense(10,activation='relu'))
+model.add(Dense(5,activation='relu'))
+
+# model.add(Dense(15,activation='sigmoid'))
+# Last layer has 1 neuron, so it can predict the class (accident or not)
 model.add(Dense(1,activation='sigmoid'))
 
 #           3. Compiling a model.
@@ -117,7 +127,7 @@ print(model.summary())
 # performed in the network. (That's batch size, set with, you guessed it: batch_size.)
 # The numbers used here are quite small, but the right number can be discovered via trial and error.
 
-model.fit(X_train, y_train, epochs=300, batch_size=128)
+hist = model.fit(X_train, y_train, epochs=10, batch_size=128, validation_data=(X_test, y_test))
 
 # Evaluating the model
 # This part tells us how well we've modeled the data set.
@@ -143,12 +153,24 @@ predictions_round = [abs(round(x[0])) for x in predictions]
 accscore1 = accuracy_score(y_test, predictions_round)
 print("Rounded:",accscore1)
 
+plt.figure(1)
+plt.subplot(211)
+plt.plot(hist.history['acc'])
+plt.plot(hist.history['val_acc'])
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right')
+
+# summarize history for loss
+
+plt.subplot(212)
+plt.plot(hist.history['loss'])
+plt.plot(hist.history['val_loss'])
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Train Loss', 'Test Loss'], loc='upper right')
+plt.show()
 
 print(len(predictions))
 print(len(y_test))
-generate_results(y_test, predictions_round)
-plt.plot(predictions[0:100], color='red', label="Predictions")
-plt.plot(y_test[0:100], color='blue', label="Accident Occurred")
-# plt.plot(predictions_round[0:100], color='green', label = "Rounded Predictions")
-plt.legend(loc='upper right', fontsize=15)
-plt.show()
+generate_results(y_test, predictions_round, predictions)
