@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-01_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-01_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-05_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-05_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-09_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-09_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-10_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-10_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-11_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-11_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-12_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-12_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-15_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-15_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-18_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-18_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="$PROJECT_DIR$/Code/AutomatedData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/convertingTime.py" afterPath="$PROJECT_DIR$/Code/convertingTime.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/keras_first_network.py" afterPath="$PROJECT_DIR$/Code/keras_first_network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-09-01.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-09-01.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/GeoTest2.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/GeoTest2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SchoolProjects/Project2GUI.py" afterPath="$PROJECT_DIR$/SchoolProjects/Project2GUI.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,12 +21,11 @@
       <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2106">
+            <state relative-caret-position="0">
               <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#468#694#0" expanded="false" />
-                <element signature="e#740#1158#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -50,8 +34,8 @@
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="955" column="0" lean-forward="true" selection-start-line="955" selection-start-column="0" selection-end-line="955" selection-end-column="0" />
+            <state relative-caret-position="-1631">
+              <caret line="181" column="34" lean-forward="false" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -63,10 +47,10 @@
                 <element signature="e#7830#8335#0" expanded="false" />
                 <element signature="e#8377#12946#0" expanded="false" />
                 <element signature="e#12980#14277#0" expanded="false" />
-                <element signature="e#14318#20492#0" expanded="false" />
-                <element signature="e#20533#27210#0" expanded="false" />
-                <element signature="e#27319#29434#0" expanded="false" />
-                <element signature="e#29473#46062#0" expanded="false" />
+                <element signature="e#14318#20431#0" expanded="false" />
+                <element signature="e#20472#27319#0" expanded="false" />
+                <element signature="e#27428#29543#0" expanded="false" />
+                <element signature="e#29582#46171#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -75,7 +59,7 @@
       <file leaf-file-name="FindGeomet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1040">
+            <state relative-caret-position="-1509">
               <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
               <folding />
             </state>
@@ -113,6 +97,7 @@
       <find>rainbefore</find>
       <find>negative_samples</find>
       <find>calldata</find>
+      <find>loc[::-1]</find>
     </findStrings>
     <replaceStrings>
       <replace>maxi</replace>
@@ -191,10 +176,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2477" />
-    <option name="y" value="224" />
-    <option name="width" value="993" />
-    <option name="height" value="599" />
+    <option name="x" value="2088" />
+    <option name="y" value="113" />
+    <option name="width" value="991" />
+    <option name="height" value="591" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -225,6 +210,12 @@
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
               <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
+              <item name="ETRIMS" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
@@ -384,20 +375,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Changes made">
-      <created>1532105415217</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1532105415217</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Changes made">
-      <created>1532115000392</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1532115000392</updated>
     </task>
     <task id="LOCAL-00008" summary="Changes made">
       <created>1532376367308</created>
@@ -728,7 +705,21 @@
       <option name="project" value="LOCAL" />
       <updated>1539978746095</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Changes made">
+      <created>1540378628531</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1540378628532</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Changes made">
+      <created>1540392054708</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1540392054708</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TodoView">
@@ -741,26 +732,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2477" y="224" width="1922" height="1153" extended-state="6" />
+    <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31750268" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24386339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25621414" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25621414" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1059,21 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/.~lock.New Negative Samples (Hour).csv#" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv">
       <provider selected="true" editor-type-id="text-editor">
@@ -1105,12 +1081,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2106">
+        <state relative-caret-position="0">
           <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
             <element signature="e#468#694#0" expanded="false" />
-            <element signature="e#740#1158#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1126,6 +1101,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,10 +1113,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1509">
+          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-122584">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2091">
-          <caret line="955" column="0" lean-forward="true" selection-start-line="955" selection-start-column="0" selection-end-line="955" selection-end-column="0" />
+        <state relative-caret-position="-1631">
+          <caret line="181" column="34" lean-forward="false" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
@@ -1152,10 +1144,10 @@
             <element signature="e#7830#8335#0" expanded="false" />
             <element signature="e#8377#12946#0" expanded="false" />
             <element signature="e#12980#14277#0" expanded="false" />
-            <element signature="e#14318#20492#0" expanded="false" />
-            <element signature="e#20533#27210#0" expanded="false" />
-            <element signature="e#27319#29434#0" expanded="false" />
-            <element signature="e#29473#46062#0" expanded="false" />
+            <element signature="e#14318#20431#0" expanded="false" />
+            <element signature="e#20472#27319#0" expanded="false" />
+            <element signature="e#27428#29543#0" expanded="false" />
+            <element signature="e#29582#46171#0" expanded="false" />
           </folding>
         </state>
       </provider>

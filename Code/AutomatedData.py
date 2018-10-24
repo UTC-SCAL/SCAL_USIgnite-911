@@ -321,6 +321,7 @@ def get_hour_negatives(calldata):
                 negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
                 negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
                 negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
+                negative_samples.loc[neg_loc, "Log_Mile"] = calldata.Log_Mile.values[i]
                 negative_samples.loc[neg_loc, "Terrain"] = calldata.Terrain.values[i]
                 negative_samples.loc[neg_loc, "Land_Use"] = calldata.Land_Use.values[i]
                 negative_samples.loc[neg_loc, "Access_Control"] = calldata.Access_Control.values[i]
@@ -356,8 +357,6 @@ def get_hour_negatives(calldata):
 
     print("Getting NS Hour Weather Data")
     negative_samples = get_weather_data(negative_samples)
-    negative_samples.to_csv(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
     # Appending new data to the New Data file #
     print("Appending NS Hour Data")
     negative_samples = negative_samples.iloc[::-1]
@@ -426,6 +425,8 @@ def get_date_negatives(calldata):
                 negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
                 negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
                 negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
+                negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
+                negative_samples.loc[neg_loc, "Log_Mile"] = calldata.Log_Mile.values[i]
                 negative_samples.loc[neg_loc, "Terrain"] = calldata.Terrain.values[i]
                 negative_samples.loc[neg_loc, "Land_Use"] = calldata.Land_Use.values[i]
                 negative_samples.loc[neg_loc, "Access_Control"] = calldata.Access_Control.values[i]
@@ -878,24 +879,24 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    # calldata, file = get_Email()
+    calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
-    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx",
-            dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
-                    'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
-                    'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-                    "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
-                    "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
-                    'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
-                    "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
-                    "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
-                    "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
-                    "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
-                    "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx",
+    #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
+    #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
+    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
+    #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
+    #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
+    #                 "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
+    #                 "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
+    #                 "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
+    #                 "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
+    #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx"
+    # file = folderpath + ""
     # calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -944,8 +945,8 @@ def main():
     calldata = add_data(calldata, dayname_xlsx)
 
     # Save the calldata in its final form, just in case the appending goes wrong
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + "_FinalForm.xlsx",
-                    "FinalSave", calldata)
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + "_FinalForm.xlsx",
+    #                 "FinalSave", calldata)
 
     # Append the new data
     append_data(calldata)
