@@ -356,7 +356,8 @@ def get_hour_negatives(calldata):
 
     print("Getting NS Hour Weather Data")
     negative_samples = get_weather_data(negative_samples)
-
+    negative_samples.to_csv(
+        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
     # Appending new data to the New Data file #
     print("Appending NS Hour Data")
     negative_samples = negative_samples.iloc[::-1]
@@ -877,10 +878,10 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    # calldata, file = get_Email()
+    calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
-    # calldata = pandas.read_excel(folderpath + "",
+    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx",
     #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
     #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
     #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
@@ -894,8 +895,8 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-10-10.csv"
-    calldata = pandas.read_csv(file, sep=",")
+    # file = folderpath + "v"
+    # calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
@@ -923,7 +924,7 @@ def main():
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
     header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", 
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
@@ -950,9 +951,8 @@ def main():
     append_data(calldata)
     # Get the negative samples of the calldata
     # Each of these methods also gets the updated weather information
-    get_date_negatives(calldata)
     get_hour_negatives(calldata)
-
+    get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,9 @@
 # This coding example is greatly influenced and inspired by an online example written by Saurabh Chaturvedi #
+# URL: https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 import tkinter
+import random
 
 
 # Two scripts, one for the server, one for the client #
@@ -36,7 +38,7 @@ def new_connection():
 
 
 # Takes the client name (socket) as an argument
-# The client picks their username and the method checks if there's another user by that name (this still needs to be implemented)
+# The client picks their username
 def client_handling(client):
     # This hanldes the single client we pass it
     name = client.recv(BUFSIZE).decode("enc5")
@@ -46,8 +48,18 @@ def client_handling(client):
     client.send(bytes(message, "enc5"))
     client_msg = client + " has joined the server!"
     msg_broadcast(bytes(client_msg, "enc5"))
-    # Save the client's name
-    client_list[client] = name
+    # Save the client's name, and append a random number to the end, so as to give the client a unique name
+    # This is a simple way to ensure there's no duplicate names
+    while True:
+        name_addon = random.randint(1, 1000)
+        # Append the unique number identifier to the user's name
+        name = name + str(name_addon)
+        if name in client_list:
+            print("Name taken, assigning new name addon")
+        else:
+            client_list[client] = name
+            break
+
     # Continuously take messages from the client, until they wish to quit
     while True:
         client_msg = client.recv(BUFSIZE)

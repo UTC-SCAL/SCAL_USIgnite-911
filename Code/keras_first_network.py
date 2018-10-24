@@ -95,7 +95,7 @@ model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu')
 model.add(Dense(25,activation='relu'))
 model.add(Dense(20,activation='relu'))
 model.add(Dense(18,activation='relu'))
-model.add(Dense(15,activation='sigmoid'))
+# model.add(Dense(15,activation='sigmoid'))
 # Last layer has 1 neuron, so it can predict the class (diabetes or not)
 model.add(Dense(1,activation='sigmoid'))
 
