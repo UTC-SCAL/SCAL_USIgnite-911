@@ -878,24 +878,24 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    calldata, file = get_Email()
+    # calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
-    # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx",
-    #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
-    #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
-    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-    #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
-    #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
-    #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
-    #                 "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
-    #                 "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
-    #                 "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
-    #                 "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
-    #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
+    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx",
+            dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
+                    'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
+                    'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+                    "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
+                    "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
+                    'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
+                    "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
+                    "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
+                    "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
+                    "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
+                    "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    # file = folderpath + "v"
+    file = folderpath + "Excel & CSV Sheets/2018 Data/911_Reports_for_2018-09-26_FinalForm.xlsx"
     # calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
