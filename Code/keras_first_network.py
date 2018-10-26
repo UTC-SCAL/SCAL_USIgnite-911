@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 import numpy
 import os, sys
 import pandas
@@ -88,7 +88,7 @@ dataset = shuffle(dataset)
 #
 # dataset = dataset.drop(["Dewpoint"], axis=1)
 X = dataset.ix[:,1:(len(dataset.columns)+1)].values
-print(X)
+# print(X)
 
 Y = dataset.ix[:,0].values
 
@@ -96,7 +96,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random
 
 print(X.shape)
 print(Y.shape)
-
 #           2. Defining a Neural Network
 #creating the model
 model = Sequential()
@@ -108,21 +107,24 @@ model = Sequential()
 
 # Adding the first layer, with 12 neurons, the input dimensions being the size of X,
 # and the activation function as Rectifier. (Better performance than using sigmoid or tanh)
-model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='relu'))
+model.add(Dense(X_train.shape[1], input_dim=X_train.shape[1], activation='selu'))
 # This layer has 8 neurons, with Rectifier still being the activation.
-model.add(Dense(25,activation='relu'))
-model.add(Dense(20,activation='relu'))
-model.add(Dense(18,activation='relu'))
-# Last layer has 1 neuron, so it can predict the class (diabetes or not)
+model.add(Dense(28,activation='selu'))
+model.add(Dense(20,activation='selu'))
+model.add(Dense(18,activation='selu'))
+model.add(Dense(10,activation='selu'))
+# Last layer has 1 neuron, so it can predict the class (Accident or not)
 model.add(Dense(1,activation='sigmoid'))
 
 #           3. Compiling a model.
 # Compiling the model.
 # The loss function is used to evaluate a set of weights,and we're losing logarithmic loss with a binary classification
 #   problem. This means we need to use binary cross entropy.
-# The optimizer is used to search through different weights. We're using Adam before it's efficient and the default.
+# The optimizer is used to search through different weights. We were originally using Adam before it's efficient and the default.
+# now we are using Adamax but further exploration is needed. 
+
 # Finally, we collect/report the classification accuracy as the metric.
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer='adamax', metrics=['accuracy'])
 print(model.summary())
 
 
@@ -133,8 +135,7 @@ print(model.summary())
 # iterations are referred to as epochs. We also set the number of instances evaluated before a weight update is
 # performed in the network. (That's batch size, set with, you guessed it: batch_size.)
 # The numbers used here are quite small, but the right number can be discovered via trial and error.
-
-hist = model.fit(X_train, y_train, epochs=500, batch_size=128, validation_data=(X_test, y_test))
+hist = model.fit(X_train, y_train, epochs=200, batch_size=250, validation_data=(X_test, y_test))
 
 # Evaluating the model
 # This part tells us how well we've modeled the data set.
@@ -147,7 +148,7 @@ hist = model.fit(X_train, y_train, epochs=500, batch_size=128, validation_data=(
 
 #           5. Evaluate that model!
 #This is evaluating the model, and printing the results of the epochs.
-scores = model.evaluate(X_train, y_train, batch_size=128)
+scores = model.evaluate(X_train, y_train, batch_size=250)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 # Okay, now let's calculate predictions.
