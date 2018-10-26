@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/RolandProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RolandProjects.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/keras_first_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/keras_first_network.py" afterDir="false" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="$PROJECT_DIR$/Code/AutomatedData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +25,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="173">
               <caret line="123" column="61" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
+=======
+            <state relative-caret-position="26">
+              <caret line="113" column="38" lean-forward="false" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
                 <element signature="e#468#694#0" />
@@ -30,11 +44,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="810">
               <caret line="534" column="31" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
+=======
+            <state relative-caret-position="111">
+              <caret line="883" column="57" lean-forward="true" selection-start-line="883" selection-start-column="57" selection-end-line="883" selection-end-column="57" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" />
@@ -168,8 +187,8 @@
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/SchoolProjects/Project2GUI.py" />
         <option value="$PROJECT_DIR$/Code/convertingTime.py" />
-        <option value="$PROJECT_DIR$/Code/AutomatedData.py" />
         <option value="$PROJECT_DIR$/Code/keras_first_network.py" />
+        <option value="$PROJECT_DIR$/Code/AutomatedData.py" />
       </list>
     </option>
   </component>
@@ -208,6 +227,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,7 +261,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.keras_first_network">
+  <component name="RunManager" selected="Python.AutomatedData">
     <configuration name="AutomatedData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RolandProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -340,12 +360,21 @@
       <item itemvalue="Python.convertingTime" />
     </list>
     <recent_temporary>
+<<<<<<< HEAD
       <list>
         <item itemvalue="Python.keras_first_network" />
         <item itemvalue="Python.AutomatedData" />
         <item itemvalue="Python.convertingTime" />
         <item itemvalue="Python.scratchSheet" />
         <item itemvalue="Python.Project2GUI" />
+=======
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.AutomatedData" />
+        <item index="1" class="java.lang.String" itemvalue="Python.keras_first_network" />
+        <item index="2" class="java.lang.String" itemvalue="Python.convertingTime" />
+        <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Project2GUI" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
       </list>
     </recent_temporary>
   </component>
@@ -359,13 +388,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Changes made">
-      <created>1532457679431</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1532457679431</updated>
     </task>
     <task id="LOCAL-00010" summary="Changes made">
       <created>1532460546469</created>
@@ -703,7 +725,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540411444260</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Changes made">
+      <created>1540482199847</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1540482199847</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TodoView">
@@ -719,6 +748,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24652778" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
@@ -737,6 +767,26 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919848" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25186765" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39483747" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -817,12 +867,28 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-08-21.csv">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Address.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report - 4-29-2015 - 4-29-2018.csv">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses with Routes.csv" />
     <entry file="file://$PROJECT_DIR$/Code/Graphing.py">
@@ -874,7 +940,11 @@
     <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
+<<<<<<< HEAD
           <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="42" />
+=======
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="42" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
         </state>
       </provider>
     </entry>
@@ -1016,13 +1086,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-122584" />
+=======
+        <state relative-caret-position="-122584">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/h5py/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="113" column="38" lean-forward="false" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#468#694#0" expanded="false" />
+          </folding>
+        </state>
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="810">
           <caret line="534" column="31" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
+=======
+        <state relative-caret-position="111">
+          <caret line="883" column="57" lean-forward="true" selection-start-line="883" selection-start-column="57" selection-end-line="883" selection-end-column="57" />
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" />
@@ -1042,6 +1141,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/h5py/__init__.py" />
     <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1055,6 +1155,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> cc03ab4925ae60d28974d599fa65c0f8b9b21a03
   </component>
   <component name="masterDetails">
     <states>
