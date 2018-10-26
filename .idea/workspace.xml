@@ -2,40 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2016_to_2018.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/AD Dates.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/AD Hours.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/AD Original+Hours.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Accident Data Full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Address.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses with Routes.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/All_Calls_With_AADT.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/CPD 2017 TITAN Crash Data.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/I24Accidents.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Road_Segment_County_HAMILTON.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Roadway_Geometrics.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Roadways_with_Roadnames.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Routes and Miles.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Routes_and_Miles_Complete.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/TDOT Vehicle Count.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/Accident vs Prediction Plot.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/Accident vs Prediction Plot_Oct18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/Histogram (All).png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/Histogram (No ITL).png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/MLP Acc 2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/MLP Acc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/P-Values All.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/P-Values No ITL.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/ROC 2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/ROC.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Graphs &amp; Images/MLP Results/ROC_Oct18.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="$PROJECT_DIR$/Code/AutomatedData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/keras_first_network.py" afterPath="$PROJECT_DIR$/Code/keras_first_network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/GeoTest2.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/GeoTest2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
@@ -49,10 +18,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
+            <state relative-caret-position="26">
               <caret line="113" column="38" lean-forward="false" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -62,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="534" column="31" lean-forward="false" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
+            <state relative-caret-position="111">
+              <caret line="883" column="57" lean-forward="true" selection-start-line="883" selection-start-column="57" selection-end-line="883" selection-end-column="57" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -201,8 +170,8 @@
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/SchoolProjects/Project2GUI.py" />
         <option value="$PROJECT_DIR$/Code/convertingTime.py" />
-        <option value="$PROJECT_DIR$/Code/AutomatedData.py" />
         <option value="$PROJECT_DIR$/Code/keras_first_network.py" />
+        <option value="$PROJECT_DIR$/Code/AutomatedData.py" />
       </list>
     </option>
   </component>
@@ -230,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -254,6 +222,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,7 +256,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.keras_first_network">
+  <component name="RunManager" selected="Python.AutomatedData">
     <configuration name="AutomatedData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -382,8 +351,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.keras_first_network" />
-        <item index="1" class="java.lang.String" itemvalue="Python.AutomatedData" />
+        <item index="0" class="java.lang.String" itemvalue="Python.AutomatedData" />
+        <item index="1" class="java.lang.String" itemvalue="Python.keras_first_network" />
         <item index="2" class="java.lang.String" itemvalue="Python.convertingTime" />
         <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
         <item index="4" class="java.lang.String" itemvalue="Python.Project2GUI" />
@@ -400,13 +369,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Changes made">
-      <created>1532457679431</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1532457679431</updated>
     </task>
     <task id="LOCAL-00010" summary="Changes made">
       <created>1532460546469</created>
@@ -744,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540411444260</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Changes made">
+      <created>1540482199847</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1540482199847</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TodoView">
@@ -759,7 +728,7 @@
   <component name="ToolWindowManager">
     <frame x="2088" y="113" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24653149" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25186765" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -868,20 +837,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Address.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Address.csv" />
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Accident Report - 4-29-2015 - 4-29-2018.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -889,13 +846,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses with Routes.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses with Routes.csv" />
     <entry file="file://$PROJECT_DIR$/Code/Graphing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
@@ -949,13 +900,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/I24Accidents.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/I24Accidents.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Accident Data Cut.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1130,14 +1075,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-122584">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/h5py/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="113" column="38" lean-forward="false" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#468#694#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="534" column="31" lean-forward="false" selection-start-line="534" selection-start-column="31" selection-end-line="534" selection-end-column="31" />
+        <state relative-caret-position="111">
+          <caret line="883" column="57" lean-forward="true" selection-start-line="883" selection-start-column="57" selection-end-line="883" selection-end-column="57" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
@@ -1153,25 +1115,6 @@
             <element signature="e#20472#27319#0" expanded="false" />
             <element signature="e#27428#29543#0" expanded="false" />
             <element signature="e#29582#46171#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/h5py/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="113" column="38" lean-forward="false" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#468#694#0" expanded="false" />
           </folding>
         </state>
       </provider>
