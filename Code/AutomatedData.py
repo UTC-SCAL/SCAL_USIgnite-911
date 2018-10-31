@@ -382,7 +382,7 @@ def get_date_negatives(calldata):
     # This file needs to be updated every day, and should have the date up until the day before the current day
     # so, if today is 10/18/2018, the last date in the file should be 10/17/2018
     day_holder2018 = pandas.read_excel(
-        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
+        "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Day Holder 2018.xlsx")
 
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
@@ -528,7 +528,7 @@ def update_temp_avgs(day_holder2018):
             coord_avgs.append(temp_avg)
             day_average = sum(coord_avgs) / len(coord_avgs)
             day_holder2018.Daily_Average.values[k] = day_average
-    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx",
+    save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Day Holder 2018.xlsx",
                     "Time and Temp", day_holder2018)
 
 
