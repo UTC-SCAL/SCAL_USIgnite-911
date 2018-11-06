@@ -33,12 +33,10 @@
       <file leaf-file-name="NetworkModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1430">
-              <caret line="93" column="38" lean-forward="false" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+            <state relative-caret-position="2730">
+              <caret line="105" column="38" lean-forward="false" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#519#745#0" expanded="false" />
-                <element signature="e#796#1869#0" expanded="false" />
+                <marker date="1541515246795" expanded="true" signature="0:5" ph="import ..." />
               </folding>
             </state>
           </provider>
@@ -47,8 +45,8 @@
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="889" column="13" lean-forward="false" selection-start-line="889" selection-start-column="13" selection-end-line="889" selection-end-column="13" />
+            <state relative-caret-position="702">
+              <caret line="901" column="55" lean-forward="true" selection-start-line="901" selection-start-column="55" selection-end-line="901" selection-end-column="55" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -383,13 +381,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Changes made">
-      <created>1533054954841</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1533054954841</updated>
     </task>
     <task id="LOCAL-00018" summary="Changes made">
       <created>1533066945569</created>
@@ -727,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541172052292</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Changes made">
+      <created>1541436068399</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1541436068400</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView">
@@ -742,7 +740,7 @@
   <component name="ToolWindowManager">
     <frame x="1920" y="-4" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28175026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28495198" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1086,20 +1084,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1430">
-          <caret line="93" column="38" lean-forward="false" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
+        <state relative-caret-position="2730">
+          <caret line="105" column="38" lean-forward="false" selection-start-line="105" selection-start-column="38" selection-end-line="105" selection-end-column="38" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#519#745#0" expanded="false" />
-            <element signature="e#796#1869#0" expanded="false" />
+            <marker date="1541515246795" expanded="true" signature="0:5" ph="import ..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="889" column="13" lean-forward="false" selection-start-line="889" selection-start-column="13" selection-end-line="889" selection-end-column="13" />
+        <state relative-caret-position="702">
+          <caret line="901" column="55" lean-forward="true" selection-start-line="901" selection-start-column="55" selection-end-line="901" selection-end-column="55" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
