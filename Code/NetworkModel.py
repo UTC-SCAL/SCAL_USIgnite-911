@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 def generate_results(y_test, y_score, hist):
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = auc(fpr, tpr)
-    font = {'family' : 'normal',
+    font = {'family' : 'serif',
         'weight' : 'bold',
         'size'   : 15}
 
