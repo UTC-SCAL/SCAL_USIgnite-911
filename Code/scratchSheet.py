@@ -1,14 +1,11 @@
+import numpy
 import pandas
-from datetime import datetime
-from darksky import forecast
-import pandas
-from datetime import datetime
-from darksky import forecast
-import os, sys
-import random
-import pytz
-from datetime import datetime, timedelta, date, time
-
+from sklearn.utils import shuffle
+from numpy import sort
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.feature_selection import SelectFromModel
+from sklearn.tree import DecisionTreeClassifier
 
 def add_data(calldata):
     # Caste the columns into the data types we need them to be
@@ -380,9 +377,6 @@ def update_temp_avgs(day_holder2018):
             "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 20182.xlsx",
             "Time and Temp", day_holder2018)
 
-path = os.path.dirname(sys.argv[0])
-folderpath = '/'.join(path.split('/')[0:-1]) + '/'
-
 # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
 
 # A relative temperature variable, the deviation of the mean daily temp from the monthly temp
@@ -573,8 +567,27 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # #                 "Excel & CSV Sheets/2017+2018 Data/I24AccidentHours Agg.xlsx",
 # #                 "Aggregated Weather", calldata)
 
+# fit model on all training data
+
+dataset = pandas.read_csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data for Model.csv", sep=",")
+dataset = shuffle(dataset)
+dataset = shuffle(dataset)
 
 
-day_holder2018 = \
-        pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
-update_temp_avgs(day_holder2018)
+# X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
+X = dataset.ix[:, 1:(dataset.shape[1])]
+# Y = dataset.ix[:, 0].values
+Y = dataset.ix[:, 0]
+names = dataset.columns.values
+
+from sklearn.feature_selection import SelectKBest, f_classif, f_regression, mutual_info_regression, mutual_info_classif
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, Y, test_size=0.30, random_state=42)
+X_test, X_valid, y_test, y_valid = train_test_split(
+    X_test, y_test, test_size=0.90, random_state=42)
+
+
+
+
+ 

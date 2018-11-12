@@ -8,6 +8,7 @@ tensorflow = "*"
 pandas = "*"
 sklearn = "*"
 matplotlib = "*"
+statsmodels = "*"
 
 [dev-packages]
 "autopep8" = "*"
