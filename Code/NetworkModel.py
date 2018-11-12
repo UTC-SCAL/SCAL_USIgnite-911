@@ -17,6 +17,11 @@ import matplotlib.pyplot as plt
 def generate_results(y_test, y_score, hist):
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = auc(fpr, tpr)
+    font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 15}
+
+    plt.rc('font', **font)
     plt.figure()
     plt.subplot(211)
     plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
@@ -26,9 +31,13 @@ def generate_results(y_test, y_score, hist):
     plt.title('Receiver operating characteristic curve')
     print('AUC: %f' % roc_auc)
     plt.subplot(212)
-    plt.plot(predictions[0:100], color='red', label="Predictions")
-    plt.plot(y_test[0:100], color='blue', label="Accident Occurred")
-    plt.legend(loc='upper right', fontsize=8)
+    plt.xticks(range(0,20), range(1,21))
+    plt.yticks(range(0,2), ['No', 'Yes', ''])
+    plt.ylabel('Accident')
+    plt.xlabel('Record')
+    plt.grid(which='major', axis='x')
+    plt.scatter(x=range(0,20), y=predictions_round[0:20], s=100, c='blue', marker='x', linewidth=2)
+    plt.scatter(x=range(0,20), y=y_test[0:20], s=110, facecolors='none', edgecolors='r', linewidths=2)
     plt.show()
 
     plt.figure()
@@ -55,20 +64,16 @@ def generate_results(y_test, y_score, hist):
     # 4. Train a model on some data.
     # 5. Evaluate that model on some data!
 
-
-numpy.random.seed(7)
-
 #           1. Load Data
-
 dataset = pandas.read_csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data for Model.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
 
-# X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
-X = dataset.ix[:, 1:(dataset.shape[1])]
-# Y = dataset.ix[:, 0].values
-Y = dataset.ix[:, 0]
+X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
+# X = dataset.ix[:, 1:(dataset.shape[1])]
+Y = dataset.ix[:, 0].values
+# Y = dataset.ix[:, 0]
 names = dataset.columns.values[1:-1]
 
 # from sklearn.feature_selection import SelectKBest, f_classif, f_regression, mutual_info_classif
