@@ -194,8 +194,8 @@ def add_data(calldata, save_name):
     usr = driver.find_element_by_id("UserName")
     pw = driver.find_element_by_id("Password")
 
-    usr.send_keys("JJVPG58")
-    pw.send_keys("Nashville1")
+    usr.send_keys("JJVPG56")
+    pw.send_keys("Saturn77")
     driver.find_element_by_class_name("btn").click()
 
     calldata.Route = calldata.Route.astype(str)
