@@ -343,7 +343,7 @@ def get_hour_negatives(calldata):
         "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
 
-    print("Getting Hour NS Road Geometrics")
+    print("Getting NS Hour Road Geometrics")
     for k, info in enumerate(negative_samples.values):
         for m, value in enumerate(traffic.values):
             if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
