@@ -194,8 +194,8 @@ def add_data(calldata, save_name):
     usr = driver.find_element_by_id("UserName")
     pw = driver.find_element_by_id("Password")
 
-    usr.send_keys("JJVPG58")
-    pw.send_keys("Nashville1")
+    usr.send_keys("JJVPG56")
+    pw.send_keys("Saturn77")
     driver.find_element_by_class_name("btn").click()
 
     calldata.Route = calldata.Route.astype(str)
@@ -343,7 +343,7 @@ def get_hour_negatives(calldata):
         "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
 
-    print("Getting Hour NS Road Geometrics")
+    print("Getting NS Hour Road Geometrics")
     for k, info in enumerate(negative_samples.values):
         for m, value in enumerate(traffic.values):
             if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
@@ -945,7 +945,7 @@ def main():
     calldata = add_data(calldata, dayname_xlsx)
 
     # Save the calldata in its final form, just in case the appending goes wrong
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + "_FinalForm.xlsx",
+    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
                     "FinalSave", calldata)
 
     # Append the new data
