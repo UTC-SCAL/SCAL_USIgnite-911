@@ -56,13 +56,13 @@
 #                     print("Downloading this email: ", mail["Subject"])
 #
 #                     if filename is not None:    #Saves the attachment in the daily record folder with a tidy name.
-#                         sv_path = os.path.join('/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/'+ str(daybefore)+'.csv')
+#                         sv_path = os.path.join('/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/'+ str(daybefore)+'.csv')
 #                         if not os.path.isfile(sv_path):
 #                             print(sv_path)
 #                             fp = open(sv_path, 'wb')
 #                             fp.write(part.get_payload(decode=True))
 #                             fp.close()
-#     file = '/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/' + str(daybefore) + '.csv'
+#     file = '/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/' + str(daybefore) + '.csv'
 #     calllog = pandas.read_csv(file,sep=",")
 #     return calllog
 #
@@ -184,7 +184,7 @@
 #                 station_matches.loc[j, str(stations[i])] = 0
 #
 #     # print(station_matches.head())
-#     # save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
+#     # save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
 #     #                             "station_matching", calldata)
 #
 #     # Taking out the 0's in weather station matches
@@ -217,7 +217,7 @@
 #                 my_dwindling_sanity.append(call_stations[index])
 #                 break
 #     calldata["Station"] = my_dwindling_sanity
-#     save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
+#     save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
 #                     "station_matching_added_stations", calldata)
 #     return calldata
 #
@@ -225,31 +225,31 @@
 # def adding_weather_to_incidents(calldata, weather_stations):
 #     # Weather Stations used for 2018 #
 #     ktnchatt14 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNCHATT14_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNCHATT14_2018.csv",
 #         sep=",")
 #     ktnchatt20 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNCHATT20_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNCHATT20_2018.csv",
 #         sep=",")
 #     ktnchatt88 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNCHATT88_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNCHATT88_2018.csv",
 #         sep=",")
 #     ktneastr2 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNEASTR2_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNEASTR2_2018.csv",
 #         sep=",")
 #     ktnharri26 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNHARRI26_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNHARRI26_2018.csv",
 #         sep=",")
 #     ktnoolte32 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNOOLTE32_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNOOLTE32_2018.csv",
 #         sep=",")
 #     ktnsoddy29 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNSODDY29_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNSODDY29_2018.csv",
 #         sep=",")
 #     ktnsoddy11 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNSODDY11_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNSODDY11_2018.csv",
 #         sep=",")
 #     ktntenne3 = pandas.read_csv(
-#         r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KTNTENNE3_2018.csv",
+#         r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KTNTENNE3_2018.csv",
 #         sep=",")
 #
 #     latcoords = []  # Weather station latitudes
@@ -322,7 +322,7 @@
 #             calldata.Station.values[i] = weather_station_names[index]
 #         calldata = add_weather(calldata, weatherdata, i)
 #
-#     save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
+#     save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2018 Data/CallData 2018 Update.xlsx",
 #                     "adding_weather_to_incidents", calldata)
 #     return calldata
 #
@@ -410,7 +410,7 @@
 #
 #
 # def add_weather(calldata, weatherdata, i):
-#     kcha = pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/WeatherStations/Stations Covering 2018/KCHA_events.csv",
+#     kcha = pandas.read_csv(r"/home/admin/PycharmProjects/911Project/WeatherStations/Stations Covering 2018/KCHA_events.csv",
 #                              sep=",")
 #
 #     header_list = ("Latitude", "Longitude", "Date","Time", "Problem", "Hour", "Temperature",
@@ -465,10 +465,10 @@
 #     # Each morning, download new weather data using this link #
 #     # http://oco-carbon.com/wunderground-weather-data-downloader/
 #
-#     calldata = pandas.read_csv(r"/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018-07-11.csv", sep=",")
+#     calldata = pandas.read_csv(r"/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2018-07-11.csv", sep=",")
 #     # MAIN: Weather Stations for 2018 #
 #     weather_stations = data_file_name = \
-#         pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/2018 Weather Stations.xlsx")
+#         pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Weather Stations/2018 Weather Stations.xlsx")
 #
 #     #Reading file directly for testing.
 #     # file = '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel:CSV Files/daily report/911_Reports_for_2018-07-10.csv'
@@ -491,7 +491,7 @@
 #     calldata = find_y(calldata)
 #     # print(calldata.head())
 #     agg_options(calldata)
-#     save_excel_file("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData 7-11-2018.xlsx",
+#     save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2018 Data/CallData 7-11-2018.xlsx",
 #                     "agg_options", calldata)
 #
 # if __name__ == "__main__":

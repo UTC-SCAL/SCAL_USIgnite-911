@@ -374,7 +374,7 @@ def update_temp_avgs(day_holder2018):
                     day_average = sum(coord_avgs) / len(coord_avgs)
                     day_holder2018.Daily_Average.values[k] = day_average
         save_excel_file(
-            "/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 20182.xlsx",
+            "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/Day Holder 20182.xlsx",
             "Time and Temp", day_holder2018)
 
 # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
@@ -479,7 +479,7 @@ def update_temp_avgs(day_holder2018):
 # #                 "Time and Temp", timedata_2018)
 #
 # # Code for aggregating data and converting them into numerical forms for modelling #
-# # calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/I24AccidentHours.xlsx")
+# # calldata = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/I24AccidentHours.xlsx")
 # #
 # # header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
 # #                'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
@@ -488,7 +488,7 @@ def update_temp_avgs(day_holder2018):
 # #                "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore")
 # #
 # # calldata = calldata.reindex(columns=header_list)
-# # calldata = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/I24AccidentHours Agg.xlsx")
+# # calldata = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/I24AccidentHours Agg.xlsx")
 # # for i, value in enumerate(calldata.values):
 # #     print(i)
 # #     if "clear" in calldata.Event.values[i] or "clear" in calldata.Conditions.values[i] \
@@ -531,8 +531,8 @@ def update_temp_avgs(day_holder2018):
 # #         calldata.RainBefore.values[i] = 0
 # # calldata.drop(["Precipitation_Type", "Event", "Conditions", "EventBefore", "ConditionBefore"], axis=1, inplace=True)
 # #
-# # dayHolder_2017 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
-# # dayHolder_2018 = pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
+# # dayHolder_2017 = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/Day Holder 2017.xlsx")
+# # dayHolder_2018 = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/Day Holder 2018.xlsx")
 # # dayHolder_2017.Date = dayHolder_2017.Date.astype(str)
 # # dayHolder_2018.Date = dayHolder_2018.Date.astype(str)
 # # calldata.Date = calldata.Date.astype(str)

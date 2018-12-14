@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2018.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2018.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="$PROJECT_DIR$/Code/AutomatedData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/scratchSheet.py" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/weatherStationCode.py" afterPath="$PROJECT_DIR$/Code/weatherStationCode.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,42 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="keras_first_network.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3094">
-              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NetworkModel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2262">
-              <caret line="99" column="38" lean-forward="false" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
-              <folding>
-                <marker date="1544542383754" expanded="true" signature="0:5" ph="import ..." />
-                <marker date="1544542383754" expanded="true" signature="525:1915" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="1917:2212" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="2581:2776" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="3027:3088" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="3406:4512" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="4713:4918" ph="..." />
-                <marker date="1544542383754" expanded="true" signature="5039:5146" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="899" column="47" lean-forward="true" selection-start-line="899" selection-start-column="47" selection-end-line="899" selection-end-column="47" />
+            <state relative-caret-position="-492">
+              <caret line="181" column="34" lean-forward="false" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -63,23 +30,13 @@
                 <element signature="e#4936#5159#0" expanded="false" />
                 <element signature="e#5220#7794#0" expanded="false" />
                 <element signature="e#7830#8335#0" expanded="false" />
-                <element signature="e#8377#12944#0" expanded="false" />
-                <element signature="e#12978#14275#0" expanded="false" />
-                <element signature="e#14316#20429#0" expanded="false" />
-                <element signature="e#20470#27302#0" expanded="false" />
-                <element signature="e#27411#29511#0" expanded="false" />
-                <element signature="e#29550#46139#0" expanded="false" />
+                <element signature="e#8377#12924#0" expanded="false" />
+                <element signature="e#12958#14251#0" expanded="false" />
+                <element signature="e#14292#20393#0" expanded="false" />
+                <element signature="e#20434#27250#0" expanded="false" />
+                <element signature="e#27359#29455#0" expanded="false" />
+                <element signature="e#29494#46083#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FindGeomet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1040">
-              <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -117,6 +74,7 @@
       <find>calldata</find>
       <find>loc[::-1]</find>
       <find>Day Holder 2018</find>
+      <find>RolandProjects</find>
     </findStrings>
     <replaceStrings>
       <replace>maxi</replace>
@@ -127,6 +85,7 @@
       <replace>negative_samples</replace>
       <replace>calldata</replace>
       <replace>data_file_name</replace>
+      <replace>911Project</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -140,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/connectingMapWeather.py" />
         <option value="$PROJECT_DIR$/mapping.py" />
         <option value="$PROJECT_DIR$/ConnectingWeather.py" />
         <option value="$PROJECT_DIR$/Code/CW_Backup.py" />
@@ -182,7 +140,6 @@
         <option value="$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/AddingETRIMS.py" />
         <option value="$PROJECT_DIR$/Code/SchoolProjects/Project2GUI.py" />
         <option value="$PROJECT_DIR$/Code/negativeSampling.py" />
-        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/SchoolProjects/Project2GUI.py" />
         <option value="$PROJECT_DIR$/Code/convertingTime.py" />
         <option value="$PROJECT_DIR$/Code/keras_first_network.py" />
@@ -191,6 +148,8 @@
         <option value="/media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Project2_Server.py" />
         <option value="$PROJECT_DIR$/Code/NetworkModel.py" />
         <option value="$PROJECT_DIR$/Code/AutomatedData.py" />
+        <option value="$PROJECT_DIR$/Code/weatherStationCode.py" />
+        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
       </list>
     </option>
   </component>
@@ -219,22 +178,21 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="911Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="911Project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="911Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="911Project" type="462c0819:PsiDirectoryNode" />
               <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="RolandProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RolandProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="911Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="911Project" type="462c0819:PsiDirectoryNode" />
               <item name="Excel &amp; CSV Sheets" type="462c0819:PsiDirectoryNode" />
               <item name="New Data Files" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -242,11 +200,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="/media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Project2_Server.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
@@ -388,13 +347,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Changes made">
-      <created>1534966337416</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1534966337416</updated>
     </task>
     <task id="LOCAL-00035" summary="Changes made">
       <created>1535054733730</created>
@@ -732,7 +684,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544452819965</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Cleaned alot of folders">
+      <created>1544542811729</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1544542811730</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TodoView">
@@ -747,24 +706,24 @@
   <component name="ToolWindowManager">
     <frame x="1922" y="133" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24012807" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24546425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2667304" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2667304" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -824,205 +783,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="26" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Added Addresses with Routes.csv" />
-    <entry file="file://$PROJECT_DIR$/Code/Graphing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="149" column="30" lean-forward="false" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/NBRExample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/dailyTesting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="21" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/AddingAADT.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/.~lock.Negative Samples (Hour).xlsx#" />
-    <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6760">
-          <caret line="269" column="57" lean-forward="false" selection-start-line="269" selection-start-column="57" selection-end-line="269" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Routes and Miles Adding Geo_1.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Routes and Miles Adding Geo_0.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/.~lock.AD Original+Hours.xlsx#" />
-    <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/I24Accidents.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/Accident Data Cut.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/I24Work.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="37" column="33" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="117" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/JinsPlayfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Jins24HourPlayfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1014">
-          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/GeoTest.csv" />
-    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="469" column="26" lean-forward="false" selection-start-line="469" selection-start-column="26" selection-end-line="469" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/Traffic_Count.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/Server.py" />
-    <entry file="file://$USER_HOME$/Downloads/Client.py" />
-    <entry file="file://$PROJECT_DIR$/Code/negativeSampling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="421" column="0" lean-forward="true" selection-start-line="421" selection-start-column="0" selection-end-line="516" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/AddingETRIMS.py" />
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="381" column="0" lean-forward="true" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/NegativeSamples.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/ETRIMSmerge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/AddRoutes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Graphs &amp; Images/etrims definitions.png" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/.~lock.New Negative Samples (Hour).csv#" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="135" column="57" lean-forward="true" selection-start-line="135" selection-start-column="57" selection-end-line="135" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SchoolProjects/Project2GUI.py" />
-    <entry file="file://$PROJECT_DIR$/Code/convertingTime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-09-01.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,16 +807,6 @@
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Client.py" />
-    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3094">
-          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1062,27 +821,376 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2017+2018 Cloudy Map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/AddingAADT.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/AddingETRIMS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/AddRoutes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Chattanooga Polygons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/connectingMapWeather.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/ConnectingWeather.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="470" column="35" lean-forward="true" selection-start-line="470" selection-start-column="35" selection-end-line="470" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/convertingTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/CW_Backup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/dailyTesting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/ETRIMSmerge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/FindGeomet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="53" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/GeoFence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="135" column="57" lean-forward="true" selection-start-line="135" selection-start-column="57" selection-end-line="135" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Graphing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/I24Work.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="37" column="33" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="117" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Jins24HourPlayfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/JinsPlayfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="69" column="53" lean-forward="false" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/keras_first_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/khashiMapping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/linearRegression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/LogReg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mapping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mappingDarkSky.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mappingEx.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/NBRExample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/negativeSampling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="421" column="0" lean-forward="true" selection-start-line="421" selection-start-column="0" selection-end-line="516" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2262">
+        <state relative-caret-position="968">
           <caret line="99" column="38" lean-forward="false" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
           <folding>
             <marker date="1544542383754" expanded="true" signature="0:5" ph="import ..." />
-            <marker date="1544542383754" expanded="true" signature="525:1915" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="1917:2212" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="2581:2776" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="3027:3088" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="3406:4512" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="4713:4918" ph="..." />
-            <marker date="1544542383754" expanded="true" signature="5039:5146" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/PCA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/weatherStationCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="54" column="52" lean-forward="true" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13821">
+          <caret line="534" column="82" lean-forward="false" selection-start-line="534" selection-start-column="82" selection-end-line="534" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/regressionTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/regression.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="48" lean-forward="true" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/pvalueTesting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="50" lean-forward="true" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/practiceCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/pcaExample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="899" column="47" lean-forward="true" selection-start-line="899" selection-start-column="47" selection-end-line="899" selection-end-column="47" />
+        <state relative-caret-position="-492">
+          <caret line="181" column="34" lean-forward="false" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
@@ -1092,12 +1200,12 @@
             <element signature="e#4936#5159#0" expanded="false" />
             <element signature="e#5220#7794#0" expanded="false" />
             <element signature="e#7830#8335#0" expanded="false" />
-            <element signature="e#8377#12944#0" expanded="false" />
-            <element signature="e#12978#14275#0" expanded="false" />
-            <element signature="e#14316#20429#0" expanded="false" />
-            <element signature="e#20470#27302#0" expanded="false" />
-            <element signature="e#27411#29511#0" expanded="false" />
-            <element signature="e#29550#46139#0" expanded="false" />
+            <element signature="e#8377#12924#0" expanded="false" />
+            <element signature="e#12958#14251#0" expanded="false" />
+            <element signature="e#14292#20393#0" expanded="false" />
+            <element signature="e#20434#27250#0" expanded="false" />
+            <element signature="e#27359#29455#0" expanded="false" />
+            <element signature="e#29494#46083#0" expanded="false" />
           </folding>
         </state>
       </provider>
