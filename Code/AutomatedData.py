@@ -896,7 +896,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-12-13.csv"
+    file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-12-16.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)

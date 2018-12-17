@@ -21,7 +21,7 @@
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
+            <state relative-caret-position="494">
               <caret line="900" column="0" lean-forward="true" selection-start-line="900" selection-start-column="0" selection-end-line="900" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -180,6 +180,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,7 +203,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -349,13 +349,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Changes made">
-      <created>1535398496708</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1535398496708</updated>
     </task>
     <task id="LOCAL-00037" summary="Changes made">
       <created>1536087074115</created>
@@ -693,7 +686,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544800319474</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="More data">
+      <created>1544807558269</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1544807558269</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TodoView">
@@ -708,7 +708,7 @@
   <component name="ToolWindowManager">
     <frame x="1922" y="133" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25080043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2561366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -782,7 +782,8 @@
     <MESSAGE value="Changes made" />
     <MESSAGE value="Cleaned alot of folders" />
     <MESSAGE value="Changed name of main folder to reflect project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed name of main folder to reflect project" />
+    <MESSAGE value="More data" />
+    <option name="LAST_COMMIT_MESSAGE" value="More data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,7 +1114,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="494">
           <caret line="900" column="0" lean-forward="true" selection-start-line="900" selection-start-column="0" selection-end-line="900" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
