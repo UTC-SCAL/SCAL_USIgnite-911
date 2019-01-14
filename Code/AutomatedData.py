@@ -61,13 +61,13 @@ def get_Email():
                     # print("Downloading this email: ", mail["Subject"])
 
                     if filename is not None:    #Saves the attachment in the daily record folder with a tidy name.
-                        sv_path = os.path.join(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
+                        sv_path = os.path.join(folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
                         if not os.path.isfile(sv_path):
                             # print(sv_path)
                             fp = open(sv_path, 'wb')
                             fp.write(part.get_payload(decode=True))
                             fp.close()
-    file = folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
+    file = folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
     calllog = pandas.read_csv(file,sep=",")
     return calllog, file
 
@@ -114,7 +114,7 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 
 def drop_duplicates(calldata):
-    datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
+    datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx")
     listing = list(datafile.index.values)
     calldata.drop(calldata.index[listing], inplace=True)
     return calldata
@@ -133,7 +133,7 @@ def find_Duplicates(data_file_name, occurrence_list):
     for id1, id in enumerate(data_file_copy.values):
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
-            save_excel_file(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
+            save_excel_file(folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx',
                             'Call Info', remove)
             break
         else:
@@ -380,9 +380,9 @@ def get_hour_negatives(calldata):
 def get_date_negatives(calldata):
     # Get the Negative Samples for Date #
     # This file needs to be updated every day, and should have the date up until the day before the current day
-    # so, if today is 10/18/2018, the last date in the file should be 10/17/2018
-    day_holder2018 = pandas.read_excel(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2018.xlsx")
+    # so, if today is 10/18/2019, the last date in the file should be 10/17/2019
+    day_holder2019 = pandas.read_excel(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
 
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
@@ -391,7 +391,7 @@ def get_date_negatives(calldata):
 
     neg_loc = 0  # Used for positioning
     calldata.Date = calldata.Date.astype(str)
-    day_holder2018.Date = day_holder2018.Date.astype(str)
+    day_holder2019.Date = day_holder2019.Date.astype(str)
     # For selecting a random day, use random.choice on a list while excluding the particular day from the range
     for i, info in enumerate(calldata.values):
         # Get the day
@@ -400,16 +400,16 @@ def get_date_negatives(calldata):
         day_num = int(day_num) + 1
         # Note: When selecting the corresponding date from the excel file, it's the Day_Num value - 1 #
         # So, for the ranges, have them be from 0 to max Day_Num value + 1
-        days_2017 = range(0, 365)
-        # This variable needs to be updated for the current day, since 2018 is still going on
-        days_2018 = range(0, 269)
-
-        r_2017 = [x for x in days_2017 if x != day_num]  # A list of numbers without dayoa, covering the days in 2017
-        r_2018 = [y for y in days_2018 if y != day_num]  # A list of numbers without dayoa, covering the days in 2018
+        # days_2017 = range(0, 365)
+        # days_2018 = range(0, 365)
+        # This variable needs to be updated each time the code is run every morning
+        # days_2019 = range(0, 2)
+        days_2019 = range(0, len(day_holder2019.Date))
+        r_2019 = [y for y in days_2019 if y != day_num]  # A list of numbers without dayoa, covering the days in 2019
         # Check to see what the year is; based on this, you use one of the above variables
         yoa = int(doa.split('-')[0])  # Get the year
-        if yoa == 2018:
-            calldata.Date.values[i] = day_holder2018.Date.values[random.choice(r_2018)]
+        if yoa == 2019:
+            calldata.Date.values[i] = day_holder2019.Date.values[random.choice(r_2019)]
         # Check other entries if there's a match
         for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
             if calldata.Date.values[k] == calldata.Date.values[i]:
@@ -482,18 +482,18 @@ def get_date_negatives(calldata):
 
 
 # currently, the relative temperature variable has been dropped
-def update_temp_avgs(day_holder2018):
+def update_temp_avgs(day_holder2019):
     lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
     long_coords = [-85.121603, -85.121603, -85.175549, -85.047341, -84.998361, -85.158404]
     hour_times = [0, 6, 12, 18]
     coord_avgs = []
     # The key for using DarkSky API
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-    day_holder2018.Date = day_holder2018.Date.astype(str)
+    day_holder2019.Date = day_holder2019.Date.astype(str)
 
     print("Adding in DarkSky Weather")
     # Iterate through calldata and assign weather data for each incident
-    for k, info in enumerate(day_holder2018.values):
+    for k, info in enumerate(day_holder2019.values):
         print(k)
         lat_iterator = 0
         hour_iterator = 0
@@ -507,7 +507,7 @@ def update_temp_avgs(day_holder2018):
                 hoa = hour_times[hour_iterator]
                 mioa = 0
                 soa = 0
-                doa = day_holder2018.Date.values[k]
+                doa = day_holder2019.Date.values[k]
                 yoa = int(doa.split('-')[0])
                 moa = int(doa.split('-')[1])
                 dayoa = int(doa.split('-')[2])
@@ -527,9 +527,9 @@ def update_temp_avgs(day_holder2018):
             temp_avg = temp_avg / 4
             coord_avgs.append(temp_avg)
             day_average = sum(coord_avgs) / len(coord_avgs)
-            day_holder2018.Daily_Average.values[k] = day_average
-    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2018.xlsx",
-                    "Time and Temp", day_holder2018)
+            day_holder2019.Daily_Average.values[k] = day_average
+    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx",
+                    "Time and Temp", day_holder2019)
 
 
 def get_weather_data(calldata):
@@ -896,7 +896,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    # file = folderpath + ""
+    # file = folderpath + "Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-01-12.csv"
     # calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -945,7 +945,7 @@ def main():
     calldata = add_data(calldata, dayname_xlsx)
 
     # Save the calldata in its final form, just in case the appending goes wrong
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
+    save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
                     "FinalSave", calldata)
 
     # Append the new data

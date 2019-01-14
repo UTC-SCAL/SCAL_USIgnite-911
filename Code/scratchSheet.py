@@ -7,375 +7,375 @@ from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.tree import DecisionTreeClassifier
 
-def add_data(calldata):
-    # Caste the columns into the data types we need them to be
-    calldata.Event = calldata.Event.astype(str)
-    calldata.Conditions = calldata.Conditions.astype(str)
-    calldata.Precipitation_Type = calldata.Precipitation_Type.astype(str)
-    calldata.Precipitation_Intensity = calldata.Precipitation_Intensity.astype(float)
-    calldata.Precip_Intensity_Max = calldata.Precip_Intensity_Max.astype(float)
-    calldata.Temp_Max = calldata.Temp_Max.astype(float)
-    calldata.Temp_Min = calldata.Temp_Min.astype(float)
-    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
-    calldata.Latitude = calldata.Latitude.astype(float)
-    calldata.Longitude = calldata.Longitude.astype(float)
-    calldata.Date = calldata.Date.astype(str)
-    calldata.Time = calldata.Time.astype(str)
-    calldata.Latitude = calldata.Latitude.astype(float)
-    calldata.Longitude = calldata.Longitude.astype(float)
-    calldata.EventBefore = calldata.EventBefore.astype(str)
-    calldata.ConditionBefore = calldata.ConditionBefore.astype(str)
-
-    print("Fixing Latitude and Longitude")
-    # Format the latitude and longitude values into the appropriate formats, if they need to be formatted
-    for k, info in enumerate(calldata.values):
-        if calldata.Latitude.values[k] > 40:
-            calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
-            calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-
-    # The key for using DarkSky API
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-
-    print("Adding in DarkSky Weather")
-    # Iterate through calldata and assign weather data for each incident
-    for k, info in enumerate(calldata.values):
-        print(k)
-        # All variables are blank-of-accident, thus year is yoa.
-        hoa = int(calldata.Hour.values[k])
-        toa = calldata.Time.values[k]
-        mioa = int(toa.split(':')[1])
-        soa = int(toa.split(':')[2])
-        doa = calldata.Date.values[k]
-        yoa = int(doa.split('-')[0])
-        moa = int(doa.split('-')[1])
-        dayoa = int(doa.split('-')[2])
-        lat = calldata.Latitude.values[k]
-        long = calldata.Longitude.values[k]
-
-        # The following line needs to have this format:
-        t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
-        call = key, lat, long
-
-        # Retrieve the previous hour's weather event and conditions for each incident
-        # A series of if statements to see what day of the year it is
-        # If it is the first of the month, then we call the weather data for the last day of the previous month
-        if hoa == 0 and dayoa == 1:  # If 1/1, get weather data from 12/31, reduce year by 1
-            if moa == 1:
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 12
-                new_yoa = yoa - 1
-                # Get weather data
-                # The following line needs to have this format:
-                t = datetime(new_yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 2:  # If 2/1, get weather data from 1/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 1
-                # Get weather data
-                # The following line needs to have this format:
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 3:  # If 3/1, get weather data from 2/28, same year
-                new_hoa = 23
-                new_dayoa = 28
-                new_moa = 2
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 4:  # If 4/1, get weather data from 3/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 3
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 5:  # If 5/1, get weather data from 4/30, same year
-                new_hoa = 23
-                new_dayoa = 30
-                new_moa = 4
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 6:  # If 6/1, get weather data from 5/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 5
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 7:  # If 7/1, get weather data from 6/30, same year
-                new_hoa = 23
-                new_dayoa = 30
-                new_moa = 6
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 8:  # If 8/1, get weather data from 7/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 7
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 9:  # If 9/1, get weather data from 8/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 8
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 10:  # If 10/1, get weather data from 9/30, same year
-                new_hoa = 23
-                new_dayoa = 30
-                new_moa = 9
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 11:  # If 11/1, get weather data from 10/31, same year
-                new_hoa = 23
-                new_dayoa = 31
-                new_moa = 10
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            elif moa == 12:  # If 12/1, get weather data from 11/30, same year
-                new_hoa = 23
-                new_dayoa = 30
-                new_moa = 11
-                # Get weather data
-                t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    for i, value in enumerate(forecastcall.hourly):
-                        calldata.EventBefore.values[k] = value.icon
-                        calldata.ConditionBefore.values[k] = value.summary
-                except:
-                    print("Error in finding previous hour")
-            else:
-                print("Error in calculating previous day")
-        elif hoa == 0 and dayoa != 1:
-            new_dayoa = dayoa - 1
-            new_hoa = 23
-            # Get weather data
-            t = datetime(yoa, moa, new_dayoa, new_hoa, mioa, soa).isoformat()
-            call = key, lat, long
-            try:
-                forecastcall = forecast(*call, time=t)
-                for i, value in enumerate(forecastcall.hourly):
-                    calldata.EventBefore.values[k] = value.icon
-                    calldata.ConditionBefore.values[k] = value.summary
-            except:
-                print("Error in finding previous hour")
-        elif hoa > 0:
-            new_hoa = hoa - 1
-            # Get weather data
-            t = datetime(yoa, moa, dayoa, new_hoa, mioa, soa).isoformat()
-            call = key, lat, long
-            try:
-                forecastcall = forecast(*call, time=t)
-                for i, value in enumerate(forecastcall.hourly):
-                    calldata.EventBefore.values[k] = value.icon
-                    calldata.ConditionBefore.values[k] = value.summary
-            except:
-                print("Error in finding previous hour")
-        else:
-            print("One of the hours was 0 and didn't register")
-
-        # Retrieve the main weather data
-        try:
-            forecastcall = forecast(*call, time=t)
-            # Hourly data
-            for i, value in enumerate(forecastcall.hourly):
-                # Retrieving weather for previous weather
-                if i == hoa:
-                    calldata.Temperature.values[k] = value.temperature
-                    calldata.Dewpoint.values[k] = value.dewPoint
-                    calldata.Event.values[k] = value.icon
-                    calldata.Humidity.values[k] = value.humidity
-                    calldata.Month.values[k] = moa
-                    calldata.Visibility.values[k] = value.visibility
-                    calldata.Conditions.values[k] = value.summary
-        except:
-            print("Hourly Lookup Failed")
-        # try:
-            # Daily data, which requires individual try/except statements, otherwise the code crashes for some reason
-        for j, value2 in enumerate(forecastcall.daily):
-            try:
-                calldata.Precipitation_Type.values[k] = value2.precipType
-            except:
-                calldata.Precipitation_Type.values[k] = "NA"
-            try:
-                calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
-            except:
-                calldata.Precipitation_Intensity.values[k] = -1000
-            try:
-                calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
-            except:
-                calldata.Precip_Intensity_Max.values[k] = -1000
-            try:
-                calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
-            except:
-                calldata.Precip_Intensity_Time.values[k] = -1000
-            try:
-                calldata.Temp_Max.values[k] = value2.temperatureMax
-            except:
-                calldata.Temp_Max.values[k] = -1000
-            try:
-                calldata.Temp_Min.values[k] = value2.temperatureMin
-            except:
-                calldata.Temp_Min.values[k] = -1000
-            try:
-                calldata.Cloud_Coverage.values[k] = value2.cloudCover
-            except:
-                calldata.Cloud_Coverage.values[k] = -1000
-        # except:
-        #     print("Daily Lookup Failed")
-
-
-    save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/I24AccidentHours Agg.xlsx",
-                    "DarkSky Weather", calldata)
-
-
-def save_excel_file(save_file_name, sheet, data_file_name):
-    writer = pandas.ExcelWriter(save_file_name, engine='xlsxwriter', date_format='mmm d yyyy')
-    data_file_name.to_excel(writer, sheet_name=sheet)
-    workbook = writer.book
-    worksheet = writer.sheets[sheet]
-    writer.save()
-
-
-def update_temp_avgs(day_holder2018):
-        lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
-        long_coords = [-85.121603, -85.121603, -85.175549, -85.047341, -84.998361, -85.158404]
-        hour_times = [0, 6, 12, 18]
-        coord_avgs = []
-        # The key for using DarkSky API
-        key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-        day_holder2018.Date = day_holder2018.Date.astype(str)
-
-        print("Adding in DarkSky Weather")
-        # Iterate through calldata and assign weather data for each incident
-        for k, info in enumerate(day_holder2018.values):
-            print(k)
-            if day_holder2018.Daily_Average.values[k] > -100:
-                print("Skipping")
-            else:
-                lat_iterator = 0
-                hour_iterator = 0
-                temp_avg = 0
-                for j in range(0, 6):
-                    lat = lat_coords[lat_iterator]
-                    long = long_coords[lat_iterator]
-                    temp_avg = 0
-                    hour_iterator = 0
-                    for o in range(0, 4):
-                        hoa = hour_times[hour_iterator]
-                        mioa = 0
-                        soa = 0
-                        doa = day_holder2018.Date.values[k]
-                        yoa = int(doa.split('-')[0])
-                        moa = int(doa.split('-')[1])
-                        dayoa = int(doa.split('-')[2])
-                        # The following line needs to have this format:
-                        t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
-                        call = key, lat, long
-                        try:
-                            forecastcall = forecast(*call, time=t)
-                            # Hourly data
-                            for i, value in enumerate(forecastcall.hourly):
-                                if i == hoa:
-                                    temp_avg = temp_avg + value.temperature
-                        except:
-                            print("Hourly Lookup Failed")
-                        hour_iterator = hour_iterator + 1
-                    lat_iterator = lat_iterator + 1
-                    temp_avg = temp_avg / 4
-                    coord_avgs.append(temp_avg)
-                    day_average = sum(coord_avgs) / len(coord_avgs)
-                    day_holder2018.Daily_Average.values[k] = day_average
-        save_excel_file(
-            "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/Day Holder 20182.xlsx",
-            "Time and Temp", day_holder2018)
+# def add_data(calldata):
+#     # Caste the columns into the data types we need them to be
+#     calldata.Event = calldata.Event.astype(str)
+#     calldata.Conditions = calldata.Conditions.astype(str)
+#     calldata.Precipitation_Type = calldata.Precipitation_Type.astype(str)
+#     calldata.Precipitation_Intensity = calldata.Precipitation_Intensity.astype(float)
+#     calldata.Precip_Intensity_Max = calldata.Precip_Intensity_Max.astype(float)
+#     calldata.Temp_Max = calldata.Temp_Max.astype(float)
+#     calldata.Temp_Min = calldata.Temp_Min.astype(float)
+#     calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
+#     calldata.Latitude = calldata.Latitude.astype(float)
+#     calldata.Longitude = calldata.Longitude.astype(float)
+#     calldata.Date = calldata.Date.astype(str)
+#     calldata.Time = calldata.Time.astype(str)
+#     calldata.Latitude = calldata.Latitude.astype(float)
+#     calldata.Longitude = calldata.Longitude.astype(float)
+#     calldata.EventBefore = calldata.EventBefore.astype(str)
+#     calldata.ConditionBefore = calldata.ConditionBefore.astype(str)
+#
+#     print("Fixing Latitude and Longitude")
+#     # Format the latitude and longitude values into the appropriate formats, if they need to be formatted
+#     for k, info in enumerate(calldata.values):
+#         if calldata.Latitude.values[k] > 40:
+#             calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
+#             calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
+#
+#     # The key for using DarkSky API
+#     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+#
+#     print("Adding in DarkSky Weather")
+#     # Iterate through calldata and assign weather data for each incident
+#     for k, info in enumerate(calldata.values):
+#         print(k)
+#         # All variables are blank-of-accident, thus year is yoa.
+#         hoa = int(calldata.Hour.values[k])
+#         toa = calldata.Time.values[k]
+#         mioa = int(toa.split(':')[1])
+#         soa = int(toa.split(':')[2])
+#         doa = calldata.Date.values[k]
+#         yoa = int(doa.split('-')[0])
+#         moa = int(doa.split('-')[1])
+#         dayoa = int(doa.split('-')[2])
+#         lat = calldata.Latitude.values[k]
+#         long = calldata.Longitude.values[k]
+#
+#         # The following line needs to have this format:
+#         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+#         call = key, lat, long
+#
+#         # Retrieve the previous hour's weather event and conditions for each incident
+#         # A series of if statements to see what day of the year it is
+#         # If it is the first of the month, then we call the weather data for the last day of the previous month
+#         if hoa == 0 and dayoa == 1:  # If 1/1, get weather data from 12/31, reduce year by 1
+#             if moa == 1:
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 12
+#                 new_yoa = yoa - 1
+#                 # Get weather data
+#                 # The following line needs to have this format:
+#                 t = datetime(new_yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 2:  # If 2/1, get weather data from 1/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 1
+#                 # Get weather data
+#                 # The following line needs to have this format:
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 3:  # If 3/1, get weather data from 2/28, same year
+#                 new_hoa = 23
+#                 new_dayoa = 28
+#                 new_moa = 2
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 4:  # If 4/1, get weather data from 3/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 3
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 5:  # If 5/1, get weather data from 4/30, same year
+#                 new_hoa = 23
+#                 new_dayoa = 30
+#                 new_moa = 4
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 6:  # If 6/1, get weather data from 5/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 5
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 7:  # If 7/1, get weather data from 6/30, same year
+#                 new_hoa = 23
+#                 new_dayoa = 30
+#                 new_moa = 6
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 8:  # If 8/1, get weather data from 7/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 7
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 9:  # If 9/1, get weather data from 8/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 8
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 10:  # If 10/1, get weather data from 9/30, same year
+#                 new_hoa = 23
+#                 new_dayoa = 30
+#                 new_moa = 9
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 11:  # If 11/1, get weather data from 10/31, same year
+#                 new_hoa = 23
+#                 new_dayoa = 31
+#                 new_moa = 10
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             elif moa == 12:  # If 12/1, get weather data from 11/30, same year
+#                 new_hoa = 23
+#                 new_dayoa = 30
+#                 new_moa = 11
+#                 # Get weather data
+#                 t = datetime(yoa, new_moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#                 call = key, lat, long
+#                 try:
+#                     forecastcall = forecast(*call, time=t)
+#                     for i, value in enumerate(forecastcall.hourly):
+#                         calldata.EventBefore.values[k] = value.icon
+#                         calldata.ConditionBefore.values[k] = value.summary
+#                 except:
+#                     print("Error in finding previous hour")
+#             else:
+#                 print("Error in calculating previous day")
+#         elif hoa == 0 and dayoa != 1:
+#             new_dayoa = dayoa - 1
+#             new_hoa = 23
+#             # Get weather data
+#             t = datetime(yoa, moa, new_dayoa, new_hoa, mioa, soa).isoformat()
+#             call = key, lat, long
+#             try:
+#                 forecastcall = forecast(*call, time=t)
+#                 for i, value in enumerate(forecastcall.hourly):
+#                     calldata.EventBefore.values[k] = value.icon
+#                     calldata.ConditionBefore.values[k] = value.summary
+#             except:
+#                 print("Error in finding previous hour")
+#         elif hoa > 0:
+#             new_hoa = hoa - 1
+#             # Get weather data
+#             t = datetime(yoa, moa, dayoa, new_hoa, mioa, soa).isoformat()
+#             call = key, lat, long
+#             try:
+#                 forecastcall = forecast(*call, time=t)
+#                 for i, value in enumerate(forecastcall.hourly):
+#                     calldata.EventBefore.values[k] = value.icon
+#                     calldata.ConditionBefore.values[k] = value.summary
+#             except:
+#                 print("Error in finding previous hour")
+#         else:
+#             print("One of the hours was 0 and didn't register")
+#
+#         # Retrieve the main weather data
+#         try:
+#             forecastcall = forecast(*call, time=t)
+#             # Hourly data
+#             for i, value in enumerate(forecastcall.hourly):
+#                 # Retrieving weather for previous weather
+#                 if i == hoa:
+#                     calldata.Temperature.values[k] = value.temperature
+#                     calldata.Dewpoint.values[k] = value.dewPoint
+#                     calldata.Event.values[k] = value.icon
+#                     calldata.Humidity.values[k] = value.humidity
+#                     calldata.Month.values[k] = moa
+#                     calldata.Visibility.values[k] = value.visibility
+#                     calldata.Conditions.values[k] = value.summary
+#         except:
+#             print("Hourly Lookup Failed")
+#         # try:
+#             # Daily data, which requires individual try/except statements, otherwise the code crashes for some reason
+#         for j, value2 in enumerate(forecastcall.daily):
+#             try:
+#                 calldata.Precipitation_Type.values[k] = value2.precipType
+#             except:
+#                 calldata.Precipitation_Type.values[k] = "NA"
+#             try:
+#                 calldata.Precipitation_Intensity.values[k] = value2.precipIntensity
+#             except:
+#                 calldata.Precipitation_Intensity.values[k] = -1000
+#             try:
+#                 calldata.Precip_Intensity_Max.values[k] = value2.precipIntensityMax
+#             except:
+#                 calldata.Precip_Intensity_Max.values[k] = -1000
+#             try:
+#                 calldata.Precip_Intensity_Time.values[k] = value2.precipIntensityMaxTime
+#             except:
+#                 calldata.Precip_Intensity_Time.values[k] = -1000
+#             try:
+#                 calldata.Temp_Max.values[k] = value2.temperatureMax
+#             except:
+#                 calldata.Temp_Max.values[k] = -1000
+#             try:
+#                 calldata.Temp_Min.values[k] = value2.temperatureMin
+#             except:
+#                 calldata.Temp_Min.values[k] = -1000
+#             try:
+#                 calldata.Cloud_Coverage.values[k] = value2.cloudCover
+#             except:
+#                 calldata.Cloud_Coverage.values[k] = -1000
+#         # except:
+#         #     print("Daily Lookup Failed")
+#
+#
+#     save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/I24AccidentHours Agg.xlsx",
+#                     "DarkSky Weather", calldata)
+#
+#
+# def save_excel_file(save_file_name, sheet, data_file_name):
+#     writer = pandas.ExcelWriter(save_file_name, engine='xlsxwriter', date_format='mmm d yyyy')
+#     data_file_name.to_excel(writer, sheet_name=sheet)
+#     workbook = writer.book
+#     worksheet = writer.sheets[sheet]
+#     writer.save()
+#
+#
+# def update_temp_avgs(day_holder2018):
+#         lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
+#         long_coords = [-85.121603, -85.121603, -85.175549, -85.047341, -84.998361, -85.158404]
+#         hour_times = [0, 6, 12, 18]
+#         coord_avgs = []
+#         # The key for using DarkSky API
+#         key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+#         day_holder2018.Date = day_holder2018.Date.astype(str)
+#
+#         print("Adding in DarkSky Weather")
+#         # Iterate through calldata and assign weather data for each incident
+#         for k, info in enumerate(day_holder2018.values):
+#             print(k)
+#             if day_holder2018.Daily_Average.values[k] > -100:
+#                 print("Skipping")
+#             else:
+#                 lat_iterator = 0
+#                 hour_iterator = 0
+#                 temp_avg = 0
+#                 for j in range(0, 6):
+#                     lat = lat_coords[lat_iterator]
+#                     long = long_coords[lat_iterator]
+#                     temp_avg = 0
+#                     hour_iterator = 0
+#                     for o in range(0, 4):
+#                         hoa = hour_times[hour_iterator]
+#                         mioa = 0
+#                         soa = 0
+#                         doa = day_holder2018.Date.values[k]
+#                         yoa = int(doa.split('-')[0])
+#                         moa = int(doa.split('-')[1])
+#                         dayoa = int(doa.split('-')[2])
+#                         # The following line needs to have this format:
+#                         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+#                         call = key, lat, long
+#                         try:
+#                             forecastcall = forecast(*call, time=t)
+#                             # Hourly data
+#                             for i, value in enumerate(forecastcall.hourly):
+#                                 if i == hoa:
+#                                     temp_avg = temp_avg + value.temperature
+#                         except:
+#                             print("Hourly Lookup Failed")
+#                         hour_iterator = hour_iterator + 1
+#                     lat_iterator = lat_iterator + 1
+#                     temp_avg = temp_avg / 4
+#                     coord_avgs.append(temp_avg)
+#                     day_average = sum(coord_avgs) / len(coord_avgs)
+#                     day_holder2018.Daily_Average.values[k] = day_average
+#         save_excel_file(
+#             "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/Day Holder 20182.xlsx",
+#             "Time and Temp", day_holder2018)
 
 # calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
 
@@ -569,25 +569,29 @@ def update_temp_avgs(day_holder2018):
 
 # fit model on all training data
 
-dataset = pandas.read_csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data for Model.csv", sep=",")
-dataset = shuffle(dataset)
-dataset = shuffle(dataset)
+# dataset = pandas.read_csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data for Model.csv", sep=",")
+# dataset = shuffle(dataset)
+# dataset = shuffle(dataset)
+#
+#
+# # X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
+# X = dataset.ix[:, 1:(dataset.shape[1])]
+# # Y = dataset.ix[:, 0].values
+# Y = dataset.ix[:, 0]
+# names = dataset.columns.values
+#
+# from sklearn.feature_selection import SelectKBest, f_classif, f_regression, mutual_info_regression, mutual_info_classif
+#
+# X_train, X_test, y_train, y_test = train_test_split(
+#     X, Y, test_size=0.30, random_state=42)
+# X_test, X_valid, y_test, y_valid = train_test_split(
+#     X_test, y_test, test_size=0.90, random_state=42)
 
 
-# X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
-X = dataset.ix[:, 1:(dataset.shape[1])]
-# Y = dataset.ix[:, 0].values
-Y = dataset.ix[:, 0]
-names = dataset.columns.values
-
-from sklearn.feature_selection import SelectKBest, f_classif, f_regression, mutual_info_regression, mutual_info_classif
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.30, random_state=42)
-X_test, X_valid, y_test, y_valid = train_test_split(
-    X_test, y_test, test_size=0.90, random_state=42)
 
 
+day_holder2019 = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
 
+day_holder2019.Date = day_holder2019.Date.astype(str)
 
- 
+print(len(day_holder2019.Date))

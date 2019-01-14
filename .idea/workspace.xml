@@ -3,7 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-10_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-10_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-11_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-11_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-12_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-12_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-13_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-13_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-14_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-14_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-15_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-15_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-16_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-16_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-17_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-17_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-18_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/Final Form Reports/911_Reports_for_2018-12-18_FinalForm.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2018.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2018.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="$PROJECT_DIR$/Code/AutomatedData.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/scratchSheet.py" afterPath="$PROJECT_DIR$/Code/scratchSheet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
@@ -20,8 +34,8 @@
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="892" column="15" lean-forward="true" selection-start-line="892" selection-start-column="15" selection-end-line="892" selection-end-column="15" />
+            <state relative-caret-position="-936">
+              <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -34,9 +48,9 @@
                 <element signature="e#8377#12924#0" expanded="false" />
                 <element signature="e#12958#14251#0" expanded="false" />
                 <element signature="e#14292#20393#0" expanded="false" />
-                <element signature="e#20434#27250#0" expanded="false" />
-                <element signature="e#27359#29455#0" expanded="false" />
-                <element signature="e#29494#46083#0" expanded="false" />
+                <element signature="e#20434#27214#0" expanded="false" />
+                <element signature="e#27323#29419#0" expanded="false" />
+                <element signature="e#29458#46047#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -76,6 +90,7 @@
       <find>loc[::-1]</find>
       <find>Day Holder 2018</find>
       <find>RolandProjects</find>
+      <find>2018</find>
     </findStrings>
     <replaceStrings>
       <replace>maxi</replace>
@@ -87,6 +102,7 @@
       <replace>calldata</replace>
       <replace>data_file_name</replace>
       <replace>911Project</replace>
+      <replace>2019</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -155,10 +171,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1922" />
-    <option name="y" value="133" />
-    <option name="width" value="1918" />
-    <option name="height" value="1137" />
+    <option name="x" value="1839" />
+    <option name="y" value="365" />
+    <option name="width" value="1916" />
+    <option name="height" value="1129" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -178,7 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,7 +217,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -331,10 +347,10 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.AutomatedData" />
-        <item index="1" class="java.lang.String" itemvalue="Python.NetworkModel" />
-        <item index="2" class="java.lang.String" itemvalue="Python.keras_first_network" />
-        <item index="3" class="java.lang.String" itemvalue="Python.convertingTime" />
-        <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="2" class="java.lang.String" itemvalue="Python.NetworkModel" />
+        <item index="3" class="java.lang.String" itemvalue="Python.keras_first_network" />
+        <item index="4" class="java.lang.String" itemvalue="Python.convertingTime" />
       </list>
     </recent_temporary>
   </component>
@@ -348,13 +364,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Changes made">
-      <created>1537465319294</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1537465319294</updated>
     </task>
     <task id="LOCAL-00040" summary="Changes made">
       <created>1537817104491</created>
@@ -692,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545159529121</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="More data">
+      <created>1545229685090</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1545229685090</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TodoView">
@@ -705,14 +721,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1922" y="133" width="1922" height="1153" extended-state="6" />
+    <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2614728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27427962" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2667304" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2667304" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -723,7 +740,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -786,38 +802,16 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.anaconda3/lib/python3.5/site-packages/h5py/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Client.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Project2GUI.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Client.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1062,13 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13821">
-          <caret line="534" column="82" lean-forward="false" selection-start-line="534" selection-start-column="82" selection-end-line="534" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/regressionTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -1111,10 +1098,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/X_New_For_Model.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="92" lean-forward="false" selection-start-line="5" selection-start-column="92" selection-end-line="5" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="597" column="0" lean-forward="true" selection-start-line="597" selection-start-column="0" selection-end-line="597" selection-end-column="0" />
+          <folding>
+            <element signature="e#283#308#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="892" column="15" lean-forward="true" selection-start-line="892" selection-start-column="15" selection-end-line="892" selection-end-column="15" />
+        <state relative-caret-position="-936">
+          <caret line="72" column="0" lean-forward="true" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
@@ -1127,9 +1155,9 @@
             <element signature="e#8377#12924#0" expanded="false" />
             <element signature="e#12958#14251#0" expanded="false" />
             <element signature="e#14292#20393#0" expanded="false" />
-            <element signature="e#20434#27250#0" expanded="false" />
-            <element signature="e#27359#29455#0" expanded="false" />
-            <element signature="e#29494#46083#0" expanded="false" />
+            <element signature="e#20434#27214#0" expanded="false" />
+            <element signature="e#27323#29419#0" expanded="false" />
+            <element signature="e#29458#46047#0" expanded="false" />
           </folding>
         </state>
       </provider>
