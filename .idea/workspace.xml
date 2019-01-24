@@ -22,8 +22,8 @@
       <file leaf-file-name="AutomatedData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="882" column="0" lean-forward="true" selection-start-line="882" selection-start-column="0" selection-end-line="882" selection-end-column="0" />
+            <state relative-caret-position="286">
+              <caret line="902" column="57" lean-forward="true" selection-start-line="902" selection-start-column="57" selection-end-line="902" selection-end-column="57" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -183,7 +183,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -206,6 +205,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -352,13 +352,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Changes made">
-      <created>1538397210210</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1538397210210</updated>
     </task>
     <task id="LOCAL-00045" summary="Changes made">
       <created>1538425629227</created>
@@ -696,7 +689,14 @@
       <option name="project" value="LOCAL" />
       <updated>1547837578342</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="More data">
+      <created>1548254565861</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1548254565861</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TodoView">
@@ -711,7 +711,7 @@
   <component name="ToolWindowManager">
     <frame x="1886" y="229" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28708646" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18943436" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -795,7 +795,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Project2GUI.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Project2_Server.py" />
     <entry file="file:///media/admin/Roland_Jeremiah/School Stuff/Computer Networks/Project 2/Group1_Project2/Client.py" />
@@ -1121,10 +1120,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-01-23.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="882" column="0" lean-forward="true" selection-start-line="882" selection-start-column="0" selection-end-line="882" selection-end-column="0" />
+        <state relative-caret-position="286">
+          <caret line="902" column="57" lean-forward="true" selection-start-line="902" selection-start-column="57" selection-end-line="902" selection-end-column="57" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
