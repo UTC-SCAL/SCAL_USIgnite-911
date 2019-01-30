@@ -96,9 +96,11 @@ model.add(Dense(X_train.shape[1],
                 input_dim=X_train.shape[1], activation='selu'))
 #Usefor standard sized variable set
 model.add(Dense(28, activation='selu'))
+model.add(Dropout(.1))
 model.add(Dense(20, activation='selu'))
 model.add(Dense(18, activation='selu'))
 model.add(Dense(10, activation='selu'))
+model.add(Dropout(.1))
 
 # # #Use for 5 var
 # model.add(Dense(4, activation='selu'))
