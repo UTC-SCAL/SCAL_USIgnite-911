@@ -1,0 +1,2 @@
+round_epochs,val_acc,val_loss,loss,acc,batch_size,optimizer,activation,loss
+100,0.7132351940316422,0.5324284102792874,0.5422718174442822,0.7039072298050058,2000,adadelta,relu,binary_crossentropy
