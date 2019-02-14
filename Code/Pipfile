@@ -4,11 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-tensorflow = "*"
 pandas = "*"
 sklearn = "*"
 matplotlib = "*"
 statsmodels = "*"
+osmnx = "*"
+drogi = "*"
+plaidml-keras = "*"
+plaidbench = "*"
+talos = "*"
+"autopep8" = "*"
+pydot = "*"
+ann-visualizer = "*"
+graphviz = "*"
+keras-sequential-ascii = "*"
 
 [dev-packages]
 "autopep8" = "*"

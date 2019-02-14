@@ -1,0 +1,61 @@
+---
+title: "HotSpotMap"
+author: "Pete Way"
+date: "2/13/2019"
+output: pdf_document
+---
+
+```{r}
+library(maps)
+utc=read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data.csv", header=T)
+#head(utc)
+
+a=which(utc$Accident==1)
+df=utc[a,]#look at only the accident records
+
+locations=data.frame(df$Route, df$Longitude, df$Latitude)
+u=unique(locations)
+
+sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+for (i in 1:dim(u)[1]){
+w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
+	df$Latitude==u[i,3])
+sums[i]<-length(df$Accident[w])
+}
+
+df4=data.frame(u, sums)#uniques locations and the number of accidents there
+
+rank=rep(NA, dim(df4)[1])
+rank[which(sums<=15 & sums>5)]<-'yellow'
+rank[which(sums<=30 & sums>15)]<-'orange'
+rank[which(sums<=40 & sums>30)]<-'red'
+rank[which(sums>40)]<-'black'
+#I chose these thresholds arbitrarily.  Feel free to change
+
+locs=data.frame(u[,2:3])
+
+# windows()
+
+map('county','tennessee,hamilton',lwd=1, fill=T, col='darkgrey')
+title(main='Hamilton County, Tennessee')
+
+# w=which(rank=='green')
+# points(locs[w,], pch=16, cex=.2, col=rank[w])
+
+w=which(rank=='yellow')
+points(locs[w,], pch=16, cex=.5, col=rank[w])
+
+w=which(rank=='red')
+points(locs[w,], pch=16, cex=.5, col=rank[w])
+
+w=which(rank=='black')
+points(locs[w,], pch=16, cex=1, col=rank[w])
+
+legend("topleft",c( '(5,15]', '(15,30]','(30,40]', '>40'), pch = 16, 
+	pt.cex=c(.2,.5,.5,1), cex = 1, 
+	       	col = c( 'yellow','orange', 'red', 'black'),
+		title='# of Accidents', box.col='black', bg='grey')
+
+```
+
+

@@ -589,9 +589,8 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 
+# day_holder2019 = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
 
-day_holder2019 = pandas.read_excel("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
+# day_holder2019.Date = day_holder2019.Date.astype(str)
 
-day_holder2019.Date = day_holder2019.Date.astype(str)
-
-print(len(day_holder2019.Date))
+# print(len(day_holder2019.Date))

@@ -1,0 +1,19 @@
+           OPERATION           DATA DIMENSIONS   WEIGHTS(N)   WEIGHTS(%)
+
+               Input   #####          30
+               Dense   XXXXX -------------------       930    31.5%
+             sigmoid   #####          30
+               Dense   XXXXX -------------------       868    29.4%
+             sigmoid   #####          28
+             Dropout    | || -------------------         0     0.0%
+                       #####          28
+               Dense   XXXXX -------------------       580    19.6%
+             sigmoid   #####          20
+               Dense   XXXXX -------------------       378    12.8%
+             sigmoid   #####          18
+               Dense   XXXXX -------------------       190     6.4%
+             sigmoid   #####          10
+             Dropout    | || -------------------         0     0.0%
+                       #####          10
+               Dense   XXXXX -------------------        11     0.4%
+             sigmoid   #####           1
