@@ -37,12 +37,12 @@ from ann_visualizer.visualize import ann_viz
 from keras_sequential_ascii import keras2ascii
 
 
-def generate_results(y_test, y_score,hist):
-    fpr, tpr, _ = roc_curve(y_test, y_score)
+def generate_results(y_test,predictions, hist):
+    fpr, tpr, _ = roc_curve(y_test, predictions)
     roc_auc = auc(fpr, tpr)
     font = {'family': 'serif',
             'weight': 'bold',
-            'size': 16}
+            'size': 10}
 
     plt.rc('font', **font)
     fig = plt.figure()
@@ -57,21 +57,23 @@ def generate_results(y_test, y_score,hist):
     # plt.subplot(212)
     print("This point reached. ")
     fig = plt.figure()
-
-    plt.xticks(range(0, 20), range(1, 21))
+    plt.xticks(range(0, 20), range(1, 21), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
- 
-    plt.scatter(x=x, y=predictions_round[0:20], s=100, c='blue', marker='x', linewidth=2)
+    x= [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    plt.axhline(y=0.5, color='gray', linestyle='-')
+    plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
     plt.scatter(x=x, y=y_test[0:20], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
     fig.savefig('pred.png', bbox_inches='tight')
 
     print("Second point reached. ")
-
+    font = {'family': 'serif',
+            'weight': 'bold',
+            'size': 16}
+    plt.rc('font', **font)
     fig = plt.figure()
     # plt.subplot(211)
     plt.plot(hist.history['acc'])
@@ -160,8 +162,8 @@ print(model.summary())
 #           4. Train that model on some data!
 # Fitting the model to train the data
 
-hist = model.fit(X_train, y_train, epochs=300,
-                 batch_size=200, validation_data=(X_valid, y_valid))
+hist = model.fit(X_train, y_train, epochs=3,
+                 batch_size=400, validation_data=(X_valid, y_valid))
 
 model_json = model.to_json()
 with open("model.json", "w") as json_file:
@@ -170,12 +172,12 @@ with open("model.json", "w") as json_file:
 model.save_weights("model.h5")
 print("Saved model to disk")
 
-ann_viz(model, view=True, filename="network.gv", title="Model")
-keras2ascii(model)
+# ann_viz(model, view=True, filename="network.gv", title="Model")
+# keras2ascii(model)
 
 #     return hist, model
 # This is evaluating the model, and printing the results of the epochs.
-scores = model.evaluate(X_train, y_train, batch_size=200)
+scores = model.evaluate(X_train, y_train, batch_size=400)
 print("\n Model Training Accuracy:", scores[1]*100)
 
 # Okay, now let's calculate predictions.
