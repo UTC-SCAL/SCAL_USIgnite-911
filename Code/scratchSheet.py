@@ -7,6 +7,13 @@ from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.tree import DecisionTreeClassifier
 
+import matplotlib
+import matplotlib.pyplot as plt
+x = [1,2,3]
+y=[1,2,3]
+plt.figure()
+plt.scatter(x=x, y=y, s=100, c='blue', marker='x', linewidth=2)
+plt.show()
 # def add_data(calldata):
 #     # Caste the columns into the data types we need them to be
 #     calldata.Event = calldata.Event.astype(str)

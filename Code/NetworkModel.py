@@ -37,7 +37,7 @@ from ann_visualizer.visualize import ann_viz
 from keras_sequential_ascii import keras2ascii
 
 
-def generate_results(y_test, y_score, hist):
+def generate_results(y_test, y_score,hist):
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = auc(fpr, tpr)
     font = {'family': 'serif',
@@ -45,7 +45,7 @@ def generate_results(y_test, y_score, hist):
             'size': 16}
 
     plt.rc('font', **font)
-    plt.figure()
+    fig = plt.figure()
     # plt.subplot(211)
     plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
@@ -53,35 +53,46 @@ def generate_results(y_test, y_score, hist):
     plt.ylabel('True Positive Rate')
     # plt.title('Receiver operating characteristic curve')
     print('AUC: %f' % roc_auc)
+    fig.savefig('roc.png', bbox_inches='tight')
     # plt.subplot(212)
-    plt.figure()
+    print("This point reached. ")
+    fig = plt.figure()
+
     plt.xticks(range(0, 20), range(1, 21))
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    plt.scatter(x=range(
-        0, 20), y=predictions_round[0:20], s=100, c='blue', marker='x', linewidth=2)
-    plt.scatter(x=range(0, 20), y=y_test[0:20], s=110,
+    x= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+ 
+    plt.scatter(x=x, y=predictions_round[0:20], s=100, c='blue', marker='x', linewidth=2)
+    plt.scatter(x=x, y=y_test[0:20], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    plt.show()
+    fig.savefig('pred.png', bbox_inches='tight')
 
-    plt.figure()
+    print("Second point reached. ")
+
+    fig = plt.figure()
     # plt.subplot(211)
     plt.plot(hist.history['acc'])
     plt.plot(hist.history['val_acc'])
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
     plt.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right')
+    # plt.show()
+    fig.savefig('acc.png', bbox_inches='tight')
+    print("Third point reached. ")
     # summarize history for loss
     # plt.subplot(212)
-    plt.figure()
+    fig = plt.figure()
     plt.plot(hist.history['loss'])
     plt.plot(hist.history['val_loss'])
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
     plt.legend(['Train Loss', 'Test Loss'], loc='upper right')
-    plt.show()
+    # plt.show()
+    fig.savefig('loss.png', bbox_inches='tight')
+    print("End reached. ")
 
 ## The steps of creating a neural network or deep learning model ##
     # 1. Load Data
@@ -93,21 +104,36 @@ def generate_results(y_test, y_score, hist):
 
 #           1. Load Data
 dataset = pandas.read_csv(
-    "/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data for Model.csv", sep=",")
+    "../Excel & CSV Sheets/Full Data for Model.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
+
+# train = pandas.read_csv(
+#     "../Excel & CSV Sheets/Full Data TestDay.csv", sep=",")
+# train = shuffle(train)
+# train = shuffle(train)
 
 
 X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
 Y = dataset.ix[:, 0].values
-names = dataset.columns.values[1:-1]
+# names = train.columns.values[1:-1]
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, Y, test_size=0.30, random_state=42)
+
+# test = pandas.read_csv(
+#     "../Excel & CSV Sheets/TestDay.csv", sep=",")
+# test = shuffle(test)
+# test = shuffle(test)
+
+# X_test = test.ix[:, 1:(len(test.columns)+1)].values
+# y_test = (test.ix[:, 0].values).reshape((138, 1))
+# print("Size of X_Test:", X_test.shape, "Size of y_test:", y_test.shape)
+
 X_test, X_valid, y_test, y_valid = train_test_split(
     X_test, y_test, test_size=0.90, random_state=42)
 
-print("Number of X variables: ", X.shape[1])
+# print("Number of X variables: ", X.shape[1])
 
 
 #           2. Defining a Neural Network
@@ -135,24 +161,21 @@ print(model.summary())
 # Fitting the model to train the data
 
 hist = model.fit(X_train, y_train, epochs=300,
-                 batch_size=500, validation_data=(X_valid, y_valid))
+                 batch_size=200, validation_data=(X_valid, y_valid))
 
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model.h5")
+print("Saved model to disk")
 
 ann_viz(model, view=True, filename="network.gv", title="Model")
 keras2ascii(model)
-model.save_weights("weights.h5")
-cols = list(range(1, 30))
-# weight_set = pandas.DataFrame(columns=cols)
 
-for layer in model.layers:
-    weights = layer.get_weights()
-    print(weights)
-    # m = numpy.asarray(weights)
-    m = pandas.DataFrame.from_records(weights)
-    m.to_csv("weights"+str(layer.name)+".csv")
 #     return hist, model
 # This is evaluating the model, and printing the results of the epochs.
-scores = model.evaluate(X_train, y_train, batch_size=500)
+scores = model.evaluate(X_train, y_train, batch_size=200)
 print("\n Model Training Accuracy:", scores[1]*100)
 
 # Okay, now let's calculate predictions.
