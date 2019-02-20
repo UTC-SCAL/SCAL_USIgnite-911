@@ -167,7 +167,7 @@ print(model.summary())
 
 avg_holder = pandas.read_csv(
     "../Excel & CSV Sheets/AverageHolder.csv", sep=",")
-for i in range(0,100):
+for i in range(0,1):
     if exists("../Excel & CSV Sheets/AverageHolder2.csv"):
         avg_holder = pandas.read_csv("../Excel & CSV Sheets/AverageHolder2.csv", usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss"])
         j = avg_holder.shape[0]
@@ -209,7 +209,7 @@ for i in range(0,100):
     print("Test Loss", hist.history['val_loss'])
     # avg_holder.Test_Loss.values[i] = hist.history['val_loss']
     # avg_holder.Test_Acc.values[i] = accscore1*100
-    # generate_results(y_test, predictions, hist)
+    generate_results(y_test, predictions, hist)
     avg_holder.loc[j, 'Train_Acc'] = scores[1]*100
     avg_holder.loc[j, 'Train_Loss'] = str(hist.history['loss'])
     avg_holder.loc[j, 'Test_Acc'] = accscore1*100
