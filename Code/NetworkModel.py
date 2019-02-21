@@ -40,64 +40,60 @@ from os.path import exists
 
 
 
-def generate_results(y_test,predictions, hist):
+def generate_results(y_test,predictions, hist,i):
     fpr, tpr, _ = roc_curve(y_test, predictions)
     roc_auc = auc(fpr, tpr)
     font = {'family': 'serif',
-            'weight': 'bold',
-            'size': 10}
-
+            'weight': 'regular',
+            'size': 14}
     plt.rc('font', **font)
     fig = plt.figure()
-    # plt.subplot(211)
     plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
+    plt.yticks((0, .5, 1), (0, .5, 1))
+    plt.xticks((0, .5, 1), (0, .5, 1))
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    # plt.title('Receiver operating characteristic curve')
     print('AUC: %f' % roc_auc)
-    fig.savefig('roc.png', bbox_inches='tight')
-    # plt.subplot(212)
-    print("This point reached. ")
+    title = 'roc' + str(i) + '.png'
+    fig.savefig(title, bbox_inches='tight')
     fig = plt.figure()
     plt.xticks(range(0, 20), range(1, 21), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x= [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     plt.axhline(y=0.5, color='gray', linestyle='-')
     plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
     plt.scatter(x=x, y=y_test[0:20], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    fig.savefig('pred.png', bbox_inches='tight')
+    title = 'pred' +str(i) + '.png'
+    fig.savefig(title, bbox_inches='tight')
 
-    print("Second point reached. ")
     font = {'family': 'serif',
             'weight': 'bold',
-            'size': 16}
+            'size': 14}
     plt.rc('font', **font)
     fig = plt.figure()
-    # plt.subplot(211)
-    plt.plot(hist.history['acc'])
-    plt.plot(hist.history['val_acc'])
-    plt.ylabel('Accuracy')
-    plt.xlabel('Epoch')
-    plt.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right')
-    # plt.show()
-    fig.savefig('acc.png', bbox_inches='tight')
-    print("Third point reached. ")
-    # summarize history for loss
-    # plt.subplot(212)
-    fig = plt.figure()
-    plt.plot(hist.history['loss'])
-    plt.plot(hist.history['val_loss'])
-    plt.ylabel('Loss')
-    plt.xlabel('Epoch')
-    plt.legend(['Train Loss', 'Test Loss'], loc='upper right')
-    # plt.show()
-    fig.savefig('loss.png', bbox_inches='tight')
-    print("End reached. ")
+    a1 = fig.add_subplot(2, 1, 1)
+    a1.plot(hist.history['acc'])
+    a1.plot(hist.history['val_acc'])
+    a1.set_ylabel('Accuracy')
+    a1.set_xlabel('Epoch')
+    a1.set_yticks((.5, .65, .8))
+    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
+    a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
+    a2 = fig.add_subplot(2, 1, 2)
+    a2.plot(hist.history['loss'])
+    a2.plot(hist.history['val_loss'])
+    a2.set_ylabel('Loss')
+    a2.set_xlabel('Epoch')
+    a2.set_yticks((.15, .20, .25,))
+    a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
+    a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
+    title = 'lossandacc'+str(i) + '.png'
+    fig.savefig(title, bbox_inches='tight')
 
 ## The steps of creating a neural network or deep learning model ##
     # 1. Load Data
@@ -167,7 +163,7 @@ print(model.summary())
 
 avg_holder = pandas.read_csv(
     "../Excel & CSV Sheets/AverageHolder.csv", sep=",")
-for i in range(0,1):
+for i in range(0,15):
     if exists("../Excel & CSV Sheets/AverageHolder2.csv"):
         avg_holder = pandas.read_csv("../Excel & CSV Sheets/AverageHolder2.csv", usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss"])
         j = avg_holder.shape[0]
@@ -176,7 +172,7 @@ for i in range(0,1):
         avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss"])
         # avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
     print("Iteration: ", i)
-    hist = model.fit(X_train, y_train, epochs=300, batch_size=400, validation_data=(X_valid, y_valid), verbose=0)
+    hist = model.fit(X_train, y_train, epochs=3000, batch_size=400, validation_data=(X_valid, y_valid), verbose=0)
     # avg_holder.append(hist)
 
 
@@ -193,8 +189,8 @@ for i in range(0,1):
 #     return hist, model
 # This is evaluating the model, and printing the results of the epochs.
     scores = model.evaluate(X_train, y_train, batch_size=400)
-    print("\nModel Training Accuracy:", scores[1]*100)
-    print("\nModel Training Loss:", hist.history['loss'])
+    print("Model Training Accuracy:", scores[1]*100)
+    print("Model Training Loss:", hist.history['loss'])
     # avg_holder.Train_Acc.values[i] = scores[1]*100
     # avg_holder.Train_Loss.values[i] = hist.history['loss']
     # Okay, now let's calculate predictions.
@@ -209,7 +205,7 @@ for i in range(0,1):
     print("Test Loss", hist.history['val_loss'])
     # avg_holder.Test_Loss.values[i] = hist.history['val_loss']
     # avg_holder.Test_Acc.values[i] = accscore1*100
-    generate_results(y_test, predictions, hist)
+    generate_results(y_test, predictions, hist,i)
     avg_holder.loc[j, 'Train_Acc'] = scores[1]*100
     avg_holder.loc[j, 'Train_Loss'] = str(hist.history['loss'])
     avg_holder.loc[j, 'Test_Acc'] = accscore1*100
