@@ -8,6 +8,8 @@ import pytz
 import pandas
 import math
 import os, sys
+import random
+from selenium import webdriver
 
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
@@ -59,13 +61,13 @@ def get_Email():
                     # print("Downloading this email: ", mail["Subject"])
 
                     if filename is not None:    #Saves the attachment in the daily record folder with a tidy name.
-                        sv_path = os.path.join(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
+                        sv_path = os.path.join(folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_'+ str(daybefore)+'.csv')
                         if not os.path.isfile(sv_path):
                             # print(sv_path)
                             fp = open(sv_path, 'wb')
                             fp.write(part.get_payload(decode=True))
                             fp.close()
-    file = folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
+    file = folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_' + str(daybefore) + '.csv'
     calllog = pandas.read_csv(file,sep=",")
     return calllog, file
 
@@ -112,23 +114,26 @@ def save_excel_file(save_file_name, sheet, data_file_name):
 
 
 def drop_duplicates(calldata):
-    datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx")
+    datafile = pandas.read_excel(folderpath + "Excel & CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx")
     listing = list(datafile.index.values)
     calldata.drop(calldata.index[listing], inplace=True)
     return calldata
 
 
 def find_Duplicates(data_file_name, occurrence_list):
+    for k, info in enumerate(data_file_name.values):
+        if data_file_name.Latitude.values[k] > 40:
+            data_file_name.Latitude.values[k] = (data_file_name.Latitude.values[k] / 1000000)
+            data_file_name.Longitude.values[k] = (data_file_name.Longitude.values[k] / -1000000)
     count_doubles = 0
     data_file_copy = data_file_name.copy()
     remove = pandas.DataFrame(columns= data_file_copy.columns)
     # id1 = 0
     # id2 = data_file_copy.index[id1 + 1]
     for id1, id in enumerate(data_file_copy.values):
-        print(id1)
         if id1 + 1 >= len(data_file_copy)-1:
             print("There were :", count_doubles, "occurrences of duplicate calls.")
-            save_excel_file(folderpath + 'Excel & CSV Sheets/2018 Data/DailyReports/ToRemoveFile.xlsx',
+            save_excel_file(folderpath + 'Excel & CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx',
                             'Call Info', remove)
             break
         else:
@@ -161,56 +166,373 @@ def find_Duplicates(data_file_name, occurrence_list):
                 # return remove
 
 
-def find_y(calldata):
-    for i, value in enumerate(calldata.values):
-        # if 'No Injuries' in calldata.loc[i, 'Problem'] or 'Unknown Injuries' in calldata.loc[
-        #     i, 'Problem'] or 'Delayed' in calldata.loc[i, 'Problem']:
-        if 'No Injuries' in calldata.Problem.values[i] or 'Unknown Injuries' in calldata.Problem.values[i] or\
-                        'Delayed' in calldata.Problem.values[i]:
-            calldata.Y.values[i] = 0
-        else:
-            calldata.Y.values[i] = 1
-    return calldata
-
-
 def data_cleaning(calldata):
-    # Convert the unix times in the Precipitation Intensity Time column to clock time
-    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
-    for k, value in enumerate(calldata.values):
-        empty_time_test = pandas.isnull(calldata.Precip_Intensity_Time.values[k])
-        if calldata.Precip_Intensity_Time.values[k] == 0 or empty_time_test is True:
-            pass
-        else:
-            tz = pytz.timezone('America/New_York')
-            dt = datetime.fromtimestamp(calldata.Precip_Intensity_Time.values[k], tz)
-            calldata.Precip_Intensity_Time.values[k] = dt
-
-    # Caste the column as a string, since excel doesn't like the format that the column's values currently are
-    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(str)
-    # Take the substring of the column that actually has the time
-    # Once in excel, convert the column values into numbers again
-    for i, value2 in enumerate(calldata.values):
-        x = calldata.Precip_Intensity_Time.values[i]
-        calldata.Precip_Intensity_Time.values[i] = x[11:19]
-
     # The next for loops are used to fill in blank values in the corresponding columns
     # (just so I don't have to do it by hand)
-    # However, you will need to go in and replace the blanks in the Precip_Intensity_Time column with 0 by hand
-    # For some reason, the code doesn't want to replace the blanks with a 0
     for n, value4 in enumerate(calldata.values):
-        empty_intensity_test = pandas.isnull(calldata.Precip_Intensity_Max.values[n])
-        if empty_intensity_test is True:
-            calldata.Precip_Intensity_Max.values[n] = 0
+        if pandas.isnull(calldata.Precip_Intensity_Max.values[n]) is True:
+            calldata.Precip_Intensity_Max.values[n] = -1000
     for c, value5 in enumerate(calldata.values):
-        empty_cover_test = pandas.isnull(calldata.Cloud_Coverage.values[c])
-        if empty_cover_test is True:
-            calldata.Cloud_Coverage.values[c] = 0
+        if pandas.isnull(calldata.Cloud_Coverage.values[c]) is True:
+            calldata.Cloud_Coverage.values[c] = -1000
 
     return calldata
 
 
 def add_data(calldata, save_name):
-    # Caste the columns into the data types we need them to be
+    # Getting the weekday
+    calldata['Date'] = pandas.to_datetime(calldata['Date'])
+    calldata['Weekday'] = calldata['Date'].dt.dayofweek
+    calldata.Date = calldata.Date.astype(str)
+
+    print("Getting Accident Weather Data")
+    calldata = get_weather_data(calldata)
+    print("Getting Accident Road Geometrics")
+    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
+
+    usr = driver.find_element_by_id("UserName")
+    pw = driver.find_element_by_id("Password")
+
+    usr.send_keys("JJVPG56")
+    pw.send_keys("Saturn77")
+    driver.find_element_by_class_name("btn").click()
+
+    calldata.Route = calldata.Route.astype(str)
+
+    for i, info in enumerate(calldata.values):
+        latitude = calldata.Latitude.values[i]
+        longitude = calldata.Longitude.values[i]
+
+        site = "https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/lrsforlatlong?latitude=" \
+               + str(latitude) + "&longitude=" + str(longitude) + "&d=1538146112919"
+
+        driver.get(site)
+        raw = str(driver.page_source)
+        milepoint = float(raw[raw.index("<MilePoint>") + len("<MilePoint>"): raw.index("</MilePoint>")])
+        routeid = raw[raw.index("<RouteId>") + len("<RouteId>"): raw.index("</RouteId>")]
+
+        calldata.Route.values[i] = routeid
+        calldata.Log_Mile.values[i] = milepoint
+
+    geometrics = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
+        sep=",")
+    segments = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
+        sep=",")
+    descriptions = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
+        sep=",")
+    traffic = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        sep=",")
+    for k, info in enumerate(calldata.values):
+        for i, value in enumerate(geometrics.values):
+            if calldata.Route.values[k] == geometrics.ID_NUMBER.values[i]:
+                if geometrics.ELM.values[i] > calldata.Log_Mile.values[k] > geometrics.BLM.values[i]:
+                    calldata.Num_Lanes.values[k] = geometrics.Num_Lns.values[i]
+                    calldata.Thru_Lanes.values[k] = geometrics.Thru_Lanes.values[i]
+        for l, value in enumerate(segments.values):
+            if calldata.Route.values[k] == segments.ID_NUMBER.values[l]:
+                if segments.ELM.values[l] > calldata.Log_Mile.values[k] > segments.BLM.values[l]:
+                    calldata.Ad_Sys.values[k] = segments.Ad_Sys.values[l]
+                    calldata.Gov_Cont.values[k] = segments.Gov_Cont.values[l]
+                    calldata.Func_Class.values[k] = segments.Func_Class.values[l]
+        for m, value in enumerate(traffic.values):
+            if calldata.Route.values[k] == traffic.ID_NUMBER.values[m]:
+                if traffic.ELM.values[m] > calldata.Log_Mile.values[k] > traffic.BLM.values[m]:
+                    calldata.AADT.values[k] = traffic.AADT.values[m]
+                    calldata.DHV.values[k] = traffic.DHV.values[m]
+        for n, value in enumerate(descriptions.values):
+            if calldata.Route.values[k] == descriptions.ID_NUMBER.values[n]:
+                if descriptions.ELM.values[n] > calldata.Log_Mile.values[k] > descriptions.BLM.values[n]:
+                    if descriptions.Feature_Type[n] == 19:
+                        calldata.Pavement_Width.values[k] = descriptions.Feat_Width.values[n]
+                        calldata.Pavement_Type.values[k] = descriptions.Feature_Composition.values[n]
+        for i, value in enumerate(geometrics.values):
+            if calldata.Route.values[k] == geometrics.ID_NUMBER.values[i]:
+                if geometrics.ELM.values[i] > calldata.Log_Mile.values[k] > geometrics.BLM.values[i]:
+                    calldata.Terrain.values[k] = geometrics.Terrain.values[i]
+                    calldata.Land_Use.values[k] = geometrics.Land_Use.values[i]
+                    calldata.Access_Control.values[k] = geometrics.Acc_Ctrl.values[i]
+                    calldata.Illumination.values[k] = geometrics.Illum.values[i]
+                    calldata.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
+                    calldata.Operation.values[k] = geometrics.Operation.values[i]
+    return calldata
+
+
+def append_data(calldata):
+    # Appending new data to the New Data file #
+    print("Appending Accident Data")
+    calldata = calldata.iloc[::-1]
+    og_calldata = pandas.read_csv(
+        folderpath + "Excel & CSV Sheets/New Data Files/New Accident Data.csv", sep=",")
+    frames = [og_calldata, calldata]
+    results = pandas.concat(frames)
+    header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+    results = results.reindex(columns=header_list)
+    results.to_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Accident Data.csv")
+
+
+def get_hour_negatives(calldata):
+    # Hour Negative Sampling #
+    # Make a negative samples dataframe to hold the negative samples from calldata
+    # By default, this file is empty
+    negative_samples = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+
+    neg_loc = 0  # Used for positioning
+    calldata.Time = calldata.Time.astype(str)
+    calldata.Date = calldata.Date.astype(str)
+    # For selecting a random hour, use random.choice on a list while excluding the particular hour from the range
+    for i, info in enumerate(calldata.values):
+        # Get the hour
+        n = calldata.Hour.values[i]  # Number to remove from list of hours
+        hours = range(0, 24)
+        r = [x for x in hours if x != n]  # A list of numbers without n
+        # Replace hour in calldata with a random hour
+        calldata.Hour.values[i] = random.choice(r)
+        # Check other entries if there's a match
+        for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+            if calldata.Hour.values[n] == calldata.Hour.values[i] and \
+                            calldata.Date.values[n] is calldata.Date.values[i]:
+                # If match, skip
+                pass
+            else:
+                new_hour = str(calldata.Hour.values[i])
+                toa = calldata.Time.values[i]
+                mioa = str(toa.split(':')[1])
+                soa = str(toa.split(':')[2])
+                new_time = new_hour + ":" + mioa + ":" + soa
+                calldata.Date = calldata.Date.astype(datetime)
+                # These values stay the same between calldata and the negative samples
+                negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
+                negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
+                negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
+                negative_samples.loc[neg_loc, "Time"] = new_time
+                negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
+                negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
+                negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
+                negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
+                negative_samples.loc[neg_loc, "Log_Mile"] = calldata.Log_Mile.values[i]
+                negative_samples.loc[neg_loc, "Terrain"] = calldata.Terrain.values[i]
+                negative_samples.loc[neg_loc, "Land_Use"] = calldata.Land_Use.values[i]
+                negative_samples.loc[neg_loc, "Access_Control"] = calldata.Access_Control.values[i]
+                negative_samples.loc[neg_loc, "Illumination"] = calldata.Illumination.values[i]
+                negative_samples.loc[neg_loc, "Operation"] = calldata.Operation.values[i]
+                negative_samples.loc[neg_loc, "Speed_Limit"] = calldata.Speed_Limit.values[i]
+                negative_samples.loc[neg_loc, "Thru_Lanes"] = calldata.Thru_Lanes.values[i]
+                negative_samples.loc[neg_loc, "Num_Lanes"] = calldata.Num_Lanes.values[i]
+                negative_samples.loc[neg_loc, "Ad_Sys"] = calldata.Ad_Sys.values[i]
+                negative_samples.loc[neg_loc, "Gov_Cont"] = calldata.Gov_Cont.values[i]
+                negative_samples.loc[neg_loc, "Func_Class"] = calldata.Func_Class.values[i]
+                negative_samples.loc[neg_loc, "AADT"] = calldata.AADT.values[i]
+                negative_samples.loc[neg_loc, "DHV"] = calldata.DHV.values[i]
+                negative_samples.loc[neg_loc, "Pavement_Width"] = calldata.Pavement_Width.values[i]
+                negative_samples.loc[neg_loc, "Pavement_Type"] = calldata.Pavement_Type.values[i]
+                neg_loc = neg_loc + 1
+                break
+    traffic = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        sep=",")
+
+    print("Getting NS Hour Road Geometrics")
+    for k, info in enumerate(negative_samples.values):
+        for m, value in enumerate(traffic.values):
+            if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
+                if traffic.ELM.values[m] > negative_samples.Log_Mile.values[k] > traffic.BLM.values[m]:
+                    # negative_samples.AADT.values[k] = traffic.AADT.values[m]
+                    negative_samples.DHV.values[k] = traffic.DHV.values[m]
+    # Getting the weekday
+    negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
+    negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
+    negative_samples.Date = negative_samples.Date.astype(str)
+
+    print("Getting NS Hour Weather Data")
+    negative_samples = get_weather_data(negative_samples)
+    # Appending new data to the New Data file #
+    print("Appending NS Hour Data")
+    negative_samples = negative_samples.iloc[::-1]
+    og_calldata = pandas.read_csv(
+        folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv", sep=",")
+    frames = [og_calldata, negative_samples]
+    results = pandas.concat(frames)
+    header_list = (
+        "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+        "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+        'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+        "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+        "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+    results = results.reindex(columns=header_list)
+    results.to_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
+
+
+def get_date_negatives(calldata):
+    # Get the Negative Samples for Date #
+    # This file needs to be updated every day, and should have the date up until the day before the current day
+    # so, if today is 10/18/2019, the last date in the file should be 10/17/2019
+    day_holder2019 = pandas.read_excel(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
+
+    # Make a negative samples dataframe to hold the negative samples from calldata
+    # By default, this file is empty
+    negative_samples = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+
+    neg_loc = 0  # Used for positioning
+    calldata.Date = calldata.Date.astype(str)
+    day_holder2019.Date = day_holder2019.Date.astype(str)
+    # For selecting a random day, use random.choice on a list while excluding the particular day from the range
+    for i, info in enumerate(calldata.values):
+        # Get the day
+        doa = calldata.Date.values[i]  # Date of a 911 call
+        day_num = pandas.to_datetime(doa).strftime('%-j')
+        day_num = int(day_num) + 1
+        # Note: When selecting the corresponding date from the excel file, it's the Day_Num value - 1 #
+        # So, for the ranges, have them be from 0 to max Day_Num value + 1
+        # days_2017 = range(0, 365)
+        # days_2018 = range(0, 365)
+        # This variable needs to be updated each time the code is run every morning
+        # days_2019 = range(0, 2)
+        days_2019 = range(0, len(day_holder2019.Date))
+        r_2019 = [y for y in days_2019 if y != day_num]  # A list of numbers without dayoa, covering the days in 2019
+        # Check to see what the year is; based on this, you use one of the above variables
+        yoa = int(doa.split('-')[0])  # Get the year
+        if yoa == 2019:
+            calldata.Date.values[i] = day_holder2019.Date.values[random.choice(r_2019)]
+        # Check other entries if there's a match
+        for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+            if calldata.Date.values[k] == calldata.Date.values[i]:
+                # If match, skip
+                pass
+            else:
+                # print("No match found, negative sample added to new dataframe")
+                calldata.Date = calldata.Date.astype(datetime)
+                negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
+                negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
+                negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
+                negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[i]
+                negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[i]
+                negative_samples.loc[neg_loc, "Address"] = calldata.Address.values[i]
+                negative_samples.loc[neg_loc, "City"] = calldata.City.values[i]
+                negative_samples.loc[neg_loc, "Route"] = calldata.Route.values[i]
+                negative_samples.loc[neg_loc, "Log_Mile"] = calldata.Log_Mile.values[i]
+                negative_samples.loc[neg_loc, "Terrain"] = calldata.Terrain.values[i]
+                negative_samples.loc[neg_loc, "Land_Use"] = calldata.Land_Use.values[i]
+                negative_samples.loc[neg_loc, "Access_Control"] = calldata.Access_Control.values[i]
+                negative_samples.loc[neg_loc, "Illumination"] = calldata.Illumination.values[i]
+                negative_samples.loc[neg_loc, "Operation"] = calldata.Operation.values[i]
+                negative_samples.loc[neg_loc, "Speed_Limit"] = calldata.Speed_Limit.values[i]
+                negative_samples.loc[neg_loc, "Thru_Lanes"] = calldata.Thru_Lanes.values[i]
+                negative_samples.loc[neg_loc, "Num_Lanes"] = calldata.Num_Lanes.values[i]
+                negative_samples.loc[neg_loc, "Ad_Sys"] = calldata.Ad_Sys.values[i]
+                negative_samples.loc[neg_loc, "Gov_Cont"] = calldata.Gov_Cont.values[i]
+                negative_samples.loc[neg_loc, "Func_Class"] = calldata.Func_Class.values[i]
+                negative_samples.loc[neg_loc, "DHV"] = calldata.DHV.values[i]
+                negative_samples.loc[neg_loc, "Pavement_Width"] = calldata.Pavement_Width.values[i]
+                negative_samples.loc[neg_loc, "Pavement_Type"] = calldata.Pavement_Type.values[i]
+                neg_loc = neg_loc + 1
+                break
+    traffic = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        sep=",")
+    print("Getting Date NS Road Geometrics")
+    for k, info in enumerate(negative_samples.values):
+        for m, value in enumerate(traffic.values):
+            if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
+                if traffic.ELM.values[m] > negative_samples.Log_Mile.values[k] > traffic.BLM.values[m]:
+                    negative_samples.AADT.values[k] = traffic.AADT.values[m]
+                    negative_samples.DHV.values[k] = traffic.DHV.values[m]
+    print("Getting Date NS Weather Data")
+    negative_samples = get_weather_data(negative_samples)
+
+    # Getting the weekday
+    negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
+    negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
+    negative_samples.Date = negative_samples.Date.astype(str)
+
+    # Appending new data to the New Data file #
+    print("Appending Date NS Data")
+    negative_samples = negative_samples.iloc[::-1]
+    og_calldata = pandas.read_csv(
+        folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv", sep=",")
+    frames = [og_calldata, negative_samples]
+    results = pandas.concat(frames)
+    header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow",
+                   "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+    results = results.reindex(columns=header_list)
+    results.to_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
+
+
+# currently, the relative temperature variable has been dropped
+def update_temp_avgs(day_holder2019):
+    lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
+    long_coords = [-85.121603, -85.121603, -85.175549, -85.047341, -84.998361, -85.158404]
+    hour_times = [0, 6, 12, 18]
+    coord_avgs = []
+    # The key for using DarkSky API
+    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+    day_holder2019.Date = day_holder2019.Date.astype(str)
+
+    print("Adding in DarkSky Weather")
+    # Iterate through calldata and assign weather data for each incident
+    for k, info in enumerate(day_holder2019.values):
+        print(k)
+        lat_iterator = 0
+        hour_iterator = 0
+        temp_avg = 0
+        for j in range(0, 6):
+            lat = lat_coords[lat_iterator]
+            long = long_coords[lat_iterator]
+            temp_avg = 0
+            hour_iterator = 0
+            for o in range(0, 4):
+                hoa = hour_times[hour_iterator]
+                mioa = 0
+                soa = 0
+                doa = day_holder2019.Date.values[k]
+                yoa = int(doa.split('-')[0])
+                moa = int(doa.split('-')[1])
+                dayoa = int(doa.split('-')[2])
+                # The following line needs to have this format:
+                t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+                call = key, lat, long
+                try:
+                    forecastcall = forecast(*call, time=t)
+                    # Hourly data
+                    for i, value in enumerate(forecastcall.hourly):
+                        if i == hoa:
+                            temp_avg = temp_avg + value.temperature
+                except:
+                    print("Hourly Lookup Failed")
+                hour_iterator = hour_iterator + 1
+            lat_iterator = lat_iterator + 1
+            temp_avg = temp_avg / 4
+            coord_avgs.append(temp_avg)
+            day_average = sum(coord_avgs) / len(coord_avgs)
+            day_holder2019.Daily_Average.values[k] = day_average
+    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx",
+                    "Time and Temp", day_holder2019)
+
+
+def get_weather_data(calldata):
     calldata.Event = calldata.Event.astype(str)
     calldata.Conditions = calldata.Conditions.astype(str)
     calldata.Precipitation_Type = calldata.Precipitation_Type.astype(str)
@@ -221,27 +543,15 @@ def add_data(calldata, save_name):
     calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
-    calldata.Date = calldata.Date.astype(str)
     calldata.Time = calldata.Time.astype(str)
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
     calldata.EventBefore = calldata.EventBefore.astype(str)
     calldata.ConditionBefore = calldata.ConditionBefore.astype(str)
-
-    print("Fixing Latitude and Longitude")
-    # Format the latitude and longitude values into the appropriate formats, if they need to be formatted
-    for k, info in enumerate(calldata.values):
-        if calldata.Latitude.values[k] > 40:
-            calldata.Latitude.values[k] = (calldata.Latitude.values[k] / 1000000)
-            calldata.Longitude.values[k] = (calldata.Longitude.values[k] / -1000000)
-
     # The key for using DarkSky API
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-
-    print("Adding in DarkSky Weather")
-    # Iterate through calldata and assign weather data for each incident
+    # Iterate through negative_samples and assign weather data for each incident
     for k, info in enumerate(calldata.values):
-        print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
         toa = calldata.Time.values[k]
@@ -479,7 +789,7 @@ def add_data(calldata, save_name):
                     calldata.Conditions.values[k] = value.summary
         except:
             print("Hourly Lookup Failed")
-        # try:
+            # try:
             # Daily data, which requires individual try/except statements, otherwise the code crashes for some reason
         for j, value2 in enumerate(forecastcall.daily):
             try:
@@ -510,160 +820,92 @@ def add_data(calldata, save_name):
                 calldata.Cloud_Coverage.values[k] = value2.cloudCover
             except:
                 calldata.Cloud_Coverage.values[k] = -1000
-        # except:
-        #     print("Daily Lookup Failed")
 
-    # Create non-overlapping intervals to hold the temperature values
-    # These specific columns don't like to use the easy method of reference by typing calldata.column_name, instead it
-    # insists that I have to use iloc[row, column] for proper referencing.  So, if new variables are added, double check
-    # to see what the current column numbers are for the temperature intervals
-    # calldata.Temperature = calldata.Temperature.astype(float)
-    # print("Adding in Temperature Intervals")
-    # for i, values in enumerate(calldata.values):
-    #     print(i)
-    #     if calldata.Temperature.values[i] < 0:
-    #         calldata.iloc[i, 17] = 1
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 0 and calldata.Temperature.values[i] < 10:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 1
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 10 and calldata.Temperature.values[i] < 20:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 1
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 20 and calldata.Temperature.values[i] < 30:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 1
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 30 and calldata.Temperature.values[i] < 40:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 1
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 40 and calldata.Temperature.values[i] < 50:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 1
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 50 and calldata.Temperature.values[i] < 60:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 1
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 60 and calldata.Temperature.values[i] < 70:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 1
-    #         calldata.iloc[i, 25] = 0
-    #     elif calldata.Temperature.values[i] >= 70:
-    #         calldata.iloc[i, 17] = 0
-    #         calldata.iloc[i, 18] = 0
-    #         calldata.iloc[i, 19] = 0
-    #         calldata.iloc[i, 20] = 0
-    #         calldata.iloc[i, 21] = 0
-    #         calldata.iloc[i, 22] = 0
-    #         calldata.iloc[i, 23] = 0
-    #         calldata.iloc[i, 24] = 0
-    #         calldata.iloc[i, 25] = 1
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + save_name + ".xlsx",
-                    "DarkSky Weather", calldata)
+    for i, value in enumerate(calldata.values):
+        if "clear" in calldata.Event.values[i] or "clear" in calldata.Conditions.values[
+            i] \
+                or "Clear" in calldata.Event.values[i] or "Clear" in \
+                calldata.Conditions.values[i]:
+            calldata.Clear.values[i] = 1
+        else:
+            calldata.Clear.values[i] = 0
 
+        if "rain" in calldata.Event.values[i] or "rain" in calldata.Conditions.values[i] \
+                or "Rain" in calldata.Event.values[i] or "Rain" in \
+                calldata.Conditions.values[i] \
+                or "Drizzle" in calldata.Event.values[i] or "Drizzle" in \
+                calldata.Conditions.values[i] \
+                or "drizzle" in calldata.Event.values[i] or "drizzle" in \
+                calldata.Conditions.values[i]:
+            calldata.Rain.values[i] = 1
+        else:
+            calldata.Rain.values[i] = 0
 
-def append_data(calldata):
-    # Appending new data to 2018+2017 File #
-    calldata = calldata.iloc[::-1]
-    og_calldata = pandas.read_excel(
-        folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx")
-    frames = [og_calldata, calldata]
-    results = pandas.concat(frames)
-    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', "Route", 'City', 'Event', 'Conditions',
-                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
-                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
-                   "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
-                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-                   "Precip_Intensity_Max", "Precip_Intensity_Time")
-    results = results.reindex(columns=header_list)
-    # # Saving new data to 2018+2017 File #
-    save_excel_file(folderpath + "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Full Data.xlsx",
-                    "DarkSky Weather", results)
+        if "snow" in calldata.Event.values[i] or "snow" in calldata.Conditions.values[i] \
+                or "Snow" in calldata.Event.values[i] or "Snow" in \
+                calldata.Conditions.values[i]:
+            calldata.Snow.values[i] = 1
+        else:
+            calldata.Snow.values[i] = 0
+
+        if "cloudy" in calldata.Event.values[i] or "cloudy" in \
+                calldata.Conditions.values[i] \
+                or "Cloudy" in calldata.Event.values[i] or "Cloudy" in \
+                calldata.Conditions.values[i] \
+                or "overcast" in calldata.Event.values[i] or "overcast" in \
+                calldata.Conditions.values[i] \
+                or "Overcast" in calldata.Event.values[i] or "Overcast" in \
+                calldata.Conditions.values[
+                    i]:
+            calldata.Cloudy.values[i] = 1
+        else:
+            calldata.Cloudy.values[i] = 0
+
+        if "fog" in calldata.Event.values[i] or "foggy" in calldata.Conditions.values[i] \
+                or "Fog" in calldata.Event.values[i] or "Foggy" in \
+                calldata.Conditions.values[i]:
+            calldata.Fog.values[i] = 1
+        else:
+            calldata.Fog.values[i] = 0
+        if "rain" in calldata.EventBefore.values[i] or "rain" in \
+                calldata.ConditionBefore.values[i] \
+                or "Rain" in calldata.EventBefore.values[i] or "Rain" in \
+                calldata.ConditionBefore.values[i]:
+            calldata.RainBefore.values[i] = 1
+        else:
+            calldata.RainBefore.values[i] = 0
+    return calldata
 
 
 def main():
-    # Run this line each morning
-    calldata, file = get_Email()
+    # This line should be run each morning around 9:10 AM
+    # calldata, file = get_Email()
+
+    # Here are the current dtypes for reading in a file #
+    # calldata = pandas.read_excel(folderpath + "",
+    #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
+    #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
+    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
+    #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
+    #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
+    #                 "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
+    #                 "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
+    #                 "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
+    #                 "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
+    #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    # file = folderpath + "Excel & CSV Sheets/2018 Data/DailyReports/911_Reports_for_2018-09-23.csv"
-    # calldata = pandas.read_csv(file, sep=",")
-    # calldata = pandas.read_excel(file)
+    file = folderpath + "Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-02-11.csv"
+    calldata = pandas.read_csv(file, sep=",")
 
-    # Use for reading csv versions of calldata #
-    # calldata = pandas.read_csv(file, sep=",",
-    #                     dtype={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
-    #                           "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-    #                           "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
-    #                           "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
-    #                           "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
-    #                           "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
-    #                           "Precipitation_Type": str, "Precipitation_Intensity": float,
-    #                           "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
-
-    # Use for reading xlsx versions of calldata #
-    # calldata = pandas.read_excel(file,
-    #                     dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
-    #                           "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-    #                           "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
-    #                           "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
-    #                           "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
-    #                           "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
-    #                           "Precipitation_Type": str, "Precipitation_Intensity": float,
-    #                           "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
+    calldata.Latitude = calldata.Latitude.astype(float)
+    calldata.Longitude = calldata.Longitude.astype(float)
+    print("Fixing These Stupid Lat and Long Coordinates")
+    for k, info in enumerate(calldata.values):
+        if calldata.Latitude.values[k] > 40:
+            calldata.Latitude.values[k] = float(calldata.Latitude.values[k] / 1000000)
+            calldata.Longitude.values[k] = float(calldata.Longitude.values[k] / -1000000)
 
     # Specific save names for files
     # This makes the saving process less tedious since we don't have to change the name of the file we're saving
@@ -682,70 +924,36 @@ def main():
     # Reset the Column names for the data
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
-    header_list = ("Y", 'Latitude', 'Longitude', 'Date', 'Time', 'Problem', 'Address', "Route", 'City', 'Event', 'Conditions',
-                   "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min", "Monthly_Avg_Temp",
-                   "Temp_Below_0", "Temp_0to10", "Temp_10to20", "Temp_20to30", "Temp_30to40", "Temp_40to50",
-                   "Temp_50to60", "Temp_60to70", "Temp_Above_70", "Daily_Avg_Temp", 'Dewpoint', 'Humidity', 'Month',
+    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-                   "Precip_Intensity_Max", "Precip_Intensity_Time")
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
 
     calldata.index.name = "Index"
     calldata = calldata.reindex(columns=header_list)
 
-    # Add data to calldata
-    # Adds in weather data with DarkSky and some weather data calculated by code
-    add_data(calldata, dayname_xlsx)
-
     # Create a list of different accident types for finding Y
     occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
-
-    # Read in the calldata file that was saved in the add_data method
-    # Assign particular dtypes to avoid errors
-    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + ".xlsx",
-            dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
-                              "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-                              "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
-                              "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
-                              "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
-                              "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
-                              "Precipitation_Type": str, "Precipitation_Intensity": float,
-                              "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
-
     # Find the duplicate calls and drop them
     find_Duplicates(calldata, occurrence_list)
     calldata = drop_duplicates(calldata)
 
-    # Save the calldata data that was returned from drop_duplicates
-    # This is saved outside of the method because for some reason the data doesn't save correctly if
-    # you save it in the method
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/"+ dayname_xlsx + "_Dropped_Dupes.xlsx",
-                    "DarkSky Weather", calldata)
+    # Add weather and road geometric data to calldata
+    calldata = add_data(calldata, dayname_xlsx)
 
-    # Read in the calldata file that was previously saved
-    calldata = pandas.read_excel(folderpath + "Excel & CSV Sheets/2018 Data/"
-        + dayname_xlsx + "_Dropped_Dupes.xlsx",
-            dtypes={"Index": int, 'Date': datetime, 'Time': datetime.time,'Event': str,'Conditions': str,
-                              "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-                              "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Temp_Below_0": int,
-                              "Temp_0to10": int, "Temp_10to20": int, "Temp_20to30": int, "Temp_30to40": int,
-                              "Temp_40to50": int, "Temp_50to60": int, "Temp_60to70": int, "Temp_Above_70": int,
-                              "Daily_Avg_Temp": str, 'Humidity': float, 'Visibility': float,  "Cloud_Coverage": float,
-                              "Precipitation_Type": str, "Precipitation_Intensity": float,
-                              "Precip_Intensity_Max": float, "Precip_Intensity_Time": float})
+    # Save the calldata in its final form, just in case the appending goes wrong
+    save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
+                    "FinalSave", calldata)
 
-    # Find the Y values for injury vs no injury
-    calldata = find_y(calldata)
-
-    # Clean the data
-    calldata = data_cleaning(calldata)
-
-    # Save the calldata in its final form
-    # Not as epic as Goku's final form, but it's alright
-    save_excel_file(folderpath + "Excel & CSV Sheets/2018 Data/" + dayname_xlsx + "_FinalForm.xlsx",
-                    "DarkSky Weather", calldata)
-
-    # Append the new calldata to the old calldata
+    # Append the new data
     append_data(calldata)
+    # Get the negative samples of the calldata
+    # Each of these methods also gets the updated weather information
+    get_hour_negatives(calldata)
+    get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()
