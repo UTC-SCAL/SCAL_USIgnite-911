@@ -33,42 +33,43 @@ except ImportError:
     matplotlib.use("TkAgg")
     import matplotlib.pyplot as plt
 from os.path import exists
-
+import datetime
 
 # from ann_visualizer.visualize import ann_viz
 # from keras_sequential_ascii import keras2ascii
 
 
 
-def generate_results(y_test,predictions, hist,i):
-    fpr, tpr, _ = roc_curve(y_test, predictions)
-    roc_auc = auc(fpr, tpr)
+def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc):
     font = {'family': 'serif',
             'weight': 'regular',
             'size': 14}
+
     plt.rc('font', **font)
     fig = plt.figure()
+    # plt.subplot(211)
     plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
-    plt.yticks((0, .5, 1), (0, .5, 1))
-    plt.xticks((0, .5, 1), (0, .5, 1))
+    plt.yticks((0,.5,1), (0,.5,1))
+    plt.xticks((0,.5,1), (0,.5,1))
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    print('AUC: %f' % roc_auc)
-    title = 'roc' + str(i) + '.png'
+    # plt.title('Receiver operating characteristic curve')
+    title = '../Graphs & Images/ResultsFromIterations/'+str(datetime.datetime.now())+'roc'+str(i)+'.png'
     fig.savefig(title, bbox_inches='tight')
+    # plt.subplot(212)
     fig = plt.figure()
     plt.xticks(range(0, 20), range(1, 21), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    x= [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     plt.axhline(y=0.5, color='gray', linestyle='-')
     plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
     plt.scatter(x=x, y=y_test[0:20], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    title = 'pred' +str(i) + '.png'
+    title = '../Graphs & Images/ResultsFromIterations/'+str(datetime.datetime.now())+'pred'+str(i)+'.png'
     fig.savefig(title, bbox_inches='tight')
 
     font = {'family': 'serif',
@@ -76,23 +77,29 @@ def generate_results(y_test,predictions, hist,i):
             'size': 14}
     plt.rc('font', **font)
     fig = plt.figure()
-    a1 = fig.add_subplot(2, 1, 1)
+    a1 = fig.add_subplot(2,1,1)
     a1.plot(hist.history['acc'])
     a1.plot(hist.history['val_acc'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
-    a1.set_yticks((.5, .65, .8))
-    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
+    a1.set_yticks((.5, .65, .8) )
+    a1.set_xticks((0,(len(hist.history['val_acc'])/2),len(hist.history['val_acc'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
-    a2 = fig.add_subplot(2, 1, 2)
+    # plt.show()
+    # fig.savefig('acc.png', bbox_inches='tight')
+    # summarize history for loss
+    # fig = plt.figure()
+    a2 = fig.add_subplot(2,1,2)
+    # fig = plt.figure()
     a2.plot(hist.history['loss'])
     a2.plot(hist.history['val_loss'])
     a2.set_ylabel('Loss')
     a2.set_xlabel('Epoch')
-    a2.set_yticks((.15, .20, .25,))
-    a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
+    a2.set_yticks((.15,.20,.25,))
+    a2.set_xticks((0,(len(hist.history['val_loss'])/2),len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
-    title = 'lossandacc'+str(i) + '.png'
+    # plt.show()
+    title = '../Graphs & Images/ResultsFromIterations/'+str(datetime.datetime.now())+'lossandacc'+str(i)+'.png'
     fig.savefig(title, bbox_inches='tight')
 
 ## The steps of creating a neural network or deep learning model ##
@@ -119,8 +126,8 @@ X = dataset.ix[:, 1:(len(dataset.columns)+1)].values
 Y = dataset.ix[:, 0].values
 # names = train.columns.values[1:-1]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.30, random_state=42)
+# X_train, X_test, y_train, y_test = train_test_split(
+#     X, Y, test_size=0.30, random_state=42)
 
 # test = pandas.read_csv(
 #     "../Excel & CSV Sheets/TestDay.csv", sep=",")
@@ -131,49 +138,69 @@ X_train, X_test, y_train, y_test = train_test_split(
 # y_test = (test.ix[:, 0].values).reshape((138, 1))
 # print("Size of X_Test:", X_test.shape, "Size of y_test:", y_test.shape)
 
-X_test, X_valid, y_test, y_valid = train_test_split(
-    X_test, y_test, test_size=0.90, random_state=42)
+# X_test, X_valid, y_test, y_valid = train_test_split(
+#     X_test, y_test, test_size=0.90, random_state=42)
 
 # print("Number of X variables: ", X.shape[1])
 
 
 #           2. Defining a Neural Network
 # creating the model
-model = Sequential()
+# model = Sequential()
 
-model.add(Dense(X_train.shape[1],
-                input_dim=X_train.shape[1], activation='sigmoid'))
-# Usefor standard sized variable set
-model.add(Dense(28, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
+# model.add(Dense(X_train.shape[1],
+#                 input_dim=X_train.shape[1], activation='sigmoid'))
+# # Usefor standard sized variable set
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
 
-model.add(Dense(1, activation='sigmoid'))
+# model.add(Dense(1, activation='sigmoid'))
 
 #           3. Compiling a model.
-model.compile(loss='mse',
-              optimizer='nadam', metrics=['accuracy'])
-print(model.summary())
+# model.compile(loss='mse',
+#               optimizer='nadam', metrics=['accuracy'])
+# print(model.summary())
 
 #           4. Train that model on some data!
 # Fitting the model to train the data
 
-avg_holder = pandas.read_csv(
-    "../Excel & CSV Sheets/AverageHolder.csv", sep=",")
-for i in range(0,15):
+for i in range(0,100):
+    # names = train.columns.values[1:-1]
+    dataset = shuffle(dataset)
+    dataset = shuffle(dataset)
+    X_train, X_test, y_train, y_test = train_test_split(
+    X, Y, test_size=0.30, random_state=42)
+    X_test, X_valid, y_test, y_valid = train_test_split(
+    X_test, y_test, test_size=0.90, random_state=42)
+
+    model = Sequential()
+    model.add(Dense(X_train.shape[1],
+                    input_dim=X_train.shape[1], activation='sigmoid'))
+    model.add(Dense(28, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(20, activation='sigmoid'))
+    model.add(Dense(18, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(1, activation='sigmoid'))
+
+    #           3. Compiling a model.
+    model.compile(loss='mse',
+                optimizer='nadam', metrics=['accuracy'])
+    # print(model.summary())
     if exists("../Excel & CSV Sheets/AverageHolder2.csv"):
-        avg_holder = pandas.read_csv("../Excel & CSV Sheets/AverageHolder2.csv", usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss"])
+        avg_holder = pandas.read_csv("../Excel & CSV Sheets/AverageHolder2.csv", usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss","AUC"])
         j = avg_holder.shape[0]
         # avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
     else:
-        avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss"])
+        avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss","AUC"])
         # avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
     print("Iteration: ", i)
-    hist = model.fit(X_train, y_train, epochs=3000, batch_size=400, validation_data=(X_valid, y_valid), verbose=0)
-    # avg_holder.append(hist)
+    hist = model.fit(X_train, y_train, epochs=300, batch_size=5000, validation_data=(X_valid, y_valid), verbose=0)
 
 
 # model_json = model.to_json()
@@ -188,26 +215,29 @@ for i in range(0,15):
 
 #     return hist, model
 # This is evaluating the model, and printing the results of the epochs.
-    scores = model.evaluate(X_train, y_train, batch_size=400)
-    print("Model Training Accuracy:", scores[1]*100)
-    print("Model Training Loss:", hist.history['loss'])
-    # avg_holder.Train_Acc.values[i] = scores[1]*100
-    # avg_holder.Train_Loss.values[i] = hist.history['loss']
+    scores = model.evaluate(X_train, y_train, batch_size=5000)
+    print("\nModel Training Accuracy:", scores[1]*100)
+    print("Model Training Loss:", sum(hist.history['loss'])/len(hist.history['loss']))
     # Okay, now let's calculate predictions.
     predictions = model.predict(X_test)
-    # print(predictions[0:5])
 
     # Then, let's round to either 0 or 1, since we have only two options.
     predictions_round = [abs(round(x[0])) for x in predictions]
     # print(rounded)
     accscore1 = accuracy_score(y_test, predictions_round)
     print("Rounded Test Accuracy:", accscore1*100)
-    print("Test Loss", hist.history['val_loss'])
-    # avg_holder.Test_Loss.values[i] = hist.history['val_loss']
-    # avg_holder.Test_Acc.values[i] = accscore1*100
-    generate_results(y_test, predictions, hist,i)
+    print("Test Loss",sum(hist.history['val_loss'])/len(hist.history['val_loss']))
+    
+    fpr, tpr, _ = roc_curve(y_test, predictions)
+    roc_auc = auc(fpr, tpr)
+    print('AUC: %f' % roc_auc)
+
     avg_holder.loc[j, 'Train_Acc'] = scores[1]*100
-    avg_holder.loc[j, 'Train_Loss'] = str(hist.history['loss'])
+    avg_holder.loc[j, 'Train_Loss'] = sum(hist.history['loss'])/len(hist.history['loss'])
     avg_holder.loc[j, 'Test_Acc'] = accscore1*100
-    avg_holder.loc[j, 'Test_Loss'] = str(hist.history['val_loss'])
+    avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss'])/len(hist.history['val_loss'])
+    avg_holder.loc[j, 'AUC'] = roc_auc
+
     avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
+
+    generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
