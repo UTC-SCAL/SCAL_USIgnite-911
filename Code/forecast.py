@@ -22,17 +22,17 @@ import datetime
 from selenium import webdriver
 
 
-now = datetime.datetime.now()
-dataset = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_13_forecast.csv", sep=",")
-
-dataset = shuffle(dataset)
-dataset = shuffle(dataset)
-
-columns = ('Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
-'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
-'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
-'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type')
-X_test = dataset.ix[:,columns].values
+# now = datetime.datetime.now()
+forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
+monday = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx")
+# dataset = shuffle(dataset)
+# dataset = shuffle(dataset)
+#
+# columns = ('Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
+# 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
+# 'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
+# 'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type')
+# X_test = dataset.ix[:,columns].values
 
 
 
@@ -541,6 +541,44 @@ def get_etrims(dataset):
             dataset.RainBefore.values[i] = 0
     return dataset
 
-dataset = get_etrims(dataset)
+#
+# model = Sequential()
+# model.add(Dense(30, input_dim=30, activation='sigmoid'))
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(1, activation='sigmoid'))
+#
+# #           3. Compiling a model.
+# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+# model.load_weights("model.h5")
+# # Okay, now let's calculate predictions.
+# predictions = model.predict(X_test)
+# dataset["Probability"] = predictions
+# # Then, let's round to either 0 or 1, since we have only two options.
+# predictions_round = [abs(round(x[0])) for x in predictions]
+# dataset["Predictions"] = predictions_round
+# # print(rounded)
+# print("Head of predicitons: ", predictions[0:10])
+# print("Head of predictions_round: ", predictions_round)
+#
+# dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
+matches = 0
 
-dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full.csv", sep=",")
+for i, info in enumerate(forecast.values):
+    for j, data in enumerate(monday.values):
+        if forecast.Hour.values[i] == monday.Hour.values[j]:
+            lat1 = forecast.Latitude.values[i]
+            long1 = forecast.Longitude.values[i]
+
+            lat2 = monday.Latitude.values[j]
+            long2 = monday.Longitude.values[j]
+            latChange = math.fabs(lat1 - lat2)
+            longChange = math.fabs(long1 - long2)
+            if latChange < 0.001 and longChange < 0.001:
+                matches +=1
+
+print(matches)
