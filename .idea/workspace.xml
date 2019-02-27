@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/model.h5" afterPath="$PROJECT_DIR$/Code/model.h5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/NetworkModel.py" afterPath="$PROJECT_DIR$/Code/NetworkModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/forecast.py" afterPath="$PROJECT_DIR$/Code/forecast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast_full.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast_full.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast_full.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast_full.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast_full.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast_full.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -401,13 +389,6 @@
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
     </task>
-    <task id="LOCAL-00062" summary="Changes made">
-      <created>1540921486493</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1540921486494</updated>
-    </task>
     <task id="LOCAL-00063" summary="Changes made">
       <created>1540993528235</created>
       <option name="number" value="00063" />
@@ -744,7 +725,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551277556169</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="New data">
+      <created>1551297822833</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1551297822833</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TodoView">
