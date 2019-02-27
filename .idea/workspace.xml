@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/gmailReaderRenew.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Code/forecast.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReaderBackup.py" afterPath="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,17 +24,17 @@
         <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="178" column="30" lean-forward="false" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+              <caret line="205" column="30" lean-forward="false" selection-start-line="205" selection-start-column="30" selection-end-line="205" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="879" column="11" lean-forward="true" selection-start-line="879" selection-start-column="11" selection-end-line="879" selection-end-column="11" />
+            <state relative-caret-position="435">
+              <caret line="868" column="19" lean-forward="true" selection-start-line="868" selection-start-column="19" selection-end-line="868" selection-end-column="19" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#341#3313#0" expanded="false" />
@@ -40,12 +44,27 @@
                 <element signature="e#4936#5159#0" expanded="false" />
                 <element signature="e#5220#7794#0" expanded="false" />
                 <element signature="e#7830#8335#0" expanded="false" />
-                <element signature="e#8377#12924#0" expanded="false" />
-                <element signature="e#12958#14251#0" expanded="false" />
-                <element signature="e#14292#20393#0" expanded="false" />
-                <element signature="e#20434#27214#0" expanded="false" />
-                <element signature="e#27323#29419#0" expanded="false" />
-                <element signature="e#29458#46047#0" expanded="false" />
+                <element signature="e#8377#12944#0" expanded="false" />
+                <element signature="e#12978#14271#0" expanded="false" />
+                <element signature="e#14312#20413#0" expanded="false" />
+                <element signature="e#20454#26798#0" expanded="false" />
+                <element signature="e#26907#29003#0" expanded="false" />
+                <element signature="e#29042#45631#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forecast.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/forecast.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="650">
+              <caret line="32" column="86" lean-forward="false" selection-start-line="32" selection-start-column="86" selection-end-line="32" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+                <element signature="e#1225#16302#0" expanded="false" />
+                <element signature="e#18948#25676#0" expanded="false" />
+                <marker date="1551216053789" expanded="false" signature="16377:18916" ph="..." />
               </folding>
             </state>
           </provider>
@@ -81,12 +100,12 @@
       <find>problem</find>
       <find>rainbefore</find>
       <find>negative_samples</find>
-      <find>calldata</find>
       <find>loc[::-1]</find>
       <find>Day Holder 2018</find>
       <find>RolandProjects</find>
       <find>2018</find>
       <find>df</find>
+      <find>calldata</find>
     </findStrings>
     <replaceStrings>
       <replace>maxi</replace>
@@ -99,6 +118,7 @@
       <replace>data_file_name</replace>
       <replace>911Project</replace>
       <replace>2019</replace>
+      <replace>dataset</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -112,8 +132,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Code/process.py" />
-        <option value="$PROJECT_DIR$/addingNewData.py" />
         <option value="$PROJECT_DIR$/Code/mapping.py" />
         <option value="$PROJECT_DIR$/Code/connectingMapWeather.py" />
         <option value="$PROJECT_DIR$/weatherStationCode.py" />
@@ -161,16 +179,18 @@
         <option value="$PROJECT_DIR$/Excel &amp; CSV Sheets/AverageHolder2.csv" />
         <option value="$PROJECT_DIR$/Code/NetworkModel.py" />
         <option value="$PROJECT_DIR$/Code/gmailReaderRenew.py" />
-        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
         <option value="$PROJECT_DIR$/Code/gmailReaderBackup.py" />
+        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/forecastingTests.py" />
+        <option value="$PROJECT_DIR$/Code/forecast.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2484" />
-    <option name="y" value="434" />
-    <option name="width" value="759" />
-    <option name="height" value="698" />
+    <option name="x" value="2621" />
+    <option name="y" value="314" />
+    <option name="width" value="649" />
+    <option name="height" value="775" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -190,7 +210,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,7 +233,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -247,7 +267,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NetworkModel">
+  <component name="RunManager" selected="Python.forecast">
     <configuration name="AutomatedData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -282,7 +302,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="convertingTime" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="forecast" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -294,12 +314,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/convertingTime.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/forecast.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="keras_first_network" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="gmailReader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -311,7 +331,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/keras_first_network.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReader.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -334,19 +354,19 @@
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.keras_first_network" />
-      <item index="1" class="java.lang.String" itemvalue="Python.AutomatedData" />
-      <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
-      <item index="3" class="java.lang.String" itemvalue="Python.convertingTime" />
-      <item index="4" class="java.lang.String" itemvalue="Python.NetworkModel" />
+      <item index="0" class="java.lang.String" itemvalue="Python.AutomatedData" />
+      <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
+      <item index="2" class="java.lang.String" itemvalue="Python.NetworkModel" />
+      <item index="3" class="java.lang.String" itemvalue="Python.gmailReader" />
+      <item index="4" class="java.lang.String" itemvalue="Python.forecast" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.NetworkModel" />
-        <item index="1" class="java.lang.String" itemvalue="Python.AutomatedData" />
-        <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="3" class="java.lang.String" itemvalue="Python.keras_first_network" />
-        <item index="4" class="java.lang.String" itemvalue="Python.convertingTime" />
+        <item index="0" class="java.lang.String" itemvalue="Python.forecast" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
+        <item index="2" class="java.lang.String" itemvalue="Python.NetworkModel" />
+        <item index="3" class="java.lang.String" itemvalue="Python.AutomatedData" />
+        <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
       </list>
     </recent_temporary>
   </component>
@@ -360,20 +380,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Changes made">
-      <created>1540560105028</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1540560105029</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Changes made">
-      <created>1540832931298</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1540832931298</updated>
     </task>
     <task id="LOCAL-00061" summary="Changes made">
       <created>1540840577684</created>
@@ -704,7 +710,21 @@
       <option name="project" value="LOCAL" />
       <updated>1550674383780</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Refreshing some Files">
+      <created>1551102379321</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1551102379322</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Refreshing some Files">
+      <created>1551102514908</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1551102514908</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TodoView">
@@ -719,35 +739,26 @@
   <component name="ToolWindowManager">
     <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2379936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2353255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22732124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -816,7 +827,8 @@
     <MESSAGE value="Changed name of main folder to reflect project" />
     <MESSAGE value="More data, and removed some old files" />
     <MESSAGE value="More data" />
-    <option name="LAST_COMMIT_MESSAGE" value="More data" />
+    <MESSAGE value="Refreshing some Files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refreshing some Files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -825,41 +837,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/regressionTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/regression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="48" lean-forward="true" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pvalueTesting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="50" lean-forward="true" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/practiceCode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -918,207 +895,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roctest.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc900.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pred900.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/predandroc.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/acc900.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/loss.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pred.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/acc.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc5.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc6.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc7.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc8.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc10.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pred1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pred14.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc6.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc8.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/pred0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/roc0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc12.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/lossandacc0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/roctest.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc900.png" />
+    <entry file="file://$PROJECT_DIR$/Code/pred900.png" />
+    <entry file="file://$PROJECT_DIR$/Code/predandroc.png" />
+    <entry file="file://$PROJECT_DIR$/Code/acc900.png" />
+    <entry file="file://$PROJECT_DIR$/Code/loss.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc.png" />
+    <entry file="file://$PROJECT_DIR$/Code/pred.png" />
+    <entry file="file://$PROJECT_DIR$/Code/acc.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc3.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc4.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc5.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc6.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc7.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc8.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc10.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc2.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc1.png" />
+    <entry file="file://$PROJECT_DIR$/Code/pred1.png" />
+    <entry file="file://$PROJECT_DIR$/Code/pred14.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc1.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc3.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc6.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc8.png" />
+    <entry file="file://$PROJECT_DIR$/Code/pred0.png" />
+    <entry file="file://$PROJECT_DIR$/Code/roc0.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc12.png" />
+    <entry file="file://$PROJECT_DIR$/Code/lossandacc0.png" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/AverageHolder2.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gmailReaderRenew.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="930" column="40" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="958" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#12#0" expanded="false" />
-            <element signature="e#341#3313#0" expanded="false" />
-            <element signature="e#3351#4250#0" expanded="false" />
-            <element signature="e#4287#4605#0" expanded="false" />
-            <element signature="e#4672#4898#0" expanded="false" />
-            <element signature="e#4936#5159#0" expanded="false" />
-            <element signature="e#5220#7794#0" expanded="false" />
-            <element signature="e#7830#8335#0" expanded="false" />
-            <element signature="e#8377#12924#0" expanded="false" />
-            <element signature="e#12958#14251#0" expanded="false" />
-            <element signature="e#14292#20393#0" expanded="false" />
-            <element signature="e#20434#27214#0" expanded="false" />
-            <element signature="e#27323#29419#0" expanded="false" />
-            <element signature="e#29458#46047#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="910">
-          <caret line="168" column="28" lean-forward="false" selection-start-line="168" selection-start-column="28" selection-end-line="168" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#12#0" expanded="false" />
-            <element signature="e#341#3313#0" expanded="false" />
-            <element signature="e#3351#4250#0" expanded="false" />
-            <element signature="e#4287#4605#0" expanded="false" />
-            <element signature="e#4672#4898#0" expanded="false" />
-            <element signature="e#4936#5159#0" expanded="false" />
-            <element signature="e#5220#7794#0" expanded="false" />
-            <element signature="e#7830#8335#0" expanded="false" />
-            <element signature="e#8377#12924#0" expanded="false" />
-            <element signature="e#12958#14251#0" expanded="false" />
-            <element signature="e#14292#20393#0" expanded="false" />
-            <element signature="e#20434#27214#0" expanded="false" />
-            <element signature="e#27323#29419#0" expanded="false" />
-            <element signature="e#29458#46047#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReaderRenew.py" />
     <entry file="file://$PROJECT_DIR$/Code/ETRIMSmerge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1126,9 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1136,25 +949,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-149">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="false" />
-            <element signature="e#437#19741#0" expanded="false" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1716">
+          <caret line="168" column="28" lean-forward="false" selection-start-line="168" selection-start-column="28" selection-end-line="168" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="178" column="30" lean-forward="false" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+          <caret line="205" column="30" lean-forward="false" selection-start-line="205" selection-start-column="30" selection-end-line="205" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-02-15.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/forecastingTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="879" column="11" lean-forward="true" selection-start-line="879" selection-start-column="11" selection-end-line="879" selection-end-column="11" />
+        <state relative-caret-position="435">
+          <caret line="868" column="19" lean-forward="true" selection-start-line="868" selection-start-column="19" selection-end-line="868" selection-end-column="19" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#341#3313#0" expanded="false" />
@@ -1164,12 +1010,25 @@
             <element signature="e#4936#5159#0" expanded="false" />
             <element signature="e#5220#7794#0" expanded="false" />
             <element signature="e#7830#8335#0" expanded="false" />
-            <element signature="e#8377#12924#0" expanded="false" />
-            <element signature="e#12958#14251#0" expanded="false" />
-            <element signature="e#14292#20393#0" expanded="false" />
-            <element signature="e#20434#27214#0" expanded="false" />
-            <element signature="e#27323#29419#0" expanded="false" />
-            <element signature="e#29458#46047#0" expanded="false" />
+            <element signature="e#8377#12944#0" expanded="false" />
+            <element signature="e#12978#14271#0" expanded="false" />
+            <element signature="e#14312#20413#0" expanded="false" />
+            <element signature="e#20454#26798#0" expanded="false" />
+            <element signature="e#26907#29003#0" expanded="false" />
+            <element signature="e#29042#45631#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/forecast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="32" column="86" lean-forward="false" selection-start-line="32" selection-start-column="86" selection-end-line="32" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+            <element signature="e#1225#16302#0" expanded="false" />
+            <element signature="e#18948#25676#0" expanded="false" />
+            <marker date="1551216053789" expanded="false" signature="16377:18916" ph="..." />
           </folding>
         </state>
       </provider>

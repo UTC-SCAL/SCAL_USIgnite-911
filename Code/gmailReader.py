@@ -195,7 +195,7 @@ def add_data(calldata, save_name):
     pw = driver.find_element_by_id("Password")
 
     usr.send_keys("JJVPG56")
-    pw.send_keys("Saturn77")
+    pw.send_keys("Saturn71")  #updated 2/26/2019
     driver.find_element_by_class_name("btn").click()
 
     calldata.Route = calldata.Route.astype(str)
@@ -396,20 +396,12 @@ def get_date_negatives(calldata):
     for i, info in enumerate(calldata.values):
         # Get the day
         doa = calldata.Date.values[i]  # Date of a 911 call
-        day_num = pandas.to_datetime(doa).strftime('%-j')
-        day_num = int(day_num) + 1
-        # Note: When selecting the corresponding date from the excel file, it's the Day_Num value - 1 #
-        # So, for the ranges, have them be from 0 to max Day_Num value + 1
-        # days_2017 = range(0, 365)
-        # days_2018 = range(0, 365)
-        # This variable needs to be updated each time the code is run every morning
-        # days_2019 = range(0, 2)
         days_2019 = range(0, len(day_holder2019.Date))
-        r_2019 = [y for y in days_2019 if y != day_num]  # A list of numbers without dayoa, covering the days in 2019
-        # Check to see what the year is; based on this, you use one of the above variables
-        yoa = int(doa.split('-')[0])  # Get the year
-        if yoa == 2019:
-            calldata.Date.values[i] = day_holder2019.Date.values[random.choice(r_2019)]
+        # r_2019 covers the days in Day Holder 2019.xlsx, which should be updated to contain the days from the beginning
+        # of the year up to the day before the current day being tested (ex: if today is 2/5, then the xlsx file should
+        # have 2/4 be its last day
+        r_2019 = [y for y in days_2019]
+        calldata.Date.values[i] = day_holder2019.Date.values[random.choice(r_2019)]
         # Check other entries if there's a match
         for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
             if calldata.Date.values[k] == calldata.Date.values[i]:
