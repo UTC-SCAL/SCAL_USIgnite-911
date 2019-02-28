@@ -570,7 +570,10 @@ matches = 0
 
 for i, info in enumerate(forecast.values):
     for j, data in enumerate(monday.values):
-        if forecast.Hour.values[i] == monday.Hour.values[j]:
+        forecastHour = forecast.Hour.values[i]
+        mondayHour = monday.Hour.values[j]
+        hourDiff = abs(forecastHour - mondayHour)
+        if hourDiff < 3:
             lat1 = forecast.Latitude.values[i]
             long1 = forecast.Longitude.values[i]
 
@@ -578,7 +581,7 @@ for i, info in enumerate(forecast.values):
             long2 = monday.Longitude.values[j]
             latChange = math.fabs(lat1 - lat2)
             longChange = math.fabs(long1 - long2)
-            if latChange < 0.001 and longChange < 0.001:
+            if latChange < 0.01 and longChange < 0.01:
                 matches +=1
 
 print(matches)

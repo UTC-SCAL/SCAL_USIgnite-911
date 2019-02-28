@@ -8,20 +8,26 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib
 import matplotlib.pyplot as plt
+forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
 
-avg_holder = pandas.read_csv(
-    "../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
+lat = forecast.groupby('Latitude').nunique()
+print(len(lat))
 
-print(avg_holder.columns.values)
-print(avg_holder.dtypes)
-tot_sum = 0
-
-for i, info in enumerate(avg_holder.values):
-    avg_holder.Train_Loss.values[i] = map(str.strip, avg_holder.Train_Loss.values[i].split(','))
-    # avg_holder.Train_Loss.values[i] = numpy.array(list(avg_holder.Train_Loss.values[i])).astype(numpy.float)
-    print(type(avg_holder.Train_Loss.values[i]))
-    # tot_sum += numpy.sum(avg_holder.Train_Loss.values[i])
-print(tot_sum)
+long = forecast.groupby('Longitude').nunique()
+print(len(long))
+# avg_holder = pandas.read_csv(
+#     "../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
+#
+# print(avg_holder.columns.values)
+# print(avg_holder.dtypes)
+# tot_sum = 0
+#
+# for i, info in enumerate(avg_holder.values):
+#     avg_holder.Train_Loss.values[i] = map(str.strip, avg_holder.Train_Loss.values[i].split(','))
+#     # avg_holder.Train_Loss.values[i] = numpy.array(list(avg_holder.Train_Loss.values[i])).astype(numpy.float)
+#     print(type(avg_holder.Train_Loss.values[i]))
+#     # tot_sum += numpy.sum(avg_holder.Train_Loss.values[i])
+# print(tot_sum)
 # avg_holder.Train_Loss.values[0] = avg_holder.Train_Loss.values[0].replace (',', ' ')
 # print(type(avg_holder.Train_Loss.values[0]))
 # avg_array = array('c', avg_holder.Train_Loss.values[0])
