@@ -2,75 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/021219092029_.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/021219092721_.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/021219092848_.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/2017+2018 Cloudy Map.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/2017+2018 Foggy Map.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/2017+2018 Rain Map.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/2017+2018 Snow Map.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/2018+2017 Map.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/AddRoutes.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/AddingAADT.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/AddingETRIMS.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/AutomatedData.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/CW_Backup.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/Chattanooga Polygons.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/ConnectingWeather.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/ETRIMSmerge.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/FindGeomet.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/I24Work.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/Jins24HourPlayfile.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/JinsPlayfile.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/LogReg.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/NBRExample.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/dailyTesting.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/foo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/keras_first_network.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/khashiMapping.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/linearRegression.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/model.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/negativeSampling.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/practiceCode.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/process.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/pvalueTesting.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/regression.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Code/regressionTest.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2018 Data/2019-03-01_Mar_hotspotsForecast.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_accidents.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast_accidents.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast_full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_22_forecast_full2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast_accidents.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast_full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_08_forecast_full2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast_accidents.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast_full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-25_13_forecast_full2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/AverageHolder.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data TestDay.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/TestDay.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/Agg_CallData.xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/HeatMap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/Logit Reg Table" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/Logo Paw" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/Logo Paw.xcf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/WeatherStations &amp; Accidents Map.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/calendar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/lightning.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/lightning.xcf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/rainy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/temp.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Presentation Stuff/temp.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/forecast.py" afterPath="$PROJECT_DIR$/Code/forecast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/testing.py" afterPath="$PROJECT_DIR$/Code/testing.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -460,13 +392,6 @@
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
     </task>
-    <task id="LOCAL-00067" summary="Changes made">
-      <created>1541515840907</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1541515840907</updated>
-    </task>
     <task id="LOCAL-00068" summary="Changes made">
       <created>1541610986526</created>
       <option name="number" value="00068" />
@@ -803,7 +728,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551448688102</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="New data">
+      <created>1551464809326</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1551464809326</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TodoView">
