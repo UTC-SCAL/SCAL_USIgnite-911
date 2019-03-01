@@ -37,8 +37,8 @@ except ImportError:
     matplotlib.use("GtkAgg")
     import matplotlib.pyplot as plt
 
-from ann_visualizer.visualize import ann_viz
-from keras_sequential_ascii import keras2ascii
+# from ann_visualizer.visualize import ann_viz
+# from keras_sequential_ascii import keras2ascii
 from keras.models import model_from_json
 
 

@@ -1,2 +1,0 @@
-round_epochs,loss,val_acc,val_loss,acc,activation,loss,optimizer,batch_size
-100,0.3219353376880999,0.6662532486766659,0.33374681243971477,0.66623665885098,relu,mse,adamax,2000
