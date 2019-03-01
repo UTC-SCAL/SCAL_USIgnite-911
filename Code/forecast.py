@@ -18,13 +18,15 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from os.path import exists
-import datetime
+# import datetime
 from selenium import webdriver
+import schedule
 
 
 # now = datetime.datetime.now()
-forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
-monday = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx")
+hotspots = pandas.read_csv("../Excel & CSV Sheets/Jan28Feb28Hotspotsabove5.csv", sep=",")
+# forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
+# monday = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx")
 # dataset = shuffle(dataset)
 # dataset = shuffle(dataset)
 #
@@ -36,7 +38,7 @@ monday = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/9
 
 
 
-def add_data(hotspots):
+def add_data(hotspots,day,month, year):
     # Caste the columns into the data types we need them to be
     hotspots.Event = hotspots.Event.astype(str)
     hotspots.Conditions = hotspots.Conditions.astype(str)
@@ -46,10 +48,8 @@ def add_data(hotspots):
     hotspots.Temp_Max = hotspots.Temp_Max.astype(float)
     hotspots.Temp_Min = hotspots.Temp_Min.astype(float)
     hotspots.Precip_Intensity_Time = hotspots.Precip_Intensity_Time.astype(str)
-    hotspots.Latitude = hotspots.Latitude.astype(float)
-    hotspots.Longitude = hotspots.Longitude.astype(float)
-    hotspots.Date = hotspots.Date.astype(str)
-    hotspots.Time = hotspots.Time.astype(str)
+    # hotspots.Date = hotspots.Date.astype(str)
+    # hotspots.Time = hotspots.Time.astype(str)
     hotspots.Latitude = hotspots.Latitude.astype(float)
     hotspots.Longitude = hotspots.Longitude.astype(float)
     hotspots.EventBefore = hotspots.EventBefore.astype(str)
@@ -70,21 +70,20 @@ def add_data(hotspots):
     for k, info in enumerate(hotspots.values):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
-        toa = hotspots.Time.values[k]
-        hoa = int(toa.split(':')[0])
-        hotspots.Hour.values[k] = hoa
-        mioa = int(toa.split(':')[1])
+        # toa = hotspots.Time.values[k]
+        # hoa = int(toa.split(':')[0])
+        hoa = hotspots.Hour.values[k]
+        mioa = 0
         soa = 0
-        # print("Hour:", hoa,"minute",mioa, "Second", soa)
-        doa = hotspots.Date.values[k]
-        yoa = int(doa.split('/')[2])+2000
-        moa = int(doa.split('/')[0])
-        dayoa = int(doa.split('/')[1])
-        # print("Day:", dayoa,"Month",moa, "Year", yoa)
+        yoa = year
+        moa = month
+        dayoa = day
         lat = hotspots.Latitude.values[k]
         long = hotspots.Longitude.values[k]
 
         # The following line needs to have this format:
+        # print(datetime(yoa, moa, dayoa, hoa, mioa, soa))
+        # exit()
         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
         call = key, lat, long
 
@@ -340,9 +339,62 @@ def add_data(hotspots):
                 hotspots.Cloud_Coverage.values[k] = value2.cloudCover
             except:
                 hotspots.Cloud_Coverage.values[k] = -1000
+        for i, value in enumerate(hotspots.values):
+            if "clear" in hotspots.Event.values[i] or "clear" in hotspots.Conditions.values[
+                i] \
+                    or "Clear" in hotspots.Event.values[i] or "Clear" in \
+                    hotspots.Conditions.values[i]:
+                hotspots.Clear.values[i] = 1
+            else:
+                hotspots.Clear.values[i] = 0
+
+            if "rain" in hotspots.Event.values[i] or "rain" in hotspots.Conditions.values[i] \
+                    or "Rain" in hotspots.Event.values[i] or "Rain" in \
+                    hotspots.Conditions.values[i] \
+                    or "Drizzle" in hotspots.Event.values[i] or "Drizzle" in \
+                    hotspots.Conditions.values[i] \
+                    or "drizzle" in hotspots.Event.values[i] or "drizzle" in \
+                    hotspots.Conditions.values[i]:
+                hotspots.Rain.values[i] = 1
+            else:
+                hotspots.Rain.values[i] = 0
+
+            if "snow" in hotspots.Event.values[i] or "snow" in hotspots.Conditions.values[i] \
+                    or "Snow" in hotspots.Event.values[i] or "Snow" in \
+                    hotspots.Conditions.values[i]:
+                hotspots.Snow.values[i] = 1
+            else:
+                hotspots.Snow.values[i] = 0
+
+            if "cloudy" in hotspots.Event.values[i] or "cloudy" in \
+                    hotspots.Conditions.values[i] \
+                    or "Cloudy" in hotspots.Event.values[i] or "Cloudy" in \
+                    hotspots.Conditions.values[i] \
+                    or "overcast" in hotspots.Event.values[i] or "overcast" in \
+                    hotspots.Conditions.values[i] \
+                    or "Overcast" in hotspots.Event.values[i] or "Overcast" in \
+                    hotspots.Conditions.values[
+                        i]:
+                hotspots.Cloudy.values[i] = 1
+            else:
+                hotspots.Cloudy.values[i] = 0
+
+            if "fog" in hotspots.Event.values[i] or "foggy" in hotspots.Conditions.values[i] \
+                    or "Fog" in hotspots.Event.values[i] or "Foggy" in \
+                    hotspots.Conditions.values[i]:
+                hotspots.Fog.values[i] = 1
+            else:
+                hotspots.Fog.values[i] = 0
+            if "rain" in hotspots.EventBefore.values[i] or "rain" in \
+                    hotspots.ConditionBefore.values[i] \
+                    or "Rain" in hotspots.EventBefore.values[i] or "Rain" in \
+                    hotspots.ConditionBefore.values[i]:
+                hotspots.RainBefore.values[i] = 1
+            else:
+                hotspots.RainBefore.values[i] = 0
         now = datetime.now()
         # numpy.savetxt("../Excel & CSV Sheets/2018 Data/" +str(datetime.today())+"hotspotsForecast.csv", hotspots)
-        hotspots.to_csv("../Excel & CSV Sheets/2018 Data/" +str(now.strftime("%Y-%m-%d_%h"))+"_hotspotsForecast.csv",
+        hotspots.to_csv("../Excel & CSV Sheets/2019 Data/" +str(now.strftime("%Y-%m-%d_%h"))+"_hotspotsForecast.csv",
                      sep=",")
 
 
@@ -407,7 +459,7 @@ def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc, date):
     title = '../Graphs & Images/ResultsFromForecast/lossandacc'+date+'.png'
     fig.savefig(title, bbox_inches='tight')
 
-# add_data(hotspots)
+
 # dataset.to_csv("../Excel & CSV Sheets/2019 Data/" +str(now.strftime("%Y-%m-%d"))+"_hotspotsForecast.csv",
 #                      sep=",")
 
@@ -541,7 +593,23 @@ def get_etrims(dataset):
             dataset.RainBefore.values[i] = 0
     return dataset
 
-#
+
+def job(t, hotspots, day,month, year):
+    add_data(hotspots,day,month, year)
+    print(t)
+    return
+schedule.every().day.at("18:00").do(job, "Fetching weather forecast for 6 PM on Thursday 2/28", hotspots, 1, 3, 2019)
+schedule.every().day.at("00:00").do(job, "Fetching weather forecast for Midnight on Friday 3/1", hotspots, 1, 3, 2019)
+schedule.every().day.at("08:17").do(job, "Fetching weather forecast for 6 AM on Friday 3/1", hotspots, 1, 3, 2019)
+schedule.every().day.at("12:00").do(job, "Fetching weather forecast for Noon on Friday 3/1", hotspots, 1, 3, 2019)
+while True:
+    schedule.run_pending()
+    time.sleep(0)
+
+# print(hotspots.columns.values)
+
+
+
 # model = Sequential()
 # model.add(Dense(30, input_dim=30, activation='sigmoid'))
 # model.add(Dense(28, activation='sigmoid'))
@@ -566,22 +634,22 @@ def get_etrims(dataset):
 # print("Head of predictions_round: ", predictions_round)
 #
 # dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
-matches = 0
+# matches = 0
 
-for i, info in enumerate(forecast.values):
-    for j, data in enumerate(monday.values):
-        forecastHour = forecast.Hour.values[i]
-        mondayHour = monday.Hour.values[j]
-        hourDiff = abs(forecastHour - mondayHour)
-        if hourDiff < 3:
-            lat1 = forecast.Latitude.values[i]
-            long1 = forecast.Longitude.values[i]
-
-            lat2 = monday.Latitude.values[j]
-            long2 = monday.Longitude.values[j]
-            latChange = math.fabs(lat1 - lat2)
-            longChange = math.fabs(long1 - long2)
-            if latChange < 0.01 and longChange < 0.01:
-                matches +=1
-
-print(matches)
+# for i, info in enumerate(forecast.values):
+#     for j, data in enumerate(monday.values):
+#         forecastHour = forecast.Hour.values[i]
+#         mondayHour = monday.Hour.values[j]
+#         hourDiff = abs(forecastHour - mondayHour)
+#         if hourDiff < 3:
+#             lat1 = forecast.Latitude.values[i]
+#             long1 = forecast.Longitude.values[i]
+#
+#             lat2 = monday.Latitude.values[j]
+#             long2 = monday.Longitude.values[j]
+#             latChange = math.fabs(lat1 - lat2)
+#             longChange = math.fabs(long1 - long2)
+#             if latChange < 0.01 and longChange < 0.01:
+#                 matches +=1
+#
+# print(matches)
