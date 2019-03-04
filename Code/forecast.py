@@ -598,10 +598,10 @@ def job(t, hotspots, day,month, year):
     add_data(hotspots,day,month, year)
     print(t)
     return
-schedule.every().day.at("18:00").do(job, "Fetching weather forecast for 6 PM on Thursday 2/28", hotspots, 1, 3, 2019)
-schedule.every().day.at("00:00").do(job, "Fetching weather forecast for Midnight on Friday 3/1", hotspots, 1, 3, 2019)
-schedule.every().day.at("08:17").do(job, "Fetching weather forecast for 6 AM on Friday 3/1", hotspots, 1, 3, 2019)
-schedule.every().day.at("12:00").do(job, "Fetching weather forecast for Noon on Friday 3/1", hotspots, 1, 3, 2019)
+schedule.every().day.at("18:00").do(job, "Fetching weather forecast for 6 PM on Friday 3/1", hotspots, 2, 3, 2019)
+schedule.every().day.at("00:00").do(job, "Fetching weather forecast for Midnight on Friday 3/1", hotspots, 2, 3, 2019)
+schedule.every().day.at("06:00").do(job, "Fetching weather forecast for 6 AM on Saturday 3/2", hotspots, 2, 3, 2019)
+schedule.every().day.at("12:00").do(job, "Fetching weather forecast for Noon on Saturday 3/2", hotspots, 2, 3, 2019)
 while True:
     schedule.run_pending()
     time.sleep(0)
