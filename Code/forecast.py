@@ -25,17 +25,59 @@ import schedule
 
 # now = datetime.datetime.now()
 hotspots = pandas.read_csv("../Excel & CSV Sheets/Jan28Feb28Hotspotsabove5.csv", sep=",")
-# forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
-# monday = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-02-25_FinalForm.xlsx")
-# dataset = shuffle(dataset)
-# dataset = shuffle(dataset)
-#
-# columns = ('Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
-# 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
-# 'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
-# 'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type')
-# X_test = dataset.ix[:,columns].values
+forecast = pandas.read_csv("../Excel & CSV Sheets/2019 Data/2019-03-04_18_hotspotsForecast.csv")
+# accidents = pandas.read_excel("") # Here, place the Final Form Report of the day you want
 
+
+def predict(forecast, accidents):
+    dataset = shuffle(forecast)
+    columns = ('Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
+    'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
+    'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
+    'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type')
+    X_test = dataset.ix[:,columns].values
+    model = Sequential()
+    model.add(Dense(30, input_dim=30, activation='sigmoid'))
+    model.add(Dense(28, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(20, activation='sigmoid'))
+    model.add(Dense(18, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(1, activation='sigmoid'))
+
+    # 3. Compiling a model.
+    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+    model.load_weights("model.h5")
+    # Okay, now let's calculate predictions.
+    predictions = model.predict(X_test)
+    dataset["Probability"] = predictions
+    # Then, let's round to either 0 or 1, since we have only two options.
+    predictions_round = [abs(round(x[0])) for x in predictions]
+    dataset["Predictions"] = predictions_round
+    # print(rounded)
+    print("Head of predictions: ", predictions[0:10])
+    print("Head of predictions_round: ", predictions_round)
+
+    dataset.to_csv("../Excel & CSV Sheets/" + str(datetime.today()) + "forecast_full2.csv", sep=",")
+    matches = 0
+
+    for i, info in enumerate(forecast.values):
+        for j, data in enumerate(accidents.values):
+            forecastHour = forecast.Hour.values[i]
+            mondayHour = accidents.Hour.values[j]
+            hourDiff = abs(forecastHour - mondayHour)
+            if hourDiff < 3:
+                lat1 = forecast.Latitude.values[i]
+                long1 = forecast.Longitude.values[i]
+
+                lat2 = accidents.Latitude.values[j]
+                long2 = accidents.Longitude.values[j]
+                latChange = math.fabs(lat1 - lat2)
+                longChange = math.fabs(long1 - long2)
+                if latChange < 0.01 and longChange < 0.01:
+                    matches +=1
+    print(matches)
 
 
 def add_data(hotspots,day,month, year):
@@ -394,7 +436,7 @@ def add_data(hotspots,day,month, year):
                 hotspots.RainBefore.values[i] = 0
         now = datetime.now()
         # numpy.savetxt("../Excel & CSV Sheets/2018 Data/" +str(datetime.today())+"hotspotsForecast.csv", hotspots)
-        hotspots.to_csv("../Excel & CSV Sheets/2019 Data/" +str(now.strftime("%Y-%m-%d_%h"))+"_hotspotsForecast.csv",
+        hotspots.to_csv("../Excel & CSV Sheets/2019 Data/" +str(now.strftime("%Y-%m-%d_%H"))+"_hotspotsForecast.csv",
                      sep=",")
 
 
@@ -460,196 +502,19 @@ def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc, date):
     fig.savefig(title, bbox_inches='tight')
 
 
-# dataset.to_csv("../Excel & CSV Sheets/2019 Data/" +str(now.strftime("%Y-%m-%d"))+"_hotspotsForecast.csv",
-#                      sep=",")
-
-
-def get_etrims(dataset):
-    print("Getting Accident Road Geometrics")
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
-    driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
-
-    usr = driver.find_element_by_id("UserName")
-    pw = driver.find_element_by_id("Password")
-
-    usr.send_keys("JJVPG56")
-    pw.send_keys("Saturn71")  # updated 2/26/2019
-    driver.find_element_by_class_name("btn").click()
-
-    dataset.Route = dataset.Route.astype(str)
-
-    for i, info in enumerate(dataset.values):
-        latitude = dataset.Latitude.values[i]
-        longitude = dataset.Longitude.values[i]
-
-        site = "https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/lrsforlatlong?latitude=" \
-               + str(latitude) + "&longitude=" + str(longitude) + "&d=1538146112919"
-
-        driver.get(site)
-        raw = str(driver.page_source)
-        milepoint = float(raw[raw.index("<MilePoint>") + len("<MilePoint>"): raw.index("</MilePoint>")])
-        # routeid = raw[raw.index("<RouteId>") + len("<RouteId>"): raw.index("</RouteId>")]
-
-        # dataset.Route.values[i] = routeid
-        dataset.Log_Mile.values[i] = milepoint
-
-    geometrics = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
-        sep=",")
-    segments = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
-        sep=",")
-    descriptions = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
-        sep=",")
-    traffic = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
-        sep=",")
-    for k, info in enumerate(dataset.values):
-        for i, value in enumerate(geometrics.values):
-            if dataset.Route.values[k] == geometrics.ID_NUMBER.values[i]:
-                if geometrics.ELM.values[i] > dataset.Log_Mile.values[k] > geometrics.BLM.values[i]:
-                    dataset.Num_Lanes.values[k] = geometrics.Num_Lns.values[i]
-                    dataset.Thru_Lanes.values[k] = geometrics.Thru_Lanes.values[i]
-        for l, value in enumerate(segments.values):
-            if dataset.Route.values[k] == segments.ID_NUMBER.values[l]:
-                if segments.ELM.values[l] > dataset.Log_Mile.values[k] > segments.BLM.values[l]:
-                    dataset.Ad_Sys.values[k] = segments.Ad_Sys.values[l]
-                    dataset.Gov_Cont.values[k] = segments.Gov_Cont.values[l]
-                    dataset.Func_Class.values[k] = segments.Func_Class.values[l]
-        for m, value in enumerate(traffic.values):
-            if dataset.Route.values[k] == traffic.ID_NUMBER.values[m]:
-                if traffic.ELM.values[m] > dataset.Log_Mile.values[k] > traffic.BLM.values[m]:
-                    dataset.AADT.values[k] = traffic.AADT.values[m]
-                    dataset.DHV.values[k] = traffic.DHV.values[m]
-        for n, value in enumerate(descriptions.values):
-            if dataset.Route.values[k] == descriptions.ID_NUMBER.values[n]:
-                if descriptions.ELM.values[n] > dataset.Log_Mile.values[k] > descriptions.BLM.values[n]:
-                    if descriptions.Feature_Type[n] == 19:
-                        dataset.Pavement_Width.values[k] = descriptions.Feat_Width.values[n]
-                        dataset.Pavement_Type.values[k] = descriptions.Feature_Composition.values[n]
-        for i, value in enumerate(geometrics.values):
-            if dataset.Route.values[k] == geometrics.ID_NUMBER.values[i]:
-                if geometrics.ELM.values[i] > dataset.Log_Mile.values[k] > geometrics.BLM.values[i]:
-                    dataset.Terrain.values[k] = geometrics.Terrain.values[i]
-                    dataset.Land_Use.values[k] = geometrics.Land_Use.values[i]
-                    dataset.Access_Control.values[k] = geometrics.Acc_Ctrl.values[i]
-                    dataset.Illumination.values[k] = geometrics.Illum.values[i]
-                    dataset.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
-                    dataset.Operation.values[k] = geometrics.Operation.values[i]
-    print("Getting weather stuff")
-    for i, value in enumerate(dataset.values):
-        if "clear" in dataset.Event.values[i] or "clear" in dataset.Conditions.values[
-            i] \
-                or "Clear" in dataset.Event.values[i] or "Clear" in \
-                dataset.Conditions.values[i]:
-            dataset.Clear.values[i] = 1
-        else:
-            dataset.Clear.values[i] = 0
-
-        if "rain" in dataset.Event.values[i] or "rain" in dataset.Conditions.values[i] \
-                or "Rain" in dataset.Event.values[i] or "Rain" in \
-                dataset.Conditions.values[i] \
-                or "Drizzle" in dataset.Event.values[i] or "Drizzle" in \
-                dataset.Conditions.values[i] \
-                or "drizzle" in dataset.Event.values[i] or "drizzle" in \
-                dataset.Conditions.values[i]:
-            dataset.Rain.values[i] = 1
-        else:
-            dataset.Rain.values[i] = 0
-
-        if "snow" in dataset.Event.values[i] or "snow" in dataset.Conditions.values[i] \
-                or "Snow" in dataset.Event.values[i] or "Snow" in \
-                dataset.Conditions.values[i]:
-            dataset.Snow.values[i] = 1
-        else:
-            dataset.Snow.values[i] = 0
-
-        if "cloudy" in dataset.Event.values[i] or "cloudy" in \
-                dataset.Conditions.values[i] \
-                or "Cloudy" in dataset.Event.values[i] or "Cloudy" in \
-                dataset.Conditions.values[i] \
-                or "overcast" in dataset.Event.values[i] or "overcast" in \
-                dataset.Conditions.values[i] \
-                or "Overcast" in dataset.Event.values[i] or "Overcast" in \
-                dataset.Conditions.values[
-                    i]:
-            dataset.Cloudy.values[i] = 1
-        else:
-            dataset.Cloudy.values[i] = 0
-
-        if "fog" in dataset.Event.values[i] or "foggy" in dataset.Conditions.values[i] \
-                or "Fog" in dataset.Event.values[i] or "Foggy" in \
-                dataset.Conditions.values[i]:
-            dataset.Fog.values[i] = 1
-        else:
-            dataset.Fog.values[i] = 0
-        if "rain" in dataset.EventBefore.values[i] or "rain" in \
-                dataset.ConditionBefore.values[i] \
-                or "Rain" in dataset.EventBefore.values[i] or "Rain" in \
-                dataset.ConditionBefore.values[i]:
-            dataset.RainBefore.values[i] = 1
-        else:
-            dataset.RainBefore.values[i] = 0
-    return dataset
-
-
 def job(t, hotspots, day,month, year):
     add_data(hotspots,day,month, year)
     print(t)
     return
-schedule.every().day.at("18:00").do(job, "Fetching weather forecast for 6 PM on Friday 3/1", hotspots, 2, 3, 2019)
-schedule.every().day.at("00:00").do(job, "Fetching weather forecast for Midnight on Friday 3/1", hotspots, 2, 3, 2019)
-schedule.every().day.at("06:00").do(job, "Fetching weather forecast for 6 AM on Saturday 3/2", hotspots, 2, 3, 2019)
-schedule.every().day.at("12:00").do(job, "Fetching weather forecast for Noon on Saturday 3/2", hotspots, 2, 3, 2019)
-while True:
-    schedule.run_pending()
-    time.sleep(0)
 
-# print(hotspots.columns.values)
+# schedule.every().day.at("18:00").do(job, "Fetching weather forecast", hotspots, 4, 3, 2019)
+# schedule.every().day.at("00:00").do(job, "Fetching weather forecast", hotspots, 4, 3, 2019)
+# schedule.every().day.at("06:00").do(job, "Fetching weather forecast", hotspots, 5, 3, 2019)
+# schedule.every().day.at("12:00").do(job, "Fetching weather forecast", hotspots, 5, 3, 2019)
+# schedule.every().tuesday.at("12:30").do(exit())
 
+# while True:
+#     schedule.run_pending()
+#     time.sleep(0)
 
-
-# model = Sequential()
-# model.add(Dense(30, input_dim=30, activation='sigmoid'))
-# model.add(Dense(28, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(20, activation='sigmoid'))
-# model.add(Dense(18, activation='sigmoid'))
-# model.add(Dense(10, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(1, activation='sigmoid'))
-#
-# #           3. Compiling a model.
-# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-# model.load_weights("model.h5")
-# # Okay, now let's calculate predictions.
-# predictions = model.predict(X_test)
-# dataset["Probability"] = predictions
-# # Then, let's round to either 0 or 1, since we have only two options.
-# predictions_round = [abs(round(x[0])) for x in predictions]
-# dataset["Predictions"] = predictions_round
-# # print(rounded)
-# print("Head of predicitons: ", predictions[0:10])
-# print("Head of predictions_round: ", predictions_round)
-#
-# dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
-# matches = 0
-
-# for i, info in enumerate(forecast.values):
-#     for j, data in enumerate(monday.values):
-#         forecastHour = forecast.Hour.values[i]
-#         mondayHour = monday.Hour.values[j]
-#         hourDiff = abs(forecastHour - mondayHour)
-#         if hourDiff < 3:
-#             lat1 = forecast.Latitude.values[i]
-#             long1 = forecast.Longitude.values[i]
-#
-#             lat2 = monday.Latitude.values[j]
-#             long2 = monday.Longitude.values[j]
-#             latChange = math.fabs(lat1 - lat2)
-#             longChange = math.fabs(long1 - long2)
-#             if latChange < 0.01 and longChange < 0.01:
-#                 matches +=1
-#
-# print(matches)
+predict()

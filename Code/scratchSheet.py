@@ -8,13 +8,13 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib
 import matplotlib.pyplot as plt
-forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
-
-lat = forecast.groupby('Latitude').nunique()
-print(len(lat))
-
-long = forecast.groupby('Longitude').nunique()
-print(len(long))
+# forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
+#
+# lat = forecast.groupby('Latitude').nunique()
+# print(len(lat))
+#
+# long = forecast.groupby('Longitude').nunique()
+# print(len(long))
 # avg_holder = pandas.read_csv(
 #     "../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
 #
@@ -620,3 +620,10 @@ print(len(long))
 # day_holder2019.Date = day_holder2019.Date.astype(str)
 
 # print(len(day_holder2019.Date))
+
+accidents = pandas.read_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Accident Data.csv")
+negatives = pandas.read_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
+
+for k, info in enumerate(accidents.values):
+    for i, values in enumerate(negatives.values):
+        print("stuff")
