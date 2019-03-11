@@ -2,6 +2,7 @@ import email
 import imaplib
 import os
 from datetime import datetime, timedelta, date, time
+import datetime
 import time
 from darksky import forecast
 import pytz
@@ -10,6 +11,7 @@ import math
 import os, sys
 import random
 from selenium import webdriver
+import decimal
 
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
@@ -185,7 +187,7 @@ def add_data(calldata, save_name):
     calldata['Weekday'] = calldata['Date'].dt.dayofweek
     calldata.Date = calldata.Date.astype(str)
 
-    print("Getting Accident Weather Data")
+    # print("Getting Accident Weather Data")
     calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
     driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
@@ -471,6 +473,149 @@ def get_date_negatives(calldata):
     results = results.reindex(columns=header_list)
     results.to_csv(
         "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
+
+
+def get_loc_negatives(calldata):
+    calldata.Route = calldata.Route.astype(str)
+    calldata.Log_Mile = calldata.Log_Mile.astype(float)
+    negative_samples = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+    unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes.csv", sep=",")
+    route_number = range(0, len(unique_routes.Route))
+    neg_loc = 0  # Used for positioning
+    for j, values in enumerate(calldata.values):
+        current_route = calldata.Route.values[j]
+        r = [x for x in route_number if x != current_route]
+        rand_num = random.choice(r)
+        new_route = unique_routes.Route.values[rand_num]
+        for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+            if calldata.Hour.values[n] == calldata.Hour.values[j] and \
+                        calldata.Date.values[n] is calldata.Date.values[j]\
+                    and calldata.Route.values[n] is calldata.Route.values[j]:
+                # If match, skip
+                pass
+            else:
+                elm = unique_routes.ELM.values[rand_num]*1000
+                blm = unique_routes.BLM.values[rand_num]*1000
+                negative_samples.loc[neg_loc, "Log_Mile"] = decimal.Decimal(random.randrange(blm, round(elm))) / 1000
+                negative_samples.loc[neg_loc, "Route"] = new_route
+                # These values stay the same between calldata and the negative samples
+                negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[j]
+                negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[j]
+                negative_samples.loc[neg_loc, "Unix"] = calldata.Unix.values[j]
+                negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[j]
+                negative_samples.loc[neg_loc, "Weekday"] = calldata.Weekday.values[j]
+                neg_loc = neg_loc + 1
+                break
+
+    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
+
+    usr = driver.find_element_by_id("UserName")
+    pw = driver.find_element_by_id("Password")
+
+    usr.send_keys("JJVPG56")
+    pw.send_keys("Saturn71")  # updated 2/26/2019
+    driver.find_element_by_class_name("btn").click()
+
+    for i, info in enumerate(calldata.values):
+        routeID = negative_samples.Route.values[i]
+        logmile = negative_samples.Log_Mile.values[i]
+        siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
+                    + str(routeID) + '&logmile=' + str(logmile) + '&subroute='
+
+        driver.get(siteRoute)
+        raw = str(driver.page_source)
+        X = float(raw[raw.index("<X>") + len("<X>"): raw.index("</X>")])
+        Y = raw[raw.index("<Y>") + len("<Y>"): raw.index("</Y>")]
+        negative_samples.Latitude.values[i] = Y
+        negative_samples.Longitude.values[i] = X
+    print("Getting NS Location Road Geometrics")
+    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
+
+    usr = driver.find_element_by_id("UserName")
+    pw = driver.find_element_by_id("Password")
+
+    usr.send_keys("JJVPG56")
+    pw.send_keys("Saturn71")  # updated 2/26/2019
+    driver.find_element_by_class_name("btn").click()
+
+    calldata.Route = calldata.Route.astype(str)
+    geometrics = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
+        sep=",")
+    segments = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
+        sep=",")
+    descriptions = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
+        sep=",")
+    traffic = pandas.read_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        sep=",")
+    for i, info in enumerate(negative_samples.values):
+        latitude = negative_samples.Latitude.values[i]
+        longitude = negative_samples.Longitude.values[i]
+
+        site = "https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/lrsforlatlong?latitude=" \
+               + str(latitude) + "&longitude=" + str(longitude) + "&d=1538146112919"
+        driver.get(site)
+        raw = str(driver.page_source)
+    for k, info in enumerate(negative_samples.values):
+        for i, value in enumerate(geometrics.values):
+            if negative_samples.Route.values[k] == geometrics.ID_NUMBER.values[i]:
+                if geometrics.ELM.values[i] > negative_samples.Log_Mile.values[k] > geometrics.BLM.values[i]:
+                    negative_samples.Num_Lanes.values[k] = geometrics.Num_Lns.values[i]
+                    negative_samples.Thru_Lanes.values[k] = geometrics.Thru_Lanes.values[i]
+        for l, value in enumerate(segments.values):
+            if negative_samples.Route.values[k] == segments.ID_NUMBER.values[l]:
+                if segments.ELM.values[l] > negative_samples.Log_Mile.values[k] > segments.BLM.values[l]:
+                    negative_samples.Ad_Sys.values[k] = segments.Ad_Sys.values[l]
+                    negative_samples.Gov_Cont.values[k] = segments.Gov_Cont.values[l]
+                    negative_samples.Func_Class.values[k] = segments.Func_Class.values[l]
+        for m, value in enumerate(traffic.values):
+            if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
+                if traffic.ELM.values[m] > negative_samples.Log_Mile.values[k] > traffic.BLM.values[m]:
+                    negative_samples.AADT.values[k] = traffic.AADT.values[m]
+                    negative_samples.DHV.values[k] = traffic.DHV.values[m]
+        for n, value in enumerate(descriptions.values):
+            if negative_samples.Route.values[k] == descriptions.ID_NUMBER.values[n]:
+                if descriptions.ELM.values[n] > negative_samples.Log_Mile.values[k] > descriptions.BLM.values[n]:
+                    if descriptions.Feature_Type[n] == 19:
+                        negative_samples.Pavement_Width.values[k] = descriptions.Feat_Width.values[n]
+                        negative_samples.Pavement_Type.values[k] = descriptions.Feature_Composition.values[n]
+        for i, value in enumerate(geometrics.values):
+            if negative_samples.Route.values[k] == geometrics.ID_NUMBER.values[i]:
+                if geometrics.ELM.values[i] > negative_samples.Log_Mile.values[k] > geometrics.BLM.values[i]:
+                    negative_samples.Terrain.values[k] = geometrics.Terrain.values[i]
+                    negative_samples.Land_Use.values[k] = geometrics.Land_Use.values[i]
+                    negative_samples.Access_Control.values[k] = geometrics.Acc_Ctrl.values[i]
+                    negative_samples.Illumination.values[k] = geometrics.Illum.values[i]
+                    negative_samples.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
+                    negative_samples.Operation.values[k] = geometrics.Operation.values[i]
+    # Getting the weekday
+    negative_samples.Date = negative_samples.Date.astype(str)
+    print("Getting NS Location Weather Data")
+    negative_samples = get_weather_data(negative_samples)
+    # Appending new data to the New Data file #
+    print("Appending NS Location Data")
+    negative_samples = negative_samples.iloc[::-1]
+    og_calldata = pandas.read_csv(
+        folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv", sep=",")
+    frames = [og_calldata, negative_samples]
+    results = pandas.concat(frames)
+    header_list = (
+        "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+        "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+        'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+        "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+        "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type", "Unix")
+    results = results.reindex(columns=header_list)
+    results.to_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
 
 
 # currently, the relative temperature variable has been dropped
@@ -871,81 +1016,84 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
+    # calldata = pandas.read_csv("../Excel & CSV Sheets/New Data Files/New Accident Data.csv", sep=",")
+    calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data Accidents Only.csv", sep=",")
     # calldata, file = get_Email()
-
-    # Here are the current dtypes for reading in a file #
-    # calldata = pandas.read_excel(folderpath + "",
-    #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
-    #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
-    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
-    #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
-    #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
-    #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
-    #                 "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
-    #                 "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
-    #                 "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
-    #                 "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
-    #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
-
-    # Reading file directly for testing
-    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-02-28.csv"
-    calldata = pandas.read_csv(file, sep=",")
-
-    calldata.Latitude = calldata.Latitude.astype(float)
-    calldata.Longitude = calldata.Longitude.astype(float)
-    print("Fixing These Stupid Lat and Long Coordinates")
-    for k, info in enumerate(calldata.values):
-        if calldata.Latitude.values[k] > 40:
-            calldata.Latitude.values[k] = float(calldata.Latitude.values[k] / 1000000)
-            calldata.Longitude.values[k] = float(calldata.Longitude.values[k] / -1000000)
-
-    # Specific save names for files
-    # This makes the saving process less tedious since we don't have to change the name of the file we're saving
-    # every time we read a new file
-    # We save the file multiple times throughout the process of working with it so if an error occurs, we don't have to
-    # start from the very beginning
-    dayname_csv = file.split("/")[-1]
-    dayname_xlsx = dayname_csv.split(".")[0]
-
-    # Removing the excess text from the problem column
-    calldata = clean_problems(calldata)
-
-    # Splitting and tidying the Response Date to the accident.
-    calldata = split_datetime(calldata)
-
-    # Reset the Column names for the data
-    calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
-
-    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
-                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
-                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
-                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
-
-    calldata.index.name = "Index"
-    calldata = calldata.reindex(columns=header_list)
-
-    # Create a list of different accident types for finding Y
-    occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
-    # Find the duplicate calls and drop them
-    find_Duplicates(calldata, occurrence_list)
-    calldata = drop_duplicates(calldata)
-
-    # Add weather and road geometric data to calldata
-    calldata = add_data(calldata, dayname_xlsx)
-
-    # Save the calldata in its final form, just in case the appending goes wrong
-    save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
-                    "FinalSave", calldata)
-
-    # Append the new data
-    append_data(calldata)
-    # Get the negative samples of the calldata
-    # Each of these methods also gets the updated weather information
-    get_hour_negatives(calldata)
-    get_date_negatives(calldata)
+    #
+    # # Here are the current dtypes for reading in a file #
+    # # calldata = pandas.read_excel(folderpath + "",
+    # #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
+    # #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
+    # #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    # #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
+    # #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
+    # #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
+    # #                 "Precipitation_Intensity": float, "Precip_Intensity_Max": float, "Precip_Intensity_Time": float,
+    # #                 "Clear": int, "Cloudy": int, "Rain": int, "Fog": int, "Snow": int, "RainBefore": int,
+    # #                 "Terrain": int, "Land_Use": int, "Access_Control": int, "Illumination": int, "Operation": int,
+    # #                 "Speed_Limit": int, "Thru_Lanes": int, "Num_Lanes": int, "Ad_Sys": int, "Gov_Cont": int,
+    # #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
+    #
+    # # Reading file directly for testing
+    # # file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-05.csv"
+    # # calldata = pandas.read_csv(file, sep=",")
+    #
+    # calldata.Latitude = calldata.Latitude.astype(float)
+    # calldata.Longitude = calldata.Longitude.astype(float)
+    # print("Fixing These Stupid Lat and Long Coordinates")
+    # for k, info in enumerate(calldata.values):
+    #     if calldata.Latitude.values[k] > 40:
+    #         calldata.Latitude.values[k] = float(calldata.Latitude.values[k] / 1000000)
+    #         calldata.Longitude.values[k] = float(calldata.Longitude.values[k] / -1000000)
+    #
+    # # Specific save names for files
+    # # This makes the saving process less tedious since we don't have to change the name of the file we're saving
+    # # every time we read a new file
+    # # We save the file multiple times throughout the process of working with it so if an error occurs, we don't have to
+    # # start from the very beginning
+    # dayname_csv = file.split("/")[-1]
+    # dayname_xlsx = dayname_csv.split(".")[0]
+    #
+    # # Removing the excess text from the problem column
+    # calldata = clean_problems(calldata)
+    #
+    # # Splitting and tidying the Response Date to the accident.
+    # calldata = split_datetime(calldata)
+    #
+    # # Reset the Column names for the data
+    # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
+    #
+    # header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+    #                'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+    #                "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+    #                'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+    #                "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+    #                "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+    #                "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+    #
+    # calldata.index.name = "Index"
+    # calldata = calldata.reindex(columns=header_list)
+    #
+    # # Create a list of different accident types for finding Y
+    # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
+    # # Find the duplicate calls and drop them
+    # find_Duplicates(calldata, occurrence_list)
+    # calldata = drop_duplicates(calldata)
+    #
+    # # Add weather and road geometric data to calldata
+    # calldata = add_data(calldata, dayname_xlsx)
+    #
+    # # Save the calldata in its final form, just in case the appending goes wrong
+    # save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
+    #                 "FinalSave", calldata)
+    #
+    # # Append the new data
+    # append_data(calldata)
+    # # Get the negative samples of the calldata
+    # # Each of these methods also gets the updated weather information
+    # get_hour_negatives(calldata)
+    # get_date_negatives(calldata)
+    get_loc_negatives(calldata)
 
 if __name__ == "__main__":
     main()

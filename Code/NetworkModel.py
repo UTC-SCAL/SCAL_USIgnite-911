@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 import numpy
 import pandas
 import talos
+import numpy as np
+from sklearn import preprocessing
 from keras.callbacks import EarlyStopping
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
@@ -43,7 +45,6 @@ import datetime
 
 # from ann_visualizer.visualize import ann_viz
 # from keras_sequential_ascii import keras2ascii
-
 
 
 def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
@@ -118,8 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv(
-    "../Excel & CSV Sheets/Full Data for Model.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data for Model.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 

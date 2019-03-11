@@ -1,4 +1,4 @@
-BLM,ELM,Co. Seq.,ID_NUMBER,Thru_Lanes,ROW ,Num_Lns,Spd_Limit,Terrain,Land_Use,Illum,Operation,Acc_Ctrl,Sch Spd Limit,Truck Spd Limit
+BLM,ELM,Co. Seq.,ID_NUMBER,Thru_Lanes,ROW ,Num_Lns,Spd_Limit,Terrain,Land_Use,Illum,Operation,Acc_Ctrl,Sch Spd Limit,Truck Spd Limit,BLM_Lat,BLM_Long,ELM_Lat,ELM_Long
 0,5.8,1,3300948001,2,40,2,40,2,0,,2,0,,
 0,0.12,1,3300951001,2,120,2,35,2,0,1,2,0,,
 0.12,1.08,1,3300951001,2,50,2,35,2,0,0,2,0,,

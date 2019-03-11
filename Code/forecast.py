@@ -26,7 +26,7 @@ import schedule
 # now = datetime.datetime.now()
 hotspots = pandas.read_csv("../Excel & CSV Sheets/Jan28Feb28Hotspotsabove5.csv", sep=",")
 forecast = pandas.read_csv("../Excel & CSV Sheets/2019 Data/2019-03-04_18_hotspotsForecast.csv")
-# accidents = pandas.read_excel("") # Here, place the Final Form Report of the day you want
+accidents = pandas.read_excel("") # Here, place the Final Form Report of the day you want
 
 
 def predict(forecast, accidents):
