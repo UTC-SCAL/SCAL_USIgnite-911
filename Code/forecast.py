@@ -10,13 +10,17 @@ import math
 import os, sys
 from os.path import exists
 from selenium import webdriver
+import matplotlib.pyplot as plt
 import schedule
+from keras.layers import Dense, Dropout
+from keras.models import Sequential
+from keras import callbacks
 
 
-hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
-
-
-
+# hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
+#
+#
+#
 # columns = ['Route','Log_Mile','Date','Hour','Unix','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
 # 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
 # 'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
@@ -377,46 +381,57 @@ day = 16
 year = 2019
 
 
-thisdate = str(month)+'/'+str(day)+'/'+str(year)
-schedule.every().day.at("18:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-schedule.every().day.at("00:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-schedule.every().day.at("06:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-schedule.every().day.at("12:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-while True:
-    schedule.run_pending()
-    schedule.every(30).minutes.do(waiting, datetime.now())
-    time.sleep(1)
+# thisdate = str(month)+'/'+str(day)+'/'+str(year)
+# schedule.every().day.at("18:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
+# schedule.every().day.at("00:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
+# schedule.every().day.at("06:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
+# schedule.every().day.at("12:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
+# while True:
+#     schedule.run_pending()
+#     schedule.every(30).minutes.do(waiting, datetime.now())
+#     time.sleep(1)
 
 # print(hotspots.columns.values)
 
 
+dataset = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-20-2019_2019-03-20_12.csv", sep=",")
 
-# model = Sequential()
-# model.add(Dense(30, input_dim=30, activation='sigmoid'))
-# model.add(Dense(28, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(20, activation='sigmoid'))
-# model.add(Dense(18, activation='sigmoid'))
-# model.add(Dense(10, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(1, activation='sigmoid'))
-#
-# #           3. Compiling a model.
-# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-# model.load_weights("model.h5")
-# # Okay, now let's calculate predictions.
-# predictions = model.predict(X_test)
-# dataset["Probability"] = predictions
-# # Then, let's round to either 0 or 1, since we have only two options.
-# predictions_round = [abs(round(x[0])) for x in predictions]
-# dataset["Predictions"] = predictions_round
-# # print(rounded)
-# print("Head of predicitons: ", predictions[0:10])
-# print("Head of predictions_round: ", predictions_round)
-#
-# dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
+columns = ['Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
+'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
+'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
+'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type']
+
+X_test = dataset.ix[:, columns]
+# print(len(X_test.columns))
+# print(X_test.dtypes)
+# exit()
+model = Sequential()
+model.add(Dense(30, input_dim=30, activation='sigmoid'))
+model.add(Dense(28, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(20, activation='sigmoid'))
+model.add(Dense(18, activation='sigmoid'))
+model.add(Dense(10, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(1, activation='sigmoid'))
+
+#           3. Compiling a model.
+model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+model.load_weights("model(2).h5")
+# Okay, now let's calculate predictions.
+predictions = model.predict(X_test)
+dataset["Probability"] = predictions
+# Then, let's round to either 0 or 1, since we have only two options.
+predictions_round = [abs(round(x[0])) for x in predictions]
+dataset["Predictions"] = predictions_round
+# print(rounded)
+print("Head of predictions: ", predictions[0:10])
+print("Head of predictions_round: ", predictions_round)
+
+
+dataset.to_csv("../Excel & CSV Sheets/2019-03-20_12_forecast_full.csv", sep=",")
 # matches = 0
-
+#
 # for i, info in enumerate(forecast.values):
 #     for j, data in enumerate(monday.values):
 #         forecastHour = forecast.Hour.values[i]

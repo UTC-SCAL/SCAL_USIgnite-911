@@ -78,28 +78,28 @@ import pandas
 from datetime import datetime
 from darksky import forecast
 
-places = pandas.read_csv(
-    "../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
-print(len(places))
-places = places[places['Latitude'].notnull()]
-print(len(places))
-
-places.Event = places.Event.astype(str)
-places.Conditions = places.Conditions.astype(str)
-places.Precipitation_Type = places.Precipitation_Type.astype(str)
-places.Precipitation_Intensity = places.Precipitation_Intensity.astype(float)
-places.Precip_Intensity_Max = places.Precip_Intensity_Max.astype(float)
-places.Temp_Max = places.Temp_Max.astype(float)
-places.Temp_Min = places.Temp_Min.astype(float)
-places.Precip_Intensity_Time = places.Precip_Intensity_Time.astype(str)
-places.Latitude = places.Latitude.astype(float)
-places.Longitude = places.Longitude.astype(float)
-places.EventBefore = places.EventBefore.astype(str)
-places.ConditionBefore = places.ConditionBefore.astype(str)
-
-month = 3
-day = 16
-year = 2019
+# places = pandas.read_csv(
+#     "../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
+# print(len(places))
+# places = places[places['Latitude'].notnull()]
+# print(len(places))
+#
+# places.Event = places.Event.astype(str)
+# places.Conditions = places.Conditions.astype(str)
+# places.Precipitation_Type = places.Precipitation_Type.astype(str)
+# places.Precipitation_Intensity = places.Precipitation_Intensity.astype(float)
+# places.Precip_Intensity_Max = places.Precip_Intensity_Max.astype(float)
+# places.Temp_Max = places.Temp_Max.astype(float)
+# places.Temp_Min = places.Temp_Min.astype(float)
+# places.Precip_Intensity_Time = places.Precip_Intensity_Time.astype(str)
+# places.Latitude = places.Latitude.astype(float)
+# places.Longitude = places.Longitude.astype(float)
+# places.EventBefore = places.EventBefore.astype(str)
+# places.ConditionBefore = places.ConditionBefore.astype(str)
+#
+# month = 3
+# day = 16
+# year = 2019
 def forecasting(places, month, day, year):
     thisdate = str(month)+'/'+str(day)+'/'+str(year)
     dt = datetime.strptime(thisdate, '%m/%d/%Y')
@@ -477,31 +477,29 @@ def forecasting(places, month, day, year):
 
 ##This section finds the min and max of the route's log miles. 
 
-# routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv", sep=",")
-
-# roads = routes.ID_NUMBER.unique()
+routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSforNSLoc.csv", sep=",")
+roads = routes.Route.unique()
 # print(len(roads))
 
-# df = pandas.DataFrame( columns=['BLM', 'ELM', 'Route'])
+df = pandas.DataFrame( columns=['BLM', 'ELM', 'Route'])
 
-# df.Route = roads
+df.Route = roads
 
-# for i, info in enumerate(df.values):
-#     list = []
-#     print(i)
-#     for j, stuff in enumerate(routes.values):
-#         # min = routes.BLM.values[j]
-#         if routes.ID_NUMBER.values[j] == df.Route.values[i]:
+for i, info in enumerate(df.values):
+    list = []
+    print(i)
+    for j, stuff in enumerate(routes.values):
+        # min = routes.BLM.values[j]
+        if routes.Route.values[j] == df.Route.values[i]:
 
-#             list.append(routes.BLM.values[j])
-#             list.append(routes.ELM.values[j])
-#             mini = min(list)
-#             df.BLM.values[i] = mini
-#             maxi = max(list)
-#             df.ELM.values[i] = maxi
-#             # print(mini,maxi)
+            list.append(routes.Log_Mile.values[j])
+            mini = min(list)
+            df.BLM.values[i] = mini
+            maxi = max(list)
+            df.ELM.values[i] = maxi
+            # print(mini,maxi)
 
-# df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes.csv', sep=",")
+df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv', sep=",")
 
 
 

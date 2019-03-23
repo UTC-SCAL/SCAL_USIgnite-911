@@ -7,7 +7,14 @@ from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib
+import os, sys
 import matplotlib.pyplot as plt
+import schedule
+from datetime import datetime
+import time
+from selenium import webdriver
+path = os.path.dirname(sys.argv[0])
+folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
 #
 # lat = forecast.groupby('Latitude').nunique()
@@ -621,9 +628,3 @@ import matplotlib.pyplot as plt
 
 # print(len(day_holder2019.Date))
 
-accidents = pandas.read_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Accident Data.csv")
-negatives = pandas.read_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
-
-for k, info in enumerate(accidents.values):
-    for i, values in enumerate(negatives.values):
-        print("stuff")
