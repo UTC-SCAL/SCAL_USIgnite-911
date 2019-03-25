@@ -23,24 +23,120 @@
 # import numpy
 import pandas
 # import talos
-# from keras.callbacks import EarlyStopping
-# from keras.layers import Dense, Dropout
-# from keras.models import Sequential
-# from sklearn.metrics import accuracy_score, auc, roc_curve
-# from sklearn.model_selection import train_test_split
-# from sklearn.utils import shuffle
+from keras.callbacks import EarlyStopping
+from keras.layers import Dense, Dropout
+from keras.models import Sequential
+from sklearn.metrics import accuracy_score, auc, roc_curve
+from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
-# try:
-#     import matplotlib.pyplot as plt
-# except ImportError:
-#     import matplotlib
-#     matplotlib.use("GtkAgg")
-#     import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    import matplotlib
+    matplotlib.use("GtkAgg")
+    import matplotlib.pyplot as plt
 
 # from ann_visualizer.visualize import ann_viz
 # from keras_sequential_ascii import keras2ascii
 # from keras.models import model_from_json
+import datetime
+thistime = datetime.datetime.now()
+month = thistime.month
+day = thistime.day
+year = thistime.year
+print("Using Date: ",month,"/",day,"/",year)
+exit()
 
+
+
+## This section is the part that takes in a forecast file, and tests it against the model. 
+
+file = "../Excel & CSV Sheets/ETRIMS/Forecast-for3-20-2019_2019-03-20_12.csv"
+test = pandas.read_csv(file, sep=",")
+test = shuffle(test)
+test = shuffle(test)
+
+columns =['Latitude','Longitude','Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
+	'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
+    	'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
+        	'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
+            	'Gov_Cont',	'Func_Class',	'Pavement_Width',	'Pavement_Type']
+
+
+test = test[columns]
+
+X_test = test
+
+print("Size of X_Test:", X_test.shape)
+
+model = Sequential()
+model.add(Dense(32, input_dim=32, activation='sigmoid'))
+model.add(Dense(28, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(20, activation='sigmoid'))
+model.add(Dense(18, activation='sigmoid'))
+model.add(Dense(10, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(1, activation='sigmoid'))
+
+#           3. Compiling a model.
+model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+model.load_weights("model.h5")
+# Okay, now let's calculate predictions.
+predictions = model.predict(X_test)
+test["Probability"] = predictions
+# Then, let's round to either 0 or 1, since we have only two options.
+predictions_round = [abs(round(x[0])) for x in predictions]
+test["Prediction"] = predictions_round
+# print(rounded)
+print("Head of predicitons: ", predictions[0:10])
+print("Head of predictions_round: ", predictions_round[0:10])
+
+test.to_csv(file, sep=",")
+exit()
+
+
+
+
+
+data = pandas.read_csv("../Excel & CSV Sheets/Full Data Unix.csv",sep=",")
+# print(len(data.values))
+data = data.loc[data['Accident'] == 1]
+# print(len(data.values))
+
+# print(data.Weekday.value_counts())
+tab = data.groupby(['Weekday', 'Hour']).size().reset_index()
+
+tab.columns = ['Weekday', 'Hour', 'Count']
+Monday = tab.loc[tab['Weekday'] == 0]
+Tuesday = tab.loc[tab['Weekday'] == 1]
+Wednesday = tab.loc[tab['Weekday'] == 2]
+Thursday = tab.loc[tab['Weekday'] == 3]
+Friday = tab.loc[tab['Weekday'] == 4]
+Saturday = tab.loc[tab['Weekday'] == 5]
+Sunday = tab.loc[tab['Weekday'] == 6]
+
+font = {'family': 'serif',
+            'weight': 'regular',
+            'size': 18}
+plt.rc('font', **font)
+plt.plot(Monday.Hour.values,Monday.Count.values, label='Monday', color='r', linewidth=3)
+plt.plot(Tuesday.Hour.values,Tuesday.Count.values, label='Tuesday', color='Orange', linewidth=3)
+plt.plot(Wednesday.Hour.values,Wednesday.Count.values, label='Wednesday', color='Yellow', linewidth=3)
+plt.plot(Thursday.Hour.values,Thursday.Count.values, label='Thursday', color='Green', linewidth=3)
+plt.plot(Friday.Hour.values,Friday.Count.values, label='Friday', color='Teal', linewidth=3)
+plt.plot(Saturday.Hour.values,Saturday.Count.values, label='Saturday', color='Purple', linewidth=3)
+plt.plot(Sunday.Hour.values,Sunday.Count.values, label='Sunday', color='Fuchsia', linewidth=3)
+xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
+plt.xticks(xticks)
+plt.grid(color='lightgray', linestyle='-', linewidth=2)
+plt.xlabel('Hour')
+plt.ylabel('Incidents that Occurred')
+plt.title('Hourly Incident Count')
+plt.legend()
+plt.show()
+exit()
 
 # test = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_GPS.csv", sep=",")
@@ -75,15 +171,42 @@ import pandas
 #     # places.at[myindex,'Longitude'] = test.ELM_Long.values[i]
 #     places.to_csv("../Excel & CSV Sheets/ETRIMS/GPS_Locations.csv",sep=',')
 # exit()
-from datetime import datetime
-from darksky import forecast
+
+# file = pandas.read_csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ETRIMS/Forecast-for3-20-2019_2019-03-20_12.csv",sep=",")
+# print(file.dtypes)
+# exit()
+# ## Messing around with dates in order to always have the right date for the forecasr file. 
+
+# import datetime 
+# tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+# thistime = datetime.datetime.now()
+# print(thistime.time())
+# print(thistime.day)
+# print(thistime.month)
+# print(thistime.year)
+# print(datetime.date.today())
+# print(tomorrow.year)
+# print(tomorrow.month)
+# print(tomorrow.day)
+# if thistime.hour == 13 or thistime.day ==20:
+#     print("It is 12")
+# forecastingfor = str(tomorrow.month) + "-" + str(tomorrow.day) + "-" + str(tomorrow.year)
+# print(thistime.strftime("%Y-%m-%d %H:%M"))
+# print(forecastingfor)
+# exit()
+
+
+## New forecast method and associated file calls, etc. 
+
+# from datetime import datetime
+# from darksky import forecast
 
 # places = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
 # print(len(places))
 # places = places[places['Latitude'].notnull()]
 # print(len(places))
-#
+
 # places.Event = places.Event.astype(str)
 # places.Conditions = places.Conditions.astype(str)
 # places.Precipitation_Type = places.Precipitation_Type.astype(str)
@@ -96,145 +219,145 @@ from darksky import forecast
 # places.Longitude = places.Longitude.astype(float)
 # places.EventBefore = places.EventBefore.astype(str)
 # places.ConditionBefore = places.ConditionBefore.astype(str)
-#
+
 # month = 3
 # day = 16
 # year = 2019
-def forecasting(places, month, day, year):
-    thisdate = str(month)+'/'+str(day)+'/'+str(year)
-    dt = datetime.strptime(thisdate, '%m/%d/%Y')
-    print(thisdate, dt.weekday())
-    places.Date = thisdate
-    places.Weekday = dt.weekday()
-    print(places.Date.values[0:5])
-    print(places.Weekday.values[0:5])
-    exit()
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-    hoa = 0
-    mioa = 0
-    soa = 0
-    yoa = year
-    moa = month
-    dayoa = day
-    start = datetime.now()
-    filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for"+str(month)+"-"+str(day)+"-"+str(year)+"_"+str(start.date())+"_"+str(start.hour)+".csv"
-    print(filename)
-    for d, stuff in enumerate(places.values[0:(len(places.loc[places['Hour'] == 0]))]):
-        print(d)
-        lat = places.Latitude.values[d]
-        long = places.Longitude.values[d]
-        t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
-        call = key, lat, long
+# def forecasting(places, month, day, year):
+#     thisdate = str(month)+'/'+str(day)+'/'+str(year)
+#     dt = datetime.strptime(thisdate, '%m/%d/%Y')
+#     print(thisdate, dt.weekday())
+#     places.Date = thisdate
+#     places.Weekday = dt.weekday()
+#     print(places.Date.values[0:5])
+#     print(places.Weekday.values[0:5])
+#     exit()
+#     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+#     hoa = 0
+#     mioa = 0
+#     soa = 0
+#     yoa = year
+#     moa = month
+#     dayoa = day
+#     start = datetime.now()
+#     filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for"+str(month)+"-"+str(day)+"-"+str(year)+"_"+str(start.date())+"_"+str(start.hour)+".csv"
+#     print(filename)
+#     for d, stuff in enumerate(places.values[0:(len(places.loc[places['Hour'] == 0]))]):
+#         print(d)
+#         lat = places.Latitude.values[d]
+#         long = places.Longitude.values[d]
+#         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+#         call = key, lat, long
 
-        try:
-            forecastcall = forecast(*call, time=t, header={'Accept-Encoding': 'gzip'})
+#         try:
+#             forecastcall = forecast(*call, time=t, header={'Accept-Encoding': 'gzip'})
         
-            # Hourly data
-            for i in range(0,7):
-                r = (i*len(places.loc[places['Hour'] == 0]))
-                if d != 0:
-                    r = (i*len(places.loc[places['Hour'] == 0]))+d
-                hour = places.Hour.values[r]
-                for k, value in enumerate(forecastcall.hourly):
-                # Retrieving weather for previous weather
-                    if k == hour:
-                        places.Temperature.values[r] = value.temperature
-                        places.Dewpoint.values[r] = value.dewPoint
-                        places.Event.values[r] = value.icon
-                        places.Humidity.values[r] = value.humidity
-                        places.Month.values[r] = moa
-                        places.Visibility.values[r] = value.visibility
-                        places.Conditions.values[r] = value.summary
-                        places.ConditionBefore.values[r] = forecastcall.hourly[k-1].summary
-                        places.EventBefore.values[r] = forecastcall.hourly[k-1].icon
-                # print(places.values[r])
-                for j, value2 in enumerate(forecastcall.daily):
-                    try:
-                        places.Precipitation_Type.values[r] = value2.precipType
-                    except:
-                        places.Precipitation_Type.values[r] = "NA"
-                    try:
-                        places.Precipitation_Intensity.values[r] = value2.precipIntensity
-                    except:
-                        places.Precipitation_Intensity.values[r] = -1000
-                    try:
-                        places.Precip_Intensity_Max.values[r] = value2.precipIntensityMax
-                    except:
-                        places.Precip_Intensity_Max.values[r] = -1000
-                    try:
-                        places.Precip_Intensity_Time.values[r] = value2.precipIntensityMaxTime
-                    except:
-                        places.Precip_Intensity_Time.values[r] = -1000
-                    try:
-                        places.Temp_Max.values[r] = value2.temperatureMax
-                    except:
-                        places.Temp_Max.values[r] = -1000
-                    try:
-                        places.Temp_Min.values[r] = value2.temperatureMin
-                    except:
-                        places.Temp_Min.values[r] = -1000
-                    try:
-                        places.Cloud_Coverage.values[r] = value2.cloudCover
-                    except:
-                        places.Cloud_Coverage.values[r] = -1000
-                    if "clear" in places.Event.values[r] or "clear" in places.Conditions.values[
-                        r] \
-                            or "Clear" in places.Event.values[r] or "Clear" in \
-                            places.Conditions.values[r]:
-                        places.Clear.values[r] = 1
-                    else:
-                        places.Clear.values[r] = 0
+#             # Hourly data
+#             for i in range(0,7):
+#                 r = (i*len(places.loc[places['Hour'] == 0]))
+#                 if d != 0:
+#                     r = (i*len(places.loc[places['Hour'] == 0]))+d
+#                 hour = places.Hour.values[r]
+#                 for k, value in enumerate(forecastcall.hourly):
+#                 # Retrieving weather for previous weather
+#                     if k == hour:
+#                         places.Temperature.values[r] = value.temperature
+#                         places.Dewpoint.values[r] = value.dewPoint
+#                         places.Event.values[r] = value.icon
+#                         places.Humidity.values[r] = value.humidity
+#                         places.Month.values[r] = moa
+#                         places.Visibility.values[r] = value.visibility
+#                         places.Conditions.values[r] = value.summary
+#                         places.ConditionBefore.values[r] = forecastcall.hourly[k-1].summary
+#                         places.EventBefore.values[r] = forecastcall.hourly[k-1].icon
+#                 # print(places.values[r])
+#                 for j, value2 in enumerate(forecastcall.daily):
+#                     try:
+#                         places.Precipitation_Type.values[r] = value2.precipType
+#                     except:
+#                         places.Precipitation_Type.values[r] = "NA"
+#                     try:
+#                         places.Precipitation_Intensity.values[r] = value2.precipIntensity
+#                     except:
+#                         places.Precipitation_Intensity.values[r] = -1000
+#                     try:
+#                         places.Precip_Intensity_Max.values[r] = value2.precipIntensityMax
+#                     except:
+#                         places.Precip_Intensity_Max.values[r] = -1000
+#                     try:
+#                         places.Precip_Intensity_Time.values[r] = value2.precipIntensityMaxTime
+#                     except:
+#                         places.Precip_Intensity_Time.values[r] = -1000
+#                     try:
+#                         places.Temp_Max.values[r] = value2.temperatureMax
+#                     except:
+#                         places.Temp_Max.values[r] = -1000
+#                     try:
+#                         places.Temp_Min.values[r] = value2.temperatureMin
+#                     except:
+#                         places.Temp_Min.values[r] = -1000
+#                     try:
+#                         places.Cloud_Coverage.values[r] = value2.cloudCover
+#                     except:
+#                         places.Cloud_Coverage.values[r] = -1000
+#                     if "clear" in places.Event.values[r] or "clear" in places.Conditions.values[
+#                         r] \
+#                             or "Clear" in places.Event.values[r] or "Clear" in \
+#                             places.Conditions.values[r]:
+#                         places.Clear.values[r] = 1
+#                     else:
+#                         places.Clear.values[r] = 0
 
-                    if "rain" in places.Event.values[r] or "rain" in places.Conditions.values[r] \
-                            or "Rain" in places.Event.values[r] or "Rain" in \
-                            places.Conditions.values[r] \
-                            or "Drizzle" in places.Event.values[r] or "Drizzle" in \
-                            places.Conditions.values[r] \
-                            or "drizzle" in places.Event.values[r] or "drizzle" in \
-                            places.Conditions.values[r]:
-                        places.Rain.values[r] = 1
-                    else:
-                        places.Rain.values[r] = 0
+#                     if "rain" in places.Event.values[r] or "rain" in places.Conditions.values[r] \
+#                             or "Rain" in places.Event.values[r] or "Rain" in \
+#                             places.Conditions.values[r] \
+#                             or "Drizzle" in places.Event.values[r] or "Drizzle" in \
+#                             places.Conditions.values[r] \
+#                             or "drizzle" in places.Event.values[r] or "drizzle" in \
+#                             places.Conditions.values[r]:
+#                         places.Rain.values[r] = 1
+#                     else:
+#                         places.Rain.values[r] = 0
 
-                    if "snow" in places.Event.values[r] or "snow" in places.Conditions.values[i] \
-                            or "Snow" in places.Event.values[r] or "Snow" in places.Conditions.values[r]:
-                        places.Snow.values[r] = 1
-                    else:
-                        places.Snow.values[r] = 0
+#                     if "snow" in places.Event.values[r] or "snow" in places.Conditions.values[i] \
+#                             or "Snow" in places.Event.values[r] or "Snow" in places.Conditions.values[r]:
+#                         places.Snow.values[r] = 1
+#                     else:
+#                         places.Snow.values[r] = 0
 
-                    if "cloudy" in places.Event.values[r] or "cloudy" in \
-                            places.Conditions.values[r] \
-                            or "Cloudy" in places.Event.values[r] or "Cloudy" in \
-                            places.Conditions.values[r] \
-                            or "overcast" in places.Event.values[r] or "overcast" in \
-                            places.Conditions.values[r] \
-                            or "Overcast" in places.Event.values[r] or "Overcast" in \
-                            places.Conditions.values[
-                                r]:
-                        places.Cloudy.values[r] = 1
-                    else:
-                        places.Cloudy.values[r] = 0
+#                     if "cloudy" in places.Event.values[r] or "cloudy" in \
+#                             places.Conditions.values[r] \
+#                             or "Cloudy" in places.Event.values[r] or "Cloudy" in \
+#                             places.Conditions.values[r] \
+#                             or "overcast" in places.Event.values[r] or "overcast" in \
+#                             places.Conditions.values[r] \
+#                             or "Overcast" in places.Event.values[r] or "Overcast" in \
+#                             places.Conditions.values[
+#                                 r]:
+#                         places.Cloudy.values[r] = 1
+#                     else:
+#                         places.Cloudy.values[r] = 0
 
-                    if "fog" in places.Event.values[r] or "foggy" in places.Conditions.values[r] \
-                            or "Fog" in places.Event.values[r] or "Foggy" in \
-                            places.Conditions.values[r]:
-                        places.Fog.values[r] = 1
-                    else:
-                        places.Fog.values[r] = 0
-                    if "rain" in places.EventBefore.values[r] or "rain" in \
-                            places.ConditionBefore.values[r] \
-                            or "Rain" in places.EventBefore.values[r] or "Rain" in \
-                            places.ConditionBefore.values[r]:
-                        places.RainBefore.values[r] = 1
-                    else:
-                        places.RainBefore.values[r] = 0
-        except:
-            pass
-        if d % 200 == 0:
-            places.to_csv(filename,sep=",", index=False)
-    places.to_csv(filename,sep=",", index=False)
-    end = datetime.now()
-    print("Duration:", end-start)
+#                     if "fog" in places.Event.values[r] or "foggy" in places.Conditions.values[r] \
+#                             or "Fog" in places.Event.values[r] or "Foggy" in \
+#                             places.Conditions.values[r]:
+#                         places.Fog.values[r] = 1
+#                     else:
+#                         places.Fog.values[r] = 0
+#                     if "rain" in places.EventBefore.values[r] or "rain" in \
+#                             places.ConditionBefore.values[r] \
+#                             or "Rain" in places.EventBefore.values[r] or "Rain" in \
+#                             places.ConditionBefore.values[r]:
+#                         places.RainBefore.values[r] = 1
+#                     else:
+#                         places.RainBefore.values[r] = 0
+#         except:
+#             pass
+#         if d % 200 == 0:
+#             places.to_csv(filename,sep=",", index=False)
+#     places.to_csv(filename,sep=",", index=False)
+#     end = datetime.now()
+#     print("Duration:", end-start)
 
     
 # segments = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",sep=',')
@@ -477,29 +600,31 @@ def forecasting(places, month, day, year):
 
 ##This section finds the min and max of the route's log miles. 
 
-routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSforNSLoc.csv", sep=",")
-roads = routes.Route.unique()
+# routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv", sep=",")
+
+# roads = routes.ID_NUMBER.unique()
 # print(len(roads))
 
-df = pandas.DataFrame( columns=['BLM', 'ELM', 'Route'])
+# df = pandas.DataFrame( columns=['BLM', 'ELM', 'Route'])
 
-df.Route = roads
+# df.Route = roads
 
-for i, info in enumerate(df.values):
-    list = []
-    print(i)
-    for j, stuff in enumerate(routes.values):
-        # min = routes.BLM.values[j]
-        if routes.Route.values[j] == df.Route.values[i]:
+# for i, info in enumerate(df.values):
+#     list = []
+#     print(i)
+#     for j, stuff in enumerate(routes.values):
+#         # min = routes.BLM.values[j]
+#         if routes.ID_NUMBER.values[j] == df.Route.values[i]:
 
-            list.append(routes.Log_Mile.values[j])
-            mini = min(list)
-            df.BLM.values[i] = mini
-            maxi = max(list)
-            df.ELM.values[i] = maxi
-            # print(mini,maxi)
+#             list.append(routes.BLM.values[j])
+#             list.append(routes.ELM.values[j])
+#             mini = min(list)
+#             df.BLM.values[i] = mini
+#             maxi = max(list)
+#             df.ELM.values[i] = maxi
+#             # print(mini,maxi)
 
-df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv', sep=",")
+# df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes.csv', sep=",")
 
 
 

@@ -1,7 +1,7 @@
 # import matplotlib
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy
-from datetime import datetime, timedelta, date, time
+import datetime
 import time
 from darksky import forecast
 import pytz
@@ -10,17 +10,11 @@ import math
 import os, sys
 from os.path import exists
 from selenium import webdriver
-import matplotlib.pyplot as plt
 import schedule
-from keras.layers import Dense, Dropout
-from keras.models import Sequential
-from keras import callbacks
 
 
-# hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
-#
-#
-#
+hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
+
 # columns = ['Route','Log_Mile','Date','Hour','Unix','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
 # 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
 # 'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
@@ -29,8 +23,9 @@ from keras import callbacks
 
 
 def forecasting(places, month, day, year):
-    start = datetime.now()
+    start = datetime.datetime.now()
     places.Event = places.Event.astype(str)
+    # places.Unix = places.Unix.astype(int)
     places.Conditions = places.Conditions.astype(str)
     places.Precipitation_Type = places.Precipitation_Type.astype(str)
     places.Precipitation_Intensity = places.Precipitation_Intensity.astype(float)
@@ -43,7 +38,7 @@ def forecasting(places, month, day, year):
     places.EventBefore = places.EventBefore.astype(str)
     places.ConditionBefore = places.ConditionBefore.astype(str)
     thisdate = str(month)+'/'+str(day)+'/'+str(year)
-    dt = datetime.strptime(thisdate, '%m/%d/%Y')
+    dt = datetime.datetime.strptime(thisdate, '%m/%d/%Y')
     print(thisdate, dt.weekday())
     places.Date = thisdate
     places.Weekday = dt.weekday()
@@ -60,7 +55,7 @@ def forecasting(places, month, day, year):
         print(d)
         lat = places.Latitude.values[d]
         long = places.Longitude.values[d]
-        t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+        t = datetime.datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
         call = key, lat, long
 
         try:
@@ -71,6 +66,9 @@ def forecasting(places, month, day, year):
                 r = (i*len(places.loc[places['Hour'] == 0]))
                 if d != 0:
                     r = (i*len(places.loc[places['Hour'] == 0]))+d
+                date = datetime.datetime(yoa, moa, dayoa, int(places.Hour.values[r]), mioa, soa)
+                unixtime = date.strftime('%s')
+                places.Unix.values[r] = unixtime
                 hour = places.Hour.values[r]
                 for k, value in enumerate(forecastcall.hourly):
                 # Retrieving weather for previous weather
@@ -170,7 +168,7 @@ def forecasting(places, month, day, year):
         if d % 400 == 0:
             places.to_csv(filename,sep=",", index=False)
     places.to_csv(filename,sep=",", index=False)
-    end = datetime.now()
+    end = datetime.datetime.now()
     print("Duration:", end-start)
 
 
@@ -366,72 +364,74 @@ def get_etrims(dataset):
     return dataset
 
 
-def job(t, places, month,day, year):
-    print(t)
+def job(t, places):
+    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+    thistime = datetime.datetime.now()
+    if thistime.hour == 18:
+        month = tomorrow.month
+        day = tomorrow.day
+        year = tomorrow.year
+    else: 
+        month = thistime.month
+        day = thistime.day
+        year = thistime.year
+    print(t, "Using Date: ",month,"/",day,"/",year)
     forecasting(places,month,day,year)
     return
 
 def waiting(time):
-    print("Waiting:",time.strftime("%Y-%m-%d %H:%M:%S"))
+    print("Waiting:",time.strftime("%Y-%m-%d %H:%M"))
     return
 
-##These are the only lines you should have to adjust for the forecast file to work now!
-month = 3
-day = 16
-year = 2019
+print("Beginning code at:" , datetime.datetime.now())
 
+schedule.every().day.at("18:00").do(job, "Fetching weather forecast", hotspots)
+schedule.every().day.at("00:00").do(job, "Fetching weather forecast", hotspots)
+schedule.every().day.at("06:00").do(job, "Fetching weather forecast", hotspots)
+schedule.every().day.at("12:00").do(job, "Fetching weather forecast", hotspots)
 
-# thisdate = str(month)+'/'+str(day)+'/'+str(year)
-# schedule.every().day.at("18:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-# schedule.every().day.at("00:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-# schedule.every().day.at("06:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-# schedule.every().day.at("12:00").do(job, ("Fetching weather forecast for "+thisdate+" on "+time.strftime("%Y-%m-%d %H:%M:%S")), hotspots, month, day, year)
-# while True:
-#     schedule.run_pending()
-#     schedule.every(30).minutes.do(waiting, datetime.now())
-#     time.sleep(1)
+while True:
+    schedule.run_pending()
+    schedule.every(30).minutes.do(waiting, datetime.datetime.now())
+    time.sleep(30)
 
 # print(hotspots.columns.values)
 
+# test = pandas.read_csv(
+#     "../Excel & CSV Sheets/TestDay.csv", sep=",")
+# test = shuffle(test)
+# test = shuffle(test)
 
-dataset = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-20-2019_2019-03-20_12.csv", sep=",")
+# X = test.ix[:, 1:(len(test.columns)+1)].values
+# y = (test.ix[:, 0].values).reshape((138, 1))
+# print("Size of X_Test:", X.shape, "Size of y_test:", y.shape)
 
-columns = ['Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
-'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
-'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
-'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type']
+# model = Sequential()
+# model.add(Dense(30, input_dim=30, activation='sigmoid'))
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(1, activation='sigmoid'))
 
-X_test = dataset.ix[:, columns]
-# print(len(X_test.columns))
-# print(X_test.dtypes)
-# exit()
-model = Sequential()
-model.add(Dense(30, input_dim=30, activation='sigmoid'))
-model.add(Dense(28, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(1, activation='sigmoid'))
+# #           3. Compiling a model.
+# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+# model.load_weights("model.h5")
+# # Okay, now let's calculate predictions.
+# predictions = model.predict(X_test)
+# dataset["Probability"] = predictions
+# # Then, let's round to either 0 or 1, since we have only two options.
+# predictions_round = [abs(round(x[0])) for x in predictions]
+# dataset["Prediction"] = predictions_round
+# # print(rounded)
+# print("Head of predicitons: ", predictions[0:10])
+# print("Head of predictions_round: ", predictions_round)
 
-#           3. Compiling a model.
-model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-model.load_weights("model(2).h5")
-# Okay, now let's calculate predictions.
-predictions = model.predict(X_test)
-dataset["Probability"] = predictions
-# Then, let's round to either 0 or 1, since we have only two options.
-predictions_round = [abs(round(x[0])) for x in predictions]
-dataset["Predictions"] = predictions_round
-# print(rounded)
-print("Head of predictions: ", predictions[0:10])
-print("Head of predictions_round: ", predictions_round)
-
-
-dataset.to_csv("../Excel & CSV Sheets/2019-03-20_12_forecast_full.csv", sep=",")
+# dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
 # matches = 0
-#
+
 # for i, info in enumerate(forecast.values):
 #     for j, data in enumerate(monday.values):
 #         forecastHour = forecast.Hour.values[i]
