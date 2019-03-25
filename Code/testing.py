@@ -40,7 +40,7 @@ except ImportError:
 # from ann_visualizer.visualize import ann_viz
 # from keras_sequential_ascii import keras2ascii
 # from keras.models import model_from_json
-import datetime
+from datetime import datetime
 
 calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
 
@@ -52,15 +52,17 @@ for k, info in enumerate(calldata.values):
     mioa = int(toa.split(':')[1])
     soa = int(toa.split(':')[2])
     doa = calldata.Date.values[k]
-    yoa = int(doa.split('/')[2])
+    yoa = int(doa.split('/')[2])+2000
     moa = int(doa.split('/')[0])
     dayoa = int(doa.split('/')[1])
-
-    date = datetime.datetime(yoa, moa, dayoa, hoa, mioa, soa)
+    print(yoa, moa, dayoa, hoa, mioa, soa)
+    date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+    print(date)
     unixtime = date.strftime('%s')
+    print(unixtime)
     calldata.Unix.values[k] = unixtime
 calldata.to_csv("../Excel & CSV Sheets/Full Data 2.csv", sep=",", index=False)
-
+exit()
 
 
 
