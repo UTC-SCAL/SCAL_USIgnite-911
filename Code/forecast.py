@@ -11,6 +11,12 @@ import os, sys
 from os.path import exists
 from selenium import webdriver
 import schedule
+from keras.callbacks import EarlyStopping
+from keras.layers import Dense, Dropout
+from keras.models import Sequential
+from sklearn.metrics import accuracy_score, auc, roc_curve
+from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 
 hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
@@ -168,8 +174,51 @@ def forecasting(places, month, day, year):
         if d % 400 == 0:
             places.to_csv(filename,sep=",", index=False)
     places.to_csv(filename,sep=",", index=False)
+
+    test = places
+    test = shuffle(test)
+    test = shuffle(test)
+
+    columns =['Latitude','Longitude','Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
+        'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
+            'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
+                'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
+                    'Gov_Cont',	'Func_Class',	'Pavement_Width',	'Pavement_Type']
+
+
+    test = test[columns]
+
+    X_test = test
+
+    print("Size of X_Test:", X_test.shape)
+
+    model = Sequential()
+    model.add(Dense(32, input_dim=32, activation='sigmoid'))
+    model.add(Dense(28, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(20, activation='sigmoid'))
+    model.add(Dense(18, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(1, activation='sigmoid'))
+
+    #           3. Compiling a model.
+    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+    model.load_weights("model.h5")
+    # Okay, now let's calculate predictions.
+    predictions = model.predict(X_test)
+    test["Probability"] = predictions
+    # Then, let's round to either 0 or 1, since we have only two options.
+    predictions_round = [abs(round(x[0])) for x in predictions]
+    test["Prediction"] = predictions_round
+    # print(rounded)
+    print("Head of predicitons: ", predictions[0:10])
+    print("Head of predictions_round: ", predictions_round[0:10])
+
+    test.to_csv(filename, sep=",")
+
     end = datetime.datetime.now()
-    print("Duration:", end-start)
+    print("Forecasting Complete. Duration:", end-start)
 
 
 def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc, date):
