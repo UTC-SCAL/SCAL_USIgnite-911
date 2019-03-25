@@ -273,7 +273,7 @@ def append_data(calldata):
     frames = [og_calldata, calldata]
     results = pandas.concat(frames)
     header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix" 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
@@ -368,7 +368,7 @@ def get_hour_negatives(calldata):
     results = pandas.concat(frames)
     header_list = (
         "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
         "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
         'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
         "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
@@ -463,7 +463,7 @@ def get_date_negatives(calldata):
     frames = [og_calldata, negative_samples]
     results = pandas.concat(frames)
     header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow",
@@ -520,7 +520,6 @@ def get_loc_negatives(calldata):
     for i, info in enumerate(calldata.values):
         if np.isnan(negative_samples.Latitude.values[i]):
             try:
-                print(i)
                 routeID = negative_samples.Route.values[i]
                 logmile = negative_samples.Log_Mile.values[i]
                 siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
@@ -613,7 +612,7 @@ def get_loc_negatives(calldata):
     results = pandas.concat(frames)
     header_list = (
         "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
         "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
         'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
         "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
@@ -706,6 +705,10 @@ def get_weather_data(calldata):
         dayoa = int(doa.split('-')[2])
         lat = calldata.Latitude.values[k]
         long = calldata.Longitude.values[k]
+
+        date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+        unixtime = date.strftime('%s')
+        calldata.Unix.values[k] = unixtime
 
         # The following line needs to have this format:
         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
@@ -1028,7 +1031,8 @@ def main():
     # calldata = pandas.read_excel(folderpath + "",
     #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
     #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
-    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
+    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, "Unix": int,
+    #                 'Temperature': float,
     #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
     #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
     #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
@@ -1039,7 +1043,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = ""
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-12.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -1068,7 +1072,7 @@ def main():
     calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
     header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
