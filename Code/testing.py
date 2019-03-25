@@ -42,37 +42,37 @@ except ImportError:
 # from keras.models import model_from_json
 from datetime import datetime
 
-calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
-
-for k, info in enumerate(calldata.values):
-    print(k)
-    # All variables are blank-of-accident, thus year is yoa.
-    hoa = int(calldata.Hour.values[k])
-    toa = calldata.Time.values[k]
-    mioa = int(toa.split(':')[1])
-    soa = int(toa.split(':')[2])
-    doa = calldata.Date.values[k]
-    yoa = int(doa.split('/')[2])+2000
-    moa = int(doa.split('/')[0])
-    dayoa = int(doa.split('/')[1])
-    print(yoa, moa, dayoa, hoa, mioa, soa)
-    date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
-    print(date)
-    unixtime = date.strftime('%s')
-    print(unixtime)
-    calldata.Unix.values[k] = unixtime
-calldata.to_csv("../Excel & CSV Sheets/Full Data 2.csv", sep=",", index=False)
-exit()
-
-
+# calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
+#
+# for k, info in enumerate(calldata.values):
+#     print(k)
+#     # All variables are blank-of-accident, thus year is yoa.
+#     hoa = int(calldata.Hour.values[k])
+#     toa = calldata.Time.values[k]
+#     mioa = int(toa.split(':')[1])
+#     soa = int(toa.split(':')[2])
+#     doa = calldata.Date.values[k]
+#     yoa = int(doa.split('/')[2])+2000
+#     moa = int(doa.split('/')[0])
+#     dayoa = int(doa.split('/')[1])
+#     print(yoa, moa, dayoa, hoa, mioa, soa)
+#     date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+#     print(date)
+#     unixtime = date.strftime('%s')
+#     print(unixtime)
+#     calldata.Unix.values[k] = unixtime
+# calldata.to_csv("../Excel & CSV Sheets/Full Data 2.csv", sep=",", index=False)
+# exit()
 
 
-thistime = datetime.datetime.now()
-month = thistime.month
-day = thistime.day
-year = thistime.year
-print("Using Date: ",month,"/",day,"/",year)
-exit()
+
+
+# thistime = datetime.datetime.now()
+# month = thistime.month
+# day = thistime.day
+# year = thistime.year
+# print("Using Date: ",month,"/",day,"/",year)
+# exit()
 
 
 
@@ -83,44 +83,44 @@ test = pandas.read_csv(file, sep=",")
 test = shuffle(test)
 test = shuffle(test)
 
-columns =['Latitude','Longitude','Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
-	'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
-    	'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
-        	'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
-            	'Gov_Cont',	'Func_Class',	'Pavement_Width',	'Pavement_Type']
-
-
-test = test[columns]
-
-X_test = test
-
-print("Size of X_Test:", X_test.shape)
-
-model = Sequential()
-model.add(Dense(32, input_dim=32, activation='sigmoid'))
-model.add(Dense(28, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(1, activation='sigmoid'))
-
-#           3. Compiling a model.
-model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-model.load_weights("model.h5")
-# Okay, now let's calculate predictions.
-predictions = model.predict(X_test)
-test["Probability"] = predictions
-# Then, let's round to either 0 or 1, since we have only two options.
-predictions_round = [abs(round(x[0])) for x in predictions]
-test["Prediction"] = predictions_round
-# print(rounded)
-print("Head of predicitons: ", predictions[0:10])
-print("Head of predictions_round: ", predictions_round[0:10])
-
-test.to_csv(file, sep=",")
-exit()
+# columns =['Latitude','Longitude','Log_Mile','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
+# 	'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
+#     	'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
+#         	'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
+#             	'Gov_Cont',	'Func_Class',	'Pavement_Width',	'Pavement_Type']
+#
+#
+# test = test[columns]
+#
+# X_test = test
+#
+# print("Size of X_Test:", X_test.shape)
+#
+# model = Sequential()
+# model.add(Dense(32, input_dim=32, activation='sigmoid'))
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(1, activation='sigmoid'))
+#
+# #           3. Compiling a model.
+# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+# model.load_weights("model.h5")
+# # Okay, now let's calculate predictions.
+# predictions = model.predict(X_test)
+# test["Probability"] = predictions
+# # Then, let's round to either 0 or 1, since we have only two options.
+# predictions_round = [abs(round(x[0])) for x in predictions]
+# test["Prediction"] = predictions_round
+# # print(rounded)
+# print("Head of predicitons: ", predictions[0:10])
+# print("Head of predictions_round: ", predictions_round[0:10])
+#
+# test.to_csv(file, sep=",")
+# exit()
 
 
 
@@ -661,7 +661,7 @@ exit()
 # from sklearn import preprocessing
 # import pandas
 # # Get column names first
-# df = pandas.read_csv("../Excel & CSV Sheets/Full Data for Model LatLong Unix.csv", sep=",")
+# df = pandas.read_csv("../Excel & CSV Sheets/Full Data for Model", sep=",")
 # names = df.columns
 # # Create the Scaler object
 # scaler = preprocessing.MinMaxScaler()
