@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_07_forecast_full.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_12_forecast_full.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/AverageHolder2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ComputedTestAverages.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/ComputedTestAverages3000Epochs.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data 2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Accidents Only.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Normalized.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Standardized MinMax.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Standardized.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data TestDay.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Unix.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model LatLong Unix.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Jan28Feb28Hotspotsabove5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/forecast.py" afterPath="$PROJECT_DIR$/Code/forecast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/testing.py" afterPath="$PROJECT_DIR$/Code/testing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +31,7 @@
       <file leaf-file-name="NetworkModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="1586">
               <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
               <folding>
                 <element signature="e#412#421#0" expanded="true" />
@@ -33,8 +44,8 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="624" column="0" lean-forward="true" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
+            <state relative-caret-position="-297">
+              <caret line="1024" column="0" lean-forward="true" selection-start-line="1024" selection-start-column="0" selection-end-line="1024" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#375#3347#0" expanded="false" />
@@ -49,7 +60,20 @@
                 <element signature="e#14348#20449#0" expanded="false" />
                 <element signature="e#20490#26834#0" expanded="false" />
                 <element signature="e#26874#35836#0" expanded="false" />
-                <element signature="e#38080#54669#0" expanded="false" />
+                <element signature="e#35945#38041#0" expanded="false" />
+                <element signature="e#38080#54809#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scratchSheet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="630" column="0" lean-forward="true" selection-start-line="630" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+              <folding>
+                <element signature="e#523#622#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,10 +82,40 @@
       <file leaf-file-name="forecast.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/forecast.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11232">
-              <caret line="432" column="0" lean-forward="false" selection-start-line="432" selection-start-column="0" selection-end-line="432" selection-end-column="0" />
+            <state relative-caret-position="10946">
+              <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
               <folding>
-                <marker date="1553534607854" expanded="true" signature="20005:20675" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="10322:10344" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="10419:12796" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="10432:10506" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="11663:11734" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="12156:12276" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="12823:19556" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="13354:14006" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="13831:13959" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="14675:17073" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="14729:15066" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="14803:15066" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="14904:15066" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15118:15518" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15190:15518" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15287:15518" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15569:15869" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15640:15869" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15735:15869" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="15925:16359" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16001:16359" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16106:16359" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16165:16359" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16413:17073" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16487:17073" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="16588:17073" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="17155:19537" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="19578:19998" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="19711:19798" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="19808:19896" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="20018:20083" ph="..." />
+                <marker date="1553536140425" expanded="true" signature="20588:22599" ph="..." />
               </folding>
             </state>
           </provider>
@@ -181,10 +235,10 @@
         <option value="$PROJECT_DIR$/Code/daemonService.py" />
         <option value="$PROJECT_DIR$/Code/serviceRunner.py" />
         <option value="$PROJECT_DIR$/Code/gmailService.py" />
-        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/Code/forecast.py" />
-        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
         <option value="$PROJECT_DIR$/Code/testing.py" />
+        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
       </list>
     </option>
   </component>
@@ -212,6 +266,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,8 +290,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -269,7 +323,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
+  <component name="RunManager" selected="Python.scratchSheet">
     <configuration name="forecast" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -364,8 +418,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="0" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
         <item index="2" class="java.lang.String" itemvalue="Python.forecast" />
         <item index="3" class="java.lang.String" itemvalue="Python.testing" />
         <item index="4" class="java.lang.String" itemvalue="Python.roadwayGPS" />
@@ -382,13 +436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Cleaned alot of folders">
-      <created>1542725504494</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1542725504495</updated>
     </task>
     <task id="LOCAL-00074" summary="Cleaned alot of folders">
       <created>1543252676487</created>
@@ -726,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553518697436</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="More data">
+      <created>1553534738985</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1553534738985</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TodoView">
@@ -741,26 +795,26 @@
   <component name="ToolWindowManager">
     <frame x="2576" y="175" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2716115" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27481323" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39961758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39961758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -828,11 +882,11 @@
     <MESSAGE value="Cleaned alot of folders" />
     <MESSAGE value="Changed name of main folder to reflect project" />
     <MESSAGE value="More data, and removed some old files" />
-    <MESSAGE value="More data" />
     <MESSAGE value="Refreshing some Files" />
     <MESSAGE value="New data" />
     <MESSAGE value="Now we have negative samples by location" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now we have negative samples by location" />
+    <MESSAGE value="More data" />
+    <option name="LAST_COMMIT_MESSAGE" value="More data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -844,7 +898,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Code/negativeSampling.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-02-15.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -921,12 +974,12 @@
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/2019-03-03_Mar_hotspotsForecast.csv" />
     <entry file="file://$PROJECT_DIR$/Code/fetchingForecast.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv">
-      <provider editor-type-id="text-editor">
+      <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="LargeFileEditor">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
@@ -1000,7 +1053,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1586">
           <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
           <folding>
             <element signature="e#412#421#0" expanded="true" />
@@ -1024,31 +1077,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/.~lock.2019-03-20_12_forecast_full.csv#" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_07_forecast_full.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_12_forecast_full.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_07_forecast_full.csv" />
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-20_12_forecast_full.csv" />
     <entry file="file://$PROJECT_DIR$/Code/daemonService.py" />
     <entry file="file://$PROJECT_DIR$/Code/serviceRunner.py" />
     <entry file="file://$PROJECT_DIR$/Code/gmailService.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New NS(Location) Milestone 2.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New NS(Location) Milestone 3.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1057,20 +1093,48 @@
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="630" column="0" lean-forward="false" selection-start-line="630" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/forecast.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11232">
-          <caret line="432" column="0" lean-forward="false" selection-start-line="432" selection-start-column="0" selection-end-line="432" selection-end-column="0" />
+        <state relative-caret-position="10946">
+          <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
           <folding>
-            <marker date="1553534607854" expanded="true" signature="20005:20675" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="10322:10344" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="10419:12796" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="10432:10506" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="11663:11734" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="12156:12276" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="12823:19556" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="13354:14006" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="13831:13959" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="14675:17073" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="14729:15066" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="14803:15066" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="14904:15066" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15118:15518" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15190:15518" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15287:15518" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15569:15869" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15640:15869" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15735:15869" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="15925:16359" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16001:16359" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16106:16359" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16165:16359" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16413:17073" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16487:17073" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="16588:17073" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="17155:19537" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="19578:19998" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="19711:19798" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="19808:19896" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="20018:20083" ph="..." />
+            <marker date="1553536140425" expanded="true" signature="20588:22599" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1079,14 +1143,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model LatLong Unix.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/scratchSheet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="630" column="0" lean-forward="true" selection-start-line="630" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+          <folding>
+            <element signature="e#523#622#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="624" column="0" lean-forward="true" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
+        <state relative-caret-position="-297">
+          <caret line="1024" column="0" lean-forward="true" selection-start-line="1024" selection-start-column="0" selection-end-line="1024" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#375#3347#0" expanded="false" />
@@ -1101,7 +1181,8 @@
             <element signature="e#14348#20449#0" expanded="false" />
             <element signature="e#20490#26834#0" expanded="false" />
             <element signature="e#26874#35836#0" expanded="false" />
-            <element signature="e#38080#54669#0" expanded="false" />
+            <element signature="e#35945#38041#0" expanded="false" />
+            <element signature="e#38080#54809#0" expanded="false" />
           </folding>
         </state>
       </provider>

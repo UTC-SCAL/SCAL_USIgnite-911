@@ -707,6 +707,10 @@ def get_weather_data(calldata):
         lat = calldata.Latitude.values[k]
         long = calldata.Longitude.values[k]
 
+        date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+        unixtime = date.strftime('%s')
+        calldata.Unix.values[k] = unixtime
+
         # The following line needs to have this format:
         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
         call = key, lat, long
