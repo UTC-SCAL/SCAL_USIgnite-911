@@ -119,7 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data for Model.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Standardized MinMax Reduced.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
@@ -212,7 +212,7 @@ print(model.summary())
 
 
 for i in range(0, 50):
-    file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder2.csv"
+    file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
     # names = train.columns.values[1:-1]
     # dataset = shuffle(dataset)
     # dataset = shuffle(dataset)
@@ -220,8 +220,8 @@ for i in range(0, 50):
         X, Y, test_size=0.30, random_state=42)
     X_test, X_valid, y_test, y_valid = train_test_split(
         X_test, y_test, test_size=0.90, random_state=42)
-    if exists('model.json'):
-        model.load_weights("model.h5")
+    if exists('modelreduced.h5'):
+        model.load_weights("modelreduced.h5")
         print("Loading Model")
     # print(model.summary())
     if exists(file):
@@ -242,7 +242,7 @@ for i in range(0, 50):
     #     with open("model.json", "w") as json_file:
     #         json_file.write(model_json)
     #     # serialize weights to HDF5
-    model.save_weights("model.h5")
+    model.save_weights("modelreduced.h5")
     print("Saved model to disk")
 
     # This is evaluating the model, and printing the results of the epochs.
@@ -269,5 +269,5 @@ for i in range(0, 50):
     avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
     avg_holder.loc[j, 'AUC'] = roc_auc
     avg_holder.to_csv(file, sep=",")
-
-    # generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
+    if i ==0 or i == 50:
+        generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
