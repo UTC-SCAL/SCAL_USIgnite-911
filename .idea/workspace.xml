@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Standardized MinMax.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Standardized MinMax.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +18,12 @@
       <file leaf-file-name="NetworkModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
+            <state relative-caret-position="0">
               <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
               <folding>
                 <element signature="e#412#421#0" expanded="true" />
                 <element signature="e#1267#3835#0" expanded="false" />
+                <marker date="1553614926523" expanded="true" signature="10026:10089" ph="..." />
               </folding>
             </state>
           </provider>
@@ -37,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="1034" column="43" lean-forward="true" selection-start-line="1034" selection-start-column="43" selection-end-line="1034" selection-end-column="43" />
+              <caret line="1034" column="43" lean-forward="false" selection-start-line="1034" selection-start-column="43" selection-end-line="1034" selection-end-column="43" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#375#3347#0" expanded="false" />
@@ -62,40 +58,10 @@
       <file leaf-file-name="forecast.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/forecast.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10946">
+            <state relative-caret-position="12064">
               <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
               <folding>
                 <marker date="1553536140425" expanded="true" signature="10322:10344" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="10419:12796" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="10432:10506" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="11663:11734" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="12156:12276" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="12823:19556" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="13354:14006" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="13831:13959" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="14675:17073" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="14729:15066" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="14803:15066" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="14904:15066" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15118:15518" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15190:15518" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15287:15518" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15569:15869" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15640:15869" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15735:15869" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="15925:16359" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16001:16359" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16106:16359" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16165:16359" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16413:17073" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16487:17073" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="16588:17073" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="17155:19537" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="19578:19998" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="19711:19798" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="19808:19896" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="20018:20083" ph="..." />
-                <marker date="1553536140425" expanded="true" signature="20588:22599" ph="..." />
               </folding>
             </state>
           </provider>
@@ -303,7 +269,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
+  <component name="RunManager" selected="Python.standardizeData">
     <configuration name="forecast" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -338,23 +304,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="roadwayGPS" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RolandProjects" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/roadwayGPS.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="scratchSheet" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -368,6 +317,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RolandProjects" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/scratchSheet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="standardizeData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RolandProjects" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/standardizeData.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -391,18 +357,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-      <item index="1" class="java.lang.String" itemvalue="Python.roadwayGPS" />
-      <item index="2" class="java.lang.String" itemvalue="Python.testing" />
-      <item index="3" class="java.lang.String" itemvalue="Python.forecast" />
-      <item index="4" class="java.lang.String" itemvalue="Python.scratchSheet" />
+      <item index="1" class="java.lang.String" itemvalue="Python.testing" />
+      <item index="2" class="java.lang.String" itemvalue="Python.forecast" />
+      <item index="3" class="java.lang.String" itemvalue="Python.scratchSheet" />
+      <item index="4" class="java.lang.String" itemvalue="Python.standardizeData" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.gmailReader" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratchSheet" />
-        <item index="2" class="java.lang.String" itemvalue="Python.forecast" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testing" />
-        <item index="4" class="java.lang.String" itemvalue="Python.roadwayGPS" />
+        <item index="0" class="java.lang.String" itemvalue="Python.standardizeData" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gmailReader" />
+        <item index="2" class="java.lang.String" itemvalue="Python.scratchSheet" />
+        <item index="3" class="java.lang.String" itemvalue="Python.forecast" />
+        <item index="4" class="java.lang.String" itemvalue="Python.testing" />
       </list>
     </recent_temporary>
   </component>
@@ -416,13 +382,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Cleaned alot of folders">
-      <created>1543506010867</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1543506010868</updated>
     </task>
     <task id="LOCAL-00078" summary="Cleaned alot of folders">
       <created>1543589068775</created>
@@ -760,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553538980936</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="New Data">
+      <created>1553540391946</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1553540391946</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TodoView">
@@ -775,7 +741,7 @@
   <component name="ToolWindowManager">
     <frame x="2576" y="175" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27481323" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27801493" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -884,13 +850,7 @@
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full2.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Jan28Feb28Hotspotsabove5.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="103" lean-forward="true" selection-start-line="9" selection-start-column="103" selection-end-line="9" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Jan28Feb28Hotspotsabove5.csv" />
     <entry file="file://$PROJECT_DIR$/Code/AutomatedData.py" />
     <entry file="file://$PROJECT_DIR$/Code/featureSelectionTesting.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -949,12 +909,12 @@
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/2019-03-03_Mar_hotspotsForecast.csv" />
     <entry file="file://$PROJECT_DIR$/Code/fetchingForecast.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
+      <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
@@ -968,13 +928,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Normalized Data Saver.csv" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/test_loc.csv" />
     <entry file="file://$PROJECT_DIR$/Code/dataNormalizer.py" />
     <entry file="file://$PROJECT_DIR$/Code/gmailReaderBackup.py">
@@ -1049,6 +1003,11 @@
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New NS(Location) Milestone 2.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New NS(Location) Milestone 3.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1057,64 +1016,22 @@
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/forecast.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10946">
+        <state relative-caret-position="12064">
           <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
           <folding>
             <marker date="1553536140425" expanded="true" signature="10322:10344" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="10419:12796" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="10432:10506" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="11663:11734" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="12156:12276" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="12823:19556" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="13354:14006" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="13831:13959" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="14675:17073" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="14729:15066" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="14803:15066" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="14904:15066" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15118:15518" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15190:15518" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15287:15518" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15569:15869" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15640:15869" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15735:15869" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="15925:16359" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16001:16359" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16106:16359" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16165:16359" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16413:17073" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16487:17073" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="16588:17073" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="17155:19537" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="19578:19998" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="19711:19798" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="19808:19896" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="20018:20083" ph="..." />
-            <marker date="1553536140425" expanded="true" signature="20588:22599" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model LatLong Unix.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model LatLong Unix.csv" />
     <entry file="file://$PROJECT_DIR$/Code/testing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="665" column="28" lean-forward="true" selection-start-line="665" selection-start-column="28" selection-end-line="665" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,29 +1039,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="630" column="0" lean-forward="true" selection-start-line="630" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
           <folding>
-            <element signature="e#523#622#0" expanded="false" />
+            <element signature="e#412#421#0" expanded="true" />
+            <element signature="e#1267#3835#0" expanded="false" />
+            <marker date="1553614926523" expanded="true" signature="10026:10089" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/standardizeData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="260">
+          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
-          <folding>
-            <element signature="e#412#421#0" expanded="true" />
-            <element signature="e#1267#3835#0" expanded="false" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1152,7 +1067,7 @@
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="1034" column="43" lean-forward="true" selection-start-line="1034" selection-start-column="43" selection-end-line="1034" selection-end-column="43" />
+          <caret line="1034" column="43" lean-forward="false" selection-start-line="1034" selection-start-column="43" selection-end-line="1034" selection-end-column="43" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#375#3347#0" expanded="false" />
