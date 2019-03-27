@@ -13,7 +13,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r}
 library(ggmap)
-utc=read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data.csv", header=T)
+utc=read.csv("../Excel & CSV Sheets/Full Data.csv", header=T)
 # min(utc$Latitude)
 # max(utc$Latitude)
 # min(utc$Longitude)
@@ -69,7 +69,7 @@ lats<-c(34.99, 35.15)
 lons<-c(-85.4,-85.05)
 
 
-# png("HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
+# png("../Graphs & Images/R Maps/HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 calc_zoom(bb)
@@ -91,63 +91,109 @@ ggmap(cda, legend = "bottom") +
 ```{r}
 library(ggmap)
 
-accidents =read.csv("/Users/pete/Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-22.csv", header=T)
+accidents =read.csv("../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-22.csv", header=T)
 colnames(accidents)
-forecast18 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-21_18 other.csv", header=T)
-nrow(forecast18)
-forecast00 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_0.csv", header=T)
+# forecast18 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-21_18 other.csv", header=T)
+# nrow(forecast18)
+# forecast00 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_0.csv", header=T)
 
-forecast06 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_6.csv", header=T)
-
-forecast12 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv", header=T)
-
-a=which(forecast18$Prediction==1)
-length(a)
-forecast18=forecast18[a,]
-nrow(forecast18)
-
-a=which(forecast00$Prediction==1)
-forecast00=forecast00[a,]
+forecast06 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_6.csv", header=T)
+# 
+# forecast12 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv", header=T)
+#
+# a=which(forecast18$Prediction==1)
+# length(a)
+# forecast18=forecast18[a,]
+# nrow(forecast18)
+#
+# a=which(forecast00$Prediction==1)
+# forecast00=forecast00[a,]
+# a=which(forecast06$Prediction==1)
+# forecast06=forecast06[a,]
 a=which(forecast06$Prediction==1)
 forecast06=forecast06[a,]
-a=which(forecast12$Prediction==1)
-forecast12=forecast12[a,]
 
 # colnames(accidents)
 # colnames(forecast1)
 # colnames(forecast2)
-sixPM = which(forecast18$Probability>=0.92)
-forecast18=forecast18[sixPM,]
-cat("Number of entries above 92 percent sure, 6PM",nrow(forecast18))
+sixPM = which(forecast06$Probability>=0.50)
+forecast06=forecast06[sixPM,]
+cat("Number of entries above 50 percent sure, 6AM",nrow(forecast06))
 
-midnight = which(forecast00$Probability>=0.92)
-forecast00=forecast00[midnight,]
-cat("\nNumber of entries above 92 percent sure, midnight",nrow(forecast00))
-sixAM = which(forecast06$Probability>=0.92)
-forecast06=forecast06[sixAM,]
-cat("\nNumber of entries above 92 percent sure, 6AM",nrow(forecast06))
-noon = which(forecast12$Probability>=0.92)
-forecast12=forecast12[noon,]
-cat("\nNumber of entries above 92 percent sure, noon",nrow(forecast12))
+midnight = which(forecast06$Probability>=0.50)
+forecast06_50=forecast06[midnight,]
+cat("\nNumber of entries above 50 percent sure",nrow(forecast06_50))
+midnight = which(forecast06$Probability>=0.70)
+forecast06_70=forecast06[midnight,]
+cat("\nNumber of entries above 70 percent sure",nrow(forecast06_70))
+midnight = which(forecast06$Probability>=0.90)
+forecast06_90=forecast06[midnight,]
+cat("\nNumber of entries above 90 percent sure",nrow(forecast06_90))
 
+# sixAM = which(forecast06$Probability>=0.50)
+# forecast06=forecast06[sixAM,]
+# cat("\nNumber of entries above 50 percent sure, 6AM",nrow(forecast06))
+# noon = which(forecast12$Probability>=0.50)
+# forecast12=forecast12[noon,]
+# cat("\nNumber of entries above 50 percent sure, noon",nrow(forecast12))
+
+# add_points <- function(df, colored, sized, alphed) {
+#   geom_point(aes(x=df$Longitude, y=df$Latitude),data=df, color= colored, alpha=alphed, size=sized)
+# }
 
 lats<-c(34.99, 35.45)
 lons<-c(-85.4,-85.05)
-png("ForecastsforMarch20versusAccidents92Threshold_Mar22_midnight.png", width=12,height=12,units='in', res=300)
+png("../Graphs & Images/R Maps/50thresh_6am_March22.png", width=12,height=12,units='in', res=900)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 # calc_zoom(bb)
-# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
-cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
-ggmap(cda, legend = 'bottom') +
-  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22) +
-  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - .60 Threshold") + 
-  # geom_point(aes(x=forecast18$Longitude, y=forecast18$Latitude), color= 'blue', data=forecast18, alpha=.3, size=.5)+
-  geom_point(aes(x=forecast00$Longitude, y=forecast00$Latitude),data=forecast00, color= 'green', alpha=.3, size=.5)  +
-  # geom_point(aes(x=forecast06$Longitude, y=forecast06$Latitude), data=forecast06, color= 'purple', alpha=.3, size=.5)  +
-  # geom_point(aes(x=forecast12$Longitude, y=forecast12$Latitude), data=forecast12, color= 'lightblue', alpha=.3, size=.5)  + 
-  geom_point(aes(x=Longitude, y=Latitude), alpha=.7,size=2, data=accidents, color='black') 
-# + 
-#   scale_color_manual(values = c("blue","green","purple","teal","black"),  labels = c("6pm Forecast","Midnight Forecast","6am Forecast","Noon Forecast","Accidents"), name = "")
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .5 Threshold") +
+  geom_point(aes(x=forecast06_50$Longitude, y=forecast06_50$Latitude), data=forecast06_50, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+
+png("../Graphs & Images/R Maps/70thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .7 Threshold") +
+  geom_point(aes(x=forecast06_70$Longitude, y=forecast06_70$Latitude), data=forecast06_70, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+png("../Graphs & Images/R Maps/90thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .9 Threshold") +
+  geom_point(aes(x=forecast06_90$Longitude, y=forecast06_90$Latitude), data=forecast06_90, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+```
+
+```{r}
+sixteen = which(forecast06$Hour == 16)
+forecast18_16=forecast06[sixteen,]
+
+sixteenseventeen = which(accidents$Hour == 16,accidents$Hour == 17)
+accidents_1617=accidents[sixteenseventeen,]
+
+png("../Graphs & Images/R Maps/March22_6pm_1617_heatmap.png", width=12,height=12,units='in', res=1080)
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) + stat_density2d(data=forecast18_16, aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon", size=0.01, bins=16)+scale_fill_gradient(low="blue", high="purple") + scale_alpha(range = c(0,0.3), guide=FALSE) + 
+  geom_point(aes(x=accidents_1617$Longitude, y=accidents_1617$Latitude), data=accidents_1617, color= 'red', alpha=1, size=1.5)
 dev.off()
 ```
+
