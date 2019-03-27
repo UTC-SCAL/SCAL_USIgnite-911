@@ -13,90 +13,141 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r}
 library(ggmap)
-# utc=read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data.csv", header=T)
+utc=read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data.csv", header=T)
 # min(utc$Latitude)
 # max(utc$Latitude)
 # min(utc$Longitude)
 # max(utc$Longitude)
-# 
-# a=which(utc$Accident==1)
-# df=utc[a,]
-# 
-# locations=data.frame(df$Route, df$Longitude, df$Latitude)
-# u=unique(locations)
-# 
-# sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
-# for (i in 1:dim(u)[1]){
-# w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
-# 	df$Latitude==u[i,3])
-# sums[i]<-length(df$Accident[w])
-# }
-# 
-# df4=data.frame(u, sums)#uniques locations and the number of accidents there
-# 
-# rank=rep(NA, dim(df4)[1])
-# rank[which(sums<=10 & sums>25)]<-'yellow'
-# rank[which(sums<=50 & sums>25)]<-'orange'
-# rank[which(sums<=70 & sums>50)]<-'red'
-# rank[which(sums>70)]<-'black'
-# 
-# locs=data.frame(u[,2:3])
+#
+a=which(utc$Accident==1)
+df=utc[a,]
+
+# #
+locations=data.frame(df$Route, df$Longitude, df$Latitude)
+u=unique(locations)
+# #
+sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+for (i in 1:dim(u)[1]){
+w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
+	df$Latitude==u[i,3])
+sums[i]<-length(df$Accident[w])
+}
+
+# #
+df4=data.frame(u, sums)#uniques locations and the number of accidents there
+# hs = which(df4$sums>25)
+# df4=df4[hs,]
+
+# #
+rank=rep(NA, dim(df4)[1])
+rank[which(sums<=25)] <-'yellow'
+rank[which(sums<=75)] <-'orange'
+rank[which(sums<=125)] <-'red'
+rank[which(sums>=150)] <-'black'
+
+
+locs=data.frame(u[,2:3])
 # 
 # y=which(rank=='yellow')
 # r=which(rank=='red')
 # b=which(rank=='black')
 # o = which(rank=='orange')
-lats<-c(34.99, 35.29)
-lons<-c(-85.4,-85.05)
-# black = locs[b,]
-# yellow = locs[y,]
-# red = locs[r,]
-# orange = locs[o,]
-# bluedf = do.call(rbind.data.frame, blue)
-# reddf = do.call(rbind.data.frame, red)
-# yellowdf = do.call(rbind.data.frame, yellow)
-# red$df.Latitude[0:5]
-# stop()
-# typeof(blue)
-# stop()
 
-# png("HamiltonHotSpotsMapstamen.png", width=10,height=10,units='in', res=300)
-par(mar = rep(4, 4))
-bb<-make_bbox(lon=lons,lat=lats)
+# df4[0:10,]
+
+df4$rank <- rank
+
+
+df5 = df4[!is.na(df4$rank),]
+df5[0:10,]
+
+
+df5$rank = with(df5, reorder(df5$rank, df5$sum))
+df5[0:10,]
+
+lats<-c(34.99, 35.15)
+lons<-c(-85.4,-85.05)
+
+
+# png("HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
 # bb<-make_bbox(lon=lons,lat=lats,f=0.05)
 cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
-ggmap(cda, legend="right") +
-  xlim(lons)+ylim(lats)+theme_minimal()+
-  labs(x="Longitude",y="Latitude", main="Hamilton County") +
-  geom_point(aes(x=df.Longitude, y=df.Latitude), data=yellow, alpha = .6, color="white", size = 1, show.legend = TRUE) +
-  geom_point(aes(x=df.Longitude, y=df.Latitude), data=black,  alpha = .6, color="purple", size = 3, show.legend = TRUE) + 
-  geom_point(aes(x=df.Longitude, y=df.Latitude), data=red,  alpha = .6, color="red", size = 2, show.legend = TRUE) + 
-  geom_point(aes(x=df.Longitude, y=df.Latitude), data=orange,  alpha = .6, color="orange", size = 1.5, show.legend = TRUE) 
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+  geom_point(aes(x=df.Longitude, y=df.Latitude, color=df5$rank), data=df5, alpha = .75)  + guides( guide = "none" ) + scale_color_manual(values = c("orange","red","black"),  labels = c("25 - 50","50 - 75"," > 75"), name = "Accidents")
 
-# theme(legend.position = "bottom") 
 
-# scale_fill_discrete(name = "Accidents",labels = c("A", "B", "C", "D"))
-
-#scale_color_distiller(palette = "YlOrRd", direction = 1)
-  
-  # theme(legend.text = element_text(size = 16),
-  #       legend.position="topleft")
-# legend("topleft",c( '(10,25]', '(25,50]','(50,70]', '>70'), pch = 16,
-# 	pt.cex=c(.2,.5,.5,1), cex = 1,
-# 	       	col = c( 'yellow','orange', 'red', 'black'),
-# 		title='# of Accidents', box.col='black', bg='grey')
+               # Inside the ggmap call, put this : , legend="right"
 
 # dev.off()
 
 
 ```
 
-## Including Plots
+```{r}
+library(ggmap)
 
-You can also embed plots, for example:
+accidents =read.csv("/Users/pete/Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-22.csv", header=T)
+colnames(accidents)
+forecast18 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-21_18 other.csv", header=T)
+nrow(forecast18)
+forecast00 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_0.csv", header=T)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+forecast06 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_6.csv", header=T)
+
+forecast12 =read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv", header=T)
+
+a=which(forecast18$Prediction==1)
+length(a)
+forecast18=forecast18[a,]
+nrow(forecast18)
+
+a=which(forecast00$Prediction==1)
+forecast00=forecast00[a,]
+a=which(forecast06$Prediction==1)
+forecast06=forecast06[a,]
+a=which(forecast12$Prediction==1)
+forecast12=forecast12[a,]
+
+# colnames(accidents)
+# colnames(forecast1)
+# colnames(forecast2)
+sixPM = which(forecast18$Probability>=0.92)
+forecast18=forecast18[sixPM,]
+cat("Number of entries above 92 percent sure, 6PM",nrow(forecast18))
+
+midnight = which(forecast00$Probability>=0.92)
+forecast00=forecast00[midnight,]
+cat("\nNumber of entries above 92 percent sure, midnight",nrow(forecast00))
+sixAM = which(forecast06$Probability>=0.92)
+forecast06=forecast06[sixAM,]
+cat("\nNumber of entries above 92 percent sure, 6AM",nrow(forecast06))
+noon = which(forecast12$Probability>=0.92)
+forecast12=forecast12[noon,]
+cat("\nNumber of entries above 92 percent sure, noon",nrow(forecast12))
+
+
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+png("ForecastsforMarch20versusAccidents92Threshold_Mar22_midnight.png", width=12,height=12,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = 'bottom') +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - .60 Threshold") + 
+  # geom_point(aes(x=forecast18$Longitude, y=forecast18$Latitude), color= 'blue', data=forecast18, alpha=.3, size=.5)+
+  geom_point(aes(x=forecast00$Longitude, y=forecast00$Latitude),data=forecast00, color= 'green', alpha=.3, size=.5)  +
+  # geom_point(aes(x=forecast06$Longitude, y=forecast06$Latitude), data=forecast06, color= 'purple', alpha=.3, size=.5)  +
+  # geom_point(aes(x=forecast12$Longitude, y=forecast12$Latitude), data=forecast12, color= 'lightblue', alpha=.3, size=.5)  + 
+  geom_point(aes(x=Longitude, y=Latitude), alpha=.7,size=2, data=accidents, color='black') 
+# + 
+#   scale_color_manual(values = c("blue","green","purple","teal","black"),  labels = c("6pm Forecast","Midnight Forecast","6am Forecast","Noon Forecast","Accidents"), name = "")
+dev.off()
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
