@@ -119,10 +119,11 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Standardized MinMax Reduced.csv", sep=",")
+dataset = pandas.read_csv("/Users/pete/Desktop/Book1.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
+# dataset.drop(['Temp_Max','Temp_Min','Gov_Cont','Access_Control'], axis=1)
 # train = pandas.read_csv(
 #     "../Excel & CSV Sheets/Full Data TestDay.csv", sep=",")
 # train = shuffle(train)
@@ -211,7 +212,7 @@ print(model.summary())
 # generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
 
 
-for i in range(0, 50):
+for i in range(0, 100):
     file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
     # names = train.columns.values[1:-1]
     # dataset = shuffle(dataset)
@@ -220,8 +221,8 @@ for i in range(0, 50):
         X, Y, test_size=0.30, random_state=42)
     X_test, X_valid, y_test, y_valid = train_test_split(
         X_test, y_test, test_size=0.90, random_state=42)
-    if exists('modelreduced.h5'):
-        model.load_weights("modelreduced.h5")
+    if exists('model_reduced.h5'):
+        model.load_weights("model_reduced.h5")
         print("Loading Model")
     # print(model.summary())
     if exists(file):
@@ -242,7 +243,7 @@ for i in range(0, 50):
     #     with open("model.json", "w") as json_file:
     #         json_file.write(model_json)
     #     # serialize weights to HDF5
-    model.save_weights("modelreduced.h5")
+    model.save_weights("model_reduced.h5")
     print("Saved model to disk")
 
     # This is evaluating the model, and printing the results of the epochs.

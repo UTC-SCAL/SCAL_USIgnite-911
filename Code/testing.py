@@ -40,9 +40,63 @@ except ImportError:
 # from ann_visualizer.visualize import ann_viz
 # from keras_sequential_ascii import keras2ascii
 # from keras.models import model_from_json
+
+filename = "../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv"
+test = pandas.read_csv(filename,sep=",")
+# test = shuffle(test)
+# test = shuffle(test)
+
+columns =['Latitude','Longitude','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
+    'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
+        'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
+            'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
+                'Gov_Cont',	'Access_Control','Func_Class',	'Pavement_Width',	'Pavement_Type']
+# test2 = test[columns]
+# test2.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast Test.csv")
+
+
+
+
+test2 = test[columns]
+print(test2.columns.values)
+print(test2.shape)
+
+X_test = test2
+
+print("Size of X_Test:", X_test.shape)
+
+model = Sequential()
+model.add(Dense(32, input_dim=32, activation='sigmoid'))
+model.add(Dense(28, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(20, activation='sigmoid'))
+model.add(Dense(18, activation='sigmoid'))
+model.add(Dense(10, activation='sigmoid'))
+model.add(Dropout(.1))
+model.add(Dense(1, activation='sigmoid'))
+
+#           3. Compiling a model.
+model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+model.load_weights("model_reduced.h5")
+# Okay, now let's calculate predictions.
+predictions = model.predict(X_test)
+test["Probability"] = predictions
+# Then, let's round to either 0 or 1, since we have only two options.
+predictions_round = [abs(round(x[0])) for x in predictions]
+test["Prediction"] = predictions_round
+# print(rounded)
+print("Head of predicitons: ", predictions[0:10])
+print("Head of predictions_round: ", predictions_round[0:10])
+
+test.to_csv(filename, sep=",",index=False)
+
+
+# exit()
+
+
 from datetime import datetime
 
-calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data for Reduction.csv",sep=",")
+calldata = pandas.read_csv("/Users/pete/Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data Standardized MinMax Negatives Only.csv",sep=",")
 reduced = calldata.copy()
 
 print(len(calldata))
@@ -53,9 +107,9 @@ for i, info in enumerate(calldata.values):
     else:
         listing.append(i)
 reduced.drop(reduced.index[listing], inplace=True)
-reduced.to_csv("../Excel & CSV Sheets/Full Data for Reduction Less.csv", sep=",")
+reduced.to_csv("/Users/pete/Desktop/Full Data for Reduction Less.csv", sep=",")
 
-
+exit()
 
 # for k, info in enumerate(calldata.values):
 #     print(k)

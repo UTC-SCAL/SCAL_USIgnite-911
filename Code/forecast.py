@@ -204,7 +204,7 @@ def forecasting(places, month, day, year):
 
     #           3. Compiling a model.
     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-    model.load_weights("model.h5")
+    model.load_weights("modelreduced.h5")
     # Okay, now let's calculate predictions.
     predictions = model.predict(X_test)
     test["Probability"] = predictions

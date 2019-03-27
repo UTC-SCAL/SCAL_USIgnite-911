@@ -1,0 +1,102 @@
+---
+title: "HamiltonHotSpots"
+author: "Pete Way"
+date: "3/21/2019"
+output: pdf_document
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(ggmap)
+# utc=read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data.csv", header=T)
+# min(utc$Latitude)
+# max(utc$Latitude)
+# min(utc$Longitude)
+# max(utc$Longitude)
+# 
+# a=which(utc$Accident==1)
+# df=utc[a,]
+# 
+# locations=data.frame(df$Route, df$Longitude, df$Latitude)
+# u=unique(locations)
+# 
+# sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+# for (i in 1:dim(u)[1]){
+# w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
+# 	df$Latitude==u[i,3])
+# sums[i]<-length(df$Accident[w])
+# }
+# 
+# df4=data.frame(u, sums)#uniques locations and the number of accidents there
+# 
+# rank=rep(NA, dim(df4)[1])
+# rank[which(sums<=10 & sums>25)]<-'yellow'
+# rank[which(sums<=50 & sums>25)]<-'orange'
+# rank[which(sums<=70 & sums>50)]<-'red'
+# rank[which(sums>70)]<-'black'
+# 
+# locs=data.frame(u[,2:3])
+# 
+# y=which(rank=='yellow')
+# r=which(rank=='red')
+# b=which(rank=='black')
+# o = which(rank=='orange')
+lats<-c(34.99, 35.29)
+lons<-c(-85.4,-85.05)
+# black = locs[b,]
+# yellow = locs[y,]
+# red = locs[r,]
+# orange = locs[o,]
+# bluedf = do.call(rbind.data.frame, blue)
+# reddf = do.call(rbind.data.frame, red)
+# yellowdf = do.call(rbind.data.frame, yellow)
+# red$df.Latitude[0:5]
+# stop()
+# typeof(blue)
+# stop()
+
+# png("HamiltonHotSpotsMapstamen.png", width=10,height=10,units='in', res=300)
+par(mar = rep(4, 4))
+bb<-make_bbox(lon=lons,lat=lats)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend="right") +
+  xlim(lons)+ylim(lats)+theme_minimal()+
+  labs(x="Longitude",y="Latitude", main="Hamilton County") +
+  geom_point(aes(x=df.Longitude, y=df.Latitude), data=yellow, alpha = .6, color="white", size = 1, show.legend = TRUE) +
+  geom_point(aes(x=df.Longitude, y=df.Latitude), data=black,  alpha = .6, color="purple", size = 3, show.legend = TRUE) + 
+  geom_point(aes(x=df.Longitude, y=df.Latitude), data=red,  alpha = .6, color="red", size = 2, show.legend = TRUE) + 
+  geom_point(aes(x=df.Longitude, y=df.Latitude), data=orange,  alpha = .6, color="orange", size = 1.5, show.legend = TRUE) 
+
+# theme(legend.position = "bottom") 
+
+# scale_fill_discrete(name = "Accidents",labels = c("A", "B", "C", "D"))
+
+#scale_color_distiller(palette = "YlOrRd", direction = 1)
+  
+  # theme(legend.text = element_text(size = 16),
+  #       legend.position="topleft")
+# legend("topleft",c( '(10,25]', '(25,50]','(50,70]', '>70'), pch = 16,
+# 	pt.cex=c(.2,.5,.5,1), cex = 1,
+# 	       	col = c( 'yellow','orange', 'red', 'black'),
+# 		title='# of Accidents', box.col='black', bg='grey')
+
+# dev.off()
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
