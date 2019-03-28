@@ -41,75 +41,75 @@ except ImportError:
 # from keras_sequential_ascii import keras2ascii
 # from keras.models import model_from_json
 
-filename = "../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv"
-test = pandas.read_csv(filename,sep=",")
-# test = shuffle(test)
-# test = shuffle(test)
+# filename = "../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv"
+# test = pandas.read_csv(filename,sep=",")
+# # test = shuffle(test)
+# # test = shuffle(test)
 
-columns =['Latitude','Longitude','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
-    'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
-        'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
-            'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
-                'Gov_Cont',	'Access_Control','Func_Class',	'Pavement_Width',	'Pavement_Type']
+# columns =['Latitude','Longitude','Hour','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity',
+#     'Month','Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max',
+#         'Clear',	'Cloudy',	'Rain',	'Fog',	'Snow',	'RainBefore',	'Terrain',	'Land_Use',
+#             'Access_Control',	'Operation',	'Thru_Lanes',	'Num_Lanes',	'Ad_Sys',
+#                 'Gov_Cont',	'Access_Control','Func_Class',	'Pavement_Width',	'Pavement_Type']
+# # test2 = test[columns]
+# # test2.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast Test.csv")
+
+
+
+
 # test2 = test[columns]
-# test2.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast Test.csv")
+# print(test2.columns.values)
+# print(test2.shape)
+
+# X_test = test2
+
+# print("Size of X_Test:", X_test.shape)
+
+# model = Sequential()
+# model.add(Dense(32, input_dim=32, activation='sigmoid'))
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(1, activation='sigmoid'))
+
+# #           3. Compiling a model.
+# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+# model.load_weights("model_reduced.h5")
+# # Okay, now let's calculate predictions.
+# predictions = model.predict(X_test)
+# test["Probability"] = predictions
+# # Then, let's round to either 0 or 1, since we have only two options.
+# predictions_round = [abs(round(x[0])) for x in predictions]
+# test["Prediction"] = predictions_round
+# # print(rounded)
+# print("Head of predicitons: ", predictions[0:10])
+# print("Head of predictions_round: ", predictions_round[0:10])
+
+# test.to_csv(filename, sep=",",index=False)
 
 
+# # exit()
 
 
-test2 = test[columns]
-print(test2.columns.values)
-print(test2.shape)
+# from datetime import datetime
 
-X_test = test2
+# calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data for Reduction.csv",sep=",")
+# reduced = calldata.copy()
 
-print("Size of X_Test:", X_test.shape)
-
-model = Sequential()
-model.add(Dense(32, input_dim=32, activation='sigmoid'))
-model.add(Dense(28, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(1, activation='sigmoid'))
-
-#           3. Compiling a model.
-model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-model.load_weights("model_reduced.h5")
-# Okay, now let's calculate predictions.
-predictions = model.predict(X_test)
-test["Probability"] = predictions
-# Then, let's round to either 0 or 1, since we have only two options.
-predictions_round = [abs(round(x[0])) for x in predictions]
-test["Prediction"] = predictions_round
-# print(rounded)
-print("Head of predicitons: ", predictions[0:10])
-print("Head of predictions_round: ", predictions_round[0:10])
-
-test.to_csv(filename, sep=",",index=False)
-
+# print(len(calldata))
+# listing = []
+# for i, info in enumerate(calldata.values):
+#     if i % 3 == 0:
+#         pass
+#     else:
+#         listing.append(i)
+# reduced.drop(reduced.index[listing], inplace=True)
+# reduced.to_csv("../Excel & CSV Sheets/Full Data for Reduction Less.csv", sep=",")
 
 # exit()
-
-
-from datetime import datetime
-
-calldata = pandas.read_csv("/Users/pete/Library/Mobile Documents/com~apple~CloudDocs/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data Standardized MinMax Negatives Only.csv",sep=",")
-reduced = calldata.copy()
-
-print(len(calldata))
-listing = []
-for i, info in enumerate(calldata.values):
-    if i % 3 == 0:
-        pass
-    else:
-        listing.append(i)
-reduced.drop(reduced.index[listing], inplace=True)
-reduced.to_csv("/Users/pete/Desktop/Full Data for Reduction Less.csv", sep=",")
-
-exit()
 
 # for k, info in enumerate(calldata.values):
 #     print(k)
@@ -191,45 +191,45 @@ exit()
 
 
 
+##Creating the weekday/hour map neater than before. 
 
+data = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
+# print(len(data.values))
+data = data.loc[data['Accident'] == 1]
+# print(len(data.values))
 
-# data = pandas.read_csv("../Excel & CSV Sheets/Full Data Unix.csv",sep=",")
-# # print(len(data.values))
-# data = data.loc[data['Accident'] == 1]
-# # print(len(data.values))
+# print(data.Weekday.value_counts())
+tab = data.groupby(['Weekday', 'Hour']).size().reset_index()
 
-# # print(data.Weekday.value_counts())
-# tab = data.groupby(['Weekday', 'Hour']).size().reset_index()
+tab.columns = ['Weekday', 'Hour', 'Count']
+Monday = tab.loc[tab['Weekday'] == 0]
+Tuesday = tab.loc[tab['Weekday'] == 1]
+Wednesday = tab.loc[tab['Weekday'] == 2]
+Thursday = tab.loc[tab['Weekday'] == 3]
+Friday = tab.loc[tab['Weekday'] == 4]
+Saturday = tab.loc[tab['Weekday'] == 5]
+Sunday = tab.loc[tab['Weekday'] == 6]
 
-# tab.columns = ['Weekday', 'Hour', 'Count']
-# Monday = tab.loc[tab['Weekday'] == 0]
-# Tuesday = tab.loc[tab['Weekday'] == 1]
-# Wednesday = tab.loc[tab['Weekday'] == 2]
-# Thursday = tab.loc[tab['Weekday'] == 3]
-# Friday = tab.loc[tab['Weekday'] == 4]
-# Saturday = tab.loc[tab['Weekday'] == 5]
-# Sunday = tab.loc[tab['Weekday'] == 6]
-
-# font = {'family': 'serif',
-#             'weight': 'regular',
-#             'size': 18}
-# plt.rc('font', **font)
-# plt.plot(Monday.Hour.values,Monday.Count.values, label='Monday', color='r', linewidth=3)
-# plt.plot(Tuesday.Hour.values,Tuesday.Count.values, label='Tuesday', color='Orange', linewidth=3)
-# plt.plot(Wednesday.Hour.values,Wednesday.Count.values, label='Wednesday', color='Yellow', linewidth=3)
-# plt.plot(Thursday.Hour.values,Thursday.Count.values, label='Thursday', color='Green', linewidth=3)
-# plt.plot(Friday.Hour.values,Friday.Count.values, label='Friday', color='Teal', linewidth=3)
-# plt.plot(Saturday.Hour.values,Saturday.Count.values, label='Saturday', color='Purple', linewidth=3)
-# plt.plot(Sunday.Hour.values,Sunday.Count.values, label='Sunday', color='Fuchsia', linewidth=3)
-# xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
-# plt.xticks(xticks)
-# plt.grid(color='lightgray', linestyle='-', linewidth=2)
-# plt.xlabel('Hour')
-# plt.ylabel('Incidents that Occurred')
-# plt.title('Hourly Incident Count')
-# plt.legend()
-# plt.show()
-# exit()
+font = {'family': 'serif',
+            'weight': 'regular',
+            'size': 18}
+plt.rc('font', **font)
+plt.plot(Monday.Hour.values,Monday.Count.values, label='Monday', color='r', linewidth=3)
+plt.plot(Tuesday.Hour.values,Tuesday.Count.values, label='Tuesday', color='Orange', linewidth=3)
+plt.plot(Wednesday.Hour.values,Wednesday.Count.values, label='Wednesday', color='Yellow', linewidth=3)
+plt.plot(Thursday.Hour.values,Thursday.Count.values, label='Thursday', color='Green', linewidth=3)
+plt.plot(Friday.Hour.values,Friday.Count.values, label='Friday', color='Teal', linewidth=3)
+plt.plot(Saturday.Hour.values,Saturday.Count.values, label='Saturday', color='Purple', linewidth=3)
+plt.plot(Sunday.Hour.values,Sunday.Count.values, label='Sunday', color='Fuchsia', linewidth=3)
+xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
+plt.xticks(xticks)
+plt.grid(color='lightgray', linestyle='-', linewidth=2)
+plt.xlabel('Hour')
+plt.ylabel('Incidents that Occurred')
+plt.title('Hourly Incident Count')
+plt.legend()
+plt.show()
+exit()
 
 # test = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_GPS.csv", sep=",")
