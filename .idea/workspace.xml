@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Code/gmailReader.py" afterPath="$PROJECT_DIR$/Code/gmailReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,12 +18,11 @@
       <file leaf-file-name="NetworkModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="1586">
               <caret line="121" column="67" lean-forward="false" selection-start-line="121" selection-start-column="67" selection-end-line="121" selection-end-column="67" />
               <folding>
                 <element signature="e#412#421#0" expanded="true" />
                 <element signature="e#1267#3835#0" expanded="false" />
-                <marker date="1553709631566" expanded="true" signature="8784:10135" ph="..." />
               </folding>
             </state>
           </provider>
@@ -37,8 +31,8 @@
       <file leaf-file-name="gmailReader.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="1067" column="62" lean-forward="false" selection-start-line="1067" selection-start-column="62" selection-end-line="1067" selection-end-column="62" />
+            <state relative-caret-position="-45">
+              <caret line="477" column="32" lean-forward="false" selection-start-line="477" selection-start-column="32" selection-end-line="477" selection-end-column="32" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#375#3347#0" expanded="false" />
@@ -52,9 +46,9 @@
                 <element signature="e#13014#14314#0" expanded="false" />
                 <element signature="e#14355#20464#0" expanded="false" />
                 <element signature="e#20505#26857#0" expanded="false" />
-                <element signature="e#26897#35842#0" expanded="false" />
-                <element signature="e#35951#38047#0" expanded="false" />
-                <element signature="e#38086#54815#0" expanded="false" />
+                <element signature="e#26897#36642#0" expanded="false" />
+                <element signature="e#36751#38847#0" expanded="false" />
+                <element signature="e#38886#55785#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -66,38 +60,7 @@
             <state relative-caret-position="12064">
               <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
               <folding>
-                <marker date="1553709631602" expanded="true" signature="1092:10351" ph="..." />
                 <marker date="1553709631602" expanded="true" signature="10329:10351" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="10426:12803" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="10439:10513" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="11670:11741" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="12163:12283" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="12830:19563" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="13361:14013" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="13838:13966" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="14682:17080" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="14736:15073" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="14810:15073" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="14911:15073" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15125:15525" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15197:15525" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15294:15525" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15576:15876" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15647:15876" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15742:15876" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="15932:16366" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16008:16366" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16113:16366" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16172:16366" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16420:17080" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16494:17080" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="16595:17080" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="17162:19544" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="19585:20005" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="19718:19805" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="19815:19903" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="20025:20090" ph="..." />
-                <marker date="1553709631602" expanded="true" signature="20595:22606" ph="..." />
               </folding>
             </state>
           </provider>
@@ -248,8 +211,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -272,6 +233,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -418,13 +381,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Cleaned alot of folders">
-      <created>1544031684561</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1544031684562</updated>
     </task>
     <task id="LOCAL-00080" summary="Cleaned alot of folders">
       <created>1544123730375</created>
@@ -762,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553615012741</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="New Data">
+      <created>1553710943829</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1553710943830</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TodoView">
@@ -775,28 +738,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="-4" width="1920" height="1145" extended-state="6" />
+    <frame x="2433" y="10" width="1922" height="1153" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21771611" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2230523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.86042064" sideWeight="0.50213444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39961758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3049713" sideWeight="0.49786553" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288719" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39961758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298279" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -882,7 +845,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Code/forecastingTests.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-02-24_15_forecast_full2.csv" />
@@ -1051,38 +1013,7 @@
         <state relative-caret-position="12064">
           <caret line="481" column="0" lean-forward="false" selection-start-line="481" selection-start-column="0" selection-end-line="481" selection-end-column="0" />
           <folding>
-            <marker date="1553709631602" expanded="true" signature="1092:10351" ph="..." />
             <marker date="1553709631602" expanded="true" signature="10329:10351" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="10426:12803" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="10439:10513" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="11670:11741" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="12163:12283" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="12830:19563" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="13361:14013" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="13838:13966" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="14682:17080" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="14736:15073" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="14810:15073" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="14911:15073" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15125:15525" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15197:15525" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15294:15525" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15576:15876" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15647:15876" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15742:15876" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="15932:16366" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16008:16366" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16113:16366" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16172:16366" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16420:17080" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16494:17080" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="16595:17080" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="17162:19544" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="19585:20005" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="19718:19805" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="19815:19903" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="20025:20090" ph="..." />
-            <marker date="1553709631602" expanded="true" signature="20595:22606" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1104,12 +1035,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/NetworkModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1586">
           <caret line="121" column="67" lean-forward="false" selection-start-line="121" selection-start-column="67" selection-end-line="121" selection-end-column="67" />
           <folding>
             <element signature="e#412#421#0" expanded="true" />
             <element signature="e#1267#3835#0" expanded="false" />
-            <marker date="1553709631566" expanded="true" signature="8784:10135" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1130,7 +1060,16 @@
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="-13532">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2017+2018 Data/NegativeSamples.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
       <provider editor-type-id="csv-table-editor">
@@ -1139,8 +1078,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="1067" column="62" lean-forward="false" selection-start-line="1067" selection-start-column="62" selection-end-line="1067" selection-end-column="62" />
+        <state relative-caret-position="-45">
+          <caret line="477" column="32" lean-forward="false" selection-start-line="477" selection-start-column="32" selection-end-line="477" selection-end-column="32" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#375#3347#0" expanded="false" />
@@ -1154,9 +1093,9 @@
             <element signature="e#13014#14314#0" expanded="false" />
             <element signature="e#14355#20464#0" expanded="false" />
             <element signature="e#20505#26857#0" expanded="false" />
-            <element signature="e#26897#35842#0" expanded="false" />
-            <element signature="e#35951#38047#0" expanded="false" />
-            <element signature="e#38086#54815#0" expanded="false" />
+            <element signature="e#26897#36642#0" expanded="false" />
+            <element signature="e#36751#38847#0" expanded="false" />
+            <element signature="e#38886#55785#0" expanded="false" />
           </folding>
         </state>
       </provider>
