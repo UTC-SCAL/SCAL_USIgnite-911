@@ -179,21 +179,16 @@ dev.off()
 ```
 
 ```{r}
-sixteen = which(forecast06$Hour == 16)
-forecast18_16=forecast06[sixteen,]
 
-sixteenseventeen = which(accidents$Hour == 16,accidents$Hour == 17)
-accidents_1617=accidents[sixteenseventeen,]
-
-png("../Graphs & Images/R Maps/March22_6pm_1617_heatmap.png", width=12,height=12,units='in', res=1080)
+png("../Graphs & Images/R Maps/March22_midnight_heatmap.png", width=12,height=12,units='in', res=1080)
 lats<-c(34.99, 35.45)
 lons<-c(-85.4,-85.05)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 calc_zoom(bb)
 cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
-ggmap(cda) + stat_density2d(data=forecast18_16, aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon", size=0.01, bins=16)+scale_fill_gradient(low="blue", high="purple") + scale_alpha(range = c(0,0.3), guide=FALSE) + 
-  geom_point(aes(x=accidents_1617$Longitude, y=accidents_1617$Latitude), data=accidents_1617, color= 'red', alpha=1, size=1.5)
+ggmap(cda) + stat_density2d(data=forecast00, aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon", size=0.01, bins=16)+scale_fill_gradient(low="blue", high="purple") + scale_alpha(range = c(0,0.3), guide=FALSE) + 
+  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=1, size=1.5)
 dev.off()
 ```
 
