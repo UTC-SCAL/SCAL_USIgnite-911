@@ -476,77 +476,85 @@ def get_date_negatives(calldata):
 
 
 def get_loc_negatives(calldata):
-    calldata.Route = calldata.Route.astype(str)
-    calldata.Log_Mile = calldata.Log_Mile.astype(float)
-    negative_samples = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
-    unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv", sep=",")
-    route_number = range(0, len(unique_routes.Route))
-    neg_loc = 0  # Used for positioning
-    print("Getting new routes")
-    for j, values in enumerate(calldata.values):
-        print(j)
-        current_route = calldata.Route.values[j]
-        r = [x for x in route_number if x != current_route]
-        rand_num = random.choice(r)
-        new_route = unique_routes.Route.values[rand_num]
-        for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
-            if calldata.Hour.values[n] == calldata.Hour.values[j] and \
-                        calldata.Date.values[n] is calldata.Date.values[j]\
-                    and calldata.Route.values[n] is calldata.Route.values[j]:
-                # If match, skip
-                pass
-            else:
-                elm = unique_routes.ELM.values[rand_num]
-                blm = unique_routes.BLM.values[rand_num]
-                negative_samples.loc[neg_loc, "Log_Mile"] = round(random.uniform(blm, elm), 3)
-                negative_samples.loc[neg_loc, "Route"] = new_route
-                # These values stay the same between calldata and the negative samples
-                negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[j]
-                negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[j]
-                negative_samples.loc[neg_loc, "Unix"] = calldata.Unix.values[j]
-                negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[j]
-                negative_samples.loc[neg_loc, "Weekday"] = calldata.Weekday.values[j]
-                neg_loc = neg_loc + 1
-                break
-        if j % 1000 == 0:
-            negative_samples.to_csv(
-                "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
+    # calldata.Route = calldata.Route.astype(str)
+    # calldata.Log_Mile = calldata.Log_Mile.astype(float)
+    # negative_samples = pandas.read_csv(
+    #     "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+    # unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv", sep=",")
+    # route_number = range(0, len(unique_routes.Route))
+    # neg_loc = 0  # Used for positioning
+    # print("Getting new routes")
+    # for j, values in enumerate(calldata.values):
+    #     print(j)
+    #     current_route = calldata.Route.values[j]
+    #     r = [x for x in route_number if x != current_route]
+    #     rand_num = random.choice(r)
+    #     new_route = unique_routes.Route.values[rand_num]
+    #     for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+    #         if calldata.Hour.values[n] == calldata.Hour.values[j] and \
+    #                     calldata.Date.values[n] is calldata.Date.values[j]\
+    #                 and calldata.Route.values[n] is calldata.Route.values[j]:
+    #             # If match, skip
+    #             pass
+    #         else:
+    #             elm = unique_routes.ELM.values[rand_num]
+    #             blm = unique_routes.BLM.values[rand_num]
+    #             negative_samples.loc[neg_loc, "Log_Mile"] = round(random.uniform(blm, elm), 3)
+    #             negative_samples.loc[neg_loc, "Route"] = new_route
+    #             # These values stay the same between calldata and the negative samples
+    #             negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[j]
+    #             negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[j]
+    #             negative_samples.loc[neg_loc, "Unix"] = calldata.Unix.values[j]
+    #             negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[j]
+    #             negative_samples.loc[neg_loc, "Weekday"] = calldata.Weekday.values[j]
+    #             neg_loc = neg_loc + 1
+    #             break
+    #     if j % 1000 == 0:
+    #         negative_samples.to_csv(
+    #             "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
+    #
+    # negative_samples.to_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
 
-    negative_samples.to_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
+    # negative_samples = pandas.read_csv("../Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
+    # driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    # driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
+    #
+    # usr = driver.find_element_by_id("UserName")
+    # pw = driver.find_element_by_id("Password")
+    #
+    # usr.send_keys("JJVPG56")
+    # pw.send_keys("Saturn71")  # updated 2/26/2019
+    # driver.find_element_by_class_name("btn").click()
+    #
+    # print("Getting new lat/longs")
+    # # for i, info in enumerate(calldata.values[36646:-1]):
+    # for i in range(36645, len(negative_samples.values)):
+    #     print(i)
+    #     if np.isnan(negative_samples.Latitude.values[i]):
+    #         try:
+    #             routeID = negative_samples.Route.values[i]
+    #             logmile = negative_samples.Log_Mile.values[i]
+    #             siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
+    #                         + str(routeID) + '&logmile=' + str(logmile) + '&subroute='
+    #             driver.get(siteRoute)
+    #             raw = str(driver.page_source)
+    #             X = float(raw[raw.index("<X>") + len("<X>"): raw.index("</X>")])
+    #             Y = raw[raw.index("<Y>") + len("<Y>"): raw.index("</Y>")]
+    #             negative_samples.Latitude.values[i] = Y
+    #             negative_samples.Longitude.values[i] = X
+    #         except:
+    #             pass
+    #     else:
+    #         pass
+    #     if i % 1000 == 0:
+    #         negative_samples.to_csv(
+    #             "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
+    #
+    # negative_samples.to_csv(
+    #     "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
 
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
-    driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
-
-    usr = driver.find_element_by_id("UserName")
-    pw = driver.find_element_by_id("Password")
-
-    usr.send_keys("JJVPG56")
-    pw.send_keys("Saturn71")  # updated 2/26/2019
-    driver.find_element_by_class_name("btn").click()
-
-    print("Getting new lat/longs")
-    for i, info in enumerate(calldata.values):
-        print(i)
-        if np.isnan(negative_samples.Latitude.values[i]):
-            try:
-                routeID = negative_samples.Route.values[i]
-                logmile = negative_samples.Log_Mile.values[i]
-                siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
-                            + str(routeID) + '&logmile=' + str(logmile) + '&subroute='
-                driver.get(siteRoute)
-                raw = str(driver.page_source)
-                X = float(raw[raw.index("<X>") + len("<X>"): raw.index("</X>")])
-                Y = raw[raw.index("<Y>") + len("<Y>"): raw.index("</Y>")]
-                negative_samples.Latitude.values[i] = Y
-                negative_samples.Longitude.values[i] = X
-            except:
-                pass
-        else:
-            pass
-        if i % 1000 == 0:
-            negative_samples.to_csv(
-                "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
+    negative_samples = pandas.read_csv("../Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
+    negative_samples.Route = negative_samples.Route.astype(str)
 
     print("Getting NS Location Road Geometrics")
     driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
@@ -572,15 +580,8 @@ def get_loc_negatives(calldata):
     traffic = pandas.read_csv(
         "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
-    # for i, info in enumerate(negative_samples.values):
-    #     latitude = negative_samples.Latitude.values[i]
-    #     longitude = negative_samples.Longitude.values[i]
-    #
-    #     site = "https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/lrsforlatlong?latitude=" \
-    #            + str(latitude) + "&longitude=" + str(longitude) + "&d=1538146112919"
-    #     driver.get(site)
-    #     raw = str(driver.page_source)
-    for k, info in enumerate(negative_samples.values):
+    # for k, info in enumerate(negative_samples.values):
+    for k in range(55001, len(negative_samples.values)):
         print(k)
         for i, value in enumerate(geometrics.values):
             if negative_samples.Route.values[k] == geometrics.ID_NUMBER.values[i]:
@@ -613,9 +614,11 @@ def get_loc_negatives(calldata):
                     negative_samples.Illumination.values[k] = geometrics.Illum.values[i]
                     negative_samples.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
                     negative_samples.Operation.values[k] = geometrics.Operation.values[i]
-        if k % 1000 == 0:
+        if k % 5000 == 0:
             negative_samples.to_csv(
                 "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
+    negative_samples.to_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
     # Getting the weekday
     negative_samples.Date = negative_samples.Date.astype(str)
     print("Getting NS Location Weather Data")
@@ -711,15 +714,16 @@ def get_weather_data(calldata):
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
     # Iterate through negative_samples and assign weather data for each incident
     for k, info in enumerate(calldata.values):
+        print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
         toa = calldata.Time.values[k]
         mioa = int(toa.split(':')[1])
         soa = int(toa.split(':')[2])
         doa = calldata.Date.values[k]
-        yoa = int(doa.split('-')[0])
-        moa = int(doa.split('-')[1])
-        dayoa = int(doa.split('-')[2])
+        yoa = int(doa.split('/')[0])
+        moa = int(doa.split('/')[1])
+        dayoa = int(doa.split('/')[2])
         lat = calldata.Latitude.values[k]
         long = calldata.Longitude.values[k]
 
@@ -983,7 +987,7 @@ def get_weather_data(calldata):
                 calldata.Cloud_Coverage.values[k] = value2.cloudCover
             except:
                 calldata.Cloud_Coverage.values[k] = -1000
-        if k % 1000 == 0:
+        if k % 5000 == 0:
             calldata.to_csv(
                 "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 4.csv")
 
@@ -1040,6 +1044,8 @@ def get_weather_data(calldata):
             calldata.RainBefore.values[i] = 1
         else:
             calldata.RainBefore.values[i] = 0
+    calldata.to_csv(
+        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 4.csv")
     return calldata
 
 
