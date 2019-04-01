@@ -285,7 +285,7 @@ def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc, date):
 
 def get_etrims(dataset):
     print("Getting Accident Road Geometrics")
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
 
     usr = driver.find_element_by_id("UserName")

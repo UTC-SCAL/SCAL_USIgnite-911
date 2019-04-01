@@ -119,7 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("/Users/pete/Desktop/Book1.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
@@ -243,7 +243,7 @@ for i in range(0, 100):
     #     with open("model.json", "w") as json_file:
     #         json_file.write(model_json)
     #     # serialize weights to HDF5
-    model.save_weights("model_reduced.h5")
+    model.save_weights("model_full.h5")
     print("Saved model to disk")
 
     # This is evaluating the model, and printing the results of the epochs.

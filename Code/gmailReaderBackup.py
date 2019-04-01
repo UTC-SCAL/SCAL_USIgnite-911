@@ -188,7 +188,7 @@ def add_data(calldata, save_name):
     print("Getting Accident Weather Data")
     calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
 
     usr = driver.find_element_by_id("UserName")
