@@ -1,18 +1,9 @@
-import numpy
 import pandas
-from sklearn.utils import shuffle
-from numpy import sort
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.feature_selection import SelectFromModel
-from sklearn.tree import DecisionTreeClassifier
-import matplotlib
 import os, sys
-import matplotlib.pyplot as plt
-import schedule
 from datetime import datetime
-import time
-from selenium import webdriver
+from darksky import forecast
+
+
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # forecast = pandas.read_csv("../Excel & CSV Sheets/2019-02-25_08_forecast_accidents.csv", sep=",")
@@ -628,3 +619,43 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # print(len(day_holder2019.Date))
 
+# def get_weather_data(calldata):
+#     calldata.Time = calldata.Time.astype(str)
+#     # The key for using DarkSky API
+#     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+#     # Iterate through negative_samples and assign weather data for each incident
+#     for k, info in enumerate(calldata.values):
+#         # All variables are blank-of-accident, thus year is yoa.
+#         hoa = int(calldata.Hour.values[k])
+#         toa = calldata.Time.values[k]
+#         mioa = int(toa.split(':')[1])
+#         soa = int(toa.split(':')[2])
+#         doa = calldata.Date.values[k]
+#         yoa = int(doa.split('-')[0])
+#         moa = int(doa.split('-')[1])
+#         dayoa = int(doa.split('-')[2])
+#         lat = calldata.Latitude.values[k]
+#         long = calldata.Longitude.values[k]
+#
+#         date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+#         # unixtime = date.strftime('%s')
+#         # calldata.Unix.values[k] = unixtime
+#
+#         # The following line needs to have this format:
+#         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
+#         call = key, lat, long
+#         # Retrieve the main weather data
+#         try:
+#             forecastcall = forecast(*call, time=t)
+#             # Hourly data
+#             for i, value in enumerate(forecastcall.hourly):
+#                 # Retrieving weather for previous weather
+#                 if i == hoa:
+#                     calldata.Temperature.values[k] = value.temperature
+#         except:
+#             print("Hourly Lookup Failed")
+#     return calldata
+#
+# calldata = pandas.read_csv("../Excel & CSV Sheets/TempGetter.csv")
+# calldata = get_weather_data(calldata)
+# calldata.to_csv("../Excel & CSV Sheets/TempGetter2.csv")

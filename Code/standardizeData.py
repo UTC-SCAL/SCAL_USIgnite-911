@@ -13,4 +13,4 @@ scaler = preprocessing.MinMaxScaler()
 # Fit your data on the scaler object
 scaled_df = scaler.fit_transform(df)
 scaled_df = pandas.DataFrame(scaled_df, columns=names)
-scaled_df.to_csv("../Excel & CSV Sheets/Full Data Standardized MinMax.csv", sep=",", index=False)
+scaled_df.to_csv("../Excel & CSV Sheets/Full Data MinMax.csv", sep=",", index=False)

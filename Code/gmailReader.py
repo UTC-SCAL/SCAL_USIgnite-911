@@ -190,7 +190,7 @@ def add_data(calldata, save_name):
     # print("Getting Accident Weather Data")
     calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
 
     usr = driver.find_element_by_id("UserName")
@@ -218,16 +218,16 @@ def add_data(calldata, save_name):
         calldata.Log_Mile.values[i] = milepoint
 
     geometrics = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
+        "../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
         sep=",")
     segments = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
+        "../Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
         sep=",")
     descriptions = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
+        "../Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
         sep=",")
     traffic = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        "../Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
     for k, info in enumerate(calldata.values):
         for i, value in enumerate(geometrics.values):
@@ -271,16 +271,16 @@ def append_data(calldata):
     og_calldata = pandas.read_csv(
         folderpath + "Excel & CSV Sheets/New Data Files/New Accident Data.csv", sep=",")
     frames = [og_calldata, calldata]
-    results = pandas.concat(frames)
+    results = pandas.concat(frames, sort=True)
     header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix" 'Temperature', "Temp_Max", "Temp_Min",
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
                    "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
-    results.to_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Accident Data.csv")
+    results.to_csv("../Excel & CSV Sheets/New Data Files/New Accident Data.csv")
 
 
 def get_hour_negatives(calldata):
@@ -288,7 +288,7 @@ def get_hour_negatives(calldata):
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
     negative_samples = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
 
     neg_loc = 0  # Used for positioning
     calldata.Time = calldata.Time.astype(str)
@@ -313,7 +313,7 @@ def get_hour_negatives(calldata):
                 mioa = str(toa.split(':')[1])
                 soa = str(toa.split(':')[2])
                 new_time = new_hour + ":" + mioa + ":" + soa
-                calldata.Date = calldata.Date.astype(datetime)
+                # calldata.Date = calldata.Date.astype(datetime)
                 # These values stay the same between calldata and the negative samples
                 negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
                 negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
@@ -341,17 +341,6 @@ def get_hour_negatives(calldata):
                 negative_samples.loc[neg_loc, "Pavement_Type"] = calldata.Pavement_Type.values[i]
                 neg_loc = neg_loc + 1
                 break
-    traffic = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
-        sep=",")
-
-    print("Getting NS Hour Road Geometrics")
-    for k, info in enumerate(negative_samples.values):
-        for m, value in enumerate(traffic.values):
-            if negative_samples.Route.values[k] == traffic.ID_NUMBER.values[m]:
-                if traffic.ELM.values[m] > negative_samples.Log_Mile.values[k] > traffic.BLM.values[m]:
-                    # negative_samples.AADT.values[k] = traffic.AADT.values[m]
-                    negative_samples.DHV.values[k] = traffic.DHV.values[m]
     # Getting the weekday
     negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
     negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
@@ -365,10 +354,10 @@ def get_hour_negatives(calldata):
     og_calldata = pandas.read_csv(
         folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv", sep=",")
     frames = [og_calldata, negative_samples]
-    results = pandas.concat(frames)
+    results = pandas.concat(frames, sort=True)
     header_list = (
         "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
         "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
         'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
         "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
@@ -376,7 +365,7 @@ def get_hour_negatives(calldata):
         "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
     results.to_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
+        "../Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
 
 
 def get_date_negatives(calldata):
@@ -384,12 +373,12 @@ def get_date_negatives(calldata):
     # This file needs to be updated every day, and should have the date up until the day before the current day
     # so, if today is 10/18/2019, the last date in the file should be 10/17/2019
     day_holder2019 = pandas.read_excel(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx")
+        "../Excel & CSV Sheets/Day Holder 2019.xlsx")
 
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
     negative_samples = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
 
     neg_loc = 0  # Used for positioning
     calldata.Date = calldata.Date.astype(str)
@@ -402,7 +391,7 @@ def get_date_negatives(calldata):
         # r_2019 covers the days in Day Holder 2019.xlsx, which should be updated to contain the days from the beginning
         # of the year up to the day before the current day being tested (ex: if today is 2/5, then the xlsx file should
         # have 2/4 be its last day
-        r_2019 = [y for y in days_2019]
+        r_2019 = [y for y in days_2019 if y != doa]
         calldata.Date.values[i] = day_holder2019.Date.values[random.choice(r_2019)]
         # Check other entries if there's a match
         for k, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
@@ -411,7 +400,7 @@ def get_date_negatives(calldata):
                 pass
             else:
                 # print("No match found, negative sample added to new dataframe")
-                calldata.Date = calldata.Date.astype(datetime)
+                # calldata.Date = calldata.Date.astype(datetime)
                 negative_samples.loc[neg_loc, "Latitude"] = calldata.Latitude.values[i]
                 negative_samples.loc[neg_loc, "Longitude"] = calldata.Longitude.values[i]
                 negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[i]
@@ -438,7 +427,7 @@ def get_date_negatives(calldata):
                 neg_loc = neg_loc + 1
                 break
     traffic = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        "../Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
     print("Getting Date NS Road Geometrics")
     for k, info in enumerate(negative_samples.values):
@@ -461,9 +450,9 @@ def get_date_negatives(calldata):
     og_calldata = pandas.read_csv(
         folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv", sep=",")
     frames = [og_calldata, negative_samples]
-    results = pandas.concat(frames)
+    results = pandas.concat(frames, sort=True)
     header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow",
@@ -472,92 +461,43 @@ def get_date_negatives(calldata):
                    "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
     results.to_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
+        "../Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
 
 
 def get_loc_negatives(calldata):
-    # calldata.Route = calldata.Route.astype(str)
-    # calldata.Log_Mile = calldata.Log_Mile.astype(float)
-    # negative_samples = pandas.read_csv(
-    #     "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
-    # unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv", sep=",")
-    # route_number = range(0, len(unique_routes.Route))
-    # neg_loc = 0  # Used for positioning
-    # print("Getting new routes")
-    # for j, values in enumerate(calldata.values):
-    #     print(j)
-    #     current_route = calldata.Route.values[j]
-    #     r = [x for x in route_number if x != current_route]
-    #     rand_num = random.choice(r)
-    #     new_route = unique_routes.Route.values[rand_num]
-    #     for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
-    #         if calldata.Hour.values[n] == calldata.Hour.values[j] and \
-    #                     calldata.Date.values[n] is calldata.Date.values[j]\
-    #                 and calldata.Route.values[n] is calldata.Route.values[j]:
-    #             # If match, skip
-    #             pass
-    #         else:
-    #             elm = unique_routes.ELM.values[rand_num]
-    #             blm = unique_routes.BLM.values[rand_num]
-    #             negative_samples.loc[neg_loc, "Log_Mile"] = round(random.uniform(blm, elm), 3)
-    #             negative_samples.loc[neg_loc, "Route"] = new_route
-    #             # These values stay the same between calldata and the negative samples
-    #             negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[j]
-    #             negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[j]
-    #             negative_samples.loc[neg_loc, "Unix"] = calldata.Unix.values[j]
-    #             negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[j]
-    #             negative_samples.loc[neg_loc, "Weekday"] = calldata.Weekday.values[j]
-    #             neg_loc = neg_loc + 1
-    #             break
-    #     if j % 1000 == 0:
-    #         negative_samples.to_csv(
-    #             "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
-    #
-    # negative_samples.to_csv("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 1.csv")
+    calldata.Route = calldata.Route.astype(str)
+    calldata.Log_Mile = calldata.Log_Mile.astype(float)
+    negative_samples = pandas.read_csv(
+        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+    unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv", sep=",")
+    route_number = range(0, len(unique_routes.Route))
+    neg_loc = 0  # Used for positioning
+    print("Getting new routes")
+    for j, values in enumerate(calldata.values):
+        current_route = calldata.Route.values[j]
+        r = [x for x in route_number if x != current_route]
+        rand_num = random.choice(r)
+        new_route = unique_routes.Route.values[rand_num]
+        for n, checks in enumerate(calldata.values):  # Iterates through calldata checking for a match with i
+            if calldata.Hour.values[n] == calldata.Hour.values[j] and \
+                        calldata.Date.values[n] is calldata.Date.values[j]\
+                    and calldata.Route.values[n] is calldata.Route.values[j]:
+                # If match, skip
+                pass
+            else:
+                elm = unique_routes.ELM.values[rand_num]
+                blm = unique_routes.BLM.values[rand_num]
+                negative_samples.loc[neg_loc, "Log_Mile"] = round(random.uniform(blm, elm), 3)
+                negative_samples.loc[neg_loc, "Route"] = new_route
+                # These values stay the same between calldata and the negative samples
+                negative_samples.loc[neg_loc, "Date"] = calldata.Date.values[j]
+                negative_samples.loc[neg_loc, "Hour"] = calldata.Hour.values[j]
+                negative_samples.loc[neg_loc, "Time"] = calldata.Time.values[j]
+                negative_samples.loc[neg_loc, "Weekday"] = calldata.Weekday.values[j]
+                neg_loc = neg_loc + 1
+                break
 
-    # negative_samples = pandas.read_csv("../Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
-    # driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
-    # driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
-    #
-    # usr = driver.find_element_by_id("UserName")
-    # pw = driver.find_element_by_id("Password")
-    #
-    # usr.send_keys("JJVPG56")
-    # pw.send_keys("Saturn71")  # updated 2/26/2019
-    # driver.find_element_by_class_name("btn").click()
-    #
-    # print("Getting new lat/longs")
-    # # for i, info in enumerate(calldata.values[36646:-1]):
-    # for i in range(36645, len(negative_samples.values)):
-    #     print(i)
-    #     if np.isnan(negative_samples.Latitude.values[i]):
-    #         try:
-    #             routeID = negative_samples.Route.values[i]
-    #             logmile = negative_samples.Log_Mile.values[i]
-    #             siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
-    #                         + str(routeID) + '&logmile=' + str(logmile) + '&subroute='
-    #             driver.get(siteRoute)
-    #             raw = str(driver.page_source)
-    #             X = float(raw[raw.index("<X>") + len("<X>"): raw.index("</X>")])
-    #             Y = raw[raw.index("<Y>") + len("<Y>"): raw.index("</Y>")]
-    #             negative_samples.Latitude.values[i] = Y
-    #             negative_samples.Longitude.values[i] = X
-    #         except:
-    #             pass
-    #     else:
-    #         pass
-    #     if i % 1000 == 0:
-    #         negative_samples.to_csv(
-    #             "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
-    #
-    # negative_samples.to_csv(
-    #     "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 2.csv")
-
-    negative_samples = pandas.read_csv("../Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
-    negative_samples.Route = negative_samples.Route.astype(str)
-
-    print("Getting NS Location Road Geometrics")
-    driver = webdriver.Firefox(executable_path=r"/home/admin/PycharmProjects/911Project/geckodriver")
+    driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
 
     usr = driver.find_element_by_id("UserName")
@@ -567,22 +507,41 @@ def get_loc_negatives(calldata):
     pw.send_keys("Saturn71")  # updated 2/26/2019
     driver.find_element_by_class_name("btn").click()
 
-    calldata.Route = calldata.Route.astype(str)
+    print("Getting new lat/longs")
+    for i, info in enumerate(calldata.values):
+        if np.isnan(negative_samples.Latitude.values[i]):
+            try:
+                routeID = negative_samples.Route.values[i]
+                logmile = negative_samples.Log_Mile.values[i]
+                siteRoute = 'https://e-trims.tdot.tn.gov/etrimsol/services/applicationservice/roadfinder/latlongforlrs?idnumber=' \
+                            + str(routeID) + '&logmile=' + str(logmile) + '&subroute='
+                driver.get(siteRoute)
+                raw = str(driver.page_source)
+                X = float(raw[raw.index("<X>") + len("<X>"): raw.index("</X>")])
+                Y = raw[raw.index("<Y>") + len("<Y>"): raw.index("</Y>")]
+                negative_samples.Latitude.values[i] = Y
+                negative_samples.Longitude.values[i] = X
+            except:
+                pass
+        else:
+            pass
+
+    negative_samples.Route = negative_samples.Route.astype(str)
+
+    print("Getting NS Location Road Geometrics")
     geometrics = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
+        "../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv",
         sep=",")
     segments = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
+        "../Excel & CSV Sheets/ETRIMS/Road_Segment_County_Raw.csv",
         sep=",")
     descriptions = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
+        "../Excel & CSV Sheets/ETRIMS/Roadway_Description_County_HAMILTON RAW.csv",
         sep=",")
     traffic = pandas.read_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
+        "../Excel & CSV Sheets/ETRIMS/Traffic_Count.csv",
         sep=",")
-    # for k, info in enumerate(negative_samples.values):
-    for k in range(55001, len(negative_samples.values)):
-        print(k)
+    for k, info in enumerate(negative_samples.values):
         for i, value in enumerate(geometrics.values):
             if negative_samples.Route.values[k] == geometrics.ID_NUMBER.values[i]:
                 if geometrics.ELM.values[i] > negative_samples.Log_Mile.values[k] > geometrics.BLM.values[i]:
@@ -614,11 +573,7 @@ def get_loc_negatives(calldata):
                     negative_samples.Illumination.values[k] = geometrics.Illum.values[i]
                     negative_samples.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
                     negative_samples.Operation.values[k] = geometrics.Operation.values[i]
-        if k % 5000 == 0:
-            negative_samples.to_csv(
-                "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
-    negative_samples.to_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 3.csv")
+
     # Getting the weekday
     negative_samples.Date = negative_samples.Date.astype(str)
     print("Getting NS Location Weather Data")
@@ -629,19 +584,18 @@ def get_loc_negatives(calldata):
     og_calldata = pandas.read_csv(
         folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv", sep=",")
     frames = [og_calldata, negative_samples]
-    results = pandas.concat(frames)
+    results = pandas.concat(frames, sort=True)
     header_list = (
         "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
+        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
         "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
         'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
         "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
         "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type", "Unix")
+        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
     results.to_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
-
+        "../Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
 
 # currently, the relative temperature variable has been dropped
 def update_temp_avgs(day_holder2019):
@@ -702,7 +656,7 @@ def get_weather_data(calldata):
     calldata.Precip_Intensity_Max = calldata.Precip_Intensity_Max.astype(float)
     calldata.Temp_Max = calldata.Temp_Max.astype(float)
     calldata.Temp_Min = calldata.Temp_Min.astype(float)
-    calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
+    # calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(datetime)
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
     calldata.Time = calldata.Time.astype(str)
@@ -714,22 +668,21 @@ def get_weather_data(calldata):
     key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
     # Iterate through negative_samples and assign weather data for each incident
     for k, info in enumerate(calldata.values):
-        print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
         toa = calldata.Time.values[k]
         mioa = int(toa.split(':')[1])
         soa = int(toa.split(':')[2])
         doa = calldata.Date.values[k]
-        yoa = int(doa.split('/')[0])
-        moa = int(doa.split('/')[1])
-        dayoa = int(doa.split('/')[2])
+        yoa = int(doa.split('-')[0])
+        moa = int(doa.split('-')[1])
+        dayoa = int(doa.split('-')[2])
         lat = calldata.Latitude.values[k]
         long = calldata.Longitude.values[k]
 
         date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
-        unixtime = date.strftime('%s')
-        calldata.Unix.values[k] = unixtime
+        # unixtime = date.strftime('%s')
+        # calldata.Unix.values[k] = unixtime
 
         # The following line needs to have this format:
         t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
@@ -987,9 +940,6 @@ def get_weather_data(calldata):
                 calldata.Cloud_Coverage.values[k] = value2.cloudCover
             except:
                 calldata.Cloud_Coverage.values[k] = -1000
-        if k % 5000 == 0:
-            calldata.to_csv(
-                "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 4.csv")
 
     for i, value in enumerate(calldata.values):
         if "clear" in calldata.Event.values[i] or "clear" in calldata.Conditions.values[
@@ -1044,8 +994,6 @@ def get_weather_data(calldata):
             calldata.RainBefore.values[i] = 1
         else:
             calldata.RainBefore.values[i] = 0
-    calldata.to_csv(
-        "/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/NS Loc Milestone 4.csv")
     return calldata
 
 
@@ -1057,8 +1005,7 @@ def main():
     # calldata = pandas.read_excel(folderpath + "",
     #         dtypes={"Accident": int, "Problem": str, "Latitude": float, "Longitude": float, 'Date': datetime,
     #                 'Time': datetime.time, "Address": str, "Route": str, "Log_Mile": float, "City": str, 'Event': str,
-    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, "Unix": int,
-    #                 'Temperature': float,
+    #                 'Conditions': str, "EventBefore": str, "ConditionBefore": str, 'Hour': int, 'Temperature': float,
     #                 "Temp_Max": float, "Temp_Min": float, "Monthly_Avg_Temp": float, "Daily_Avg_Temp": str,
     #                 "Relative_Temp": float, "Dewpoint": float, 'Humidity': float, "Month": int, "Weekday": int,
     #                 'Visibility': float, "Cloud_Coverage": float, "Precipitation_Type": str,
@@ -1069,65 +1016,65 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = "../Excel & CSV Sheets/Full Data Accidents Only.csv"
+    file = ""
     calldata = pandas.read_csv(file, sep=",")
 
-    # calldata.Latitude = calldata.Latitude.astype(float)
-    # calldata.Longitude = calldata.Longitude.astype(float)
-    # print("Fixing These Stupid Lat and Long Coordinates")
-    # for k, info in enumerate(calldata.values):
-    #     if calldata.Latitude.values[k] > 40:
-    #         calldata.Latitude.values[k] = float(calldata.Latitude.values[k] / 1000000)
-    #         calldata.Longitude.values[k] = float(calldata.Longitude.values[k] / -1000000)
+    calldata.Latitude = calldata.Latitude.astype(float)
+    calldata.Longitude = calldata.Longitude.astype(float)
+    print("Fixing These Stupid Lat and Long Coordinates")
+    for k, info in enumerate(calldata.values):
+        if calldata.Latitude.values[k] > 40:
+            calldata.Latitude.values[k] = float(calldata.Latitude.values[k] / 1000000)
+            calldata.Longitude.values[k] = float(calldata.Longitude.values[k] / -1000000)
 
     # Specific save names for files
     # This makes the saving process less tedious since we don't have to change the name of the file we're saving
     # every time we read a new file
     # We save the file multiple times throughout the process of working with it so if an error occurs, we don't have to
     # start from the very beginning
-    # dayname_csv = file.split("/")[-1]
-    # dayname_xlsx = dayname_csv.split(".")[0]
+    dayname_csv = file.split("/")[-1]
+    dayname_xlsx = dayname_csv.split(".")[0]
 
     # Removing the excess text from the problem column
-    # calldata = clean_problems(calldata)
+    calldata = clean_problems(calldata)
 
     # Splitting and tidying the Response Date to the accident.
-    # calldata = split_datetime(calldata)
+    calldata = split_datetime(calldata)
 
     # Reset the Column names for the data
-    # calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
+    calldata = calldata.drop(['Response_Date', 'Fixed_Time_CallClosed'], axis=1)
 
-    # header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-    #                'Conditions', "EventBefore", "ConditionBefore", 'Hour', "Unix", 'Temperature', "Temp_Max", "Temp_Min",
-    #                "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
-    #                'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-    #                "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
-    #                "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-    #                "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
 
-    # calldata.index.name = "Index"
-    # calldata = calldata.reindex(columns=header_list)
+    calldata.index.name = "Index"
+    calldata = calldata.reindex(columns=header_list)
 
     # Create a list of different accident types for finding Y
-    # occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
+    occurrence_list = ['Unknown Injuries', 'Delayed', 'No Injuries', 'Injuries', 'Entrapment', 'Mass Casualty']
     # Find the duplicate calls and drop them
-    # find_Duplicates(calldata, occurrence_list)
-    # calldata = drop_duplicates(calldata)
+    find_Duplicates(calldata, occurrence_list)
+    calldata = drop_duplicates(calldata)
 
     # Add weather and road geometric data to calldata
-    # calldata = add_data(calldata, dayname_xlsx)
+    calldata = add_data(calldata, dayname_xlsx)
 
     # Save the calldata in its final form, just in case the appending goes wrong
-    # save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
-    #                 "FinalSave", calldata)
+    save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
+                    "FinalSave", calldata)
 
-    # Append the new data
-    # append_data(calldata)
+    # I recalled the file to be used for the negative sampling, so as to avoid any bleeding over of data between the
+    # methods, cause sometimes it wanted to do that for some stupid reason
+    calldata = pandas.read_excel("Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
     # Get the negative samples of the calldata
-    # Each of these methods also gets the updated weather information
     get_loc_negatives(calldata)
-    # get_hour_negatives(calldata)
-    # get_date_negatives(calldata)
+    get_hour_negatives(calldata)
+    get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()
