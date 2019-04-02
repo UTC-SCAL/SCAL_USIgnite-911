@@ -193,43 +193,43 @@ except ImportError:
 
 ##Creating the weekday/hour map neater than before. 
 
-data = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
-# print(len(data.values))
-data = data.loc[data['Accident'] == 1]
-# print(len(data.values))
+# data = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
+# # print(len(data.values))
+# data = data.loc[data['Accident'] == 1]
+# # print(len(data.values))
 
-# print(data.Weekday.value_counts())
-tab = data.groupby(['Weekday', 'Hour']).size().reset_index()
+# # print(data.Weekday.value_counts())
+# tab = data.groupby(['Weekday', 'Hour']).size().reset_index()
 
-tab.columns = ['Weekday', 'Hour', 'Count']
-Monday = tab.loc[tab['Weekday'] == 0]
-Tuesday = tab.loc[tab['Weekday'] == 1]
-Wednesday = tab.loc[tab['Weekday'] == 2]
-Thursday = tab.loc[tab['Weekday'] == 3]
-Friday = tab.loc[tab['Weekday'] == 4]
-Saturday = tab.loc[tab['Weekday'] == 5]
-Sunday = tab.loc[tab['Weekday'] == 6]
+# tab.columns = ['Weekday', 'Hour', 'Count']
+# Monday = tab.loc[tab['Weekday'] == 0]
+# Tuesday = tab.loc[tab['Weekday'] == 1]
+# Wednesday = tab.loc[tab['Weekday'] == 2]
+# Thursday = tab.loc[tab['Weekday'] == 3]
+# Friday = tab.loc[tab['Weekday'] == 4]
+# Saturday = tab.loc[tab['Weekday'] == 5]
+# Sunday = tab.loc[tab['Weekday'] == 6]
 
-font = {'family': 'serif',
-            'weight': 'regular',
-            'size': 18}
-plt.rc('font', **font)
-plt.plot(Monday.Hour.values,Monday.Count.values, label='Monday', color='r', linewidth=3)
-plt.plot(Tuesday.Hour.values,Tuesday.Count.values, label='Tuesday', color='Orange', linewidth=3)
-plt.plot(Wednesday.Hour.values,Wednesday.Count.values, label='Wednesday', color='Yellow', linewidth=3)
-plt.plot(Thursday.Hour.values,Thursday.Count.values, label='Thursday', color='Green', linewidth=3)
-plt.plot(Friday.Hour.values,Friday.Count.values, label='Friday', color='Teal', linewidth=3)
-plt.plot(Saturday.Hour.values,Saturday.Count.values, label='Saturday', color='Purple', linewidth=3)
-plt.plot(Sunday.Hour.values,Sunday.Count.values, label='Sunday', color='Fuchsia', linewidth=3)
-xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
-plt.xticks(xticks)
-plt.grid(color='lightgray', linestyle='-', linewidth=2)
-plt.xlabel('Hour')
-plt.ylabel('Incidents that Occurred')
-plt.title('Hourly Incident Count')
-plt.legend()
-plt.show()
-exit()
+# font = {'family': 'serif',
+#             'weight': 'regular',
+#             'size': 18}
+# plt.rc('font', **font)
+# plt.plot(Monday.Hour.values,Monday.Count.values, label='Monday', color='r', linewidth=3)
+# plt.plot(Tuesday.Hour.values,Tuesday.Count.values, label='Tuesday', color='Orange', linewidth=3)
+# plt.plot(Wednesday.Hour.values,Wednesday.Count.values, label='Wednesday', color='Yellow', linewidth=3)
+# plt.plot(Thursday.Hour.values,Thursday.Count.values, label='Thursday', color='Green', linewidth=3)
+# plt.plot(Friday.Hour.values,Friday.Count.values, label='Friday', color='Teal', linewidth=3)
+# plt.plot(Saturday.Hour.values,Saturday.Count.values, label='Saturday', color='Purple', linewidth=3)
+# plt.plot(Sunday.Hour.values,Sunday.Count.values, label='Sunday', color='Fuchsia', linewidth=3)
+# xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
+# plt.xticks(xticks)
+# plt.grid(color='lightgray', linestyle='-', linewidth=2)
+# plt.xlabel('Hour')
+# plt.ylabel('Incidents that Occurred')
+# plt.title('Hourly Incident Count')
+# plt.legend()
+# plt.show()
+# exit()
 
 # test = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_GPS.csv", sep=",")
@@ -725,17 +725,19 @@ exit()
 
 ##This section makes the data in a nice standardized format by minimum and maximum. 
 
-# from sklearn import preprocessing
-# import pandas
-# # Get column names first
-# df = pandas.read_csv("../Excel & CSV Sheets/Full Data for Model LatLong Unix.csv", sep=",")
-# names = df.columns
-# # Create the Scaler object
-# scaler = preprocessing.MinMaxScaler()
-# # Fit your data on the scaler object
-# scaled_df = scaler.fit_transform(df)
-# scaled_df = pandas.DataFrame(scaled_df, columns=names)
-# scaled_df.to_csv("../Excel & CSV Sheets/Full Data Standardized MinMax.csv", sep=",", index=False)
+from sklearn import preprocessing
+import pandas
+# Get column names first
+df = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-23_06.csv", sep=",")
+full = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax Reduced.csv", sep=",")
+columns = full.columns.values[1:len(full.columns.values)]
+df = df[columns]
+# Create the Scaler object
+scaler = preprocessing.MinMaxScaler()
+# Fit your data on the scaler object
+scaled_df = scaler.fit_transform(df)
+scaled_df = pandas.DataFrame(scaled_df, columns=columns)
+scaled_df.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_06minmax.csv", sep=",", index=False)
 
 
 

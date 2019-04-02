@@ -119,7 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax Reduced.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
@@ -219,10 +219,10 @@ for i in range(0, 100):
     # dataset = shuffle(dataset)
     X_train, X_test, y_train, y_test = train_test_split(
         X, Y, test_size=0.30, random_state=42)
-    X_test, X_valid, y_test, y_valid = train_test_split(
-        X_test, y_test, test_size=0.90, random_state=42)
-    if exists('model_reduced.h5'):
-        model.load_weights("model_reduced.h5")
+    # X_test, X_valid, y_test, y_valid = train_test_split(
+    #     X_test, y_test, test_size=0.90, random_state=42)
+    if exists('model_MMR.h5'):
+        model.load_weights("model_MMR.h5")
         print("Loading Model")
     # print(model.summary())
     if exists(file):
@@ -236,14 +236,14 @@ for i in range(0, 100):
     print("Iteration: ", i)
     patience = 15
     stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
-    hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_valid, y_valid), verbose=1,
+    hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
                      callbacks=[stopper])
     # else:
     #     model_json = model.to_json()
     #     with open("model.json", "w") as json_file:
     #         json_file.write(model_json)
     #     # serialize weights to HDF5
-    model.save_weights("model_full.h5")
+    model.save_weights("model_MMR.h5")
     print("Saved model to disk")
 
     # This is evaluating the model, and printing the results of the epochs.
