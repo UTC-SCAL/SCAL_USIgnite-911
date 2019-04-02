@@ -1,0 +1,194 @@
+---
+title: "HamiltonHotSpots"
+author: "Pete Way"
+date: "3/21/2019"
+output: pdf_document
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(ggmap)
+utc=read.csv("../Excel & CSV Sheets/Full Data.csv", header=T)
+# min(utc$Latitude)
+# max(utc$Latitude)
+# min(utc$Longitude)
+# max(utc$Longitude)
+#
+a=which(utc$Accident==1)
+df=utc[a,]
+
+# #
+locations=data.frame(df$Route, df$Longitude, df$Latitude)
+u=unique(locations)
+# #
+sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+for (i in 1:dim(u)[1]){
+w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
+	df$Latitude==u[i,3])
+sums[i]<-length(df$Accident[w])
+}
+
+# #
+df4=data.frame(u, sums)#uniques locations and the number of accidents there
+# hs = which(df4$sums>25)
+# df4=df4[hs,]
+
+# #
+rank=rep(NA, dim(df4)[1])
+rank[which(sums<=25)] <-'yellow'
+rank[which(sums<=75)] <-'orange'
+rank[which(sums<=125)] <-'red'
+rank[which(sums>=150)] <-'black'
+
+
+locs=data.frame(u[,2:3])
+# 
+# y=which(rank=='yellow')
+# r=which(rank=='red')
+# b=which(rank=='black')
+# o = which(rank=='orange')
+
+# df4[0:10,]
+
+df4$rank <- rank
+
+
+df5 = df4[!is.na(df4$rank),]
+df5[0:10,]
+
+
+df5$rank = with(df5, reorder(df5$rank, df5$sum))
+df5[0:10,]
+
+lats<-c(34.99, 35.15)
+lons<-c(-85.4,-85.05)
+
+
+# png("../Graphs & Images/R Maps/HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+  geom_point(aes(x=df.Longitude, y=df.Latitude, color=df5$rank), data=df5, alpha = .75)  + guides( guide = "none" ) + scale_color_manual(values = c("orange","red","black"),  labels = c("25 - 50","50 - 75"," > 75"), name = "Accidents")
+
+
+               # Inside the ggmap call, put this : , legend="right"
+
+# dev.off()
+
+
+```
+
+```{r}
+library(ggmap)
+
+accidents =read.csv("../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-22.csv", header=T)
+colnames(accidents)
+# forecast18 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-21_18 other.csv", header=T)
+# nrow(forecast18)
+# forecast00 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_0.csv", header=T)
+
+forecast06 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_6.csv", header=T)
+# 
+# forecast12 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv", header=T)
+#
+# a=which(forecast18$Prediction==1)
+# length(a)
+# forecast18=forecast18[a,]
+# nrow(forecast18)
+#
+# a=which(forecast00$Prediction==1)
+# forecast00=forecast00[a,]
+# a=which(forecast06$Prediction==1)
+# forecast06=forecast06[a,]
+a=which(forecast06$Prediction==1)
+forecast06=forecast06[a,]
+
+# colnames(accidents)
+# colnames(forecast1)
+# colnames(forecast2)
+sixPM = which(forecast06$Probability>=0.50)
+forecast06=forecast06[sixPM,]
+cat("Number of entries above 50 percent sure, 6AM",nrow(forecast06))
+
+midnight = which(forecast06$Probability>=0.50)
+forecast06_50=forecast06[midnight,]
+cat("\nNumber of entries above 50 percent sure",nrow(forecast06_50))
+midnight = which(forecast06$Probability>=0.70)
+forecast06_70=forecast06[midnight,]
+cat("\nNumber of entries above 70 percent sure",nrow(forecast06_70))
+midnight = which(forecast06$Probability>=0.90)
+forecast06_90=forecast06[midnight,]
+cat("\nNumber of entries above 90 percent sure",nrow(forecast06_90))
+
+# sixAM = which(forecast06$Probability>=0.50)
+# forecast06=forecast06[sixAM,]
+# cat("\nNumber of entries above 50 percent sure, 6AM",nrow(forecast06))
+# noon = which(forecast12$Probability>=0.50)
+# forecast12=forecast12[noon,]
+# cat("\nNumber of entries above 50 percent sure, noon",nrow(forecast12))
+
+# add_points <- function(df, colored, sized, alphed) {
+#   geom_point(aes(x=df$Longitude, y=df$Latitude),data=df, color= colored, alpha=alphed, size=sized)
+# }
+
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+png("../Graphs & Images/R Maps/50thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .5 Threshold") +
+  geom_point(aes(x=forecast06_50$Longitude, y=forecast06_50$Latitude), data=forecast06_50, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+
+png("../Graphs & Images/R Maps/70thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .7 Threshold") +
+  geom_point(aes(x=forecast06_70$Longitude, y=forecast06_70$Latitude), data=forecast06_70, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+png("../Graphs & Images/R Maps/90thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .9 Threshold") +
+  geom_point(aes(x=forecast06_90$Longitude, y=forecast06_90$Latitude), data=forecast06_90, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+```
+
+```{r}
+
+png("../Graphs & Images/R Maps/March22_midnight_heatmap.png", width=12,height=12,units='in', res=1080)
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) + stat_density2d(data=forecast00, aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon", size=0.01, bins=16)+scale_fill_gradient(low="blue", high="purple") + scale_alpha(range = c(0,0.3), guide=FALSE) + 
+  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=1, size=1.5)
+dev.off()
+```
+
