@@ -179,16 +179,68 @@ dev.off()
 ```
 
 ```{r}
+library(ggmap)
+# accidents =read.csv("/Users/pete/Downloads/Accident Report.csv", header=T)
+# head(accidents)
+# accidents = accidents[,c('Latitude','Longitude')]
 
-png("../Graphs & Images/R Maps/March22_midnight_heatmap.png", width=12,height=12,units='in', res=1080)
+forecastMMR =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv", header=T)
+
+
+forecaststand =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv", header=T)
+
+forecast0MMR$Latitude = forecast0stand$Latitude
+forecast0MMR$Longitude = forecast0stand$Longitude
+
+a=which(forecast0MMR$Prediction==1)
+length(a)
+forecast0MMR=forecast0MMR[a,c('Latitude','Longitude', 'Probability')]
+
+b=which(forecast0stand$Prediction==1)
+forecast0stand=forecast0stand[b,c('Latitude','Longitude', 'Probability')]
+length(b)
+
+library(reshape)
+zz <- melt(list(MMR=forecast0MMR,stand=forecast0stand,accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
+head(zz)
+
+thresh = which(zz$Probability>=0.95)
+zz=zz[thresh,]
+
+
+png("../Graphs & Images/R Maps/April03_noon_.95thresh.png", width=6,height=6,units='in', res=800)
 lats<-c(34.99, 35.45)
 lons<-c(-85.4,-85.05)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 calc_zoom(bb)
 cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
-ggmap(cda) + stat_density2d(data=forecast00, aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon", size=0.01, bins=16)+scale_fill_gradient(low="blue", high="purple") + scale_alpha(range = c(0,0.3), guide=FALSE) + 
-  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=1, size=1.5)
+ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), alpha=.25, data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","red","dodgerblue"),  labels = c("Accident","MMR","Standard"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7,.15)) + ggtitle("Accidents Predicted at noon .95 threshold")
 dev.off()
+```
+
+
+```{r}
+##Find probabilities
+
+forecastMMR =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv", header=T)
+a=which(forecastMMR$Prediction==1)
+length(a)
+sevenfive = which(forecastMMR$Probability>=0.75)
+length(sevenfive)
+ninety = which(forecastMMR$Probability>=0.90)
+length(ninety)
+sixAM = which(forecastMMR$Probability>=0.95)
+length(ninefive)
+
+forecaststand =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv", header=T)
+a=which(forecaststand$Prediction==1)
+length(a)
+sevenfive = which(forecaststand$Probability>=0.75)
+length(sevenfive)
+ninety = which(forecaststand$Probability>=0.90)
+length(ninety)
+sixAM = which(forecaststand$Probability>=0.95)
+length(ninefive)
 ```
 

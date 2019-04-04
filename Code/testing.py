@@ -41,6 +41,14 @@ except ImportError:
 # from keras_sequential_ascii import keras2ascii
 # from keras.models import model_from_json
 
+
+
+
+
+
+
+
+
 # filename = "../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv"
 # test = pandas.read_csv(filename,sep=",")
 # # test = shuffle(test)
@@ -53,9 +61,6 @@ except ImportError:
 #                 'Gov_Cont',	'Access_Control','Func_Class',	'Pavement_Width',	'Pavement_Type']
 # # test2 = test[columns]
 # # test2.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast Test.csv")
-
-
-
 
 # test2 = test[columns]
 # print(test2.columns.values)
