@@ -175,7 +175,7 @@ except ImportError:
 
 # #           3. Compiling a model.
 # model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-# model.load_weights("model.h5")
+# model.load_weights("")
 # # Okay, now let's calculate predictions.
 # predictions = model.predict(X_test)
 # test["Probability"] = predictions
@@ -591,7 +591,7 @@ except ImportError:
 # json_file.close()
 # loaded_model = model_from_json(loaded_model_json)
 # # load weights into new model
-# loaded_model.load_weights("model.h5")
+# loaded_model.load_weights("")
 # print("Loaded model from disk")
  
 # # evaluate loaded model on test data

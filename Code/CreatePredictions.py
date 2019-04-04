@@ -3,27 +3,25 @@ import pandas
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 
-filename = "../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_0minmax.csv"
+filename = "../"
 test = pandas.read_csv(filename,sep=",")
 # test = shuffle(test)
 # test = shuffle(test)
-trained = "../Excel & CSV Sheets/Full Data MinMax Reduced.csv"
-trainingset = pandas.read_csv(trained,sep=",")
-columns = trainingset.columns.values[1:len(trainingset.columns.values)]
-print(columns)
-test2 = test[columns]
-print(test2.columns.values)
 
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data_MMR.csv", sep=",")
+columns = dataset.columns.values[1:len(dataset.columns.values)]
+test = test[columns]
+test = test.dropna()
 
 # test2.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast Test.csv")
 
-X_test = test2
+X_test = test
 
 print("Size of X_Test:", X_test.shape)
 
 model = Sequential()
 model.add(Dense(X_test.shape[1], input_dim=X_test.shape[1], activation='sigmoid'))
-model.add(Dense(28, activation='sigmoid'))
+model.add(Dense(25, activation='sigmoid'))
 model.add(Dropout(.1))
 model.add(Dense(20, activation='sigmoid'))
 model.add(Dense(18, activation='sigmoid'))
@@ -33,7 +31,7 @@ model.add(Dense(1, activation='sigmoid'))
 
 #           3. Compiling a model.
 model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-model.load_weights("model_test.h5")
+model.load_weights("model_MMR.h5")
 # Okay, now let's calculate predictions.
 predictions = model.predict(X_test)
 test["Probability"] = predictions
@@ -45,4 +43,4 @@ print("Head of predicitons: ", predictions[0:10])
 print("Head of predictions_round: ", predictions_round[0:10])
 print("Accidents predicted: ", sum(predictions_round))
 
-test.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_0minmax_withpred.csv", sep=",",index=False)
+test.to_csv("../", sep=",",index=False)

@@ -119,7 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax Reduced.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data_MMR.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
@@ -159,7 +159,7 @@ model = Sequential()
 model.add(Dense(X.shape[1],
                 input_dim=X.shape[1], activation='sigmoid'))
 # Usefor standard sized variable set
-model.add(Dense(28, activation='sigmoid'))
+model.add(Dense(25, activation='sigmoid'))
 model.add(Dropout(.1))
 model.add(Dense(20, activation='sigmoid'))
 model.add(Dense(18, activation='sigmoid'))
@@ -179,14 +179,14 @@ print(model.summary())
 # hist = model.fit(X_train, y_train, epochs=3000, batch_size=500, validation_data=(X_valid, y_valid), verbose=1)
 
 # if exists('model.json'):
-#     model.load_weights("model.h5")
+#     model.load_weights("")
 #     print("Loading Model")
 # else:
 #     model_json = model.to_json()
 #     with open("model.json", "w") as json_file:
 #         json_file.write(model_json)
 #     # serialize weights to HDF5
-#     model.save_weights("model.h5")
+#     model.save_weights("")
 #     print("Saved model to disk")
 # ann_viz(model, view=True, filename="network.gv", title="Model")
 # keras2ascii(model)
