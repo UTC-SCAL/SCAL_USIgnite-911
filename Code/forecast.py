@@ -344,20 +344,5 @@ while True:
 # dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
 # matches = 0
 
-# for i, info in enumerate(forecast.values):
-#     for j, data in enumerate(monday.values):
-#         forecastHour = forecast.Hour.values[i]
-#         mondayHour = monday.Hour.values[j]
-#         hourDiff = abs(forecastHour - mondayHour)
-#         if hourDiff < 3:
-#             lat1 = forecast.Latitude.values[i]
-#             long1 = forecast.Longitude.values[i]
-#
-#             lat2 = monday.Latitude.values[j]
-#             long2 = monday.Longitude.values[j]
-#             latChange = math.fabs(lat1 - lat2)
-#             longChange = math.fabs(long1 - long2)
-#             if latChange < 0.01 and longChange < 0.01:
-#                 matches +=1
 #
 # print(matches)

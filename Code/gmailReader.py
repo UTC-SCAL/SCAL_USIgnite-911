@@ -85,6 +85,7 @@ def split_datetime(calldata):
         calldata.Date = calldata.Date.astype(str)
         calldata.Time = calldata.Time.astype(str)
         calldata.Hour = calldata.Hour.astype(str)
+        
 
         dateof = datetime.strptime(calldata.Response_Date.values[i], '%m/%d/%Y %I:%M:%S %p')
         moa = int(calldata.Response_Date.values[i].split('/')[0])
