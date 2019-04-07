@@ -18,6 +18,7 @@ pydot = "*"
 ann-visualizer = "*"
 graphviz = "*"
 keras-sequential-ascii = "*"
+tkinter = "*"
 
 [dev-packages]
 "autopep8" = "*"

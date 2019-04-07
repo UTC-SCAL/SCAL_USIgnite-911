@@ -119,7 +119,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data_MMR.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model _MMR.csv", sep=",")
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
@@ -221,8 +221,8 @@ for i in range(0, 100):
         X, Y, test_size=0.30, random_state=42)
     # X_test, X_valid, y_test, y_valid = train_test_split(
     #     X_test, y_test, test_size=0.90, random_state=42)
-    if exists('model_MMR.h5'):
-        model.load_weights("model_MMR.h5")
+    if exists('model_timesort_MMR.h5'):
+        model.load_weights("model_timesort_MMR.h5")
         print("Loading Model")
     # print(model.summary())
     if exists(file):
@@ -243,7 +243,7 @@ for i in range(0, 100):
     #     with open("model.json", "w") as json_file:
     #         json_file.write(model_json)
     #     # serialize weights to HDF5
-    model.save_weights("model_MMR.h5")
+    model.save_weights("model_timesort_MMR.h5")
     print("Saved model to disk")
 
     # This is evaluating the model, and printing the results of the epochs.

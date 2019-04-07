@@ -1017,7 +1017,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = ""
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-03.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -1071,11 +1071,11 @@ def main():
 
     # I recalled the file to be used for the negative sampling, so as to avoid any bleeding over of data between the
     # methods, cause sometimes it wanted to do that for some stupid reason
-    calldata = pandas.read_excel("Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
+    # calldata = pandas.read_excel("Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
     # Get the negative samples of the calldata
-    get_loc_negatives(calldata)
-    get_hour_negatives(calldata)
-    get_date_negatives(calldata)
+    # get_loc_negatives(calldata)
+    # get_hour_negatives(calldata)
+    # get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()
