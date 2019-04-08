@@ -19,7 +19,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 
-hotspots = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
+places = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
 
 # columns = ['Route','Log_Mile','Date','Hour','Unix','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
 # 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',

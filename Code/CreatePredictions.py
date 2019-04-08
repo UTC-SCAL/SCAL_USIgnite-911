@@ -5,32 +5,46 @@ from keras.models import Sequential
 from math import *
 import datetime
 
+test = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-02_18.csv",sep=",")
+
 filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv"
 forecastMMR = pandas.read_csv(filename,sep=",")
 
-filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv"
-forecastStand = pandas.read_csv(filename,sep=",")
+# filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv"
+# forecastStand = pandas.read_csv(filename,sep=",")
 
-forecastMMR['Latitude'] = forecastStand['Latitude']
-forecastMMR['Longitude'] = forecastStand['Longitude']
+# forecastMMR['Latitude'] = forecastStand['Latitude']
+# forecastMMR['Longitude'] = forecastStand['Longitude']
 
 forecastMMR = forecastMMR[forecastMMR['Prediction'] == 1]
-forecastStand = forecastStand[forecastStand['Prediction'] == 1]
+# forecastStand = forecastStand[forecastStand['Prediction'] == 1]
 
-threshhold = 0.95
+# threshhold = 0.50
 
-forecastMMR = forecastMMR[forecastMMR['Probability'] >= threshhold]
-forecastStand = forecastStand[forecastStand['Probability'] >= threshhold]
-
-
-accidents = pandas.read_csv("/Users/pete/Downloads/Accident Report.csv", sep=",")
-accidents['Hour'] = 0
-for d, info in enumerate(accidents.values):
-     dateof = datetime.datetime.strptime(accidents.Response_Date.values[d], '%d/%m/%y %H:%M')
-     accidents.Hour.values[d] = dateof.hour
+# forecastMMR = forecastMMR[forecastMMR['Probability'] >= threshhold]
+# forecastStand = forecastStand[forecastStand['Probability'] >= threshhold]
 
 
-def match_predictions(forecast, accidents):
+accidents = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/Accident Report_FinalForm.xlsx")
+# accidents['Hour'] = 0
+# for d, info in enumerate(accidents.values):
+#      dateof = datetime.datetime.strptime(accidents.Response_Date.values[d], '%d/%m/%y %H:%M')
+#      accidents.Hour.values[d] = dateof.hour
+
+def match_predictions_using_route(forecast, accidents):
+    matches = 0
+    for i, info in enumerate(forecast.values):
+        for j, data in enumerate(accidents.values):
+            forecastHour = forecast.Hour.values[i]
+            accHour = accidents.Hour.values[j]
+            hourDiff = abs(forecastHour - accHour)
+            forecastlog = forecast.Log_Mile.values[i] 
+            acclog= accidents.Log_Mile.values[j]
+            if (forecast.Route.values[i] == accidents.Route.values[j]) and (hourDiff < 2) and ((abs(forecastlog-acclog)) < .25):
+                matches +=1
+    print("\t Matches found using Route:", matches)
+
+def match_predictions_using_have(forecast, accidents):
     matches = 0
     for i, info in enumerate(forecast.values):
         for j, data in enumerate(accidents.values):
@@ -45,7 +59,7 @@ def match_predictions(forecast, accidents):
                 distance = haversine(long1, lat1, long2, lat2)
                 if distance < 0.15:
                     matches +=1
-    print("\t Matches found:", matches)
+    print("\t Matches found using Haversine:", matches)
 
 def haversine(long1, lat1, long2, lat2):
     # convert decimal degrees to radians
@@ -94,9 +108,10 @@ def predict_accidents(test):
     print("Head of predictions_round: ", predictions_round[0:10])
     print("Accidents predicted: ", sum(predictions_round))
 
-    test.to_csv("../", sep=",",index=False)
+    test.to_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-02_18_test.csv", sep=",",index=False)
 
 
+predict_accidents(test)
 # lat1= 35.044795
 # long1 = -85.305500
 # lat2 = 35.046121
@@ -112,9 +127,11 @@ def predict_accidents(test):
 # print("From loc1 to loc3:",distance2)
 # distance3 = haversine(lat1, long1, lat4, long4)
 # print("From loc1 to loc4:",distance3)
-print("Accidents: ", len(accidents.Latitude.values))
-print("Threshhold: ", threshhold)
-print("MMR: \n\t", len(forecastMMR.Latitude.values))
-match_predictions(forecastMMR, accidents)
-print("Standard: \n\t", len(forecastStand.Latitude.values))
-match_predictions(forecastStand, accidents)
+# print("Accidents: ", len(accidents.Latitude.values))
+# print("Threshhold: ", threshhold)
+# print("MMR: \n\t", len(forecastMMR.Latitude.values))
+# # match_predictions_using_have(forecastMMR, accidents)
+# match_predictions_using_route(forecastMMR, accidents)
+# print("Standard: \n\t", len(forecastStand.Latitude.values))
+# # match_predictions_using_have(forecastStand, accidents)
+# match_predictions_using_route(forecastStand, accidents)
