@@ -4,12 +4,18 @@ import numpy as np
 
 
 ##Incidents by Hour of the Day##
-def incident_by_hour(file):
-    plt.plot(x, y, label=label, color=color, linewidth=4)
+def by_hour(file):
+    font = {'family': 'serif',
+                'weight': 'regular',
+                'size': 18}
+    plt.rc('font', **font)
+    tab = file.groupby(['Hour']).size().reset_index()
+    tab.columns = ['Hour','Count']
+    plt.plot(tab.Hour.values, tab.Count.values,color='red', linewidth=4)
     xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
     plt.xticks(xticks)
     plt.xlabel('Hour')
-    plt.ylabel('Incidents that Occurred on',day)
+    plt.ylabel('Incidents that Occurred')
     plt.title('Hourly Incident Count')
     plt.legend()
     plt.show()
@@ -42,7 +48,7 @@ def by_day_hour(file):
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
     plt.xlabel('Hour')
     plt.ylabel('Incidents that Occurred')
-    plt.title('Hourly Incident Count')
+    plt.title('Hourly Incident Count by Weekday')
     plt.legend()
     plt.show()
 
@@ -84,7 +90,7 @@ def by_month_hour(file):
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
     plt.xlabel('Hour')
     plt.ylabel('Incidents that Occurred')
-    plt.title('Hourly Incident Count')
+    plt.title('Hourly Incident Count by Month')
     plt.legend()
     plt.show()
 
@@ -126,7 +132,7 @@ def by_month_day(file):
     plt.xticks(xticks,days)
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
     plt.ylabel('Incidents that Occurred')
-    plt.title('Daily Incident Count')
+    plt.title('Daily Incident Count by Month')
     plt.legend()
     plt.show()
 
@@ -136,21 +142,21 @@ def by_year_hour(file):
     tab.columns = ['Year', 'Hour','Count']
     seventeen = tab.loc[tab['Year'] == 2017]
     eighteen = tab.loc[tab['Year'] == 2018]
-    nineteen = tab.loc[tab['Year'] == 2018]
+    # nineteen = tab.loc[tab['Year'] == 2018]
 
     font = {'family': 'serif',
                 'weight': 'regular',
                 'size': 18}
     plt.rc('font', **font)
     plt.plot(seventeen.Hour.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
-    plt.plot(eighteen.Hour.values,eighteen.Count.values, label='2018', color='green', linewidth=3)
-    plt.plot(nineteen.Hour.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
+    plt.plot(eighteen.Hour.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    # plt.plot(nineteen.Hour.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
     xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
     plt.xticks(xticks)
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
     plt.xlabel('Hour')
     plt.ylabel('Incidents that Occurred')
-    plt.title('Hourly Incident Count')
+    plt.title('Hourly Incident Count by Year')
     plt.legend()
     plt.show()
 
@@ -160,50 +166,64 @@ def by_year_day(file):
     tab.columns = ['Year', 'Weekday','Count']
     seventeen = tab.loc[tab['Year'] == 2017]
     eighteen = tab.loc[tab['Year'] == 2018]
-    print(eighteen)
-    nineteen = tab.loc[tab['Year'] == 2018]
-
+    # nineteen = tab.loc[tab['Year'] == 2018]
     font = {'family': 'serif',
                 'weight': 'regular',
                 'size': 18}
     plt.rc('font', **font)
     plt.plot(seventeen.Weekday.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
-    plt.plot(eighteen.Weekday.values,eighteen.Count.values, label='2018', color='green', linewidth=3)
-    plt.plot(nineteen.Weekday.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
+    plt.plot(eighteen.Weekday.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    # plt.plot(nineteen.Weekday.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
     days = ["Monday", 'Tuesday', "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     xticks = [0,1,2,3,4,5,6]
     plt.xticks(xticks,days)
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
     plt.ylabel('Incidents that Occurred')
-    plt.title('Daily Incident Count')
+    plt.title('Daily Incident Count by Year')
+    plt.legend()
+    plt.show()
+
+def by_year_month(file):
+    
+    tab = file.groupby(['Year', 'Month']).size().reset_index()
+    tab.columns = ['Year', 'Month','Count']
+    seventeen = tab.loc[tab['Year'] == 2017]
+    eighteen = tab.loc[tab['Year'] == 2018]
+    # nineteen = tab.loc[tab['Year'] == 2018]
+    font = {'family': 'serif',
+                'weight': 'regular',
+                'size': 18}
+    plt.rc('font', **font)
+    plt.plot(seventeen.Month.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
+    plt.plot(eighteen.Month.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    # plt.plot(nineteen.Month.values,nineteen.Count.values, label='2019', color='orange', linewidth=3)
+    xticks = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+              'November', 'December']
+    plt.xticks(range(1,13),xticks, rotation='vertical')
+    plt.grid(color='lightgray', linestyle='-', linewidth=2)
+    plt.ylabel('Incidents that Occurred')
+    plt.title('Monthly Incident Count by Year')
     plt.legend()
     plt.show()
 
 def main():
     data = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv",sep=",")
+
+    ##If Year is needed, this is the loop that creates it. 
     data['Year'] = 0
     for k, info in enumerate(data.values):
         doa = data.Date.values[k]
-        # print(doa)
         year = (int(doa.split('-')[0]))
-        # print(year)
         data.Year.values[k] = year
-    # print(data.Year.values[0:10])
+
+#Different plotting options
+    by_hour(data)
     # by_day_hour(data)
     # by_month_hour(data)
     # by_month_day(data)
-    by_year_day(data)
-
-    # x, y = np.loadtxt(daysofyear, delimiter=',', unpack=True)
-    # plt.plot(x, y, 'rX', label='Daily Incidents')
-    # xticks = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
-    #           'November', 'December']
-    # plt.xticks([31,59,90,120,151,181,212,243,273,304,334,365], xticks)
-    # plt.xlabel('Day')
-    # plt.ylabel('Incidents that Occurred')
-    # plt.title('Incident Count by Day of Year')
-    # plt.legend()
-    # plt.show()
+    # by_year_hour(data)
+    # by_year_month(data)
+    # by_year_day(data)
 
 
 if __name__ == "__main__":
