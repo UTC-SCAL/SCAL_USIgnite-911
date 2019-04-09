@@ -15,14 +15,9 @@ except ImportError:
 
 import os
 import sys
-
-# Import matplotlib pyplot safely
-import matplotlib
-import matplotlib.pyplot as plt
 import numpy
 import pandas
 import talos
-import numpy as np
 from sklearn import preprocessing
 from keras.callbacks import EarlyStopping
 from keras.layers import Dense, Dropout
@@ -31,7 +26,11 @@ from keras import callbacks
 from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
+from sklearn.metrics import confusion_matrix
 
+
+
+# Import matplotlib pyplot safely
 try:
     import matplotlib.pyplot as plt
 except ImportError:
@@ -43,11 +42,117 @@ from os.path import exists
 import datetime
 
 
-# from ann_visualizer.visualize import ann_viz
-# from keras_sequential_ascii import keras2ascii
+def fitting_loops(X,Y):
+        #   2. Defining a Neural Network
+    # creating the model
+    model = Sequential()
+    ##X.shape[1] is the number of columns inside of X. 
+    model.add(Dense(X.shape[1],
+                    input_dim=X.shape[1], activation='sigmoid'))
+
+    # Use for standard sized variable set
+    model.add(Dense(25, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(20, activation='sigmoid'))
+    model.add(Dense(18, activation='sigmoid'))
+    model.add(Dense(10, activation='sigmoid'))
+    model.add(Dropout(.1))
+
+    model.add(Dense(1, activation='sigmoid'))
 
 
-def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
+    #   3. Compiling a model.
+    model.compile(loss='mse',
+                optimizer='nadam', metrics=['accuracy'])
+    print(model.summary())
+
+
+    for i in range(0, 100):
+        file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
+        
+        
+        ##Shuffling if needed. 
+        # dataset = shuffle(dataset)
+        # dataset = shuffle(dataset)
+
+
+        ##Splitting data into train and test. 
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, Y, test_size=0.30, random_state=42)
+
+
+        ##If the model already exists, import and update/use it. If not, create it. 
+        if exists('model_CM.h5'):
+            model.load_weights("model_CM.h5")
+            print("Loading Model")
+
+        ##If the average holder file exists, import it. If not, create it. 
+        if exists(file):
+            avg_holder = pandas.read_csv(file, usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            j = avg_holder.shape[0]
+
+        else:
+            avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            j = avg_holder.shape[0]
+
+
+        ###What cycle of the loop are we on? 
+        print("Cycle: ", i)
+
+
+        #Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
+        patience = 15
+        stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
+        hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
+                        callbacks=[stopper])
+        
+        ##Save the weights for next run. 
+        model.save_weights("model_CM.h5")
+        print("Saved model to disk")
+
+        # This is evaluating the model, and printing the results of the epochs.
+        scores = model.evaluate(X_train, y_train, batch_size=5000)
+        print("\nModel Training Accuracy:", scores[1] * 100)
+        print("Model Training Loss:", sum(hist.history['loss']) / len(hist.history['loss']))
+
+        # Okay, now let's calculate predictions probability.
+        predictions = model.predict(X_test)
+
+        # Then, let's round to either 0 or 1, since we have only two options.
+        predictions_round = [abs(round(x[0])) for x in predictions]
+
+        ##Finding accuracy score of the predictions versus the actual Y. 
+        accscore1 = accuracy_score(y_test, predictions_round)
+        ##Printing it as a whole number instead of a percent of 1. (Just easier for me to read) 
+        print("Rounded Test Accuracy:", accscore1 * 100)
+        ##Find the Testing loss as well: 
+        print("Test Loss", sum(hist.history['val_loss']) / len(hist.history['val_loss']))
+
+        ##Finding the AUC for the cycle: 
+        fpr, tpr, _ = roc_curve(y_test, predictions)
+        roc_auc = auc(fpr, tpr)
+        print('AUC: %f' % roc_auc)
+
+        ##Confusion Matrix: 
+        cm = confusion_matrix(y_test, predictions_round)
+        print(cm)
+
+        ##Adding the scores to the average holder file. 
+        avg_holder.loc[j, 'Train_Acc'] = scores[1] * 100
+        avg_holder.loc[j, 'Train_Loss'] = sum(hist.history['loss']) / len(hist.history['loss'])
+        avg_holder.loc[j, 'Test_Acc'] = accscore1 * 100
+        avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
+        avg_holder.loc[j, 'AUC'] = roc_auc
+        avg_holder.loc[j, 'CM'] = str(cm)
+
+        #Save the average holder file: 
+        avg_holder.to_csv(file, sep=",")
+
+        #If we are on the 1st, 50th, or 100th cycle, make some graphs: 
+        if i ==0 or i == 50 or i ==100:
+            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i)
+
+def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     font = {'family': 'serif',
             'weight': 'regular',
             'size': 14}
@@ -120,155 +225,11 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 #           1. Load Data
 dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model_MMR.csv", sep=",")
-# dataset = shuffle(dataset)
-# dataset = shuffle(dataset)
-
-# dataset.drop(['Temp_Max','Temp_Min','Gov_Cont','Access_Control'], axis=1)
-# train = pandas.read_csv(
-#     "../Excel & CSV Sheets/Full Data TestDay.csv", sep=",")
-# train = shuffle(train)
-# train = shuffle(train)
-
-
+#Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
 Y = dataset.ix[:, 0].values
-# names = train.columns.values[1:-1]
 
-# X_train, X_test, y_train, y_test = train_test_split(
-#     X, Y, test_size=0.30, random_state=42)
-
-# test = pandas.read_csv(
-#     "../Excel & CSV Sheets/TestDay.csv", sep=",")
-# test = shuffle(test)
-# test = shuffle(test)
-
-# X_test = test.ix[:, 1:(len(test.columns)+1)].values
-# y_test = (test.ix[:, 0].values).reshape((138, 1))
-# print("Size of X_Test:", X_test.shape, "Size of y_test:", y_test.shape)
-
-# X_test, X_valid, y_test, y_valid = train_test_split(
-#     X_test, y_test, test_size=0.90, random_state=42)
-
-# print("Number of X variables: ", X.shape[1])
+##Steps 2-5 are inside the fitting loops method. 
+fitting_loops(X,Y)
 
 
-#   2. Defining a Neural Network
-# creating the model
-model = Sequential()
-
-model.add(Dense(X.shape[1],
-                input_dim=X.shape[1], activation='sigmoid'))
-# Usefor standard sized variable set
-model.add(Dense(25, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
-
-model.add(Dense(1, activation='sigmoid'))
-
-#   3. Compiling a model.
-model.compile(loss='mse',
-              optimizer='nadam', metrics=['accuracy'])
-print(model.summary())
-
-#           4. Train that model on some data!
-# Fitting the model to train the data
-
-# hist = model.fit(X_train, y_train, epochs=3000, batch_size=500, validation_data=(X_valid, y_valid), verbose=1)
-
-# if exists('model.json'):
-#     model.load_weights("")
-#     print("Loading Model")
-# else:
-#     model_json = model.to_json()
-#     with open("model.json", "w") as json_file:
-#         json_file.write(model_json)
-#     # serialize weights to HDF5
-#     model.save_weights("")
-#     print("Saved model to disk")
-# ann_viz(model, view=True, filename="network.gv", title="Model")
-# keras2ascii(model)
-
-#     return hist, model
-# This is evaluating the model, and printing the results of the epochs.
-# scores = model.evaluate(X_train, y_train, batch_size=500)
-# print("\nModel Training Accuracy:", scores[1]*100)
-# print("Model Training Loss:", sum(hist.history['loss'])/len(hist.history['loss']))
-# # Okay, now let's calculate predictions.
-# predictions = model.predict(X_test)
-
-# # Then, let's round to either 0 or 1, since we have only two options.
-# predictions_round = [abs(round(x[0])) for x in predictions]
-# # print(rounded)
-# accscore1 = accuracy_score(y_test, predictions_round)
-# print("Rounded Test Accuracy:", accscore1*100)
-# print("Test Loss",sum(hist.history['val_loss'])/len(hist.history['val_loss']))
-
-# fpr, tpr, _ = roc_curve(y_test, predictions)
-# roc_auc = auc(fpr, tpr)
-# print('AUC: %f' % roc_auc)
-# generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
-
-
-for i in range(0, 100):
-    file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "TimeSortAverageHolder.csv"
-    # names = train.columns.values[1:-1]
-    # dataset = shuffle(dataset)
-    # dataset = shuffle(dataset)
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, Y, test_size=0.30, random_state=42)
-    # X_test, X_valid, y_test, y_valid = train_test_split(
-    #     X_test, y_test, test_size=0.90, random_state=42)
-    if exists('model_timesort_MMR.h5'):
-        model.load_weights("model_timesort_MMR.h5")
-        print("Loading Model")
-    # print(model.summary())
-    if exists(file):
-        avg_holder = pandas.read_csv(file, usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC"])
-        j = avg_holder.shape[0]
-        # avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
-    else:
-        avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC"])
-        j = avg_holder.shape[0]
-        # avg_holder.to_csv("../Excel & CSV Sheets/AverageHolder2.csv", sep=",")
-    print("Iteration: ", i)
-    patience = 15
-    stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
-    hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
-                     callbacks=[stopper])
-    # else:
-    #     model_json = model.to_json()
-    #     with open("model.json", "w") as json_file:
-    #         json_file.write(model_json)
-    #     # serialize weights to HDF5
-    model.save_weights("model_timesort_MMR.h5")
-    print("Saved model to disk")
-
-    # This is evaluating the model, and printing the results of the epochs.
-    scores = model.evaluate(X_train, y_train, batch_size=5000)
-    print("\nModel Training Accuracy:", scores[1] * 100)
-    print("Model Training Loss:", sum(hist.history['loss']) / len(hist.history['loss']))
-    # Okay, now let's calculate predictions.
-    predictions = model.predict(X_test)
-
-    # Then, let's round to either 0 or 1, since we have only two options.
-    predictions_round = [abs(round(x[0])) for x in predictions]
-    # print(rounded)
-    accscore1 = accuracy_score(y_test, predictions_round)
-    print("Rounded Test Accuracy:", accscore1 * 100)
-    print("Test Loss", sum(hist.history['val_loss']) / len(hist.history['val_loss']))
-
-    fpr, tpr, _ = roc_curve(y_test, predictions)
-    roc_auc = auc(fpr, tpr)
-    print('AUC: %f' % roc_auc)
-
-    avg_holder.loc[j, 'Train_Acc'] = scores[1] * 100
-    avg_holder.loc[j, 'Train_Loss'] = sum(hist.history['loss']) / len(hist.history['loss'])
-    avg_holder.loc[j, 'Test_Acc'] = accscore1 * 100
-    avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
-    avg_holder.loc[j, 'AUC'] = roc_auc
-    avg_holder.to_csv(file, sep=",")
-    if i ==0 or i == 50:
-        generate_results(y_test, predictions, hist, fpr, tpr, roc_auc)
