@@ -15,16 +15,13 @@ path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # MAIN Calldata 2018 + 2017 #
-calldata = pandas.read_excel(folderpath +
-                             "Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx",
+calldata = pandas.read_excel("../Excel & CSV Sheets/2017+2018 Data/2018 + 2017 Accident Report List Agg Options.xlsx",
                              dtypes={"Index": int, "Y": int, 'Latitude': float, 'Longitude': float, 'Date': datetime,
                                      'Time': datetime.time, 'Problem': str, 'Hour': int, 'Address': str, 'City': str,
                                      'Temperature': float, 'Dewpoint': float, 'Event': str, 'Humidity': float,
                                      'Month': int, 'Visibility': float, 'Conditions': str})
 
-mini = calldata.columns.get_loc("Conditions") + 1
-maxi = len(calldata.columns)
-X = calldata.ix[:, mini:maxi].values
+X = calldata.ix[:, 1:len(calldata.columns.values)].values
 Y = calldata.ix[:, 0].values
 
 # Removing features with low variance #

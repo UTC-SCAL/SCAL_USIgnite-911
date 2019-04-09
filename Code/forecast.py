@@ -1,4 +1,3 @@
-# import matplotlib
 import matplotlib.pyplot as plt
 import numpy
 import datetime
@@ -11,23 +10,12 @@ import os, sys
 from os.path import exists
 from selenium import webdriver
 import schedule
-from keras.callbacks import EarlyStopping
-from keras.layers import Dense, Dropout
-from keras.models import Sequential
-from sklearn.metrics import accuracy_score, auc, roc_curve
-from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
+
 
 
 places = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
 
-# columns = ['Route','Log_Mile','Date','Hour','Unix','Temperature','Temp_Max','Temp_Min','Dewpoint','Humidity','Month',
-# 'Weekday','Visibility','Cloud_Coverage','Precipitation_Intensity','Precip_Intensity_Max','Clear',
-# 'Cloudy','Rain','Fog','Snow','RainBefore','Terrain','Land_Use','Access_Control','Operation',
-# 'Thru_Lanes','Num_Lanes','Ad_Sys','Gov_Cont','Func_Class','Pavement_Width',	'Pavement_Type']
-# hotspots = hotspots[columns]
-
-
+##Fetching the weather forecast for the given file. 
 def forecasting(places, month, day, year):
     start = datetime.datetime.now()
     places.Event = places.Event.astype(str)
@@ -171,112 +159,14 @@ def forecasting(places, month, day, year):
         if d % 400 == 0:
             places.to_csv(filename,sep=",", index=False)
     places.to_csv(filename,sep=",", index=False)
-#     testing(places)
-# def testing(places):
-#     test = places
-#     test = shuffle(test)
-#     test = shuffle(test)
-#     model_maker = pandas.read_csv("../Excel & CSV Sheets/Full Data_MMR.csv",sep=",")
-#     columns = model_maker.columns.values[1:len(model_maker.column.values)]
-#
-#     test = test[columns]
-#
-#     X_test = test
-#
-#     print("Size of X_Test:", X_test.shape)
-#
-#     model = Sequential()
-#
-#     model.add(Dense(X_test.shape[1],
-#                     input_dim=X_test.shape[1], activation='sigmoid'))
-#     model.add(Dense(28, activation='sigmoid'))
-#     model.add(Dropout(.1))
-#     model.add(Dense(20, activation='sigmoid'))
-#     model.add(Dense(18, activation='sigmoid'))
-#     model.add(Dense(10, activation='sigmoid'))
-#     model.add(Dropout(.1))
-#     model.add(Dense(1, activation='sigmoid'))
-#
-#     #           3. Compiling a model.
-#     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-#     model.load_weights("model_MMR.h5")
-#     # Okay, now let's calculate predictions.
-#     predictions = model.predict(X_test)
-#     test["Probability"] = predictions
-#     # Then, let's round to either 0 or 1, since we have only two options.
-#     predictions_round = [abs(round(x[0])) for x in predictions]
-#     test["Prediction"] = predictions_round
-#     # print(rounded)
-#     print("Head of predicitons: ", predictions[0:10])
-#     print("Head of predictions_round: ", predictions_round[0:10])
-#
-#     test.to_csv(filename, sep=",")
+
 
     end = datetime.datetime.now()
     print("Forecasting Complete. Duration:", end - start)
-def generate_results(y_test,predictions, hist, fpr, tpr, roc_auc, date):
-    font = {'family': 'serif',
-            'weight': 'regular',
-            'size': 14}
-    plt.rc('font', **font)
-    fig = plt.figure()
-    # plt.subplot(211)
-    plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
-    plt.plot([0, 1], [0, 1], 'k--')
-    plt.yticks((0,.5,1), (0,.5,1))
-    plt.xticks((0,.5,1), (0,.5,1))
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    # plt.title('Receiver operating characteristic curve')
-    title = '../Graphs & Images/ResultsFromForecast/roc.png'
-    fig.savefig(title, bbox_inches='tight')
-    # plt.subplot(212)
-    fig = plt.figure()
-    plt.xticks(range(0, 20), range(1, 21), rotation=90)
-    plt.yticks(range(0, 2), ['No', 'Yes', ''])
-    plt.ylabel('Accident')
-    plt.xlabel('Record')
-    plt.grid(which='major', axis='x')
-    x= [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
-    plt.axhline(y=0.5, color='gray', linestyle='-')
-    plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
-    plt.scatter(x=x, y=y_test[0:20], s=110,
-                facecolors='none', edgecolors='r', linewidths=2)
-    title = '../Graphs & Images/ResultsFromForecast/pred'+date+'.png'
-    fig.savefig(title, bbox_inches='tight')
-
-    font = {'family': 'serif',
-            'weight': 'bold',
-            'size': 14}
-    plt.rc('font', **font)
-    fig = plt.figure()
-    a1 = fig.add_subplot(2,1,1)
-    a1.plot(hist.history['acc'])
-    a1.plot(hist.history['val_acc'])
-    a1.set_ylabel('Accuracy')
-    a1.set_xlabel('Epoch')
-    a1.set_yticks((.5, .65, .8) )
-    a1.set_xticks((0,(len(hist.history['val_acc'])/2),len(hist.history['val_acc'])))
-    a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
-    # plt.show()
-    # fig.savefig('acc.png', bbox_inches='tight')
-    # summarize history for loss
-    # fig = plt.figure()
-    a2 = fig.add_subplot(2,1,2)
-    # fig = plt.figure()
-    a2.plot(hist.history['loss'])
-    a2.plot(hist.history['val_loss'])
-    a2.set_ylabel('Loss')
-    a2.set_xlabel('Epoch')
-    a2.set_yticks((.15,.20,.25,))
-    a2.set_xticks((0,(len(hist.history['val_loss'])/2),len(hist.history['val_loss'])))
-    a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
-    # plt.show()
-    title = '../Graphs & Images/ResultsFromForecast/lossandacc'+date+'.png'
-    fig.savefig(title, bbox_inches='tight')
 
 
 def job(t, places):
+    #Setting the date to fetch for. If it's 6pm, use the date of tomorrow. If any other time, use todays. 
     tomorrow = datetime.date.today() + datetime.timedelta(days=1)
     thistime = datetime.datetime.now()
     if thistime.hour == 18:
@@ -297,52 +187,13 @@ def waiting(time):
 
 print("Beginning code at:" , datetime.datetime.now())
 
-schedule.every().day.at("18:00").do(job, "Fetching weather forecast", hotspots)
-schedule.every().day.at("00:00").do(job, "Fetching weather forecast", hotspots)
-schedule.every().day.at("06:00").do(job, "Fetching weather forecast", hotspots)
-schedule.every().day.at("12:00").do(job, "Fetching weather forecast", hotspots)
+##Run the forecast at 6PM, midnight, 6AM, and noon. 
+schedule.every().day.at("18:00").do(job, "Fetching weather forecast", places)
+schedule.every().day.at("00:00").do(job, "Fetching weather forecast", places)
+schedule.every().day.at("06:00").do(job, "Fetching weather forecast", places)
+schedule.every().day.at("12:00").do(job, "Fetching weather forecast", places)
 
 while True:
     schedule.run_pending()
     schedule.every(30).minutes.do(waiting, datetime.datetime.now())
     time.sleep(30)
-
-# print(hotspots.columns.values)
-
-# test = pandas.read_csv(
-#     "../Excel & CSV Sheets/TestDay.csv", sep=",")
-# test = shuffle(test)
-# test = shuffle(test)
-
-# X = test.ix[:, 1:(len(test.columns)+1)].values
-# y = (test.ix[:, 0].values).reshape((138, 1))
-# print("Size of X_Test:", X.shape, "Size of y_test:", y.shape)
-
-# model = Sequential()
-# model.add(Dense(30, input_dim=30, activation='sigmoid'))
-# model.add(Dense(28, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(20, activation='sigmoid'))
-# model.add(Dense(18, activation='sigmoid'))
-# model.add(Dense(10, activation='sigmoid'))
-# model.add(Dropout(.1))
-# model.add(Dense(1, activation='sigmoid'))
-
-# #           3. Compiling a model.
-# model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-# model.load_weights("")
-# # Okay, now let's calculate predictions.
-# predictions = model.predict(X_test)
-# dataset["Probability"] = predictions
-# # Then, let's round to either 0 or 1, since we have only two options.
-# predictions_round = [abs(round(x[0])) for x in predictions]
-# dataset["Prediction"] = predictions_round
-# # print(rounded)
-# print("Head of predicitons: ", predictions[0:10])
-# print("Head of predictions_round: ", predictions_round)
-
-# dataset.to_csv("../Excel & CSV Sheets/2019-02-25_13_forecast_full2.csv", sep=",")
-# matches = 0
-
-#
-# print(matches)

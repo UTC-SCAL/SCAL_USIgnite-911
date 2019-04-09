@@ -5,33 +5,49 @@ from keras.models import Sequential
 from math import *
 import datetime
 
+########################################################################################################################################################################
+
+##Importing all files necessary. 
+
+#Test is the forecast file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM. 
 test = pandas.read_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6.csv",sep=",")
+##MMR is minmaxed reduced. 
+forecastMMR = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_0minmax.csv",sep=",")
+##Time sorted, that is, the model should be changed to model_timesort_MMr.h5
+forecasttimesort = pandas.read_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv",sep=",")
+forecastStand = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv",sep=",")
 
-filename = "../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv"
-# forecastMMR = pandas.read_csv(filename,sep=",")
-forecasttimesort = pandas.read_csv(filename,sep=",")
-# filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv"
-# forecastStand = pandas.read_csv(filename,sep=",")
-
-# forecastMMR['Latitude'] = forecastStand['Latitude']
-# forecastMMR['Longitude'] = forecastStand['Longitude']
-
-# forecastMMR = forecastMMR[forecastMMR['Prediction'] == 1]
-forecasttimesort = forecasttimesort[forecasttimesort['Prediction'] == 1]
-# forecastStand = forecastStand[forecastStand['Prediction'] == 1]
-
-# threshhold = 0.50
-
-# forecastMMR = forecastMMR[forecastMMR['Probability'] >= threshhold]
-# forecastStand = forecastStand[forecastStand['Probability'] >= threshhold]
-
-
+#Importing the accidents. The loop is only necessary if we are operating with the raw file from the email. 
 accidents = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/Accident Report_FinalForm.xlsx")
 # accidents['Hour'] = 0
 # for d, info in enumerate(accidents.values):
 #      dateof = datetime.datetime.strptime(accidents.Response_Date.values[d], '%d/%m/%y %H:%M')
 #      accidents.Hour.values[d] = dateof.hour
 
+
+########################################################################################################################################################################
+
+##Converting the lat and longs back to a readable format (Each entry in MMR matches the same index in Standard)
+forecastMMR['Latitude'] = forecastStand['Latitude']
+forecastMMR['Longitude'] = forecastStand['Longitude']
+
+##Cutting the data set to only those entries that are reported as positive. 
+forecastMMR = forecastMMR[forecastMMR['Prediction'] == 1]
+forecasttimesort = forecasttimesort[forecasttimesort['Prediction'] == 1]
+forecastStand = forecastStand[forecastStand['Prediction'] == 1]
+
+########################################################################################################################################################################
+
+##Creating a threshold for the predictions. If 75% probability is needed, change to .75. There will be no change to the predictions if the threshold remains at 0.5 . 
+
+threshhold = 0.50
+forecastMMR = forecastMMR[forecastMMR['Probability'] >= threshhold]
+forecasttimesort = forecasttimesort[forecasttimesort['Probability'] >= threshhold]
+forecastStand = forecastStand[forecastStand['Probability'] >= threshhold]
+
+########################################################################################################################################################################
+
+#Note: This function is not currently usable, as the Log_Mile and Route are not included in the forecast miles once they are adjusted for the model. 
 def match_predictions_using_route(forecast, accidents):
     matches = 0
     for i, info in enumerate(forecast.values):
@@ -41,18 +57,24 @@ def match_predictions_using_route(forecast, accidents):
             hourDiff = abs(forecastHour - accHour)
             forecastlog = forecast.Log_Mile.values[i] 
             acclog= accidents.Log_Mile.values[j]
+            ##If the forecast entry and the accident are along the same route, happened within 2 hours of one another, and the distance is less than .25, consider
+            #the two a match. 
             if (forecast.Route.values[i] == accidents.Route.values[j]) and (hourDiff < 2) and ((abs(forecastlog-acclog)) < .25):
                 matches +=1
+    #Total number of matches between forecast and accident. 
     print("\t Matches found using Route:", matches)
 
 def match_predictions_using_have(forecast, accidents):
+    #Start out with no matches, so matches equals zero. 
     matches = 0
+    #For each entry in forecast, look at every accident for that day. If the two happened within 3 hours of one another, and 
+    # the distance between the two is less than roughly a block, then they are considered a match. 
     for i, info in enumerate(forecast.values):
         for j, data in enumerate(accidents.values):
             forecastHour = forecast.Hour.values[i]
             accHour = accidents.Hour.values[j]
             hourDiff = abs(forecastHour - accHour)
-            if hourDiff < 4:
+            if hourDiff < 3:
                 lat1 = forecast.Latitude.values[i]
                 long1 = forecast.Longitude.values[i]
                 lat2 = accidents.Latitude.values[j]
@@ -60,6 +82,7 @@ def match_predictions_using_have(forecast, accidents):
                 distance = haversine(long1, lat1, long2, lat2)
                 if distance < 0.15:
                     matches +=1
+    #Prints the total number of matches found using the haversine method. 
     print("\t Matches found using Haversine:", matches)
 
 def haversine(long1, lat1, long2, lat2):
@@ -72,21 +95,24 @@ def haversine(long1, lat1, long2, lat2):
     a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlong/2)**2
     c = 2 * asin(sqrt(a))
     r = 3956 # the radius of the earth in miles
-    return c * r
+    return c * r #The distance between the two locations
 
-def predict_accidents(test):
+def predict_accidents(forecast):
 
+    ########################################################################################################################################################################
+
+    ##This section makes sure that the correct columns are in the forecast files, just in case. 
     dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data_MMR.csv", sep=",")
     columns = dataset.columns.values[1:len(dataset.columns.values)]
-    test = test[columns]
-    test = test.dropna()
+    forecast = forecast[columns]
+    forecast = forecast.dropna()
 
-    X_test = test
-
-    print("Size of X_Test:", X_test.shape)
-
+    ########################################################################################################################################################################
+    #Printing the size of the testing data, that is, the forecast file. 
+    print("Size of forecast:", forecast.shape)
+    #Creating the framework for the model. 
     model = Sequential()
-    model.add(Dense(X_test.shape[1], input_dim=X_test.shape[1], activation='sigmoid'))
+    model.add(Dense(forecast.shape[1], input_dim=forecast.shape[1], activation='sigmoid'))
     model.add(Dense(25, activation='sigmoid'))
     model.add(Dropout(.1))
     model.add(Dense(20, activation='sigmoid'))
@@ -95,45 +121,57 @@ def predict_accidents(test):
     model.add(Dropout(.1))
     model.add(Dense(1, activation='sigmoid'))
 
-    #           3. Compiling a model.
+    ##Compiling a model, and pulling in the saved weights.
     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-    model.load_weights("model_timesort_MMR.h5")
+
+    ##The model created using the forecast and test data combined as the test. 
+    # model.load_weights("model_forecast.h5")
+
+    ##Our current set model. Min max reduced. 
+    model.load_weights("model_MMR.h5")
+
+    ##The model created by sorted the entries by time, then training the model. 
+    # model.load_weights("model_timesort_MMR.h5")
+
+    ########################################################################################################################################################################
     # Okay, now let's calculate predictions.
-    predictions = model.predict(X_test)
-    test["Probability"] = predictions
-    # Then, let's round to either 0 or 1, since we have only two options.
-    predictions_round = [abs(round(x[0])) for x in predictions]
-    test["Prediction"] = predictions_round
-    # print(rounded)
-    print("Head of predicitons: ", predictions[0:10])
+    probability = model.predict(forecast)
+    #Save the predicted values to the Probability column. 
+    forecast["Probability"] = probability 
+
+    # Then, let's round to either 0 or 1, since we have only two options (accident or no).
+    predictions_round = [abs(round(x[0])) for x in probability]
+    forecast["Prediction"] = predictions_round
+ 
+    #Printing the found values, as well as the total number of predicted accidents for this forecast. 
+    print("Head of probabilities: ",  probability[0:10])
     print("Head of predictions_round: ", predictions_round[0:10])
     print("Accidents predicted: ", sum(predictions_round))
 
-    test.to_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv", sep=",",index=False)
+    forecast.to_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv", sep=",",index=False)
 
 
-# predict_accidents(test)
-match_predictions_using_have(forecasttimesort, accidents)
-# lat1= 35.044795
-# long1 = -85.305500
-# lat2 = 35.046121
-# long2 =  -85.304835
-# lat3 = 35.044294
-# long3 = -85.304191
-# lat4 = 35.045603
-# long4 =  -85.303515
+    ########################################################################################################################################################################
 
-# distance = haversine(lat1, long1, lat2, long2)
-# print("From loc1 to loc2:",distance)
-# distance2 = haversine(lat1, long1, lat3, long3)
-# print("From loc1 to loc3:",distance2)
-# distance3 = haversine(lat1, long1, lat4, long4)
-# print("From loc1 to loc4:",distance3)
+#The print statements just make things easier to understand. 
+#
+#Print the number of accidents and the current threshold. 
 # print("Accidents: ", len(accidents.Latitude.values))
 # print("Threshhold: ", threshhold)
+
+##Finding the matches from MMR using haversine. First prints the number of accidents predicted. Note: The using_route function does not currently work, but is ready for future use. 
 # print("MMR: \n\t", len(forecastMMR.Latitude.values))
 # match_predictions_using_have(forecastMMR, accidents)
 # match_predictions_using_route(forecastMMR, accidents)
+
+##Finding the matches from Timesort using haversine. First prints the number of accidents predicted. Note: The using_route function does not currently work, but is ready for future use. 
+
+# print("Time Sorted: \n\t", len(forecasttimesort.Latitude.values))
+# # match_predictions_using_have(forecasttimesort, accidents)
+# match_predictions_using_route(forecasttimesort, accidents)
+
+##Finding the matches from standard data using haversine. First prints the number of accidents predicted. Note: The using_route function does not currently work, but is ready for future use. 
+
 # print("Standard: \n\t", len(forecastStand.Latitude.values))
 # # match_predictions_using_have(forecastStand, accidents)
 # match_predictions_using_route(forecastStand, accidents)
