@@ -18,7 +18,10 @@ pydot = "*"
 ann-visualizer = "*"
 graphviz = "*"
 keras-sequential-ascii = "*"
-tkinter = "*"
+xlsxwriter = "*"
+xlrd = "*"
+plaidml = "*"
+keras = "*"
 
 [dev-packages]
 "autopep8" = "*"

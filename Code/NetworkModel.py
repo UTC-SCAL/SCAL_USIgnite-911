@@ -119,9 +119,9 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model _MMR.csv", sep=",")
-dataset = shuffle(dataset)
-dataset = shuffle(dataset)
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model_MMR.csv", sep=",")
+# dataset = shuffle(dataset)
+# dataset = shuffle(dataset)
 
 # dataset.drop(['Temp_Max','Temp_Min','Gov_Cont','Access_Control'], axis=1)
 # train = pandas.read_csv(
@@ -213,7 +213,7 @@ print(model.summary())
 
 
 for i in range(0, 100):
-    file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
+    file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "TimeSortAverageHolder.csv"
     # names = train.columns.values[1:-1]
     # dataset = shuffle(dataset)
     # dataset = shuffle(dataset)

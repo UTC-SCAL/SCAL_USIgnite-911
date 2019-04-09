@@ -99,22 +99,32 @@ except ImportError:
 # # exit()
 
 
-# from datetime import datetime
+##This section cuts the negatives into 3. 
 
-# calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data for Reduction.csv",sep=",")
-# reduced = calldata.copy()
+calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort.csv",sep=",")
+print(len(calldata))
+accidents = calldata[calldata['Accident'] == 1]
+print(len(accidents))
+noaccidents = calldata[calldata['Accident'] == 0]
+print(len(noaccidents))
+
+reduced = noaccidents.copy()
 
 # print(len(calldata))
-# listing = []
-# for i, info in enumerate(calldata.values):
-#     if i % 3 == 0:
-#         pass
-#     else:
-#         listing.append(i)
-# reduced.drop(reduced.index[listing], inplace=True)
-# reduced.to_csv("../Excel & CSV Sheets/Full Data for Reduction Less.csv", sep=",")
+listing = []
+for i, info in enumerate(noaccidents.values):
+    if i % 3 == 0:
+        pass
+    else:
+        listing.append(i)
+reduced.drop(reduced.index[listing], inplace=True)
+frames = [accidents, reduced]
+fulldata = pandas.concat(frames)
+fulldata = fulldata.sort_values(by=['Date', 'Time'])
+print(len(fulldata), (len(fulldata)/2))
+fulldata.to_csv("../Excel & CSV Sheets/Full Data Time Sort Less.csv", sep=",")
 
-# exit()
+exit()
 
 # for k, info in enumerate(calldata.values):
 #     print(k)
@@ -730,19 +740,19 @@ except ImportError:
 
 ##This section makes the data in a nice standardized format by minimum and maximum. 
 
-from sklearn import preprocessing
-import pandas
-# Get column names first
-df = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-23_06.csv", sep=",")
-full = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax Reduced.csv", sep=",")
-columns = full.columns.values[1:len(full.columns.values)]
-df = df[columns]
-# Create the Scaler object
-scaler = preprocessing.MinMaxScaler()
-# Fit your data on the scaler object
-scaled_df = scaler.fit_transform(df)
-scaled_df = pandas.DataFrame(scaled_df, columns=columns)
-scaled_df.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_06minmax.csv", sep=",", index=False)
+# from sklearn import preprocessing
+# import pandas
+# # Get column names first
+# df = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-23_06.csv", sep=",")
+# full = pandas.read_csv("../Excel & CSV Sheets/Full Data MinMax Reduced.csv", sep=",")
+# columns = full.columns.values[1:len(full.columns.values)]
+# df = df[columns]
+# # Create the Scaler object
+# scaler = preprocessing.MinMaxScaler()
+# # Fit your data on the scaler object
+# scaled_df = scaler.fit_transform(df)
+# scaled_df = pandas.DataFrame(scaled_df, columns=columns)
+# scaled_df.to_csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-23-2019_2019-03-23_06minmax.csv", sep=",", index=False)
 
 
 

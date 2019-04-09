@@ -5,18 +5,19 @@ from keras.models import Sequential
 from math import *
 import datetime
 
-test = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-02_18.csv",sep=",")
+test = pandas.read_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6.csv",sep=",")
 
-filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv"
-forecastMMR = pandas.read_csv(filename,sep=",")
-
+filename = "../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv"
+# forecastMMR = pandas.read_csv(filename,sep=",")
+forecasttimesort = pandas.read_csv(filename,sep=",")
 # filename = "../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv"
 # forecastStand = pandas.read_csv(filename,sep=",")
 
 # forecastMMR['Latitude'] = forecastStand['Latitude']
 # forecastMMR['Longitude'] = forecastStand['Longitude']
 
-forecastMMR = forecastMMR[forecastMMR['Prediction'] == 1]
+# forecastMMR = forecastMMR[forecastMMR['Prediction'] == 1]
+forecasttimesort = forecasttimesort[forecasttimesort['Prediction'] == 1]
 # forecastStand = forecastStand[forecastStand['Prediction'] == 1]
 
 # threshhold = 0.50
@@ -51,7 +52,7 @@ def match_predictions_using_have(forecast, accidents):
             forecastHour = forecast.Hour.values[i]
             accHour = accidents.Hour.values[j]
             hourDiff = abs(forecastHour - accHour)
-            if hourDiff < 2:
+            if hourDiff < 4:
                 lat1 = forecast.Latitude.values[i]
                 long1 = forecast.Longitude.values[i]
                 lat2 = accidents.Latitude.values[j]
@@ -96,7 +97,7 @@ def predict_accidents(test):
 
     #           3. Compiling a model.
     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-    model.load_weights("model_MMR.h5")
+    model.load_weights("model_timesort_MMR.h5")
     # Okay, now let's calculate predictions.
     predictions = model.predict(X_test)
     test["Probability"] = predictions
@@ -108,10 +109,11 @@ def predict_accidents(test):
     print("Head of predictions_round: ", predictions_round[0:10])
     print("Accidents predicted: ", sum(predictions_round))
 
-    test.to_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-02_18_test.csv", sep=",",index=False)
+    test.to_csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv", sep=",",index=False)
 
 
-predict_accidents(test)
+# predict_accidents(test)
+match_predictions_using_have(forecasttimesort, accidents)
 # lat1= 35.044795
 # long1 = -85.305500
 # lat2 = 35.046121
@@ -130,7 +132,7 @@ predict_accidents(test)
 # print("Accidents: ", len(accidents.Latitude.values))
 # print("Threshhold: ", threshhold)
 # print("MMR: \n\t", len(forecastMMR.Latitude.values))
-# # match_predictions_using_have(forecastMMR, accidents)
+# match_predictions_using_have(forecastMMR, accidents)
 # match_predictions_using_route(forecastMMR, accidents)
 # print("Standard: \n\t", len(forecastStand.Latitude.values))
 # # match_predictions_using_have(forecastStand, accidents)

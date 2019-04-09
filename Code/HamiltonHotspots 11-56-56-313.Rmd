@@ -180,42 +180,62 @@ dev.off()
 
 ```{r}
 library(ggmap)
-# accidents =read.csv("/Users/pete/Downloads/Accident Report.csv", header=T)
+accidents =read.csv("/Users/pete/Downloads/Accident Report.csv", header=T)
 # head(accidents)
-# accidents = accidents[,c('Latitude','Longitude')]
+accidents = accidents[,c('Latitude','Longitude')]
+accidents['Probability'] = 1
+# head(accidents)
 
-forecastMMR =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv", header=T)
+forecastMMR =read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-02_18_minmax_withpred.csv", header=T)
 
+timesorted = read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv", header=T)
 
-forecaststand =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv", header=T)
+forecaststand =read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-02_18_noMM.csv", header=T)
 
-forecast0MMR$Latitude = forecast0stand$Latitude
-forecast0MMR$Longitude = forecast0stand$Longitude
+forecastMMR$Latitude = forecaststand$Latitude
+forecastMMR$Longitude = forecaststand$Longitude
 
-a=which(forecast0MMR$Prediction==1)
+a=which(forecastMMR$Prediction==1)
 length(a)
-forecast0MMR=forecast0MMR[a,c('Latitude','Longitude', 'Probability')]
+forecastMMR=forecastMMR[a,c('Latitude','Longitude', 'Probability')]
 
-b=which(forecast0stand$Prediction==1)
-forecast0stand=forecast0stand[b,c('Latitude','Longitude', 'Probability')]
+a=which(timesorted$Prediction==1)
+length(a)
+timesorted=timesorted[a,c('Latitude','Longitude', 'Probability')]
+
+b=which(forecaststand$Prediction==1)
+forecaststand=forecaststand[b,c('Latitude','Longitude', 'Probability')]
 length(b)
 
-library(reshape)
-zz <- melt(list(MMR=forecast0MMR,stand=forecast0stand,accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
+# library(reshape)
+# zz <- melt(list(MMR=forecastMMR,stand=forecaststand,accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
+# head(zz)
+
+zz <- melt(list(TimeSorted=timesorted, accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
 head(zz)
 
-thresh = which(zz$Probability>=0.95)
+thresh = which(zz$Probability>=0.90)
 zz=zz[thresh,]
 
 
-png("../Graphs & Images/R Maps/April03_noon_.95thresh.png", width=6,height=6,units='in', res=800)
+png("../Graphs & Images/R Maps/April03/April03_6PM_.90thresh.png", width=6,height=6,units='in', res=800)
 lats<-c(34.99, 35.45)
 lons<-c(-85.4,-85.05)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 calc_zoom(bb)
 cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
-ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), alpha=.25, data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","red","dodgerblue"),  labels = c("Accident","MMR","Standard"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7,.15)) + ggtitle("Accidents Predicted at noon .95 threshold")
+ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), alpha=.25, data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","dodgerblue"),  labels = c("Accident","Standard"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7,.15)) + ggtitle("Accidents Predicted at 6PM .90 threshold")
+dev.off()
+
+png("../Graphs & Images/R Maps/April03/April03_6AM_TimeSorted.png", width=6,height=6,units='in', res=800)
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","red"),  labels = c("Accident","TimeSorted"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7)) + ggtitle("Accidents Predicted at 6AM Time Sorted")
 dev.off()
 ```
 

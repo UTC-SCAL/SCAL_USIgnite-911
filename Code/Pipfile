@@ -20,6 +20,8 @@ graphviz = "*"
 keras-sequential-ascii = "*"
 xlsxwriter = "*"
 xlrd = "*"
+plaidml = "*"
+keras = "*"
 
 [dev-packages]
 "autopep8" = "*"

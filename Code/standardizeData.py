@@ -7,10 +7,10 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # Get column names first
 # df = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-02_18.csv", sep=",")
-
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model.csv", sep=",")
-columns = dataset.columns.values[0:len(dataset.columns.values)]
-# df = df[columns]
+model = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model.csv",sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort Less.csv", sep=",")
+columns = model.columns.values[0:len(model.columns.values)]
+dataset = dataset[columns]
 # df = df.dropna()
 # # Create the Scaler object
 scaler = preprocessing.MinMaxScaler()
