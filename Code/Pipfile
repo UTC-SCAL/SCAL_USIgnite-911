@@ -22,6 +22,7 @@ xlsxwriter = "*"
 xlrd = "*"
 plaidml = "*"
 keras = "*"
+keras-utils = "*"
 
 [dev-packages]
 "autopep8" = "*"

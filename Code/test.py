@@ -171,12 +171,13 @@ def sort_by_month(data_file_name):
         month_count.loc[j] = [monthofyear, months.count(monthofyear)]
     #print(month_count)
     save_text_file('Months Count.csv', month_count)
-#def sort_by_year(data_file_name, year):
+
+
+# def sort_by_year(data_file_name, year):
 
 
 
-
- #Saving this set to a new excel sheet, when you're done
+#Saving this set to a new excel sheet, when you're done
 def save_excel_file_with_format(save_file_name, sheet, data_file_name):
     writer = pandas.ExcelWriter(save_file_name, engine='xlsxwriter', date_format='mmm d yyyy', )
     data_file_name.to_excel(writer, sheet_name=sheet)
@@ -216,12 +217,14 @@ def csv_from_excel(save_file_name, worksheet_name):
 
     csv_file.close()
 
+
 def excel_from_csv(csv_file_name):
     with open(csv_file_name) as f:
         reader = csv.reader(f)
         data = [r for r in reader]
     excelfile = pandas.DataFrame(data)
     return excelfile
+
 
 def drop_duplicates(data_file_name, toremove):
     listing = []

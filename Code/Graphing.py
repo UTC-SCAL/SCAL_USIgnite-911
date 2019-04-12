@@ -141,16 +141,16 @@ def by_year_hour(file):
     tab = file.groupby(['Year', 'Hour']).size().reset_index()
     tab.columns = ['Year', 'Hour','Count']
     seventeen = tab.loc[tab['Year'] == 2017]
-    eighteen = tab.loc[tab['Year'] == 2018]
-    # nineteen = tab.loc[tab['Year'] == 2018]
+    # eighteen = tab.loc[tab['Year'] == 2018]
+    nineteen = tab.loc[tab['Year'] == 2018]
 
     font = {'family': 'serif',
                 'weight': 'regular',
                 'size': 18}
     plt.rc('font', **font)
     plt.plot(seventeen.Hour.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
-    plt.plot(eighteen.Hour.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
-    # plt.plot(nineteen.Hour.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
+    # plt.plot(eighteen.Hour.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    plt.plot(nineteen.Hour.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
     xticks = [0.0, 6.0, 12.0, 18.0, 23.0]
     plt.xticks(xticks)
     plt.grid(color='lightgray', linestyle='-', linewidth=2)
@@ -165,15 +165,15 @@ def by_year_day(file):
     tab = file.groupby(['Year', 'Weekday']).size().reset_index()
     tab.columns = ['Year', 'Weekday','Count']
     seventeen = tab.loc[tab['Year'] == 2017]
-    eighteen = tab.loc[tab['Year'] == 2018]
-    # nineteen = tab.loc[tab['Year'] == 2018]
+    # eighteen = tab.loc[tab['Year'] == 2018]
+    nineteen = tab.loc[tab['Year'] == 2018]
     font = {'family': 'serif',
                 'weight': 'regular',
                 'size': 18}
     plt.rc('font', **font)
     plt.plot(seventeen.Weekday.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
-    plt.plot(eighteen.Weekday.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
-    # plt.plot(nineteen.Weekday.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
+    # plt.plot(eighteen.Weekday.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    plt.plot(nineteen.Weekday.values,nineteen.Count.values, label='2019', color='blue', linewidth=3)
     days = ["Monday", 'Tuesday', "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     xticks = [0,1,2,3,4,5,6]
     plt.xticks(xticks,days)
@@ -188,15 +188,15 @@ def by_year_month(file):
     tab = file.groupby(['Year', 'Month']).size().reset_index()
     tab.columns = ['Year', 'Month','Count']
     seventeen = tab.loc[tab['Year'] == 2017]
-    eighteen = tab.loc[tab['Year'] == 2018]
-    # nineteen = tab.loc[tab['Year'] == 2018]
+    # eighteen = tab.loc[tab['Year'] == 2018]
+    nineteen = tab.loc[tab['Year'] == 2018]
     font = {'family': 'serif',
                 'weight': 'regular',
                 'size': 18}
     plt.rc('font', **font)
     plt.plot(seventeen.Month.values,seventeen.Count.values, label='2017', color='red', linewidth=3)
-    plt.plot(eighteen.Month.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
-    # plt.plot(nineteen.Month.values,nineteen.Count.values, label='2019', color='orange', linewidth=3)
+    # plt.plot(eighteen.Month.values,eighteen.Count.values, label='2018', color='blue', linewidth=3)
+    plt.plot(nineteen.Month.values,nineteen.Count.values, label='2019', color='orange', linewidth=3)
     xticks = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
               'November', 'December']
     plt.xticks(range(1,13),xticks, rotation='vertical')
@@ -216,14 +216,16 @@ def main():
         year = (int(doa.split('-')[0]))
         data.Year.values[k] = year
 
+
+
 #Different plotting options
-    by_hour(data)
+    # by_hour(data)
     # by_day_hour(data)
     # by_month_hour(data)
-    # by_month_day(data)
-    # by_year_hour(data)
-    # by_year_month(data)
-    # by_year_day(data)
+    by_month_day(data)
+    by_year_hour(data)
+    by_year_month(data)
+    by_year_day(data)
 
 
 if __name__ == "__main__":
