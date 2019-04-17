@@ -67,7 +67,7 @@ def fitting_loops(X,Y):
     print(model.summary())
 
 
-    for i in range(0, 100):
+    for i in range(0, 10):
         file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
         
         
@@ -149,8 +149,7 @@ def fitting_loops(X,Y):
         avg_holder.to_csv(file, sep=",")
 
         #If we are on the 1st, 50th, or 100th cycle, make some graphs: 
-        if i % 50 == 0:
-            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i)
+        generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i)
 
 def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     font = {'family': 'serif',
@@ -169,19 +168,19 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     title = '../Graphs & Images/ResultsFromIterations/' + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
     # plt.subplot(212)
-    fig = plt.figure()
-    plt.xticks(range(0, 20), range(1, 21), rotation=90)
+    fig = plt.figure(figsize=(12,6))
+    # plt.xticks(range(0, 100), range(1, 101, 10), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    # x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     plt.axhline(y=0.5, color='gray', linestyle='-')
-    plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
-    plt.scatter(x=x, y=y_test[0:20], s=110,
-                facecolors='none', edgecolors='r', linewidths=2)
+    plt.plot(predictions[0:100], c='blue', label="Probability")
+    plt.plot(y_test[0:100], c='r', label = "Accident Occurred")
+    plt.legend(loc='lower right')
     title = '../Graphs & Images/ResultsFromIterations/' + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
-    fig.savefig(title, bbox_inches='tight')
+    fig.savefig(title, bbox_inches='tight', dpi=500)
 
     font = {'family': 'serif',
             'weight': 'bold',
