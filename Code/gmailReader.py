@@ -16,6 +16,23 @@ import decimal
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
+def load_logins(self):
+    """Loads logins from a file, returning them as a dict"""
+    logins = {}
+    if os.path.exists("../Excel & CSV Sheets/Login.csv"):
+        with open(self.path, "r") as file:
+            lines = file.readlines()
+            for line in lines:
+                decrypted_line = self.fernet.decrypt(bytes(line.encode()))
+                decrypted_line = decrypted_line.decode()
+                username, password = (
+                    decrypted_line.replace(" ", "")
+                    .replace("\n", "")
+                    .replace("\t", "")
+                    .split(",")
+                )
+                logins[username] = password
+    return logins
 
 def get_Email():
     # connecting to the gmail imap server
