@@ -182,13 +182,13 @@ def data_cleaning(calldata):
     return calldata
 
 
-def add_data(calldata, save_name):
+def add_data(calldata):
     # Getting the weekday
     calldata['Date'] = pandas.to_datetime(calldata['Date'])
     calldata['Weekday'] = calldata['Date'].dt.dayofweek
     calldata.Date = calldata.Date.astype(str)
 
-    # print("Getting Accident Weather Data")
+    print("Getting Accident Weather Data")
     calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
     driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
@@ -357,13 +357,13 @@ def get_hour_negatives(calldata):
     frames = [og_calldata, negative_samples]
     results = pandas.concat(frames, sort=True)
     header_list = (
-        "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
-        "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
-        'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-        "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
-        "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+        "Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
@@ -452,12 +452,11 @@ def get_date_negatives(calldata):
         folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv", sep=",")
     frames = [og_calldata, negative_samples]
     results = pandas.concat(frames, sort=True)
-    header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
                    'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow",
-                   "RainBefore",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
                    "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
@@ -587,13 +586,13 @@ def get_loc_negatives(calldata):
     frames = [og_calldata, negative_samples]
     results = pandas.concat(frames, sort=True)
     header_list = (
-        "Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
-        'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
-        "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
-        'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
-        "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
-        "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-        "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+        "Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+                   'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
+                   "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
+                   'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
+                   "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                   "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
     results = results.reindex(columns=header_list)
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
@@ -1017,7 +1016,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-03.csv"
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-05.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -1063,7 +1062,7 @@ def main():
     calldata = drop_duplicates(calldata)
 
     # Add weather and road geometric data to calldata
-    calldata = add_data(calldata, dayname_xlsx)
+    calldata = add_data(calldata)
 
     # Save the calldata in its final form, just in case the appending goes wrong
     save_excel_file(folderpath + "Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx",
@@ -1071,11 +1070,13 @@ def main():
 
     # I recalled the file to be used for the negative sampling, so as to avoid any bleeding over of data between the
     # methods, cause sometimes it wanted to do that for some stupid reason
-    # calldata = pandas.read_excel("Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
+    calldata = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
+    # Set the actual accidents to their own file
+    append_data(calldata)
     # Get the negative samples of the calldata
-    # get_loc_negatives(calldata)
-    # get_hour_negatives(calldata)
-    # get_date_negatives(calldata)
+    get_loc_negatives(calldata)
+    get_hour_negatives(calldata)
+    get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()

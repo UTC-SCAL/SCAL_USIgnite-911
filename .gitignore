@@ -101,8 +101,6 @@ ENV/
 .mypy_cache/
 Code/NetworkModel.py
 Code/NetworkModelTalos.py
-Code/NetworkModel.py
-Code/NetworkModel.py
-Code/NetworkModel.py
 Graphs & Images/ResultsFromIterations/.DS_Store
 Graphs & Images/.DS_Store
+/Excel & CSV Sheets/login_credintials.csv
