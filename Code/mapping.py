@@ -40,22 +40,22 @@ gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 #     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/Stations_Covering_2017_Reduced.xlsx")
 
 # MAIN: Weather Stations for 2018 #
-weather_stations = data_file_name = \
-    pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/2018 Weather Stations.xlsx")
+# weather_stations = data_file_name = \
+#     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Weather Stations/2018 Weather Stations.xlsx")
 
 # MAIN: Call Data for 2017 #
 # calldata = data_file_name = \
 #     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Call_Data_2017_NewStations_NoBlanks.xlsx")
 
 # MAIN: Call Data for 2018 #
-calldata = data_file_name = \
-    pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData_2018_Stations_Sorted.xlsx")
+# calldata = data_file_name = \
+#     pandas.read_excel("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/2018 Data/CallData_2018_Stations_Sorted.xlsx")
 
 # Call Data for Khashayar's Project #
 # calldata = data_file_name = \
 #     pandas.read_excel(("/home/admin/PycharmProjects/RolandProjects/Excel & CSV Sheets/Agg_CallData.xlsx"))
 
-calldata["Station"] = ""
+# calldata["Station"] = ""
 
 # print(calldata.head())
 # Call Data Lat = 1, Long = 2
@@ -68,43 +68,43 @@ calldata["Station"] = ""
 #     call_lat = (calldata.Latitude.values[i]) / 1000000
 #     call_long = (calldata.Longitude.values[i]) / -1000000
 
-latcoords = []  # Weather station latitudes
-longcoords = []  # Weather station longitudes
-coords = []  # Weather station coordinates
+# latcoords = []  # Weather station latitudes
+# longcoords = []  # Weather station longitudes
+# coords = []  # Weather station coordinates
 # Dataframe containing the 9 weather stations used
-station_matches = pandas.DataFrame(index=range(len(calldata)), columns=weather_stations.Station.values)
+# station_matches = pandas.DataFrame(index=range(len(calldata)), columns=weather_stations.Station.values)
 # print(station_matches.head())
 
 
 # Placing the weather station coordinates into lists
-for i, value in enumerate(weather_stations.values):
-    coords.append(str(str(value[4]) + "," + str(value[5])))
-    latcoords.append((value[4]))
-    longcoords.append((value[5]))
+# for i, value in enumerate(weather_stations.values):
+#     coords.append(str(str(value[4]) + "," + str(value[5])))
+#     latcoords.append((value[4]))
+#     longcoords.append((value[5]))
 
 # Placing the weather station identifiers into a list
 # Doing this allows us to hover our mouse over a weather station and see which one it is
-stations = []
-for i, value in enumerate(weather_stations.values):
-    stations.append(value[1])
+# stations = []
+# for i, value in enumerate(weather_stations.values):
+#     stations.append(value[1])
 
 # Placing all the weather station pins on the map, marked by cyan pin
-for i, value in enumerate(latcoords[0:len(latcoords)]):
+# for i, value in enumerate(latcoords[0:len(latcoords)]):
     # The 3 lines are commented out, they display the additional NOAA weather station locations #
     # Use these lines only when using the NOAA stations finder xlsx file #
     # if weather_stations.ID[i] >= 7:
     # gmap.marker(latcoords[i], longcoords[i], 'g', title=stations[i])
     # else:
-    gmap.marker(latcoords[i], longcoords[i], 'c', title=stations[i])
+    # gmap.marker(latcoords[i], longcoords[i], 'c', title=stations[i])
 
-# Placing all of the 911 incident pins on the map, marked by gray and red pins
-for i, value in enumerate(calldata.values):
-    lat = (value[1] / 1000000)
-    long = (value[2] / -1000000)
-    if value[0] == 0:
-        gmap.marker(lat, long, '#DCDCDC', title=i) # Places a gray marker if no injury
-    elif value[0] == 1:
-        gmap.marker(lat, long, '#FF0000', title=i) # Places a red marker if injury
+# # Placing all of the 911 incident pins on the map, marked by gray and red pins
+# for i, value in enumerate(calldata.values):
+#     lat = (value[1] / 1000000)
+#     long = (value[2] / -1000000)
+#     if value[0] == 0:
+#         gmap.marker(lat, long, '#DCDCDC', title=i) # Places a gray marker if no injury
+#     elif value[0] == 1:
+#         gmap.marker(lat, long, '#FF0000', title=i) # Places a red marker if injury
 
 # MLK Testing Purposes for Khashayar's tests #
 # for i, value in enumerate(calldata.values):
@@ -119,30 +119,30 @@ for i, value in enumerate(calldata.values):
 #         gmap.marker(lat, long, 'b', title=i)
 
 
-for i in range(0, len(latcoords)):
-    # Center for the polygon (the weather station)
-    poly_lat = latcoords[i]
-    poly_long = longcoords[i]
-    # Coordinates for the polygon's edges
-    # The A_lat, A_long, B_lat...represent the cardinal points of the octagon (which alone represent a diamond)
-    # Think of them like north, south, east, west points
-    # The P1_lat, P1_long, P2_lat...represent the points in between the cardinal points in the octagon
-    A_lat, A_long = poly_lat + 0.10, poly_long
-    P1_lat, P1_long = poly_lat + 0.09, poly_long + 0.105
-    B_lat, B_long = poly_lat, poly_long + 0.115
-    P2_lat, P2_long = poly_lat - 0.09, poly_long + 0.105
-    C_lat, C_long = poly_lat - 0.10, poly_long
-    P3_lat, P3_long = poly_lat - 0.09, poly_long - 0.105
-    D_lat, D_long = poly_lat, poly_long - 0.115
-    P4_lat, P4_long = poly_lat + 0.09, poly_long - 0.105
-    E_lat, E_long = poly_lat + 0.10, poly_long
-
-    # Drawing an Octagon covering ~ 6.5 - 7 miles
-    station_lats, station_longs = zip(*[(A_lat, A_long), (P1_lat, P1_long), (B_lat, B_long), (P2_lat, P2_long),
-                                        (C_lat, C_long), (P3_lat, P3_long), (D_lat, D_long), (P4_lat, P4_long),
-                                        (E_lat, E_long)])
-    # Placing the previously drawn octagon on the map (just a visual assistant)
-    gmap.plot(station_lats, station_longs, 'cornflowerblue', edge_width=10)
+# for i in range(0, len(latcoords)):
+#     # Center for the polygon (the weather station)
+#     poly_lat = latcoords[i]
+#     poly_long = longcoords[i]
+#     # Coordinates for the polygon's edges
+#     # The A_lat, A_long, B_lat...represent the cardinal points of the octagon (which alone represent a diamond)
+#     # Think of them like north, south, east, west points
+#     # The P1_lat, P1_long, P2_lat...represent the points in between the cardinal points in the octagon
+#     A_lat, A_long = poly_lat + 0.10, poly_long
+#     P1_lat, P1_long = poly_lat + 0.09, poly_long + 0.105
+#     B_lat, B_long = poly_lat, poly_long + 0.115
+#     P2_lat, P2_long = poly_lat - 0.09, poly_long + 0.105
+#     C_lat, C_long = poly_lat - 0.10, poly_long
+#     P3_lat, P3_long = poly_lat - 0.09, poly_long - 0.105
+#     D_lat, D_long = poly_lat, poly_long - 0.115
+#     P4_lat, P4_long = poly_lat + 0.09, poly_long - 0.105
+#     E_lat, E_long = poly_lat + 0.10, poly_long
+#
+#     # Drawing an Octagon covering ~ 6.5 - 7 miles
+#     station_lats, station_longs = zip(*[(A_lat, A_long), (P1_lat, P1_long), (B_lat, B_long), (P2_lat, P2_long),
+#                                         (C_lat, C_long), (P3_lat, P3_long), (D_lat, D_long), (P4_lat, P4_long),
+#                                         (E_lat, E_long)])
+#     # Placing the previously drawn octagon on the map (just a visual assistant)
+#     gmap.plot(station_lats, station_longs, 'cornflowerblue', edge_width=10)
 
     # Making the actual polygon using the coordinates above
 #     poly_coords = ((A_lat, A_long), (P1_lat, P1_long), (B_lat, B_long), (P2_lat, P2_long), (C_lat, C_long),
@@ -207,5 +207,11 @@ for i in range(0, len(latcoords)):
 # workbook = writer.book
 # writer.save()
 
+points = pandas.read_csv("../Excel & CSV Sheets/VerticesPoints.csv")
+# Placing all of the 911 incident pins on the map, marked by gray and red pins
+for i, value in enumerate(points.values[0:5]):
+    lat = points.POINT_Y.values[i]
+    long = points.POINT_X.values[i]
+    gmap.marker(lat, long, '#FF0000', title=i) # Places a red marker if injury
 
 gmap.draw("Chattanooga Polygons.html")

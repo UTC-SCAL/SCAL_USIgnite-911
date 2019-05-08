@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="This is the first push from the laptop, hopefully it works">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="New Data added for catching up with data collection after spring semester">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/gmailReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gmailReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/mapping.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/mapping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterDir="false" />
@@ -20,29 +20,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
+            <state relative-caret-position="328">
+              <caret line="1039" selection-start-line="1039" selection-end-line="1039" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#382#857#0" />
-                <element signature="e#880#3852#0" />
-                <element signature="e#3890#4798#0" />
-                <element signature="e#4835#5153#0" />
-                <element signature="e#5220#5446#0" />
-                <element signature="e#5484#5707#0" />
-                <element signature="e#5768#8342#0" />
-                <element signature="e#7070#8342#0" />
-                <element signature="e#8378#8883#0" />
-                <element signature="e#8915#13405#0" />
-                <element signature="e#13438#14706#0" />
-                <element signature="e#14747#20234#0" />
-                <element signature="e#20275#26492#0" />
-                <element signature="e#26532#34578#0" />
-                <element signature="e#34686#36782#0" />
-                <element signature="e#36821#53542#0" />
+                <element signature="e#5769#8343#0" />
+                <element signature="e#7071#8343#0" />
+                <element signature="e#8379#8884#0" />
+                <element signature="e#8915#13407#0" />
+                <element signature="e#13441#14709#0" />
+                <element signature="e#14750#20237#0" />
+                <element signature="e#20278#26495#0" />
+                <element signature="e#26535#34581#0" />
+                <element signature="e#34689#36785#0" />
+                <element signature="e#36824#53545#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/mapping.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#290#628#0" />
+                <element signature="e#678#894#0" />
               </folding>
             </state>
           </provider>
@@ -115,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scratchSheet.py" />
         <option value="$PROJECT_DIR$/gmailReaderBackup.py" />
         <option value="$PROJECT_DIR$/khashiMapping.py" />
         <option value="$PROJECT_DIR$/Code/khashiMapping.py" />
@@ -166,13 +174,15 @@
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/mapping.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="width" value="1853" />
-    <option name="height" value="1080" />
+    <option name="x" value="113" />
+    <option name="y" value="78" />
+    <option name="width" value="1657" />
+    <option name="height" value="965" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -240,28 +250,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
-    <configuration name="Forecast_Split" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RolandProjects" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/Forecast_Split.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.mapping">
     <configuration name="NetworkModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RolandProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -296,6 +285,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mapping" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RolandProjects" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/mapping.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -347,19 +357,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.standardizeData" />
       <item itemvalue="Python.NetworkModel" />
-      <item itemvalue="Python.Forecast_Split" />
       <item itemvalue="Python.gmailReader" />
       <item itemvalue="Python.scratchSheet" />
+      <item itemvalue="Python.standardizeData" />
+      <item itemvalue="Python.mapping" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mapping" />
         <item itemvalue="Python.gmailReader" />
         <item itemvalue="Python.scratchSheet" />
         <item itemvalue="Python.NetworkModel" />
         <item itemvalue="Python.standardizeData" />
-        <item itemvalue="Python.Forecast_Split" />
       </list>
     </recent_temporary>
   </component>
@@ -373,13 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00085" summary="More data">
-      <created>1544807558269</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1544807558269</updated>
     </task>
     <task id="LOCAL-00086" summary="More data">
       <created>1545060173877</created>
@@ -717,7 +720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557237047977</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="New Data added for catching up with data collection after spring semester">
+      <created>1557327904041</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1557327904042</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TodoView">
@@ -740,7 +750,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.39961758" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" weight="0.3508103" />
+      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" weight="0.24308866" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
       <window_info anchor="bottom" id="Messages" order="8" />
@@ -839,20 +849,13 @@
     <MESSAGE value="Using this as a checkpoint for getting negative samples by location, on 3/30/19" />
     <MESSAGE value="Pushing data after forecast test integration" />
     <MESSAGE value="This is the first push from the laptop, hopefully it works" />
-    <option name="LAST_COMMIT_MESSAGE" value="This is the first push from the laptop, hopefully it works" />
+    <MESSAGE value="New Data added for catching up with data collection after spring semester" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Data added for catching up with data collection after spring semester" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Code/weatherStationCode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12097" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/2019-03-03_Mar_hotspotsForecast.csv" />
     <entry file="file://$PROJECT_DIR$/Code/fetchingForecast.py" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" />
-    <entry file="file://$PROJECT_DIR$/Code/mapping.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Normalized Data Saver.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/test_loc.csv" />
@@ -1030,9 +1033,7 @@
       </provider>
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/.~lock.911_Reports_for_2019-04-23.csv#">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/.~lock.911_Reports_for_2019-04-23.csv#" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-23.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
@@ -1055,28 +1056,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
+        <state relative-caret-position="328">
+          <caret line="1039" selection-start-line="1039" selection-end-line="1039" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#382#857#0" />
-            <element signature="e#880#3852#0" />
-            <element signature="e#3890#4798#0" />
-            <element signature="e#4835#5153#0" />
-            <element signature="e#5220#5446#0" />
-            <element signature="e#5484#5707#0" />
-            <element signature="e#5768#8342#0" />
-            <element signature="e#7070#8342#0" />
-            <element signature="e#8378#8883#0" />
-            <element signature="e#8915#13405#0" />
-            <element signature="e#13438#14706#0" />
-            <element signature="e#14747#20234#0" />
-            <element signature="e#20275#26492#0" />
-            <element signature="e#26532#34578#0" />
-            <element signature="e#34686#36782#0" />
-            <element signature="e#36821#53542#0" />
+            <element signature="e#5769#8343#0" />
+            <element signature="e#7071#8343#0" />
+            <element signature="e#8379#8884#0" />
+            <element signature="e#8915#13407#0" />
+            <element signature="e#13441#14709#0" />
+            <element signature="e#14750#20237#0" />
+            <element signature="e#20278#26495#0" />
+            <element signature="e#26535#34581#0" />
+            <element signature="e#34689#36785#0" />
+            <element signature="e#36824#53545#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mapping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#290#628#0" />
+            <element signature="e#678#894#0" />
           </folding>
         </state>
       </provider>

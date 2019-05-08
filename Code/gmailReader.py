@@ -204,7 +204,7 @@ def add_data(calldata):
     calldata.Date = calldata.Date.astype(str)
 
     print("Getting Accident Weather Data")
-    # calldata = get_weather_data(calldata)
+    calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
     driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
@@ -1039,7 +1039,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-22.csv"
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-27.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -1093,13 +1093,13 @@ def main():
 
     # I recalled the file to be used for the negative sampling, so as to avoid any bleeding over of data between the
     # methods, cause sometimes it wanted to do that for some stupid reason
-    # calldata = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
+    calldata = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
     # Set the actual accidents to their own file
-    # append_data(calldata)
+    append_data(calldata)
     # Get the negative samples of the calldata
-    # get_loc_negatives(calldata)
-    # get_hour_negatives(calldata)
-    # get_date_negatives(calldata)
+    get_loc_negatives(calldata)
+    get_hour_negatives(calldata)
+    get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()
