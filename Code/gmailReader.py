@@ -16,23 +16,21 @@ import decimal
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
-def load_logins(self):
-    """Loads logins from a file, returning them as a dict"""
-    logins = {}
-    if os.path.exists("../Excel & CSV Sheets/Login.csv"):
-        with open(self.path, "r") as file:
+
+def find_cred(service):
+    file = "../Excel & CSV Sheets/login.csv"
+    if os.path.exists(file):
+        with open(file, "r") as file:
             lines = file.readlines()
-            for line in lines:
-                decrypted_line = self.fernet.decrypt(bytes(line.encode()))
-                decrypted_line = decrypted_line.decode()
-                username, password = (
-                    decrypted_line.replace(" ", "")
-                    .replace("\n", "")
-                    .replace("\t", "")
-                    .split(",")
-                )
-                logins[username] = password
-    return logins
+            if service in lines[0]:
+                cred = lines[0].split(",")[1]
+                # print(cred)
+            if service in lines[1]:
+                cred = str(lines[1].split(",")[1]) + "," + str(lines[1].split(",")[2])
+                # print(cred)
+                    # logins[username] = password
+    return cred
+
 
 def get_Email():
     # connecting to the gmail imap server
@@ -206,7 +204,7 @@ def add_data(calldata):
     calldata.Date = calldata.Date.astype(str)
 
     print("Getting Accident Weather Data")
-    calldata = get_weather_data(calldata)
+    # calldata = get_weather_data(calldata)
     print("Getting Accident Road Geometrics")
     driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")
     driver.get("https://e-trims.tdot.tn.gov/Account/Logon")
@@ -214,8 +212,12 @@ def add_data(calldata):
     usr = driver.find_element_by_id("UserName")
     pw = driver.find_element_by_id("Password")
 
-    usr.send_keys("JJVPG56")
-    pw.send_keys("Saturn71")  #updated 2/26/2019
+    credentials = find_cred("etrims")
+    usr_name = credentials.split(",")[0]
+    password = credentials.split(",")[1]
+
+    usr.send_keys(usr_name)
+    pw.send_keys(password)
     driver.find_element_by_class_name("btn").click()
 
     calldata.Route = calldata.Route.astype(str)
@@ -520,8 +522,12 @@ def get_loc_negatives(calldata):
     usr = driver.find_element_by_id("UserName")
     pw = driver.find_element_by_id("Password")
 
-    usr.send_keys("JJVPG56")
-    pw.send_keys("Saturn71")  # updated 2/26/2019
+    credentials = find_cred("etrims")
+    usr_name = credentials.split(",")[0]
+    password = credentials.split(",")[1]
+
+    usr.send_keys(usr_name)
+    pw.send_keys(password)
     driver.find_element_by_class_name("btn").click()
 
     print("Getting new lat/longs")
@@ -682,7 +688,7 @@ def get_weather_data(calldata):
     calldata.EventBefore = calldata.EventBefore.astype(str)
     calldata.ConditionBefore = calldata.ConditionBefore.astype(str)
     # The key for using DarkSky API
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
+    key = find_cred("darksky")
     # Iterate through negative_samples and assign weather data for each incident
     for k, info in enumerate(calldata.values):
         # All variables are blank-of-accident, thus year is yoa.
@@ -1033,7 +1039,7 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-05.csv"
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-22.csv"
     calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
@@ -1087,13 +1093,13 @@ def main():
 
     # I recalled the file to be used for the negative sampling, so as to avoid any bleeding over of data between the
     # methods, cause sometimes it wanted to do that for some stupid reason
-    calldata = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
+    # calldata = pandas.read_excel("../Excel & CSV Sheets/2019 Data/Final Form Reports/" + dayname_xlsx + "_FinalForm.xlsx")
     # Set the actual accidents to their own file
-    append_data(calldata)
+    # append_data(calldata)
     # Get the negative samples of the calldata
-    get_loc_negatives(calldata)
-    get_hour_negatives(calldata)
-    get_date_negatives(calldata)
+    # get_loc_negatives(calldata)
+    # get_hour_negatives(calldata)
+    # get_date_negatives(calldata)
 
 if __name__ == "__main__":
     main()

@@ -6,27 +6,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/gmailReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gmailReader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-25AverageHolder.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-03-26AverageHolder.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-04-02AverageHolder.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-04-03AverageHolderForecast.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-04-08TimeSortAverageHolder.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-04-09AverageHolder.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-04-12AverageHolder.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Time Sort Less.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Time Sort for Model.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Time Sort for Model_MMR.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Time Sort.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Negative Samples Only.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/X_Test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/y_Test.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,40 +20,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="1019" column="45" selection-start-line="1019" selection-start-column="45" selection-end-line="1019" selection-end-column="45" />
+            <state relative-caret-position="226">
+              <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <element signature="e#375#3347#0" />
-                <element signature="e#3385#4293#0" />
-                <element signature="e#4330#4648#0" />
-                <element signature="e#4715#4941#0" />
-                <element signature="e#4979#5202#0" />
-                <element signature="e#5263#7837#0" />
-                <element signature="e#6565#7837#0" />
-                <element signature="e#7873#8378#0" />
+                <element signature="e#382#857#0" />
+                <element signature="e#880#3852#0" />
+                <element signature="e#3890#4798#0" />
+                <element signature="e#4835#5153#0" />
+                <element signature="e#5220#5446#0" />
+                <element signature="e#5484#5707#0" />
+                <element signature="e#5768#8342#0" />
+                <element signature="e#7070#8342#0" />
+                <element signature="e#8378#8883#0" />
+                <element signature="e#8915#13405#0" />
+                <element signature="e#13438#14706#0" />
+                <element signature="e#14747#20234#0" />
+                <element signature="e#20275#26492#0" />
+                <element signature="e#26532#34578#0" />
+                <element signature="e#34686#36782#0" />
+                <element signature="e#36821#53542#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="105" column="41" lean-forward="true" selection-start-line="105" selection-start-column="41" selection-end-line="105" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/forecast.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3565">
-              <caret line="166" selection-start-line="166" selection-end-line="166" />
             </state>
           </provider>
         </entry>
@@ -190,16 +164,15 @@
         <option value="$PROJECT_DIR$/Pipfile" />
         <option value="$PROJECT_DIR$/Code/NetworkModel.py" />
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
-        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="217" />
-    <option name="y" value="1585" />
-    <option name="width" value="1371" />
-    <option name="height" value="805" />
+    <option name="x" value="67" />
+    <option name="width" value="1853" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -236,7 +209,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="add_unversioned_files" value="true" />
+    <property name="add_unversioned_files" value="true&#10;/home/jeremy/PycharmProjects/911Project/Excel &amp; CSV Sheets/login.csv" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -400,13 +373,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Changed name of main folder to reflect project">
-      <created>1544800319474</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1544800319474</updated>
     </task>
     <task id="LOCAL-00085" summary="More data">
       <created>1544807558269</created>
@@ -744,7 +710,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554669560985</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="This is the first push from the laptop, hopefully it works">
+      <created>1557237047977</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1557237047977</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TodoView">
@@ -757,22 +730,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="1227" width="1853" height="1053" extended-state="6" />
-    <editor active="true" />
+    <frame x="67" y="0" width="1853" height="1200" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23291416" />
       <window_info id="Structure" order="1" weight="0.24919957" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3288719" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32815966" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.39961758" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" weight="0.35144123" />
+      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" weight="0.3508103" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
       <window_info anchor="bottom" id="Messages" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3269781" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32507148" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3298279" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32888466" />
       <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.3298279" />
@@ -870,16 +842,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="This is the first push from the laptop, hopefully it works" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Code/process.py" />
-    <entry file="file://$PROJECT_DIR$/Code/pvalueTesting.py" />
-    <entry file="file://$PROJECT_DIR$/Code/SVMTry.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8424" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/weatherStationCode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12097" />
@@ -1029,20 +991,6 @@
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
@@ -1050,23 +998,21 @@
       <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="1019" column="45" selection-start-line="1019" selection-start-column="45" selection-end-line="1019" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#375#3347#0" />
-            <element signature="e#3385#4293#0" />
-            <element signature="e#4330#4648#0" />
-            <element signature="e#4715#4941#0" />
-            <element signature="e#4979#5202#0" />
-            <element signature="e#5263#7837#0" />
-            <element signature="e#6565#7837#0" />
-            <element signature="e#7873#8378#0" />
-          </folding>
+        <state relative-caret-position="269">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="-28167" />
+      </provider>
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/forecast.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1075,10 +1021,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="-50220" />
+      </provider>
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/.~lock.911_Reports_for_2019-04-23.csv#">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-23.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-04-22.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/login.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="105" column="41" lean-forward="true" selection-start-line="105" selection-start-column="41" selection-end-line="105" selection-end-column="41" />
+        <state relative-caret-position="226">
+          <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#382#857#0" />
+            <element signature="e#880#3852#0" />
+            <element signature="e#3890#4798#0" />
+            <element signature="e#4835#5153#0" />
+            <element signature="e#5220#5446#0" />
+            <element signature="e#5484#5707#0" />
+            <element signature="e#5768#8342#0" />
+            <element signature="e#7070#8342#0" />
+            <element signature="e#8378#8883#0" />
+            <element signature="e#8915#13405#0" />
+            <element signature="e#13438#14706#0" />
+            <element signature="e#14747#20234#0" />
+            <element signature="e#20275#26492#0" />
+            <element signature="e#26532#34578#0" />
+            <element signature="e#34686#36782#0" />
+            <element signature="e#36821#53542#0" />
+          </folding>
         </state>
       </provider>
     </entry>
