@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="New data">
+      <change afterPath="$PROJECT_DIR$/Code/gridMap.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/gmailReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gmailReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Chattanooga Polygons.html" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Chattanooga Polygons.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/mappingEx.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/mappingEx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,31 +22,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="1044" column="55" selection-start-line="1044" selection-start-column="55" selection-end-line="1044" selection-end-column="55" />
+            <state relative-caret-position="230">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#382#857#0" />
+                <element signature="e#881#3853#0" />
+                <element signature="e#3891#4799#0" />
+                <element signature="e#4836#5154#0" />
+                <element signature="e#5221#5447#0" />
+                <element signature="e#5485#5708#0" />
                 <element signature="e#5769#8343#0" />
                 <element signature="e#7071#8343#0" />
                 <element signature="e#8379#8884#0" />
+                <element signature="e#8915#13405#0" />
+                <element signature="e#13439#14707#0" />
+                <element signature="e#14748#20235#0" />
+                <element signature="e#20276#26493#0" />
+                <element signature="e#26533#34579#0" />
+                <element signature="e#34687#36783#0" />
+                <element signature="e#36822#53543#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/gridMap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#290#628#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/mapping.py">
+        <entry file="file://$PROJECT_DIR$/Code/mappingEx.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="392">
+              <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="71" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#290#628#0" />
-                <element signature="e#678#894#0" />
               </folding>
             </state>
           </provider>
@@ -116,8 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gmailReaderBackup.py" />
-        <option value="$PROJECT_DIR$/khashiMapping.py" />
         <option value="$PROJECT_DIR$/Code/khashiMapping.py" />
         <option value="$PROJECT_DIR$/Code/AddingAADT.py" />
         <option value="$PROJECT_DIR$/NBRExample.py" />
@@ -167,6 +190,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Code/mapping.py" />
         <option value="$PROJECT_DIR$/Code/gmailReader.py" />
+        <option value="$PROJECT_DIR$/Code/mappingEx.py" />
+        <option value="$PROJECT_DIR$/Code/gridMap.py" />
       </list>
     </option>
   </component>
@@ -241,28 +266,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gmailReader">
-    <configuration name="NetworkModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RolandProjects" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/NetworkModel.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.gridMap">
     <configuration name="gmailReader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RolandProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -276,6 +280,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gmailReader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gridMap" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RolandProjects" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/gridMap.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -305,6 +330,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="mappingEx" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RolandProjects" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/mappingEx.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="scratchSheet" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RolandProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -326,41 +372,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="standardizeData" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RolandProjects" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/standardizeData.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.NetworkModel" />
       <item itemvalue="Python.gmailReader" />
       <item itemvalue="Python.scratchSheet" />
-      <item itemvalue="Python.standardizeData" />
       <item itemvalue="Python.mapping" />
+      <item itemvalue="Python.gridMap" />
+      <item itemvalue="Python.mappingEx" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gridMap" />
+        <item itemvalue="Python.mappingEx" />
         <item itemvalue="Python.gmailReader" />
         <item itemvalue="Python.mapping" />
         <item itemvalue="Python.scratchSheet" />
-        <item itemvalue="Python.NetworkModel" />
-        <item itemvalue="Python.standardizeData" />
       </list>
     </recent_temporary>
   </component>
@@ -374,13 +399,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00087" summary="More data">
-      <created>1545159529121</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1545159529121</updated>
     </task>
     <task id="LOCAL-00088" summary="More data">
       <created>1545229685090</created>
@@ -718,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557341138873</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="New data">
+      <created>1557427190952</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1557427190953</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TodoView">
@@ -731,7 +756,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
+    <frame x="67" y="0" width="1853" height="1200" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23291416" />
       <window_info id="Structure" order="1" weight="0.24919957" />
@@ -741,7 +767,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.39961758" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" visible="true" weight="0.2827051" />
+      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" visible="true" weight="0.30123928" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
       <window_info anchor="bottom" id="Messages" order="8" />
@@ -844,10 +870,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="New data" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/2019-03-03_Mar_hotspotsForecast.csv" />
-    <entry file="file://$PROJECT_DIR$/Code/fetchingForecast.py" />
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data for Model.csv" />
-    <entry file="file://$PROJECT_DIR$/Normalized Data Saver.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv" />
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/test_loc.csv" />
     <entry file="file://$PROJECT_DIR$/Code/dataNormalizer.py" />
@@ -1038,16 +1060,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/mapping.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        <state relative-caret-position="322">
+          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#290#628#0" />
@@ -1056,25 +1072,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding>
+            <element signature="e#382#857#0" />
+            <element signature="e#881#3853#0" />
+            <element signature="e#3891#4799#0" />
+            <element signature="e#4836#5154#0" />
+            <element signature="e#5221#5447#0" />
+            <element signature="e#5485#5708#0" />
+            <element signature="e#5769#8343#0" />
+            <element signature="e#7071#8343#0" />
+            <element signature="e#8379#8884#0" />
+            <element signature="e#8915#13405#0" />
+            <element signature="e#13439#14707#0" />
+            <element signature="e#14748#20235#0" />
+            <element signature="e#20276#26493#0" />
+            <element signature="e#26533#34579#0" />
+            <element signature="e#34687#36783#0" />
+            <element signature="e#36822#53543#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/mappingDarkSky.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-77578" />
-      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
+    <entry file="file://$PROJECT_DIR$/Code/mappingEx.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="1044" column="55" selection-start-line="1044" selection-start-column="55" selection-end-line="1044" selection-end-column="55" />
+        <state relative-caret-position="392">
+          <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="71" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#382#857#0" />
-            <element signature="e#5769#8343#0" />
-            <element signature="e#7071#8343#0" />
-            <element signature="e#8379#8884#0" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state>
+          <caret column="17" selection-start-column="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/gridMap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#290#628#0" />
           </folding>
         </state>
       </provider>
