@@ -23,7 +23,7 @@ path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 # MAIN Calldata 2018 + 2017 #
-calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv")
+calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv")
 
 X = calldata.ix[:, 1:len(calldata.columns.values)].values
 Y = calldata.ix[:, 0].values
@@ -31,7 +31,7 @@ Y = calldata.ix[:, 0].values
 # Removing features with low variance #
 print("X before feature selection: \n", X)
 # Setting variance threshold to 0.5, it keeps Hour, Temperature, Dewpoint, Month, Visibility
-sel = VarianceThreshold(threshold=0.5)
+sel = VarianceThreshold(threshold=0.1)
 print("X after feature selection: \n", sel.fit_transform(X))
 
 # Univariate feature selection #

@@ -23,7 +23,7 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 #
 #
 # # MAIN Calldata 2018 + 2017 #
-calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv")
+calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv")
 
 mini = 1
 maxi = len(calldata.columns)
