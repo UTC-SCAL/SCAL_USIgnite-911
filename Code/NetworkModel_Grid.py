@@ -69,10 +69,6 @@ def fitting_loops(X,Y):
 
     for i in range(0, 50):
         file = "../Excel & CSV Sheets/Grid Layout Test Files/" + str(datetime.date.today()) + "GridAverageHolder.csv"
-        
-        ##Shuffling if needed. 
-        # dataset = shuffle(dataset)
-        # dataset = shuffle(dataset)
 
 
         ##Splitting data into train and test. 
@@ -223,12 +219,17 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("..Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv", sep=",")
-#Creating X and Y. Accident is the first column, therefore it is 0. 
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid No Temporal.csv", sep=",")
+
+#           Shuffling if needed. 
+dataset = shuffle(dataset)
+dataset = shuffle(dataset)
+
+#           Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
 Y = dataset.ix[:, 0].values
 
-##Steps 2-5 are inside the fitting loops method. 
+##          Steps 2-5 are inside the fitting loops method. 
 fitting_loops(X,Y)
 
 
