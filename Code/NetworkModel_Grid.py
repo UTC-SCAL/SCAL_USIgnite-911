@@ -83,11 +83,11 @@ def fitting_loops(X,Y):
 
         ##If the average holder file exists, import it. If not, create it. 
         if exists(file):
-            avg_holder = pandas.read_csv(file, usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            avg_holder = pandas.read_csv(file, usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP"])
             j = avg_holder.shape[0]
 
         else:
-            avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP"])
             j = avg_holder.shape[0]
 
 
@@ -129,8 +129,8 @@ def fitting_loops(X,Y):
         print('AUC: %f' % roc_auc)
 
         ##Confusion Matrix: 
-        cm = confusion_matrix(y_test, predictions_round)
-        print(cm)
+        tn, fp, fn, tp = confusion_matrix(y_test, predictions_round).ravel()
+        print(tn,fp,tn,tp)
 
         ##Adding the scores to the average holder file. 
         avg_holder.loc[j, 'Train_Acc'] = scores[1] * 100
@@ -138,7 +138,10 @@ def fitting_loops(X,Y):
         avg_holder.loc[j, 'Test_Acc'] = accscore1 * 100
         avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
         avg_holder.loc[j, 'AUC'] = roc_auc
-        avg_holder.loc[j, 'CM'] = str(cm)
+        avg_holder.loc[j, 'TP'] = tp
+        avg_holder.loc[j, 'TN'] = tn
+        avg_holder.loc[j, 'FP'] = fp
+        avg_holder.loc[j, 'FN'] = fn
 
         #Save the average holder file: 
         avg_holder.to_csv(file, sep=",")
@@ -219,7 +222,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid No Temporal.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv", sep=",")
 
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
