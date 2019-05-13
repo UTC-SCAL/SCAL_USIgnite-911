@@ -31,7 +31,7 @@ Y = calldata.ix[:, 0].values
 # Removing features with low variance #
 print("X before feature selection: \n", X)
 # Setting variance threshold to 0.5, it keeps Hour, Temperature, Dewpoint, Month, Visibility
-sel = VarianceThreshold(threshold=0.1)
+sel = VarianceThreshold(threshold=0.2)
 print("X after feature selection: \n", sel.fit_transform(X))
 
 # Univariate feature selection #
