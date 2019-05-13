@@ -8,7 +8,7 @@ path = os.path.dirname(sys.argv[0])
 # Place map
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
-gridCoords = pandas.read_csv("../Excel & CSV Sheets/VerticesPoints.csv")
+gridCoords = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv")
 # print(gridCoords.head())
 
 # This will hold the polygon versions of our grid blocks
@@ -43,7 +43,7 @@ for i, value in enumerate(gridCoords.values):
         gridLayout_Coords.append(poly_coords)
         # print(len(gridLayout_Coords))
 
-calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data Grid.csv", sep=",")
+calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv", sep=",")
 for j in range(0, len(gridLayout_Coords)):
     poly = Polygon(gridLayout_Coords[j])  # This is the grid block for the current iteration
     print(j)
@@ -57,5 +57,5 @@ for j in range(0, len(gridLayout_Coords)):
             calldata.Grid_Block.values[o] = j
         else:
             pass
-calldata.to_csv("../Excel & CSV Sheets/Full Data Grid.csv")
+calldata.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv")
 # gmap.draw("Chattanooga Polygons.html")

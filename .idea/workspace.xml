@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="New data">
+    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="Just matched grid blocks and calldata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/gmailReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gmailReader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/gridMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gridMap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Accident Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Date).csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Hour).csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,12 +22,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+            <state relative-caret-position="253">
+              <caret line="1032" column="113" selection-start-line="1032" selection-start-column="113" selection-end-line="1032" selection-end-column="113" />
               <folding>
+                <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#382#857#0" />
                 <element signature="e#881#3853#0" />
                 <element signature="e#3891#4799#0" />
@@ -41,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/gridMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="47" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="230">
+              <caret line="14" column="68" selection-start-line="14" selection-start-column="68" selection-end-line="14" selection-end-column="68" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -168,9 +177,9 @@
         <option value="$PROJECT_DIR$/Code/scratchSheet.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Code/mapping.py" />
-        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
         <option value="$PROJECT_DIR$/Code/mappingEx.py" />
         <option value="$PROJECT_DIR$/Code/gridMap.py" />
+        <option value="$PROJECT_DIR$/Code/gmailReader.py" />
       </list>
     </option>
   </component>
@@ -187,6 +196,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,7 +219,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -245,7 +254,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gridMap">
+  <component name="RunManager" selected="Python.gmailReader">
     <configuration name="gmailReader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RolandProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -353,16 +362,16 @@
     </configuration>
     <list>
       <item itemvalue="Python.gmailReader" />
-      <item itemvalue="Python.scratchSheet" />
-      <item itemvalue="Python.mapping" />
       <item itemvalue="Python.gridMap" />
       <item itemvalue="Python.mappingEx" />
+      <item itemvalue="Python.mapping" />
+      <item itemvalue="Python.scratchSheet" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gmailReader" />
         <item itemvalue="Python.gridMap" />
         <item itemvalue="Python.mappingEx" />
-        <item itemvalue="Python.gmailReader" />
         <item itemvalue="Python.mapping" />
         <item itemvalue="Python.scratchSheet" />
       </list>
@@ -378,13 +387,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00089" summary="More data">
-      <created>1547476961972</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1547476961973</updated>
     </task>
     <task id="LOCAL-00090" summary="More data">
       <created>1547566560719</created>
@@ -722,7 +724,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557502785820</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Just matched grid blocks and calldata">
+      <created>1557525945759</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1557525945759</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TodoView">
@@ -735,7 +744,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
+    <frame x="67" y="0" width="1853" height="1200" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23291416" />
       <window_info id="Structure" order="1" weight="0.24919957" />
@@ -745,7 +754,7 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.39961758" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" visible="true" weight="0.30044347" />
+      <window_info anchor="bottom" x="42" y="673" width="1878" height="454" id="Run" order="5" sideWeight="0.49786553" visible="true" weight="0.22402288" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
       <window_info anchor="bottom" id="Messages" order="8" />
@@ -845,7 +854,8 @@
     <MESSAGE value="This is the first push from the laptop, hopefully it works" />
     <MESSAGE value="New Data added for catching up with data collection after spring semester" />
     <MESSAGE value="New data" />
-    <option name="LAST_COMMIT_MESSAGE" value="New data" />
+    <MESSAGE value="Just matched grid blocks and calldata" />
+    <option name="LAST_COMMIT_MESSAGE" value="Just matched grid blocks and calldata" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Normalized Data.csv" />
@@ -989,23 +999,14 @@
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="101" selection-start-line="101" selection-end-line="101" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-28167" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/forecast.py">
@@ -1063,8 +1064,8 @@
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/mappingEx.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1076,24 +1077,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv">
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv" />
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv" />
+    <entry file="file://$PROJECT_DIR$/Code/gridMap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="14" column="68" selection-start-line="14" selection-start-column="68" selection-end-line="14" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/New Data Files/New Negative Samples (Location).csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state>
-          <caret column="17" selection-start-column="9" selection-end-column="17" />
-        </state>
+        <state relative-caret-position="-87917" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+        <state relative-caret-position="253">
+          <caret line="1032" column="113" selection-start-line="1032" selection-start-column="113" selection-end-line="1032" selection-end-column="113" />
           <folding>
+            <element signature="e#0#12#0" expanded="true" />
             <element signature="e#382#857#0" />
             <element signature="e#881#3853#0" />
             <element signature="e#3891#4799#0" />
@@ -1110,16 +1120,6 @@
             <element signature="e#26533#34579#0" />
             <element signature="e#34687#36783#0" />
             <element signature="e#36822#53543#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/gridMap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
