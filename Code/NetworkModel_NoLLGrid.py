@@ -68,7 +68,7 @@ def fitting_loops(X,Y):
 
 
     for i in range(0, 50):
-        file = "../Excel & CSV Sheets/Grid Layout Test Files/" + str(datetime.date.today()) + "GridAverageHolder.csv"
+        file = "../Excel & CSV Sheets/Grid Layout Test Files/" + str(datetime.date.today()) + "NoLLGridAverageHolder.csv"
 
 
         ##Splitting data into train and test. 
@@ -77,9 +77,9 @@ def fitting_loops(X,Y):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_grid.h5'):
-            model.load_weights("model_grid.h5")
-            print("Loading Grid Model")
+        if exists('model_noLLgrid.h5'):
+            model.load_weights("model_noLLgrid.h5")
+            print("Loading No LL Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
         if exists(file):
@@ -102,8 +102,8 @@ def fitting_loops(X,Y):
                         callbacks=[stopper])
         
         ##Save the weights for next run. 
-        model.save_weights("model_grid.h5")
-        print("Saved grid model to disk")
+        model.save_weights("model_noLLgrid.h5")
+        print("Saved No LL grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
         scores = model.evaluate(X_train, y_train, batch_size=5000)
@@ -161,7 +161,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     # plt.title('Receiver operating characteristic curve')
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
+    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'NoLLroc' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
     # plt.subplot(212)
     fig = plt.figure()
@@ -175,7 +175,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
     plt.scatter(x=x, y=y_test[0:20], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
+    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'NoLLpred' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
 
     font = {'family': 'serif',
@@ -205,7 +205,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
     # plt.show()
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'lossandacc' + str(
+    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'NoLLlossandacc' + str(
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
 
@@ -220,7 +220,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 #           1. Load Data
 dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid No Temporal.csv", sep=",")
-
+dataset = dataset.drop(["Latitude","Longitude"], axis=1)
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
