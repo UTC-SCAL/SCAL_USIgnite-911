@@ -192,7 +192,7 @@ print("Beginning code at:", datetime.datetime.now())
 schedule.every().day.at("18:00").do(job, "Fetching weather forecast", places)
 schedule.every().day.at("00:00").do(job, "Fetching weather forecast", places)
 schedule.every().day.at("09:37").do(job, "Fetching weather forecast", places)
-schedule.every().day.at("12:00").do(job, "Fetching weather forecast", places)
+schedule.every().day.at("12:02").do(job, "Fetching weather forecast", places)
 
 while True:
     schedule.run_pending()
