@@ -22,30 +22,30 @@ from sklearn.metrics import confusion_matrix
 
 
 
-##Creating an image demonstrating the model. 
-model = Sequential()
-##X.shape[1] is the number of columns inside of X. 
-model.add(Dense(32,
-                input_dim=32, activation='sigmoid'))
+# ##Creating an image demonstrating the model. 
+# model = Sequential()
+# ##X.shape[1] is the number of columns inside of X. 
+# model.add(Dense(32,
+#                 input_dim=32, activation='sigmoid'))
 
-# Use for standard sized variable set
-model.add(Dense(28, activation='sigmoid'))
-model.add(Dropout(.1))
-model.add(Dense(20, activation='sigmoid'))
-model.add(Dense(18, activation='sigmoid'))
-model.add(Dense(10, activation='sigmoid'))
-model.add(Dropout(.1))
+# # Use for standard sized variable set
+# model.add(Dense(28, activation='sigmoid'))
+# model.add(Dropout(.1))
+# model.add(Dense(20, activation='sigmoid'))
+# model.add(Dense(18, activation='sigmoid'))
+# model.add(Dense(10, activation='sigmoid'))
+# model.add(Dropout(.1))
 
-model.add(Dense(1, activation='sigmoid'))
+# model.add(Dense(1, activation='sigmoid'))
 
 
-#   3. Compiling a model.
-model.compile(loss='mse',
-            optimizer='nadam', metrics=['accuracy'])
-print(model.summary())
+# #   3. Compiling a model.
+# model.compile(loss='mse',
+#             optimizer='nadam', metrics=['accuracy'])
+# print(model.summary())
 
-# model.load_weights("model_CM.h5")
-plot_model(model, to_file='../Graphs & Images/model.png')
+# # model.load_weights("model_CM.h5")
+# plot_model(model, to_file='../Graphs & Images/model.png')
 
 ##Gets the forecast data for every 4 hours. 
 
@@ -109,3 +109,15 @@ plot_model(model, to_file='../Graphs & Images/model.png')
 #             # print(mini,maxi)
 
 # df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes.csv', sep=",")
+
+
+vertices = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv",sep=",")
+forecast = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_9.csv",sep=",")
+
+print(forecast)
+for i,value in enumerate(vertices.values):
+    for j,stuff in enumerate(forecast.values):
+        if vertices.ORIG_FID.values[i] == forecast.Grid_Block.values[j]:
+            vertices.Probability.values[i] = forecast.Probability.values[j]
+            vertices.Prediction.values[i] = forecast.Prediction.values[j]
+            print(vertices.Prediction.values[i], vertices.Probability.values[i])
