@@ -188,6 +188,8 @@ def waiting(time):
 
 print("Beginning code at:", datetime.datetime.now())
 
+forecasting(places, 5, 13, 2019)
+exit()
 ##Run the forecast at 6PM, midnight, 6AM, and noon.
 schedule.every().day.at("18:00").do(job, "Fetching weather forecast", places)
 schedule.every().day.at("00:00").do(job, "Fetching weather forecast", places)

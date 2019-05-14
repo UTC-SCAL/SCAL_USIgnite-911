@@ -11,7 +11,7 @@ import datetime
 ##Importing all files necessary. 
 
 #Test is the forecast MMR file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM.
-forecastfile = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_12.csv"
+forecastfile = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-13-2019_2019-05-14_13.csv"
 test = pandas.read_csv(forecastfile, sep=",")
 blank = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Blank Forecast Forum.csv", sep=",")
 
@@ -182,7 +182,7 @@ def predict_accidents(forecast):
     print("Head of predictions_round: ", predictions_round[0:10])
     print("Accidents predicted: ", sum(predictions_round))
 
-    forecast.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_12_grid.csv",
+    forecast.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-13_grid.csv",
                     sep=",",index=False)
     return forecast
 
