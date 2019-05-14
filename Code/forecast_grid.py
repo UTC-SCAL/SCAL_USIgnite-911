@@ -26,8 +26,8 @@ def forecasting(places, month, day, year):
     places.Temp_Max = places.Temp_Max.astype(float)
     places.Temp_Min = places.Temp_Min.astype(float)
     # places.Precip_Intensity_Time = places.Precip_Intensity_Time.astype(str)
-    places.Center_Lat = places.Center_Lat.astype(float)
-    places.Center_Long = places.Center_Long.astype(float)
+    places.Latitude = places.Latitude.astype(float)
+    places.Longitude = places.Longitude.astype(float)
     places.EventBefore = places.EventBefore.astype(str)
     places.ConditionBefore = places.ConditionBefore.astype(str)
     thisdate = str(month) + '/' + str(day) + '/' + str(year)
@@ -47,8 +47,8 @@ def forecasting(places, month, day, year):
     print(filename)
     for d, stuff in enumerate(places.values[0:(len(places.loc[places['Hour'] == 0]))]):
         print(d)
-        lat = places.Center_Lat.values[d]
-        long = places.Center_Long.values[d]
+        lat = places.Latitude.values[d]
+        long = places.Longitude.values[d]
         t = datetime.datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
         call = key, lat, long
 
