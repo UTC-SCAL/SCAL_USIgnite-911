@@ -264,3 +264,24 @@ sixAM = which(forecaststand$Probability>=0.95)
 length(ninefive)
 ```
 
+```{r}
+library(ggmap)
+forecast = read.csv("/Users/pete/Downloads/Forecast-for5-14-2019_2019-05-14_9.csv", header=T)
+
+min(forecast$Latitude)
+max(forecast$Latitude)
+mean(forecast$Latitude)
+mean(forecast$Longitude)
+min(forecast$Longitude)
+max(forecast$Longitude)
+
+# png("../FinalProject/MapOfDisney.png", width=8,height=8,units='in', res=300)
+register_google(key="AIzaSyB9SbDxFzEubEN3icbAce4T2U262jskSlg")
+ggmap(get_googlemap(center = c(lon = -85.225, lat = 35.07),
+                    zoom = 13, scale = 2,
+                    maptype ='satellite',
+                    color = 'color')) +   
+  geom_point(aes(x = Longitude, y = Latitude), colour = red, data = forecast, alpha=0.9, size = 2) + 
+  theme(legend.position="none")
+# dev.off()
+```
