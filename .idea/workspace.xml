@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/RolandProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RolandProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="526dcb59-165e-4740-b8a4-69c9706e6dcf" name="Revert &quot;Made new file to hold grid stuff&quot;" comment="Revert &quot;Made new file to hold grid stuff&quot;&#10;&#10;This reverts commit 78d03fc2">
+      <change afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/gmailReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/gmailReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/ToRemoveFile.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Day Holder 2019.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-10_FinalForm.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-11_FinalForm.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/2019-05-13GridAverageHolder.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-05-13GridAverageHolder.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/2019-05-13NoLLGridAverageHolder.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/2019-05-13NoLLGridAverageHolder.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Blank Forecast Forum.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Blank Forecast Forum.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Combined.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Combined.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast-for5-13-2019_2019-05-14_13.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast-for5-13-2019_2019-05-14_13.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-13_grid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast-for5-14-2019_2019-05-13_grid.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_12.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast-for5-14-2019_2019-05-14_12.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_12_grid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast-for5-14-2019_2019-05-14_12_grid.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast-for5-14-2019_2019-05-14_9.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Forecast_for_5-14-2019_on_5-14-2019_9_grid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Forecast_for_5-14-2019_on_5-14-2019_9_grid.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid MMR.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Full Data Grid No Temporal.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Full Data Grid No Temporal.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/Full Data Grid.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel &amp; CSV Sheets/Grid Layout Test Files/VerticesPoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Excel &amp; CSV Sheets/VerticesPoints.csv" afterDir="false" />
     </list>
+    <list id="d3327155-0fab-4c3f-9665-8d7fa7fe155e" name="Default" comment="Completed First Forecast, have predictions" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="1043" lean-forward="true" selection-start-line="1043" selection-end-line="1043" />
+            <state relative-caret-position="213">
+              <caret line="1043" selection-start-line="1043" selection-end-line="1043" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
                 <element signature="e#382#857#0" />
@@ -182,7 +198,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,6 +220,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -351,10 +367,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.CreatePredictionsGrid" />
+      <item itemvalue="Python.NetworkModel_Grid" />
       <item itemvalue="Python.forecast_grid" />
       <item itemvalue="Python.gmailReader" />
       <item itemvalue="Python.gridMap" />
-      <item itemvalue="Python.NetworkModel_Grid" />
     </list>
     <recent_temporary>
       <list>
@@ -376,13 +392,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527686015577</updated>
-    </task>
-    <task id="LOCAL-00095" summary="More data">
-      <created>1548433063903</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1548433063903</updated>
     </task>
     <task id="LOCAL-00096" summary="More data">
       <created>1548686443961</created>
@@ -720,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557852177838</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="Completed First Forecast, have predictions">
+      <created>1557931018862</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1557931018862</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TodoView">
@@ -735,7 +751,7 @@
   <component name="ToolWindowManager">
     <frame x="67" y="0" width="1853" height="1200" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2334609" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2334609" />
       <window_info id="Structure" order="1" weight="0.24919957" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -747,7 +763,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298279" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50213444" side_tool="true" weight="0.86042064" />
       <window_info anchor="bottom" id="Messages" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32793137" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32793137" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3298279" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.3298279" />
@@ -846,7 +862,8 @@
     <MESSAGE value="Just matched grid blocks and calldata" />
     <MESSAGE value="Made new file to hold grid stuff" />
     <MESSAGE value="Completed First Forecast, have predictions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed First Forecast, have predictions" />
+    <MESSAGE value="Revert &quot;Made new file to hold grid stuff&quot;&#10;&#10;This reverts commit 78d03fc2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Made new file to hold grid stuff&quot;&#10;&#10;This reverts commit 78d03fc2" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Code/fetchingForecast.py" />
@@ -935,8 +952,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/gmailReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="1043" lean-forward="true" selection-start-line="1043" selection-end-line="1043" />
+        <state relative-caret-position="213">
+          <caret line="1043" selection-start-line="1043" selection-end-line="1043" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
             <element signature="e#382#857#0" />
