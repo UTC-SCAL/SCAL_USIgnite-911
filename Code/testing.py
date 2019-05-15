@@ -110,14 +110,9 @@ from sklearn.metrics import confusion_matrix
 
 # df.to_csv('../Excel & CSV Sheets/ETRIMS/UniqueRoutes.csv', sep=",")
 
-
-vertices = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv",sep=",")
-forecast = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_9.csv",sep=",")
-
-print(forecast)
-for i,value in enumerate(vertices.values):
-    for j,stuff in enumerate(forecast.values):
-        if vertices.ORIG_FID.values[i] == forecast.Grid_Block.values[j]:
-            vertices.Probability.values[i] = forecast.Probability.values[j]
-            vertices.Prediction.values[i] = forecast.Prediction.values[j]
-            print(vertices.Prediction.values[i], vertices.Probability.values[i])
+dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv", sep=",")
+for i,values in enumerate(dataset.values):
+    doa = dataset.Date.values[i]
+    dataset.Year.values[i] = int(doa.split('/')[2])+2000
+print(dataset.Year.values[0:5])
+dataset.to_csv('../Excel & CSV Sheets/Full Data with Year.csv', sep=",")
