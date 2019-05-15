@@ -267,21 +267,105 @@ length(ninefive)
 ```{r}
 library(ggmap)
 forecast = read.csv("/Users/pete/Downloads/Forecast-for5-14-2019_2019-05-14_9.csv", header=T)
+forecast = forecast[which(forecast$Prediction==1),]
+hours = unique(forecast$Hour)
 
-min(forecast$Latitude)
-max(forecast$Latitude)
-mean(forecast$Latitude)
-mean(forecast$Longitude)
-min(forecast$Longitude)
-max(forecast$Longitude)
-
-# png("../FinalProject/MapOfDisney.png", width=8,height=8,units='in', res=300)
+# min(forecast$Latitude)
+# max(forecast$Latitude)
+# mean(forecast$Latitude)
+# mean(forecast$Longitude)
+# min(forecast$Longitude)
+# max(forecast$Longitude)
 register_google(key="AIzaSyB9SbDxFzEubEN3icbAce4T2U262jskSlg")
+
+thishour = forecast[which(forecast$Hour==0),]
+# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/PredictionMapForMay14_9am_0", width=8,height=8,units='in', res=300)
+highprob = thishour[which(thishour$Probability>=.90),]
+midprob = thishour[which(thishour$Probability>=.75),]
+lowprob = thishour[which(thishour$Probability>=.5),]
 ggmap(get_googlemap(center = c(lon = -85.225, lat = 35.07),
-                    zoom = 13, scale = 2,
-                    maptype ='satellite',
-                    color = 'color')) +   
-  geom_point(aes(x = Longitude, y = Latitude), colour = red, data = forecast, alpha=0.9, size = 2) + 
-  theme(legend.position="none")
+                  zoom = 11, scale = 2,
+                  maptype ='roadmap',
+                  color = 'bw')) +   
+# geom_point(aes(x = Longitude, y = Latitude), colour = "yellow", data = lowprob, alpha=0.9, size = 2) +
+geom_point(aes(x = Longitude, y = Latitude), colour = "orange", data = midprob, alpha=0.9, size = 2) +  
+geom_point(aes(x = Longitude, y = Latitude), colour = "red", data = highprob, alpha=0.9, size = 2) 
+
 # dev.off()
 ```
+
+```{r}
+# forecast = read.csv("/Users/pete/Downloads/Forecast-for5-14-2019_2019-05-14_9.csv", header=T)
+# forecast = forecast[which(forecast$Prediction==1),]
+# # hours = unique(forecast$Hour)
+# polys = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv")
+# head(polys)
+
+accidents = read.csv("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-14_FinalForm.csv", header = TRUE)
+forecast = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast_for_5-14-2019_on_5-14-2019_9_grid.csv", header=TRUE)
+forecast = forecast[which(forecast$Prediction==1),]
+
+thishour = forecast[which(forecast$Hour>=0 & forecast$Hour<=4),]
+accidents = accidents[which(accidents$Hour>=0 & accidents$Hour <=4),]
+
+low = which(thishour$Probability>=0.5)
+low=thishour[low,]
+mid = which(thishour$Probability>=0.75)
+mid=thishour[mid,]
+high = which(thishour$Probability>=0.95)
+high=thishour[high,]
+# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/HeatMapMapForMay13", width=8,height=8,units='in', res=300)
+par(mar = rep(0, 4))
+lons = c(-85.39, -85.05)
+lats = c(34.99, 35.15)
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+ geom_tile(aes(x = Longitude, y = Latitude), data = low, alpha= low$Probability, color='yellow',fill='yellow', size = 1) +  
+  geom_tile(aes(x = Longitude, y = Latitude), data = mid, alpha= mid$Probability, color='orange', fill='orange', size = 1) + 
+  geom_tile(aes(x = Longitude, y = Latitude), data = high, alpha= high$Probability, color='red', fill='red', size = 1) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'black', alpha=.7, size=2)
+# dev.off()
+
+# + scale_fill_gradientn(name = "Probability", space = "Lab", colours=)
+```
+
+```{r}
+polys$Grid_Block = polys$ORIG_FID
+
+dat <- merge(thishour, polys, by = "Grid_Block", all.x = TRUE)
+colnames(dat)
+
+library(rio)
+write.csv(dat, file = "/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Layout Test Files/Combined.csv")
+```
+
+```{r}
+dataset = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data with Year.csv",sep=",")
+dataset = dataset[which(dataset$Accident==1),]
+tabMon = table(dataset$Year, dataset$Month)
+
+barplot(tabMon, ylab="Frequency", xlab="Month", main="Side-By-Side Bar Chart", col=c("blue", "green", "red" ), beside=TRUE, width=.3)
+legend("topleft", title="Year", legend= c(2017,2018,2019), fill =c("blue", "green", "red" ), box.lty=0)
+
+tab = table(dataset$Year)
+barplot(tab)
+
+tabMon = table(dataset$Year, dataset$Month)
+```
+
+```{r}
+polys[0:5]
+png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/PolygonMap", width=8,height=8,units='in', res=300)
+ggmap(get_googlemap(center = c(lon = -85.225, lat = 35.07),
+                  zoom = 11, scale = 2,
+                  maptype ='roadmap',
+                  color = 'bw'), layout='tight') +
+geom_polygon(data = fortify(polys),
+                  aes(X, Y, group = ORIG_FID),
+                  fill = NA, colour = "red", alpha = 0.2)
+dev.off()
+```
+
