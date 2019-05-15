@@ -308,7 +308,7 @@ def get_hour_negatives(calldata):
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+        "../Excel & CSV Sheets/New Data Files/Blank Negative Samples Form.csv", sep=",")
 
     neg_loc = 0  # Used for positioning
     calldata.Time = calldata.Time.astype(str)
@@ -393,12 +393,12 @@ def get_date_negatives(calldata):
     # This file needs to be updated every day, and should have the date up until the day before the current day
     # so, if today is 10/18/2019, the last date in the file should be 10/17/2019
     day_holder2019 = pandas.read_excel(
-        "../Excel & CSV Sheets/Day Holder 2019.xlsx")
+        "../Excel & CSV Sheets/New Data Files/Day Holder 2019.xlsx")
 
     # Make a negative samples dataframe to hold the negative samples from calldata
     # By default, this file is empty
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+        "../Excel & CSV Sheets/New Data Files/Blank Negative Samples Form.csv", sep=",")
 
     neg_loc = 0  # Used for positioning
     calldata.Date = calldata.Date.astype(str)
@@ -487,7 +487,7 @@ def get_loc_negatives(calldata):
     calldata.Route = calldata.Route.astype(str)
     calldata.Log_Mile = calldata.Log_Mile.astype(float)
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/2017+2018 Data/NegativeSamples.csv", sep=",")
+        "../Excel & CSV Sheets/New Data Files/Blank Negative Samples Form.csv", sep=",")
     unique_routes = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/UniqueRoutes2.csv", sep=",")
     route_number = range(0, len(unique_routes.Route))
     neg_loc = 0  # Used for positioning
@@ -1022,7 +1022,7 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    calldata, file = get_Email()
+    # calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
     # calldata = pandas.read_excel(folderpath + "",
@@ -1039,8 +1039,8 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    # file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-12.csv"
-    # calldata = pandas.read_csv(file, sep=",")
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-14.csv"
+    calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)

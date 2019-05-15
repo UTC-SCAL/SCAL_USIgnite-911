@@ -2,7 +2,7 @@ import pandas
 
 ##This file takes in a positive and negative set of data, and reduces 
 # the negatives of the file to 1/3, then saves the reduced dataset. 
-calldata = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort.csv",sep=",")
+calldata = pandas.read_csv("",sep=",")
 print(len(calldata))
 accidents = calldata[calldata['Accident'] == 1]
 print(len(accidents))
@@ -22,4 +22,4 @@ frames = [accidents, reduced]
 fulldata = pandas.concat(frames)
 fulldata = fulldata.sort_values(by=['Date', 'Time'])
 print(len(fulldata), (len(fulldata)/2))
-fulldata.to_csv("../Excel & CSV Sheets/Full Data Time Sort Less.csv", sep=",")
+fulldata.to_csv("", sep=",")
