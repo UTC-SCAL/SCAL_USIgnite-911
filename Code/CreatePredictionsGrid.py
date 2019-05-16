@@ -5,6 +5,8 @@ from keras.models import Sequential
 from math import *
 from sklearn import preprocessing
 import datetime
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
 
 ########################################################################################################################################################################
 
@@ -76,43 +78,70 @@ def add_Pred_andProb(forecast, scaled, forecastfile):
     forecast.to_csv(forecastfile, sep=",", index=False)
 
 
-#Note: This function is not currently usable, as the Log_Mile and Route are not included in the forecast miles once they are adjusted for the model. 
-def match_predictions_using_route(forecast, accidents):
-    matches = 0
-    for i, info in enumerate(forecast.values):
-        for j, data in enumerate(accidents.values):
-            forecastHour = forecast.Hour.values[i]
-            accHour = accidents.Hour.values[j]
-            hourDiff = abs(forecastHour - accHour)
-            forecastlog = forecast.Log_Mile.values[i] 
-            acclog= accidents.Log_Mile.values[j]
-            ##If the forecast entry and the accident are along the same route, happened within 2 hours of one another, and the distance is less than .25, consider
-            #the two a match. 
-            if (forecast.Route.values[i] == accidents.Route.values[j]) and (hourDiff < 2) and ((abs(forecastlog-acclog)) < .25):
-                matches +=1
-    #Total number of matches between forecast and accident. 
-    print("\t Matches found using Route:", matches)
-
-def match_predictions_using_have(forecast, accidents):
+def match_predictions_using_grid(forecast, accidents, gridblocks):
     #Start out with no matches, so matches equals zero. 
     matches = 0
     #For each entry in forecast, look at every accident for that day. If the two happened within 3 hours of one another, and 
-    # the distance between the two is less than roughly a block, then they are considered a match. 
+    # the distance between the two is less than roughly a gridblock, then they are considered a match. 
     for i, info in enumerate(forecast.values):
         for j, data in enumerate(accidents.values):
-            forecastHour = forecast.Hour.values[i]
-            accHour = accidents.Hour.values[j]
-            hourDiff = abs(forecastHour - accHour)
-            if hourDiff < 3:
-                lat1 = forecast.Latitude.values[i]
-                long1 = forecast.Longitude.values[i]
-                lat2 = accidents.Latitude.values[j]
-                long2 = accidents.Longitude.values[j]
-                distance = haversine(long1, lat1, long2, lat2)
-                if distance < 0.15:
+            forecastTime = forecast.TimeFrame.values[i]
+            accTime = accidents.TimeFrame.values[j]
+            if forecastTime == accTime:
+                # Making the actual polygon using the coordinates above
+                lats = []
+                longs = []
+                for k, value in enumerate(gridblocks):
+                    if forecast.GridBlock.values[i] == gridblocks.ORIG_FID.values[k]:
+                        lats.append(gridblocks.Y.values[k])
+                        longs.append(gridblocks.X.values[k])
+                poly_coords = ((lats[0], longs[0]), (lats[1], longs[1]), (lats[2], longs[2]), (lats[3], longs[3]), (lats[4], longs[4]))
+                poly = Polygon(poly_coords)
+
+                # take in the 911 incident lat and long one at a time
+                call_lat = accidents.Latitude.values[j]
+                call_long = accidents.Longitude.values[j]
+                call_incident = Point(call_lat, call_long)
+                # See if the 911 incident is in the current polygon (gridblock)
+                if poly.contains(call_incident):
                     matches +=1
+                else:
+                    pass
     #Prints the total number of matches found using the haversine method. 
-    print("\t Matches found using Haversine:", matches)
+    print("\t Matches found using GridBlocks:", matches)
+
+def match_predictions_using_ghost(forecast, accidents, gridblocks):
+  #Start out with no matches, so matches equals zero. 
+    matches = 0
+    #For each entry in forecast, look at every accident for that day. If the two happened within 3 hours of one another, and 
+    # the distance between the two is less than roughly a gridblock, then they are considered a match. 
+    for i, info in enumerate(forecast.values):
+        for j, data in enumerate(accidents.values):
+            forecastTime = forecast.TimeFrame.values[i]
+            accTime = accidents.TimeFrame.values[j]
+            if forecastTime == accTime:
+                # Making the actual polygon using the coordinates above
+                lats = []
+                longs = []
+                for k, value in enumerate(gridblocks):
+                    if forecast.GridBlock.values[i] == gridblocks.ORIG_FID.values[k]:
+                        lats.append(gridblocks.Ghost_Lat.values[k])
+                        longs.append(gridblocks.Ghost_Long.values[k])
+                poly_coords = ((lats[0], longs[0]), (lats[1], longs[1]), (lats[2], longs[2]), (lats[3], longs[3]), (lats[4], longs[4]))
+                poly = Polygon(poly_coords)
+
+                # take in the 911 incident lat and long one at a time
+                call_lat = accidents.Latitude.values[j]
+                call_long = accidents.Longitude.values[j]
+                call_incident = Point(call_lat, call_long)
+                # See if the 911 incident is in the current polygon (gridblock)
+                if poly.contains(call_incident):
+                    matches +=1
+                else:
+                    pass
+    #Prints the total number of matches found using the haversine method. 
+    print("\t Matches found using GhostBlocks:", matches)
+
 
 def haversine(long1, lat1, long2, lat2):
     # convert decimal degrees to radians
