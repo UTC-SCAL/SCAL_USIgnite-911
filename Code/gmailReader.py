@@ -620,6 +620,7 @@ def get_loc_negatives(calldata):
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
 
+
 # currently, the relative temperature variable has been dropped
 def update_temp_avgs(day_holder2019):
     lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
@@ -667,7 +668,7 @@ def update_temp_avgs(day_holder2019):
             coord_avgs.append(temp_avg)
             day_average = sum(coord_avgs) / len(coord_avgs)
             day_holder2019.Daily_Average.values[k] = day_average
-    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/Day Holder 2019.xlsx",
+    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/Day Holder 2019.xlsx",
                     "Time and Temp", day_holder2019)
 
 
@@ -1022,7 +1023,7 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    # calldata, file = get_Email()
+    calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
     # calldata = pandas.read_excel(folderpath + "",
@@ -1039,8 +1040,8 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-14.csv"
-    calldata = pandas.read_csv(file, sep=",")
+    # file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-15.csv"
+    # calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
