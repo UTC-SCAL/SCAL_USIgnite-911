@@ -1023,7 +1023,7 @@ def get_weather_data(calldata):
 
 def main():
     # This line should be run each morning around 9:10 AM
-    calldata, file = get_Email()
+    # calldata, file = get_Email()
 
     # Here are the current dtypes for reading in a file #
     # calldata = pandas.read_excel(folderpath + "",
@@ -1040,8 +1040,8 @@ def main():
     #                 "Func_Class": int, "AADT": int, "DHV": int, "Pavement_Width": int, "Pavement_Type": str})
 
     # Reading file directly for testing
-    # file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-15.csv"
-    # calldata = pandas.read_csv(file, sep=",")
+    file = "../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-05-19.csv"
+    calldata = pandas.read_csv(file, sep=",")
 
     calldata.Latitude = calldata.Latitude.astype(float)
     calldata.Longitude = calldata.Longitude.astype(float)
