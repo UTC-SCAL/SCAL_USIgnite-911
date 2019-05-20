@@ -1,6 +1,5 @@
 import email
 import imaplib
-import os
 import numpy as np
 from datetime import datetime, timedelta, date, time
 import time
@@ -11,7 +10,8 @@ import math
 import os, sys
 import random
 from selenium import webdriver
-import decimal
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
 
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
@@ -281,6 +281,9 @@ def add_data(calldata):
                     calldata.Illumination.values[k] = geometrics.Illum.values[i]
                     calldata.Speed_Limit.values[k] = geometrics.Spd_Limit.values[i]
                     calldata.Operation.values[k] = geometrics.Operation.values[i]
+    print("Matching accident to grid block")
+    calldata = get_gridblock(calldata)
+
     return calldata
 
 
@@ -292,13 +295,14 @@ def append_data(calldata):
         folderpath + "Excel & CSV Sheets/New Data Files/New Accident Data.csv", sep=",")
     frames = [og_calldata, calldata]
     results = pandas.concat(frames, sort=True)
-    header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
                    'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type",
+                   "Grid_Block")
     results = results.reindex(columns=header_list)
     results.to_csv("../Excel & CSV Sheets/New Data Files/New Accident Data.csv")
 
@@ -359,6 +363,7 @@ def get_hour_negatives(calldata):
                 negative_samples.loc[neg_loc, "DHV"] = calldata.DHV.values[i]
                 negative_samples.loc[neg_loc, "Pavement_Width"] = calldata.Pavement_Width.values[i]
                 negative_samples.loc[neg_loc, "Pavement_Type"] = calldata.Pavement_Type.values[i]
+                negative_samples.loc[neg_loc, "Grid_Block"] = calldata.Grid_Block.values[i]
                 neg_loc = neg_loc + 1
                 break
     # Getting the weekday
@@ -382,7 +387,8 @@ def get_hour_negatives(calldata):
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type",
+                   "Grid_Block")
     results = results.reindex(columns=header_list)
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Hour).csv")
@@ -444,6 +450,7 @@ def get_date_negatives(calldata):
                 negative_samples.loc[neg_loc, "DHV"] = calldata.DHV.values[i]
                 negative_samples.loc[neg_loc, "Pavement_Width"] = calldata.Pavement_Width.values[i]
                 negative_samples.loc[neg_loc, "Pavement_Type"] = calldata.Pavement_Type.values[i]
+                negative_samples.loc[neg_loc, "Grid_Block"] = calldata.Grid_Block.values[i]
                 neg_loc = neg_loc + 1
                 break
     traffic = pandas.read_csv(
@@ -477,7 +484,8 @@ def get_date_negatives(calldata):
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type",
+                   "Grid_Block")
     results = results.reindex(columns=header_list)
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Date).csv")
@@ -601,6 +609,9 @@ def get_loc_negatives(calldata):
     negative_samples.Date = negative_samples.Date.astype(str)
     print("Getting NS Location Weather Data")
     negative_samples = get_weather_data(negative_samples)
+    print("Matching NS Location Accidents to grid blocks")
+    negative_samples = get_gridblock(negative_samples)
+
     # Appending new data to the New Data file #
     print("Appending NS Location Data")
     negative_samples = negative_samples.iloc[::-1]
@@ -608,14 +619,14 @@ def get_loc_negatives(calldata):
         folderpath + "Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv", sep=",")
     frames = [og_calldata, negative_samples]
     results = pandas.concat(frames, sort=True)
-    header_list = (
-        "Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
+    header_list = ("Accident", "Problem", 'Latitude', 'Longitude', 'Date', 'Time', 'Address', "Route", "Log_Mile", 'City', 'Event',
                    'Conditions', "EventBefore", "ConditionBefore", 'Hour', 'Temperature', "Temp_Max", "Temp_Min",
                    "Monthly_Avg_Temp", "Daily_Avg_Temp", "Relative_Temp", 'Dewpoint', 'Humidity', 'Month', "Weekday",
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type",
+                   "Grid_Block")
     results = results.reindex(columns=header_list)
     results.to_csv(
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
@@ -1021,6 +1032,37 @@ def get_weather_data(calldata):
     return calldata
 
 
+def get_gridblock(calldata):
+    # GridCoords is the file containing the lat/long coordinates for the grid blocks
+    gridCoords = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv", sep=",")
+    gridLayout_Coords = []
+    for i, value in enumerate(gridCoords.values):
+        if i % 5 == 0:
+            poly_coords = ((gridCoords.Y.values[i], gridCoords.X.values[i]),
+                           (gridCoords.Y.values[i + 1], gridCoords.X.values[i + 1]),
+                           (gridCoords.Y.values[i + 2], gridCoords.X.values[i + 2]),
+                           (gridCoords.Y.values[i + 3], gridCoords.X.values[i + 3]),
+                           (gridCoords.Y.values[i + 4], gridCoords.X.values[i + 4]))
+            # Append the poly_coords to a list for later use
+            gridLayout_Coords.append(poly_coords)
+
+    # Checking to see what calldata records each grid block has #
+    for j in range(0, len(gridLayout_Coords)):
+        poly = Polygon(gridLayout_Coords[j])  # This is the grid block for the current iteration
+        print(j)
+        # take in the 911 incident lat and long one at a time
+        for o, value2 in enumerate(calldata.values):
+            call_lat = calldata.Latitude.values[o]
+            call_long = calldata.Longitude.values[o]
+            call_incident = Point(call_lat, call_long)
+            # See if the 911 incident is in the current grid block polygon
+            if poly.contains(call_incident):
+                calldata.Grid_Block.values[o] = j
+            else:
+                pass
+    return calldata
+
+
 def main():
     # This line should be run each morning around 9:10 AM
     # calldata, file = get_Email()
@@ -1074,7 +1116,8 @@ def main():
                    'Visibility', "Cloud_Coverage", "Precipitation_Type", "Precipitation_Intensity",
                    "Precip_Intensity_Max", "Precip_Intensity_Time", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
                    "Terrain", "Land_Use", "Access_Control", "Illumination", "Operation", "Speed_Limit", "Thru_Lanes",
-                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type")
+                   "Num_Lanes", "Ad_Sys", "Gov_Cont", "Func_Class", "AADT", "DHV", "Pavement_Width", "Pavement_Type",
+                   "Grid_Block")
 
     calldata.index.name = "Index"
     calldata = calldata.reindex(columns=header_list)
