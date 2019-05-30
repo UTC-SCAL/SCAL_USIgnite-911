@@ -48,7 +48,7 @@ grid_section1.Date = grid_section1.Date.astype(str)
 # The key for using DarkSky API
 key = find_cred("darksky")
 # Iterate through negative_samples and assign weather data for each incident
-for i in range(276):
+for i in range(106, 276):
     print("Finding data for grid block ", i)
     # Use the i value to make a string for the current column name in grid blocks section
     col_name = "Block_" + str(i)
