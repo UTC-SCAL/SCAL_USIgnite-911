@@ -13,9 +13,9 @@ from shapely.geometry.polygon import Polygon
 ##Importing all files necessary. 
 
 #Test is the forecast MMR file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM.
-forecastfile = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-13-2019_2019-05-14_13.csv"
+forecastfile = "../Excel & CSV Sheets/ Forecast Files/Forecast-for5-13-2019_2019-05-14_13.csv"
 test = pandas.read_csv(forecastfile, sep=",")
-blank = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Blank Forecast Forum.csv", sep=",")
+blank = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Blank Forecast Forum.csv", sep=",")
 gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv", sep=",")
 
 
