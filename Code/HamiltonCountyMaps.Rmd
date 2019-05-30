@@ -302,7 +302,7 @@ geom_point(aes(x = Longitude, y = Latitude), colour = "red", data = highprob, al
 # head(polys)
 
 accidents = read.csv("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-14_FinalForm.csv", header = TRUE)
-forecast = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast_for_5-14-2019_on_5-14-2019_9_grid.csv", header=TRUE)
+forecast = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-14-2019_2019-05-14_12.csv", header=TRUE)
 forecast = forecast[which(forecast$Prediction==1),]
 
 thishour = forecast[which(forecast$Hour>=0 & forecast$Hour<=4),]
@@ -314,7 +314,7 @@ mid = which(thishour$Probability>=0.75)
 mid=thishour[mid,]
 high = which(thishour$Probability>=0.95)
 high=thishour[high,]
-# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/HeatMapMapForMay13", width=8,height=8,units='in', res=300)
+png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/HeatMapMapForMay14_time1_noon", width=8,height=8,units='in', res=300)
 par(mar = rep(0, 4))
 lons = c(-85.39, -85.05)
 lats = c(34.99, 35.15)
@@ -323,11 +323,11 @@ calc_zoom(bb)
 cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
 ggmap(cda, legend = "bottom") +
   xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
-  labs(x="",y="", title="Accidents in Chattanooga") +
+  labs(x="",y="", title="Accidents in Chattanooga - Early Morning") +
  geom_tile(aes(x = Longitude, y = Latitude), data = low, alpha= low$Probability, color='yellow',fill='yellow', size = 1) +  
   geom_tile(aes(x = Longitude, y = Latitude), data = mid, alpha= mid$Probability, color='orange', fill='orange', size = 1) + 
   geom_tile(aes(x = Longitude, y = Latitude), data = high, alpha= high$Probability, color='red', fill='red', size = 1) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'black', alpha=.7, size=2)
-# dev.off()
+dev.off()
 
 # + scale_fill_gradientn(name = "Probability", space = "Lab", colours=)
 ```
@@ -368,4 +368,27 @@ geom_polygon(data = fortify(polys),
                   fill = NA, colour = "red", alpha = 0.2)
 dev.off()
 ```
+
+```{r}
+# griddata = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data.csv")
+# griddata
+weekdaytable = table(griddata$DayFrame, griddata$WeekDay)
+weekendtable = table(griddata$DayFrame, griddata$WeekEnd)
+traveltable = table(griddata$DayFrame, griddata$Travel)
+
+cat("WeekdayTable")
+weekdaytable
+
+cat("WeekEndTable")
+weekendtable
+
+cat("TravelTable")
+traveltable
+```
+
+```{r}
+
+```
+
+
 

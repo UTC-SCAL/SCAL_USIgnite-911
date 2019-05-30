@@ -7,6 +7,33 @@ import datetime
 
 ########################################################################################################################################################################
 
+
+accidents = pandas.read_csv("../Excel & CSV Sheets/Full Data.csv")
+print(len(accidents))
+accidents = accidents[accidents['Accident'] == 1]
+print(len(accidents))
+
+def haversine(long1, lat1, long2, lat2):
+    # convert decimal degrees to radians
+    long1, lat1, long2, lat2 = map(radians, [long1, lat1, long2, lat2])
+
+    # haversine formula
+    dlong = long2 - long1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlong/2)**2
+    c = 2 * asin(sqrt(a))
+    r = 3956 # the radius of the earth in miles
+    return c * r #The distance between the two locations
+
+long1 = -85.2961319
+lat1 = 35.0645991
+count=0
+for i, info in enumerate(accidents.values):
+    havers = haversine(long1, lat1, accidents.Longitude.values[i], accidents.Latitude.values[i])
+    if havers <= 0.08:
+        count = count+1
+print(count)
+exit()
 ##Importing all files necessary. 
 
 #Test is the forecast file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM. 

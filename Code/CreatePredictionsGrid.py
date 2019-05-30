@@ -16,6 +16,7 @@ from shapely.geometry.polygon import Polygon
 forecastfile = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for5-13-2019_2019-05-14_13.csv"
 test = pandas.read_csv(forecastfile, sep=",")
 blank = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Blank Forecast Forum.csv", sep=",")
+gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv", sep=",")
 
 
 #Importing the accidents. The loop is only necessary if we are operating with the raw file from the email.
