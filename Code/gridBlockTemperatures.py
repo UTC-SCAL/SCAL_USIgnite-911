@@ -31,29 +31,30 @@ grid_coords = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Cent
 
 # First, we'll need to find the daily temperature for every grid block we use
 # Grid Blocks 0 - 275
-# grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
+grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
 # Grid Blocks 276 - 550
 # grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 2.csv")
 # Grid Blocks 551 - 825
-grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
+# grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
 # Grid Blocks 826 - 1099
 # grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 4.csv")
 
 # Set the date column as a string for easy splitting
-grid_section3.Date = grid_section3.Date.astype(str)
+# Change the number after the section in the name to correspond to the file you read in
+grid_section1.Date = grid_section1.Date.astype(str)
 
 # The key for using DarkSky API
 key = find_cred("darksky")
-# Iterate through negative_samples and assign weather data for each incident
-for i in range(664, 826):
+# Set the range of column values you want to go over
+for i in range(0, ):
     print("Finding data for grid block ", i)
     # Use the i value to make a string for the current column name in grid blocks section
     col_name = "Block_" + str(i)
-    grid_section3[col_name] = grid_section3[col_name].astype(str)
-    for k, info in enumerate(grid_section3.values):
+    grid_section1[col_name] = grid_section1[col_name].astype(str)
+    for k, info in enumerate(grid_section1.values):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
-        doa = grid_section3.Date.values[k]
+        doa = grid_section1.Date.values[k]
         yoa = int(doa.split('-')[0])
         moa = int(doa.split('-')[1])
         dayoa = int(doa.split('-')[2])
@@ -79,7 +80,8 @@ for i in range(664, 826):
             temp_avg = (temp_max + temp_min) / 2
             # Save the numbers in this format so they can all stay in the same cell for easy data saving
             # For later use, all you'd need to do is split by |
-            grid_section3[col_name].values[k] = str(temp_max) + "|" + str(temp_min) + "|" + str(temp_avg)
-    grid_section3.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
-
-grid_section3.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
+            grid_section1[col_name].values[k] = str(temp_max) + "|" + str(temp_min) + "|" + str(temp_avg)
+    # Save each time a column finishes to avoid having to redo work if the code stops for some reason
+    grid_section1.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
+# A final save
+grid_section1.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")

@@ -632,57 +632,6 @@ def get_loc_negatives(calldata):
         "../Excel & CSV Sheets/New Data Files/New Negative Samples (Location).csv")
 
 
-# currently, the relative temperature variable has been dropped
-def update_temp_avgs(day_holder2019):
-    lat_coords = [35.421081, 35.153381, 35.006039, 35.150392, 35.301703, 35.185536]
-    long_coords = [-85.121603, -85.121603, -85.175549, -85.047341, -84.998361, -85.158404]
-    hour_times = [0, 6, 12, 18]
-    coord_avgs = []
-    # The key for using DarkSky API
-    key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
-    day_holder2019.Date = day_holder2019.Date.astype(str)
-
-    print("Adding in DarkSky Weather")
-    # Iterate through calldata and assign weather data for each incident
-    for k, info in enumerate(day_holder2019.values):
-        print(k)
-        lat_iterator = 0
-        hour_iterator = 0
-        temp_avg = 0
-        for j in range(0, 6):
-            lat = lat_coords[lat_iterator]
-            long = long_coords[lat_iterator]
-            temp_avg = 0
-            hour_iterator = 0
-            for o in range(0, 4):
-                hoa = hour_times[hour_iterator]
-                mioa = 0
-                soa = 0
-                doa = day_holder2019.Date.values[k]
-                yoa = int(doa.split('-')[0])
-                moa = int(doa.split('-')[1])
-                dayoa = int(doa.split('-')[2])
-                # The following line needs to have this format:
-                t = datetime(yoa, moa, dayoa, hoa, mioa, soa).isoformat()
-                call = key, lat, long
-                try:
-                    forecastcall = forecast(*call, time=t)
-                    # Hourly data
-                    for i, value in enumerate(forecastcall.hourly):
-                        if i == hoa:
-                            temp_avg = temp_avg + value.temperature
-                except:
-                    print("Hourly Lookup Failed")
-                hour_iterator = hour_iterator + 1
-            lat_iterator = lat_iterator + 1
-            temp_avg = temp_avg / 4
-            coord_avgs.append(temp_avg)
-            day_average = sum(coord_avgs) / len(coord_avgs)
-            day_holder2019.Daily_Average.values[k] = day_average
-    save_excel_file("/home/admin/PycharmProjects/911Project/Excel & CSV Sheets/New Data Files/Day Holder 2019.xlsx",
-                    "Time and Temp", day_holder2019)
-
-
 def get_weather_data(calldata):
     calldata.Event = calldata.Event.astype(str)
     calldata.Conditions = calldata.Conditions.astype(str)
@@ -1029,6 +978,67 @@ def get_weather_data(calldata):
             calldata.RainBefore.values[i] = 1
         else:
             calldata.RainBefore.values[i] = 0
+    # Getting relative temperature 
+    # First, we'll need to find the daily temperature for every grid block we use
+    # Grid Blocks 0 - 275
+    grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
+    # Grid Blocks 276 - 550
+    grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 2.csv")
+    # Grid Blocks 551 - 825
+    grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
+    # Grid Blocks 826 - 1099
+    grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 4.csv")
+
+    grid_section1.Date = grid_section1.Date.astype(str)
+    grid_section2.Date = grid_section2.Date.astype(str)
+    grid_section3.Date = grid_section3.Date.astype(str)
+    grid_section4.Date = grid_section4.Date.astype(str)
+    calldata.Date = calldata.Date.astype(str)
+    calldata.Temperature = calldata.Temperature.astype(float)
+
+    for i, value in enumerate(calldata.values):
+        print(i)
+        # Use the i value to make a string for the current column name in grid blocks section
+        # Based on what the current accident's grid block number is, the appropriate grid_section file will be used
+        # if calldata.Grid_Block.values[i] >= 0 and calldata.Grid_Block.values[i] <= 275:
+        if 0 <= calldata.Grid_Block.values[i] <= 275:
+            # this is the column of the grid section file
+            col_name = "Block_" + str(calldata.Grid_Block.values[i])
+            # Set the column as a string for easy splitting
+            grid_section1[col_name] = grid_section1[col_name].astype(str)
+            # this is the row of the grid section file
+            # this gets the row number based on the value passed to it, which is the date from the current accident
+            row_num = grid_section1.loc[grid_section1['Date'] == calldata.Date.values[i]].index[0]
+            # get relative temp from the grid section file
+            # in the files, there are 3 values in each cell (temp max, temp min, relative temp), all separated by a |
+            # use the string split function to get the relative temperature
+            relative_temp = calldata.Temperature.values[i] - float(grid_section1.loc[row_num, col_name].split('|')[2])
+            # save the relative temperature for the current accident
+            calldata.Relative_Temp.values[i] = relative_temp
+        elif 276 <= calldata.Grid_Block.values[i] <= 550:
+            col_name = "Block_" + str(calldata.Grid_Block.values[i])
+
+            grid_section2[col_name] = grid_section2[col_name].astype(str)
+            row_num = grid_section2.loc[grid_section2['Date'] == calldata.Date.values[i]].index[0]
+
+            relative_temp = calldata.Temperature.values[i] - float(grid_section2.loc[row_num, col_name].split('|')[2])
+            calldata.Relative_Temp.values[i] = relative_temp
+        elif 551 <= calldata.Grid_Block.values[i] <= 825:
+            col_name = "Block_" + str(calldata.Grid_Block.values[i])
+
+            grid_section3[col_name] = grid_section3[col_name].astype(str)
+            row_num = grid_section3.loc[grid_section3['Date'] == calldata.Date.values[i]].index[0]
+
+            relative_temp = calldata.Temperature.values[i] - float(grid_section3.loc[row_num, col_name].split('|')[2])
+            calldata.Relative_Temp.values[i] = relative_temp
+        elif 826 <= calldata.Grid_Block.values[i] <= 1099:
+            col_name = "Block_" + str(calldata.Grid_Block.values[i])
+
+            grid_section4[col_name] = grid_section4[col_name].astype(str)
+            row_num = grid_section4.loc[grid_section4['Date'] == calldata.Date.values[i]].index[0]
+
+            relative_temp = calldata.Temperature.values[i] - float(grid_section4.loc[row_num, col_name].split('|')[2])
+            calldata.Relative_Temp.values[i] = relative_temp
     return calldata
 
 
