@@ -13,14 +13,14 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r}
 library(ggmap)
-utc=read.csv("../Excel & CSV Sheets/Full Data.csv", header=T)
+utc1=read.csv("../Excel & CSV Sheets/Full Data.csv", header=T)
 # min(utc$Latitude)
 # max(utc$Latitude)
 # min(utc$Longitude)
 # max(utc$Longitude)
 #
-a=which(utc$Accident==1)
-df=utc[a,]
+a=which(utc1$Accident==1)
+df1=utc[a,]
 
 # #
 locations=data.frame(df$Route, df$Longitude, df$Latitude)
@@ -276,7 +276,9 @@ hours = unique(forecast$Hour)
 # mean(forecast$Longitude)
 # min(forecast$Longitude)
 # max(forecast$Longitude)
-register_google(key="AIzaSyB9SbDxFzEubEN3icbAce4T2U262jskSlg")
+logins = read.csv("../Excel & CSV Sheets/Login.csv", header=T)
+googlekey = logins[3,2]
+register_google(key=googlekey)
 
 thishour = forecast[which(forecast$Hour==0),]
 # png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/PredictionMapForMay14_9am_0", width=8,height=8,units='in', res=300)
@@ -347,8 +349,8 @@ dataset = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV S
 dataset = dataset[which(dataset$Accident==1),]
 tabMon = table(dataset$Year, dataset$Month)
 
-barplot(tabMon, ylab="Frequency", xlab="Month", main="Side-By-Side Bar Chart", col=c("blue", "green", "red" ), beside=TRUE, width=.3)
-legend("topleft", title="Year", legend= c(2017,2018,2019), fill =c("blue", "green", "red" ), box.lty=0)
+barplot(tabMon, ylab="Frequency", xlab="Month", main="Side-By-Side Bar Chart", col=c("violet", "pink", "purple" ), beside=TRUE, width=.3)
+legend("topleft", title="Year", legend= c(2017,2018,2019), fill =c("violet", "pink", "purple" ), box.lty=0)
 
 tab = table(dataset$Year)
 barplot(tab)
@@ -387,8 +389,137 @@ traveltable
 ```
 
 ```{r}
+length(unique(df$Date))
+df$Year
+no19 = df[which(df$Year!=2019),]
+length(unique(no19$Date))
+# convert Date from character to class Date using a 2 digit year
+
+df$Date <- as.Date(df$Date, '%d/%m/%y')
+df$Date
+df$Year <-lubridate::year(df$Date)
+df$Year
+
+eighteen = df[which(df$Year==2018 ),]
+seventeen = df[which(df$Year==2017 ),]
+
+library(ggplot2)
+datetable = table(df$Date)
+datetable
+# aggregate by day
+ggplot(df, main="ALL", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+ggplot(seventeen, main="2017", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+ggplot(eighteen, main="2018", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+
+
+ggplot(seventeen, main="2017", ylim=c(0,1000)) + aes(x = lubridate::floor_date(Date, "month")) + 
+  geom_bar()
+
+ggplot(eighteen, main="2018", ylim=c(0,1000)) + aes(x = lubridate::floor_date(Date, "month")) + 
+  geom_bar()
+
+length(unique(df$Date))
+length(byDate)
+byDate = table(df$Date)
+byDate
+plot(byDate, type="l")
+
+byDate17 = table(seventeen$Date)
+byDate17
+plot(byDate17, type="l", ylim=c(0,250))
+
+byDate18 = table(eighteen$Date)
+byDate18
+plot(byDate18, type="l", ylim=c(0,250), main="2018",col="red", ylab="Accidents")
+lines(byDate17, type="l", col="blue")
+plot(byDate17, type="l", ylim=c(0,250), main="2017",col="blue", ylab="Accidents")
+
+length(byDate17)
+length(byDate18)
+
+plot(byDate18, type="l", col="red", ylab="Number of Accidents per Day", xlab="", xaxt="none", ylim=c(0,250))
+lines(byDate17, type="l", col="blue")
+
+ggplot(df) + aes(x = lubridate::floor_date(Date, "year")) + 
+  geom_bar()
 
 ```
+
+```{r}
+library(RColorBrewer)
+utc=read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv", header=T)
+
+a=which(utc$Accident==1)
+df=utc[a,]
+df$Date
+df$Date <- as.Date(df$Date, '%Y-%m-%d')
+df$Date
+df$Year <-lubridate::year(df$Date)
+df$Year
+
+df1$Date <- as.Date(df1$Date, '%Y-%m-%d')
+df1$Date
+df1$Year <-lubridate::year(df1$Date)
+df1$Year
+
+no19 = df[which(df$Year!=2019),]
+byday19 = table(no19$Date)
+byday19
+length(byday19)
+
+
+byday = table(df$Date)
+byday
+length(byday)
+byyear = table(df$Year)
+byyear
+
+bymonthYear19 = table(no19$Year, no19$Month)
+bymonthYear19
+
+bymonthYear19M = table(df1$Year, df1$Month)
+bymonthYear19M
+# png("../Graphs & Images/MonthandYearSplit.png", width=12,height=6,units='in', res=300)
+par(mar=c(4,4,4,4))
+barplot(bymonthYear, beside=T, xaxt="none", ylim=c(0,3500), col=brewer.pal(3, "Accent"), yaxt="none", main="Accidents by Month and Year", ylab="Accidents", xlab="Month")
+axis(1, seq(2,48,by=4) , c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"),las="2")
+legend("topleft",c('2017', '2018','2019'), fill=brewer.pal(3, "Accent"))
+axis(2,las="2")
+# dev.off()
+
+par(mar=c(4,4,4,4))
+barplot(bymonthYear19, beside=T, xaxt="none", ylim=c(0,3500), col=c("red","blue"), yaxt="none", main="Accidents by Month and Year", ylab="Accidents", xlab="Month")
+axis(1, seq(2,36,by=3) , c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"),las="2")
+legend("topleft",c('2017', '2018'), fill=c("red","blue"))
+axis(2,las="2")
+# dev.off()
+```
+
+```{r}
+bymonthYear19 = as.data.frame(bymonthYear19)
+bymonthYear19 =  bymonthYear19[order(bymonthYear19$Year, bymonthYear19$Month),]
+bymonthYear19
+# months = c("Jan 17", "Feb 17", "Mar 17", "Apr 17", "May 17","June 17","July 17","Aug 17","Sep 17","Oct 17","Nov 17","Dec 17", "Jan 18", "Feb 18", "Mar 18", "Apr 18", "May 18","June 18","July 18","Aug 18","Sep 18","Oct 18","Nov 18","Dec 18")
+
+months = c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec")
+# dim(bymonthYear19)
+# names(bymonthYear19) <- c("Year", "Month", "Count")
+# png("../Graphs & Images/MonthandYear.png", width=12,height=6,units='in', res=300)
+plot(bymonthYear19$Count[0:12], type="o", xaxt="none", xlab="", ylab="Accident Count", ylim=c(1500,3500), main="Division of Accidents by Year and Month")
+legend("topleft",c("2017","2018"), fill=c("black","red"))
+lines(bymonthYear19$Count[13:24], type="o", col="red")
+axis(1, seq(1,12, by=1),months, las="2")
+abline(v=13)
+# dev.off()
+```
+
+
 
 
 
