@@ -63,21 +63,21 @@ for i, value in enumerate(gridCoords.values):
     if i % 5 == 0:
         # Drawing the block grid, all this does is place the grid on the map #
         # We only draw on each 5th iteration, since each grid block's coordinates are grouped by 5
-        # grid_lats, grid_longs = zip(*[(gridCoords.Y.values[i], gridCoords.X.values[i]),
-        #                               (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
-        #                               (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
-        #                               (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
-        #                               (gridCoords.Y.values[i+4], gridCoords.X.values[i+4])])
-        # gmap.plot(grid_lats, grid_longs, 'cornflowerblue', edge_width=5)
+        grid_lats, grid_longs = zip(*[(gridCoords.Y.values[i], gridCoords.X.values[i]),
+                                      (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
+                                      (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
+                                      (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
+                                      (gridCoords.Y.values[i+4], gridCoords.X.values[i+4])])
+        gmap.plot(grid_lats, grid_longs, 'cornflowerblue', edge_width=5)
         # Making the actual polygon using the coordinates above for calculations and manipulation #
         # poly_coords are the current polygon's coordinates (lat & long)
-        poly_coords = ((gridCoords.Y.values[i], gridCoords.X.values[i]),
-                       (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
-                       (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
-                       (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
-                       (gridCoords.Y.values[i+4], gridCoords.X.values[i+4]))
-        # Append the poly_coords to a list for later use
-        gridLayout_Coords.append(poly_coords)
+        # poly_coords = ((gridCoords.Y.values[i], gridCoords.X.values[i]),
+        #                (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
+        #                (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
+        #                (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
+        #                (gridCoords.Y.values[i+4], gridCoords.X.values[i+4]))
+        # # Append the poly_coords to a list for later use
+        # gridLayout_Coords.append(poly_coords)
 
         # Drawing the ghost grid blocks #
         # ghost_lats, ghost_longs = zip(*[(gridCoords.Ghost_Lat.values[i], gridCoords.Ghost_Long.values[i]),
