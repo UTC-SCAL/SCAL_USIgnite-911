@@ -4,7 +4,7 @@ import os, sys
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
-grid_data = pandas.read_csv("../")
+grid_data = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
 # First, we'll need to find the daily temperature for every grid block we use
 # Grid Blocks 0 - 275
 grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")

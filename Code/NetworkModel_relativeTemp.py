@@ -71,8 +71,8 @@ def fitting_loops(X, Y):
             X, Y, test_size=0.30, random_state=42)
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_relativeTemp.h5'):
-            model.load_weights("model_relativeTemp.h5")
+        if exists('model_aggST'):
+            model.load_weights("model_aggST")
             print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
@@ -97,7 +97,7 @@ def fitting_loops(X, Y):
                          callbacks=[stopper])
 
         ##Save the weights for next run. 
-        model.save_weights("model_relativeTemp.h5")
+        model.save_weights("model_aggST")
         print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
