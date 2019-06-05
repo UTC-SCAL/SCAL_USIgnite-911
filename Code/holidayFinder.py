@@ -19,12 +19,13 @@ for i, value in enumerate(dataset.values):
         dataset.TravelDay.values[i] = 0
         dataset.WeekEnd.values[i] = 0
         dataset.WeekDay.values[i] = 1
-        if dataset.Date.values[i] == holidays.Dates.values[j]:
-            dataset.TravelDay.values[i] = 1
-            dataset.WeekEnd.values[i] = 0
-            dataset.WeekDay.values[i] = 0
-            break
-        elif dataset.Weekday.values[i] == 5 or dataset.Weekday.values[i] == 6:
+        # if dataset.Date.values[i] == holidays.Dates.values[j]:
+        #     dataset.TravelDay.values[i] = 1
+        #     dataset.WeekEnd.values[i] = 0
+        #     dataset.WeekDay.values[i] = 0
+        #     break
+        # elif dataset.Weekday.values[i] == 5 or dataset.Weekday.values[i] == 6:
+        if dataset.Weekday.values[i] == 5 or dataset.Weekday.values[i] == 6:
             dataset.TravelDay.values[i] = 0
             dataset.WeekEnd.values[i] = 1
             dataset.WeekDay.values[i] = 0
