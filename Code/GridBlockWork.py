@@ -1,6 +1,26 @@
 import numpy
 import pandas
 
+gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/GridInfoCutandUpdated.csv")
+terrain = pandas.read_csv("/Users/pete/Downloads/TerrainRoadData.csv", dtype={'OBJECTID':int, 'Highway_1':int, 'Land_Use_Mode':int, 'Segment_Count':int,
+ 'Road_Count': int, 'Terrain':int, 'Short_Terrain':int})
+print(terrain.dtypes)
+
+for i, info in enumerate(gridblocks.values): 
+    stuff = terrain.values[i]
+    stuffcut = stuff[0:5]
+    # print(stuffcut, info[0])
+#     if info != stuffcut:
+#         print("Numbers don't match at :", info[0], stuffcut[0])
+#     else: 
+#         pass
+# exit()
+    if (info != stuffcut).all(): 
+        print("Found Error", info[0], info, " ", stuffcut)
+    else:
+        pass
+exit()
+
 a = list(range(1100))
 a = numpy.reshape(a, (25, 44))
 # print(a)
