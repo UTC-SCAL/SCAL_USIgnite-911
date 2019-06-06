@@ -21,30 +21,30 @@ def find_cred(service):
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
-# # This code fetches the daily mins, maxes, and average temperatures for each grid block # #
-# # These files hold the days for the years 2017 and 2018
+# This code fetches the daily mins, maxes, and average temperatures for each grid block # #
+# These files hold the days for the years 2017 and 2018
 # dayHolder_2017 = pandas.read_excel("../Excel & CSV Sheets/New Data Files/Day Holder 2017.xlsx")
 # dayHolder_2018 = pandas.read_excel("../Excel & CSV Sheets/New Data Files/Day Holder 2018.xlsx")
-# # Our accidents
-# # calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
-# # Grid Block center point coordinates
+# Our accidents
+# calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
+# Grid Block center point coordinates
 # grid_coords = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/CenterPoints.csv")
-#
-# # First, we'll need to find the daily temperature for every grid block we use
-# # Grid Blocks 0 - 275
+
+# First, we'll need to find the daily temperature for every grid block we use
+# Grid Blocks 0 - 275
 # grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
-# # Grid Blocks 276 - 550
-# # grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 2.csv")
-# # Grid Blocks 551 - 825
-# # grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
-# # Grid Blocks 826 - 1099
-# # grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 4.csv")
-#
-# # Set the date column as a string for easy splitting
-# # Change the number after the section in the name to correspond to the file you read in
+# Grid Blocks 276 - 550
+# grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 2.csv")
+# Grid Blocks 551 - 825
+# grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 3.csv")
+# Grid Blocks 826 - 1099
+# grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 4.csv")
+
+# Set the date column as a string for easy splitting
+# Change the number after the section in the name to correspond to the file you read in
 # grid_section1.Date = grid_section1.Date.astype(str)
-#
-# # The key for using DarkSky API
+
+# The key for using DarkSky API
 # key = find_cred("darksky")
 # # Set the range of column values you want to go over
 # for i in range(0, ):
@@ -87,9 +87,10 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 # # A final save
 # grid_section1.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
 
+# The following code is getting the monthly averages for each grid block
 # These files have the daily min, max, and average temperatures for each grid block
 # Grid Blocks 0 - 275
-grid_section = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
+# grid_section = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 1.csv")
 # Grid Blocks 276 - 550
 # grid_section = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks Section 2.csv")
 # Grid Blocks 551 - 825
@@ -99,7 +100,7 @@ grid_section = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Gri
 
 # These will contain the monthly averages per grid block
 # Grid Blocks 0 - 275
-grid_averages = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S1 Monthly Averages.csv")
+# grid_averages = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S1 Monthly Averages.csv")
 # Grid Blocks 276 - 550
 # grid_averages = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S2 Monthly Averages.csv")
 # Grid Blocks 551 - 825
@@ -107,19 +108,43 @@ grid_averages = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Gr
 # Grid Blocks 826 - 1099
 # grid_averages = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S4 Monthly Averages.csv")
 
-# for i, values in enumerate(grid_section.values):
-for i in range(0, 276):
-    # Use the i value to make a string for the current column name in grid blocks section
-    col_name = "Block_" + str(i)
-    print("Finding data for grid block ", i)
-    for o, values in enumerate(grid_section.values):
-        print(o)
-        year = int(grid_section.Date.values[o].split('/')[2])
-        month = int(grid_section.Date.values[o].split('/')[0])
-        daily_avg = float(grid_section[col_name].values[o].split("|")[2])
-        for j, avg_values in enumerate(grid_averages.values):
-            if year == int(grid_averages.Month.values[j].split("|")[0]) and \
-                    month == int(grid_averages.Month.values[j].split("|")[1]):
-                grid_averages[col_name].values[j] += daily_avg
-    grid_averages.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S1 Monthly Averages.csv")
-grid_averages.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S1 Monthly Averages.csv")
+# Here, you will need to change the range values based on what file you are reading in
+# You can find each file's respective grid block numbers above each file as a comment
+# for i in range(, ):
+#     # Use the i value to make a string for the current column name in grid blocks section
+#     col_name = "Block_" + str(i)
+#     print("Finding data for grid block ", i)
+#     for o, values in enumerate(grid_section.values):
+#         print(o)
+#         grid_averages[col_name] = grid_averages[col_name].astype(float)
+#         year = int(grid_section.Date.values[o].split('/')[2])
+#         month = int(grid_section.Date.values[o].split('/')[0])
+#         daily_avg = float(grid_section[col_name].values[o].split("|")[2])
+#         for j, avg_values in enumerate(grid_averages.values):
+#             if year == grid_averages.Year.values[j] and month == grid_averages.Month.values[j]:
+#                 grid_averages[col_name].values[j] += daily_avg
+#     # You will need to change the name of the file based on what file you are reading in
+#     # Ex, if you are reading in file Grid Blocks S4 Monthly Averages, you will need to change the save name to that
+#     grid_averages.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S3 Monthly Averages.csv")
+# grid_averages.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S3 Monthly Averages.csv")
+
+
+# This code reads in the previously made files and gets the average temp for each month
+# This is just for simplicity, as going through doing this averaging for every single grid block would take forever
+# Aint nobody got time for that
+# Read in the monthly averages file you want to get the averages for, and change the values in the for in range below
+# average_file = pandas.read_csv("../")
+# # Set the range of column values you want to go over
+# for i in range(826, 1100):
+#     print("Averaging for block ", i)
+#     # Use the i value to make a string for the current column name in grid blocks section
+#     col_name = "Block_" + str(i)
+#     for k, info in enumerate(average_file.values):
+#         month = average_file.Month.values[k]
+#         if month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12:
+#             average_file[col_name].values[k] = round(average_file[col_name].values[k]/31.00, 2)
+#         elif month == 2:
+#             average_file[col_name].values[k] = round(average_file[col_name].values[k]/28.00, 2)
+#         else:
+#             average_file[col_name].values[k] = round(average_file[col_name].values[k]/30.00, 2)
+# average_file.to_csv("../")

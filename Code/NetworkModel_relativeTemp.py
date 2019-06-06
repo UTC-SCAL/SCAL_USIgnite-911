@@ -111,7 +111,7 @@ def fitting_loops(X, Y):
         # Then, let's round to either 0 or 1, since we have only two options.
         predictions_round = [abs(round(x[0])) for x in predictions]
 
-        ##Finding accuracy score of the predictions versus the actual Y. 
+        ##Finding accuracy score of the predictions versus the actual Y.
         accscore1 = accuracy_score(y_test, predictions_round)
         ##Printing it as a whole number instead of a percent of 1. (Just easier for me to read) 
         print("Rounded Test Accuracy:", accscore1 * 100)

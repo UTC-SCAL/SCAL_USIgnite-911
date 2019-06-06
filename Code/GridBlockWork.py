@@ -31,7 +31,7 @@ a = list(a+1)
 # index = numpy.where(a == 100)
 # print(list(index))
 
-gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 Test.csv")
+gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
 for i, info in enumerate(gridblocks.values):
     for j,k in enumerate(a):
         k = list(k)
@@ -42,7 +42,7 @@ for i, info in enumerate(gridblocks.values):
                 print(i, col, row)
                 gridblocks.Grid_Col.values[i] = col
                 gridblocks.Grid_Row.values[i] = row
-gridblocks.to_csv('../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 Test.csv')
+gridblocks.to_csv('../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 Test2.csv')
 exit()
 
 # roadfile = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/GridCountRoads.csv")
