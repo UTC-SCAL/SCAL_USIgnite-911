@@ -29,7 +29,7 @@ dayHolder_2018 = pandas.read_excel("../Excel & CSV Sheets/New Data Files/Day Hol
 # Our accidents
 # calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
 # Grid Block center point coordinates
-grid_coords = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/CenterPoints.csv")
+grid_coords = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/CenterPoints OS Layout.csv")
 
 # First, we'll need to find the daily temperature for every grid block we use
 # Grid Blocks represents the files related to the standard grid layout we started with, while grid os blocks
@@ -54,7 +54,7 @@ grid_section1.Date = grid_section1.Date.astype(str)
 # The key for using DarkSky API
 key = find_cred("darksky")
 # Set the range of column values you want to go over
-for i in range(0, 457):
+for i in range(440, 457):
     print("Finding data for grid block ", i)
     # Use the i value to make a string for the current column name in grid blocks section
     col_name = "Block_" + str(i)
@@ -63,9 +63,9 @@ for i in range(0, 457):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         doa = grid_section1.Date.values[k]
-        yoa = int(doa.split('-')[0])
-        moa = int(doa.split('-')[1])
-        dayoa = int(doa.split('-')[2])
+        yoa = int(doa.split('/')[2])
+        moa = int(doa.split('/')[0])
+        dayoa = int(doa.split('/')[1])
         lat = grid_coords.Center_Lat.values[i]  # Center latitude point for current grid block
         long = grid_coords.Center_Long.values[i]  # Center longitude point for current grid block
         # The following line needs to have this format:
@@ -90,9 +90,9 @@ for i in range(0, 457):
             # For later use, all you'd need to do is split by |
             grid_section1[col_name].values[k] = str(temp_max) + "|" + str(temp_min) + "|" + str(temp_avg)
     # Save each time a column finishes to avoid having to redo work if the code stops for some reason
-    grid_section1.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S1 Daily Avg Temps.csv")
+    grid_section1.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S1 Daily Avg Temps2.csv")
 # A final save
-grid_section1.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S1 Daily Avg Temps.csv")
+grid_section1.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S1 Daily Avg Temps2.csv")
 
 # The following code is getting the monthly averages for each grid block
 # These files have the daily min, max, and average temperatures for each grid block

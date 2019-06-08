@@ -23,6 +23,8 @@ xlrd = "*"
 plaidml = "*"
 keras = "*"
 keras-utils = "*"
+darksky = "*"
+darkskylib = "*"
 
 [dev-packages]
 "autopep8" = "*"

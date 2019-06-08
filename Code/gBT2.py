@@ -43,7 +43,7 @@ grid_section2.Date = grid_section2.Date.astype(str)
 # The key for using DarkSky API
 key = find_cred("darksky")
 # Set the range of column values you want to go over
-for i in range(457, 913):
+for i in range(894, 913):
     print("Finding data for grid block ", i)
     # Use the i value to make a string for the current column name in grid blocks section
     col_name = "Block_" + str(i)
@@ -52,9 +52,9 @@ for i in range(457, 913):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         doa = grid_section2.Date.values[k]
-        yoa = int(doa.split('-')[0])
-        moa = int(doa.split('-')[1])
-        dayoa = int(doa.split('-')[2])
+        yoa = int(doa.split('/')[2])
+        moa = int(doa.split('/')[0])
+        dayoa = int(doa.split('/')[1])
         lat = grid_coords.Center_Lat.values[i]  # Center latitude point for current grid block
         long = grid_coords.Center_Long.values[i]  # Center longitude point for current grid block
         # The following line needs to have this format:
@@ -79,6 +79,6 @@ for i in range(457, 913):
             # For later use, all you'd need to do is split by |
             grid_section2[col_name].values[k] = str(temp_max) + "|" + str(temp_min) + "|" + str(temp_avg)
     # Save each time a column finishes to avoid having to redo work if the code stops for some reason
-    grid_section2.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S2 Daily Avg Temps.csv")
+    grid_section2.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S2 Daily Avg Temps2.csv")
 # A final save
-grid_section2.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S2 Daily Avg Temps.csv")
+grid_section2.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S2 Daily Avg Temps2.csv")
