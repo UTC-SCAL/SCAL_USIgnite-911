@@ -45,7 +45,7 @@ path = os.path.dirname(sys.argv[0])
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
 # This file contains the coordinates for the grid blocks
-gridCoords = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Vertices OS Layout.csv", sep=",")
+gridCoords = pandas.read_csv("../", sep=",")
 # print(gridCoords.head())
 
 # This will hold the polygon versions of our grid blocks
@@ -129,21 +129,21 @@ for i, value in enumerate(gridCoords.values):
         
 
 # Checking to see what calldata records each grid block has #
-calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv", sep=",")
-for j in range(1, len(gridLayout_Coords)):
-    poly = Polygon(gridLayout_Coords[j])  # This is the grid block for the current iteration
-    print(j)
-    # take in the 911 incident lat and long one at a time
-    for o, value2 in enumerate(calldata.values):
-        call_lat = calldata.Latitude.values[o]
-        call_long = calldata.Longitude.values[o]
-        call_incident = Point(call_lat, call_long)
-        # See if the 911 incident is in the current grid block polygon
-        if poly.contains(call_incident):
-            calldata.Grid_Block.values[o] = j
-        else:
-            pass
-calldata.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
+# calldata = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Data 2017+2018.csv", sep=",")
+# for j in range(1, len(gridLayout_Coords)):
+#     poly = Polygon(gridLayout_Coords[j])  # This is the grid block for the current iteration
+#     print(j)
+#     # take in the 911 incident lat and long one at a time
+#     for o, value2 in enumerate(calldata.values):
+#         call_lat = calldata.Latitude.values[o]
+#         call_long = calldata.Longitude.values[o]
+#         call_incident = Point(call_lat, call_long)
+#         # See if the 911 incident is in the current grid block polygon
+#         if poly.contains(call_incident):
+#             calldata.Grid_Block.values[o] = j
+#         else:
+#             pass
+# calldata.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Data 2017+2018.csv")
 
 # Getting the center coordinate of each grid block #
 # These will be our weather points for each grid block
