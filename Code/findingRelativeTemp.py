@@ -4,16 +4,16 @@ import os, sys
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
-grid_data = pandas.read_csv("../")
+grid_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
 # First, we'll need to find the daily temperature for every grid block we use
 # Grid Blocks 0 - 275
-grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S1 Monthly Avg Temps.csv")
+grid_section1 = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S1 Monthly Avg Temps.csv")
 # Grid Blocks 276 - 550
-grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S2 Monthly Avg Temps.csv")
+grid_section2 = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S2 Monthly Avg Temps.csv")
 # Grid Blocks 551 - 825
-grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S3 Monthly Avg Temps.csv")
+grid_section3 = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S3 Monthly Avg Temps.csv")
 # Grid Blocks 826 - 1099
-grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Blocks S4 Monthly Avg Temps.csv")
+grid_section4 = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Blocks S4 Monthly Avg Temps.csv")
 
 # These 4 casting lines are only needed for finding daily relative temperature
 grid_section1.Date = grid_section1.Date.astype(str)
@@ -28,7 +28,7 @@ for i, value in enumerate(grid_data.values):
     print(i)
     # Use the i value to make a string for the current column name in grid blocks section
     # Based on what the current accident's grid block number is, the appropriate grid_section file will be used
-    if 0 <= grid_data.Grid_Block.values[i] <= 275:
+    if 0 <= grid_data.Grid_Block.values[i] <= 455:
         # this is the column of the grid section file
         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
         # Set the column as a string for easy splitting
@@ -42,7 +42,7 @@ for i, value in enumerate(grid_data.values):
         relative_temp = grid_data.Temperature.values[i] - float(grid_section1.loc[row_num, col_name].split('|')[2])
         # save the relative temperature for the current accident
         grid_data.Relative_Temp.values[i] = relative_temp
-    elif 276 <= grid_data.Grid_Block.values[i] <= 550:
+    elif 456 <= grid_data.Grid_Block.values[i] <= 911:
         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
         grid_section2[col_name] = grid_section2[col_name].astype(str)
@@ -50,7 +50,7 @@ for i, value in enumerate(grid_data.values):
 
         relative_temp = grid_data.Temperature.values[i] - float(grid_section2.loc[row_num, col_name].split('|')[2])
         grid_data.Relative_Temp.values[i] = relative_temp
-    elif 551 <= grid_data.Grid_Block.values[i] <= 825:
+    elif 912 <= grid_data.Grid_Block.values[i] <= 1367:
         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
         grid_section3[col_name] = grid_section3[col_name].astype(str)
@@ -58,7 +58,7 @@ for i, value in enumerate(grid_data.values):
 
         relative_temp = grid_data.Temperature.values[i] - float(grid_section3.loc[row_num, col_name].split('|')[2])
         grid_data.Relative_Temp.values[i] = relative_temp
-    elif 826 <= grid_data.Grid_Block.values[i] <= 1099:
+    elif 1368 <= grid_data.Grid_Block.values[i] <= 1824:
         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
         grid_section4[col_name] = grid_section4[col_name].astype(str)
