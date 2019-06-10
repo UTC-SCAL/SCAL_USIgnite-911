@@ -70,6 +70,7 @@ def fitting_loops(X, Y):
         X_train, X_test, y_train, y_test = train_test_split(
             X, Y, test_size=0.30, random_state=42)
 
+
         ##If the model already exists, import and update/use it. If not, create it. 
         if exists('model_aggST'):
             model.load_weights("model_aggST")
@@ -223,6 +224,8 @@ dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Dat
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
+
+dataset.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/model_aggST Data.csv")
 
 #           Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
