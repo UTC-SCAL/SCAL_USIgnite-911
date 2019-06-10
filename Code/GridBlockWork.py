@@ -1,6 +1,7 @@
 import numpy
 import pandas
 
+
 gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/GridInfoCutandUpdated.csv")
 terrain = pandas.read_csv("/Users/pete/Downloads/TerrainRoadData.csv", dtype={'OBJECTID':int, 'Highway_1':int, 'Land_Use_Mode':int, 'Segment_Count':int,
  'Road_Count': int, 'Terrain':int, 'Short_Terrain':int})
