@@ -64,11 +64,11 @@ def forecasting(places, month, day, year):
                 for k, value in enumerate(forecastcall.hourly):
                     # Retrieving weather for previous weather
                     if k == hour:
-                        places.Temperature.values[r] = value.temperature
-                        places.Dewpoint.values[r] = value.dewPoint
+                        # places.Temperature.values[r] = value.temperature
+                        # places.Dewpoint.values[r] = value.dewPoint
                         places.Event.values[r] = value.icon
-                        places.Humidity.values[r] = value.humidity
-                        places.Month.values[r] = moa
+                        # places.Humidity.values[r] = value.humidity
+                        # places.Month.values[r] = moa
                         places.Visibility.values[r] = value.visibility
                         places.Conditions.values[r] = value.summary
                         places.ConditionBefore.values[r] = forecastcall.hourly[k - 1].summary
@@ -91,14 +91,14 @@ def forecasting(places, month, day, year):
                     #     places.Precip_Intensity_Time.values[r] = value2.precipIntensityMaxTime
                     # except:
                     #     places.Precip_Intensity_Time.values[r] = -1000
-                    try:
-                        places.Temp_Max.values[r] = value2.temperatureMax
-                    except:
-                        places.Temp_Max.values[r] = -1000
-                    try:
-                        places.Temp_Min.values[r] = value2.temperatureMin
-                    except:
-                        places.Temp_Min.values[r] = -1000
+                    # try:
+                    #     places.Temp_Max.values[r] = value2.temperatureMax
+                    # except:
+                    #     places.Temp_Max.values[r] = -1000
+                    # try:
+                    #     places.Temp_Min.values[r] = value2.temperatureMin
+                    # except:
+                    #     places.Temp_Min.values[r] = -1000
                     try:
                         places.Cloud_Coverage.values[r] = value2.cloudCover
                     except:
@@ -176,6 +176,9 @@ def job(t, places):
         month = thistime.month
         day = thistime.day
         year = thistime.year
+    # month = 6
+    # day = 8
+    # year = 2019
     print(t, "Using Date: ", month, "/", day, "/", year)
     forecasting(places, month, day, year)
     return
@@ -188,15 +191,17 @@ def waiting(time):
 
 print("Beginning code at:", datetime.datetime.now())
 
-forecasting(places, 5, 13, 2019)
-exit()
+# forecasting(places, 5, 13, 2019)
+# exit()
 ##Run the forecast at 6PM, midnight, 6AM, and noon.
-schedule.every().day.at("18:00").do(job, "Fetching weather forecast", places)
-schedule.every().day.at("00:00").do(job, "Fetching weather forecast", places)
-schedule.every().day.at("09:37").do(job, "Fetching weather forecast", places)
-schedule.every().day.at("12:02").do(job, "Fetching weather forecast", places)
+# schedule.every().day.at("18:00").do(job, "Fetching weather forecast", places)
+# schedule.every().day.at("00:00").do(job, "Fetching weather forecast", places)
+# schedule.every().day.at("09:37").do(job, "Fetching weather forecast", places)
+# schedule.every().day.at("12:02").do(job, "Fetching weather forecast", places)
 
-while True:
-    schedule.run_pending()
-    schedule.every(30).minutes.do(waiting, datetime.datetime.now())
-    time.sleep(30)
+forecasting(places, 6, 8, 2019)
+
+# while True:
+#     schedule.run_pending()
+#     schedule.every(30).minutes.do(waiting, datetime.datetime.now())
+#     time.sleep(30)
