@@ -72,8 +72,8 @@ def fitting_loops(X, Y):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_ORI.h5'):
-            model.load_weights("model_ORI.h5")
+        if exists('model_ORI_t5.h5'):
+            model.load_weights("model_ORI_t5.h5")
             print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
@@ -98,7 +98,7 @@ def fitting_loops(X, Y):
                          callbacks=[stopper])
 
         ##Save the weights for next run. 
-        model.save_weights("model_ORI.h5")
+        model.save_weights("model_ORI_t5.h5")
         print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
@@ -225,7 +225,7 @@ dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
 
-dataset.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/model_ORI data.csv")
+dataset.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/model_ORI test 5 data.csv")
 
 #           Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
