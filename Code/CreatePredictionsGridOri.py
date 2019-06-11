@@ -1,3 +1,17 @@
+# Use the plaidml backend dynamically if AMD GPU is in use
+try:
+    import tensorflow as tf
+    from tensorflow.python.client import device_lib
+
+    LST = [x.device_type for x in device_lib.list_local_devices()]
+    if not 'GPU' in LST:
+        import os
+
+        os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+except ImportError:
+    import os
+
+    os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 
 import pandas
 from keras.layers import Dense, Dropout
@@ -7,6 +21,7 @@ from sklearn import preprocessing
 import datetime
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
+
 
 ########################################################################################################################################################################
 
@@ -83,8 +98,6 @@ def standarize_forecast(forecast):
     columns = dataset.columns.values[1:len(dataset.columns.values)]
     X = columns
     forecast = forecast[columns]
-    print(forecast[0:5], len(forecast))
-    exit()
     # Drop any empties now, since we don't want empties here!
     # df = df.dropna()
 
@@ -138,6 +151,7 @@ def match_predictions_using_grid(forecast, accidents, gridblocks):
                     pass
     #Prints the total number of matches found using the haversine method. 
     print("\t Matches found using GridBlocks:", matches)
+
 
 def match_predictions_using_ghost(forecast, accidents, gridblocks):
   #Start out with no matches, so matches equals zero. 
@@ -220,7 +234,7 @@ def predict_accidents(forecast, filename):
     # model.load_weights("model_forecast.h5")
 
     ##Our current set model. Min max reduced. 
-    model.load_weights("model_ORI.h5")
+    model.load_weights("model_ORI_t5.h5")
 
     ##The model created by sorted the entries by time, then training the model. 
     # model.load_weights("model_timesort_MMR.h5")
