@@ -12,7 +12,7 @@ from selenium import webdriver
 # import schedule
 
 # This is the file containing the lat/long coords for the grid blocks and their centers
-places = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Forecast Forum OS.csv", sep=",")
+places = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast Forum Ori.csv", sep=",")
 
 
 def find_cred(service):
@@ -51,14 +51,13 @@ def forecasting(places, month, day, year):
     # places.Date = thisdate
     # places.Weekday = dt.weekday()
     key = find_cred("darksky")
-    # key = 'c9f5b49eab51e5a3a98bae35a9bcbb88'
     hoa = 0
     mioa = 0
     soa = 0
     yoa = year
     moa = month
     dayoa = day
-    filename = "../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Forecast-for" + str(month) + "-" + str(day) + "-" + str(year) + "_" + str(
+    filename = "../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for" + str(month) + "-" + str(day) + "-" + str(year) + "_" + str(
         start.date()) + "_" + str(start.hour) + ".csv"
     print(filename)
     for d, stuff in enumerate(places.values[0:(len(places.loc[places['Hour'] == 0]))]):

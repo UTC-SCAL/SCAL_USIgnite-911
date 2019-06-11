@@ -47,19 +47,8 @@ from sklearn.metrics import confusion_matrix
 # # model.load_weights("model_CM.h5")
 # plot_model(model, to_file='../Graphs & Images/model.png')
 
-##Gets the forecast data for every 4 hours. 
 
-# fulldata = places.copy()
-# for i in range(0,25,4):
-#     name = ('places'+str(i))
-#     print(name)
-#     places.Hour= i
-#     print(places.Hour[0:5])
-#     fulldata = fulldata.append(places)
-# fulldata = fulldata.drop_duplicates()
-# print(fulldata.size)
-# fulldata.to_csv("../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",", index=False)
-# exit()
+exit()
 # places = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
 # descriptions = pandas.read_csv(

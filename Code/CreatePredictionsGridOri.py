@@ -15,8 +15,8 @@ from shapely.geometry.polygon import Polygon
 # #Test is the forecast MMR file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM.
 # forecastfiledone = "../Excel & CSV Sheets/ Forecast Files/Forecast-for5-13-2019_2019-05-14_13.csv"
 # test = pandas.read_csv(forecastfiledone, sep=",")
-blank = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Forecast Forum OS.csv", sep=",")
-gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Vertices OS Layout.csv", sep=",")
+blank = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast Forum Ori.csv", sep=",")
+gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv", sep=",")
 
 
 #Importing the accidents. The loop is only necessary if we are operating with the raw file from the email.

@@ -43,10 +43,10 @@ def letter2num(letters, zbase=False):
     if not zbase:
         return res
     return res - 1
-grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Info.csv")
+grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Vertices OS Layout.csv")
 for i, info in enumerate(grid_info.values):
-    grid_info.Col_Num.values[i] = letter2num(grid_info.GRID_ID.values[i])
-grid_info.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Info.csv")
+    grid_info.Grid_Col.values[i] = letter2num(grid_info.GRID_ID.values[i])
+grid_info.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Vertices OS Layout.csv")
 exit()
 # bringing info from the excel file in to work on. Remember if you move this file, change this location.
 def import_excel_file(file_name, datetime_col_name):
