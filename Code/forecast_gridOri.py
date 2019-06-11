@@ -114,10 +114,10 @@ def forecasting(places, month, day, year):
                     #     places.Temp_Min.values[r] = value2.temperatureMin
                     # except:
                     #     places.Temp_Min.values[r] = -1000
-                    try:
-                        places.Cloud_Coverage.values[r] = value2.cloudCover
-                    except:
-                        places.Cloud_Coverage.values[r] = -1000
+                    # try:
+                    #     places.Cloud_Coverage.values[r] = value2.cloudCover
+                    # except:
+                    #     places.Cloud_Coverage.values[r] = -1000
                     if "clear" in places.Event.values[r] or "clear" in places.Conditions.values[
                         r] \
                             or "Clear" in places.Event.values[r] or "Clear" in \

@@ -13,11 +13,10 @@ from shapely.geometry.polygon import Polygon
 ##Importing all files necessary. 
 
 #Test is the forecast MMR file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM.
-forecastfile = "../Excel & CSV Sheets/ Forecast Files/Forecast-for5-13-2019_2019-05-14_13.csv"
+forecastfile = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv"
 test = pandas.read_csv(forecastfile, sep=",")
-blank = pandas.read_csv("../Excel & CSV Sheets/ Forecast Files/Blank Forecast Forum.csv", sep=",")
+blank = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast Forum Original.csv", sep=",")
 gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv", sep=",")
-
 
 #Importing the accidents. The loop is only necessary if we are operating with the raw file from the email.
 
@@ -48,6 +47,34 @@ gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Verti
 
 
 ########################################################################################################################################################################
+
+def fillForecastFile(places, filename):
+    ##Gets the forecast data for every 4 hours. 
+    fulldata = places.copy()
+    for i in range(0,25,4):
+        if i ==0:
+            pass
+        else:
+            name = ('places'+str(i))
+            print(name)
+            if i == 24:
+                places.Hour = 23
+            else:
+                places.Hour = i
+            if 0<=i<7 or 19<=i<=23:
+                places.DayFrame = 1
+            elif 7<=i<10:
+                places.DayFrame = 2
+            elif 10<=i<13:
+                places.DayFrame = 3
+            elif 13<=i<19:
+                places.DayFrame = 4
+            print(places.Hour[0:5], places.DayFrame[0:5])
+            fulldata = fulldata.append(places)
+    fulldata = fulldata.drop_duplicates()
+    print(fulldata.size)
+    fulldata.to_csv(filename, sep=",", index=False)
+
 
 def standarize_forecast(forecast):
     # Read in the data you want to normalize/standardize/adjust
@@ -223,6 +250,9 @@ def predict_accidents(forecast):
 #Print the number of accidents and the current threshold. 
 # print("Accidents: ", len(accidents.Latitude.values))
 # print("Threshhold: ", threshhold)
+
+fillForecastFile(blank, "../Excel & CSV Sheets/Grid Layout Test Files/Forecast Forum Original.csv")
+exit()
 
 ##Finding the matches from standard data using haversine. First prints the number of accidents predicted. Note: The using_route function does not currently work, but is ready for future use.
 print(test.columns)

@@ -13,8 +13,8 @@ from shapely.geometry.polygon import Polygon
 ##Importing all files necessary. 
 
 # #Test is the forecast MMR file created by forecast.py. The time the forecast was pulled is the last section. That is, 2019-04-03_6 would be April 3rd at 6AM.
-# forecastfiledone = "../Excel & CSV Sheets/ Forecast Files/Forecast-for5-13-2019_2019-05-14_13.csv"
-# test = pandas.read_csv(forecastfiledone, sep=",")
+forecastfiledone = "../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv"
+test = pandas.read_csv(forecastfiledone, sep=",")
 blank = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast Forum Ori.csv", sep=",")
 gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv", sep=",")
 
@@ -79,11 +79,12 @@ def fillForecastFile(places, filename):
 def standarize_forecast(forecast):
     # Read in the data you want to normalize/standardize/adjust
     # Get the columns of the data
-    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv", sep=",")
+    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Data 2017+2018 MMR.csv", sep=",")
     columns = dataset.columns.values[1:len(dataset.columns.values)]
     X = columns
-    forecast = dataset[columns]
-
+    forecast = forecast[columns]
+    print(forecast[0:5], len(forecast))
+    exit()
     # Drop any empties now, since we don't want empties here!
     # df = df.dropna()
 
@@ -93,7 +94,7 @@ def standarize_forecast(forecast):
     # Fit your data on the scaler object
     scaled_df = scaler.fit_transform(forecast)
     scaled_df = pandas.DataFrame(scaled_df, columns=columns)
-
+    scaled_df.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Test MMR.csv")
     # Send it back
     return scaled_df
 
@@ -184,7 +185,7 @@ def haversine(long1, lat1, long2, lat2):
     return c * r #The distance between the two locations
 
 def predict_accidents(forecast, filename):
-    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Data 2017+2018 MMR.csv", sep=",")
+    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Data 2017+2018 MMR.csv", sep=",")
     columns = dataset.columns.values[1:len(dataset.columns.values)]
     X = columns
     ########################################################################################################################################################################
@@ -219,7 +220,7 @@ def predict_accidents(forecast, filename):
     # model.load_weights("model_forecast.h5")
 
     ##Our current set model. Min max reduced. 
-    model.load_weights("model_gridOS.h5")
+    model.load_weights("model_ORI.h5")
 
     ##The model created by sorted the entries by time, then training the model. 
     # model.load_weights("model_timesort_MMR.h5")
@@ -253,15 +254,14 @@ def predict_accidents(forecast, filename):
 thistime = str(datetime.datetime.now().date())
 thishour = str(datetime.datetime.now().hour)
 fileending = thistime,thishour
-print(fileending)
-exit()
-filename = "../"+thistime.date()+".csv"
+
+filename = forecastfiledone.split(".csv",1)[0]+"_MMR.csv" 
 ##Finding the matches from standard data using haversine. First prints the number of accidents predicted. Note: The using_route function does not currently work, but is ready for future use.
 print(test.columns)
 print("Grid Layout: \t\t", len(test.Latitude.values))
 scaled = standarize_forecast(test)
 scaled = predict_accidents(scaled, filename)
-add_Pred_andProb(test, scaled, forecastfile)
+add_Pred_andProb(test, scaled, forecastfiledone)
 # match_predictions_using_have(forecastStand, accidents)
 # match_predictions_using_route(test, accidents)
 

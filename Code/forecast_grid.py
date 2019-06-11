@@ -12,7 +12,7 @@ from selenium import webdriver
 # import schedule
 
 # This is the file containing the lat/long coords for the grid blocks and their centers
-places = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Forecast Forum OS.csv", sep=",")
+places = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Forecast Forum Original.csv", sep=",")
 
 
 def find_cred(service):
@@ -58,7 +58,7 @@ def forecasting(places, month, day, year):
     yoa = year
     moa = month
     dayoa = day
-    filename = "../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Forecast-for" + str(month) + "-" + str(day) + "-" + str(year) + "_" + str(
+    filename = "../Excel & CSV Sheets/Grid Layout Test Files/Forecast-for" + str(month) + "-" + str(day) + "-" + str(year) + "_" + str(
         start.date()) + "_" + str(start.hour) + ".csv"
     print(filename)
     for d, stuff in enumerate(places.values[0:(len(places.loc[places['Hour'] == 0]))]):
@@ -115,10 +115,10 @@ def forecasting(places, month, day, year):
                     #     places.Temp_Min.values[r] = value2.temperatureMin
                     # except:
                     #     places.Temp_Min.values[r] = -1000
-                    try:
-                        places.Cloud_Coverage.values[r] = value2.cloudCover
-                    except:
-                        places.Cloud_Coverage.values[r] = -1000
+                    # try:
+                    #     places.Cloud_Coverage.values[r] = value2.cloudCover
+                    # except:
+                    #     places.Cloud_Coverage.values[r] = -1000
                     if "clear" in places.Event.values[r] or "clear" in places.Conditions.values[
                         r] \
                             or "Clear" in places.Event.values[r] or "Clear" in \

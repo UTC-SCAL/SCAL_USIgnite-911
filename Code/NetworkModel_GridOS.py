@@ -77,8 +77,8 @@ def fitting_loops(X,Y):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_gridOS.h5'):
-            model.load_weights("model_gridOS.h5")
+        if exists('model_gridOS_NoRel_NoClear.h5'):
+            model.load_weights("model_gridOS_NoRel_NoClear.h5")
             print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
@@ -102,7 +102,7 @@ def fitting_loops(X,Y):
                         callbacks=[stopper])
         
         ##Save the weights for next run. 
-        model.save_weights("model_gridOS.h5")
+        model.save_weights("model_gridOS_NoRel_NoClear.h5")
         print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
@@ -222,8 +222,8 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Data 2017+2018 MMR.csv", sep=",")
-
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Data 2017+2018 MMR Cut.csv", sep=",")
+# dataset = dataset.drop(['Daily_Relative_Temp','Monthly_Relative_Temp', 'Clear', 'Month','Weekday'], axis=1)
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
