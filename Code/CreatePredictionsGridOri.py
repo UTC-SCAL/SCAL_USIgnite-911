@@ -234,7 +234,7 @@ def predict_accidents(forecast, filename):
     # model.load_weights("model_forecast.h5")
 
     ##Our current set model. Min max reduced. 
-    model.load_weights("model_ORI_t5.h5")
+    model.load_weights("model_ORI_t4.h5")
 
     ##The model created by sorted the entries by time, then training the model. 
     # model.load_weights("model_timesort_MMR.h5")

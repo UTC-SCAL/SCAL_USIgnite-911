@@ -45,7 +45,7 @@ path = os.path.dirname(sys.argv[0])
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
 # This file contains the coordinates for the grid blocks
-gridCoords = pandas.read_csv("../", sep=",")
+gridCoords = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv", sep=",")
 # print(gridCoords.head())
 
 # This will hold the polygon versions of our grid blocks
@@ -64,21 +64,21 @@ for i, value in enumerate(gridCoords.values):
     if i % 5 == 0:
         # Drawing the block grid, all this does is place the grid on the map #
         # We only draw on each 5th iteration, since each grid block's coordinates are grouped by 5
-        # grid_lats, grid_longs = zip(*[(gridCoords.Y.values[i], gridCoords.X.values[i]),
-        #                               (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
-        #                               (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
-        #                               (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
-        #                               (gridCoords.Y.values[i+4], gridCoords.X.values[i+4])])
-        # gmap.plot(grid_lats, grid_longs, 'cornflowerblue', edge_width=5)
+        grid_lats, grid_longs = zip(*[(gridCoords.Y.values[i], gridCoords.X.values[i]),
+                                      (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
+                                      (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
+                                      (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
+                                      (gridCoords.Y.values[i+4], gridCoords.X.values[i+4])])
+        gmap.plot(grid_lats, grid_longs, 'cornflowerblue', edge_width=5)
         # Making the actual polygon using the coordinates above for calculations and manipulation #
         # poly_coords are the current polygon's coordinates (lat & long)
-        poly_coords = ((gridCoords.Y.values[i], gridCoords.X.values[i]),
-                       (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
-                       (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
-                       (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
-                       (gridCoords.Y.values[i+4], gridCoords.X.values[i+4]))
-        # Append the poly_coords to a list for later use
-        gridLayout_Coords.append(poly_coords)
+        # poly_coords = ((gridCoords.Y.values[i], gridCoords.X.values[i]),
+        #                (gridCoords.Y.values[i+1], gridCoords.X.values[i+1]),
+        #                (gridCoords.Y.values[i+2], gridCoords.X.values[i+2]),
+        #                (gridCoords.Y.values[i+3], gridCoords.X.values[i+3]),
+        #                (gridCoords.Y.values[i+4], gridCoords.X.values[i+4]))
+        # # Append the poly_coords to a list for later use
+        # gridLayout_Coords.append(poly_coords)
 
         # # Getting the center points for the polygons and assigning them accordingly to the grid blocks
         # poly = Polygon(poly_coords)
@@ -155,6 +155,13 @@ for i, value in enumerate(gridCoords.values):
 #     center_long = center[0][1]  # Longitude
 #     # This places a point marker at the center of each grid block
 #     gmap.marker(center_lat, center_long, '#FF0000', title=j)
+
+# Placing markers for predicted accidents
+predictions = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv")
+for p, values in enumerate(predictions.values):
+    if predictions.Probability.values[p] >= .80 and 19 <= predictions.Hour.values[p] <= 23:
+        gmap.marker(predictions.Latitude.values[p], predictions.Longitude.values[p], '#FF0000', title=p)
+
 
 # This actually draws or "places" the map itself for viewing #
 gmap.draw("Chattanooga Polygons.html")
