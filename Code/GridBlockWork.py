@@ -8,22 +8,22 @@ import pandas
 # print(terrain.dtypes)
 
 
-# road_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Info.csv")
-# grid_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018_AllTemp.csv")
-# for j, info in enumerate(grid_data.values):
-#     print(j)
-#     for i, stuff in enumerate(road_info.values):
-#         if grid_data.Grid_Block.values[j] == road_info.ORIG_FID.values[i]:
-#             grid_data.Road_Count.values[j] = int(road_info.Road_Count.values[i])
-#             grid_data.Highway.values[j] = int(road_info.Highway.values[i])
-#             grid_data.Land_Use_Mode.values[j] = int(road_info.Land_Use_Mode.values[i])
-#             grid_data.Grid_Col.values[j] = road_info.Col_Num.values[i]
-#             grid_data.Grid_Row.values[j] = road_info.Row_Num.values[i]
-#     if j % 20000 == 0:
-#         print("Saving at:", j)
-#         grid_data.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
-# grid_data.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
-# exit()
+road_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Info.csv")
+grid_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018_AllTemp.csv")
+for j, info in enumerate(grid_data.values):
+    print(j)
+    for i, stuff in enumerate(road_info.values):
+        if grid_data.Grid_Block.values[j] == road_info.ORIG_FID.values[i]:
+            grid_data.Road_Count.values[j] = int(road_info.Road_Count.values[i])
+            grid_data.Highway.values[j] = int(road_info.Highway.values[i])
+            grid_data.Land_Use_Mode.values[j] = int(road_info.Land_Use_Mode.values[i])
+            grid_data.Grid_Col.values[j] = road_info.Col_Num.values[i]
+            grid_data.Grid_Row.values[j] = road_info.Row_Num.values[i]
+    if j % 20000 == 0:
+        print("Saving at:", j)
+        grid_data.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
+grid_data.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018.csv")
+exit()
 
 # for i, info in enumerate(gridblocks.values): 
 #     stuff = terrain.values[i]

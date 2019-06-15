@@ -229,6 +229,8 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 #             pass
 # dataset.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2.csv")
 
-grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Info.csv")
 
 
+import multiprocessing
+
+print(multiprocessing.cpu_count())
