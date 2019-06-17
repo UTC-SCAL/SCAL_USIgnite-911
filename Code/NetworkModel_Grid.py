@@ -74,7 +74,11 @@ def fitting_loops(X,Y):
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
             X, Y, test_size=0.30, random_state=42)
-
+        if i == 0:
+            # X_test2 = pandas.DataFrame(X_test)
+            # y_test2 = pandas.DataFrame(y_test)
+            # X_test2.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/XTest.csv")
+            # y_test2.to_csv("../Excel & CSV Sheets/Grid Layout Test Files/YTest.csv")
 
         ##If the model already exists, import and update/use it. If not, create it. 
         if exists('model_grid.h5'):
@@ -222,7 +226,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid MMR.csv", sep=",")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 MMR For Real.csv", sep=",")
 
 #           Shuffling if needed. 
 dataset = shuffle(dataset)

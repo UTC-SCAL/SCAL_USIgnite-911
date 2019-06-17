@@ -305,17 +305,23 @@ geom_point(aes(x = Longitude, y = Latitude), colour = "orange", data = midprob, 
 # # hours = unique(forecast$Hour)
 # polys = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv")
 # head(polys)
+# 
+# accidents = read.csv("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-14_FinalForm.csv", header = TRUE)
+accidents = read.csv("/Users/pete/Downloads/Accident Report (1).csv", header = TRUE)
 
-accidents = read.csv("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-14_FinalForm.csv", header = TRUE)
-forecast = read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for5-14-2019_2019-05-14_12.csv", header=TRUE)
+# forecast = read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for5-14-2019_2019-05-14_12.csv", header=TRUE)
+forecast = read.csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv", header=TRUE)
+
 forecast = forecast[which(forecast$Prediction==1),]
+begin = 7
+  end = 10
+# thishour = forecast
+thishour = forecast[which(forecast$Hour>=begin & forecast$Hour<=end),]
+accidents = accidents[which(accidents$Hour>=begin & accidents$Hour <=end),]
 
-thishour = forecast[which(forecast$Hour>=0 & forecast$Hour<=4),]
-accidents = accidents[which(accidents$Hour>=0 & accidents$Hour <=4),]
-
-low = which(thishour$Probability>=0.5)
-low=thishour[low,]
-mid = which(thishour$Probability>=0.75)
+# low = which(thishour$Probability>=0.5)
+# low=thishour[low,]
+mid = which(thishour$Probability>=0.80)
 mid=thishour[mid,]
 high = which(thishour$Probability>=0.95)
 high=thishour[high,]
@@ -328,9 +334,9 @@ calc_zoom(bb)
 cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
 ggmap(cda, legend = "bottom") +
   xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
-  labs(x="",y="", title="Accidents in Chattanooga - Early Morning") +
- geom_tile(aes(x = Longitude, y = Latitude), data = low, alpha= low$Probability, color='yellow',fill='yellow', size = 1) +  
-  geom_tile(aes(x = Longitude, y = Latitude), data = mid, alpha= mid$Probability, color='orange', fill='orange', size = 1) + 
+  labs(x="",y="", title="Accidents in Chattanooga") +
+ # geom_tile(aes(x = Longitude, y = Latitude), data = low, alpha= low$Probability, color='yellow',fill='yellow', size = 2) +  
+  geom_tile(aes(x = Longitude, y = Latitude), data = mid, alpha= mid$Probability, color='orange', fill='orange', size = 2) + 
   geom_tile(aes(x = Longitude, y = Latitude), data = high, alpha= high$Probability, color='red', fill='red', size = 1) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'black', alpha=.7, size=2)
 # dev.off()
 
@@ -533,6 +539,22 @@ abline(v=13)
 ```
 
 
+```{r}
+data = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 MMR.csv")
+a=which(data$Accident==1)
+yesdata=data[a,]
+
+b=which(data$Accident==0)
+nodata = data[b,]
+hist(yesdata$Precipitation_Intensity)
+hist(nodata$Precipitation_Intensity)
+
+hist(yesdata$Rain)
+hist(nodata$Rain)
+
+hist(yesdata$Visibility)
+hist(nodata$Visibility)
+```
 
 
 

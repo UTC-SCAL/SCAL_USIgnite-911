@@ -188,7 +188,7 @@ def haversine(long1, lat1, long2, lat2):
     return c * r #The distance between the two locations
 
 def predict_accidents(forecast, filename):
-    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Data 2017+2018 MMR.csv", sep=",")
+    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid OS Data 2017+2018 MMR Cut.csv", sep=",")
     columns = dataset.columns.values[1:len(dataset.columns.values)]
     X = columns
     print(columns)

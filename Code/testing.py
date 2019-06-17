@@ -20,6 +20,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
 
+import multiprocessing
+from multiprocessing import Pool
+print(multiprocessing.cpu_count())
+exit()
+
 
 
 # ##Creating an image demonstrating the model. 
@@ -47,8 +52,6 @@ from sklearn.metrics import confusion_matrix
 # # model.load_weights("model_CM.h5")
 # plot_model(model, to_file='../Graphs & Images/model.png')
 
-
-exit()
 # places = pandas.read_csv(
 #     "../Excel & CSV Sheets/ETRIMS/FullGPSwithHourby4.csv", sep=",")
 # descriptions = pandas.read_csv(
