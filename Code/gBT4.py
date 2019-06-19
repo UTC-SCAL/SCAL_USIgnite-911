@@ -1,7 +1,6 @@
 import pandas
 import os, sys
 import random
-
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
@@ -17,18 +16,16 @@ def find_cred(service):
             if service in lines[1]:
                 cred = str(lines[1].split(",")[1]) + "," + str(lines[1].split(",")[2])
                 # print(cred)
-                # logins[username] = password
+                    # logins[username] = password
     return cred
 
 
 def get_negatives_master(calldata, compare):
     # Blank csv file for formatting purposes and easily saving negative samples
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Blank Negative Samples Form.csv",
-        sep=",")
+        "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Blank Negative Samples Form.csv", sep=",")
     # The center points for our grid blocks for the current grid layout we are using
-    center_points = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/CenterPoints Ori Layout.csv",
-                                    sep=",")
+    center_points = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/CenterPoints Ori Layout.csv", sep=",")
     # This contains the information of each grid block, such as road count and grid column number
     grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Info.csv")
 
@@ -91,7 +88,7 @@ def get_negatives_master(calldata, compare):
 
         # Append the current hour (the first hour for the main loop) to the list of dates that shouldn't be chosen
         # for finding negative samples
-        current_hour = calldata.Grid_Block.values[j]
+        current_hour = calldata.Hour.values[j]
         hour_list.append(current_hour)
 
         # This is the g-loop, where the process of finding a negative sample for our current accident record is repeated
@@ -108,19 +105,17 @@ def get_negatives_master(calldata, compare):
             accident_year = int(copy_calldata.Date.values[0].split("-")[0])
             if accident_year == 2017:
                 days = range(0, len(day_holder2017.Date))
-                doa = copy_calldata.Date.values[0]  # Date of a 911 call
 
                 r_date = [y for y in days if y not in date_list_2017]
                 copy_calldata.Date.values[0] = day_holder2017.Date.values[random.choice(r_date)]
-                row_num = day_holder2017.loc[day_holder2017['Date'] == doa].index[0]
+                row_num = day_holder2017.loc[day_holder2017['Date'] == copy_calldata.Date.values[0]].index[0]
                 date_list_2017.append(row_num)
             elif accident_year == 2018:
                 days = range(0, len(day_holder2018.Date))
-                doa = copy_calldata.Date.values[0]  # Date of a 911 call
 
                 r_date = [y for y in days if y not in date_list_2018]
                 copy_calldata.Date.values[0] = day_holder2018.Date.values[random.choice(r_date)]
-                row_num = day_holder2018.loc[day_holder2018['Date'] == doa].index[0]
+                row_num = day_holder2018.loc[day_holder2018['Date'] == copy_calldata.Date.values[0]].index[0]
                 date_list_2018.append(row_num)
 
             # Hour Changer #
@@ -140,7 +135,7 @@ def get_negatives_master(calldata, compare):
                     pass
                 else:
                     if copy_calldata.Hour.values[0] == compare.Hour.values[n] and \
-                            copy_calldata.Date.values[0] is compare.Date.values[n] \
+                                copy_calldata.Date.values[0] is compare.Date.values[n]\
                             and copy_calldata.Grid_Block.values[0] is compare.Grid_Block.values[n]:
                         no_matches = False
                         break
@@ -156,8 +151,7 @@ def get_negatives_master(calldata, compare):
                 negative_samples.loc[neg_loc, "Weekday"] = copy_calldata.Weekday.values[0]
                 # Get the row number to use in the centerpoint file based on the grid block of the negative sample
                 # The basic idea here is to match row numbers based on grid block numbers
-                center_row_num = \
-                center_points.loc[center_points['ORIG_FID'] == copy_calldata.Grid_Block.values[0]].index[0]
+                center_row_num = center_points.loc[center_points['ORIG_FID'] == copy_calldata.Grid_Block.values[0]].index[0]
                 negative_samples.loc[neg_loc, "Center_Lat"] = center_points.Center_Lat.values[center_row_num]
                 negative_samples.loc[neg_loc, "Center_Long"] = center_points.Center_Long.values[center_row_num]
                 # Get the row number to use in grid info based on the grid block of the negative sample
@@ -178,13 +172,14 @@ def get_negatives_master(calldata, compare):
         date_list_2018 = []
         hour_list = []
         if j % 1000 == 0:
-            negative_samples.to_csv \
+            negative_samples.to_csv\
                 ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
 
-    negative_samples.to_csv \
+    negative_samples.to_csv\
         ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
 
 
 accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 4.csv")
-compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
+compare_data = pandas.read_csv\
+    ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
 get_negatives_master(accidents, compare_data)

@@ -88,7 +88,7 @@ def get_negatives_master(calldata, compare):
 
         # Append the current hour (the first hour for the main loop) to the list of dates that shouldn't be chosen
         # for finding negative samples
-        current_hour = calldata.Grid_Block.values[j]
+        current_hour = calldata.Hour.values[j]
         hour_list.append(current_hour)
 
         # This is the g-loop, where the process of finding a negative sample for our current accident record is repeated
@@ -105,19 +105,17 @@ def get_negatives_master(calldata, compare):
             accident_year = int(copy_calldata.Date.values[0].split("-")[0])
             if accident_year == 2017:
                 days = range(0, len(day_holder2017.Date))
-                doa = copy_calldata.Date.values[0]  # Date of a 911 call
 
                 r_date = [y for y in days if y not in date_list_2017]
                 copy_calldata.Date.values[0] = day_holder2017.Date.values[random.choice(r_date)]
-                row_num = day_holder2017.loc[day_holder2017['Date'] == doa].index[0]
+                row_num = day_holder2017.loc[day_holder2017['Date'] == copy_calldata.Date.values[0]].index[0]
                 date_list_2017.append(row_num)
             elif accident_year == 2018:
                 days = range(0, len(day_holder2018.Date))
-                doa = copy_calldata.Date.values[0]  # Date of a 911 call
 
                 r_date = [y for y in days if y not in date_list_2018]
                 copy_calldata.Date.values[0] = day_holder2018.Date.values[random.choice(r_date)]
-                row_num = day_holder2018.loc[day_holder2018['Date'] == doa].index[0]
+                row_num = day_holder2018.loc[day_holder2018['Date'] == copy_calldata.Date.values[0]].index[0]
                 date_list_2018.append(row_num)
 
             # Hour Changer #
@@ -173,7 +171,7 @@ def get_negatives_master(calldata, compare):
         date_list_2017 = []
         date_list_2018 = []
         hour_list = []
-        if j % 1000 == 0:
+        if j % 500 == 0:
             negative_samples.to_csv\
                 ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1.csv")
 
@@ -181,6 +179,29 @@ def get_negatives_master(calldata, compare):
         ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1.csv")
 
 
-accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
-compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
-get_negatives_master(accidents, compare_data)
+# The main lines and files for getting the totally random negative samples
+# accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
+# compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
+# get_negatives_master(accidents, compare_data)
+
+# Now we aggregate certain portions of the negatives
+negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1.csv")
+negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
+negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
+for i, value in enumerate(negative_samples.values):
+    print(i)
+    if negative_samples.Weekday.values[i] == 5 or negative_samples.Weekday.values[i] == 6:
+        negative_samples.WeekEnd.values[i] = 1
+        negative_samples.WeekDay.values[i] = 0
+    else:
+        negative_samples.WeekEnd.values[i] = 0
+        negative_samples.WeekDay.values[i] = 1
+    if 0 <= negative_samples.Hour.values[i] <= 4 or 18 <= negative_samples.Hour.values[i] <= 23:
+        negative_samples.DayFrame.values[i] = 1
+    elif 5 <= negative_samples.Hour.values[i] <= 9:
+        negative_samples.DayFrame.values[i] = 2
+    elif 10 <= negative_samples.Hour.values[i] <= 12:
+        negative_samples.DayFrame.values[i] = 3
+    elif 13 <= negative_samples.Hour.values[i] <= 17:
+        negative_samples.DayFrame.values[i] = 4
+negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1 Test.csv")
