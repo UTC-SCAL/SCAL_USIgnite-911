@@ -185,7 +185,7 @@ def get_negatives_master(calldata, compare):
 # get_negatives_master(accidents, compare_data)
 
 # Now we aggregate certain portions of the negatives
-negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1.csv")
+negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 2.csv")
 negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
 negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
 for i, value in enumerate(negative_samples.values):
@@ -204,4 +204,4 @@ for i, value in enumerate(negative_samples.values):
         negative_samples.DayFrame.values[i] = 3
     elif 13 <= negative_samples.Hour.values[i] <= 17:
         negative_samples.DayFrame.values[i] = 4
-negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1 Test.csv")
+negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 2.csv")
