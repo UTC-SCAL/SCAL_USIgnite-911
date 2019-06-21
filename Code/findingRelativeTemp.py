@@ -24,48 +24,48 @@ grid_data.Date = grid_data.Date.astype(str)
 grid_data.Temperature = grid_data.Temperature.astype(float)
 
 # # This for loop is for finding daily relative temperature
-# for i, value in enumerate(grid_data.values):
-#     print(i)
-#     # Use the i value to make a string for the current column name in grid blocks section
-#     # Based on what the current accident's grid block number is, the appropriate grid_section file will be used
-#     if 0 <= grid_data.Grid_Block.values[i] <= 456:
-#         # this is the column of the grid section file
-#         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
-#         # Set the column as a string for easy splitting
-#         grid_section1[col_name] = grid_section1[col_name].astype(str)
-#         # this is the row of the grid section file
-#         # this gets the row number based on the value passed to it, which is the date from the current accident
-#         row_num = grid_section1.loc[grid_section1['Date'] == grid_data.Date.values[i]].index[0]
-#         # get relative temp from the grid section file
-#         # in the files, there are 3 values in each cell (temp max, temp min, relative temp), all separated by a |
-#         # use the string split function to get the relative temperature
-#         relative_temp = grid_data.Temperature.values[i] - float(grid_section1.loc[row_num, col_name].split('|')[2])
-#         # save the relative temperature for the current accident
-#         grid_data.Daily_Relative_Temp.values[i] = relative_temp
-#     elif 457 <= grid_data.Grid_Block.values[i] <= 912:
-#         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
+for i, value in enumerate(grid_data.values):
+    print(i)
+    # Use the i value to make a string for the current column name in grid blocks section
+    # Based on what the current accident's grid block number is, the appropriate grid_section file will be used
+    if 0 <= grid_data.Grid_Block.values[i] <= 456:
+        # this is the column of the grid section file
+        col_name = "Block_" + str(grid_data.Grid_Block.values[i])
+        # Set the column as a string for easy splitting
+        grid_section1[col_name] = grid_section1[col_name].astype(str)
+        # this is the row of the grid section file
+        # this gets the row number based on the value passed to it, which is the date from the current accident
+        row_num = grid_section1.loc[grid_section1['Date'] == grid_data.Date.values[i]].index[0]
+        # get relative temp from the grid section file
+        # in the files, there are 3 values in each cell (temp max, temp min, relative temp), all separated by a |
+        # use the string split function to get the relative temperature
+        relative_temp = grid_data.Temperature.values[i] - float(grid_section1.loc[row_num, col_name].split('|')[2])
+        # save the relative temperature for the current accident
+        grid_data.Daily_Relative_Temp.values[i] = relative_temp
+    elif 457 <= grid_data.Grid_Block.values[i] <= 912:
+        col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
-#         grid_section2[col_name] = grid_section2[col_name].astype(str)
-#         row_num = grid_section2.loc[grid_section2['Date'] == grid_data.Date.values[i]].index[0]
+        grid_section2[col_name] = grid_section2[col_name].astype(str)
+        row_num = grid_section2.loc[grid_section2['Date'] == grid_data.Date.values[i]].index[0]
 
-#         relative_temp = grid_data.Temperature.values[i] - float(grid_section2.loc[row_num, col_name].split('|')[2])
-#         grid_data.Daily_Relative_Temp.values[i] = relative_temp
-#     elif 913 <= grid_data.Grid_Block.values[i] <= 1368:
-#         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
+        relative_temp = grid_data.Temperature.values[i] - float(grid_section2.loc[row_num, col_name].split('|')[2])
+        grid_data.Daily_Relative_Temp.values[i] = relative_temp
+    elif 913 <= grid_data.Grid_Block.values[i] <= 1368:
+        col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
-#         grid_section3[col_name] = grid_section3[col_name].astype(str)
-#         row_num = grid_section3.loc[grid_section3['Date'] == grid_data.Date.values[i]].index[0]
+        grid_section3[col_name] = grid_section3[col_name].astype(str)
+        row_num = grid_section3.loc[grid_section3['Date'] == grid_data.Date.values[i]].index[0]
 
-#         relative_temp = grid_data.Temperature.values[i] - float(grid_section3.loc[row_num, col_name].split('|')[2])
-#         grid_data.Daily_Relative_Temp.values[i] = relative_temp
-#     elif 1369 <= grid_data.Grid_Block.values[i] <= 1825:
-#         col_name = "Block_" + str(grid_data.Grid_Block.values[i])
+        relative_temp = grid_data.Temperature.values[i] - float(grid_section3.loc[row_num, col_name].split('|')[2])
+        grid_data.Daily_Relative_Temp.values[i] = relative_temp
+    elif 1369 <= grid_data.Grid_Block.values[i] <= 1825:
+        col_name = "Block_" + str(grid_data.Grid_Block.values[i])
 
-#         grid_section4[col_name] = grid_section4[col_name].astype(str)
-#         row_num = grid_section4.loc[grid_section4['Date'] == grid_data.Date.values[i]].index[0]
+        grid_section4[col_name] = grid_section4[col_name].astype(str)
+        row_num = grid_section4.loc[grid_section4['Date'] == grid_data.Date.values[i]].index[0]
 
-#         relative_temp = grid_data.Temperature.values[i] - float(grid_section4.loc[row_num, col_name].split('|')[2])
-#         grid_data.Daily_Relative_Temp.values[i] = relative_temp
+        relative_temp = grid_data.Temperature.values[i] - float(grid_section4.loc[row_num, col_name].split('|')[2])
+        grid_data.Daily_Relative_Temp.values[i] = relative_temp
 
 # grid_data.to_csv("../Excel & CSV Sheets/Grid Oriented Small Layout Test Files/Grid Oriented Small Data 2017+2018_DailyTemp.csv")
 # exit()

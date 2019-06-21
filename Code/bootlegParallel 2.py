@@ -1,0 +1,66 @@
+import pandas
+import os, sys
+from datetime import datetime
+from darksky import forecast
+
+path = os.path.dirname(sys.argv[0])
+folderpath = '/'.join(path.split('/')[0:-1]) + '/'
+
+
+def find_cred(service):
+    file = "../Excel & CSV Sheets/login.csv"
+    if os.path.exists(file):
+        with open(file, "r") as file:
+            lines = file.readlines()
+            if service in lines[0]:
+                cred = lines[0].split(",")[1]
+                # print(cred)
+            if service in lines[1]:
+                cred = str(lines[1].split(",")[1]) + "," + str(lines[1].split(",")[2])
+                # print(cred)
+                    # logins[username] = password
+    return cred
+
+
+missingblocks = pandas.read_csv(
+    "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Date-Finder-output S3.csv")
+centers = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/CenterPoints Ori Layout.csv")
+missing_weather = pandas.read_csv(
+    "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S3.csv")
+miss_loc = 0
+key = find_cred("darksky")
+for stuff, i in enumerate(missingblocks.columns.values):
+    i = int(i)
+    if i > 606:
+        print(i)
+        values = missingblocks[str(i)].values
+        values = values[pandas.notna(values)]
+        row_num = centers.loc[centers['ORIG_FID'] == i].index[0]
+        lat = centers.Center_Lat.values[row_num]
+        long = centers.Center_Long.values[row_num]
+        # print(values)
+        for j in values:
+            if j == " ":
+                break
+            else:
+                year = int(j.split("/")[2]) + 2000
+                month = int(j.split("/")[0])
+                day = int(j.split("/")[1])
+                t = datetime(year, month, day, 0, 0, 0).isoformat()
+                call = key, lat, long
+                forecastcall = forecast(*call, time=t)
+                hourly_list = [item._data for item in forecastcall.hourly]
+                for l, info in enumerate(hourly_list):
+                    entry = hourly_list[l]
+                    for d, things in enumerate(hourly_list[l]):
+                        missing_weather.loc[miss_loc, things] = entry[things]
+                    missing_weather.loc[miss_loc, "Center_Lat"] = lat
+                    missing_weather.loc[miss_loc, "Center_Long"] = long
+                    missing_weather.loc[miss_loc, "ORIG_FID"] = i
+                    miss_loc += 1
+        missing_weather.to_csv \
+            ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S3_Part3.csv",
+             index=False)
+
+missing_weather.to_csv \
+    ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S3_Part3.csv", index=False)
