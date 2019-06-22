@@ -19,13 +19,31 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
+from datetime import datetime
 
-import multiprocessing
-from multiprocessing import Pool
-print(multiprocessing.cpu_count())
+# import multiprocessing
+# from multiprocessing import Pool
+# print(multiprocessing.cpu_count())
+# exit()
+
+weather = pandas.read_csv("/Users/pete/Downloads/weather_data/ALLHourlyCut.csv")
+
+#creating the two columns we need for this 
+weather['Timereadable'] = 0
+weather['Date'] = 0
+
+weather.time = weather.time.astype(int)
+weather.Timereadable = weather.Timereadable.astype(str)
+weather.Date = weather.Date.astype(str)
+
+for i, values in enumerate(weather.values):
+    print(i)
+    normal = datetime.fromtimestamp(int(weather.time.values[i])).strftime('%Y-%m-%d %H')
+    weather.Date.values[i] = str(normal.split(" ")[0])
+    weather.Timereadable.values[i] = str(normal.split(" ")[1])
+
+weather.to_csv("/Users/pete/Downloads/weather_data/ALLHourlyCutFull.csv")
 exit()
-
-
 
 # ##Creating an image demonstrating the model. 
 # model = Sequential()
