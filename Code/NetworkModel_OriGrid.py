@@ -40,7 +40,7 @@ from os.path import exists
 import datetime
 
 
-def fitting_loops(X, Y):
+def fitting_loops(X, Y, folder):
     #   2. Defining a Neural Network
     # creating the model
     model = Sequential()
@@ -64,7 +64,7 @@ def fitting_loops(X, Y):
     print(model.summary())
 
     for i in range(0, 50):
-        file = "../Excel & CSV Sheets/Grid Oriented Layout Test Files/" + str(datetime.date.today()) + "GridAverageHolder.csv"
+        file = folder + str(datetime.date.today()) + "GridAverageHolder.csv"
 
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -72,8 +72,8 @@ def fitting_loops(X, Y):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_ORI_t5.h5'):
-            model.load_weights("model_ORI_t5.h5")
+        if exists(folder+ 'model_ORI_t5.h5'):
+            model.load_weights(folder + "model_ORI_t5.h5")
             print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
@@ -98,7 +98,7 @@ def fitting_loops(X, Y):
                          callbacks=[stopper])
 
         ##Save the weights for next run. 
-        model.save_weights("model_ORI_t5.h5")
+        model.save_weights(folder+ "model_ORI_t5.h5")
         print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
@@ -144,10 +144,10 @@ def fitting_loops(X, Y):
 
         # If we are on the 1st, 50th, or 100th cycle, make some graphs: 
         if i % 10 == 0:
-            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i)
+            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder)
 
 
-def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i):
+def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     font = {'family': 'serif',
             'weight': 'regular',
             'size': 14}
@@ -161,21 +161,21 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     # plt.title('Receiver operating characteristic curve')
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
+    title = folder + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
     # plt.subplot(212)
-    fig = plt.figure()
-    plt.xticks(range(0, 20), range(1, 21), rotation=90)
+    fig = plt.figure(figsize=(24.0, 8.0))
+    plt.xticks(range(0, 100), range(0, 100), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    x = range(0, 100)
     plt.axhline(y=0.5, color='gray', linestyle='-')
-    plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
-    plt.scatter(x=x, y=y_test[0:20], s=110,
+    plt.scatter(x=x, y=predictions[0:100], s=100, c='blue', marker='x', linewidth=2)
+    plt.scatter(x=x, y=y_test[0:100], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
+    title = folder + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
 
     font = {'family': 'serif',
@@ -205,11 +205,9 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i):
     a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
     # plt.show()
-    title = '../Graphs & Images/ResultsFromGridIterations/' + str(datetime.datetime.today()) + 'lossandacc' + str(
+    title = folder + str(datetime.datetime.today()) + 'lossandacc' + str(
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
-
-
 ## The steps of creating a neural network or deep learning model ##
 # 1. Load Data
 # 2. Defining a neural network
@@ -220,7 +218,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i):
 
 #           1. Load Data
 dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Data 2017+2018 MMR.csv", sep=",")
-
+folder = "../"
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
@@ -232,6 +230,6 @@ X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
 Y = dataset.ix[:, 0].values
 
 ##      Steps 2-5 are inside the fitting loops method. 
-fitting_loops(X, Y)
+fitting_loops(X, Y, folder)
 
 
