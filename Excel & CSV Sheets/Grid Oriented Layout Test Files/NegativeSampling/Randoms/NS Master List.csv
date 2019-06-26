@@ -1,0 +1,1 @@
+Accident,Center_Lat,Center_Long,Date,Time,Event,Conditions,EventBefore,ConditionBefore,Hour,Temperature,Temp_Max,Temp_Min,Daily_Relative_Temp,Monthly_Relative_Temp,WeekDay,WeekEnd,Precipitation_Intensity,Precip_Intensity_Max,Clear,Cloudy,Rain,Fog,Snow,RainBefore,Grid_Block,Grid_Col,Grid_Row,Highway,Land_Use_Mode,Road_Count

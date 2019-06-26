@@ -226,8 +226,8 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 
 
 #           1. Load Data
-training = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/True Randoms/True Random Data Non-Shuffle Training.csv", sep=",")
-testing = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/True Randoms/True Random Data Non-Shuffle Testing.csv", sep=",")
+training = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/True Randoms/True Random Data Non-Shuffle Random Data Non-Shuffle Training.csv", sep=",")
+testing = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/True Randoms/True Random Data Non-Shuffle Random Data Non-Shuffle Testing.csv", sep=",")
 training = training.drop(['Unnamed: 0'],axis=1)
 testing = testing.drop(['Unnamed: 0'],axis=1)
 testing = testing.dropna()
