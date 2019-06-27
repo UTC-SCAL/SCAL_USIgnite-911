@@ -72,8 +72,8 @@ def fitting_loops(X, Y, folder):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists(folder + 'model_ORI_GridFix_2.h5'):
-            model.load_weights(folder + 'model_ORI_GridFix_2.h5')
+        if exists(folder + 'model_ORI_Random.h5'):
+            model.load_weights(folder + 'model_ORI_Random.h5')
             print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
@@ -99,7 +99,7 @@ def fitting_loops(X, Y, folder):
                          callbacks=[stopper])
 
         ##Save the weights for next run. 
-        model.save_weights(folder + 'model_ORI_GridFix_2.h5')
+        model.save_weights(folder + 'model_ORI_Random.h5')
         print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
@@ -139,8 +139,8 @@ def fitting_loops(X, Y, folder):
         avg_holder.at[j, 'TN'] = tn
         avg_holder.at[j, 'FP'] = fp
         avg_holder.at[j, 'FN'] = fn
-        avg_holder.at[j, 'Y_test'] = [y_test]
-        avg_holder.at[j, 'Y_pred'] = [predictions_round]
+        # avg_holder.at[j, 'Y_test'] = [y_test]
+        # avg_holder.at[j, 'Y_pred'] = [predictions_round]
 
         # Save the average holder file: 
         avg_holder.to_csv(file, sep=",")
@@ -221,12 +221,12 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/GOD 2017+2018 Accidents_GridFixed_True.csv", sep=",")
-dataset = dataset.drop(['Latitude','Longitude','Date','Time'],axis=1)
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Randoms/GOD Random Full.csv", sep=",")
+dataset = dataset.drop(['Center_Lat','Center_Long','Date','Time'],axis=1)
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
-folder = '../'
+folder = '../Graphs & Images/ResultsFromRandomTesting/Second Test - Shuffle/'
 
 
 #           Creating X and Y. Accident is the first column, therefore it is 0. 
