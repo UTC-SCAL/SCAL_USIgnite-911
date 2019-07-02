@@ -199,8 +199,8 @@ def haversine(long1, lat1, long2, lat2):
     return c * r #The distance between the two locations
 
 def predict_accidents(forecast, filename):
-    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/GOD 2017+2018 Accidents_GridFixed_True.csv", sep=",")
-    dataset = dataset.drop(['Latitude','Longitude','Date','Time'],axis=1)
+    dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Full GridFix Data 2017+2018.csv", sep=",")
+    dataset = dataset.drop(['Date','Time', "DayFrame"],axis=1)
     columns = dataset.columns.values[1:len(dataset.columns.values)]
     X = columns.shape[0]
     print(columns.shape[0])
@@ -243,7 +243,7 @@ def predict_accidents(forecast, filename):
     # model.load_weights("model_forecast.h5")
 
     ##Our current set model. Min max reduced. 
-    model.load_weights("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/model_ORI_GridFix.h5")
+    model.load_weights("../Graphs & Images/ResultsFromGridFixTesting/Seventh Test - Full Data with Hour/model_ORI_GridFix_Hour.h5")
 
     ##The model created by sorted the entries by time, then training the model. 
     # model.load_weights("model_timesort_MMR.h5")
@@ -282,7 +282,7 @@ def predict_accidents(forecast, filename):
 # print("Grid Layout: \t\t", len(test.Latitude.values))
 # scaled = standarize_forecast(test)
 test = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_Done.csv")
-filename = "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_withGridFixedPrediction.csv"
+filename = "../Graphs & Images/ResultsFromGridFixTesting/Seventh Test - Full Data with Hour/Forecast-for6-10-2019_withGridFixedPrediction.csv"
 # test["Probability"] = 0
 # test["Prediction"] = 0
 # test.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_Done.csv",
