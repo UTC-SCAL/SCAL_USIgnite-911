@@ -22,18 +22,19 @@ def find_cred(service):
     return cred
 
 
-missingblocks = pandas.read_csv(
-    "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Date-Finder-output S4.csv")
+blocks = pandas.read_csv(
+    "../Excel & CSV Sheets/2019 Data/2019 Weather Dates.csv")
 centers = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/CenterPoints Ori Layout.csv")
-missing_weather = pandas.read_csv(
-    "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S4.csv")
+weather_holder = pandas.read_csv(
+    "../Excel & CSV Sheets/2019 Data/2019 Weather Dates 3.csv")
 miss_loc = 0
 key = find_cred("darksky")
-for stuff, i in enumerate(missingblocks.columns.values):
+for stuff, i in enumerate(blocks.columns.values):
+    # print(i)
     i = int(i)
-    if i > 847:
+    if 906 > i >= 617:
         print(i)
-        values = missingblocks[str(i)].values
+        values = blocks[str(i)].values
         values = values[pandas.notna(values)]
         row_num = centers.loc[centers['ORIG_FID'] == i].index[0]
         lat = centers.Center_Lat.values[row_num]
@@ -43,9 +44,10 @@ for stuff, i in enumerate(missingblocks.columns.values):
             if j == " ":
                 break
             else:
-                year = int(j.split("/")[2]) + 2000
-                month = int(j.split("/")[0])
-                day = int(j.split("/")[1])
+                year = int(j.split("-")[0])
+                month = int(j.split("-")[1])
+                day = int(j.split("-")[2])
+                print(year, month, day)
                 t = datetime(year, month, day, 0, 0, 0).isoformat()
                 call = key, lat, long
                 forecastcall = forecast(*call, time=t)
@@ -53,14 +55,14 @@ for stuff, i in enumerate(missingblocks.columns.values):
                 for l, info in enumerate(hourly_list):
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
-                        missing_weather.loc[miss_loc, things] = entry[things]
-                    missing_weather.loc[miss_loc, "Center_Lat"] = lat
-                    missing_weather.loc[miss_loc, "Center_Long"] = long
-                    missing_weather.loc[miss_loc, "ORIG_FID"] = i
+                        weather_holder.loc[miss_loc, things] = entry[things]
+                    weather_holder.loc[miss_loc, "Center_Lat"] = lat
+                    weather_holder.loc[miss_loc, "Center_Long"] = long
+                    weather_holder.loc[miss_loc, "ORIG_FID"] = i
                     miss_loc += 1
-        missing_weather.to_csv \
-            ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S4_Part2.csv",
-         index=False)
 
-missing_weather.to_csv \
-    ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/MissingHourWeather S4_Part2.csv", index=False)
+        weather_holder.to_csv \
+            ("../Excel & CSV Sheets/2019 Data/2019 Weather Dates3 Part 2.csv",
+             index=False)
+weather_holder.to_csv \
+    ("../Excel & CSV Sheets/2019 Data/2019 Weather Dates3 Part 2.csv", index=False)
