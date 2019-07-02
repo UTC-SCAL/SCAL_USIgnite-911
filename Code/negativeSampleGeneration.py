@@ -143,25 +143,25 @@ def get_negatives_master(calldata, compare):
             # data frame
             if no_matches is True:
                 # These values stay the same between copy_calldata and the negative samples
-                negative_samples.loc[neg_loc, "Grid_Block"] = copy_calldata.Grid_Block.values[0]
-                negative_samples.loc[neg_loc, "Accident"] = 0
-                negative_samples.loc[neg_loc, "Date"] = copy_calldata.Date.values[0]
-                negative_samples.loc[neg_loc, "Hour"] = copy_calldata.Hour.values[0]
-                negative_samples.loc[neg_loc, "Time"] = copy_calldata.Time.values[0]
-                negative_samples.loc[neg_loc, "Weekday"] = copy_calldata.Weekday.values[0]
+                negative_samples.at[neg_loc, "Grid_Block"] = copy_calldata.Grid_Block.values[0]
+                negative_samples.at[neg_loc, "Accident"] = 0
+                negative_samples.at[neg_loc, "Date"] = copy_calldata.Date.values[0]
+                negative_samples.at[neg_loc, "Hour"] = copy_calldata.Hour.values[0]
+                negative_samples.at[neg_loc, "Time"] = copy_calldata.Time.values[0]
+                negative_samples.at[neg_loc, "Weekday"] = copy_calldata.Weekday.values[0]
                 # Get the row number to use in the centerpoint file based on the grid block of the negative sample
                 # The basic idea here is to match row numbers based on grid block numbers
-                center_row_num = center_points.loc[center_points['ORIG_FID'] == copy_calldata.Grid_Block.values[0]].index[0]
-                negative_samples.loc[neg_loc, "Center_Lat"] = center_points.Center_Lat.values[center_row_num]
-                negative_samples.loc[neg_loc, "Center_Long"] = center_points.Center_Long.values[center_row_num]
+                center_row_num = center_points.at[center_points['ORIG_FID'] == copy_calldata.Grid_Block.values[0]].index[0]
+                negative_samples.at[neg_loc, "Center_Lat"] = center_points.Center_Lat.values[center_row_num]
+                negative_samples.at[neg_loc, "Center_Long"] = center_points.Center_Long.values[center_row_num]
                 # Get the row number to use in grid info based on the grid block of the negative sample
                 # The basic idea here is to match row numbers based on grid block numbers
-                info_row_num = grid_info.loc[grid_info["ORIG_FID"] == copy_calldata.Grid_Block.values[0]].index[0]
-                negative_samples.loc[neg_loc, "Grid_Col"] = grid_info.loc[info_row_num, "Col_Num"]
-                negative_samples.loc[neg_loc, "Grid_Row"] = grid_info.loc[info_row_num, "Row_Num"]
-                negative_samples.loc[neg_loc, "Highway"] = grid_info.loc[info_row_num, "Highway"]
-                negative_samples.loc[neg_loc, "Land_Use_Mode"] = grid_info.loc[info_row_num, "Land_Use_Mode"]
-                negative_samples.loc[neg_loc, "Road_Count"] = grid_info.loc[info_row_num, "Road_Count"]
+                info_row_num = grid_info.at[grid_info["ORIG_FID"] == copy_calldata.Grid_Block.values[0]].index[0]
+                negative_samples.at[neg_loc, "Grid_Col"] = grid_info.at[info_row_num, "Col_Num"]
+                negative_samples.at[neg_loc, "Grid_Row"] = grid_info.at[info_row_num, "Row_Num"]
+                negative_samples.at[neg_loc, "Highway"] = grid_info.at[info_row_num, "Highway"]
+                negative_samples.at[neg_loc, "Land_Use_Mode"] = grid_info.at[info_row_num, "Land_Use_Mode"]
+                negative_samples.at[neg_loc, "Road_Count"] = grid_info.loc[info_row_num, "Road_Count"]
                 neg_loc = neg_loc + 1
         # Delete the copies made earlier to save memory space
         del copy_calldata
@@ -180,28 +180,28 @@ def get_negatives_master(calldata, compare):
 
 
 # The main lines and files for getting the totally random negative samples
-# accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
-# compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
-# get_negatives_master(accidents, compare_data)
+accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
+compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
+get_negatives_master(accidents, compare_data)
 
 # Now we aggregate certain portions of the negatives
-negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
-negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
-negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
-for i, value in enumerate(negative_samples.values):
-    print(i)
-    if negative_samples.Weekday.values[i] == 5 or negative_samples.Weekday.values[i] == 6:
-        negative_samples.WeekEnd.values[i] = 1
-        negative_samples.WeekDay.values[i] = 0
-    else:
-        negative_samples.WeekEnd.values[i] = 0
-        negative_samples.WeekDay.values[i] = 1
-    if 0 <= negative_samples.Hour.values[i] <= 4 or 18 <= negative_samples.Hour.values[i] <= 23:
-        negative_samples.DayFrame.values[i] = 1
-    elif 5 <= negative_samples.Hour.values[i] <= 9:
-        negative_samples.DayFrame.values[i] = 2
-    elif 10 <= negative_samples.Hour.values[i] <= 12:
-        negative_samples.DayFrame.values[i] = 3
-    elif 13 <= negative_samples.Hour.values[i] <= 17:
-        negative_samples.DayFrame.values[i] = 4
-negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
+# negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
+# negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
+# negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
+# for i, value in enumerate(negative_samples.values):
+#     print(i)
+#     if negative_samples.Weekday.values[i] == 5 or negative_samples.Weekday.values[i] == 6:
+#         negative_samples.WeekEnd.values[i] = 1
+#         negative_samples.WeekDay.values[i] = 0
+#     else:
+#         negative_samples.WeekEnd.values[i] = 0
+#         negative_samples.WeekDay.values[i] = 1
+#     if 0 <= negative_samples.Hour.values[i] <= 4 or 18 <= negative_samples.Hour.values[i] <= 23:
+#         negative_samples.DayFrame.values[i] = 1
+#     elif 5 <= negative_samples.Hour.values[i] <= 9:
+#         negative_samples.DayFrame.values[i] = 2
+#     elif 10 <= negative_samples.Hour.values[i] <= 12:
+#         negative_samples.DayFrame.values[i] = 3
+#     elif 13 <= negative_samples.Hour.values[i] <= 17:
+#         negative_samples.DayFrame.values[i] = 4
+# negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")

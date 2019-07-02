@@ -267,7 +267,7 @@ def predict_accidents(forecast, filename):
 
     ########################################################################################################################################################################
 
-#The print statements just make things easier to understand. 
+#The print statements just make things easier to understand.
 #
 #Print the number of accidents and the current threshold. 
 # print("Accidents: ", len(accidents.Latitude.values))

@@ -9,16 +9,16 @@ except ImportError:
     matplotlib.use("GtkAgg")
     import matplotlib.pyplot as plt
 
-from keras.utils import plot_model
-from sklearn import preprocessing
-from keras.callbacks import EarlyStopping
-from keras.layers import Dense, Dropout
-from keras.models import Sequential
-from keras import callbacks
-from sklearn.metrics import accuracy_score, auc, roc_curve
-from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
-from sklearn.metrics import confusion_matrix
+# from keras.utils import plot_model
+# from sklearn import preprocessing
+# from keras.callbacks import EarlyStopping
+# from keras.layers import Dense, Dropout
+# from keras.models import Sequential
+# from keras import callbacks
+# from sklearn.metrics import accuracy_score, auc, roc_curve
+# from sklearn.model_selection import train_test_split
+# from sklearn.utils import shuffle
+# from sklearn.metrics import confusion_matrix
 from datetime import datetime
 
 # import multiprocessing
@@ -26,33 +26,33 @@ from datetime import datetime
 # print(multiprocessing.cpu_count())
 # exit()
 
-file = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019.csv")
-gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Info.csv")
-for i, info in enumerate(file.values):
-    print(i)
-    for j, stuff in enumerate(gridblocks.values):
-        if (file.Grid_Col.values[i] == gridblocks.Col_Num.values[j]) & (file.Grid_Row.values[i] == gridblocks.Row_Num.values[j]): 
-            file.Grid_Block.values[i] = gridblocks.ORIG_FID.values[j]
-file.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_Done.csv", index=False)
+# file = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019.csv")
+# gridblocks = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Info.csv")
+# for i, info in enumerate(file.values):
+#     print(i)
+#     for j, stuff in enumerate(gridblocks.values):
+#         if (file.Grid_Col.values[i] == gridblocks.Col_Num.values[j]) & (file.Grid_Row.values[i] == gridblocks.Row_Num.values[j]):
+#             file.Grid_Block.values[i] = gridblocks.ORIG_FID.values[j]
+# file.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_Done.csv", index=False)
 
 ##Splitting the date and time from the utc time to local timezone. 
-weather = pandas.read_csv("/Users/pete/Downloads/weather_data/ALLHourlyCut.csv")
+weather = pandas.read_csv("../Excel & CSV Sheets/2019 Data/2019 Weather Blocks 884-905.csv")
 
 #creating the two columns we need for this 
-weather['Timereadable'] = 0
-weather['Date'] = 0
+# weather['Timereadable'] = 0
+# weather['Date'] = 0
 
 weather.time = weather.time.astype(int)
-weather.Timereadable = weather.Timereadable.astype(str)
+weather.timereadable = weather.timereadable.astype(str)
 weather.Date = weather.Date.astype(str)
 
 for i, values in enumerate(weather.values):
     print(i)
     normal = datetime.fromtimestamp(int(weather.time.values[i])).strftime('%Y-%m-%d %H')
     weather.Date.values[i] = str(normal.split(" ")[0])
-    weather.Timereadable.values[i] = str(normal.split(" ")[1])
+    weather.timereadable.values[i] = str(normal.split(" ")[1])
 
-weather.to_csv("/Users/pete/Downloads/weather_data/ALLHourlyCutFull.csv")
+weather.to_csv("../Excel & CSV Sheets/2019 Data/2019 Weather Blocks 884-905.csv")
 exit()
 
 # ##Creating an image demonstrating the model. 
