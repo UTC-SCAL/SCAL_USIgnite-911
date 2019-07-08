@@ -29,10 +29,10 @@ def unixFromStandard(calldata):
         yoa = int(doa.split('/')[2])+2000
         moa = int(doa.split('/')[0])
         dayoa = int(doa.split('/')[1])
-        print(yoa, moa, dayoa, hoa, mioa, soa)
+        # print(yoa, moa, dayoa, hoa, mioa, soa)
         date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
-        print(date)
+        # print(date)
         unixtime = date.strftime('%s')
-        print(unixtime)
+        # print(unixtime)
         calldata.Unix.values[k] = unixtime
     calldata.to_csv("../Excel & CSV Sheets/Full Data with Unix.csv", sep=",", index=False)

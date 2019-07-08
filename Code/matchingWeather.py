@@ -27,8 +27,8 @@ negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout T
 negative_samples.Event = negative_samples.Event.astype(str)
 negative_samples.Conditions = negative_samples.Conditions.astype(str)
 negative_samples.Precipitation_Intensity = negative_samples.Precipitation_Intensity.astype(float)
-negative_samples.Center_Lat = negative_samples.Center_Long.astype(float)
-negative_samples.Center_Long = negative_samples.Center_Long.astype(float)
+negative_samples.Latitude = negative_samples.Latitude.astype(float)
+negative_samples.Longitude = negative_samples.Longitude.astype(float)
 negative_samples.Time = negative_samples.Time.astype(str)
 negative_samples.EventBefore = negative_samples.EventBefore.astype(str)
 negative_samples.ConditionBefore = negative_samples.ConditionBefore.astype(str)
@@ -97,13 +97,23 @@ for i, values in enumerate(negative_samples.values):
 
     weather_data.ORIG_FID = weather_data.ORIG_FID.astype(str)
     negative_samples.Grid_Block = negative_samples.Grid_Block.astype(str)
+
     negative_date = negative_samples.Date.values[i]
     negative_hour = negative_samples.Hour.values[i]
     negative_block = negative_samples.Grid_Block.values[i]
 
+    # print(type(weather_data['timereadable'].values[0]), type(negative_hour))
+    # print(type(weather_data['Date'].values[0]), type(negative_date))
+    # print(type(weather_data['ORIG_FID'].values[0]), type(negative_block))
+    # row_num = weather_data.loc[(weather_data['Date'] == negative_date) &
+    #                                (weather_data['timereadable'] == negative_hour) &
+    #                                (weather_data['ORIG_FID'] == negative_block)].index[0]
+    # print(row_num)
+    # exit()
+
     try:
         row_num = weather_data.loc[(weather_data['Date'] == negative_date) &
-                                   (weather_data['time'] == negative_hour) &
+                                   (weather_data['timereadable'] == negative_hour) &
                                    (weather_data['ORIG_FID'] == negative_block)].index[0]
 
         negative_samples.Event.values[i] = weather_data.icon.values[row_num]
@@ -125,7 +135,7 @@ for i, values in enumerate(negative_samples.values):
                 # Get weather data
                 # The following line needs to have this format:
                 t = datetime(new_yoa, new_moa, new_dayoa, new_hoa, 0, 0).isoformat()
-                call = key, negative_samples.Center_Lat.values[i], negative_samples.Center_Long.values[i]
+                call = key, negative_samples.Latitude.values[i], negative_samples.Longitude.values[i]
                 try:
                     forecastcall = forecast(*call, time=t)
                     for i, value in enumerate(forecastcall.hourly):
@@ -139,7 +149,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 1
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                           (weather_data['time'] == new_hoa) &
+                                           (weather_data['timereadable'] == new_hoa) &
                                            (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -149,7 +159,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 2
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -159,7 +169,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 3
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -169,7 +179,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 4
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -179,7 +189,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 5
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -189,7 +199,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 6
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -199,7 +209,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 7
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -209,7 +219,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 8
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -219,7 +229,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 9
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -229,7 +239,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 10
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -239,7 +249,7 @@ for i, values in enumerate(negative_samples.values):
                 new_moa = 11
                 new_date = yoa + new_moa + new_dayoa
                 prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                                (weather_data['time'] == new_hoa) &
+                                                (weather_data['timereadable'] == new_hoa) &
                                                 (weather_data['ORIG_FID'] == negative_block)].index[0]
                 negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
                 negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
@@ -250,14 +260,14 @@ for i, values in enumerate(negative_samples.values):
             new_hoa = 23
             new_date = yoa + moa + new_dayoa
             prev_row_num = weather_data.loc[(weather_data['Date'] == new_date) &
-                                            (weather_data['time'] == new_hoa) &
+                                            (weather_data['timereadable'] == new_hoa) &
                                             (weather_data['ORIG_FID'] == negative_block)].index[0]
             negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
             negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]
         elif hoa > 0:
             new_hoa = hoa - 1
             prev_row_num = weather_data.loc[(weather_data['Date'] == negative_date) &
-                                            (weather_data['time'] == new_hoa) &
+                                            (weather_data['timereadable'] == new_hoa) &
                                             (weather_data['ORIG_FID'] == negative_block)].index[0]
             negative_samples.EventBefore.values[i] = weather_data.icon.values[prev_row_num]
             negative_samples.ConditionBefore.values[i] = weather_data.summary.values[prev_row_num]

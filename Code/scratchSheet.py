@@ -22,3 +22,15 @@ def find_cred(service):
                     # logins[username] = password
     return cred
 
+data = pandas.read_csv("../Excel & CSV Sheets/2019 Data/2019 Systematic Negatives Section 3.csv")
+data.Date = data.Date.astype(str)
+data.Hour = data.Hour.astype(str)
+for i, values in enumerate(data.values):
+    print(i)
+    year = int(data.Date.values[i].split("-")[0])
+    month = int(data.Date.values[i].split("-")[1])
+    day = int(data.Date.values[i].split("-")[2])
+    date = datetime(year, month, day, int(data.Hour.values[i]), 0, 0)
+    unixtime = date.strftime('%s')
+    data.UnixTime.values[i] = unixtime
+data.to_csv("../Excel & CSV Sheets/2019 Data/2019 Systematic Negatives Section 3 Time.csv")
