@@ -178,30 +178,43 @@ def get_negatives_master(calldata, compare):
     negative_samples.to_csv\
         ("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 1.csv")
 
+##Finding the 'true' negatives from a larger set. 
+def cut_negatives(negatives, accidents):
+    neg_loc=0
+    negative_samples = pandas.DataFrame(columns=negatives.columns.values)
+    for i, info in enumerate(negatives.values):
+        print(i)
+        no_matches=True
+        for j, stuff in enumerate(accidents.values):
+            if (negatives.DayFrame.values[i] == accidents.DayFrame.values[j]) and (negatives.WeekDay.values[i] == accidents.WeekDay.values[j]) and \
+                (negatives.Grid_Block.values[i] == accidents.Grid_Block.values[j]):
+                no_matches = False
+                break
+        if no_matches is True:
+            negative_samples.loc[neg_loc] = negatives.values[i]
+            neg_loc += 1
+        if i % 500 == 0:
+            negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS True Master List 1.csv", index=False)
+    print("True Negatives found :", neg_loc+1)
+    negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS True Master List 1.csv", index=False)
+
+
+
+##Accident percent is the percent of accidents you want! For example, 75/25 split would be 25 percent accidents. 
+def dividing_data(accidents, negatives, accident_percent):
+    num_accidents = len(accidents)
+    currentNeg = len(negatives)
+
+    wantNeg = round((((num_accidents*100)/accident_percent)-num_accidents))
+    divisionInt = round((currentNeg/wantNeg))
+
+    cutNegatives = negatives.iloc[::divisionInt, :]
+    data = cutNegatives.append(accidents)
+    data = data.sort_values(["Unix", "Grid_Block"])
+    return data
+
 
 # The main lines and files for getting the totally random negative samples
 accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
 compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
 get_negatives_master(accidents, compare_data)
-
-# Now we aggregate certain portions of the negatives
-# negative_samples = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")
-# negative_samples['Date'] = pandas.to_datetime(negative_samples['Date'])
-# negative_samples['Weekday'] = negative_samples['Date'].dt.dayofweek
-# for i, value in enumerate(negative_samples.values):
-#     print(i)
-#     if negative_samples.Weekday.values[i] == 5 or negative_samples.Weekday.values[i] == 6:
-#         negative_samples.WeekEnd.values[i] = 1
-#         negative_samples.WeekDay.values[i] = 0
-#     else:
-#         negative_samples.WeekEnd.values[i] = 0
-#         negative_samples.WeekDay.values[i] = 1
-#     if 0 <= negative_samples.Hour.values[i] <= 4 or 18 <= negative_samples.Hour.values[i] <= 23:
-#         negative_samples.DayFrame.values[i] = 1
-#     elif 5 <= negative_samples.Hour.values[i] <= 9:
-#         negative_samples.DayFrame.values[i] = 2
-#     elif 10 <= negative_samples.Hour.values[i] <= 12:
-#         negative_samples.DayFrame.values[i] = 3
-#     elif 13 <= negative_samples.Hour.values[i] <= 17:
-#         negative_samples.DayFrame.values[i] = 4
-# negative_samples.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/NS Master List 4.csv")

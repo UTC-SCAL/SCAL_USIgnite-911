@@ -1,6 +1,8 @@
 import pandas
 from selenium import webdriver
 
+## This file retrieves the GPS lat/long coords provided a route and logmile. 
+
 segments = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv", sep=",")
 
 driver = webdriver.Firefox(executable_path=r"../Code/geckodriver")

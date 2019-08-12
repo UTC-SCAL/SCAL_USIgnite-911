@@ -1,0 +1,85 @@
+---
+title: "GridFixedMaps"
+author: "Pete Way"
+date: "6/27/2019"
+output: pdf_document
+---
+
+```{r}
+title = "/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/Forecast-for6-10-2019_Done_WithLat.csv"
+
+
+forecast =read.csv(title, header=T)
+blocks = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv")
+# blocks = blocks[which(is.na(blocks$Center_Lat)),]
+blocks$Grid_Block = blocks$ORIG_FID
+blocks$Grid_Block = blocks$Grid_Block+1
+keep <- c("Grid_Block", "X", "Y")
+blocks  = blocks[ , (names(blocks) %in% keep)]
+nocenter = blocks[-seq(5, NROW(blocks), by = 5),]
+
+keep <- c("Grid_Block", "Probability")
+dayframe1 = forecast[which(forecast$DayFrame == 1),]
+# dayframe1  = dayframe1[ , (names(dayframe1) %in% keep)]
+
+dayframe1avg = dayframe1 %>% 
+  group_by(Grid_Block) %>% 
+  summarise(average = mean(Probability))
+
+dayframe2 = forecast[which(forecast$DayFrame == 2),]
+# dayframe2  = dayframe2[ , (names(dayframe2) %in% keep)]
+
+dayframe3 = forecast[which(forecast$DayFrame == 3),]
+# dayframe3  = dayframe3[ , (names(dayframe3) %in% keep)]
+
+dayframe4 = forecast[which(forecast$DayFrame == 4),]
+# dayframe4  = dayframe4[ , (names(dayframe4) %in% keep)]
+
+blocks$Probability = 0 
+blocks$Prediction = 0 
+
+unique(dayframe1$Hour)
+unique(dayframe2$Hour)
+unique(dayframe3$Hour)
+unique(dayframe4$Hour)
+
+length(unique(dayframe1$Grid_Block))
+length(unique(dayframe2$Grid_Block))
+length(unique(dayframe3$Grid_Block))
+length(unique(dayframe4$Grid_Block))
+length(unique(blocks$Grid_Block))
+colnames(blocks)
+colnames(dayframe1)
+
+blocks = blocks[, !(names(blocks) == c('Prediction') )]
+dayframe1 = dayframe1[, !(names(dayframe1) == 'average')]
+
+dayframe1$Probability = dayframe1$average
+
+dayframe1blocks = merge(nocenter, dayframe1[, c('Probability','Grid_Block')], by.y = c("Grid_Block"), no.dups = TRUE, fill=0)
+dayframe2blocks = merge(nocenter, dayframe2[, c('Probability','Grid_Block')], by.y = c("Grid_Block"), no.dups = TRUE, fill=0)
+dayframe3blocks = merge(nocenter, dayframe3[, c('Probability','Grid_Block')], by.y = c("Grid_Block"), no.dups = TRUE, fill=0)
+dayframe4blocks = merge(nocenter, dayframe4[, c('Probability','Grid_Block')], by.y = c("Grid_Block"), no.dups = TRUE, fill=0)
+
+min(dayframe2$Probability)
+max(dayframe2$Probability)
+
+```
+
+
+```{r}
+dayframe = dayframe3
+# lats<-c(34.98, 35.15)
+# lons<-c(-85.4,-85.05)
+# par(mar = rep(0, 4))
+# bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# # calc_zoom(bb)
+# cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+
+ggmap(cda) +
+geom_polygon(data = fortify(nocenter),
+                  aes(X, Y, group = Grid_Block),
+                  fill =NA , colour = 'black', alpha = 0.2) + 
+geom_point(data=dayframe, aes(x=Longitude, y=Latitude), alpha=.9, size=3, shape=21, fill= factor(dayframe$Probability))
+```
+

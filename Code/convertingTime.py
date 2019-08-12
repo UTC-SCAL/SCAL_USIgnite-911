@@ -1,7 +1,7 @@
 import pandas
 from datetime import datetime
 
-calldata = pandas.read_csv("", sep=",")
+# calldata = pandas.read_csv("", sep=",")
 
 
 def convertPrecipTime():
@@ -17,6 +17,7 @@ def convertPrecipTime():
     calldata.to_csv("../", index=False)
 
 def unixFromStandard(calldata):
+
     ##This section takes in the standard time column and creates Unix time. 
     for k, info in enumerate(calldata.values):
         print(k)
@@ -35,4 +36,10 @@ def unixFromStandard(calldata):
         unixtime = date.strftime('%s')
         # print(unixtime)
         calldata.Unix.values[k] = unixtime
-    calldata.to_csv("../Excel & CSV Sheets/Full Data with Unix.csv", sep=",", index=False)
+    return calldata
+
+# data = pandas.read_csv("../Excel & CSV Sheets/2017+2018 Data/2017+2018 Accidents.csv",sep=",")
+# data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
+# # This actually makes the column
+# data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
+# data.to_csv("../Excel & CSV Sheets/2017+2018 Data/2017+2018 Accidents.csv")

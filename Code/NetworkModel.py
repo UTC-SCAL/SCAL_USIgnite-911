@@ -1,25 +1,19 @@
 # Use the plaidml backend dynamically if AMD GPU is in use
-try:
-    import tensorflow as tf
-    from tensorflow.python.client import device_lib
+# try:
+#     import tensorflow as tf
+#     from tensorflow.python.client import device_lib
 
-    LST = [x.device_type for x in device_lib.list_local_devices()]
-    if not 'GPU' in LST:
-        import os
+#     LST = [x.device_type for x in device_lib.list_local_devices()]
+#     if not 'GPU' in LST:
+#         import os
 
-        os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-except ImportError:
-    import os
+#         os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+# except ImportError:
+#     import os
 
-    os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-
-import os
-import sys
-import numpy
+#     os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+import tensorflow as tf
 import pandas
-import talos
-from sklearn import preprocessing
-from keras.callbacks import EarlyStopping
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from keras import callbacks
@@ -27,9 +21,7 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
-
-
-
+import feather
 # Import matplotlib pyplot safely
 try:
     import matplotlib.pyplot as plt
@@ -42,39 +34,30 @@ from os.path import exists
 import datetime
 
 
-def fitting_loops(X,Y):
-        #   2. Defining a Neural Network
+def fitting_loops(X, Y, folder, modelname):
+    #   2. Defining a Neural Network
     # creating the model
     model = Sequential()
-    ##X.shape[1] is the number of columns inside of X. 
-    model.add(Dense(X.shape[1],
-                    input_dim=X.shape[1], activation='sigmoid'))
+    ##X.shape[1] is the number of columns inside of X.
+    model.add(Dense(X.shape[1],input_dim=X.shape[1], activation='sigmoid'))
 
     # Use for standard sized variable set
-    model.add(Dense(25, activation='sigmoid'))
+    model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
     model.add(Dropout(.1))
-    model.add(Dense(20, activation='sigmoid'))
-    model.add(Dense(18, activation='sigmoid'))
-    model.add(Dense(10, activation='sigmoid'))
-    model.add(Dropout(.1))
+    model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
+    # model.add(Dense(X.shape[1]-15, activation='sigmoid'))
+    # model.add(Dense(X.shape[1]-20, activation='sigmoid'))
+    # model.add(Dropout(.1))
 
     model.add(Dense(1, activation='sigmoid'))
 
-
     #   3. Compiling a model.
     model.compile(loss='mse',
-                optimizer='nadam', metrics=['accuracy'])
+                  optimizer='nadam', metrics=['accuracy'])
     print(model.summary())
 
-
-    for i in range(0, 100):
-        file = "../Excel & CSV Sheets/" + str(datetime.date.today()) + "AverageHolder.csv"
-        
-        
-        ##Shuffling if needed. 
-        # dataset = shuffle(dataset)
-        # dataset = shuffle(dataset)
-
+    for i in range(0, 50):
+        file = folder + str(datetime.date.today()) + "AverageHolder.csv"
 
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -82,33 +65,33 @@ def fitting_loops(X,Y):
 
 
         ##If the model already exists, import and update/use it. If not, create it. 
-        if exists('model_2.h5'):
-            model.load_weights("model_2.h5")
-            print("Loading Model")
+        if exists(folder + modelname):
+            model.load_weights(folder + modelname)
+            print("Loading Grid Model")
 
         ##If the average holder file exists, import it. If not, create it. 
         if exists(file):
-            avg_holder = pandas.read_csv(file, usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            avg_holder = pandas.read_csv(file,
+                                         usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP",
+                                                  "FN", "TP"])
             j = avg_holder.shape[0]
 
         else:
-            avg_holder = pandas.DataFrame(columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "CM"])
+            avg_holder = pandas.DataFrame(
+                columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP"])
             j = avg_holder.shape[0]
-
-
         ###What cycle of the loop are we on? 
         print("Cycle: ", i)
 
-
-        #Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
+        # Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
         patience = 15
         stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
         hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
-                        callbacks=[stopper])
-        
+                         callbacks=[stopper])
+
         ##Save the weights for next run. 
-        model.save_weights("model_2.h5")
-        print("Saved model to disk")
+        model.save_weights(folder + modelname)
+        print("Saved grid model to disk")
 
         # This is evaluating the model, and printing the results of the epochs.
         scores = model.evaluate(X_train, y_train, batch_size=5000)
@@ -121,7 +104,7 @@ def fitting_loops(X,Y):
         # Then, let's round to either 0 or 1, since we have only two options.
         predictions_round = [abs(round(x[0])) for x in predictions]
 
-        ##Finding accuracy score of the predictions versus the actual Y. 
+        ##Finding accuracy score of the predictions versus the actual Y.
         accscore1 = accuracy_score(y_test, predictions_round)
         ##Printing it as a whole number instead of a percent of 1. (Just easier for me to read) 
         print("Rounded Test Accuracy:", accscore1 * 100)
@@ -134,53 +117,58 @@ def fitting_loops(X,Y):
         print('AUC: %f' % roc_auc)
 
         ##Confusion Matrix: 
-        cm = confusion_matrix(y_test, predictions_round)
-        print(cm)
+        tn, fp, fn, tp = confusion_matrix(y_test, predictions_round).ravel()
+        print(tn, fp, fn, tp)
 
         ##Adding the scores to the average holder file. 
-        avg_holder.loc[j, 'Train_Acc'] = scores[1] * 100
-        avg_holder.loc[j, 'Train_Loss'] = sum(hist.history['loss']) / len(hist.history['loss'])
-        avg_holder.loc[j, 'Test_Acc'] = accscore1 * 100
-        avg_holder.loc[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
-        avg_holder.loc[j, 'AUC'] = roc_auc
-        avg_holder.loc[j, 'CM'] = str(cm)
+        avg_holder.at[j, 'Train_Acc'] = scores[1] * 100
+        avg_holder.at[j, 'Train_Loss'] = sum(hist.history['loss']) / len(hist.history['loss'])
+        avg_holder.at[j, 'Test_Acc'] = accscore1 * 100
+        avg_holder.at[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
+        avg_holder.at[j, 'AUC'] = roc_auc
+        avg_holder.at[j, 'TP'] = tp
+        avg_holder.at[j, 'TN'] = tn
+        avg_holder.at[j, 'FP'] = fp
+        avg_holder.at[j, 'FN'] = fn
 
-        #Save the average holder file: 
+
+        # Save the average holder file: 
         avg_holder.to_csv(file, sep=",")
 
-        #If we are on the 1st, 50th, or 100th cycle, make some graphs: 
-        if i % 50 == 0:
-            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i)
+        # Saving every ten rounds,and the end, make some graphs: 
+        if i % 10 == 0 or i == 49:
+            generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder)
 
-def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
+
+def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     font = {'family': 'serif',
             'weight': 'regular',
             'size': 14}
     plt.rc('font', **font)
     fig = plt.figure()
     # plt.subplot(211)
-    plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot(fpr, tpr, label='Grid ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
     plt.yticks((0, .5, 1), (0, .5, 1))
     plt.xticks((0, .5, 1), (0, .5, 1))
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     # plt.title('Receiver operating characteristic curve')
-    title = '../Graphs & Images/ResultsFromIterations/' + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
+    title = folder + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
     # plt.subplot(212)
-    fig = plt.figure()
-    plt.xticks(range(0, 20), range(1, 21), rotation=90)
+    fig = plt.figure(figsize=(24.0, 8.0))
+    plt.xticks(range(0, 100), range(0, 100), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
     plt.ylabel('Accident')
     plt.xlabel('Record')
     plt.grid(which='major', axis='x')
-    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    x = range(0, 100)
     plt.axhline(y=0.5, color='gray', linestyle='-')
-    plt.scatter(x=x, y=predictions[0:20], s=100, c='blue', marker='x', linewidth=2)
-    plt.scatter(x=x, y=y_test[0:20], s=110,
+    plt.scatter(x=x, y=predictions[0:100], s=100, c='blue', marker='x', linewidth=2)
+    plt.scatter(x=x, y=y_test[0:100], s=110,
                 facecolors='none', edgecolors='r', linewidths=2)
-    title = '../Graphs & Images/ResultsFromIterations/' + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
+    title = folder + str(datetime.datetime.today()) + 'pred' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
 
     font = {'family': 'serif',
@@ -193,7 +181,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     a1.plot(hist.history['val_acc'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
-    a1.set_yticks((.5, .65, .8))
+    a1.set_yticks((.5, .75, 1), (.5, .75, 1))
     a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
     # plt.show()
@@ -206,14 +194,13 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
     a2.plot(hist.history['val_loss'])
     a2.set_ylabel('Loss')
     a2.set_xlabel('Epoch')
-    a2.set_yticks((.15, .20, .25,))
+    a2.set_yticks((0,.25, .5), (0, .25, .5))
     a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
     # plt.show()
-    title = '../Graphs & Images/ResultsFromIterations/' + str(datetime.datetime.today()) + 'lossandacc' + str(
+    title = folder + str(datetime.datetime.today()) + 'lossandacc' + str(
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
-
 
 ## The steps of creating a neural network or deep learning model ##
 # 1. Load Data
@@ -224,12 +211,24 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc,i):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Full Data Time Sort for Model_MMR.csv", sep=",")
-#Creating X and Y. Accident is the first column, therefore it is 0. 
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Temporal 50-50 Split.csv")
+# file = "/media/pete/USB DISK/2019 Grid Data Spatial Master List MMR.feather"
+# dataset = feather.read_dataframe(file)
+# dataset = dataset.drop(["Hour","Unix","Grid_Block"],axis=1)
+# print(dataset.columns)
+# exit()
+# 'Grid_Block'
+#           Shuffling if needed. 
+dataset = shuffle(dataset)
+dataset = shuffle(dataset)
+folder = '../Graphs & Images/ResultsfromTemporalShift/50-50 Split/'
+modelname = "model_50-50_Temporal.h5"
+
+#           Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
 Y = dataset.ix[:, 0].values
 
-##Steps 2-5 are inside the fitting loops method. 
-fitting_loops(X,Y)
+##      Steps 2-5 are inside the fitting loops method. 
+fitting_loops(X, Y, folder, modelname)
 
 

@@ -1,0 +1,617 @@
+---
+title: "HamiltonHotSpots"
+author: "Pete Way"
+date: "3/21/2019"
+output: pdf_document
+---
+
+## R Markdown
+
+```{r}
+library(ggmap)
+utc1=read.csv("../Excel & CSV Sheets/Full Data.csv", header=T)
+# min(utc$Latitude)
+# max(utc$Latitude)
+# min(utc$Longitude)
+# max(utc$Longitude)
+#
+a=which(utc1$Accident==1)
+df1=utc[a,]
+
+# #
+locations=data.frame(df$Route, df$Longitude, df$Latitude)
+u=unique(locations)
+# #
+sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+for (i in 1:dim(u)[1]){
+w=which(df$Route==u[i,1] & df$Longitude==u[i,2] &
+	df$Latitude==u[i,3])
+sums[i]<-length(df$Accident[w])
+}
+
+# #
+df4=data.frame(u, sums)#uniques locations and the number of accidents there
+# hs = which(df4$sums>25)
+# df4=df4[hs,]
+
+# #
+rank=rep(NA, dim(df4)[1])
+rank[which(sums<=25)] <-'yellow'
+rank[which(sums<=75)] <-'orange'
+rank[which(sums<=125)] <-'red'
+rank[which(sums>=150)] <-'black'
+
+
+locs=data.frame(u[,2:3])
+# 
+# y=which(rank=='yellow')
+# r=which(rank=='red')
+# b=which(rank=='black')
+# o = which(rank=='orange')
+
+# df4[0:10,]
+
+df4$rank <- rank
+
+
+df5 = df4[!is.na(df4$rank),]
+df5[0:10,]
+
+
+df5$rank = with(df5, reorder(df5$rank, df5$sum))
+df5[0:10,]
+
+lats<-c(34.99, 35.15)
+lons<-c(-85.4,-85.05)
+
+
+# png("../Graphs & Images/R Maps/HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+  geom_point(aes(x=df.Longitude, y=df.Latitude, color=df5$rank), data=df5, alpha = .75)  + guides( guide = "none" ) + scale_color_manual(values = c("orange","red","black"),  labels = c("25 - 50","50 - 75"," > 75"), name = "Accidents")
+
+
+               # Inside the ggmap call, put this : , legend="right"
+
+# dev.off()
+
+
+```
+
+```{r}
+library(ggmap)
+
+accidents =read.csv("../Excel & CSV Sheets/2019 Data/DailyReports/911_Reports_for_2019-03-22.csv", header=T)
+colnames(accidents)
+# forecast18 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-21_18 other.csv", header=T)
+# nrow(forecast18)
+# forecast00 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_0.csv", header=T)
+
+forecast06 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_6.csv", header=T)
+# 
+# forecast12 =read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for3-22-2019_2019-03-22_12.csv", header=T)
+#
+# a=which(forecast18$Prediction==1)
+# length(a)
+# forecast18=forecast18[a,]
+# nrow(forecast18)
+#
+# a=which(forecast00$Prediction==1)
+# forecast00=forecast00[a,]
+# a=which(forecast06$Prediction==1)
+# forecast06=forecast06[a,]
+a=which(forecast06$Prediction==1)
+forecast06=forecast06[a,]
+
+# colnames(accidents)
+# colnames(forecast1)
+# colnames(forecast2)
+sixPM = which(forecast06$Probability>=0.50)
+forecast06=forecast06[sixPM,]
+cat("Number of entries above 50 percent sure, 6AM",nrow(forecast06))
+
+midnight = which(forecast06$Probability>=0.50)
+forecast06_50=forecast06[midnight,]
+cat("\nNumber of entries above 50 percent sure",nrow(forecast06_50))
+midnight = which(forecast06$Probability>=0.70)
+forecast06_70=forecast06[midnight,]
+cat("\nNumber of entries above 70 percent sure",nrow(forecast06_70))
+midnight = which(forecast06$Probability>=0.90)
+forecast06_90=forecast06[midnight,]
+cat("\nNumber of entries above 90 percent sure",nrow(forecast06_90))
+
+# sixAM = which(forecast06$Probability>=0.50)
+# forecast06=forecast06[sixAM,]
+# cat("\nNumber of entries above 50 percent sure, 6AM",nrow(forecast06))
+# noon = which(forecast12$Probability>=0.50)
+# forecast12=forecast12[noon,]
+# cat("\nNumber of entries above 50 percent sure, noon",nrow(forecast12))
+
+# add_points <- function(df, colored, sized, alphed) {
+#   geom_point(aes(x=df$Longitude, y=df$Latitude),data=df, color= colored, alpha=alphed, size=sized)
+# }
+
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+png("../Graphs & Images/R Maps/50thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .5 Threshold") +
+  geom_point(aes(x=forecast06_50$Longitude, y=forecast06_50$Latitude), data=forecast06_50, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+
+png("../Graphs & Images/R Maps/70thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .7 Threshold") +
+  geom_point(aes(x=forecast06_70$Longitude, y=forecast06_70$Latitude), data=forecast06_70, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+png("../Graphs & Images/R Maps/90thresh_6am_March22.png", width=12,height=12,units='in', res=900)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title="Accidents in Chattanooga on March 22 - 6AM .9 Threshold") +
+  geom_point(aes(x=forecast06_90$Longitude, y=forecast06_90$Latitude), data=forecast06_90, color= 'purple', alpha=.3, size=1.5) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'red', alpha=.7, size=2)
+dev.off()
+
+```
+
+```{r}
+library(ggmap)
+accidents =read.csv("/Users/pete/Downloads/Accident Report.csv", header=T)
+# head(accidents)
+accidents = accidents[,c('Latitude','Longitude')]
+accidents['Probability'] = 1
+# head(accidents)
+
+forecastMMR =read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-02_18_minmax_withpred.csv", header=T)
+
+timesorted = read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-03_6_timesorted.csv", header=T)
+
+forecaststand =read.csv("../Excel & CSV Sheets/Forecast Files/Forecast-for4-3-2019_2019-04-02_18_noMM.csv", header=T)
+
+forecastMMR$Latitude = forecaststand$Latitude
+forecastMMR$Longitude = forecaststand$Longitude
+
+a=which(forecastMMR$Prediction==1)
+length(a)
+forecastMMR=forecastMMR[a,c('Latitude','Longitude', 'Probability')]
+
+a=which(timesorted$Prediction==1)
+length(a)
+timesorted=timesorted[a,c('Latitude','Longitude', 'Probability')]
+
+b=which(forecaststand$Prediction==1)
+forecaststand=forecaststand[b,c('Latitude','Longitude', 'Probability')]
+length(b)
+
+# library(reshape)
+# zz <- melt(list(MMR=forecastMMR,stand=forecaststand,accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
+# head(zz)
+
+zz <- melt(list(TimeSorted=timesorted, accident=accidents), id.vars=c("Latitude", "Longitude", "Probability"))
+head(zz)
+
+thresh = which(zz$Probability>=0.90)
+zz=zz[thresh,]
+
+
+png("../Graphs & Images/R Maps/April03/April03_6PM_.90thresh.png", width=6,height=6,units='in', res=800)
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), alpha=.25, data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","dodgerblue"),  labels = c("Accident","Standard"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7,.15)) + ggtitle("Accidents Predicted at 6PM .90 threshold")
+dev.off()
+
+png("../Graphs & Images/R Maps/April03/April03_6AM_TimeSorted.png", width=6,height=6,units='in', res=800)
+lats<-c(34.99, 35.45)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +  geom_point(aes(x=zz$Longitude, y=zz$Latitude, color=zz$L1), data=zz) + guides( guide = "none" ) + scale_color_manual(values = c("black","red"),  labels = c("Accident","TimeSorted"), name = "Occurrences")  + scale_alpha_manual(c(1.5,.7)) + ggtitle("Accidents Predicted at 6AM Time Sorted")
+dev.off()
+```
+
+
+```{r}
+##Find probabilities
+
+forecastMMR =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_minmax_withpred.csv", header=T)
+a=which(forecastMMR$Prediction==1)
+length(a)
+sevenfive = which(forecastMMR$Probability>=0.75)
+length(sevenfive)
+ninety = which(forecastMMR$Probability>=0.90)
+length(ninety)
+sixAM = which(forecastMMR$Probability>=0.95)
+length(ninefive)
+
+forecaststand =read.csv("../Excel & CSV Sheets/ETRIMS/Forecast-for4-3-2019_2019-04-03_12_noMM.csv", header=T)
+a=which(forecaststand$Prediction==1)
+length(a)
+sevenfive = which(forecaststand$Probability>=0.75)
+length(sevenfive)
+ninety = which(forecaststand$Probability>=0.90)
+length(ninety)
+sixAM = which(forecaststand$Probability>=0.95)
+length(ninefive)
+```
+
+```{r}
+library(ggmap)
+forecast = read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for5-14-2019_2019-05-14_12.csv", header=T)
+forecast = forecast[which(forecast$Prediction==1),]
+hours = unique(forecast$Hour)
+
+# min(forecast$Latitude)
+# max(forecast$Latitude)
+# mean(forecast$Latitude)
+# mean(forecast$Longitude)
+# min(forecast$Longitude)
+# max(forecast$Longitude)
+logins = read.csv("../Excel & CSV Sheets/Login.csv", header=T)
+googlekey = logins[3,2]
+register_google(key=googlekey)
+
+thishour = forecast[which(forecast$Hour==0),]
+# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/PredictionMapForMay14_9am_0", width=8,height=8,units='in', res=300)
+highprob = thishour[which(thishour$Probability>=.90),]
+midprob = thishour[which(thishour$Probability>=.75),]
+lowprob = thishour[which(thishour$Probability>=.5),]
+
+ggmap(get_googlemap(center = c(lon = -85.225, lat = 35.07),
+                  zoom = 11, scale = 2,
+                  maptype ='roadmap',
+                  color = 'bw')) +   
+geom_point(aes(x = Longitude, y = Latitude), colour = "yellow", data = lowprob, alpha=0.9, size = 2) +
+geom_point(aes(x = Longitude, y = Latitude), colour = "orange", data = midprob, alpha=0.9, size = 2)
+# 
+# +
+# geom_point(aes(x = Longitude, y = Latitude), colour = "red", data = highprob, alpha=0.9, size = 2)
+
+# dev.off()
+```
+
+```{r}
+# forecast = read.csv("/Users/pete/Downloads/Forecast-for5-14-2019_2019-05-14_9.csv", header=T)
+# forecast = forecast[which(forecast$Prediction==1),]
+# # hours = unique(forecast$Hour)
+# polys = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Layout Test Files/VerticesPoints.csv")
+# head(polys)
+# 
+# accidents = read.csv("../Excel & CSV Sheets/2019 Data/Final Form Reports/911_Reports_for_2019-05-14_FinalForm.csv", header = TRUE)
+accidents = read.csv("/Users/pete/Downloads/Accident Report (1).csv", header = TRUE)
+
+# forecast = read.csv("../Excel & CSV Sheets/ Forecast Files/Forecast-for5-14-2019_2019-05-14_12.csv", header=TRUE)
+forecast = read.csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv", header=TRUE)
+
+forecast = forecast[which(forecast$Prediction==1),]
+begin = 7
+  end = 10
+# thishour = forecast
+thishour = forecast[which(forecast$Hour>=begin & forecast$Hour<=end),]
+accidents = accidents[which(accidents$Hour>=begin & accidents$Hour <=end),]
+
+# low = which(thishour$Probability>=0.5)
+# low=thishour[low,]
+mid = which(thishour$Probability>=0.80)
+mid=thishour[mid,]
+high = which(thishour$Probability>=0.95)
+high=thishour[high,]
+# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/HeatMapMapForMay14_time1_noon", width=8,height=8,units='in', res=300)
+par(mar = rep(0, 4))
+lons = c(-85.39, -85.05)
+lats = c(34.99, 35.15)
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+ # geom_tile(aes(x = Longitude, y = Latitude), data = low, alpha= low$Probability, color='yellow',fill='yellow', size = 2) +  
+  geom_tile(aes(x = Longitude, y = Latitude), data = mid, alpha= mid$Probability, color='orange', fill='orange', size = 2) + 
+  geom_tile(aes(x = Longitude, y = Latitude), data = high, alpha= high$Probability, color='red', fill='red', size = 1) +  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, color= 'black', alpha=.7, size=2)
+# dev.off()
+
+# + scale_fill_gradientn(name = "Probability", space = "Lab", colours=)
+```
+
+```{r}
+polys$Grid_Block = polys$ORIG_FID
+
+dat <- merge(thishour, polys, by = "Grid_Block", all.x = TRUE)
+colnames(dat)
+
+library(rio)
+write.csv(dat, file = "/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Layout Test Files/Combined.csv")
+```
+
+```{r}
+dataset = read.csv("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Full Data with Year.csv",sep=",")
+dataset = dataset[which(dataset$Accident==1),]
+tabMon = table(dataset$Year, dataset$Month)
+
+barplot(tabMon, ylab="Frequency", xlab="Month", main="Side-By-Side Bar Chart", col=c("violet", "pink", "purple" ), beside=TRUE, width=.3)
+legend("topleft", title="Year", legend= c(2017,2018,2019), fill =c("violet", "pink", "purple" ), box.lty=0)
+
+tab = table(dataset$Year)
+barplot(tab)
+
+tabMon = table(dataset$Year, dataset$Month)
+```
+
+```{r}
+
+##Simplepolygon map of Chattanooga area
+library('ggplot2')
+library('ggmap')
+polys = read.csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv")
+polys[0:5]
+plot(polys$X, polys$Y)
+
+logins = read.csv("../Excel & CSV Sheets/login.csv", header=F)
+googlekey = logins[3,2]
+register_google(key=googlekey)
+# png("/Users/pete/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/ResultsFromGridIterations/PolygonMap", width=8,height=8,units='in', res=300)
+ggmap(get_googlemap(center = c(lon = -85.225, lat = 35.07),
+                  zoom = 11, scale = 2,
+                  maptype ='roadmap',
+                  color = 'bw'), layout='tight') +
+geom_polygon(data = fortify(polys),
+                  aes(X, Y, group = ORIG_FID),
+                  fill = NA, colour = "red", alpha = 0.2)
+# dev.off()
+```
+
+```{r}
+
+```
+
+
+```{r}
+griddata = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data.csv",sep=",")
+griddata = griddata[which(dataset$Accident==1),]
+
+weekdaytable = table(griddata$DayFrame, griddata$WeekDay)
+weekendtable = table(griddata$DayFrame, griddata$WeekEnd)
+traveltable = table(griddata$DayFrame, griddata$Travel)
+
+cat("WeekdayTable")
+weekdaytable
+
+cat("WeekEndTable")
+weekendtable
+
+cat("TravelTable")
+traveltable
+
+sum(traveltable)
+sum(weekendtable)
+sum(weekdaytable)
+```
+
+```{r}
+length(unique(df$Date))
+df$Year
+no19 = df[which(df$Year!=2019),]
+length(unique(no19$Date))
+# convert Date from character to class Date using a 2 digit year
+
+df$Date <- as.Date(df$Date, '%d/%m/%y')
+df$Date
+df$Year <-lubridate::year(df$Date)
+df$Year
+
+eighteen = df[which(df$Year==2018 ),]
+seventeen = df[which(df$Year==2017 ),]
+
+library(ggplot2)
+datetable = table(df$Date)
+datetable
+# aggregate by day
+ggplot(df, main="ALL", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+ggplot(seventeen, main="2017", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+ggplot(eighteen, main="2018", ylim=c(0,200)) + aes(x = Date) + 
+  geom_bar()
+
+
+
+ggplot(seventeen, main="2017", ylim=c(0,1000)) + aes(x = lubridate::floor_date(Date, "month")) + 
+  geom_bar()
+
+ggplot(eighteen, main="2018", ylim=c(0,1000)) + aes(x = lubridate::floor_date(Date, "month")) + 
+  geom_bar()
+
+length(unique(df$Date))
+length(byDate)
+byDate = table(df$Date)
+byDate
+plot(byDate, type="l")
+
+byDate17 = table(seventeen$Date)
+byDate17
+plot(byDate17, type="l", ylim=c(0,250))
+
+byDate18 = table(eighteen$Date)
+byDate18
+plot(byDate18, type="l", ylim=c(0,250), main="2018",col="red", ylab="Accidents")
+lines(byDate17, type="l", col="blue")
+plot(byDate17, type="l", ylim=c(0,250), main="2017",col="blue", ylab="Accidents")
+
+length(byDate17)
+length(byDate18)
+
+plot(byDate18, type="l", col="red", ylab="Number of Accidents per Day", xlab="", xaxt="none", ylim=c(0,250))
+lines(byDate17, type="l", col="blue")
+
+ggplot(df) + aes(x = lubridate::floor_date(Date, "year")) + 
+  geom_bar()
+
+```
+
+```{r}
+library(RColorBrewer)
+utc=read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Full Data Grid.csv", header=T)
+
+a=which(utc$Accident==1)
+df=utc[a,]
+df$Date
+df$Date <- as.Date(df$Date, '%Y-%m-%d')
+df$Date
+df$Year <-lubridate::year(df$Date)
+df$Year
+
+df1$Date <- as.Date(df1$Date, '%Y-%m-%d')
+df1$Date
+df1$Year <-lubridate::year(df1$Date)
+df1$Year
+
+no19 = df[which(df$Year!=2019),]
+byday19 = table(no19$Date)
+byday19
+length(byday19)
+
+
+byday = table(df$Date)
+byday
+length(byday)
+byyear = table(df$Year)
+byyear
+
+bymonthYear19 = table(no19$Year, no19$Month)
+bymonthYear19
+
+bymonthYear19M = table(df1$Year, df1$Month)
+bymonthYear19M
+# png("../Graphs & Images/MonthandYearSplit.png", width=12,height=6,units='in', res=300)
+par(mar=c(4,4,4,4))
+barplot(bymonthYear, beside=T, xaxt="none", ylim=c(0,3500), col=brewer.pal(3, "Accent"), yaxt="none", main="Accidents by Month and Year", ylab="Accidents", xlab="Month")
+axis(1, seq(2,48,by=4) , c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"),las="2")
+legend("topleft",c('2017', '2018','2019'), fill=brewer.pal(3, "Accent"))
+axis(2,las="2")
+# dev.off()
+
+par(mar=c(4,4,4,4))
+barplot(bymonthYear19, beside=T, xaxt="none", ylim=c(0,3500), col=c("red","blue"), yaxt="none", main="Accidents by Month and Year", ylab="Accidents", xlab="Month")
+axis(1, seq(2,36,by=3) , c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"),las="2")
+legend("topleft",c('2017', '2018'), fill=c("red","blue"))
+axis(2,las="2")
+# dev.off()
+```
+
+```{r}
+bymonthYear19 = as.data.frame(bymonthYear19)
+bymonthYear19 =  bymonthYear19[order(bymonthYear19$Year, bymonthYear19$Month),]
+bymonthYear19
+# months = c("Jan 17", "Feb 17", "Mar 17", "Apr 17", "May 17","June 17","July 17","Aug 17","Sep 17","Oct 17","Nov 17","Dec 17", "Jan 18", "Feb 18", "Mar 18", "Apr 18", "May 18","June 18","July 18","Aug 18","Sep 18","Oct 18","Nov 18","Dec 18")
+
+months = c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec")
+# dim(bymonthYear19)
+# names(bymonthYear19) <- c("Year", "Month", "Count")
+# png("../Graphs & Images/MonthandYear.png", width=12,height=6,units='in', res=300)
+plot(bymonthYear19$Count[0:12], type="o", xaxt="none", xlab="", ylab="Accident Count", ylim=c(1500,3500), main="Division of Accidents by Year and Month")
+legend("topleft",c("2017","2018"), fill=c("black","red"))
+lines(bymonthYear19$Count[13:24], type="o", col="red")
+axis(1, seq(1,12, by=1),months, las="2")
+abline(v=13)
+# dev.off()
+```
+
+
+```{r}
+data = read.csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018 MMR.csv")
+a=which(data$Accident==1)
+yesdata=data[a,]
+
+b=which(data$Accident==0)
+nodata = data[b,]
+hist(yesdata$Precipitation_Intensity)
+hist(nodata$Precipitation_Intensity)
+
+hist(yesdata$Rain)
+hist(nodata$Rain)
+
+hist(yesdata$Visibility)
+hist(nodata$Visibility)
+```
+
+```{r}
+png("../Graphs & Images/R Maps/GridOriMap.png", width=12,height=6,units='in', res=300)
+lats <- c(34.99, 35.15)
+lons <- c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="") +
+geom_polygon(data = fortify(polys),
+aes(X, Y, group = ORIG_FID),
+fill = NA, colour = "black", alpha = 0.2)
+dev.off()
+```
+
+
+
+```{r}
+## A MAP THAT ACTUALLY FREAKING WORKS
+accidents = read.csv("../Excel & CSV Sheets/April-12-2019_Accidents.csv")
+forecast = "../Graphs & Images/ResultsFromCutGridFixTesting/CutGF-50-50.csv"
+predict = read.csv(forecast)
+csv = (strsplit(gsub("_","", forecast), c("/"))[[1]])
+model = unlist(strsplit(csv, split='.csv', fixed=TRUE))[2]
+print(model)
+dayframe = 3
+title= "Accidents in "+ dayframe + "with " + model
+print(title)
+lats <- c(34.99, 35.15)
+lons <- c(-85.4,-85.05)
+accidents = accidents[which(accidents$DayFrame==dayframe),]
+predict = predict[which(predict$Prediction==1 ),]
+predict = predict[which(predict$DayFrame==dayframe),]
+png("../Graphs & Images/R Maps/GridOriMap.png", width=12,height=6,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+# calc_zoom(bb)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="") +
+geom_polygon(data = fortify(polys),
+aes(X, Y, group = ORIG_FID),
+fill = NA, colour = "black", alpha = 0.2) +
+geom_point(aes(x=predict$Longitude, y=predict$Latitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red') +
+  geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, alpha = .95, col = 'black', size=3, shape = 8) 
+# dev.off()
+```
+
+
+
+
