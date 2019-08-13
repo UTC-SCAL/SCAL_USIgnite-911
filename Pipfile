@@ -22,6 +22,12 @@ xlsxwriter = "*"
 xlrd = "*"
 plaidml = "*"
 keras = "*"
+darksky = "*"
+darkskylib = "*"
+feather-format = "*"
+tensorflow-gpu = "*"
+bdateutil = "*"
+python-dateutil = "*"
 
 [dev-packages]
 "autopep8" = "*"
