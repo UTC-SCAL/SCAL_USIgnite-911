@@ -22,11 +22,12 @@ from sklearn import preprocessing
 
 start = datetime.datetime.now()
 all_weather = feather.read_dataframe("../Ignore/Weather/ALL_Weather_with_Binary.feather")
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv", sep=",")
+
+data = pandas.read_csv("Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv", sep=",")
 ##Adjusting column types and such
 data['Hour'] = data['Hour'].astype(int)
 data['DayFrame'] = data['DayFrame'].astype(int)
-# data = data.drop(['Latitude','Longitude'], axis=1)
+
 
 ## Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file 
 def fillForecastFile(places, filename):
@@ -99,6 +100,9 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Weather fetch complete")
     newdata = newdata[['Hour','DayFrame','WeekDay','WeekEnd','Clear','Cloudy','Rain','Foggy','Snow','RainBefore','Grid_Block','Grid_Col',
     'Grid_Row','Highway','Land_Use_Mode','Road_Count','time','precipIntensity']]
+    if len(newdata) == 0:
+        print("Weather pull failed. Select Different Date")
+        exit()
     return newdata
 
 ##Step 2 - Standardize Data. 
@@ -178,23 +182,21 @@ def predict_accidents(data, testnum, modelname):
     data["Prediction"] = predictions_round
  
     #Printing some of the found values, as well as the total number of predicted accidents for this data. 
-    print("\tMax probability: ",  round(float(max(probability)*100), 2))
     print("\tMin probability: ",  round(float(min(probability)*100), 2))
+    print("\tMax probability: ",  round(float(max(probability)*100), 2))
     print("\tAccidents predicted: ", sum(data.Prediction))
 
     return data
 
 ##Step 4 - Add results to unscaled version of data
 ##Add Prediction and Probability to the unscaled version of the data. 
-def add_Pred_andProb(data, scaled, folder):
+def add_Pred_andProb(data, scaled, folder, suffix):
     print("Adding Probability and Predicted Accidents to data file")
-    scaledfile = folder + "MMR.csv"
-    filename = folder + "Forecast.csv"
+    scaledfile = folder + "MMR/" + suffix + "MMR.csv"
+    filename = folder + "Forecast/" + suffix + "Forecast.csv"
     scaled['Prediction'] = scaled['Prediction'].astype(int)
     scaled['Probability'] = scaled['Probability'].astype(float)
     missing = scaled['Probability'].isnull().sum()
-    print("\tLength of Scaled Probability:", len(scaled)-missing)
-    print("\tLength of Data:", len(data), "Length of scaled:",len(scaled))
     data['Prediction'] = scaled['Prediction'].values
     data['Probability'] = scaled['Probability'].values
     missing = data['Probability'].isnull().sum()
@@ -209,15 +211,16 @@ def finding_matches(accidents, data):
     data = data[data['Prediction'] == 1]
     match = 0
 
-    for i, value in enumerate(accidents.values):
-        for j, stuff in enumerate(data.values):
+    for i, _ in enumerate(accidents.values):
+        for j, _ in enumerate(data.values):
             if (accidents.Grid_Block.values[i] == data.Grid_Block.values[j] and accidents.DayFrame.values[i] == data.DayFrame.values[j]):
                 match += 1
     print("This many matches were found:", match)
 
 def make_DayFrameAlt(data):
     data["DayFrameAlt"] = ""
-    for i, value in enumerate(data.values):
+    data.Hour = data.Hour.astype(int)
+    for i, _ in enumerate(data.values):
         if 6 <= data.Hour.values[i] <= 12:
             data.DayFrameAlt.values[i] = 1
         elif 13 <= data.Hour.values[i] <= 18:
@@ -230,12 +233,12 @@ def finding_matches_alt(accidents, data):
     data = make_DayFrameAlt(data)
     accidents = make_DayFrameAlt(accidents)
     data = data[data['Prediction'] == 1]
-    match = 0
-    for i, value in enumerate(accidents.values):
-        for j, stuff in enumerate(data.values):
+    altmatch = 0
+    for i, _ in enumerate(accidents.values):
+        for j, _ in enumerate(data.values):
             if (accidents.Grid_Block.values[i] == data.Grid_Block.values[j] and accidents.DayFrameAlt.values[i] == data.DayFrameAlt.values[j]):
-                match += 1
-    print("This many matches were found:", match)
+                altmatch += 1
+    print("This many ALT matches were found:", altmatch)
 
 def make_directory(model):
     modeltype = (model.split("/")[-1]).split("_")[1]
@@ -245,22 +248,77 @@ def make_directory(model):
         modelsplit = "50-50 Split" ##50-50 
     else:
         modelsplit = "Test" ##Original
-    folder = "../Graphs & Images/Forecasts/"+modeltype+"/"+modelsplit+"/"+date+"/"
+
+    if "CutGF" in model:
+        modeltype= "CutGF"
+    elif "FullGF" in model:
+        modeltype = "FullGF" 
+    elif "CutRan" in model:
+        modeltype= "CutRan"
+    elif "FullRan" in model:
+        modeltype = "FullRan" 
+    elif "Spatial" in model:
+        modeltype = "Spatial" 
+    elif "Temporal" in model:
+        modeltype = "Temporal" 
+ 
+    folder = "Excel & CSV Sheets/Forecasts/"+date+"/"
+    suffix= modeltype +"_"+modelsplit+"_"
     print("\tSaving Folder:",folder)
 
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-    return folder
+    return folder, suffix
 #######################################################################################################################################################
 ##Which test version to run the model on, date wanted to predict for. 
-testnum = 5
-year = 2019
-month = 4
-day = 12
-date = str(year)+"-"+str(month)+"-"+str(day)
 
-model =     "../Graphs & Images/ResultsfromSpatialShift/New Fifth Test - MMR/model_Spatial_MMR.h5"
+##Cut GF
+# testnum = 3
+# model = "Graphs & Images/ResultsFromCutGridFixTesting/New Third Test - MMR/model_CutGF_MMR.h5"
+# model = "Graphs & Images/ResultsFromCutGridFixTesting/50-50 Split/model_50-50_CutGF.h5"
+# model = "Graphs & Images/ResultsFromCutGridFixTesting/75-25 Split/model_75-25_CutGF.h5"
+
+##Cut Ran
+testnum = 1
+# model = "Graphs & Images/ResultsFromCutRandomTesting/New First Test/model_CutRan_MMR.h5"
+# model = "Graphs & Images/ResultsFromCutRandomTesting/50-50 Split/model_CutRan_50-50.h5"
+model = "Graphs & Images/ResultsFromCutRandomTesting/75-25 Split/model_CutRan_75-25.h5"
+
+##Full GF
+# testnum = 5
+# model = "Graphs & Images/ResultsFromFullGridFixTesting/New Fifth Test - MMR/model_FullGF_MMR.h5"
+# model = "Graphs & Images/ResultsFromFullGridFixTesting/50-50 Split/model_50-50_FullGF.h5"
+# testnum = 1
+# model = "Graphs & Images/ResultsFromFullGridFixTesting/75-25 Split/model_75-25_FullGF.h5"
+
+##Full Ran 
+# testnum = 6
+# model = "Graphs & Images/ResultsFromFullRandomTesting/Sixth Test/model_FullRandom.h5"
+# testnum = 5
+# model = "Graphs & Images/ResultsFromFullRandomTesting/50-50 Split/model_FullRandom_50-50 Split.h5"
+# model = "Graphs & Images/ResultsFromFullRandomTesting/75-25 Split/model_FullRandom_75-25 Split.h5"
+
+##Spatial
+# testnum = 5
+# model = "Graphs & Images/ResultsfromSpatialShift/New Fifth Test - MMR/model_Spatial_MMR.h5"
+# model = "Graphs & Images/ResultsfromSpatialShift/50-50 Split/model_50-50_Spatial.h5"
+# model = "Graphs & Images/ResultsfromSpatialShift/75-25 Split/model_75-25_Spatial.h5"
+
+##Temporals
+# testnum = 1
+# model = "Graphs & Images/ResultsfromTemporalShift/New First Test - MMR/model_Temporal_MMR.h5"
+# model = "Graphs & Images/ResultsfromTemporalShift/50-50 Split/model_50-50_Temporal.h5"
+# model = "Graphs & Images/ResultsfromTemporalShift/75-25 Split/model_75-25_Temporal.h5"
+
+accidentfile = "Excel & CSV Sheets/Forecast Accident Dates/4_12_2019_Accidents.csv"
+
+accidents = pandas.read_csv(accidentfile)
+
+year = int(((accidentfile.split("/")[-1]).split("_")[2]).split(".csv")[0])
+month = int((accidentfile.split("/")[-1]).split("_")[0])
+day = int((accidentfile.split("/")[-1]).split("_")[1])
+date = str(year)+"-"+str(month)+"-"+str(day)
 
 ##Step 1 - Add weather
 data = finding_weather(data, all_weather, year, month, day)
@@ -274,11 +332,12 @@ scaled = predict_accidents(scaled, testnum, model)
 
 ##Step 4 - Add results to unscaled data - saves data to given filename. 
 #Order of parameters - data, scaled, folder to save forecast under
-folder = make_directory(model)
-scaled, data = add_Pred_andProb(data, scaled, folder)
+folder, suffix = make_directory(model)
+scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 ##Step 5 - Finding matches:
-accidents = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/April-12-2019_Accidents.csv")
+print("Accidents Occurred: ", len(accidents))
 finding_matches(accidents, data)
+finding_matches_alt(accidents, data)
 end = datetime.datetime.now()
 print("Testing completed in:", end-start)

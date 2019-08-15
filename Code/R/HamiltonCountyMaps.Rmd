@@ -612,6 +612,77 @@ geom_point(aes(x=predict$Longitude, y=predict$Latitude), data=predict, alpha = .
 # dev.off()
 ```
 
+```{r}
+##This loop takes all files in a directory and creates visualization for each dayframe.
 
+
+library(stringr)
+library(ggmap)
+latlongs = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv")
+# accidents = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/3_12_2017_Accidents.csv")
+path = "/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/2019-4-12/Forecast/"
+file.names <- dir(path, pattern =".csv")
+for(i in 1:length(file.names)){
+  print(i)
+  for (j in 1:4){
+
+    accidents = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/4_12_2019_Accidents.csv")
+    
+    forecast = file.names[i]
+    folder = str_c(c(strsplit(path, c("/"))[[1]][1:9]), collapse = "/")
+    filepath = str_c(c(path, forecast), collapse="")
+    predict = read.csv(filepath)
+    predict = merge(predict, latlongs[, c("Latitude","Longitude", "Grid_Col", "Grid_Row")], by=c("Grid_Col","Grid_Row"))
+    
+    file = strsplit(forecast, c("_"))[[1]]
+    modeltype = file[1]
+    modelratio =  file[2]
+    dayframe = j
+    date = (strsplit(path, c("/"))[[1]])[9]
+    title= str_c(c("DayFrame", dayframe , "with" , modeltype , modelratio, date), collapse= " ")
+    # print(title)
+    savepath = str_c(str_c(c(folder, "/DayFrame",dayframe, "/",title, ".png"), collapse=""))
+    # print(savepath)
+  
+    lats <- c(34.99, 35.15)
+    lons <- c(-85.4,-85.05)
+    accidents = accidents[which(accidents$DayFrame==dayframe),]
+    predict = predict[which(predict$Prediction==1 ),]
+    predict = predict[which(predict$DayFrame==dayframe),]
+    
+    png(savepath, width=10,height=5,units='in', res=300)
+    par(mar = rep(0, 4))
+    bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+    # calc_zoom(bb)
+    # cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+    # map = ggmap(cda, legend = "bottom") + xlim(lons) + ylim(lats)+theme_minimal(base_size = 22) +
+    #          labs(x="",y="") + ggtitle(title) + 
+    #          geom_point(aes(x=Latitude, y=Longitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red')
+
+    map = ggmap(cda, legend = "topright") +
+             xlim(lons) + ylim(lats)+theme_minimal(base_size = 22) +
+             labs(x="",y="") +
+             ggtitle(title) +
+             geom_polygon(data = fortify(polys), aes(X, Y, group = ORIG_FID), fill = NA, colour = "black", alpha = 0.2, show.legend = TRUE) +
+             geom_point(aes(x=predict$Longitude, y=predict$Latitude), data=predict, alpha = .1, col = 'red', shape = 21, size = 9, fill='red', show.legend = TRUE) +
+             geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, alpha = .95, col = 'black', size=10, shape = 42, show.legend = TRUE) 
+    
+    # ("topright",c("Grid_Blocks","Prediction", "Accidents"), fill=c("black","red", "black"), pch= c(0,21,42))
+           
+    print(map)
+    # 
+
+    dev.off()
+  }
+}
+```
+
+```{r}
+ggmap(cda, legend = "bottom") + xlim(lons) + ylim(lats)+theme_minimal(base_size = 22) +
+         labs(x="",y="") + ggtitle(title) +
+         geom_polygon(data = fortify(polys), aes(X, Y, group = ORIG_FID), fill = NA, colour = "black", alpha = 0.2) +
+         geom_point(aes(x=Latitude, y=Longitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red') +
+         geom_point(aes(x=Longitude, y=Latitude), data=accidents, alpha = .95, col = 'black', size=3, shape = 8)
+```
 
 

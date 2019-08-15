@@ -1,11 +1,11 @@
 import pandas
 import os, sys
 
-path = os.path.dirname(sys.argv[0])
+# path = os.path.dirname(sys.argv[0])
 
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
 
-def finding_Dayframe(data)
+def finding_Dayframe(data):
+    data['DayFrame'] = 0
     for i, value in enumerate(data.values):
         if 0 <= data.Hour.values[i] <= 4 or 18 <= data.Hour.values[i] <= 23:
             data.DayFrame.values[i] = 1
@@ -55,11 +55,14 @@ def finding_holidays(data, holidays):
             else:
                 pass
     return data
-
+filename = "Excel & CSV Sheets/Forecast Accident Dates/8_16_2018_Accidents.csv"
+data = pandas.read_csv(filename)
+data = finding_Dayframe(data)
+data.to_csv(filename, sep=",", index=False)
 
 # Call in your data and the holiday file
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
-holidays = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/HolidayList.csv")
+# data = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/Grid Data 2017+2018.csv")
+# holidays = pandas.read_csv("../Excel & CSV Sheets/Grid Layout Test Files/HolidayList.csv")
 
 
-data = finding_holidays(data, holidays)
+# data = finding_holidays(data, holidays)
