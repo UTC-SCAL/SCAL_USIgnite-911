@@ -19,9 +19,7 @@ import statistics
 import glob
 import os
 
-data = pandas.read_csv("Excel & CSV Sheets/Forecasts/2017-3-12/Forecast/CutGF_50-50_Forecast.csv")
-
-gridblocks = np.unique(data.Grid_Block)
+# data = pandas.read_csv("Excel & CSV Sheets/Forecasts/2017-3-12/Forecast/CutGF_50-50_Forecast.csv")
 
 files = glob.glob('./Excel & CSV Sheets/Forecasts/*/Forecast/*.csv')
 
@@ -61,20 +59,36 @@ for grp in dates:
 # and sets those to the corresponding columns within the correct date. 
 count = 0
 for model in modelframes:
+    # print(model)
+    # exit()
+    data = modelframes[model]
+    data = data[data['Road_Count'] > 0]
+    gridblocks = np.unique(data.Grid_Block)
+    # gridblocks = gridblocks.sort()
+    # print(gridblocks)
+    # exit()
     means = []
     modes = []
     modeldate = model.split(" ")[1]
     modelname = model.split(" ")[0]
-    print("Model number:",count, "  Model name:", model, "Model date:", modeldate)
+    print("Model number:",count, "  Model name:", modelname, "Model date:", modeldate)
     count += 1
     for i in gridblocks: 
         gridset = data[data['Grid_Block'] == i]
-        pred = statistics.mode(gridset["Prediction"])
+        try:
+            pred = statistics.mode(gridset["Prediction"])
+        except:
+            pred = 1
         prob = statistics.mean(gridset["Probability"])
         modes.append(pred)
         means.append(prob)
+    # print(len(means))
     probframes[modeldate][modelname] = means
     predframes[modeldate][modelname] = modes
+    predframes[modeldate]['Grid_Block'] = gridblocks
+    probframes[modeldate]['Grid_Block'] = gridblocks
+    means.clear()
+    modes.clear()
 
 
 ##This section saves the dataframes previously created into an 'Ensemble' folder within each date. 
@@ -83,12 +97,12 @@ for name in predframes:
     if not os.path.exists(savepath):
         os.makedirs(savepath)
     title =  savepath + name + "Prediction.csv"
-    predframes[name].to_csv(title)
+    predframes[name].to_csv(title, index=False)
 
 for name in probframes:
     savepath = "Excel & CSV Sheets/Forecasts/" + name + "/Ensemble/" 
     if not os.path.exists(savepath):
         os.makedirs(savepath)
     title = savepath + name + "Probability.csv"
-    probframes[name].to_csv(title)
+    probframes[name].to_csv(title, index=False)
 

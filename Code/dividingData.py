@@ -1,7 +1,28 @@
 import pandas
 import feather
+from datetime import datetime
 
+def get_Weekday_Files():
+    accidents['Date'] = pandas.to_datetime(accidents['Date'])
+    accidents['Day'] = (accidents['Date']).dt.dayofweek
 
+    Monday = accidents[accidents['Day'] == 0]
+    Tuesday = accidents[accidents['Day'] == 1]
+    Wednesday = accidents[accidents['Day'] == 2]
+    Thursday = accidents[accidents['Day'] == 3]
+    Friday = accidents[accidents['Day'] == 4]
+    Saturday = accidents[accidents['Day'] == 5]
+    Sunday = accidents[accidents['Day'] == 6]
+
+    Monday.to_csv("Excel & CSV Sheets/Accident Only Files/Monday2019.csv",index=False)
+    Tuesday.to_csv("Excel & CSV Sheets/Accident Only Files/Tuesday2019.csv",index=False)
+    Wednesday.to_csv("Excel & CSV Sheets/Accident Only Files/Wednesday2019.csv",index=False)
+    Thursday.to_csv("Excel & CSV Sheets/Accident Only Files/Thursday2019.csv",index=False)
+    Friday.to_csv("Excel & CSV Sheets/Accident Only Files/Friday2019.csv",index=False)
+    Saturday.to_csv("Excel & CSV Sheets/Accident Only Files/Saturday2019.csv",index=False)
+    Sunday.to_csv("Excel & CSV Sheets/Accident Only Files/Sunday2019.csv",index=False)
+
+accidents = pandas.read_csv("Excel & CSV Sheets/Accident Only Files/2019 Accidents.csv")
 
 
 def dividing_data(accidents, negatives, accident_percent):
