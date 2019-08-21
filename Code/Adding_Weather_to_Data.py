@@ -45,6 +45,29 @@ def finding_binaries(data):
     print("Clear completed in:", cleartime - snowtime)
     return data
 
+def pull_binaries(data, weather):
+    ##This method retrieves data from the all_weather file WITH BINARIES. It performs all needed functions EXCEPT
+    ## putting the columns into the correct order. Jeremy wants to do that by hand.
+    data['time'] = data.apply(lambda x: pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%m/%d/%y %H"),
+                              axis=1)
+    # This actually makes the column into the unix type
+    data['time'] = data.apply(lambda x: x.time.strftime('%s'), axis=1)
+
+    #This portion gets the hour before column
+    data['time'] = data['time'].astype(int)
+    data['hourbefore'] = data['time'] - 60 * 60
+
+    #The following line is needed to avoid the columnname_x problem that happens if the column already exists.
+    data = data.drop(['Rain','Cloudy','Fog','Snow','Clear', 'RainBefore', 'Precipitation_Intensity'], axis=1)
+
+    #The following three lines add the binaries, the rainbefore column, and then discards the time and hourbefore columns.
+    newdata = pandas.merge(data, weather[['Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'precipIntensity', 'Grid_Block', 'time']],
+                           on=['time', 'Grid_Block'])
+    newdata = pandas.merge(newdata, weather[['RainBefore', "Grid_Block", 'hourbefore']],
+                           on=['hourbefore', 'Grid_Block'])
+    newdata = newdata.drop(['time','hourbefore'], axis=1)
+
+    return newdata
 
 # Creates the unix time column for the provided file
 def make_unix_with_hour(data):
@@ -108,20 +131,25 @@ def add_weather(data, weather):
     newdata['ConditionBefore'] = newdata['ConditionBefore_y']
     newdata["Unix"] = newdata["time"]
     # Code to aggregate weather #
-    newdata = aggregate_weather(newdata)
+    # newdata = aggregate_weather(newdata)
     return newdata
 
 
 # Read in our data
 # data = feather.read_dataframe("../")
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/NS GridFix Master List.csv")
+data = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut_GridFix_Master_Full.csv")
 
 # Read in the weather file(s) you want to use
-all_weather = feather.read_dataframe("../Excel & CSV Sheets/2017+2018 Data/2017+2018WeatherFeather.feather")
+all_weather = feather.read_dataframe("../Ignore/Weather/ALL_Weather_with_Binary.feather")
 
+# data = make_unix_with_hour(data)
+# data = finding_binaries(data)
+# data = pull_binaries(data, all_weather)
+# data.to_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut_GridFix_Master_Full Complete.csv",
+#             index = False)
 
 
 
 # Saving the files: Choose which type you'd prefer
-newdata.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/NS GridFix Master List Formatted.csv")
+# newdata.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/NS GridFix Master List Formatted.csv")
 # feather.write_dataframe(newdata, "../")

@@ -1,5 +1,6 @@
 import pandas
 import glob
+from os.path import exists
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from keras.layers import Dense, Dropout
@@ -62,27 +63,33 @@ def find_Y(date, pred):
                 pred.Y[i] = 1 
     return pred
 
-def network(data):
+def network(data, folder, modelname, year):
 
-    X = data.ix[:, 0:(len(data.columns) - 2)].values
-    Y = data['Y']
-    print(X.shape)
+    X = data.ix[:, 0:(len(data.columns))].values
+    Y = data['Accident']
+
+    # print(X.shape)
     # print(X)
     # exit()
     model = Sequential()
     ##X.shape[1] is the number of columns inside of X.
-    model.add(Dense(X.shape[1],input_dim=X.shape[1], activation='sigmoid'))
+    model.add(Dense(X.shape[1], input_dim=X.shape[1], activation='sigmoid'))
 
+    # Use for standard sized variable set
+    model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
+    # model.add(Dense(X.shape[1]-15, activation='sigmoid'))
+    # model.add(Dense(X.shape[1]-20, activation='sigmoid'))
+    # model.add(Dropout(.1))
 
-    model.add(Dense(int(X.shape[1] * .75), activation='sigmoid'))
-    model.add(Dense(int(X.shape[1] / 2), activation='sigmoid'))
-    model.add(Dense(int(X.shape[1] * .25), activation='sigmoid'))
+    model.add(Dense(1, activation='sigmoid'))
 
     model.add(Dense(1, activation='sigmoid'))
 
     #   3. Compiling a model.
     model.compile(loss='mse',
-                    optimizer='rmsprop', metrics=['accuracy'])
+                    optimizer='nadam', metrics=['accuracy'])
     print(model.summary())
     avg_holder = pandas.DataFrame(
                 columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP"])
@@ -90,11 +97,19 @@ def network(data):
         X_train, X_test, y_train, y_test = train_test_split(
                     X, Y, test_size=0.30, random_state=42)
 
+        if exists(folder + year +modelname):
+            model.load_weights("../"+folder + modelname)
+            print("Loading Grid Model")
+
         # Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
-        patience = 30
+        patience = 15
         stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
-        hist = model.fit(X_train, y_train, epochs=2000, batch_size=80, validation_data=(X_test, y_test), verbose=1,
-                            callbacks=[stopper])
+        hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
+                         callbacks=[stopper])
+
+        model.save_weights("../"+folder + year + modelname)
+        print("Saved grid model to disk")
+
         scores = model.evaluate(X_train, y_train, batch_size=80)
         print("\nModel Training Accuracy:", scores[1] * 100)
         print("Model Training Loss:", sum(hist.history['loss']) / len(hist.history['loss']))
@@ -128,22 +143,34 @@ def network(data):
         avg_holder.at[i, 'TN'] = tn
         avg_holder.at[i, 'FP'] = fp
         avg_holder.at[i, 'FN'] = fn
-    avg_holder.to_csv("Excel & CSV Sheets/Forecasts/2017-5-16/Ensemble/ModelAverage.csv", sep=",", index=False)
+    avg_holder.to_csv("../"+folder+ year+"ModelAverage.csv", sep=",", index=False)
 
-filename = "Excel & CSV Sheets/Forecasts/2017-5-16/Ensemble/2017-5-16Prediction.csv"
+# filename = "../Excel & CSV Sheets/Forecasts/2017-5-16/Ensemble/2017-5-16Prediction.csv"
 # day = "2017-03-12"
 # exit()
-pred = pandas.read_csv(filename,sep= ",")
-
-pred = shuffle(pred)
-pred = shuffle(pred)
-pred.to_csv("Excel & CSV Sheets/Forecasts/2017-5-16/Ensemble/2017-5-16PredictionShuffled.csv", sep=",", index=False)
-
-pred = pred.drop(['Spatial_50-50', 'CutRan_50-50', 'FullGF_50-50', 'FullGF_75-25', 'FullGF_Test', 'FullRan_50-50', 'FullRan_75-25', 'FullRan_Test', 'Temporal_75-25', 'Temporal_Test'], axis=1)
 # pred = find_Y(day ,pred)
 # print(pred.head())
-print("Sum of Y:",sum(pred.Y))
-exit()
+# print("Sum of Y:",sum(pred.Y))
+# exit()
 
-# pred.to_csv(filename, index=False)
-network(pred)
+days = ['Monday','Tuesday', 'Wednesday','Thursday','Friday','Saturday','Sunday']
+year = '2017+2018'
+for day in days:
+    print(day)
+    print(year)
+    pred = pandas.read_csv("../Excel & CSV Sheets/Accident Only Files/"+day+year+".csv",sep= ",")
+
+    negs = pred[pred['Accident'] == 0]
+    print("Negatives ", len(negs))
+    acc = pred[pred['Accident'] == 1]
+    print("Accidents:", len(acc))
+
+    pred = shuffle(pred)
+    pred = shuffle(pred)
+
+    pred = pred.drop(["Date", "Time", "Latitude", "Longitude", "Weekday",
+                      "DayFrame", "Grid_Block"], axis=1)
+
+    folder = "Excel & CSV Sheets/Forecasts/"+ day +"/"
+    modelname = day+".h5"
+    network(pred, folder, modelname, year)
