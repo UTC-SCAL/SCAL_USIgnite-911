@@ -613,7 +613,7 @@ geom_point(aes(x=predict$Longitude, y=predict$Latitude), data=predict, alpha = .
 ```
 
 ```{r}
-##This loop takes all files in a directory and creates visualization for each dayframe.
+##This loop takes all files in a directory and creates visualization for each dayframe, saving into a particular folder based on the model and date.
 
 
 library(stringr)
@@ -624,9 +624,12 @@ path = "/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecas
 file.names <- dir(path, pattern =".csv")
 for(i in 1:length(file.names)){
   print(i)
+  accidents = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/4_12_2019_Accidents.csv")
+  forecast = file.names[i]
+  folder = str_c(c(strsplit(path, c("/"))[[1]][1:9]), collapse = "/")
+  filepath = str_c(c(path, forecast), collapse="")
+  predict = read.csv(filepath)
   for (j in 1:4){
-
-    accidents = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/4_12_2019_Accidents.csv")
     
     forecast = file.names[i]
     folder = str_c(c(strsplit(path, c("/"))[[1]][1:9]), collapse = "/")
@@ -678,11 +681,115 @@ for(i in 1:length(file.names)){
 ```
 
 ```{r}
-ggmap(cda, legend = "bottom") + xlim(lons) + ylim(lats)+theme_minimal(base_size = 22) +
+library(ggmap)
+polys = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout//Vertices Oriented Layout.csv")
+predict = read.csv("../../Excel & CSV Sheets/Forecasts/2017-3-12/Ensemble/2017-3-12Prediction.csv")
+latlongs = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv")
+accidents = read.csv("../../Excel & CSV Sheets/Forecast Accident Dates/3_12_2017_Accidents.csv")
+predict = predict[which(predict$Y==1 ),]
+predict = merge(predict, latlongs[, c("Latitude","Longitude", "Grid_Block")], by=c("Grid_Block"))
+predict = predict[!duplicated(predict), ]
+
+lats <- c(34.99, 35.15)
+lons <- c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+title = 'Test'
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ ggmap(cda, legend = "topright") + theme_minimal(base_size = 22) +
          labs(x="",y="") + ggtitle(title) +
          geom_polygon(data = fortify(polys), aes(X, Y, group = ORIG_FID), fill = NA, colour = "black", alpha = 0.2) +
-         geom_point(aes(x=Latitude, y=Longitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red') +
+         geom_point(aes(x=Longitude, y=Latitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red') +
          geom_point(aes(x=Longitude, y=Latitude), data=accidents, alpha = .95, col = 'black', size=3, shape = 8)
 ```
+
+
+```{r}
+library(ggmap)
+
+polys = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Vertices Oriented Layout.csv")
+latlongs = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv")
+
+accpath = "/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates"
+accfile.names <- dir(accpath, pattern ="*\\.csv", full.names = TRUE)
+
+predpath = "/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts"
+predfile.names <- dir(predpath, pattern = "*\\Prediction.csv", full.names = TRUE, include.dirs	= TRUE, recursive = TRUE)
+for(i in 2:10){
+  total = i
+  # print(i)
+  for(i in 1:length(predfile.names)){
+      print(i, total)
+      accidents = read.csv(accfile.names[i])
+      predict = read.csv(predfile.names[i])
+  
+      forecast = predfile.names[i]
+      predict = merge(predict, latlongs[, c("Latitude","Longitude", "Grid_Block")], by=c("Grid_Block"))
+      predict = predict[!duplicated(predict), ]
+      predict = predict[which(predict$Sum>=total ),]
+      filepath = paste0(c(strsplit(forecast, c("/"))[[1]][1:10]), collapse="/")
+      filepath = paste0(c(filepath, "/", total, "Prediction.png"), collapse = "")
+      print(filepath)
+      date = strsplit(forecast, c("/"))[[1]][9]
+      title= paste0(c(date, "Average Prediction Sum of", total), collapse= " ")
+      print(title)
+      # 
+      lats <- c(34.99, 35.15)
+      lons <- c(-85.4,-85.05)
+
+      png(filepath, width=10,height=5,units='in', res=300)
+      par(mar = rep(0, 4))
+      bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+
+      cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+      map = ggmap(cda, legend = "topright") +
+               xlim(lons) + ylim(lats)+theme_minimal(base_size = 22) +
+               labs(x="",y="") + ggtitle(title) + geom_polygon(data = fortify(polys), aes(X, Y, group = ORIG_FID), fill = NA, colour = "black", alpha = 0.2, show.legend = TRUE) + geom_point(aes(x=predict$Longitude, y=predict$Latitude), data=predict, alpha = .3, col = 'red', shape = 21, size = 9, fill='red', show.legend = TRUE) + geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, alpha = .95, col = 'black', size=10, shape = 42, show.legend = TRUE)
+
+      print(map)
+      dev.off()
+  }
+}
+```
+
+```{r}
+polys = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Vertices Oriented Layout.csv")
+latlongs = read.csv("../../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv")
+accidents1718 = read.csv('../../Excel & CSV Sheets/Accident Only Files/2017+2018 Accidents.csv')
+keepcols = c("Date","Time", "Grid_Block")
+accidents1718 = accidents1718[,keepcols ]
+accidents19 = read.csv("../../Excel & CSV Sheets/Accident Only Files/2019 Accidents.csv")
+keepcols = c("Date","Time", "Grid_Block")
+accidents19 = accidents19[,keepcols ]
+allaccidents = rbind(accidents1718, accidents19)
+
+gridcounts = table(allaccidents$Grid_Block)
+gridcounts
+
+gridcounts = as.data.frame(gridcounts) 
+colnames(gridcounts) = c("Grid_Block", "Frequency")
+
+colnames(polys) = c("GRID_ID","Grid_Block", "X", "Y", "Center_Lat","Center_Long", "Ghost_Lat", "Ghost_Long")
+freqgrid = merge(polys, gridcounts[, c("Frequency", "Grid_Block")], by=c("Grid_Block"))
+# gridcounts = gridcounts[!duplicated(gridcounts), ]
+
+max(freqgrid$Frequency)
+
+lats <- c(34.99, 35.15)
+lons <- c(-85.4,-85.05)
+
+png(filepath, width=10,height=5,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "topright") +theme_minimal(base_size = 22) + labs(x="",y="") + ggtitle("Hotspots of Chattanooga") +
+  geom_point(data = gridcounts, aes(x = Longitude, y = Latitude), size= (gridcounts$Frequency/100), alpha = .5, col= 'red', show.legend = TRUE)
+      
+      
+      # + geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, alpha = .95, col = 'black', size=10, shape = 42, show.legend = TRUE)
+
+```
+
 
 
