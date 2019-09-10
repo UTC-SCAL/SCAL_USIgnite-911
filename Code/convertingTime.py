@@ -4,7 +4,7 @@ from datetime import datetime
 # calldata = pandas.read_csv("", sep=",")
 
 
-def convertPrecipTime():
+def convertPrecipTime(calldata):
     # Cast the column as a string
     calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(str)
 
@@ -38,7 +38,21 @@ def unixFromStandard(calldata):
         calldata.Unix.values[k] = unixtime
     return calldata
 
-# data = pandas.read_csv("../Excel & CSV Sheets/2017+2018 Data/2017+2018 Accidents.csv",sep=",")
+def standardFromUnix(data):
+    # Cast the column as a string
+    data.time = data.time.astype(str)
+
+    ##Loop Converts each item within Precip Intensity Time to Unix time.
+    for i, value in enumerate(data.values):
+        unix = int(data.time.values[i])
+        readTime = str(datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+        data.timereadable.values[i] = readTime.split(" ")[1]
+        data.Date.values[i] = readTime.split(" ")[0]
+
+    return data
+
+data = pandas.read_csv("../Ignore/Weather/2019 Weather Updated.csv",sep=",")
+standardFromUnix(data)
 # data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
 # # This actually makes the column
 # data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
