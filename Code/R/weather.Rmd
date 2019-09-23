@@ -8,7 +8,7 @@ library(feather)
 weather = read_feather("/home/pete/Downloads/2017+2018 Weather Stage 2.feather")
 min = min(weather$Unix)
 max = max(weather$Unix)
-weathersorted = weather[order(weather$Unix),]\
+weathersorted = weather[order(weather$Unix),]
 head(weathersorted)
 min 
 max
@@ -59,7 +59,58 @@ head(oldweather)
 drop= c("time", "test", "test2")
 oldweather = oldweather[ , !(names(oldweather) %in% drop)]
 
-oldweather$test = as.numeric(as.POSIXct(oldweather$Date, format="%Y-%m-%d"))
+oldweather$test = paste(oldweather$Date, oldweather$hour, sep = " ")
 
+oldweather$Unix = as.numeric(as.POSIXct(oldweather$test, format="%Y-%m-%d %H"))
+
+head(oldweather)
+
+max(oldweather$Unix)
+
+library(feather)
+write_feather(oldweather, "/home/pete/Documents/GitHub/Ignore/Weather/2017+2018 Weather Unix.feather")
+colnames(oldweather)[colnames(oldweather)=="ORIG_FID"] <- "Grid_Block"
+```
+
+##Adding weather to accident records
+```{r}
+accidents = read.csv("/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accident Only Files/2017+2018 Accidents.csv")
+
+accidentswithHum <- merge(accidents,oldweather,by=c("Unix","Grid_Block"))
+
+colnames(accidentswithHum)
+
+drop= c("Time", "icon", "Date.y", "summary", "id", "precipIntensity.y", "precipType")
+accidentswithHum = accidentswithHum[ , !(names(accidentswithHum) %in% drop)]
+
+write.csv(accidentswithHum, "/home/pete/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accident Only Files/2017+2018 Accidents.csv")
+
+```
+
+##Finding high humidity records
+```{r}
+numofrecords = length(highhum$humidity)
+
+values = c(.80,.85, .90, .95, .98, .99, 1)
+for(i in values){
+print(i)
+maxhum = i
+highhum = with(accidentswithHum, accidentswithHum[(humidity >= maxhum ), ])
+typeof(highhum$humidity)
+numofrecords = length(highhum$humidity)
+highhum = highhum[order(highhum$humidity),]
+
+title = paste("Accidents - High Humidity", (maxhum*100), "%", numofrecords)
+library(ggmap)
+lats<-c(34.99, 35.15)
+lons<-c(-85.4,-85.05)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+map = ggmap(cda) +theme_minimal(base_size = 18) +
+  labs(x="Longitude",y="Latitude", title= title ) +
+  geom_point(aes(x=highhum$Center_Long, y=highhum$Center_Lat), data=highhum, color= 'red', alpha=.25, size=1.5)
+print(map)
+}
 ```
 
