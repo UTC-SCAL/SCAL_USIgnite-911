@@ -20,29 +20,29 @@ def find_cred(service):
 
 ##finds binary variables for the given event/conditions. 
 def finding_binaries(data):
-    starttime = datetime.datetime.now()
-    print("Beginning Lowercase conversion at:", starttime)
+    # starttime = datetime.datetime.now()
+    # print("Beginning Lowercase conversion at:", starttime)
     data.Event = data.Event.apply(lambda x: x.lower())
     data.Conditions = data.Conditions.apply(lambda x: x.lower())
-    data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
-    data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
-    lowertime = datetime.datetime.now()
-    print("Lowercase conversion done, Beginning Binary Lambdas at:", lowertime - starttime)
+    # data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
+    # data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
+    # lowertime = datetime.datetime.now()
+    # print("Lowercase conversion done, Beginning Binary Lambdas at:", lowertime - starttime)
     data['Rain'] = data.apply(lambda x : 1 if ("rain" in x.Event or "rain" in x.Conditions) else 0, axis=1)
-    raintime = datetime.datetime.now()
-    print("Rain completed in:", raintime - lowertime)
+    # raintime = datetime.datetime.now()
+    # print("Rain completed in:", raintime - lowertime)
     data['Cloudy'] = data.apply(lambda x : 1 if ("cloud" in x.Event or "cloud" in x.Conditions) else 0, axis=1)
-    cloudtime = datetime.datetime.now()
-    print("Cloudy completed in:", cloudtime - raintime)
+    # cloudtime = datetime.datetime.now()
+    # print("Cloudy completed in:", cloudtime - raintime)
     data['Foggy'] = data.apply(lambda x : 1 if ("fog" in x.Event or "fog" in x.Conditions) else 0, axis=1)
-    fogtime = datetime.datetime.now()
-    print("Foggy completed in:", fogtime - cloudtime)
+    # fogtime = datetime.datetime.now()
+    # print("Foggy completed in:", fogtime - cloudtime)
     data['Snow'] = data.apply(lambda x : 1 if ("snow" in x.Event or "snow" in x.Conditions) else 0, axis=1)
-    snowtime = datetime.datetime.now()
-    print("Snow completed in:", snowtime - fogtime)
+    # snowtime = datetime.datetime.now()
+    # print("Snow completed in:", snowtime - fogtime)
     data['Clear'] = data.apply(lambda x : 1 if ("clear" in x.Event or "clear" in x.Conditions) else 0, axis=1)
-    cleartime = datetime.datetime.now()
-    print("Clear completed in:", cleartime - snowtime)
+    # cleartime = datetime.datetime.now()
+    # print("Clear completed in:", cleartime - snowtime)
     return data
 
 def pull_binaries(data, weather):
@@ -117,7 +117,7 @@ def concise_weatherfile(weather):
 # and has not been formatted at all. 
 def add_weather(data, weather):
     ##Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out. 
-    data = data.drop(['precipIntensity'], axis=1)
+    # data = data.drop(['precipIntensity'], axis=1)
 
     # Merge the weather variables for the hour of the accident based on time and grid block
     newdata = pandas.merge(data, weather[['Event','Conditions', 'precipIntensity','time','Grid_Block']], how='left', on=['time','Grid_Block'])
@@ -137,16 +137,17 @@ def add_weather(data, weather):
 
 # Read in our data
 # data = feather.read_dataframe("../")
-data = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut_GridFix_Master_Full.csv")
+data = pandas.read_csv("../Ignore/Weather/2019 Weather Updated.csv")
 
+# header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Event', 'Hour',
+#                    'Conditions', "EventBefore", "ConditionBefore",  "Weekday", "Precipitation_Intensity",
+#                    "Precip_Intensity_Max", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+#                    "Grid_Block", "Grid_Col", "Grid_Row", "Highway", "Land_Use_Mode", "Road_Count")
+# data = data.reindex(columns=header_list)
 # Read in the weather file(s) you want to use
-all_weather = feather.read_dataframe("../Ignore/Weather/ALL_Weather_with_Binary.feather")
-
-# data = make_unix_with_hour(data)
-# data = finding_binaries(data)
-# data = pull_binaries(data, all_weather)
-# data.to_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut_GridFix_Master_Full Complete.csv",
-#             index = False)
+# all_weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather.feather")
+finding_binaries(data)
+data.to_csv("../Ignore/Weather/2019 Weather Updated Full.csv", index = False)
 
 
 

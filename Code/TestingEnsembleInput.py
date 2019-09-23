@@ -65,7 +65,7 @@ def find_Y(date, pred):
 
 def network(data, folder, modelname, year):
 
-    X = data.ix[:, 0:(len(data.columns))].values
+    X = data.ix[:, 1:(len(data.columns))].values
     Y = data['Accident']
 
     # print(X.shape)

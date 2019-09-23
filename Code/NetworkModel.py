@@ -84,7 +84,7 @@ def fitting_loops(X, Y, folder, modelname):
         print("Cycle: ", i)
 
         # Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
-        patience = 15
+        patience = 30
         stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
         hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
                          callbacks=[stopper])
@@ -211,7 +211,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 
 
 #           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Temporal 50-50 Split.csv")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Weekday-Weekend Models/Full Gridfix 50-50 Weekday.csv")
 # file = "/media/pete/USB DISK/2019 Grid Data Spatial Master List MMR.feather"
 # dataset = feather.read_dataframe(file)
 # dataset = dataset.drop(["Hour","Unix","Grid_Block"],axis=1)
@@ -221,8 +221,8 @@ dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files
 #           Shuffling if needed. 
 dataset = shuffle(dataset)
 dataset = shuffle(dataset)
-folder = '../Graphs & Images/ResultsfromTemporalShift/50-50 Split/'
-modelname = "model_50-50_Temporal.h5"
+folder = '../Graphs & Images/ResultsFromWeekdayTesting/'
+modelname = "model_GF50-50_Weekday.h5"
 
 #           Creating X and Y. Accident is the first column, therefore it is 0. 
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values

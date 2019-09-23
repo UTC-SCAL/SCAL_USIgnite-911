@@ -23,7 +23,7 @@ from sklearn import preprocessing
 start = datetime.datetime.now()
 all_weather = feather.read_dataframe("../Ignore/Weather/ALL_Weather_with_Binary.feather")
 
-data = pandas.read_csv("Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv", sep=",")
+data = pandas.read_csv("../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv", sep=",")
 ##Adjusting column types and such
 data['Hour'] = data['Hour'].astype(int)
 data['DayFrame'] = data['DayFrame'].astype(int)
@@ -156,11 +156,8 @@ def predict_accidents(data, testnum, modelname):
     # creating the model
     model = Sequential()
     ##X.shape[1] is the number of columns inside of X.
-    model.add(Dense(X,
-                    input_dim=X, activation='sigmoid'))
     # Use for standard sized variable set
     model.add(Dense(X-5, activation='sigmoid'))
-    # model.add(Dropout(.1))
     model.add(Dense(X-10, activation='sigmoid'))
 
     model.add(Dense(1, activation='sigmoid'))
@@ -168,7 +165,7 @@ def predict_accidents(data, testnum, modelname):
     ##Compiling a model, and pulling in the saved weights.
     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
 
-    ##Our current set model. Min max reduced. 
+    ##Our current set model. Min max reduced.
     model.load_weights(modelname)
 
     ########################################################################################################################################################################
@@ -188,6 +185,57 @@ def predict_accidents(data, testnum, modelname):
 
     return data
 
+##Step 3 - Predict for accidents (This version is slightly tweaked to work with the averaged weekday models)
+##Data is SCALED version of data, filename is title to save predicted forecast under,
+##testnum is the Chosen test number, and modelname is the path to the model.
+def predict_accidents_weekdays(data, testnum, modelname):
+    print("Predicting Accident Hotspots with Test number", testnum, " and model:", modelname)
+
+    ########################################################################################################################################################################
+
+    ##This section makes sure that the correct columns are in the data files, just in case.
+    data = data.dropna()
+    X = data.columns.shape[0]
+    ########################################################################################################################################################################
+    # Printing the size of the testing data, that is, the data file.
+    print("\tSize of data:", data.shape)
+
+    # Creating the framework for the model.
+    # creating the model
+    model = Sequential()
+    ##X.shape[1] is the number of columns inside of X.
+    model.add(Dense(X, input_dim=X, activation='sigmoid'))
+    # Use for standard sized variable set
+    model.add(Dense(X - 5, activation='sigmoid'))
+    model.add(Dropout(.1))  # Uncommented this to match weekday ang model layout
+    model.add(Dense(X - 10, activation='sigmoid'))
+
+    model.add(Dense(1, activation='sigmoid'))
+    model.add(Dense(1, activation='sigmoid'))  # Added to match weekday avg model layout
+
+    ##Compiling a model, and pulling in the saved weights.
+    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+
+    ##Our current set model. Min max reduced.
+    model.load_weights(modelname)
+
+    ########################################################################################################################################################################
+    # Okay, now let's calculate predictions.
+    probability = model.predict(data)
+    # Save the predicted values to the Probability column.
+    data["Probability"] = probability
+
+    # Then, let's round to either 0 or 1, since we have only two options (accident or no).
+    predictions_round = [abs(round(x[0])) for x in probability]
+    data["Prediction"] = predictions_round
+
+    # Printing some of the found values, as well as the total number of predicted accidents for this data.
+    print("\tMin probability: ", round(float(min(probability) * 100), 2))
+    print("\tMax probability: ", round(float(max(probability) * 100), 2))
+    print("\tAccidents predicted: ", sum(data.Prediction))
+
+    return data
+
 ##Step 4 - Add results to unscaled version of data
 ##Add Prediction and Probability to the unscaled version of the data. 
 def add_Pred_andProb(data, scaled, folder, suffix):
@@ -202,8 +250,8 @@ def add_Pred_andProb(data, scaled, folder, suffix):
     missing = data['Probability'].isnull().sum()
     print("\tLength of Data Probability:", len(data)-missing)
     print("\tSaving forecasted data to: ", filename,scaledfile)
-    scaled.to_csv(scaledfile, sep=",", index=False)
-    data.to_csv(filename, sep=",", index=False)
+    scaled.to_csv("../" + scaledfile, sep=",", index=False)
+    data.to_csv("../" + filename, sep=",", index=False)
     return scaled, data
     
 ##Step 5 - Find matches, using either the original DayFrames, or the alternate. 
@@ -270,20 +318,40 @@ def make_directory(model):
         os.makedirs(folder)
 
     return folder, suffix
+
+def make_directory_weekday(model):
+    modeltype = (model.split("/")[-1]).split(".")[0]
+    folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
+    suffix = modeltype + "_"
+    print("\tSaving Folder:", folder)
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    return folder, suffix
 #######################################################################################################################################################
 ##Which test version to run the model on, date wanted to predict for. 
 
 ##Cut GF
-# testnum = 3
+testnum = 3
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/New Third Test - MMR/model_CutGF_MMR.h5"
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/50-50 Split/model_50-50_CutGF.h5"
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/75-25 Split/model_75-25_CutGF.h5"
 
+##The following models were made using the average weekday method
+# model = "../Excel & CSV Sheets/Forecasts/Monday/2017+2018Monday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Tuesday/2017+2018Tuesday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Wednesday/2017+2018Wednesday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Thursday/2017+2018Thursday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Friday/2017+2018Friday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Saturday/2017+2018Saturday.h5"
+model = "../Excel & CSV Sheets/Forecasts/Sunday/2017+2018Sunday.h5"
+
 ##Cut Ran
-testnum = 1
+# testnum = 1
 # model = "Graphs & Images/ResultsFromCutRandomTesting/New First Test/model_CutRan_MMR.h5"
 # model = "Graphs & Images/ResultsFromCutRandomTesting/50-50 Split/model_CutRan_50-50.h5"
-model = "Graphs & Images/ResultsFromCutRandomTesting/75-25 Split/model_CutRan_75-25.h5"
+# model = "Graphs & Images/ResultsFromCutRandomTesting/75-25 Split/model_CutRan_75-25.h5"
 
 ##Full GF
 # testnum = 5
@@ -311,7 +379,7 @@ model = "Graphs & Images/ResultsFromCutRandomTesting/75-25 Split/model_CutRan_75
 # model = "Graphs & Images/ResultsfromTemporalShift/50-50 Split/model_50-50_Temporal.h5"
 # model = "Graphs & Images/ResultsfromTemporalShift/75-25 Split/model_75-25_Temporal.h5"
 
-accidentfile = "Excel & CSV Sheets/Forecast Accident Dates/4_12_2019_Accidents.csv"
+accidentfile = "../Excel & CSV Sheets/Forecast Accident Dates/3_12_2017_Accidents.csv"
 
 accidents = pandas.read_csv(accidentfile)
 
@@ -328,11 +396,18 @@ scaled, data = standarize_data(data, testnum)
 
 ##Step 3 - Predict for Accidents on Given Day - returns scaled version of data
 #Order of parameters - Scaled, testnumber, modelfilename
-scaled = predict_accidents(scaled, testnum, model)
+# scaled = predict_accidents(scaled, testnum, model)  # This version is used for our original models
+scaled = predict_accidents_weekdays(scaled, testnum, model)  # This version is used for our new averaged weekday models
 
 ##Step 4 - Add results to unscaled data - saves data to given filename. 
 #Order of parameters - data, scaled, folder to save forecast under
-folder, suffix = make_directory(model)
+
+# folder, suffix = make_directory(model)  # Use this method for the original models
+
+# Use the following two lines if using the averaged weekday models
+date = str(month)+"-"+str(day)+"-"+str(year)
+folder, suffix = make_directory_weekday(model)
+
 scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 ##Step 5 - Finding matches:
