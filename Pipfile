@@ -13,7 +13,7 @@ drogi = "*"
 plaidml-keras = "*"
 plaidbench = "*"
 talos = "*"
-"autopep8" = "*"
+autopep8 = "*"
 pydot = "*"
 ann-visualizer = "*"
 graphviz = "*"
@@ -28,9 +28,10 @@ feather-format = "*"
 tensorflow-gpu = "*"
 bdateutil = "*"
 python-dateutil = "*"
+rtree = "*"
 
 [dev-packages]
-"autopep8" = "*"
+autopep8 = "*"
 pylint = "*"
 
 [requires]

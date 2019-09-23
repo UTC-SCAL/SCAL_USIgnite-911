@@ -778,18 +778,37 @@ max(freqgrid$Frequency)
 lats <- c(34.99, 35.15)
 lons <- c(-85.4,-85.05)
 
-png(filepath, width=10,height=5,units='in', res=300)
+png("../../Excel & CSV Sheets/Accident Only Files/AccidentHotspots.png", width=10,height=5,units='in', res=300)
 par(mar = rep(0, 4))
 bb<-make_bbox(lon=lons,lat=lats, f=0.05)
 
 cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
 ggmap(cda, legend = "topright") +theme_minimal(base_size = 22) + labs(x="",y="") + ggtitle("Hotspots of Chattanooga") +
   geom_point(data = gridcounts, aes(x = Longitude, y = Latitude), size= (gridcounts$Frequency/100), alpha = .5, col= 'red', show.legend = TRUE)
-      
+dev.off()
       
       # + geom_point(aes(x=accidents$Longitude, y=accidents$Latitude), data=accidents, alpha = .95, col = 'black', size=10, shape = 42, show.legend = TRUE)
 
 ```
 
+```{r}
+## This portion just combines all accidents into one thing
+acc17 = read.csv("../../Excel & CSV Sheets/Accident Only Files/2017+2018 Accidents.csv")
+acc19 = read.csv("../../Excel & CSV Sheets/Accident Only Files/2019 Accidents Formatted.csv")
+allaccidents = rbind(acc17, acc19)
+
+##Finds count of gridblock/hour combos
+gridcounts = table(allaccidents$Grid_Block, allaccidents$Hour)
+gridcounts = as.data.frame(gridcounts) 
+
+##Renames the column names
+colnames(gridcounts) = c("Block", "Hour", "Count")
+
+#Puts the counts into an ordered set, with gridblock then hour order
+gridcountstest = gridcounts[order(gridcounts$Block, gridcounts$Hour),]
+
+##Saves the dataframe into a file
+write.csv(gridcountstest, "../../Excel & CSV Sheets/Accident Only Files/Grid_Block_Count.csv")
+```
 
 

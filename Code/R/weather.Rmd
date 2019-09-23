@@ -1,0 +1,65 @@
+---
+title: "test"
+output: html_document
+---
+
+```{r}
+library(feather)
+weather = read_feather("/home/pete/Downloads/2017+2018 Weather Stage 2.feather")
+min = min(weather$Unix)
+max = max(weather$Unix)
+weathersorted = weather[order(weather$Unix),]\
+head(weathersorted)
+min 
+max
+
+length(weather$Date)
+
+head(weather)
+
+##Creating bins style table
+br = seq(0,1,by=0.05)
+ranges = paste(head(br,-1), br[-1], sep=" - ")
+freq   = hist(weather$humidity, breaks=br, include.lowest=TRUE, plot=FALSE)
+humidbins = data.frame(range = ranges, frequency = freq$counts)
+
+total = sum(freq$counts)
+
+##Record 17 is the one related to 80% humidity. The following code shows the percent of the records at or above 80% humidity
+sum(freq$counts[17:20])/total
+##Split data to only high humidity percentages. 
+humidbins[c(17,18,19,20),]
+
+humidbins
+```
+
+```{r}
+library(feather)
+oldweather = read_feather("/home/pete/Documents/GitHub/Ignore/Weather/2017+2018 Weather Full.feather")
+head(oldweather)
+typeof(oldweather$Date)
+head(oldweather$Date)
+
+library(anytime)
+# oldweather$test <- anytime::anytime(oldweather$time)
+oldweather$test <- as.POSIXct(oldweather$time, tz="UTC")  
+# attributes(oldweather$test)$tzone <- "America/New_York"  
+
+library(lubridate)
+oldweather$time = with_tz(oldweather$test, "America/New_York")
+oldweather$time
+
+oldweather$test2
+oldweather$hour = hour(oldweather$test2)
+
+oldweather$Date = date(oldweather$test2)
+
+head(oldweather)
+
+drop= c("time", "test", "test2")
+oldweather = oldweather[ , !(names(oldweather) %in% drop)]
+
+oldweather$test = as.numeric(as.POSIXct(oldweather$Date, format="%Y-%m-%d"))
+
+```
+
