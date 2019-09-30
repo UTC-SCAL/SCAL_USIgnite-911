@@ -114,3 +114,74 @@ print(map)
 }
 ```
 
+
+```{r}
+library(feather)
+weather19 = read_feather("/home/pete/Documents/GitHub/Ignore/Weather/2019 Weather.feather")
+
+colnames(weather19)
+
+typeof(weather19$time)
+head(weather19)
+
+## Unixof June 1 midnight - 1559361600
+##Unix of June 21 11:59pm -  1561175940
+
+begin = 1559361600
+end = 1561175940
+
+june = with(weather19, weather19[between(time, begin, end, incbounds=TRUE), ])
+unique(june$Date)
+
+keep= c("ORIG_FID", "Center_Lat","Center_Long","Date", "time", "timereadable", "apparentTemperature","temperature", "humidity", "icon", "summary")
+june = june[ , (names(june) %in% keep)]
+
+head(june)
+
+colnames(june)[colnames(june)=="ORIG_FID"] <- "Grid_Block"
+
+colnames(june)[colnames(june)=="timereadable"] <- "hour"
+colnames(june)[colnames(june)=="hour"] <- "Hour"
+colnames(june)[colnames(june)=="time"] <- "Unix"
+
+colnames(june)[colnames(june)=="icon"] <- "Event"
+colnames(june)[colnames(june)=="summary"] <- "Conditions"
+
+colnames(june)[colnames(june)=="temperature"] <- "Temperature"
+
+colnames(june)[colnames(june)=="apparentTemperature"] <- "ApparentTemperature"
+colnames(june)[colnames(june)=="humidity"] <- "Humidity"
+
+
+ordercols = c("Grid_Block","Center_Lat","Center_Long","Unix","Date","Hour", "Temperature", "ApparentTemperature", "Humidity", "Event", "Conditions")
+
+june = june[, ordercols]
+
+north = 35.05
+south = 35.03
+east = -85.259
+west = -85.32
+juneMLK = with(june, june[(between(Center_Lat, south, north, incbounds=TRUE)), ])
+juneMLK = with(juneMLK, juneMLK[between(Center_Long, west, east, incbounds=TRUE), ])
+
+grids = unique(junemlk$Grid_Block)
+
+grids 
+grids = grids[6:length(grids)]
+
+test = dplyr::filter(junemlk, Grid_Block %in% grids)
+test2 = with(test, test[between(Grid_Block, 125, 132, incbounds=TRUE), ])
+head(test2)
+# juneMLK = junemlk
+library(ggmap)
+lats<-c(35.025, 35.08)
+lons<-c(-85.33,-85.25)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+cda<-get_map(bb,zoom=13,maptype="roadmap", source='google')
+ggmap(cda) +theme_minimal(base_size = 18) + geom_point(aes(x=test2$Center_Long, y=test2$Center_Lat),data = test2,  color='red', alpha=.25, size=1.5)
+
+write.csv(test2, "/home/pete/Documents/GitHub/Ignore/Weather/MLK June.csv")
+
+```
+

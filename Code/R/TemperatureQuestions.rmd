@@ -1,0 +1,207 @@
+---
+title: "WeatherCompare"
+output: pdf_document
+---
+
+
+
+```{r}
+KCHA = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/KCHA June.csv")
+grids = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/MLK June.csv")
+south = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/SouthSide June.csv")
+colnames(south) =c("Date", "Max.Temp", "Avg.Temp", "Min.Temp")
+central = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Central_June.csv")
+douglas = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Douglas_June.csv")
+georgia = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Georgia_June.csv")
+houston = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Houston_June.csv")
+lindsay = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Lindsay_June.csv")
+magnolia = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Magnolia_June.csv")
+peeples = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Peeples_June.csv")
+
+
+
+library(tidyr)
+library(dplyr)
+central = central %>% separate(Date, "Date", sep = " ")
+central = aggregate(central$Temperature,by=list(Date=central$Date),data=central,FUN=mean)
+douglas = douglas %>% separate(Date, "Date", sep = " ")
+douglas = aggregate(douglas$Temperature,by=list(Date=douglas$Date),data=douglas,FUN=mean)
+georgia = georgia %>% separate(Date, "Date", sep = " ")
+georgia = aggregate(georgia$Temperature,by=list(Date=georgia$Date),data=georgia,FUN=mean)
+houston = houston %>% separate(Date, "Date", sep = " ")
+houston = aggregate(houston$Temperature,by=list(Date=houston$Date),data=houston,FUN=mean)
+lindsay = lindsay %>% separate(Date, "Date", sep = " ")
+lindsay = aggregate(lindsay$Temperature,by=list(Date=lindsay$Date),data=lindsay,FUN=mean)
+magnolia = magnolia %>% separate(Date, "Date", sep = " ")
+magnolia = aggregate(magnolia$Temperature,by=list(Date=magnolia$Date),data=magnolia,FUN=mean)
+peeples = peeples %>% separate(Date, "Date", sep = " ")
+peeples = aggregate(peeples$Temperature,by=list(Date=peeples$Date),data=peeples,FUN=mean)
+
+colnames(central) = c("Date", "Temperature")
+colnames(douglas) = c("Date", "Temperature")
+colnames(georgia) = c("Date", "Temperature")
+colnames(houston) = c("Date", "Temperature")
+colnames(lindsay) = c("Date", "Temperature")
+colnames(magnolia) = c("Date", "Temperature")
+colnames(peeples) = c("Date", "Temperature")
+
+
+g125 = grids[which(grids$Grid_Block==125 ),]
+g126 = grids[which(grids$Grid_Block==126 ),]
+g127 = grids[which(grids$Grid_Block==127 ),]
+g128 = grids[which(grids$Grid_Block==128 ),]
+g129 = grids[which(grids$Grid_Block==129 ),]
+g130 = grids[which(grids$Grid_Block==130 ),]
+g131 = grids[which(grids$Grid_Block==131 ),]
+
+unique(test$GridBlock)
+
+test = aggregate(grids$Temperature,by=list(GridBlock=grids$Grid_Block,Date=grids$Date),data=grids,FUN=mean)
+
+test = test[order(test$GridBlock, test$Date),]
+
+png("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/DailyAverages.png", width=8,height=5,units='in', res=400)
+par(mar=c(6, 4, 2, 10), xpd=TRUE)
+plot(KCHA$Day, KCHA$Max.Temp, type = "l", col = "black", ylim = c(55,95), lwd = 4, ylab = "Temperature", xlab = "", main="Comparison of Temperatures - Daily Average", xaxt= "n")
+axis(1, unique(g125$Date),unique(g125$Date), las="2")
+
+lines(KCHA$Avg.Temp, type = "l", col = "black", lwd = 4)
+lines(KCHA$Min.Temp, type = "l", col = "black" , lwd = 4)
+
+lines(south$Max.Temp, type = "l", col = "red" , lwd = 4)
+lines(south$Avg.Temp, type = "l", col = "red", lwd = 4)
+lines(south$Min.Temp, type = "l", col = "red" , lwd = 4)
+
+lines(central$Temperature, type = "o", col = "magenta", lwd = 2 )
+lines(douglas$Temperature, type = "o", col = "orange" , lwd = 2)
+lines(georgia$Temperature, type = "o", col = "yellow", lwd = 2 )
+lines(houston$Temperature, type = "o", col = "green" , lwd = 2)
+lines(lindsay$Temperature, type = "o", col = "blue" , lwd = 2)
+lines(magnolia$Temperature, type = "o", col = "violet" , lwd = 2)
+lines(peeples$Temperature, type = "o", col = "purple" , lwd = 2)
+
+lines(g125$x, type = "l", col = "coral" , lwd = 3)
+lines(g126$x, type = "l", col = "darkgoldenrod" , lwd = 3)
+lines(g127$x, type = "l", col = "gold3" , lwd = 3)
+lines(g128$x, type = "l", col = "forestgreen" , lwd = 3)
+lines(g129$x, type = "l", col = "darkseagreen" , lwd = 3)
+lines(g130$x, type = "l", col = "dodgerblue" , lwd = 3)
+lines(g131$x, type = "l", col = "darkviolet" , lwd = 3)
+
+legend("topright", inset=c(-0.38,0),legend = c("KCHA Limits", "Southside Limits", "PA Central", "PA Douglas", "PA Georgia", "PA Houston", "PA Lindsay", "PA Magnolia", "PA Peeples", "G125", "G126", "G127", "G128", "G129", "G130", "G131" ), fill = c('black', "red", "magenta","orange", "yellow", "green", "blue", "violet","purple", "coral","darkgoldenrod", "gold3","forestgreen","darkseagreen","dodgerblue","darkviolet" ))
+
+dev.off()
+```
+
+```{r}
+g125 = g125[which(g125$Date !='2019-06-21' ),]
+
+cen = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Central_June.csv")
+cen = cen %>% separate(Date, "Date", sep = ":")
+cen = aggregate(cen$Temperature_F,by=list(Date=cen$Date),data=cen,FUN=mean)
+dates = cen %>% separate(Date, "Date", sep = " ")
+dates = unique(dates$Date)
+
+hou = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Houston_June.csv")
+hou = hou %>% separate(Date, "Date", sep = ":")
+hou = aggregate(hou$Temperature_F,by=list(Date=hou$Date),data=hou,FUN=mean)
+
+doug = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Douglas_June.csv")
+doug = doug %>% separate(Date, "Date", sep = ":")
+doug = aggregate(doug$Temperature_F,by=list(Date=doug$Date),data=doug,FUN=mean)
+
+Geo = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Georgia_June.csv")
+Geo = Geo %>% separate(Date, "Date", sep = ":")
+Geo = aggregate(Geo$Temperature_F,by=list(Date=Geo$Date),data=Geo,FUN=mean)
+
+mag = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Magnolia_June.csv")
+mag = mag %>% separate(Date, "Date", sep = ":")
+mag = aggregate(mag$Temperature_F,by=list(Date=mag$Date),data=mag,FUN=mean)
+
+lin = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Lindsay_June.csv")
+lin = lin %>% separate(Date, "Date", sep = ":")
+lin = aggregate(lin$Temperature_F,by=list(Date=lin$Date),data=lin,FUN=mean)
+
+peep = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/MLK_Peeples_June.csv")
+peep = peep %>% separate(Date, "Date", sep = ":")
+peep = aggregate(peep$Temperature_F,by=list(Date=peep$Date),data=peep,FUN=mean)
+
+png("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/HourlyAveragesBIG.png", width=22,height=8,units='in', res=400)
+par(mar=c(6, 4, 2, 2), xpd=TRUE, bg= 'darkgrey' )
+plot(cen$x, type = "l", , ylim = c(55,105), xlim= c(0,475), lwd = 2, ylab = "Temperature", xlab = "", main="Comparison of Temperatures - Hourly Average", xaxt= "n", col="red")
+axis(1, seq(0,475, by= 24),dates, las="2")
+lines(doug$x, type = "l", col = "magenta", lwd = 2 )
+lines(Geo$x, type = "l", col = "orange" , lwd = 2)
+lines(hou$x, type = "l", col = "yellow", lwd = 2 )
+lines(lin$x, type = "l", col = "green" , lwd = 2)
+lines(mag$x, type = "l", col = "blue" , lwd = 2)
+lines(peep$x, type = "l", col = "purple" , lwd = 2)
+
+lines(g125$Temperature, type = "l", col = "white" , lwd = 3)
+
+legend("bottomright",legend = c("PA Central", "PA Douglas", "PA Georgia", "PA Houston", "PA Lindsay", "PA Magnolia", "PA Peeples", "G125" ), fill = c("red","magenta","orange", "yellow", "green", "blue","purple", "white"))
+dev.off()
+```
+
+
+```{r}
+
+png("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/HourlyAveragesWeek.png", width=15,height=8,units='in', res=400)
+par(mar=c(6, 4, 2, 7), xpd=TRUE, bg= ' darkgrey' )
+plot(cen$x[0:167], type = "l", , ylim = c(60,105), lwd = 2, ylab = "Temperature", xlab = "", main="Comparison of Temperatures - Hourly Average - One Week", xaxt= "n", col = 'red')
+axis(1, seq(0,167, by= 24),week, las="2")
+lines(doug$x[0:167], type = "l", col = "magenta", lwd = 2 )
+lines(Geo$x[0:167], type = "l", col = "orange" , lwd = 2)
+lines(hou$x[0:167], type = "l", col = "yellow", lwd = 2)
+lines(lin$x[0:167], type = "l", col = "green" , lwd = 2)
+lines(mag$x[0:167], type = "l", col = "blue" , lwd = 2)
+lines(peep$x[0:167], type = "l", col = "purple" , lwd = 2)
+
+lines(g125$Temperature[0:167], type = "l", col = "white" , lwd = 3)
+
+legend("topright", inset=c(-0.1,0),legend = c("PA Central", "PA Douglas", "PA Georgia", "PA Houston", "PA Lindsay", "PA Magnolia", "PA Peeples", "G125" ), fill = c('red',"magenta","orange", "yellow", "green", "blue","purple", "white"))
+dev.off()
+```
+
+
+###Updated daily averages with shaded region
+```{r}
+grids = read.csv("/home/pete/Documents/GitHub/Ignore/Weather/MLK June.csv")
+gdaily = grids[which(grids$Grid_Block>=125 & grids$Grid_Block>=131),]
+gdaily = aggregate(gdaily$Temperature,by=list(Date=gdaily$Date),data=gdaily,FUN=mean)
+
+gdaily = gdaily[order(gdaily$Date),]
+
+
+central$Temperature = central$Temperature -10
+douglas$Temperature = douglas$Temperature -10
+georgia$Temperature = georgia$Temperature -10
+houston$Temperature = houston$Temperature -10
+lindsay$Temperature = lindsay$Temperature -10
+magnolia$Temperature = magnolia$Temperature -10
+peeples$Temperature = peeples$Temperature -10
+
+
+
+png("/home/pete/Documents/GitHub/Ignore/Weather/PurpleAir/DailyAverageShifted.png", width=12,height=7,units='in', res=400)
+par(mar=c(6, 4, 2, 14), xpd=TRUE)
+plot(seq(1,21), col = "black", ylim = c(55,95), lwd = 4, ylab = "Temperature", xlab = "", main="Comparison of Temperatures - Daily Average", xaxt= "n")
+axis(1, unique(gdaily$Date),unique(gdaily$Date), las="2")
+usr <- par('usr')
+polygon(x = c(south$Date,rev(south$Date)), y=c(south$Max.Temp, south$Min.Temp) ,col="grey")
+
+points(central$Temperature, col = "magenta", lwd= 4 )
+points(douglas$Temperature, col = "darkorange" , lwd= 4 )
+points(georgia$Temperature, col = "goldenrod4", lwd= 4 )
+points(houston$Temperature, col = "darkgreen" , lwd= 4 )
+points(lindsay$Temperature, col = "blue" ,  lwd= 4 )
+points(magnolia$Temperature, col = "violet", lwd= 4 )
+points(peeples$Temperature, col = "purple" ,  lwd= 4 )
+
+lines(gdaily$x, type = "l", col = "red" , lwd = 3)
+
+legend("topright", inset=c(-0.3,0),legend = c("Weather Station Range", "PA Central", "PA Douglas", "PA Georgia", "PA Houston", "PA Lindsay", "PA Magnolia", "PA Peeples", "Area GridBlock Average" ), fill = c('grey',"magenta","darkorange", "goldenrod4", "darkgreen", "blue", "violet","purple", "red" ))
+dev.off()
+```
+
+
