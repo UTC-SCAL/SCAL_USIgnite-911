@@ -2,7 +2,7 @@ import pandas
 import os, sys
 from datetime import datetime, timedelta
 from darksky import forecast
-import feather
+# import feather
 
 
 def find_cred(service):

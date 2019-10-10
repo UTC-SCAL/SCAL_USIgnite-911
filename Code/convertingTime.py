@@ -1,6 +1,6 @@
 import pandas
-from datetime import datetime
-import feather
+from datetime import datetime, timezone
+# import feather
 
 # calldata = pandas.read_csv("", sep=",")
 
@@ -31,11 +31,10 @@ def unixFromStandard(calldata):
         yoa = int(doa.split('/')[2])
         moa = int(doa.split('/')[0])
         dayoa = int(doa.split('/')[1])
-        # print(yoa, moa, dayoa, hoa, mioa, soa)
+        print(yoa, moa, dayoa, hoa, mioa, soa)
         date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
-        # print(date)
+        print(date)
         unixtime = date.strftime('%s')
-        # print(unixtime)
         calldata.Unix.values[k] = unixtime
     return calldata
 
@@ -72,11 +71,21 @@ def standardFromUnix(data):
 
     return data
 
-# data = pandas.read_csv("../Ignore/Weather/2019 Weather Updated.csv",sep=",")
-# standardFromUnix(data)
-# data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
+def getUnixTimeWindows(calldata):
+    calldata.Hour = calldata.Hour.astype(str)
+    calldata.Date = calldata.Date.astype(str)
+    # Combine the hour and date column into a certain format for conversion
+    calldata['Unix'] = calldata.apply(lambda x: pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
+    # Convert the combined column values to unix values
+    calldata['Unix'] = calldata.apply(lambda x: x.Unix.timestamp(), axis=1)
+
+    return calldata
+
+
+# calldata['Unix'] = calldata.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
 # # This actually makes the column
-# data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
+# calldata['Unix'] = calldata.apply(lambda x : x.Unix.strftime('%s'), axis=1)
+
 # data.to_csv("../Excel & CSV Sheets/2017+2018 Data/2017+2018 Accidents.csv")
 
 # Splitting time column into date and hour #
@@ -89,7 +98,7 @@ def standardFromUnix(data):
 # feather.write_dataframe(weather, "../Ignore/Weather/2017+2018 Weather Stage 1.feather")
 
 # Creating the unix column #
-weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather Stage 1.feather")
-weather['Unix'] = 0
-new_weather = unixFromStandardAlt(weather)
-feather.write_dataframe(new_weather, "../Ignore/Weather/2017+2018 Weather Stage 2.feather")
+# weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather Stage 1.feather")
+# weather['Unix'] = 0
+# new_weather = unixFromStandardAlt(weather)
+# feather.write_dataframe(new_weather, "../Ignore/Weather/2017+2018 Weather Stage 2.feather")
