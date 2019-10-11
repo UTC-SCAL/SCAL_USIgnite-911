@@ -1,10 +1,8 @@
 import pandas
-from datetime import datetime, timezone
+from datetime import datetime
 # import feather
 
-# calldata = pandas.read_csv("", sep=",")
-
-
+# Method to convert the variable Precipitation Time to a unix timestamp
 def convertPrecipTime(calldata):
     # Cast the column as a string
     calldata.Precip_Intensity_Time = calldata.Precip_Intensity_Time.astype(str)
@@ -17,6 +15,8 @@ def convertPrecipTime(calldata):
 
     calldata.to_csv("../", index=False)
 
+# Method to convert a standard timestamp to a unix timestamp
+# Format of standard time used: month/day/year
 def unixFromStandard(calldata):
 
     ##This section takes in the standard time column and creates Unix time. 
@@ -38,6 +38,8 @@ def unixFromStandard(calldata):
         calldata.Unix.values[k] = unixtime
     return calldata
 
+# Method to convert standard timestamp to a unix timestamp
+# Format of standard time used: year-month-day
 def unixFromStandardAlt(calldata):
 
     ##This section takes in the standard time column and creates Unix time.
@@ -45,8 +47,9 @@ def unixFromStandardAlt(calldata):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
-        mioa = 0
-        soa = 0
+        toa = calldata.Time.values[k]
+        mioa = int(toa.split(':')[1])
+        soa = int(toa.split(':')[2])
         doa = calldata.Date.values[k]
         yoa = int(doa.split('-')[0])
         moa = int(doa.split('-')[1])
@@ -58,8 +61,11 @@ def unixFromStandardAlt(calldata):
         calldata.Unix.values[k] = unixtime
     return calldata
 
+# Method to convert Unix timestamp to standard time stamp
 def standardFromUnix(data):
     # Cast the column as a string
+    # Depending on the column names, use one of the following conversions, because Pete doesn't like consistency
+    # data.Unix = data.Unix.astype(str)
     data.time = data.time.astype(str)
 
     ##Loop Converts each item within Precip Intensity Time to Unix time.
@@ -71,6 +77,7 @@ def standardFromUnix(data):
 
     return data
 
+# This is a version of getting unix timestamp for windows matching, which Jeremy uses when he works from home
 def getUnixTimeWindows(calldata):
     calldata.Hour = calldata.Hour.astype(str)
     calldata.Date = calldata.Date.astype(str)
@@ -81,24 +88,15 @@ def getUnixTimeWindows(calldata):
 
     return calldata
 
+# Method for splitting the Time column into separate date and hour columns
+# Example format of Time variable: 2018-3-5 12:13:45
+# It won't always be in that exact format, but that's the general format used in this method
+def splitTime(data):
+    data['Hour'] = 0
+    for i, value in enumerate(data.values):
+        print(i)
+        data.Hour.values[i] = (data.time[i]).split(" ")[1].split(":")[0]
+        data.Date.values[i] = (data.time[i]).split(" ")[0]
+    return data
 
-# calldata['Unix'] = calldata.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
-# # This actually makes the column
-# calldata['Unix'] = calldata.apply(lambda x : x.Unix.strftime('%s'), axis=1)
 
-# data.to_csv("../Excel & CSV Sheets/2017+2018 Data/2017+2018 Accidents.csv")
-
-# Splitting time column into date and hour #
-# weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather Full.feather")
-# weather['Hour'] = 0
-# for i, value in enumerate(weather.values):
-#     print(i)
-#     weather.Hour.values[i] = (weather.time[i]).split(" ")[1].split(":")[0]
-#     weather.Date.values[i] = (weather.time[i]).split(" ")[0]
-# feather.write_dataframe(weather, "../Ignore/Weather/2017+2018 Weather Stage 1.feather")
-
-# Creating the unix column #
-# weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather Stage 1.feather")
-# weather['Unix'] = 0
-# new_weather = unixFromStandardAlt(weather)
-# feather.write_dataframe(new_weather, "../Ignore/Weather/2017+2018 Weather Stage 2.feather")

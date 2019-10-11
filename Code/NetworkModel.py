@@ -1,18 +1,3 @@
-# Use the plaidml backend dynamically if AMD GPU is in use
-# try:
-#     import tensorflow as tf
-#     from tensorflow.python.client import device_lib
-
-#     LST = [x.device_type for x in device_lib.list_local_devices()]
-#     if not 'GPU' in LST:
-#         import os
-
-#         os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-# except ImportError:
-#     import os
-
-#     os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-import tensorflow as tf
 import pandas
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
@@ -210,25 +195,28 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # 5. Evaluate that model on some data!
 
 
-#           1. Load Data
-dataset = pandas.read_csv("../Excel & CSV Sheets/Weekday-Weekend Models/Full Gridfix 50-50 Weekday.csv")
-# file = "/media/pete/USB DISK/2019 Grid Data Spatial Master List MMR.feather"
-# dataset = feather.read_dataframe(file)
-# dataset = dataset.drop(["Hour","Unix","Grid_Block"],axis=1)
-# print(dataset.columns)
-# exit()
-# 'Grid_Block'
-#           Shuffling if needed. 
-dataset = shuffle(dataset)
-dataset = shuffle(dataset)
-folder = '../Graphs & Images/ResultsFromWeekdayTesting/'
-modelname = "model_GF50-50_Weekday.h5"
+##1. Load Data
+# Depending on the size of your dataset that you're reading in, you choose either csv or feather
+# Feather files are typically any file > 800 mb
+dataset = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut GridFixed Data 2017+2018 MMR.csv")
+# dataset = feather.read_dataframe("../")
 
-#           Creating X and Y. Accident is the first column, therefore it is 0. 
+# Drop any columns from your dataset if you want
+dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Highway", "Latitude", "Longitude", "humidity"],axis=1)
+
+##Shuffling if needed.
+dataset = shuffle(dataset)
+
+# Choose a folder for storing all of the results of the code in, including the model itself
+# Note, if the folder you specify doesn't exist, you'll have to create it
+folder = '../Graphs & Images/ResultsFromHumidityTesting/No Humidity/'
+modelname = "model_GF50-50_NoHumidity.h5"
+
+##Creating X and Y. Accident is the first column, therefore it is 0.
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
 Y = dataset.ix[:, 0].values
 
-##      Steps 2-5 are inside the fitting loops method. 
+##Steps 2-5 are inside the fitting loops method.
 fitting_loops(X, Y, folder, modelname)
 
 

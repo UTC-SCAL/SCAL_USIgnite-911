@@ -215,6 +215,10 @@ def dividing_data(accidents, negatives, accident_percent):
 
 
 # The main lines and files for getting the totally random negative samples
-accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD Section 1.csv")
-compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
-get_negatives_master(accidents, compare_data)
+accidents = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Full GridFix Data 2017+2018.csv")
+# compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
+# get_negatives_master(accidents, compare_data)
+
+negatives = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Full GridFix Master List_NegOnly.csv")
+
+cut_negatives(negatives, accidents)

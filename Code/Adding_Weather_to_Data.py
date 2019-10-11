@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 from darksky import forecast
 import feather
 
+# Method to log into the corresponding DarkSky or Etrims service through a file on this machine
+# The file itself isn't on GitHub, so if you don't have it message Jeremy or Pete for the file
 def find_cred(service):
     file = "../Excel & CSV Sheets/login.csv"
     if os.path.exists(file):
@@ -45,9 +47,8 @@ def finding_binaries(data):
     # print("Clear completed in:", cleartime - snowtime)
     return data
 
+##This method retrieves data from the all_weather file WITH BINARIES
 def pull_binaries(data, weather):
-    ##This method retrieves data from the all_weather file WITH BINARIES. It performs all needed functions EXCEPT
-    ## putting the columns into the correct order. Jeremy wants to do that by hand.
     data['time'] = data.apply(lambda x: pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%m/%d/%y %H"),
                               axis=1)
     # This actually makes the column into the unix type
@@ -66,6 +67,12 @@ def pull_binaries(data, weather):
     newdata = pandas.merge(newdata, weather[['RainBefore', "Grid_Block", 'hourbefore']],
                            on=['hourbefore', 'Grid_Block'])
     newdata = newdata.drop(['time','hourbefore'], axis=1)
+    # This reorders the columns, change the different variables depending on what columns you want
+    header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Event', 'Hour',
+                       'Conditions', "EventBefore", "ConditionBefore",  "Weekday", "Precipitation_Intensity",
+                       "Precip_Intensity_Max", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
+                       "Grid_Block", "Grid_Col", "Grid_Row", "Highway", "Land_Use_Mode", "Road_Count")
+    newdata = newdata.reindex(columns=header_list)
 
     return newdata
 
@@ -78,26 +85,22 @@ def make_unix_with_hour(data):
     data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
     return data
 
-
 # Creates the unix time column for the weather file (same method as above)
 def make_unix_with_time(data):
     data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.time, "%Y-%m-%d %H:%M:%S"), axis=1)
     data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
     return data
 
-
 # Creates dt, which is the actual date time column, if we need it
 def create_datetime_from_unix(data):
     data['dt'] = pandas.to_datetime(data['time'],unit='s', utc=True)
     return data
-
 
 ##Creates the hour before column
 def create_hourbefore(data):
     data['time'] = data['time'].astype(int)
     data['hourbefore'] = data['time'] - 60*60  # changes the hourbefore column to be 1 hour before the time column
     return data
-
 
 # Renaming some columns for later convenience, and cuts the weather file down to the columns we actually want
 def concise_weatherfile(weather):
@@ -116,13 +119,13 @@ def concise_weatherfile(weather):
 # Adds the weather from the weather file into the data file. Assumes that the weather file is straight from Darksky, 
 # and has not been formatted at all. 
 def add_weather(data, weather):
+    print("Adding Weather")
     ##Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out. 
     # data = data.drop(['precipIntensity'], axis=1)
 
     # Merge the weather variables for the hour of the accident based on time and grid block
-    newdata = pandas.merge(data, weather[['Event','Conditions', 'precipIntensity','time','Grid_Block']], how='left', on=['time','Grid_Block'])
     # Merge the event/conditions before columns based on hour before and grid block
-    newdata = pandas.merge(newdata, weather[['EventBefore','ConditionBefore','hourbefore','Grid_Block']], on=['hourbefore','Grid_Block'])
+    newdata = pandas.merge(data, weather[['EventBefore','ConditionBefore','hourbefore','Grid_Block']], on=['hourbefore','Grid_Block'])
 
     # Rename columns to a more convenient name. This is only if the data file already had these columns inside of it. 
     newdata['Event'] = newdata['Event_y']
@@ -136,21 +139,10 @@ def add_weather(data, weather):
 
 
 # Read in our data
-# data = feather.read_dataframe("../")
-data = pandas.read_csv("../Ignore/Weather/2019 Weather Updated.csv")
-
-# header_list = ("Accident", 'Latitude', 'Longitude', 'Date', 'Time', 'Event', 'Hour',
-#                    'Conditions', "EventBefore", "ConditionBefore",  "Weekday", "Precipitation_Intensity",
-#                    "Precip_Intensity_Max", "Clear", "Cloudy", "Rain", "Fog", "Snow", "RainBefore",
-#                    "Grid_Block", "Grid_Col", "Grid_Row", "Highway", "Land_Use_Mode", "Road_Count")
-# data = data.reindex(columns=header_list)
-# Read in the weather file(s) you want to use
-# all_weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather.feather")
-finding_binaries(data)
-data.to_csv("../Ignore/Weather/2019 Weather Updated Full.csv", index = False)
-
-
+weather = feather.read_dataframe("../")
+data = pandas.read_csv("../")
 
 # Saving the files: Choose which type you'd prefer
-# newdata.to_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GridFixed/NS GridFix Master List Formatted.csv")
+# Feather files are typically files > 800 mb
+data.to_csv("../", index=False)
 # feather.write_dataframe(newdata, "../")

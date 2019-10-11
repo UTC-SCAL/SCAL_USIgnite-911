@@ -4,32 +4,36 @@ except ImportError:
     import matplotlib
     matplotlib.use("TkAgg")
     import matplotlib.pyplot as plt
-import numpy
 import datetime
-import time
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import logging
 logging.getLogger('tensorflow').disabled = True
-import pytz
 import pandas
-import math
 import feather
-import tensorflow as tf
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from sklearn import preprocessing
 
-start = datetime.datetime.now()
-all_weather = feather.read_dataframe("../Ignore/Weather/ALL_Weather_with_Binary.feather")
+# Use this command and the two lines at the bottom of this file if you want to time this code
+# start = datetime.datetime.now()
 
+# Read in the weather file you want to use
+all_weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather.feather")
+all_weather["time"] = all_weather["Unix"].astype(int)
+# print(all_weather.columns)
+# exit()
+# print(all_weather.columns)
+# exit()
+# This is a template for the forecasting file created with this code
 data = pandas.read_csv("../Excel & CSV Sheets/Grid Files/Grid Oriented Layout/Forecast Forum Ori Filled.csv", sep=",")
+
 ##Adjusting column types and such
 data['Hour'] = data['Hour'].astype(int)
 data['DayFrame'] = data['DayFrame'].astype(int)
 
 
-## Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file 
+##Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file
 def fillForecastFile(places, filename):
     ##Gets the forecast data for every 4 hours. 
     fulldata = places.copy()
@@ -57,14 +61,16 @@ def fillForecastFile(places, filename):
     print("Finished data size:",fulldata.size)
     fulldata.to_csv(filename, sep=",", index=False)
 
-## Step 0 - ONLY IF NEEDED
+##Step 0 - ONLY IF NEEDED. Creates binary variables for weather if not already in data
 def finding_binaries(data):
     starttime = datetime.datetime.now()
     print("Beginning Lowercase conversion at:", starttime)
+    # data["Event"] = data["icon"].astype(str)
+    # data["Conditions"] = data["summary"].astype(str)
     data.Event = data.Event.apply(lambda x: x.lower())
     data.Conditions = data.Conditions.apply(lambda x: x.lower())
-    data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
-    data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
+    # data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
+    # data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
     lowertime = datetime.datetime.now()
     print("Lowercase conversion done, Beginning Binary Lambdas at:", lowertime - starttime)
     data['Rain'] = data.apply(lambda x : 1 if ("rain" in x.Event or "rain" in x.Conditions) else 0, axis=1)
@@ -82,7 +88,12 @@ def finding_binaries(data):
     data['Clear'] = data.apply(lambda x : 1 if ("clear" in x.Event or "clear" in x.Conditions) else 0, axis=1)
     cleartime = datetime.datetime.now()
     print("Clear completed in:", cleartime - snowtime)
+    print(data.columns)
+    exit()
     return data
+
+finding_binaries(all_weather)
+
 
 ##Step 1 - Connect Weather to Forecast
 def finding_weather(data, all_weather, yoa, moa, dayoa):
@@ -97,9 +108,10 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     newdata = pandas.merge(data, all_weather[['Rain','Cloudy', 'Foggy','Snow','Clear','precipIntensity','time','Grid_Block']], on=['time','Grid_Block'])
     # Merge the event/conditions before columns based on hour before and grid block
     newdata = pandas.merge(newdata, all_weather[['RainBefore','hourbefore','Grid_Block']], on=['hourbefore','Grid_Block'])
+    newdata = pandas.merge(newdata, all_weather[['time','humidity','Grid_Block']], on=['time','Grid_Block'])
     print("Weather fetch complete")
     newdata = newdata[['Hour','DayFrame','WeekDay','WeekEnd','Clear','Cloudy','Rain','Foggy','Snow','RainBefore','Grid_Block','Grid_Col',
-    'Grid_Row','Highway','Land_Use_Mode','Road_Count','time','precipIntensity']]
+    'Grid_Row','Highway','Land_Use_Mode','Road_Count','time','precipIntensity', "humidity"]]
     if len(newdata) == 0:
         print("Weather pull failed. Select Different Date")
         exit()
@@ -123,7 +135,7 @@ def standarize_data(data, testnum):
     if testnum == 2:
         scaled = scaled.drop(['Hour','WeekEnd','Grid_Block','Clear'],axis=1) #Test 2  
     elif testnum == 3:
-        scaled = scaled.drop(['DayFrame','Grid_Block','time'],axis=1) #Test 3  
+        scaled = scaled.drop(['DayFrame','Grid_Block','time', "humidity"],axis=1) #Test 3
     elif testnum == 4:
         scaled = scaled.drop(['DayFrame','Hour', 'Grid_Block'],axis=1) #Test 4
     elif testnum == 5:
@@ -152,18 +164,31 @@ def predict_accidents(data, testnum, modelname):
     #Printing the size of the testing data, that is, the data file. 
     print("\tSize of data:", data.shape)
 
-    #Creating the framework for the model. 
-    # creating the model
+    # #Creating the framework for the model.
+    # # creating the model
+    # model = Sequential()
+    # ##X.shape[1] is the number of columns inside of X.
+    # # Use for standard sized variable set
+    # model.add(Dense(X-5, activation='sigmoid'))
+    # model.add(Dense(X-10, activation='sigmoid'))
+    #
+    # model.add(Dense(1, activation='sigmoid'))
+    #
+    # ##Compiling a model, and pulling in the saved weights.
+    # model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
+
+    ## These lines are used for the forecasting, because for some reason the above code doesn't like to work
+    ## for any files that I try to run, so I'm keeping this here for future use
     model = Sequential()
     ##X.shape[1] is the number of columns inside of X.
+    model.add(Dense(X, input_dim=X, activation='sigmoid'))
+
     # Use for standard sized variable set
-    model.add(Dense(X-5, activation='sigmoid'))
-    model.add(Dense(X-10, activation='sigmoid'))
+    model.add(Dense(X- 5, activation='sigmoid'))
+    model.add(Dropout(.1))
+    model.add(Dense(X - 10, activation='sigmoid'))
 
     model.add(Dense(1, activation='sigmoid'))
-
-    ##Compiling a model, and pulling in the saved weights.
-    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
 
     ##Our current set model. Min max reduced.
     model.load_weights(modelname)
@@ -319,7 +344,8 @@ def make_directory(model):
 
     return folder, suffix
 
-def make_directory_weekday(model):
+# This version of make_directory is a little less specific with naming
+def make_directory_alt(model):
     modeltype = (model.split("/")[-1]).split(".")[0]
     folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
     suffix = modeltype + "_"
@@ -329,7 +355,8 @@ def make_directory_weekday(model):
         os.makedirs(folder)
 
     return folder, suffix
-#######################################################################################################################################################
+
+#######################################################################################################################
 ##Which test version to run the model on, date wanted to predict for. 
 
 ##Cut GF
@@ -337,6 +364,9 @@ testnum = 3
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/New Third Test - MMR/model_CutGF_MMR.h5"
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/50-50 Split/model_50-50_CutGF.h5"
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/75-25 Split/model_75-25_CutGF.h5"
+# model = "../Graphs & Images/ResultsFromHighwayTesting/Highway/model_GF50-50_Highway.h5"
+# model = "../Graphs & Images/ResultsFromHighwayTesting/No Highway/model_GF50-50_NoHighway.h5"
+model = "../Graphs & Images/ResultsFromHumidityTesting/Humidity/model_GF50-50_Humidity.h5"
 
 ##The following models were made using the average weekday method
 # model = "../Excel & CSV Sheets/Forecasts/Monday/2017+2018Monday.h5"
@@ -345,7 +375,7 @@ testnum = 3
 # model = "../Excel & CSV Sheets/Forecasts/Thursday/2017+2018Thursday.h5"
 # model = "../Excel & CSV Sheets/Forecasts/Friday/2017+2018Friday.h5"
 # model = "../Excel & CSV Sheets/Forecasts/Saturday/2017+2018Saturday.h5"
-model = "../Excel & CSV Sheets/Forecasts/Sunday/2017+2018Sunday.h5"
+# model = "../Excel & CSV Sheets/Forecasts/Sunday/2017+2018Sunday.h5"
 
 ##Cut Ran
 # testnum = 1
@@ -379,40 +409,43 @@ model = "../Excel & CSV Sheets/Forecasts/Sunday/2017+2018Sunday.h5"
 # model = "Graphs & Images/ResultsfromTemporalShift/50-50 Split/model_50-50_Temporal.h5"
 # model = "Graphs & Images/ResultsfromTemporalShift/75-25 Split/model_75-25_Temporal.h5"
 
-accidentfile = "../Excel & CSV Sheets/Forecast Accident Dates/3_12_2017_Accidents.csv"
+accidentfile = "../Excel & CSV Sheets/Forecast Accident Dates/2_4_2018_Accidents.csv"
 
 accidents = pandas.read_csv(accidentfile)
 
 year = int(((accidentfile.split("/")[-1]).split("_")[2]).split(".csv")[0])
 month = int((accidentfile.split("/")[-1]).split("_")[0])
 day = int((accidentfile.split("/")[-1]).split("_")[1])
-date = str(year)+"-"+str(month)+"-"+str(day)
+# Based on how the file name has the date ordered, choose a date declaration to use
+# date = str(year)+"-"+str(month)+"-"+str(day)
+date = str(month)+"-"+str(day)+"-"+str(year)
 
 ##Step 1 - Add weather
 data = finding_weather(data, all_weather, year, month, day)
+print(data.columns)
+exit()
 
 ##Step 2 - Standardize Data - returns scaled version 
 scaled, data = standarize_data(data, testnum)
 
 ##Step 3 - Predict for Accidents on Given Day - returns scaled version of data
 #Order of parameters - Scaled, testnumber, modelfilename
-# scaled = predict_accidents(scaled, testnum, model)  # This version is used for our original models
-scaled = predict_accidents_weekdays(scaled, testnum, model)  # This version is used for our new averaged weekday models
+scaled = predict_accidents(scaled, testnum, model)  # This version is used for our original models
+# scaled = predict_accidents_weekdays(scaled, testnum, model)  # This version is used for our new averaged weekday models
 
 ##Step 4 - Add results to unscaled data - saves data to given filename. 
 #Order of parameters - data, scaled, folder to save forecast under
-
+# Choose which make_directory method you want to use, they both do the same thing but the alt version is simplified
 # folder, suffix = make_directory(model)  # Use this method for the original models
-
-# Use the following two lines if using the averaged weekday models
-date = str(month)+"-"+str(day)+"-"+str(year)
-folder, suffix = make_directory_weekday(model)
+folder, suffix = make_directory_alt(model)
 
 scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 ##Step 5 - Finding matches:
 print("Accidents Occurred: ", len(accidents))
-finding_matches(accidents, data)
-finding_matches_alt(accidents, data)
-end = datetime.datetime.now()
-print("Testing completed in:", end-start)
+# finding_matches(accidents, data)
+# finding_matches_alt(accidents, data)
+
+# Timing the code, if you want
+# end = datetime.datetime.now()
+# print("Testing completed in:", end-start)
