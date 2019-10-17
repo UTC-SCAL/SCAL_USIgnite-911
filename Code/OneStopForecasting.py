@@ -20,7 +20,7 @@ from sklearn import preprocessing
 
 # Read in the weather file you want to use
 all_weather = feather.read_dataframe("../Ignore/Weather/2017+2018 Weather.feather")
-all_weather["time"] = all_weather["Unix"].astype(int)
+all_weather["Grid_Block"] = all_weather["ORIG_FID"].astype(int)
 # print(all_weather.columns)
 # exit()
 # print(all_weather.columns)
@@ -92,26 +92,26 @@ def finding_binaries(data):
     exit()
     return data
 
-finding_binaries(all_weather)
-
 
 ##Step 1 - Connect Weather to Forecast
 def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Finding Weather for Forecast date of:",moa,"/",dayoa,"/",yoa)
     data['time'] = data['Hour'].map(lambda x : datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
     data['hourbefore'] = data['time'].map(lambda x : int(x) - 60*60)
+    all_weather['hourbefore'] = all_weather['Unix'].map(lambda x: int(x) - 60 * 60)
     data['WeekDay'] = data.apply(lambda x : 1 if (int(datetime.datetime(yoa, moa, dayoa, x.Hour, 0, 0).isoweekday()) in range(1,6)) else 0, axis=1)
     data['WeekEnd'] = data.apply(lambda x : 0 if (int(datetime.datetime(yoa, moa, dayoa, x.Hour, 0, 0).isoweekday()) in range(1,6)) else 1, axis=1)
-    data['time'] = data['time'].astype(int)
+    data['Unix'] = data['time'].astype(int)
     data['hourbefore'] = data['hourbefore'].astype(int)
+    all_weather['hourbefore'] = all_weather['hourbefore'].astype(int)
     # Merge the event/conditions columns based on time and grid block
-    newdata = pandas.merge(data, all_weather[['Rain','Cloudy', 'Foggy','Snow','Clear','precipIntensity','time','Grid_Block']], on=['time','Grid_Block'])
+    newdata = pandas.merge(data, all_weather[['Rain','Cloudy', 'Foggy','Snow','Clear','precipIntensity','Unix','Grid_Block']], on=['Unix','Grid_Block'])
     # Merge the event/conditions before columns based on hour before and grid block
     newdata = pandas.merge(newdata, all_weather[['RainBefore','hourbefore','Grid_Block']], on=['hourbefore','Grid_Block'])
-    newdata = pandas.merge(newdata, all_weather[['time','humidity','Grid_Block']], on=['time','Grid_Block'])
+    newdata = pandas.merge(newdata, all_weather[['Unix','humidity','Grid_Block']], on=['Unix','Grid_Block'])
     print("Weather fetch complete")
     newdata = newdata[['Hour','DayFrame','WeekDay','WeekEnd','Clear','Cloudy','Rain','Foggy','Snow','RainBefore','Grid_Block','Grid_Col',
-    'Grid_Row','Highway','Land_Use_Mode','Road_Count','time','precipIntensity', "humidity"]]
+    'Grid_Row','Land_Use_Mode','Road_Count','Unix', "precipIntensity", "humidity"]]
     if len(newdata) == 0:
         print("Weather pull failed. Select Different Date")
         exit()
@@ -135,7 +135,7 @@ def standarize_data(data, testnum):
     if testnum == 2:
         scaled = scaled.drop(['Hour','WeekEnd','Grid_Block','Clear'],axis=1) #Test 2  
     elif testnum == 3:
-        scaled = scaled.drop(['DayFrame','Grid_Block','time', "humidity"],axis=1) #Test 3
+        scaled = scaled.drop(['DayFrame','Grid_Block','Unix'],axis=1) #Test 3
     elif testnum == 4:
         scaled = scaled.drop(['DayFrame','Hour', 'Grid_Block'],axis=1) #Test 4
     elif testnum == 5:
@@ -366,7 +366,7 @@ testnum = 3
 # model = "Graphs & Images/ResultsFromCutGridFixTesting/75-25 Split/model_75-25_CutGF.h5"
 # model = "../Graphs & Images/ResultsFromHighwayTesting/Highway/model_GF50-50_Highway.h5"
 # model = "../Graphs & Images/ResultsFromHighwayTesting/No Highway/model_GF50-50_NoHighway.h5"
-model = "../Graphs & Images/ResultsFromHumidityTesting/Humidity/model_GF50-50_Humidity.h5"
+model = "../Graphs & Images/ResultsFromHumidityTesting/Humidity No Highway/model_GF50-50_HumidityNoHighway.h5"
 
 ##The following models were made using the average weekday method
 # model = "../Excel & CSV Sheets/Forecasts/Monday/2017+2018Monday.h5"
@@ -422,8 +422,8 @@ date = str(month)+"-"+str(day)+"-"+str(year)
 
 ##Step 1 - Add weather
 data = finding_weather(data, all_weather, year, month, day)
-print(data.columns)
-exit()
+# print(data.columns)
+# exit()
 
 ##Step 2 - Standardize Data - returns scaled version 
 scaled, data = standarize_data(data, testnum)

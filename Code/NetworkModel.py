@@ -202,15 +202,15 @@ dataset = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods
 # dataset = feather.read_dataframe("../")
 
 # Drop any columns from your dataset if you want
-dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Highway", "Latitude", "Longitude", "humidity"],axis=1)
+dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
 
 ##Shuffling if needed.
 dataset = shuffle(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it
-folder = '../Graphs & Images/ResultsFromHumidityTesting/No Humidity/'
-modelname = "model_GF50-50_NoHumidity.h5"
+folder = '../Graphs & Images/ResultsFromHumidityTesting/No Humidity No Highway/'
+modelname = "model_GF50-50_NoHumidityNoHighway.h5"
 
 ##Creating X and Y. Accident is the first column, therefore it is 0.
 X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
