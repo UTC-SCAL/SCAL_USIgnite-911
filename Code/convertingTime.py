@@ -93,7 +93,7 @@ def getUnixTimeWindows(calldata):
 # It won't always be in that exact format, but that's the general format used in this method
 def splitTime(data):
     data['Hour'] = 0
-    for i, value in enumerate(data.values):
+    for i, _ in enumerate(data.values):
         print(i)
         data.Hour.values[i] = (data.time[i]).split(" ")[1].split(":")[0]
         data.Date.values[i] = (data.time[i]).split(" ")[0]
