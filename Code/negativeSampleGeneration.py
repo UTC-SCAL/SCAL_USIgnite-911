@@ -23,38 +23,45 @@ def find_cred(service):
 def get_negatives_master(calldata, compare):
     # Blank csv file for formatting purposes and easily saving negative samples
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/Blank Negative Samples Form.csv", sep=",")
+        "../Excel & CSV Sheets/ChattaData Accident System/Negatives/Blank Negative Samples Form.csv", sep=",")
     # The center points for our grid blocks for the current grid layout we are using
-    center_points = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/CenterPoints Ori Layout.csv", sep=",")
+    center_points = pandas.read_csv("../Excel & CSV Sheets/Hamilton County Accident System/Grid Files/Grid Oriented Layout/CenterPoints Ori Layout.csv", sep=",")
     # This contains the information of each grid block, such as road count and grid column number
     grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Grid Oriented Info.csv")
 
     # Select the range of grid blocks to use for getting new grid blocks
     # This is based on the column length of the center point's ORIG_FID column, which is the block ID number
-    block_number = range(0, len(center_points.ORIG_FID))
+    # For the specific file we're using, which is CenterPoint for the Oriented Layout, we have 906 different grid blocks
+    block_number = range(0, 906)
 
-    # Two files to hold the days in years 2017 and 2018
+    # The following file(s) are used as an easy way to access the dates in certain years
     # They are separated due to the nature of negative samples by date
-    day_holder2017 = pandas.read_excel(
-        "../Excel & CSV Sheets/New Data Files/Day Holder 2017.xlsx")
+    day_holder2019 = pandas.read_excel(
+        "../Excel & CSV Sheets/Hamilton County Accident System/Old Negative Sampling/Day Holder 2019.xlsx")
     day_holder2018 = pandas.read_excel(
-        "../Excel & CSV Sheets/New Data Files/Day Holder 2018.xlsx")
+        "../Excel & CSV Sheets/Hamilton County Accident System/Old Negative Sampling/Day Holder 2018.xlsx")
 
     # A negative sample location
     neg_loc = 0  # Used for positioning
 
     # Cast these columns as strings for easy manipulation and comparison
-    calldata.Date = calldata.Date.astype(str)
-    day_holder2017.Date = day_holder2017.Date.astype(str)
-    day_holder2018.Date = day_holder2018.Date.astype(str)
+    # calldata.Date = calldata.Date.astype(str)
+    # day_holder2019.Date = day_holder2019.Date.astype(str)
+    # day_holder2018.Date = day_holder2018.Date.astype(str)
+    day_holder2019.Unix = day_holder2019.Unix.astype(int)
+    day_holder2018.Unix = day_holder2018.Unix.astype(int)
+    calldata.Unix = calldata.Unix.astype(int)
+
 
     # Lists to hold the values for each type of changed variable that shouldn't be chosen again
     # Ex: The block_list holds the block numbers that have been selected in the current g-loop so we don't
     # choose the same grid block again
     block_list = []
-    date_list_2017 = []
+    date_list_2019 = []
     date_list_2018 = []
     hour_list = []
+    unix_list_2018 = []
+    unix_list_2019 = []
 
     # Our main for loop: iterates through our accidents
     for j, values in enumerate(calldata.values):
@@ -77,19 +84,25 @@ def get_negatives_master(calldata, compare):
         # This is because when we find a new date for a negative sample, we can only choose new dates from the same year
         # as the original positive sample
         original_accident_year = int(calldata.Date.values[j].split("-")[0])
-        if original_accident_year == 2017:
-            doa = calldata.Date.values[j]
-            row_num = day_holder2017.loc[day_holder2017['Date'] == doa].index[0]
-            date_list_2017.append(row_num)
+        if original_accident_year == 2019:
+            # doa = calldata.Date.values[j]
+            # row_num = day_holder2019.loc[day_holder2019['Date'] == doa].index[0]
+            # date_list_2019.append(row_num)
+            uoa = calldata.Unix.values[j]
+            row_num = day_holder2019.loc[day_holder2019["Unix"] == uoa].index[0]
+            unix_list_2019.append(row_num)
         elif original_accident_year == 2018:
-            doa = calldata.Date.values[j]
-            row_num = day_holder2018.loc[day_holder2018['Date'] == doa].index[0]
-            date_list_2018.append(row_num)
+            # doa = calldata.Date.values[j]
+            # row_num = day_holder2018.loc[day_holder2018['Date'] == doa].index[0]
+            # date_list_2018.append(row_num)
+            uoa = calldata.Unix.values[j]
+            row_num = day_holder2018.loc[day_holder2019["Unix"] == uoa].index[0]
+            unix_list_2018.append(row_num)
 
         # Append the current hour (the first hour for the main loop) to the list of dates that shouldn't be chosen
         # for finding negative samples
-        current_hour = calldata.Hour.values[j]
-        hour_list.append(current_hour)
+        # current_hour = calldata.Hour.values[j]
+        # hour_list.append(current_hour)
 
         # This is the g-loop, where the process of finding a negative sample for our current accident record is repeated
         # This is repeated 9 times so we have a split of roughly %10 positive samples, and %90 negative samples
@@ -101,29 +114,50 @@ def get_negatives_master(calldata, compare):
             copy_calldata.Grid_Block.values[0] = new_block
             block_list.append(new_block)
 
-            # Date Changer #
+            # Unix Changer #
             accident_year = int(copy_calldata.Date.values[0].split("-")[0])
-            if accident_year == 2017:
-                days = range(0, len(day_holder2017.Date))
+            if accident_year == 2019:
+                unix_times = range(0, len(day_holder2019.Unix))
 
-                r_date = [y for y in days if y not in date_list_2017]
-                copy_calldata.Date.values[0] = day_holder2017.Date.values[random.choice(r_date)]
-                row_num = day_holder2017.loc[day_holder2017['Date'] == copy_calldata.Date.values[0]].index[0]
-                date_list_2017.append(row_num)
+                r_unix = [y for y in unix_times if y not in unix_list_2019]
+                copy_calldata.Unix.values[0] = day_holder2019.Unix.values[random.choice(r_unix)]
+                row_num = day_holder2019.loc[day_holder2019['Unix'] == copy_calldata.Unix.values[0]].index[0]
+                unix_list_2019.append(row_num)
+                copy_calldata.Date.values[0] = day_holder2019.Date.values[row_num]
+                copy_calldata.Hour.values[0] = day_holder2019.Hour.values[row_num]
             elif accident_year == 2018:
-                days = range(0, len(day_holder2018.Date))
+                unix_times = range(0, len(day_holder2018.Unix))
 
-                r_date = [y for y in days if y not in date_list_2018]
-                copy_calldata.Date.values[0] = day_holder2018.Date.values[random.choice(r_date)]
-                row_num = day_holder2018.loc[day_holder2018['Date'] == copy_calldata.Date.values[0]].index[0]
-                date_list_2018.append(row_num)
+                r_unix = [y for y in unix_times if y not in unix_list_2018]
+                copy_calldata.Unix.values[0] = day_holder2018.Unix.values[random.choice(r_unix)]
+                row_num = day_holder2018.loc[day_holder2018['Unix'] == copy_calldata.Unix.values[0]].index[0]
+                unix_list_2018.append(row_num)
+                copy_calldata.Date.values[0] = day_holder2018.Date.values[row_num]
+                copy_calldata.Hour.values[0] = day_holder2018.Hour.values[row_num]
+
+            # Date Changer #
+            # accident_year = int(copy_calldata.Date.values[0].split("-")[0])
+            # if accident_year == 2019:
+            #     days = range(0, len(day_holder2019.Date))
+            #
+            #     r_date = [y for y in days if y not in date_list_2019]
+            #     copy_calldata.Date.values[0] = day_holder2019.Date.values[random.choice(r_date)]
+            #     row_num = day_holder2019.loc[day_holder2019['Date'] == copy_calldata.Date.values[0]].index[0]
+            #     date_list_2019.append(row_num)
+            # elif accident_year == 2018:
+            #     days = range(0, len(day_holder2018.Date))
+            #
+            #     r_date = [y for y in days if y not in date_list_2018]
+            #     copy_calldata.Date.values[0] = day_holder2018.Date.values[random.choice(r_date)]
+            #     row_num = day_holder2018.loc[day_holder2018['Date'] == copy_calldata.Date.values[0]].index[0]
+            #     date_list_2018.append(row_num)
 
             # Hour Changer #
-            hours = range(0, 24)
-            r = [x for x in hours if x not in hour_list]  # A list of numbers without n
-            new_hour = random.choice(r)
-            hour_list.append(new_hour)
-            copy_calldata.Hour.values[0] = new_hour
+            # hours = range(0, 24)
+            # r = [x for x in hours if x not in hour_list]  # A list of numbers without n
+            # new_hour = random.choice(r)
+            # hour_list.append(new_hour)
+            # copy_calldata.Hour.values[0] = new_hour
 
             # Set a boolean value for finding matches
             # If a match is found, the value is set to false and the for loop below is broken
@@ -134,26 +168,51 @@ def get_negatives_master(calldata, compare):
                 if n == j:
                     pass
                 else:
-                    if copy_calldata.Hour.values[0] == compare.Hour.values[n] and \
-                                copy_calldata.Date.values[0] is compare.Date.values[n]\
-                            and copy_calldata.Grid_Block.values[0] is compare.Grid_Block.values[n]:
+                    # if copy_calldata.Hour.values[0] == compare.Hour.values[n] and \
+                    #             copy_calldata.Date.values[0] is compare.Date.values[n]\
+                    #         and copy_calldata.Grid_Block.values[0] is compare.Grid_Block.values[n]:
+                    if copy_calldata.Grid_Block.values[0] == compare.Grid_Block.values[n] and \
+                            copy_calldata.Unix.values[0] is compare.Unix.values[n]:
                         no_matches = False
                         break
             # If the boolean value for matches is true, then we save the appropriate data to our negative samples
             # data frame
             if no_matches is True:
                 # These values stay the same between copy_calldata and the negative samples
-                negative_samples.at[neg_loc, "Grid_Block"] = copy_calldata.Grid_Block.values[0]
                 negative_samples.at[neg_loc, "Accident"] = 0
-                negative_samples.at[neg_loc, "Date"] = copy_calldata.Date.values[0]
+                negative_samples.at[neg_loc, "Latitude"] = copy_calldata.Latitude.values[0]
+                negative_samples.at[neg_loc, "Longitude"] = copy_calldata.Longitude.values[0]
+                negative_samples.at[neg_loc, "Street"] = copy_calldata.Street.values[0]
+                negative_samples.at[neg_loc, "AltStreet"] = copy_calldata.AltStreet.values[0]
+                negative_samples.at[neg_loc, "Intersection"] = copy_calldata.Intersection.values[0]
+                negative_samples.at[neg_loc, "DateTime"] = copy_calldata.DateTime.values[0]
+                negative_samples.at[neg_loc, "Unix"] = copy_calldata.Unix.values[0]
                 negative_samples.at[neg_loc, "Hour"] = copy_calldata.Hour.values[0]
-                negative_samples.at[neg_loc, "Time"] = copy_calldata.Time.values[0]
-                negative_samples.at[neg_loc, "Weekday"] = copy_calldata.Weekday.values[0]
-                # Get the row number to use in the centerpoint file based on the grid block of the negative sample
-                # The basic idea here is to match row numbers based on grid block numbers
-                center_row_num = center_points.at[center_points['ORIG_FID'] == copy_calldata.Grid_Block.values[0]].index[0]
-                negative_samples.at[neg_loc, "Center_Lat"] = center_points.Center_Lat.values[center_row_num]
-                negative_samples.at[neg_loc, "Center_Long"] = center_points.Center_Long.values[center_row_num]
+                negative_samples.at[neg_loc, "Date"] = copy_calldata.Date.values[0]
+                negative_samples.at[neg_loc, "WeekDay"] = copy_calldata.WeekDay.values[0]
+                negative_samples.at[neg_loc, "WeekEnd"] = copy_calldata.WeekEnd.values[0]
+                negative_samples.at[neg_loc, "DayFrame"] = copy_calldata.DayFrame.values[0]
+                negative_samples.at[neg_loc, "AccidentType"] = copy_calldata.AccidentType.values[0]
+                negative_samples.at[neg_loc, "CollisionType"] = copy_calldata.CollisionType.values[0]
+                negative_samples.at[neg_loc, "HaR"] = copy_calldata.HaR.values[0]
+                negative_samples.at[neg_loc, "FatalInjury"] = copy_calldata.FatalInjury.values[0]
+                negative_samples.at[neg_loc, "MedicalTransport"] = copy_calldata.MedicalTransport.values[0]
+                negative_samples.at[neg_loc, "InvolvedPlacardedTruck"] = copy_calldata.InvolvedPlacardedTruck.values[0]
+                # This will have to be altered, since posted speed isn't possible to get without averaging posted speed
+                # for each grid block
+                negative_samples.at[neg_loc, "PostedSpeed"] = copy_calldata.PostedSpeed.values[0]
+
+                negative_samples.at[neg_loc, "TotalVehiclesInvolved"] = copy_calldata.TotalVehiclesInvolved.values[0]
+                negative_samples.at[neg_loc, "PedestrianInvolved"] = copy_calldata.PedestrianInvolved.values[0]
+                negative_samples.at[neg_loc, "BicycleInvolved"] = copy_calldata.BicycleInvolved.values[0]
+                negative_samples.at[neg_loc, "DriverOneSafetyEquipment"] = copy_calldata.DriverOneSafetyEquipment.values[0]
+                negative_samples.at[neg_loc, "DriverOneZip"] = copy_calldata.DriverOneZip.values[0]
+                negative_samples.at[neg_loc, "DriverTwoSafetyEquipment"] = copy_calldata.DriverTwoSafetyEquipment.values[0]
+                negative_samples.at[neg_loc, "DriverTwoZip"] = copy_calldata.DriverTwoZip.values[0]
+                negative_samples.at[neg_loc, "Drug"] = copy_calldata.Drug.values[0]
+                negative_samples.at[neg_loc, "Alcohol"] = copy_calldata.Alcohol.values[0]
+                negative_samples.at[neg_loc, "LightCondition"] = copy_calldata.LightCondition.values[0]
+                negative_samples.at[neg_loc, "Grid_Block"] = copy_calldata.Grid_Block.values[0]
                 # Get the row number to use in grid info based on the grid block of the negative sample
                 # The basic idea here is to match row numbers based on grid block numbers
                 info_row_num = grid_info.at[grid_info["ORIG_FID"] == copy_calldata.Grid_Block.values[0]].index[0]
@@ -162,13 +221,14 @@ def get_negatives_master(calldata, compare):
                 negative_samples.at[neg_loc, "Highway"] = grid_info.at[info_row_num, "Highway"]
                 negative_samples.at[neg_loc, "Land_Use_Mode"] = grid_info.at[info_row_num, "Land_Use_Mode"]
                 negative_samples.at[neg_loc, "Road_Count"] = grid_info.loc[info_row_num, "Road_Count"]
+
                 neg_loc = neg_loc + 1
         # Delete the copies made earlier to save memory space
         del copy_calldata
         del line_copy
         # Reset the do-not-use lists for the new accident record we'll be using
         block_list = []
-        date_list_2017 = []
+        date_list_2019 = []
         date_list_2018 = []
         hour_list = []
         if j % 500 == 0:
@@ -215,10 +275,4 @@ def dividing_data(accidents, negatives, accident_percent):
 
 
 # The main lines and files for getting the totally random negative samples
-accidents = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Full GridFix Data 2017+2018.csv")
-# compare_data = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/NegativeSampling/GOD 2017+2018 Accidents.csv")
-# get_negatives_master(accidents, compare_data)
-
-negatives = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Full GridFix Master List_NegOnly.csv")
-
-cut_negatives(negatives, accidents)
+accidents = pandas.read_csv("../Excel & CSV Sheets/ChattaData Accident System/ChattaDataAccidentsComplete.csv")
