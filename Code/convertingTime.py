@@ -99,4 +99,30 @@ def splitTime(data):
         data.Date.values[i] = (data.time[i]).split(" ")[0]
     return data
 
-
+# In this method, we basically make a holder of unix timestamps for an entire year
+# They are categorized by year for the sake of negative sample creation
+# Dates: the year's dates that you want to convert
+# Year_days: the number of days in the year you are working with,
+# this isn't always 365 since we work with incomplete years
+# Unix_holder: the dataframe where you'll be putting all the data
+def getUnixHolder(dates, year_days, unix_holder):
+    dates.Date = dates.Date.astype(str)
+    hour = 0
+    day_num = 0
+    i = 0
+    # Set up a basic check for if we are still working within the valid number of days within the year
+    valid = True
+    while valid:
+        print(i)
+        if hour > 23:
+            day_num += 1
+            hour = 0
+        if day_num == year_days:
+            break
+            # there's probably a better while method to use, but whatever, it works
+        date = dates.Date.values[day_num]
+        unix_holder.at[i, "Hour"] = hour
+        unix_holder.at[i, "Date"] = date
+        i += 1
+        hour += 1
+    unix_holder.to_excel("../")
