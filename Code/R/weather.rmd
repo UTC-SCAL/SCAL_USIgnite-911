@@ -1,0 +1,254 @@
+---
+title: "Untitled"
+author: "Pete Way"
+date: "October 7, 2019"
+output: pdf_document
+---
+
+```{r}
+library(ggmap)
+utc=read.csv("C:/Users/Pensi/Downloads/model_GF50-50_NoHighway_Forecast.csv", header=T)
+
+centers = read.csv("C:/Users/Pensi/Downloads/Centerpoints.csv")
+
+utc = merge(utc, centers, by="Grid_Block")
+
+colnames(utc)
+utc=utc[which(utc$Prediction==1),]
+# #
+locations=data.frame(utc$Grid_Block, utc$Hour)
+u=unique(locations)
+# #
+sums=rep(0, dim(u)[1])#'sums' will be the # of accidents at each unique loc.
+for (i in 1:dim(u)[1]){
+  cat(u[i,'utc.Grid_Block'], u[i,'utc.Hour'], "\n")
+  w=which(utc$Grid_Block==u[i,1] & utc$Hour==u[i,2])
+  sums[i]<-length(utc$Prediction[w])
+}
+# #
+places=data.frame(u, sums)#uniques locations and the number of accidents there
+
+rank=rep(NA, dim(places)[1])
+rank[which(sums<=25)] <-'yellow'
+rank[which(sums<=75)] <-'orange'
+rank[which(sums<=125)] <-'red'
+rank[which(sums>=150)] <-'black'
+locs=data.frame(u[,])
+
+places$rank <- rank
+df5 = places[!is.na(places$rank),]
+df5[0:10,]
+df5$rank = with(df5, reorder(df5$rank, df5$sum))
+df5[0:10,]
+lats<-c(34.99, 35.15)
+lons<-c(-85.4,-85.05)
+# png("../Graphs & Images/R Maps/HamiltonHotSpotsMapstamen.png", width=12,height=6,units='in', res=300)
+par(mar = rep(0, 4))
+bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+calc_zoom(bb)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=11,maptype="watercolor", source='stamen')
+ggmap(cda, legend = "bottom") +
+  xlim(lons)+ylim(lats)+theme_minimal(base_size = 22)+
+  labs(x="",y="", title="Accidents in Chattanooga") +
+  geom_point(aes(x=df.Longitude, y=df.Latitude, color=df5$rank), data=df5, alpha = .75)  + guides( guide = "none" ) + scale_color_manual(values = c("orange","red","black"),  labels = c("25 - 50","50 - 75"," > 75"), name = "Accidents")
+
+```
+
+##Combining weather files
+```{r}
+library(feather)
+name = "C:/Users/Pensi/Downloads/2019 Weather.feather"
+weather19 = read_feather(name)
+
+name1718 = "C:/Users/Pensi/Downloads/2017+2018 Weather.feather"
+weather1718 = read_feather(name1718)
+colnames(weather1718)[colnames(weather1718)=="icon"] <- "Event"
+colnames(weather1718)[colnames(weather1718)=="summary"] <- "Conditions"
+memory.size(1000000)
+library(lubridate)
+weather1718$Datetime = as.POSIXct(weather1718$Unix, origin="1970-01-01")
+year170 = weather1718[(weather1718$Datetime %within% interval(ymd("2017-01-01"), ymd("2017-06-01"))),]
+year171 = weather1718[(weather1718$Datetime %within% interval(ymd("2017-06-01"), ymd("2018-01-01"))),]
+year180 = weather1718[(weather1718$Datetime %within% interval(ymd("2018-01-01"), ymd("2018-06-01"))),]
+year181 = weather1718[(weather1718$Datetime %within% interval(ymd("2018-06-01"), ymd("2019-01-01"))),]
+
+write.csv(year170, "C:/Users/Pensi/Downloads/2017 Weather Part 1.csv")
+write.csv(year171, "C:/Users/Pensi/Downloads/2017 Weather Part 2.csv")
+write.csv(year180, "C:/Users/Pensi/Downloads/2018 Weather Part 1.csv")
+write.csv(year181, "C:/Users/Pensi/Downloads/2018 Weather Part 2.csv")
+write.csv(weather19, "C:/Users/Pensi/Downloads/2019 Weather.csv")
+
+colnames(weather19)[colnames(weather19)=="time"] <- "Unix"
+colnames(weather19)[colnames(weather19)=="timereadable"] <- "hour"
+
+drops <- c("X","id")
+library(dplyr)
+weather1718 = select(weather1718, -drops)
+
+weather19 = weather19[(colnames(weather1718))]
+
+weather <- rbind(weather1718, weather19)
+weather$Datetime = as.POSIXct(weather$Unix, origin="1970-01-01")
+colnames(weather)[colnames(weather)=="ORIG_FID"] <- "Grid_Block"
+
+rm(year17, year17jan1, year18, file, i, j, dates, mid, tab, testing)
+rm(weather1718, weather19, drops, name, name1718)
+```
+
+
+```{r}
+
+
+gc()
+colnames(weather)
+keeps = c("Datetime", "Grid_Block", "humidity")
+testing = weather[(keeps)]
+
+library(reshape2)
+# testing <- dcast(testing, Datetime~Grid_Block, fun.aggregate=mean)
+testing = as.data.frame(testing)
+
+testing$Latitude <- weather$Center_Lat[match(testing$Grid_Block, weather$Grid_Block)]
+testing$Longitude <- weather$Center_Long[match(testing$Grid_Block, weather$Grid_Block)]
+colnames(testing)
+
+head(testing)
+
+library(lubridate)
+typeof(testing$Datetime)
+
+year(testing$Datetime)
+rm(year17)
+year17jan = testing[(testing$Datetime %within% interval(ymd("2017-01-01"), ymd("2017-02-01"))),]
+unique(day(year17jan$Datetime))
+
+colnames(year17jan)
+# 
+# library(dplyr)
+# testing <- testing %>%
+#   select(Grid_Block, Latitude, Longitude, everything())
+
+```
+
+```{r}
+library(lubridate)
+# year17jan1 = testing[(testing$Datetime %within% interval(ymd("2017-01-01"), ymd("2017-01-02"))),]
+library(ggplot2)
+library(ggmap)
+# mid<-mean(year17jan1$humidity)
+mid = .5
+qmplot(Longitude, Latitude, data=year17jan1, source='osm', extent='device', legend='left',color = humidity)+
+scale_color_gradientn(limits=c(.80,1), colours= heat.colors(40,alpha=1),breaks=seq(.80,1,by=.05) ) 
+  
+  # scale_color_gradient2(limits=c(0,1),midpoint=mid, low="white", mid="grey", high="black",breaks=seq(0,1,by=.5) )
+```
+```{r}
+typeof(year17jan1$Datetime)
+date(year17jan1$Datetime[0:5])
+hour(year17jan1$Datetime[0:5])
+rm(i,j,tab,title)
+year17jan1 = aggregate(humidity~Grid_Block, data=year17jan1, mean)
+year17jan1$Latitude <- testing$Latitude[match(year17jan1$Grid_Block, testing$Grid_Block)]
+year17jan1$Longitude <- testing$Longitude[match(year17jan1$Grid_Block, testing$Grid_Block)]
+```
+
+```{r}
+dates = unique(as.Date(testing$Datetime))
+
+for(i in dates)
+  print(dates[i])     
+head(testing)
+```
+
+
+
+```{r}
+"2018-01-01 00:00:00" %in% colnames(testing)
+"2017-01-01 00:00:00" %in% colnames(testing)
+
+basics = testing[, c("Grid_Block","Latitude","Longitude")]
+
+year17 = select(testing, c("2017-01-01 00:00:00":"2018-01-01 00:00:00"))
+jan17 =  select(year17, c("2017-01-01 00:00:00":"2017-02-01 00:00:00"))
+year18 = select(testing, c("2018-01-01 00:00:00":"2019-01-01 00:00:00"))
+year19 = select(testing, c("2019-01-01 00:00:00":ncol(testing)))
+
+jan17$Grid_Block = basics$Grid_Block
+jan17$Latitude = basics$Latitude
+jan17$Longitude = basics$Longitude
+
+rm(weather)
+
+```
+
+
+```{r}
+library(ggplot2)
+library(ggmap)
+library(OneR)
+# hist(testing$humidity)
+seq(0,1,by=.05)
+testing$test = cut(testing$humidity, breaks=c(seq(0,1,by=.05)), labels = c('<.05','.05-.1','.1-.15','.15-.20','.20-.25','.25-.30','.30-.35','.35-.40','.40-.45','.45-.50','.50-.55','.55-.60','.60-.65','.65-.70','.70-.75','.75-.80','.80-.85','.85-.90','.90-.95','>.95' ))
+head(testing)
+hist(testing$humidity)
+```
+
+```{r}
+acc19 = read.csv("C:/Users/Pensi/Google Drive (kxc378@mocs.utc.edu)/2019 Accidents.csv")
+acc1718 = read.csv("C:/Users/Pensi/Google Drive (kxc378@mocs.utc.edu)/2017+2018 Accidents.csv")
+colnames(acc1718)
+colnames(acc19)
+keep = c('Date','Hour','Grid_Block')
+
+acc19 = acc19[keep]
+acc1718 = acc1718[keep]
+acc <- rbind(acc1718, acc19)
+rm(acc1718,acc19, file, i,mid, year17jan1)
+
+head(acc)
+
+acc$Datetime = paste(acc$Date, paste(acc$Hour, ':00',sep=""))
+acc$Unix = as.numeric(as.POSIXct(acc$Datetime))
+head(acc)
+acc$Unix[0:5]
+acc$Latitude <- testing$Latitude[match(acc$Grid_Block, testing$Grid_Block)]
+acc$Longitude <- testing$Longitude[match(acc$Grid_Block, testing$Grid_Block)]
+
+acc$Match = paste(acc$Grid_Block, acc$Unix)
+testing$Match = paste(testing$Grid_Block, testing$Unix)
+
+acc$Humidity = testing$humidity[match(acc$Match, testing$Match)]
+```
+
+
+```{r}
+library(RColorBrewer)
+# dividex = seq(0,1,by=.05)
+# dividey = seq(0,14,by=2)
+# h = hist(testing$humidity)
+# h$density = h$counts/sum(h$counts)*100
+png("C:/Users/Pensi/Downloads/OverallHumidity.png", width=1600, height=900)
+par(ps = 18, cex = 1.5, cex.main = 1.5)
+plot(h,freq=FALSE, main="Weather Humidity Distribution", ylab="Percentage", xlab="Recorded Humidity", col = brewer.pal(9,'Blues'), ylim=c(0,14), xaxt="none", yaxt='none')
+axis(1, dividex,dividex )
+axis(2, dividey,dividey, las='2' )
+text(seq(.125,.975,.05 ), h$density+.5, labels = paste(round(h$density, 1),'%', sep=""), offset = 0.5)
+# a = hist(acc$Humidity)
+# a$density = a$counts/sum(a$counts)*100
+dev.off()
+png("C:/Users/Pensi/Downloads/AccidentHumidity.png", width=1600, height=900)
+par(ps = 18, cex = 1.5, cex.main = 1.5)
+plot(a,freq=FALSE, main="Accident Humidity Distribution", ylab="Percentage", xlab="Accident Humidity", col = brewer.pal(9,'YlOrRd'), ylim=c(0,14), xaxt="none", yaxt='none')
+axis(1, dividex,dividex )
+axis(2, dividey,dividey, las='2' )
+text(seq(.125,.975,.05 ), a$density+.5, labels = paste(round(a$density, 1),'%', sep=""), offset = 0.5)
+dev.off()
+```
+
+
+```{r}
+
+```
+
+

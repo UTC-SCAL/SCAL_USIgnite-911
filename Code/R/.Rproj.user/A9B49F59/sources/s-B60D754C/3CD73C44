@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572887530868.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3CD73C44",
+    "lastKnownWriteTime" : 1572125326,
+    "last_content_update" : 1572889528022,
+    "path" : "~/Downloads/rstudio-cloud-data/Interstate2.rmd",
+    "project_path" : "Interstate2.rmd",
+    "properties" : {
+        "cursorPosition" : "98,94",
+        "scrollLine" : "58"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

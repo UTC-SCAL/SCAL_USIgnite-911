@@ -45,6 +45,7 @@ def finding_binaries(data):
     data['Clear'] = data.apply(lambda x : 1 if ("clear" in x.Event or "clear" in x.Conditions) else 0, axis=1)
     # cleartime = datetime.datetime.now()
     # print("Clear completed in:", cleartime - snowtime)
+    data = data.drop_duplicates(subset=['Unix', 'Grid_Block'], keep='last')
     return data
 
 ##This method retrieves data from the all_weather file WITH BINARIES

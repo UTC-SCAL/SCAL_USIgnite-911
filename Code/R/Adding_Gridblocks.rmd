@@ -1,0 +1,15 @@
+---
+title: "Adding_GridBlocks"
+output: pdf_document
+---
+
+```{r}
+chattacc = read.csv("ChattaDataAccidents.csv")
+
+gridblocks = read.csv("GridBlocks.csv")
+```
+
+```{r}
+
+```
+
