@@ -138,11 +138,53 @@ def add_weather(data, weather):
     return newdata
 
 
+# Adds weather from weather file into the data file. Assumes weather file is formatted
+def add_weather_full(data, weather):
+    print("Adding Weather")
+    ##Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out.
+    # data = data.drop(['precipIntensity'], axis=1)
+
+    # Merge the weather variables for the hour of the accident based on time and grid block
+    # Merge the event/conditions before columns based on hour before and grid block
+    newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
+                                          'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
+                                          'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
+                                          'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
+                                          'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
+                                          'EventBefore', 'ConditionBefore', 'hourbefore']],
+                           on=['Unix', 'Grid_Block'])
+    # Code to aggregate weather #
+    # newdata = aggregate_weather(newdata)
+    return newdata
+
+
 # Read in our data
-weather = feather.read_dataframe("../")
-data = pandas.read_csv("../")
+weather = feather.read_dataframe("../Ignore/Weather/2019 Weather.feather")
+data = pandas.read_csv("../Excel & CSV Sheets/ChattaData Accident System/ChattaDataAccidentsComplete.csv")
+row_num = weather.loc[weather["Unix"] == 1561662000].index[0]
+print(weather.values[row_num])
+
+# new_cols = ('Accident', 'Latitude', 'Longitude', 'Street', 'AltStreet',
+#        'Intersection', 'Grid_Col_x', 'DateTime', 'Date', 'Hour', 'Unix',
+#        'WeekDay', 'WeekEnd', 'DayFrame', 'AccidentType', 'CollisionType',
+#        'HaR', 'FatalInjury', 'MedicalTransport', 'InvolvedPlacardedTruck',
+#        'PostedSpeed', 'TotalVehiclesInvolved', 'PedestrianInvolved',
+#        'BicycleInvolved', 'DriverOneSafetyEquipment', 'DriverOneZip',
+#        'DriverTwoSafetyEquipment', 'DriverTwoZip', 'Drug', 'Alcohol',
+#        'LightCondition', 'Weather', 'Grid_Block', 'HourBefore', 'Grid_Col_y',
+#        'Grid_Row', 'Highway', 'Land_Use_Mode', 'Road_Count', 'humidity',
+#        'windSpeed', 'windBearing', 'uvIndex', 'precipIntensity',
+#        'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
+#        'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy',
+#        'Snow', 'Clear', 'RainBefore',
+#        'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
+#        'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
+#        'EventBefore', 'ConditionBefore', 'hourbefore')
+# data = data.reindex(columns=new_cols)
+
+# data = add_weather_full(data, weather)
 
 # Saving the files: Choose which type you'd prefer
 # Feather files are typically files > 800 mb
-data.to_csv("../", index=False)
+# data.to_csv("../Excel & CSV Sheets/ChattaData Accident System/ChattaData Accidents with Weather.csv", index=False)
 # feather.write_dataframe(newdata, "../")
