@@ -55,9 +55,10 @@ library(sp)
 library(sf)
 library(ggmap)
 library(ggplot2)
-buffing = st_buffer(interstates, dist=.0002)
+# buffing = st_buffer(interstates, dist=.0002)
+buffing = bufferzone
 # buffing
-##Small Lat/Longs
+##Small Lat/LongsY
 lats<-c(35,35.01)
 lons<-c(-85.22, -85.2)
 #Big Lat/Longs
@@ -65,13 +66,8 @@ lons<-c(-85.22, -85.2)
 # lons=c(-85.32, -85.22)
 
 par(mar = rep(0, 4))
-bb<-make_bbox(lon=lons,lat=lats, f=0.05)
-zoomed = calc_zoom(bb)
-
-# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
-# cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
-# ggmap(cda)
-
+# bb<- make_bbox(lon=lons,lat=lats, f=0.05)
+# zoomed = calc_zoom(bb)
 
 ggplot() + 
   geom_sf(data = buffing, size=1, color= "blue" ) + 
@@ -82,7 +78,7 @@ ggplot() +
 
 # png("MapofBuffer.png", width=8,height=4,units='in', res=300)
 par(mar = rep(0, 4))
-bb<-make_bbox(lon=lons,lat=lats, f=0.05)
+bb<- make_bbox(lon=lons,lat=lats, f=0.05)
 zoomed = calc_zoom(bb)
 # bb<-make_bbox(lon=lons,lat=lats,f=0.05)
 cda<-get_map(bb,zoom=15,maptype="watercolor", source='stamen')

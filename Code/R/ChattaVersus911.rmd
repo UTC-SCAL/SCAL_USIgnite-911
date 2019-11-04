@@ -1,0 +1,60 @@
+---
+title: "ChattaVERSUS911"
+output: pdf_document
+---
+##Comparison of Chatta Data and 911 Accidents
+```{r}
+library(lubridate)
+acc_shapes$Date = as.Date(as.POSIXct(acc_shapes$Unix, origin="1970-01-01"))
+acc_shapes$Year = year(acc_shapes$Date)
+
+test_chatta = acc_shapes[acc_shapes$Year == 2018 , ]
+tab_Chatta = table(test_chatta$Date)
+tab_Chatta = as.data.frame(tab_Chatta)
+names = c("Date","Count")
+colnames(tab_Chatta) = names
+```
+
+###Adding in the Missing Dates for the 911 data 
+```{r}
+acc_911$Date = date(acc_911$Datetim)
+acc_911$Year = year(acc_911$Date)
+test_911 = acc_911[acc_911$Year == 2018 , ]
+tab_911 = table(test_911$Date)
+tab_911 = as.data.frame(tab_911)
+colnames(tab_911) = names
+library(tidyr)
+library(dplyr)
+## Make a data frame with a full series of dates from the min date to the max date
+## in the incomplete data frame
+full_dates <- seq(as.Date(head(tab_911$Date, n=1)), as.Date(tail(tab_911$Date, n=1)), by = "day")
+full_dates <- data.frame(Date = as.Date(full_dates))
+
+tab_911$Date = as.Date(tab_911$Date)
+## Merge the complete data frame with the incomplete to fill in the dates and add 
+## NAs for missing values
+tab_911 <- merge(full_dates, tab_911, by = "Date", 
+                          all.x = TRUE)
+##Replace NAs with zeroes!
+tab_911[is.na(tab_911)] <- 0
+```
+
+```{r}
+tab_911$Date = as.Date(tab_911$Date)
+tab_Chatta$Date = as.Date(tab_Chatta$Date)
+accidents = merge(tab_911,tab_Chatta,by="Date",allow.cartesian=T)
+colnames(accidents) = c("Date","Count_911","Count_Chatta")
+
+png("AccidentsBySource.png", width=8,height=4,units='in', res=600)
+par(mar = c(3,3,1,0.1))
+plot(accidents$Count_911, col='blue',xlab="",lwd=1, type="l", ylab="Accident Count in Data", xaxt="none",yaxt="none", ylim=c(0,300), main="Accidents by Source")
+lines(accidents$Count_Chatta, type="l", col='red', lwd=1)
+axis(2, seq(0,300,by=50), seq(0,300,by=50), cex.axis = .7, las=2)
+axis.Date(1, seq.Date(as.Date(head(accidents$Date, n=1)), as.Date(tail(accidents$Date, n=1)), by="week"), las=2)
+legend("topleft", legend=c("911", "ChattaData"),
+       col=c("blue", "red"), lty=1:1,lwd=2:2, cex=.8)
+dev.off()
+```
+
+
+
