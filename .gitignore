@@ -99,14 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
-.DSStore
 Ignore/Spatial
 Ignore/Weather
 Ignore/WeatherStations
 Ignore/*
-.DS_Store
-.DS_Store
-Excel & CSV Sheets/.DS_Store
-.DS_Store
-.DS_Store
-Graphs & Images/.DS_Store
+**/.DS_Store

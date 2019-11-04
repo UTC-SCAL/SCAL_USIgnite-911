@@ -1,0 +1,20 @@
+---
+title: "GridBlocks"
+output: pdf_document
+---
+
+```{r}
+blocks = read.csv("GridBlocks.csv")
+missing = c(19,40,64,295,296,297,298,340,341,342,385,386,387,430,431,475,476,520,565)
+missingblocks = blocks[blocks$ORIG_FID %in% missing,]
+rm(missblocks)
+```
+
+```{r}
+library(sf)
+library(sp)
+coordinates(missingblocks)=~X+Y
+geo.prj <- "+proj=longlat" 
+proj4string(missingblocks)<- CRS(geo.prj)
+```
+
