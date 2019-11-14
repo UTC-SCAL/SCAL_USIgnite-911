@@ -25,10 +25,10 @@ keras = "*"
 darksky = "*"
 darkskylib = "*"
 feather-format = "*"
-tensorflow-gpu = "*"
 bdateutil = "*"
 python-dateutil = "*"
 rtree = "*"
+geopy = "*"
 
 [dev-packages]
 autopep8 = "*"
