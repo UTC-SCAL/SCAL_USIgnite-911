@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
-import feather
+
 # Import matplotlib pyplot safely
 try:
     import matplotlib.pyplot as plt
@@ -30,15 +30,11 @@ def fitting_loops(X, Y, folder, modelname):
     model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
     model.add(Dropout(.1))
     model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
-    # model.add(Dense(X.shape[1]-15, activation='sigmoid'))
-    # model.add(Dense(X.shape[1]-20, activation='sigmoid'))
-    # model.add(Dropout(.1))
 
     model.add(Dense(1, activation='sigmoid'))
 
     #   3. Compiling a model.
-    model.compile(loss='mse',
-                  optimizer='nadam', metrics=['accuracy'])
+    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
     print(model.summary())
 
     for i in range(0, 50):
@@ -48,13 +44,12 @@ def fitting_loops(X, Y, folder, modelname):
         X_train, X_test, y_train, y_test = train_test_split(
             X, Y, test_size=0.30, random_state=42)
 
-
-        ##If the model already exists, import and update/use it. If not, create it. 
+        # If the model already exists, import and update/use it. If not, create it.
         if exists(folder + modelname):
             model.load_weights(folder + modelname)
             print("Loading Grid Model")
 
-        ##If the average holder file exists, import it. If not, create it. 
+        # If the average holder file exists, import it. If not, create it.
         if exists(file):
             avg_holder = pandas.read_csv(file,
                                          usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP",
@@ -68,7 +63,7 @@ def fitting_loops(X, Y, folder, modelname):
         ###What cycle of the loop are we on? 
         print("Cycle: ", i)
 
-        # Patience is 15 epochs. If the model doesn't improve over the past 15 epochs, exit training
+        # If the model doesn't improve over the past X amount epochs, exit training
         patience = 30
         stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
         hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
@@ -115,7 +110,6 @@ def fitting_loops(X, Y, folder, modelname):
         avg_holder.at[j, 'TN'] = tn
         avg_holder.at[j, 'FP'] = fp
         avg_holder.at[j, 'FN'] = fn
-
 
         # Save the average holder file: 
         avg_holder.to_csv(file, sep=",")
@@ -187,7 +181,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
 
-## The steps of creating a neural network or deep learning model ##
+# The steps of creating a neural network or deep learning model
 # 1. Load Data
 # 2. Defining a neural network
 # 3. Compile a Keras model using an efficient numerical backend
