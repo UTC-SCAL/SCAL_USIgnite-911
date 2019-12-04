@@ -4,57 +4,98 @@ output: pdf_document
 ---
 ##Comparison of Chatta Data and 911 Accidents
 ```{r}
+acc_Chatta = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/ChattaData Accident System/All Accidents.csv")
+acc_911 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accidents/2017-2019 Accidents No Dups Take 4.csv")
+acc_911$Date[0:5]
 library(lubridate)
-acc_shapes$Date = as.Date(as.POSIXct(acc_shapes$Unix, origin="1970-01-01"))
-acc_shapes$Year = year(acc_shapes$Date)
+acc_Chatta$Hour = hour(acc_Chatta$Incident.Date)
+acc_911$Hour = hour(hms(acc_911$Time))
 
-test_chatta = acc_shapes[acc_shapes$Year == 2018 , ]
-tab_Chatta = table(test_chatta$Date)
+library(lubridate)
+# acc_Chatta$Date = as.Date(as.POSIXct(acc_Chatta$Unix, origin="1970-01-01"))
+acc_Chatta$Year = year(as.Date(acc_Chatta$Incident.Date))
+acc_Chatta$Date = date(acc_Chatta$Incident.Date)
+
+test_Chatta = acc_Chatta[acc_Chatta$Year == 2018 , ]
+tab_Chatta = table(test_Chatta$Date, test_Chatta$Hour)
 tab_Chatta = as.data.frame(tab_Chatta)
-names = c("Date","Count")
+names = c("Date","Hour","Count")
 colnames(tab_Chatta) = names
 ```
 
 ###Adding in the Missing Dates for the 911 data 
 ```{r}
-acc_911$Date = date(acc_911$Datetim)
+# acc_911$Date = as.Date(acc_911$Date))
 acc_911$Year = year(acc_911$Date)
+unique(acc_911$Year)
+
 test_911 = acc_911[acc_911$Year == 2018 , ]
-tab_911 = table(test_911$Date)
+unique(test_911$Year)
+length(unique(test_911$Date))
+tab_911 = table(test_911$Date, test_911$Hour)
+# unique(tab_911$Date)
+
 tab_911 = as.data.frame(tab_911)
 colnames(tab_911) = names
+tab_911$Year = year(tab_911$Date)
+tab_911 = tab_911[tab_911$Year == 2018 , ]
 library(tidyr)
 library(dplyr)
-## Make a data frame with a full series of dates from the min date to the max date
-## in the incomplete data frame
-full_dates <- seq(as.Date(head(tab_911$Date, n=1)), as.Date(tail(tab_911$Date, n=1)), by = "day")
-full_dates <- data.frame(Date = as.Date(full_dates))
 
-tab_911$Date = as.Date(tab_911$Date)
-## Merge the complete data frame with the incomplete to fill in the dates and add 
-## NAs for missing values
-tab_911 <- merge(full_dates, tab_911, by = "Date", 
-                          all.x = TRUE)
+test <- merge(tab_Chatta, tab_911, by = c("Date","Hour"), all.x = TRUE)
+
 ##Replace NAs with zeroes!
-tab_911[is.na(tab_911)] <- 0
+test[is.na(test)] <- 0
 ```
 
 ```{r}
-tab_911$Date = as.Date(tab_911$Date)
-tab_Chatta$Date = as.Date(tab_Chatta$Date)
-accidents = merge(tab_911,tab_Chatta,by="Date",allow.cartesian=T)
-colnames(accidents) = c("Date","Count_911","Count_Chatta")
 
-png("AccidentsBySource.png", width=8,height=4,units='in', res=600)
+colnames(test) = c("Date","Hour","Count_Chatta","Count_911", "Year")
+
+test2 = test[0:30,]
+# png("AccidentsBySource.png", width=8,height=4,units='in', res=600)
+dev.new(width = 800, height = 400, unit = "px")
 par(mar = c(3,3,1,0.1))
-plot(accidents$Count_911, col='blue',xlab="",lwd=1, type="l", ylab="Accident Count in Data", xaxt="none",yaxt="none", ylim=c(0,300), main="Accidents by Source")
-lines(accidents$Count_Chatta, type="l", col='red', lwd=1)
+plot(test2$Count_911, col='blue',xlab="",lwd=1, type="l", ylab="Accident Count in Data", xaxt="none",yaxt="none", ylim=c(0,130), main="Accidents by Source - January")
+lines(test2$Count_Chatta, type="l", col='red', lwd=1)
 axis(2, seq(0,300,by=50), seq(0,300,by=50), cex.axis = .7, las=2)
-axis.Date(1, seq.Date(as.Date(head(accidents$Date, n=1)), as.Date(tail(accidents$Date, n=1)), by="week"), las=2)
+axis.Date(1, seq.Date(as.Date(head(test2$Date, n=1)), as.Date(tail(test2$Date, n=1)), by="week"), las=2)
 legend("topleft", legend=c("911", "ChattaData"),
        col=c("blue", "red"), lty=1:1,lwd=2:2, cex=.8)
-dev.off()
+# dev.off()
 ```
 
+```{r}
+dev.new(width = 800, height = 400, unit = "px")
+par(mar = c(3,3,1,0.1))
+plot(test$Count_911, col='blue',xlab="",lwd=1, type="l", ylab="Accident Count in Data", xaxt="none",yaxt="none", ylim=c(0,8),xlim=c(0,72), main="Accidents by Source - January 1 - 3")
+lines(test$Count_Chatta, type="l", col='red', lwd=1)
+axis(2, seq(0,300,by=50), seq(0,300,by=50), cex.axis = .7, las=2)
+legend("topleft", legend=c("911", "ChattaData"),
+       col=c("blue", "red"), lty=1:1,lwd=2:2, cex=.8)
+```
 
+```{r}
+tabDate_Chatta = table(test_Chatta$Date)
+tabDate_Chatta = as.data.frame(tabDate_Chatta)
+names = c("Date","Count")
+colnames(tabDate_Chatta) = names
+
+
+tabDate_911 = table(test_911$Date)
+tabDate_911 = as.data.frame(tabDate_911)
+colnames(tabDate_911) = names
+tabDate_911$Year = year(tabDate_911$Date)
+tabDate_911 = tabDate_911[tabDate_911$Year == 2018 , ]
+library(tidyr)
+library(dplyr)
+
+DateTable <- merge(tabDate_Chatta, tabDate_911, by = c("Date"), all.x = TRUE)
+
+##Replace NAs with zeroes!
+DateTable[is.na(DateTable)] <- 0
+colnames(DateTable) = c("Date","Count_Chatta","Count_911","Year")
+
+DateTable$Difference <- abs(DateTable$Count_Chatta - DateTable$Count_911)
+```
 

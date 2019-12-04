@@ -6,50 +6,53 @@ import numpy
 import time
 import math
 import geopy.distance
+import imaplib
+import email
+from io import StringIO
+import chardet
 
 
-# points = pandas.read_csv("Excel & CSV Sheets/Accidents/Coords.csv")
+total = pandas.read_csv("Excel & CSV Sheets/Accidents/RawAccidentData.csv")
+m = imaplib.IMAP4_SSL("imap.gmail.com")
+m.login('utcscal2018@gmail.com', 'EMCS 335')
+m.select("INBOX")  # here you a can choose a mail box like INBOX instead
+# use m.list() to get all the mailboxes
 
+resp, items = m.search(None,"ALL")  # you could filter using the IMAP rules here (check http://www.example-code.com/csharp/imap-search-critera.asp)
+items = items[0].split()  # getting the mails id
 
-# means = []
-# for i, _ in enumerate(points.values):
-#     if i!=(len(points.values)-1):
-#         j = i+1
-#         dist = geopy.distance.distance(points.Coords[i], points.Coords[j]).miles
-#         means.append(dist)
-#         print(i,j,dist)
-# print(sum(means)/len(means))
+#This is the number of emails in the inbox.
+# print(len(items))
 
+for emailid in items:
+    resp, data = m.fetch(emailid, "(RFC822)")  # fetching the mail, "`(RFC822)`" means "get the whole stuff", but you can ask for headers only, etc
+    email_body = data[0][1]  # getting the mail content
+    mail = email.message_from_bytes(email_body)
+# Check if any attachments at all
+    if mail.get_content_maintype() != 'multipart':
+        continue
+    # we use walk to create a generator so we can iterate on the parts and forget about the recursive headache
+    for part in mail.walk():
+        # multipart are just containers, so we skip them
+        if part.get_content_maintype() == 'multipart':
+            continue
 
-accidents = pandas.read_csv("Excel & CSV Sheets/Accidents/2017-2019 Accidents Old Style.csv")
-
-print(accidents.Route[0])
-
-accidents['Road'] = accidents.apply(lambda x :x.Route[2:-3], axis=1)
-
-accidents['Unix'] = accidents.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Time).zfill(2), "%m/%d/%y %H:%M:%S"), axis=1)
-accidents['Unix'] = accidents.apply(lambda x : x.Unix.strftime('%s'), axis=1)
-
-accidents['Unix'] = accidents['Unix'].astype(str).astype(int)
-accidents['Coords'] = accidents['Latitude'].astype(str) + " , " +accidents['Longitude'].astype(str)
-
-start = time.time()
-drops = list()
-for i, _ in enumerate(accidents.values):
-    if i % 2000 == 0: 
-        print(i, round(((time.time()-start)/60),2), len(drops))
-    timematches = accidents.loc[(accidents['Unix'].between((int(accidents.Unix[i]) - 900),(int(accidents.Unix[i]) + 900)))].index.tolist()
-    if len(timematches) > 1:
-        for j in timematches:
-            dist = geopy.distance.distance(accidents.Coords[i], accidents.Coords[j]).miles
-            if dist < .25 and (int(i) != int(j)) and j not in drops and (accidents.Road[i] == accidents.Road[j]):
-                drops.append(j)
-
-keeps = accidents.drop(drops)
-end = time.time()
-print("Time taken:",round(((end-start)/60),2))
-print("Total Accidents Begin", len(accidents.values))
-print("Total Accidents End", len(keeps.values))
-print("Difference of:", int(len(accidents.values)-len(keeps.values)), "and percent of:",\
-     round(100*len(keeps.values)/len(accidents.values),2))
-keeps.to_csv("Excel & CSV Sheets/Accidents/2017-2019 Accidents No Dups Test.csv")
+        # is this part an attachment ?
+        if part.get('Content-Disposition') is None:
+            continue
+        print(mail["Subject"], len(total))
+        encode = chardet.detect(part.get_payload(decode=True))['encoding']
+        # print(encode)
+        # print(type(part.get_payload(decode=True)))
+        try:
+            s=str(part.get_payload(decode=True),encode)
+            data = StringIO(s)
+            daypart=pandas.read_csv(data)
+            total = pandas.concat([total, daypart])
+        except:
+            total.to_csv("Excel & CSV Sheets/Accidents/RawAccidentDataComplete.csv")
+            print("In Except")
+            print(str(part.get_payload(decode=True)))
+            exit()
+            s=str(part.get_payload(decode=False))
+total.to_csv("Excel & CSV Sheets/Accidents/RawAccidentDataComplete.csv")

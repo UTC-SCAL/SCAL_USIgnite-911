@@ -59,11 +59,11 @@ library(ggplot2)
 buffing = bufferzone
 # buffing
 ##Small Lat/LongsY
-lats<-c(35,35.01)
-lons<-c(-85.22, -85.2)
+# lats<-c(35,35.01)
+# lons<-c(-85.22, -85.2)
 #Big Lat/Longs
-# lats=c(35.01,35.035)
-# lons=c(-85.32, -85.22)
+lats=c(35.01,35.035)
+lons=c(-85.32, -85.22)
 
 par(mar = rep(0, 4))
 # bb<- make_bbox(lon=lons,lat=lats, f=0.05)
