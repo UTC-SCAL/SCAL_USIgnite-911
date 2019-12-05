@@ -71,7 +71,9 @@ def pull_emails(total, lastday):
                         str(x['Response Date']), "%Y-%m-%d %H:%M:%S"), axis=1)
                     daypart['Unix'] = daypart.apply(
                         lambda x: x.Unix.strftime('%s'), axis=1)
-                    daypart['Coords'] = (daypart["Latitude"]/1000000).map(str) + " , " + (daypart["Longitude"]/-1000000).map(str)
+                    daypart['Latitude'] = daypart["Latitude"]/1000000
+                    daypart['Longitude'] = daypart["Longitude"]/-1000000
+                    daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]/).map(str)
                     total = pandas.concat([total, daypart])
         else:
             print("...Looking for new accident reports")
