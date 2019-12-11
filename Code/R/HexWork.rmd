@@ -119,30 +119,29 @@ dev.off()
 ```{r}
 library(sf)
 library(sp)
-roads = st_read("/Users/peteway/Downloads/JJVPG58_Export_12072019201315/Roadway_Geometrics_County_HAMILTON.shp")
+library(ggmap)
+library(ggplot2)
+roads = st_read("/Users/peteway/Downloads/Roadway_Info_Numerical/Roadway_Geometrics_County_HAMILTON.shp")
 typeof(roads)
 class(roads)
 
 roadbox = st_bbox(roads)
-
-st_crs(accidents)
 roads = st_transform(roads, "+proj=longlat")
 st_crs(roads)
 
-st_crs(roads)
 roadbox = st_bbox(roads)
 roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
 roadzoomed = calc_zoom(roadbb)
-roadcda<-get_map(roadbb,zoom=zoomed,maptype="watercolor", source='stamen')
+roadcda<-get_map(roadbb,zoom=roadzoomed,maptype="watercolor", source='stamen')
 ggmap(roadcda) + coord_sf(crs = st_crs(hexgrid)) + 
   geom_sf(data = roads, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE)
 
-cutroads = st_crop(roadtest, hexgridinfo)
+cutroads = st_crop(roads, hexgridinfo)
 
 roadbox = st_bbox(cutroads)
 roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
 roadzoomed = calc_zoom(roadbb)
-roadcda<-get_map(roadbb,zoom=zoomed,maptype="watercolor", source='stamen')
+roadcda<-get_map(roadbb,zoom=roadzoomed,maptype="watercolor", source='stamen')
 ggmap(roadcda) + coord_sf(crs = st_crs(cutroads)) + 
   geom_sf(data = cutroads, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE) + 
   geom_sf(data = hexgridinfo, size=1, color= 'red',fill=NA, inherit.aes = FALSE, legend=TRUE) 
@@ -152,22 +151,109 @@ ggmap(roadcda) + coord_sf(crs = st_crs(cutroads)) +
 
 ```{r}
 colSums(is.na(cutroads))
-cutroads = cutroads[, -which(names(cutroads) %in% c('SPCL_SY2','SPCL_SYS_2','SPCL_SYS_3'))]
+drops = c('SPD_LMT' , 'SPD_LMT_S2', 'TRUCK_SPD_','FEAT_WIDTH','SPCL_SY2','SPCL_SYS_2','SPCL_SYS_3')
+cutroads = cutroads[, -which(names(cutroads) %in% drops)]
 
 colSums(is.na(cutroads))
+
+hexroads = st_intersection(cutroads, hexgridinfo)
+
+aggregate(NBR_LANES~GRID_ID, data=hexroads, mean)
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+Mode_Lanes = aggregate(NBR_LANES~GRID_ID, data=hexroads, Mode)
+Mode_Terrain = aggregate(TY_TERRAIN~GRID_ID, data=hexroads, Mode)
+Mode_Class = aggregate(FUNC_CLASS~GRID_ID, data=hexroads, Mode)
+Mode_Land = aggregate(LAND_USE~GRID_ID, data=hexroads, Mode)
+# aggregate(NBR_LANES~GRID_ID, data=hexroads, max)
+# 
+# aggregate(NBR_LANES~GRID_ID, data=hexroads, min)
+
+table(Mode_Land$LAND_USE)
+
+modes = merge(Mode_Lanes, Mode_Class, by="GRID_ID")
+modes = merge(modes, Mode_Land, by="GRID_ID")
+testing = merge(hexgridinfo, Mode_Land, by="GRID_ID", all.x=TRUE)
+colSums(is.na(testing))
 ```
 
 ```{r}
-max(hexgrid1$Join_Count)
-min(hexgrid1$Join_Count)
-ggplot(hexgrid1) +
+unique(modes$TY_TERRAIN)
+unique(modes$FUNC_CLASS)
+```
+
+
+```{r}
+roadbox = st_bbox(cutroads)
+roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
+roadzoomed = calc_zoom(roadbb)
+roadcda<-get_map(roadbb,zoom=roadzoomed,maptype="watercolor", source='stamen')
+ggmap(roadcda) + coord_sf(crs = st_crs(cutroads)) + 
+  geom_sf(data = hexroads, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE) + 
+  geom_sf(data = hexgridinfo, size=1, color= 'red',fill=NA, inherit.aes = FALSE, legend=TRUE) 
+```
+
+
+```{r}
+max(hexgridinfo$Join_Count)
+min(hexgridinfo$Join_Count)
+ggplot(hexgridinfo) +
   geom_sf(aes(fill = Join_Count)) + scale_fill_gradient2(low='blue', mid='yellow', high='red', midpoint=500, limits=c(1,1000), "Number of Accidents") + 
-  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,200)) 
+  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,1000)) 
 # + theme_void()
 
 ```
 
 ```{r}
+# max(testing$TY_TERRAIN)
+# min(testing$TY_TERRAIN)
+ggplot(testing) +
+  geom_sf(aes(fill = TY_TERRAIN)) 
+
+ggplot(testing) +
+  geom_sf(aes(fill = NBR_LANES)) 
+
+ggplot(testing) +
+  geom_sf(aes(fill = LAND_USE)) 
+
+table(testing$NBR_LANES)
+
+table(testing$FUNC_CLASS)
+
+table(testing$TY_TERRAIN)
+
+table(roadexplain$TYP_FEAT)
+
+roadtype = roadexplain[(roadexplain$TYP_FEAT == 'PAVEMENT'),]
+table(roadtype$FEAT_CMPOS)
+
+ggplot(roadtype) + geom_sf(aes(col = FEAT_CMPOS)) 
+```
+
+
+```{r}
 write.csv(hexgridinfo, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv")
+```
+
+```{r}
+roadexplain = st_read("/Users/peteway/Downloads/Roadway_Info_Raw/Roadway_Geometrics_County_HAMILTON.shp")
+
+table(roadexplain$FUNC_CLASS)
+
+table(roadexplain$TYP_FEAT)
+
+roadexplain = st_transform(roadexplain, "+proj=longlat")
+st_crs(roadexplain)
+
+roadbox = st_bbox(roadexplain)
+roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
+roadzoomed = calc_zoom(roadbb)
+roadcda<-get_map(roadbb,zoom=roadzoomed,maptype="watercolor", source='stamen')
+ggmap(roadcda) + coord_sf(crs = st_crs(roadexplain)) + 
+  geom_sf(data = roadexplain, size=1, color= roadexplain$FUNC_CLASS,fill=NA, inherit.aes = FALSE, show.legend=TRUE)
+
 ```
 
