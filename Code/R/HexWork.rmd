@@ -12,9 +12,10 @@ transparent = theme(panel.background = element_rect(fill = "transparent"), # bg 
 ```
 
 ```{r}
-library(raster)
-st_write(acc_911, '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_with_TimeData.shp')
+library(st)
+st_write(acc_911, '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_with_Time.shp')
 ```
+
 
 
 ###How to get from CSV to shapefile
