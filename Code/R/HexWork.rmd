@@ -44,7 +44,7 @@ par(mar = rep(0, 4))
 box = st_bbox(accidents)
 box
 
-register_google('AIzaSyBaoPdTrk2ZLIMWiG2K7LMpkisTlXC5W1M')
+register_google(idhere)
 bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
 bb
 zoomed = calc_zoom(bb)
@@ -165,5 +165,9 @@ ggplot(hexgrid1) +
   scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,200)) 
 # + theme_void()
 
+```
+
+```{r}
+write.csv(hexgridinfo, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv")
 ```
 
