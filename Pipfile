@@ -22,6 +22,7 @@ charset-normalizer = "*"
 modin = {extras = ["ray"],version = "*"}
 swifter = "*"
 geopandas = "*"
+fiona = "*"
 
 [dev-packages]
 autopep8 = "*"

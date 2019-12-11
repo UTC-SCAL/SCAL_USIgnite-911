@@ -1,0 +1,168 @@
+---
+title: "Testing"
+output: pdf_document
+---
+```{r}
+transparent = theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
+    plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+    panel.grid.major = element_blank(), # get rid of major grid
+    panel.grid.minor = element_blank(), # get rid of minor grid
+    legend.background = element_rect(fill = "transparent"), # get rid of legend bg
+    legend.box.background = element_rect(fill = "transparent"))
+```
+
+```{r}
+library(raster)
+st_write(acc_911, '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_with_TimeData.shp')
+```
+
+
+###How to get from CSV to shapefile
+```{r}
+# accidents = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accidents/RawAccidentData_DropDupsTest2.csv")
+# coordinates(accidents)=~Longitude+Latitude
+# geo.prj <- "+proj=longlat" 
+# proj4string(accidentscsv)<- CRS(geo.prj)
+# library(raster)
+# shapefile(accidentscsv, filename='/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/accidentsCSV.shp', overwrite=TRUE)
+```
+
+```{r}
+library(sf)
+library(raster)
+accidents = st_read('/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/accidentsCSV.shp')
+##Drop zero/incorrect lat/longs
+accidents = accidents[-c(77840, 78305, 46778), ]
+```
+
+```{r}
+library(ggmap)
+library(ggplot2)
+par(mar = rep(0, 4))
+
+box = st_bbox(accidents)
+box
+
+register_google('AIzaSyBaoPdTrk2ZLIMWiG2K7LMpkisTlXC5W1M')
+bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+bb
+zoomed = calc_zoom(bb)
+zoomed 
+
+cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(accidents)) + 
+  geom_sf(data = accidents, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) 
+
+```
+
+```{r}
+
+hexgrid = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/Accident_HexGrid_02sqmi.shp")
+
+cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(accidents)) + 
+  geom_sf(data = hexgrid, size=1, color= 'black' , fill=NA, inherit.aes = FALSE) +
+  geom_sf(data = accidents, size=1, color= "red" , fill=NA, inherit.aes = FALSE)
+```
+
+##Heatmap for accidents
+```{r}
+hexgrid1 = hexgrid[(hexgrid$Join_Count > 0),]
+
+gridbox = st_bbox(hexgrid1)
+gridbox
+gridbb<- make_bbox(lat=c(gridbox['ymin'],gridbox['ymax']),lon=c(gridbox['xmin'],gridbox['xmax']), f=0.05)
+gridbb
+gridzoomed = calc_zoom(gridbb)
+
+cda<-get_map(gridbb,zoom=gridzoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(hexgrid1)) + 
+  geom_sf(data = hexgrid1, size=1, color= 'black' , fill=hexgrid1$Join_Count, inherit.aes = FALSE, legend=TRUE)
+```
+
+```{r}
+lats=c(35.01,35.035)
+lons=c(-85.32, -85.22)
+par(mar = rep(0, 4))
+smallbb<- make_bbox(lon=lons,lat=lats, f=0.05)
+smallzoomed = calc_zoom(smallbb)
+hexgrid1 = hexgrid[(hexgrid$Join_Count > 0),]
+cda<-get_map(smallbb,zoom=smallzoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(accidents)) + 
+  geom_sf(data = hexgrid1, size=1, color= 'black' , fill=NA, inherit.aes = FALSE, legend=TRUE)  + 
+  geom_sf(data = centroids, size=1, color= 'red' , fill=NA, inherit.aes = FALSE, legend=TRUE)
+```
+
+```{r}
+colnames(hexgrid1)
+
+hexgridinfo = hexgrid[c('Join_Count','GRID_ID','TARGET_FID','geometry' )]
+
+length(unique(hexgridinfo$GRID_ID))
+
+##Finding the center of the hexgrids
+hexgridinfo$Center  <- st_centroid(hexgridinfo$geometry)
+
+cda<-get_map(gridbb,zoom=15,maptype="watercolor", source='stamen')
+map = ggmap(cda) + coord_sf(crs = st_crs(hexgridinfo)) + 
+  geom_sf(data = hexgridinfo, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE) + transparent + xlab("Longitude") + ylab("Latitude") + labs(caption ="Hexagon Grid covering City of Chattanooga")
+
+png('test2.png',width=12,height=10,units="in",res=800,bg = "transparent")
+print(map)
+dev.off()
+
+# + 
+#  geom_sf(data = hexgridinfo$Center, size=1, color= 'red', inherit.aes = FALSE, legend=TRUE)
+```
+
+```{r}
+library(sf)
+library(sp)
+roads = st_read("/Users/peteway/Downloads/JJVPG58_Export_12072019201315/Roadway_Geometrics_County_HAMILTON.shp")
+typeof(roads)
+class(roads)
+
+roadbox = st_bbox(roads)
+
+st_crs(accidents)
+roads = st_transform(roads, "+proj=longlat")
+st_crs(roads)
+
+st_crs(roads)
+roadbox = st_bbox(roads)
+roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
+roadzoomed = calc_zoom(roadbb)
+roadcda<-get_map(roadbb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(roadcda) + coord_sf(crs = st_crs(hexgrid)) + 
+  geom_sf(data = roads, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE)
+
+cutroads = st_crop(roadtest, hexgridinfo)
+
+roadbox = st_bbox(cutroads)
+roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
+roadzoomed = calc_zoom(roadbb)
+roadcda<-get_map(roadbb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(roadcda) + coord_sf(crs = st_crs(cutroads)) + 
+  geom_sf(data = cutroads, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE) + 
+  geom_sf(data = hexgridinfo, size=1, color= 'red',fill=NA, inherit.aes = FALSE, legend=TRUE) 
+
+```
+
+
+```{r}
+colSums(is.na(cutroads))
+cutroads = cutroads[, -which(names(cutroads) %in% c('SPCL_SY2','SPCL_SYS_2','SPCL_SYS_3'))]
+
+colSums(is.na(cutroads))
+```
+
+```{r}
+max(hexgrid1$Join_Count)
+min(hexgrid1$Join_Count)
+ggplot(hexgrid1) +
+  geom_sf(aes(fill = Join_Count)) + scale_fill_gradient2(low='blue', mid='yellow', high='red', midpoint=500, limits=c(1,1000), "Number of Accidents") + 
+  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,200)) 
+# + theme_void()
+
+```
+
