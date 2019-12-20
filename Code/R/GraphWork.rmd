@@ -12,7 +12,7 @@ colnames(acc_911)
 
 
 ```{r}
-
+acc_911 = accidents
 library(anytime)
 acc_911$Hour = strftime(as.POSIXlt(acc_911$Unix, origin="1970-01-01"), "%H")
 acc_911$Date = as.Date(as.POSIXct(acc_911$Unix, origin="1970-01-01"))
@@ -21,7 +21,7 @@ acc_911$Weekday = as.POSIXlt(acc_911$Date)$wday
 tab = table(acc_911$Hour, acc_911$Weekday)
 tab = as.data.frame.matrix(tab) 
 names(tab) = c('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday')
-png("AllAccidentsWeekdayHourSplit_New.png", width=12,height=6,units='in', res=300)
+png("AllAccidentsWeekdayHourSplit_New.png", width=12,height=6,units='in', res=300,bg = 'transparent')
 plot(tab$Sunday, type="l", ylim=c(0,1500),col='pink', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Weekday and Hour")
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,las="2")
@@ -39,12 +39,14 @@ dev.off()
 acc_911$Year = strftime(as.POSIXlt(acc_911$Unix, origin="1970-01-01"), "%Y")
 yeartab = table(acc_911$Hour, acc_911$Year)
 yeartab = as.data.frame.matrix(yeartab) 
-png("AllAccidentsYearHourSplitExplainedNew.png", width=12,height=6,units='in', res=300)
+png("AllAccidentsYearHourSplitExplainedNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
 plot(yeartab$'2018', type="l", ylim=c(0,2500),col='green', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Year and Hour")
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,las="2")
 lines(yeartab$'2017', col='blue', lwd=4)
 lines(yeartab$'2019', col='red', lwd=4 )
+##Next line estimates number of accidents for all of 2019
+# lines((12/11)*yeartab$'2019', col='black', lwd=4 )
 legend("topleft",c('2017','2018', '2019'), fill=c('blue','green', 'red'))
 dev.off()
 ```
@@ -55,8 +57,8 @@ acc_911 = acc_911[(acc_911$Year != 2016),]
 monthtab = table(acc_911$Hour, acc_911$Month)
 monthtab = as.data.frame.matrix(monthtab) 
 names(monthtab)
-png("AllAccidentsMonthHourSplitNew.png", width=12,height=6,units='in', res=300)
-plot(monthtab$January, type="l", ylim=c(0,900),col='#469990', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Month and Hour")
+png("AllAccidentsMonthHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
+plot(monthtab$January, type="l", ylim=c(0,700),col='#469990', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Month and Hour")
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,las="2")
 lines(monthtab$Feburary, col='#42d4f4', lwd=4)
@@ -79,10 +81,11 @@ dev.off()
 ```{r}
 hourtab = table(acc_911$Hour)
 hourtab = as.data.frame(hourtab) 
-png("AllAccidentsHourSplitNew.png", width=12,height=6,units='in', res=300)
+png("AllAccidentsHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
 plot(hourtab$Freq, type="l", lwd=4, col="red", xaxt="none", yaxt="none", ylab="Number of Accidents", xlab="Hour of Day", main="Accidents by Hour", ylim=c(0,9000))
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,seq(0,9000, by= 1000), las="2")
+abline(v=c(1,4,7,10,13,16,19,22,24), col='grey')
 dev.off()
 ```
 
@@ -94,7 +97,7 @@ yearlymonthtab = as.data.frame(yearlymonthtab)
 yearlymonthtab = yearlymonthtab[(yearlymonthtab$Year != 2016),]
 # 
 # yearlymonthtab$Freq[25:36]
-png("AllAccidentsYearMonthSplitNew.png", width=12,height=6,units='in', res=300)
+png("AllAccidentsYearMonthSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
 plot(yearlymonthtab$Freq[0:12], type="l", ylim=c(1600,2700),col='blue', lwd=4, ylab="Number of Accidents", xlab="Month", xlim=c(.5,12.5), xaxt="none", yaxt="none",main="Accidents by Year and Month")
 axis(1, seq(1,12,by=1), c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"),las="2")
 axis(2,las="2")
@@ -106,5 +109,7 @@ dev.off()
 
 ```{r}
 table(acc_911$Year)
+
+max(yearlymonthtab$Freq)
 ```
 
