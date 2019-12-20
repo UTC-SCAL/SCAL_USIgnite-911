@@ -20,26 +20,34 @@ import datetime
 
 
 def fitting_loops(X, Y, folder, modelname):
-    #   2. Defining a Neural Network
-    # creating the model
+    ##2. Defining a Neural Network
+    # Model creation
     model = Sequential()
-    ##X.shape[1] is the number of columns inside of X.
-    model.add(Dense(X.shape[1],input_dim=X.shape[1], activation='sigmoid'))
 
+    # Input
+    # X.shape[1] is the number of columns inside of X
+    # Done to remove need to alter input values every time we alter variables used (simplicity)
+    model.add(Dense(X.shape[1], input_dim=X.shape[1], activation='sigmoid'))
+
+    # Hidden Layers
     # Use for standard sized variable set
     model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
     model.add(Dropout(.1))
     model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
 
+    # Output
     model.add(Dense(1, activation='sigmoid'))
 
-    #   3. Compiling a model.
+    ##3. Compiling a model.
     model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
     print(model.summary())
 
-    for i in range(0, 50):
-        file = folder + str(datetime.date.today()) + "AverageHolder.csv"
+    # File path to hold results of learning cycle
+    file = folder + str(datetime.date.today()) + "AverageHolder.csv"
 
+    # Training Cycles
+    # Each cycle's output is the next cycle's input, so the model learns for each new cycle
+    for i in range(0, 50):
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
             X, Y, test_size=0.30, random_state=42)
@@ -60,16 +68,16 @@ def fitting_loops(X, Y, folder, modelname):
             avg_holder = pandas.DataFrame(
                 columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP"])
             j = avg_holder.shape[0]
-        ###What cycle of the loop are we on? 
+
         print("Cycle: ", i)
 
-        # If the model doesn't improve over the past X amount epochs, exit training
+        # If the model doesn't improve over the past X epochs, exit training
         patience = 30
         stopper = callbacks.EarlyStopping(monitor='acc', patience=patience)
         hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
                          callbacks=[stopper])
 
-        ##Save the weights for next run. 
+        # Save the weights for next run.
         model.save_weights(folder + modelname)
         print("Saved grid model to disk")
 
@@ -84,11 +92,11 @@ def fitting_loops(X, Y, folder, modelname):
         # Then, let's round to either 0 or 1, since we have only two options.
         predictions_round = [abs(round(x[0])) for x in predictions]
 
-        ##Finding accuracy score of the predictions versus the actual Y.
+        # Finding accuracy score of the predictions versus the actual Y.
         accscore1 = accuracy_score(y_test, predictions_round)
-        ##Printing it as a whole number instead of a percent of 1. (Just easier for me to read) 
+        # Printing it as a whole number instead of a percent of 1. (Just easier for me to read)
         print("Rounded Test Accuracy:", accscore1 * 100)
-        ##Find the Testing loss as well: 
+        # Find the Testing loss as well:
         print("Test Loss", sum(hist.history['val_loss']) / len(hist.history['val_loss']))
 
         ##Finding the AUC for the cycle: 
@@ -192,25 +200,25 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 ##1. Load Data
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
+# This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
 dataset = pandas.read_csv("../Excel & CSV Sheets/Negative Sampling Paper Methods/GridFixed/Cut GridFixed Data 2017+2018 MMR.csv")
 # dataset = feather.read_dataframe("../")
 
 # Drop any columns from your dataset if you want
 dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
 
-##Shuffling if needed.
+##Shuffling
 dataset = shuffle(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it
+# These are made for code automation later on
 folder = '../Graphs & Images/ResultsFromHumidityTesting/No Humidity No Highway/'
 modelname = "model_GF50-50_NoHumidityNoHighway.h5"
 
 ##Creating X and Y. Accident is the first column, therefore it is 0.
-X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values
-Y = dataset.ix[:, 0].values
+X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+Y = dataset.ix[:, 0].values  # Our dependent variable
 
-##Steps 2-5 are inside the fitting loops method.
+##Steps 2-5 are inside the fitting loops method
 fitting_loops(X, Y, folder, modelname)
-
-
