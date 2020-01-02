@@ -73,7 +73,7 @@ def pull_emails(total, lastday):
                         lambda x: x.Unix.strftime('%s'), axis=1)
                     daypart['Latitude'] = daypart["Latitude"]/1000000
                     daypart['Longitude'] = daypart["Longitude"]/-1000000
-                    daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]/).map(str)
+                    # daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]).map(str)
                     total = pandas.concat([total, daypart])
         else:
             print("...Looking for new accident reports")
@@ -98,13 +98,13 @@ def main():
     start = time.time()
 
     total = pandas.read_csv(
-        "Excel & CSV Sheets/Accidents/RawAccidentDataTest.csv", parse_dates=['Response Date'])
+        "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData.csv")
     lastday = pandas.Timestamp(
         total['Response Date'].values[-1]).date() + timedelta(days=1)
 
     total = pull_emails(total, lastday)
     total.to_csv(
-        "Excel & CSV Sheets/Accidents/RawAccidentDataTest.csv", index=False)
+        "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData.csv", index=False)
 
 
 if __name__ == "__main__":
