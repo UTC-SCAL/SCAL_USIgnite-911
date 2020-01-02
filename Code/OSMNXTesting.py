@@ -1,18 +1,19 @@
 import osmnx as ox
 import geopandas
 import matplotlib.pyplot as plt
-# G = ox.graph_from_place('Chattanooga, Tennessee, USA', network_type='drive')
-# ox.plot_graph(G)
-# import fiona
-# shape = fiona.open("/Users/peteway/Downloads/Chattanooga_Roads_City_Limits/Roads_Chat_City_Limits.shp")
-shape = geopandas.read_file("/Users/peteway/Downloads/Chattanooga_Roads_City_Limits/Roads_Chat_City_Limits.shp")
-print(shape.head())
-print(shape.columns.values)
-print(type(shape))
+# import pandana as pdna
+# G = ox.graph_from_place('Chattanooga, Tennessee, USA', network_type= 'walk')
+# # ox.plot_graph(G)
 
-fig, ax = plt.subplots(figsize = (10,10))
-shape.plot(ax=ax)
-plt.show()
+
+# ##Saving a shapefile from the osmnx graph. 
+# G_projected = ox.project_graph(G)
+# ox.save_graph_shapefile(G_projected, filename='ChattanoogaWalk')
+
+
+# fig, ax = plt.subplots(figsize = (10,10))
+# shape.plot(ax=ax)
+# plt.show()
 
 # G2 = ox.graph_from_place('Isle of Wight, UK', network_type='drive')
 # # ox.plot_graph(G2)
@@ -23,3 +24,4 @@ plt.show()
 
 # extended_stats = ox.extended_stats(G2)
 # print(extended_stats)
+

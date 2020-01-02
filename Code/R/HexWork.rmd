@@ -31,9 +31,10 @@ st_write(acc_911, '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV
 ```{r}
 library(sf)
 library(raster)
-accidents = st_read('/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/accidentsCSV.shp')
-##Drop zero/incorrect lat/longs
-accidents = accidents[-c(77840, 78305, 46778), ]
+accidents = st_read('/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_Full.shp')
+##Drop zero/incorrect lat/longs in this way
+# accidents = accidents[-c(77840, 78305, 46778), ]
+
 ```
 
 ```{r}
@@ -43,7 +44,7 @@ par(mar = rep(0, 4))
 
 box = st_bbox(accidents)
 box
-
+idhere = ''
 register_google(idhere)
 bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
 bb
@@ -57,61 +58,57 @@ ggmap(cda) + coord_sf(crs = st_crs(accidents)) +
 ```
 
 ```{r}
-
 hexgrid = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/Accident_HexGrid_02sqmi.shp")
+hexgridinfo = hexgridinfo[, -which(names(hexgridinfo) %in% c('TARGET_FID'))]
+hexgrid = merge(hexgridinfo, modes, by="GRID_ID", all.x=TRUE)
+hexgrid$geometry <- hexgrid$Center
+hexgrid$Center  <- st_centroid(hexgrid$geometry)
+colnames(hexgridinfo)
 
-cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
-ggmap(cda) + coord_sf(crs = st_crs(accidents)) + 
-  geom_sf(data = hexgrid, size=1, color= 'black' , fill=NA, inherit.aes = FALSE) +
-  geom_sf(data = accidents, size=1, color= "red" , fill=NA, inherit.aes = FALSE)
+write.csv(hexgrid, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hex_Grid/HexGridInfoComplete.csv")
+st_write(hexgrid, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/Accident_HexGrid_Info.shp")
+
+cda<-get_map(gridbb,zoom=gridzoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(hexgrid)) + 
+  geom_sf(data = hexgridinfo, size=1, color= 'black' , fill=NA, inherit.aes = FALSE) +
+  geom_sf(data = hexgrid, size=1, color= "red" , fill=NA, inherit.aes = FALSE)
 ```
 
 ##Heatmap for accidents
 ```{r}
-hexgrid1 = hexgrid[(hexgrid$Join_Count > 0),]
+hexgrid1 = hexgrid[(hexgrid$Join_Count > 20),]
+hexgridlo = hexgrid1[(hexgrid1$Join_Count < 300),]
+hexgridhi = hexgrid[(hexgrid$Join_Count > 300),]
 
 gridbox = st_bbox(hexgrid1)
 gridbox
 gridbb<- make_bbox(lat=c(gridbox['ymin'],gridbox['ymax']),lon=c(gridbox['xmin'],gridbox['xmax']), f=0.05)
 gridbb
-gridzoomed = calc_zoom(gridbb)
+gridzoomed = calc_zoom(gridbb)+1
 
-cda<-get_map(gridbb,zoom=gridzoomed,maptype="watercolor", source='stamen')
-ggmap(cda) + coord_sf(crs = st_crs(hexgrid1)) + 
-  geom_sf(data = hexgrid1, size=1, color= 'black' , fill=hexgrid1$Join_Count, inherit.aes = FALSE, legend=TRUE)
-```
+png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/After Duplicate Rework/LowIntensityHotspots.png", width=9,height=6,units='in', res=600,bg = 'transparent')
+ggmap(cda) + coord_sf(crs = st_crs(hexgridlo)) + geom_sf(data=hexgridlo, inherit.aes = FALSE, aes(fill = hexgridlo$Join_Count)) + scale_fill_gradient2(low='darkgrey', mid='yellow', high='red', midpoint=170, limits=c(20,300), "Number of Accidents", breaks=seq(20,300,by=70))  + ggtitle("Accident Hotspots - Low Intensity") + transparent  + xlab("Longitude") + ylab("Latitude")
+dev.off()
 
-```{r}
-lats=c(35.01,35.035)
-lons=c(-85.32, -85.22)
-par(mar = rep(0, 4))
-smallbb<- make_bbox(lon=lons,lat=lats, f=0.05)
-smallzoomed = calc_zoom(smallbb)
-hexgrid1 = hexgrid[(hexgrid$Join_Count > 0),]
-cda<-get_map(smallbb,zoom=smallzoomed,maptype="watercolor", source='stamen')
-ggmap(cda) + coord_sf(crs = st_crs(accidents)) + 
-  geom_sf(data = hexgrid1, size=1, color= 'black' , fill=NA, inherit.aes = FALSE, legend=TRUE)  + 
-  geom_sf(data = centroids, size=1, color= 'red' , fill=NA, inherit.aes = FALSE, legend=TRUE)
+png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/After Duplicate Rework/HighIntensityHotspots.png", width=9,height=6,units='in', res=600,bg = 'transparent')
+ggmap(cda) + coord_sf(crs = st_crs(hexgridhi)) + geom_sf(data=hexgridhi, inherit.aes = FALSE, aes(fill = hexgridhi$Join_Count)) + scale_fill_gradient2(low='orange', mid='red', high='black', midpoint=800, limits=c(300,1400), "Number of Accidents", breaks=c(seq(300,1400,by=300), 1400)) + ggtitle("Accident Extreme Hotspots") + transparent  + xlab("Longitude") + ylab("Latitude")
+dev.off()
+# +
+  # scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,1360)) 
+
+class(hexgrid1)
+
 ```
 
 ```{r}
 colnames(hexgrid1)
-
 hexgridinfo = hexgrid[c('Join_Count','GRID_ID','TARGET_FID','geometry' )]
-
 length(unique(hexgridinfo$GRID_ID))
-
 ##Finding the center of the hexgrids
 hexgridinfo$Center  <- st_centroid(hexgridinfo$geometry)
-
 cda<-get_map(gridbb,zoom=15,maptype="watercolor", source='stamen')
 map = ggmap(cda) + coord_sf(crs = st_crs(hexgridinfo)) + 
   geom_sf(data = hexgridinfo, size=1, color= 'black',fill=NA, inherit.aes = FALSE, legend=TRUE) + transparent + xlab("Longitude") + ylab("Latitude") + labs(caption ="Hexagon Grid covering City of Chattanooga")
-
-png('test2.png',width=12,height=10,units="in",res=800,bg = "transparent")
-print(map)
-dev.off()
-
 # + 
 #  geom_sf(data = hexgridinfo$Center, size=1, color= 'red', inherit.aes = FALSE, legend=TRUE)
 ```
@@ -181,12 +178,6 @@ colSums(is.na(testing))
 ```
 
 ```{r}
-unique(modes$TY_TERRAIN)
-unique(modes$FUNC_CLASS)
-```
-
-
-```{r}
 roadbox = st_bbox(cutroads)
 roadbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
 roadzoomed = calc_zoom(roadbb)
@@ -198,12 +189,18 @@ ggmap(roadcda) + coord_sf(crs = st_crs(cutroads)) +
 
 
 ```{r}
+library(scales)
 max(hexgridinfo$Join_Count)
 min(hexgridinfo$Join_Count)
 ggplot(hexgridinfo) +
-  geom_sf(aes(fill = Join_Count)) + scale_fill_gradient2(low='blue', mid='yellow', high='red', midpoint=500, limits=c(1,1000), "Number of Accidents") + 
-  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(1,1000)) 
-# + theme_void()
+  geom_sf(aes(fill = Join_Count)) +
+# + scale_fill_gradient2(low='blue', mid='yellow', high='red', midpoint=175, limits=c(1,1400), "Number of Accidents", oob='red') + 
+  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(0,300)) 
+
+ggplot(hexgridinfo) +
+  geom_sf(aes(fill = Join_Count)) +
+# + scale_fill_gradient2(low='blue', mid='yellow', high='red', midpoint=175, limits=c(1,1400), "Number of Accidents", oob='red') + 
+  scale_fill_viridis_c(option = "magma", "# Accidents", limits=c(300,1400)) 
 
 ```
 
@@ -233,7 +230,6 @@ table(roadtype$FEAT_CMPOS)
 ggplot(roadtype) + geom_sf(aes(col = FEAT_CMPOS)) 
 ```
 
-
 ```{r}
 write.csv(hexgridinfo, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv")
 ```
@@ -255,5 +251,16 @@ roadcda<-get_map(roadbb,zoom=roadzoomed,maptype="watercolor", source='stamen')
 ggmap(roadcda) + coord_sf(crs = st_crs(roadexplain)) + 
   geom_sf(data = roadexplain, size=1, color= roadexplain$FUNC_CLASS,fill=NA, inherit.aes = FALSE, show.legend=TRUE)
 
+```
+
+```{r}
+
+hexgridinfo$Grid_Num = seq.int(nrow(hexgridinfo))
+
+city = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Chattanooga City Limits/Chattanooga.shp")
+
+accident_city = st_crop(accidents, city)
+
+accident_city = st_intersection(accident_city, hexgridinfo)
 ```
 
