@@ -1,0 +1,31 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+sklearn = "*"
+matplotlib = "*"
+osmnx = "*"
+plaidml-keras = "*"
+plaidbench = "*"
+autopep8 = "*"
+plaidml = "*"
+keras = "*"
+darkskylib = "*"
+feather-format = "*"
+rtree = "*"
+geopy = "*"
+charset-normalizer = "*"
+swifter = "*"
+geopandas = "*"
+darksky = "*"
+tensorflow = "*"
+
+[dev-packages]
+autopep8 = "*"
+pylint = "*"
+
+[requires]
+python_version = "3.7"
