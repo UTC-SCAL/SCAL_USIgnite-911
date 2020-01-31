@@ -1,0 +1,207 @@
+---
+title: "GridFixedMaps"
+author: "Pete Way"
+date: "6/27/2019"
+output: pdf_document
+---
+
+```{r}
+accidents = read_csv("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Grid Hex Layout/Accidents/Hex Forecast Accidents.csv")
+accidents$Date[1]
+accidents$DayFrame = ifelse(accidents$Hour <= 4 | accidents$Hour >= 19, 1,ifelse(accidents$Hour <= 9 & accidents$Hour >= 5,2, ifelse(accidents$Hour <= 13 & accidents$Hour >= 10,3, 4 ) ) )
+coordinates(accidents)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(accidents)<- CRS(geo.prj)
+accidents = st_as_sf(accidents)
+
+# blocks = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfo.csv")
+library(sf)
+library(raster)
+library(dplyr)
+blocks = st_read("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Shapefiles/HexGrid/HexGrid.shp")
+centers = st_read("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Shapefiles/HexGrid/Hex_Centeriod_and_Info.shp")
+centers = centers[,(names(centers) %in% c('Grid_Num','GRID_ID', 'geometry'))]
+blockstest = inner_join(blocks %>% as.data.frame(), centers %>% as.data.frame(), by = "GRID_ID")
+blockstest = blockstest[ , !(names(blockstest) %in% c("geometry.y"))]
+names(blockstest)[names(blockstest) == 'geometry.x'] <- 'geometry'
+blockstest = st_sf(blockstest)
+
+
+```
+
+```{r}
+transparent = theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
+    plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+    panel.grid.major = element_blank(), # get rid of major grid
+    panel.grid.minor = element_blank(), # get rid of minor grid
+    legend.background = element_rect(fill = "transparent"), # get rid of legend bg
+    legend.box.background = element_rect(fill = "transparent"))
+```
+
+```{r}
+library(ggmap)
+library(ggplot2)
+  box = st_bbox(blockstest)
+  box
+
+  register_google('AIzaSyCdi7_sZmNl3ost3hiex_IplIDS-WP1QHM')
+  bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+  bb
+  zoomed = calc_zoom(bb)
+  zoomed
+  cda<-get_map(bb,zoom=zoomed,maptype="roadmap", source='google')
+
+```
+
+
+```{r}
+models = c("GF_50-50 Split_Forecast", "GF_75-25 Split_Forecast","GF_Test_Forecast", "Ran_50-50 Split_Forecast","Ran_75-25 Split_Forecast","Ran_Test_Forecast")
+titledates = c("1-1-2019", "2-4-2018","3-12-2017","3-17-2019", "4-12-2019","4-22-2018","5-11-2019","5-16-2017","7-9-2017","8-16-2018")
+# titledates = c("3-17-2019", "4-12-2019","4-22-2018","5-11-2019","5-16-2017","7-9-2017","8-16-2018")
+dayframes = c(1,2,3,4)
+limit = .85
+library(anytime)
+library(tidyverse)
+
+for(titledate in titledates){
+  date = gsub("-", "/", titledate)
+  accidentsdate = accidents[which(accidents$Date == date),]
+  
+  for(model in models){
+  title = title = paste("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Forecast/",model,".csv",sep="")
+  forecast =read.csv(title, header=T)
+  forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+  forecast  = forecast[ , (names(forecast) %in% c("Grid_Num","DayFrame","Probability","Prediction"))]
+  forecast$Grid_Num_DayFrame = paste(forecast$Grid_Num,forecast$DayFrame,sep=" ")
+  forecast = aggregate(.~Grid_Num_DayFrame, data=forecast, mean)
+  forecast$Prediction = ifelse(forecast$Probability > .5, 1,0)
+  sum(forecast$Prediction)
+  
+  for(frame in dayframes){
+    cat(date, frame, model, "\n")
+    keep <- c("Grid_Num", "Probability")
+  
+    dayframe = forecast[which(forecast$DayFrame == frame),]
+    dayframe  = dayframe[ , (names(dayframe) %in% keep)]
+    accframe = accidentsdate[which(accidentsdate$DayFrame == frame),]
+  
+    blocksdayframe = merge(blockstest, dayframe, by="Grid_Num")
+    blocksdayframe = blocksdayframe[which(blocksdayframe$Probability > limit),]
+  
+    png(paste("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/PredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep=""), width=9,height=6,units='in', res=600,bg = 'transparent')
+    map = (ggmap(cda) + coord_sf(crs = st_crs(blockstest)) + geom_sf(data=blocksdayframe, aes(fill = blocksdayframe$Probability), alpha=.5, inherit.aes = FALSE) + scale_fill_gradient(low = "blue", high = "red", "Probability", limits=c(limit,1)) + transparent  + xlab("Longitude") + ylab("Latitude") + geom_sf(data=accframe, color = 'black', inherit.aes = FALSE) + ggtitle(paste("Accident Prediction",titledate,model,"Dayframe",frame, sep=" ")))
+    print(map)
+      dev.off()
+}
+}
+}
+```
+
+```{r}
+table(accidentsdate$DayFrame)
+```
+
+##Using a day not from the main accident file. 
+```{r}
+models = c("GF_50-50 Split_Forecast", "GF_75-25 Split_Forecast","GF_Test_Forecast", "Ran_50-50 Split_Forecast","Ran_75-25 Split_Forecast","Ran_Test_Forecast","SecondBatch_GF_50-50 Split_Forecast", "SecondBatch_GF_75-25 Split_Forecast","SecondBatch_GF_Test_Forecast", "SecondBatch_Ran_50-50 Split_Forecast","SecondBatch_Ran_75-25 Split_Forecast","SecondBatch_Ran_Test_Forecast")
+# titledates = c("1-1-2019", "2-4-2018","3-12-2017","3-17-2019", "4-12-2019","4-22-2018","5-11-2019","5-16-2017","7-9-2017","8-16-2018")
+# titledates = c("3-17-2019", "4-12-2019","4-22-2018","5-11-2019","5-16-2017","7-9-2017","8-16-2018")
+titledate = c("01-23-2020")
+dayframes = c(1,2,3,4)
+limit = .70
+library(anytime)
+library(tidyverse)
+#Make sure that the lat/longs are in the right format. 
+accidents = read.csv("/Users/peteway/Downloads/Accident Report.csv")
+names(accidents)[names(accidents) == 'Response.Date'] <- 'Datetime'
+coordinates(accidents)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(accidents)<- CRS(geo.prj)
+accidents = st_as_sf(accidents)
+accidents = st_intersection(accidents, blockstest)
+accidents$Rank = ifelse(accidents$Join_Count > 55, 3, ifelse(accidents$Join_Count > 25, 2, 1))
+accidents$Shape = ifelse(accidents$Rank == 3 , 24, ifelse(accidents$Rank == 2 , 22, 25))
+
+accidents = separate(accidents, Datetime, c('Date','Time'),sep=" ")
+accidentsdate = separate(accidents, Time, c('Hour'), sep = ":")
+accidentsdate$Hour = as.integer(accidentsdate$Hour)
+accidentsdate$DayFrame = ifelse(accidentsdate$Hour <= 4 | accidentsdate$Hour >= 19, 1,ifelse(accidentsdate$Hour <= 9 & accidentsdate$Hour >= 5,2, ifelse(accidentsdate$Hour <= 13 & accidentsdate$Hour >= 10,3, 4 ) ) )
+
+date = gsub("-", "/", titledate)
+  
+for(model in models){
+title = paste("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Forecast/",model,".csv",sep="")
+forecast =read.csv(title, header=T)
+forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+forecast  = forecast[ , (names(forecast) %in% c("Grid_Num","DayFrame","Probability","Prediction"))]
+forecast$Grid_Num_DayFrame = paste(forecast$Grid_Num,forecast$DayFrame,sep=" ")
+forecast = aggregate(.~Grid_Num_DayFrame, data=forecast, mean)
+forecast$Prediction = ifelse(forecast$Probability > .5, 1,0)
+sum(forecast$Prediction)
+
+for(frame in dayframes){
+  cat(date, frame, model, "\n")
+  keep <- c("Grid_Num", "Probability")
+
+  dayframe = forecast[which(forecast$DayFrame == frame),]
+  dayframe  = dayframe[ , (names(dayframe) %in% keep)]
+  accframe = accidentsdate[which(accidentsdate$DayFrame == frame),]
+
+  blocksdayframe = merge(blockstest, dayframe, by="Grid_Num")
+  blocksdayframe = blocksdayframe[which(blocksdayframe$Probability > limit),]
+
+
+  png(paste("/Users/peteway/Documents/GitHub/Hex Grid 911/Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/PredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep=""), width=9,height=6,units='in', res=600,bg = 'transparent')
+  map = (ggmap(cda) + coord_sf(crs = st_crs(blockstest)) + geom_sf(data=blocksdayframe, aes(fill = blocksdayframe$Probability), alpha=.5, inherit.aes = FALSE) + scale_fill_gradient(low = "blue", high = "red","Probability", limits=c(limit,1)) + transparent  + xlab("Longitude") + ylab("Latitude") + geom_sf(data=accframe, color = 'black', shape = accframe$Shape,size=3,fill='black', inherit.aes = FALSE) + ggtitle(paste("Accident Prediction",titledate,model,"Dayframe",frame, sep=" ")))
+  print(map)
+    dev.off()
+}
+}
+
+
+```
+
+```{r}
+
+```
+
+
+```{r}
+accidentstest = st_intersection(accidents, blockstest)
+accidentstest$Rank = ifelse(accidentstest$Join_Count > 55, 3, ifelse(accidentstest$Join_Count > 25, 2, 1))
+
+date = '9/12/2018'
+accidentstest = accidents[which(accidents$Date == date),]
+accidentstest$Rank = ifelse(accidentstest$Join_Count > 55, 3, ifelse(accidentstest$Join_Count > 25, 2, 1))
+accidentstest$Shape = ifelse(accidentstest$Rank == 3 , 24, ifelse(accidentstest$Rank == 2 , 22, 25))
+accidentstest = accidentstest[(-accidentstest$Rank)]
+# blockstest$Rank = ifelse(blockstest$Join_Count > 55, 'Red', ifelse(blockstest$Join_Count > 25, 'Orange', 'Green'))
+ggmap(cda) + coord_sf(crs = st_crs(blockstest)) + geom_sf(data=blockstest, fill = blockstest$Rank, alpha=.5, inherit.aes = FALSE) + geom_sf(data=accidentstest, color = 'black',shape = accidentstest$Shape, size =3, fill ='black', inherit.aes = FALSE) 
+```
+
+##How to do Basic Heat Map in R
+```{r}
+
+##Area for mapping is Shapefile imported for area of study. 
+##Data is the specific data we are looking at, with Probability being the column we want to display
+##Alpha - higher the number, the less transparent. 
+
+  map = (ggmap(cda) + coord_sf(crs = st_crs(areaforMapping)) + geom_sf(data=data, aes(fill = data$Probability), inherit.aes = FALSE) + scale_fill_gradient(low = "blue", high = "red", "Probability") +  transparent  + xlab("Longitude") + ylab("Latitude") + ggtitle("Catchy title here"))
+  map
+  
+```
+
+##Changing size of variables plotted
+```{r}
++ scale_size_discrete("Historical Risk", c(1,2,3),c('Low',"Medium", "High"), c(1,2,3) ) 
+```
+
+###How to get from CSV to shapefile
+```{r}
+# accidents = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accidents/RawAccidentData_DropDupsTest2.csv")
+# coordinates(accidents)=~Longitude+Latitude
+# geo.prj <- "+proj=longlat" 
+# proj4string(accidentscsv)<- CRS(geo.prj)
+# library(raster)
+# shapefile(accidentscsv, filename='/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/accidentsCSV.shp', overwrite=TRUE)
+```

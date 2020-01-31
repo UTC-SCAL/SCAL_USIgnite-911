@@ -1,0 +1,65 @@
+---
+title: "Add Grid to Accidents"
+output: pdf_document
+---
+
+##imports
+```{r}
+library(sf)
+library(sp)
+library(ggmap)
+library(ggplot2)
+library(raster)
+library(rgdal)
+library(dplyr)
+library(tidyr)
+```
+
+
+##Import Accidents
+```{r}
+accidents = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData_DropDups.csv")
+```
+
+##Convert accidents from CSV to S4 to match with hexgrid. 
+```{r}
+coordinates(accidents)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(accidents)<- CRS(geo.prj)
+library(raster)
+# shapefile(accidents, filename='/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_Full.shp', overwrite=TRUE)
+accidents = st_as_sf(accidents)
+```
+
+##Import HexGrid
+```{r}
+hexgrid = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/Accident_HexGrid_02sqmi.shp")
+colnames(hexgrid)
+head(hexgrid)
+hexgridmatch = hexgrid[,c('Join_Count','GRID_ID')]
+
+class(hexgridmatch)
+write_sf(hexgridmatch, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/HexGrid.shp")
+```
+
+##Map the two to check them out
+```{r}
+par(mar = rep(0, 4))
+
+box = st_bbox(hexgrid)
+box
+idhere = 'AIzaSyCdi7_sZmNl3ost3hiex_IplIDS-WP1QHM'
+register_google(idhere)
+bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+bb
+zoomed = calc_zoom(bb)
+zoomed 
+
+cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(hexgrid)) + 
+  geom_sf(data = hexgridmatch, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) 
+  # geom_sf(data = accidents, size=.5, color= "black" , fill=NA, inherit.aes = FALSE)
+```
+
+
+

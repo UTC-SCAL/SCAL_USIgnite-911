@@ -1,0 +1,96 @@
+---
+title: "Merging and Splitting"
+output: pdf_document
+---
+##Merging Negatives (without RainBefore in them) with accidents and saving. 
+```{r}
+negatives19 = read.csv("/Users/peteway/Downloads/NS-GF 2019 Master File.csv")
+negatives18 = read.csv("/Users/peteway/Downloads/NS-GF 2018 Master File.csv")
+negatives17 = read.csv("/Users/peteway/Downloads/NS-GF 2017 Master File.csv")
+
+# acc2018 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2018 NoHighway.csv")
+# acc2017 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2017 NoHighway.csv")
+# acc2019 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2019 NoHighway.csv")
+# 
+# accidents = do.call("rbind", list(acc2017, acc2018,acc2019))
+# 
+# setdiff(names(accidents), names(negatives19))
+# setdiff(names(accidents), names(negatives18))
+# setdiff(names(accidents), names(negatives17))
+# accidents$DayFrame = ifelse(accidents$Hour <= 4 | accidents$Hour >= 19, 1,ifelse(accidents$Hour <= 9 & accidents$Hour >= 5,2, ifelse(accidents$Hour <= 13 & accidents$Hour >= 10,3, 4 ) ) )
+
+library(chron)
+accidents$WeekDay = ifelse(is.weekend(accidents$Date), 0,1)
+accidents$DayOfWeek = as.POSIXlt(accidents$Date)$wday
+accidents$DayOfWeek = ifelse(accidents$DayOfWeek == 0 , 7, accidents$DayOfWeek-1)
+
+# library(feather)
+# weather19 = read_feather("/Users/peteway/Documents/GitHub/Ignore/HexWeather/2019 Weather Binaries.feather")
+# weather18 = read_feather("/Users/peteway/Documents/GitHub/Ignore/HexWeather/2018 Weather Binaries.feather")
+# weather17 = read_feather("/Users/peteway/Documents/GitHub/Ignore/HexWeather/2017 Weather Binaries.feather")
+# 
+# 
+# colnames(weather19)
+# colnames(accidents)
+# weather19$RainBefore = weather19$Rain
+# weather18$RainBefore = weather18$Rain
+# weather17$RainBefore = weather17$Rain
+# 
+# weather17$hourbefore = weather17$Unix
+# weather18$hourbefore = weather18$Unix
+# weather19$hourbefore = weather19$Unix
+
+
+negatives17 = merge(negatives17, weather17[c('Grid_Num','hourbefore','RainBefore')], by = c('Grid_Num','hourbefore'))
+negatives18 =  merge(negatives18, weather18[c('Grid_Num','hourbefore','RainBefore')], by = c('Grid_Num','hourbefore'))
+negatives19 =  merge(negatives19, weather19[c('Grid_Num','hourbefore','RainBefore')], by = c('Grid_Num','hourbefore'))
+  
+
+mergedset = do.call("rbind", list(accidents, negatives17, negatives18, negatives19))
+write_csv(mergedset, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Grid Fix/All NS Variables/GF_All.csv")
+```
+
+
+
+```{r}
+acc2018 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2018 NoHighway.csv")
+acc2017 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2017 NoHighway.csv")
+acc2019 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Accident2019 NoHighway.csv")
+
+neg2018 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Random/NS 2018 Master File Random.csv")
+neg2017 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Random/NS 2017 Master File Random.csv")
+neg2019 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Random/NS 2019 Master File Random.csv")
+
+acc = do.call("rbind", list(acc2017, acc2018,acc2019))
+acc = acc[which(!names(acc) %in% c("City"))]
+
+setdiff(names(acc2017), names(neg2017))
+
+mergedset = do.call("rbind", list(acc, neg2017, neg2018, neg2019))
+
+write.csv(mergedset, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Random_All.csv")
+```
+
+##Merging many files on Disk
+```{r}
+##After finding the quantities, merge them here. 
+library(tidyverse)
+library(data.table)
+path = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/"
+allmatrix <- 
+    list.files(pattern = "Hex Confusion Matrix Quantities", path=path, recursive = TRUE) %>% 
+    map_df(~fread(.))
+
+##Aggregates all columns but Date from the given files. 
+means = aggregate(. ~ ModelType, allmatrix[,!('Date')], mean)
+
+write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformanceforHex.csv")
+```
+
+
+
+```{r}
+original = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Random/All NS Variables/TS_50-50_MMR.csv")
+table(original$Accident)
+```
+

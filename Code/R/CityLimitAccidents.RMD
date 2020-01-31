@@ -1,0 +1,34 @@
+---
+title: ""
+output: pdf_document
+---
+
+```{r}
+acc_911 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Accidents/RawAccidentDataTest.csv")
+acc_911['Latitude'] = acc_911["Latitude"]/1000000
+acc_911['Longitude'] = acc_911["Longitude"]/-1000000
+
+library(sf)
+library(sp)
+coordinates(acc_911)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(acc_911)<- CRS(geo.prj)
+library(raster)
+# shapefile(acc_911, filename='/Users/peteway/Desktop/911/accidents.shp', overwrite=TRUE)
+# acc_911_2 = st_read('/Users/peteway/Desktop/911/accidents.shp')
+
+acc_911 = st_as_sf(acc_911)
+library(ggplot2)
+library(ggmap)
+lats=c(35.01,35.035)
+lons=c(-85.32, -85.22)
+par(mar = rep(0, 4))
+bb<- make_bbox(lon=lons,lat=lats, f=0.05)
+zoomed = calc_zoom(bb)
+# bb<-make_bbox(lon=lons,lat=lats,f=0.05)
+cda<-get_map(bb,zoom=zoomed,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(acc_911)) + 
+  geom_sf(data = acc_911, size=1, color= "blue" , fill=NA, inherit.aes = FALSE)
+
+```
+

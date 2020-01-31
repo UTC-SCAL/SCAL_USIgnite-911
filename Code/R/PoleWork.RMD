@@ -1,0 +1,99 @@
+---
+title: "PoleWork"
+output: pdf_document
+---
+
+```{r}
+polelocation <- data.frame(lon = -85.2961319,
+                 lat = 35.0645991)
+coordinates(polelocation)=~lon+lat
+geo.prj <- "+proj=longlat"
+proj4string(polelocation)<- CRS(geo.prj)
+
+library(raster)
+shapefile(polelocation, filename='/Users/peteway/Desktop/Polelocation.shp', overwrite=TRUE)
+polelocation = st_read('/Users/peteway/Desktop/Polelocation.shp')
+
+library(st)
+library(sf)
+library(sp)
+library(ggmap)
+library(ggplot2)
+
+polelocationlatlon <- data.frame(lon = -85.2961319,
+                 lat = 35.0645991)
+# polelocationlatlon$lat = measurements::conv_unit(polelocationlatlon$lat, to = 'deg_dec_min', from = 'dec_deg')
+# polelocationlatlon$lon = measurements::conv_unit(polelocationlatlon$lon, to = 'deg_dec_min', from = 'dec_deg')
+coordinates(polelocationlatlon)=~lon+lat
+polelocationlatlon = st_as_sf(polelocationlatlon)
+pole_buffer <- st_buffer(polelocationlatlon, dist=.0005)
+
+
+box = st_bbox(pole_buffer)
+box
+bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+bb
+zoomed = calc_zoom(bb)
+zoomed 
+
+geo.prj <- "+proj=longlat"
+st_crs(pole_buffer) <- st_crs("+proj=longlat")
+acc_at_pole = st_intersection(accidents, pole_buffer)
+
+cda<-get_map(bb,zoom=16,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(pole_buffer)) + geom_sf(data = acc_at_pole, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) + geom_sf(data = pole_buffer, size=1, fill=NA, inherit.aes = FALSE, col='red') + ggtitle(".0005 Arc Degree Radius")
+
+acc_at_pole = st_intersection(accidents, pole_buffer)
+
+remove(poleaccidents, accident_city, busroutes, dn, income, modes, hexgrid, hexroads, polelocation, trains)
+```
+
+```{r}
+pole_buffer1 <- st_buffer(polelocationlatlon, dist=.001)
+box = st_bbox(pole_buffer1)
+box
+bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+bb
+zoomed = calc_zoom(bb)
+zoomed 
+geo.prj <- "+proj=longlat"
+st_crs(pole_buffer1) <- st_crs("+proj=longlat")
+acc_at_pole1 = st_intersection(accidents, pole_buffer1)
+cda<-get_map(bb,zoom=16,maptype="watercolor", source='stamen')
+ggmap(cda) + coord_sf(crs = st_crs(pole_buffer1)) + geom_sf(data = acc_at_pole1, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) + geom_sf(data = pole_buffer1, size=1, fill=NA, inherit.aes = FALSE, col='red') + ggtitle(".001 Arc Degree Radius")
+```
+
+```{r}
+accidents$Address = tolower(accidents$Address)
+
+library(data.table)
+
+address = '500 barton' 
+address_match = accidents[accidents$Address %like% address, ]
+
+addbox = st_bbox(address_match)
+addbox
+addbb<- make_bbox(lat=c(addbox['ymin'],addbox['ymax']),lon=c(addbox['xmin'],addbox['xmax']), f=0.05)
+addbb
+addzoomed = calc_zoom(addbb)
+addzoomed 
+
+addcda<-get_map(addbb,zoom=16,maptype="watercolor", source='stamen')
+ggmap(addcda) + coord_sf(crs = st_crs(address_match)) + geom_sf(data = pole_buffer, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) + geom_sf(data = address_match, size=1, fill=NA, inherit.aes = FALSE, col='red') + ggtitle(c("Address Match: ", length(address_match)))
+
+
+
+road = 'barton ave'
+road_match = accidents[accidents$Address %like% road, ]
+
+roaddbox = st_bbox(road_match)
+roaddbox
+roaddbb<- make_bbox(lat=c(roadbox['ymin'],roadbox['ymax']),lon=c(roadbox['xmin'],roadbox['xmax']), f=0.05)
+roadbb
+roadzoomed = calc_zoom(roadbb)
+roadzoomed 
+
+roadcda<-get_map(roadbb,zoom=18,maptype="watercolor", source='stamen')
+ggmap(roadcda) + coord_sf(crs = st_crs(road_match)) + geom_sf(data = pole_buffer, size=1, color= "blue" , fill=NA, inherit.aes = FALSE) + geom_sf(data = road_match, size=1, fill=NA, inherit.aes = FALSE, col='red') + ggtitle(c("Road Match: ", length(road_match)))
+
+```
