@@ -6,6 +6,8 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
+from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
 import os
 
 # Import matplotlib pyplot safely
@@ -18,6 +20,15 @@ except ImportError:
     import matplotlib.pyplot as plt
 from os.path import exists
 import datetime
+
+def standardize(data):
+    columns = data.columns.values[0:len(data.columns.values)]
+    # Create the Scaler object
+    scaler = preprocessing.MinMaxScaler()
+    # Fit your data on the scaler object
+    dataScaled = scaler.fit_transform(dataset)
+    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    return dataScaled
 
 ##modelname is the path to the h5 model file, and X is the number of variables that model uses. 
 def get_weights_and_biases(modelname, X):
@@ -104,8 +115,8 @@ def fitting_loops(X, Y,dataset, folder, modelname):
     # Each cycle's output is the next cycle's input, so the model learns for each new cycle
     for i in range(0, 50):
         ##Creating X and Y. Accident is the first column, therefore it is 0.
-        X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-        Y = dataset.ix[:, 0].values  # Our dependent variable
+        X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+        Y = dataset.iloc[:, 0].values  # Our dependent variable
 
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -246,12 +257,12 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     plt.rc('font', **font)
     fig = plt.figure()
     a1 = fig.add_subplot(2, 1, 1)
-    a1.plot(hist.history['acc'])
-    a1.plot(hist.history['val_acc'])
+    a1.plot(hist.history['accuracy'])
+    a1.plot(hist.history['val_accuracy'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
     a1.set_yticks((.5, .75, 1), (.5, .75, 1))
-    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
+    a1.set_xticks((0, (len(hist.history['val_accuracy']) / 2), len(hist.history['val_accuracy'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
     a2 = fig.add_subplot(2, 1, 2)
     a2.plot(hist.history['loss'])
@@ -277,27 +288,26 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Second Batch - All Vars/Total Shift/Total Shift No Split.csv")
-dataset = test_type(dataset, 1)
-
-# dataset = feather.read_dataframe("../")
-
-# Drop any columns from your dataset if you want
-# dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
+filename = "Excel & CSV Sheets/Grid Hex Layout/Negative Sampling Data/Straight data/GridFix No Split.csv"
+testnum = 2
+dataset = pandas.read_csv(filename)
+modelname = ((filename.split("/")[-1]).split(".")[0] + " Model.h5").replace(" ", "_")
+foldername = modelname.split(".")[0]
+dataset = test_type(dataset, testnum)
+dataset = standardize(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
-# Note, if the folder you specify doesn't exist, you'll have to create it
 # These are made for code automation later on
-folder = 'Graphs & Images/Hex Grid/Total Shift/Test 1/'
+folder = 'Graphs & Images/Hex Grid/Grid Fix/Test '+str(testnum)+'/'+foldername+"/"
+
 if not os.path.exists(folder):
         os.makedirs(folder)
-modelname = "model_TS_hex.h5"
 
 ##Shuffling
 dataset = shuffle(dataset)
 ##Creating X and Y. Accident is the first column, therefore it is 0.
-X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-Y = dataset.ix[:, 0].values  # Our dependent variable
+X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+Y = dataset.iloc[:, 0].values  # Our dependent variable
 
 ##Steps 2-5 are inside the fitting loops method
 fitting_loops(X,Y, dataset, folder, modelname)
