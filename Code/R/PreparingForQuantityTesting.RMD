@@ -1,0 +1,68 @@
+---
+title: "PredictionCalculations"
+output: pdf_document
+---
+
+```{r}
+
+# dates = c("1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","5/11/2019","5/16/2017","7/9/2017","8/16/2018")
+dates = c("8/16/2018")
+modeltypes = c("CutGF_50-50","CutGF_75-25","CutGF_Test","CutRan_50-50","CutRan_75-25","CutRan_Test","FullGF_50-50","FullGF_75-25","FullGF_Test","FullRan_50-50", "FullRan_75-25","FullRan_Test","Spatial_50-50","Spatial_75-25","Spatial_Test","Temporal_50-50","Temporal_75-25","Temporal_Test")
+
+for(date in dates){
+  for(modeltype in modeltypes){
+    cat(date, modeltype, "\n")
+  }
+}
+
+grids = unique(forecast$Grid_Block)
+dayframes = c(1,2,3,4)
+accidents = read.csv("/Users/peteway/Documents/GitHub/Ignore/accidents.csv")
+accidents$Date[1] == "1/1/2017"
+for(date in dates){
+  month= str_split(date, "/")[[1]][1]
+  day = str_split(date, "/")[[1]][2]
+  year = str_split(date, "/")[[1]][3]
+  cat(month, day, year, "\n")
+  acc = accidents[which(accidents$Date == date),]
+  # acc = read.csv(accfile)
+  for(modeltype in modeltypes){
+  forecast = read_csv(paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Forecast/",modeltype,"_Forecast.csv", sep=""))
+  forecast = forecast[which(forecast$Prediction == 1),]
+  unique(forecast$Prediction)
+  acc_grids = table(acc$Grid_Block, acc$DayFrame)
+  acc_grids = as.data.frame(acc_grids)
+  colnames(acc_grids) = c("Grid_Block","DayFrame","Accident")
+  acc_grids = acc_grids[which(acc_grids$Accident != 0),]
+  if(length(forecast$Grid_Block) != 0){
+    cat(date, modeltype, "\n")
+    for_grids = table(forecast$Grid_Block, forecast$DayFrame)
+    for_grids = as.data.frame(for_grids)
+    colnames(for_grids) = c("Grid_Block","DayFrame","Forecast")
+    for_grids = for_grids[which(for_grids$Forecast != 0),]
+    listing = expand.grid(grids, dayframes)
+    colnames(listing) = c("Grid_Block","DayFrame")
+    test = merge(listing, acc_grids, by=c("Grid_Block","DayFrame"), all.x=TRUE)
+    test = merge(test, for_grids, by=c("Grid_Block","DayFrame"), all.x=TRUE )
+    test[is.na(test)] <- 0
+    write_csv(test, paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/TestingforPredictions/TestforPrediction_",modeltype,".csv", sep=""))
+  }
+  }
+}
+# compare = merge(acc_grids, for_grids, by=c("Grid_Block","DayFrame"), all.x = TRUE)
+```
+
+```{r}
+##After finding the quantities, merge them here. 
+library(tidyverse)
+library(data.table)
+path = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts"
+allmatrix <- 
+    list.files(pattern = "Confusion Matrix Quantities", path=path, recursive = TRUE) %>% 
+    map_df(~fread(.))
+
+means = aggregate(. ~ ModelType, allmatrix[,!('Date')], mean)
+
+write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformance.csv")
+```
+

@@ -50,6 +50,28 @@ def get_weights_and_biases(modelname, X):
         except: 
             break
 
+def test_type(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    :param data:
+    :param type:
+    :return:
+    """
+    col1 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    col2 = ['Accident', 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    if type == 1:
+        data = data.reindex(columns=col1)
+    elif type == 2:
+        data = data.reindex(columns=col2)
+
+    return data
 
 def fitting_loops(X, Y,dataset, folder, modelname):
 
@@ -81,9 +103,6 @@ def fitting_loops(X, Y,dataset, folder, modelname):
     # Training Cycles
     # Each cycle's output is the next cycle's input, so the model learns for each new cycle
     for i in range(0, 50):
-
-        ##Shuffling
-        dataset = shuffle(dataset)
         ##Creating X and Y. Accident is the first column, therefore it is 0.
         X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
         Y = dataset.ix[:, 0].values  # Our dependent variable
@@ -193,7 +212,6 @@ def fitting_loops(X, Y,dataset, folder, modelname):
         if i % 10 == 0 or i == 49:
             generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder)
 
-
 def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     font = {'family': 'serif',
             'weight': 'regular',
@@ -228,19 +246,14 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     plt.rc('font', **font)
     fig = plt.figure()
     a1 = fig.add_subplot(2, 1, 1)
-    a1.plot(hist.history['accuracy'])
-    a1.plot(hist.history['val_accuracy'])
+    a1.plot(hist.history['acc'])
+    a1.plot(hist.history['val_acc'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
     a1.set_yticks((.5, .75, 1), (.5, .75, 1))
-    a1.set_xticks((0, (len(hist.history['val_accuracy']) / 2), len(hist.history['val_accuracy'])))
+    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
-    # plt.show()
-    # fig.savefig('acc.png', bbox_inches='tight')
-    # summarize history for loss
-    # fig = plt.figure()
     a2 = fig.add_subplot(2, 1, 2)
-    # fig = plt.figure()
     a2.plot(hist.history['loss'])
     a2.plot(hist.history['val_loss'])
     a2.set_ylabel('Loss')
@@ -248,7 +261,6 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     a2.set_yticks((0,.25, .5), (0, .25, .5))
     a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
-    # plt.show()
     title = folder + str(datetime.datetime.today()) + 'lossandacc' + str(
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
@@ -265,21 +277,21 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-dataset = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Negative Sampling/Grid Fix/All NS Variables/GF_50-50_MMR.csv")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Second Batch - All Vars/Total Shift/Total Shift No Split.csv")
+dataset = test_type(dataset, 1)
+
 # dataset = feather.read_dataframe("../")
-# print(dataset.isnull().sum(axis = 0))
-dataset = dataset.dropna()
-# exit()
+
 # Drop any columns from your dataset if you want
 # dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it
 # These are made for code automation later on
-folder = 'Graphs & Images/Hex Grid/Grid Fix/NS Vars/50-50 Split/'
+folder = 'Graphs & Images/Hex Grid/Total Shift/Test 1/'
 if not os.path.exists(folder):
         os.makedirs(folder)
-modelname = "model_GF_hex_NS_vars.h5"
+modelname = "model_TS_hex.h5"
 
 ##Shuffling
 dataset = shuffle(dataset)

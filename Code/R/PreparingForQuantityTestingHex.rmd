@@ -1,0 +1,84 @@
+---
+title: "PredictionCalculations"
+output: pdf_document
+---
+```{r}
+test = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfo.csv")
+accidents = read.csv("/Users/peteway/Documents/GitHub/Ignore/Hex Forecast Accidents.csv")
+```
+
+
+```{r}
+library(stringr)
+dates = c("1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","5/11/2019","5/16/2017","7/9/2017","8/16/2018")
+
+##For original Fishnet grid
+modeltypes = c("CutGF_50-50","CutGF_75-25","CutGF_Test","CutRan_50-50","CutRan_75-25","CutRan_Test","FullGF_50-50","FullGF_75-25","FullGF_Test","FullRan_50-50", "FullRan_75-25","FullRan_Test","Spatial_50-50","Spatial_75-25","Spatial_Test","Temporal_50-50","Temporal_75-25","Temporal_Test")
+##For Hex Grid
+# modeltypes = c("GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test")
+
+
+for(date in dates){
+  for(modeltype in modeltypes){
+    cat(date, modeltype, "\n")
+  }
+}
+
+grids = unique(test$Grid_Num)
+dayframes = c(1,2,3,4)
+# hours = c(0,4,8,12,16,20,23)
+
+for(date in dates){
+  month= str_split(date, "/")[[1]][1]
+  day = str_split(date, "/")[[1]][2]
+  year = str_split(date, "/")[[1]][3]
+  cat(month, day, year, "\n")
+  acc = accidents[which(accidents$Date == date),]
+  for(modeltype in modeltypes){
+    
+  forecast = read.csv(paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Hex/Forecast/",modeltype,"_Forecast.csv", sep=""))
+  forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+  forecast = forecast[which(forecast$Prediction == 1),]
+  
+  unique(forecast$Prediction)
+  acc_grids = table(acc$Grid_Num, acc$DayFrame)
+  acc_grids = as.data.frame(acc_grids)
+  colnames(acc_grids) = c("Grid_Num","DayFrame","Accident")
+  acc_grids = acc_grids[which(acc_grids$Accident != 0),]
+  
+  if(length(forecast$Grid_Num) != 0){
+    cat(date, modeltype, "\n")
+    for_grids = table(forecast$Grid_Num, forecast$DayFrame)
+    for_grids = as.data.frame(for_grids)
+    colnames(for_grids) = c("Grid_Num","DayFrame","Forecast")
+    for_grids = for_grids[which(for_grids$Forecast != 0),]
+    listing = expand.grid(grids, dayframes)
+    colnames(listing) = c("Grid_Num","DayFrame")
+    test = merge(listing, acc_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE)
+    test = merge(test, for_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE )
+    test[is.na(test)] <- 0
+    write.csv(test, paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Hex/TestingforPredictions/",modeltype,".csv", sep=""))
+  }
+  }
+}
+# compare = merge(acc_grids, for_grids, by=c("Grid_Num","DayFrame"), all.x = TRUE)
+```
+
+```{r}
+##After finding the quantities, merge them here. 
+library(tidyverse)
+library(data.table)
+path = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/"
+allmatrix <- 
+    list.files(pattern = "Hex Confusion Matrix Quantities", path=path, recursive = TRUE) %>% 
+    map_df(~fread(.))
+
+means = aggregate(. ~ ModelType, allmatrix[,!('Date')], mean)
+
+write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformanceforHex.csv")
+```
+
+```{r}
+
+```
+
