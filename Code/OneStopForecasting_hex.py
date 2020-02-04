@@ -39,6 +39,27 @@ def find_cred(service):
                     # logins[username] = password
     return cred
 
+def test_type(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    :param data:
+    :param type:
+    :return:
+    """
+    col1 = [ 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    col2 = [ 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    if type == 1:
+        data = data.reindex(columns=col1)
+    elif type == 2:
+        data = data.reindex(columns=col2)
+    return data
 
 ##Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file
 def fillForecastFile(places, filename):
@@ -473,10 +494,11 @@ def make_directory(model, batchnum, date):
         modeltype = "Ran" 
     
     if batchnum == 1:
-        suffix= modeltype +"_"+modelsplit+"_"
+        suffix= modeltype +"_"+modelsplit+"_Test"+str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" +(date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/"
     elif batchnum == 2:
-        suffix= "SecondBatch_" + modeltype +"_"+modelsplit+"_"
+        suffix= "SecondBatch_" + modeltype +"_"+modelsplit+"_Test"+str(batchnum)
         date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" +(date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/"
     print("\tSaving Folder:",folder)
@@ -526,34 +548,38 @@ date = "2020-01-23"
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # data = fetchWeather(date)
-data = pandas.read_csv("/Users/peteway/Desktop/Testing.csv")
+data = pandas.read_csv("Excel & CSV Sheets/Forecast Accident Dates/01-23-2020.csv")
+testnum = 2
+data = test_type(data, testnum)
 
-batchnum = 2
-if batchnum ==1: 
-    # First Batch
-    columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-       'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-       'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-       'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
-elif batchnum ==2: 
-    ##Second Batch Columns
-    columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
-           'FUNC_CLASS', 'Hour', 'hourbefore', 'cloudCover', 'dewPoint',
-           'humidity', 'precipIntensity', 'precipProbability', 'pressure',
-           'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust',
-           'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'Longitude',
-           'Latitude', 'RainBefore', 'DayFrame', 'WeekDay', 'DayOfWeek']
+# batchnum = 2
+# if batchnum ==1: 
+#     # First Batch
+#     columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
+#        'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+#        'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
+#        'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
+# elif batchnum ==2: 
+#     ##Second Batch Columns
+#     columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+#            'FUNC_CLASS', 'Hour', 'hourbefore', 'cloudCover', 'dewPoint',
+#            'humidity', 'precipIntensity', 'precipProbability', 'pressure',
+#            'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust',
+#            'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'Longitude',
+#            'Latitude', 'RainBefore', 'DayFrame', 'WeekDay', 'DayOfWeek']
 
-data = data.reindex(columns = columns)
+
+
+# data = data.reindex(columns = columns)
 
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
 
-modelname = "/Users/peteway/Documents/GitHub/Hex Grid 911/Graphs & Images/Hex Grid/Grid Fix/NS Vars/50-50 Split/model_GF_hex_NS_vars.h5"
+modelname = "Graphs & Images/Hex Grid/Grid Fix/Test 2/GridFix_50-50_Split_Model/GridFix_50-50_Split_Model.h5"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
-folder, suffix = make_directory(modelname, 2, date)
+folder, suffix = make_directory(modelname, testnum, date)
 
 scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
