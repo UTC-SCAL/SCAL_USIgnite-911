@@ -288,7 +288,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-filename = "Excel & CSV Sheets/Grid Hex Layout/Negative Sampling Data/Straight data/GridFix No Split.csv"
+filename = "Excel & CSV Sheets/Grid Hex Layout/Negative Sampling Data/Straight data/GridFix 50-50 Split.csv"
 testnum = 2
 dataset = pandas.read_csv(filename)
 modelname = ((filename.split("/")[-1]).split(".")[0] + " Model.h5").replace(" ", "_")
