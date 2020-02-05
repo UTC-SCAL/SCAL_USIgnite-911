@@ -1,7 +1,9 @@
 import datetime
 import os
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import logging
+
 logging.getLogger('tensorflow').disabled = True
 import pandas
 import feather
@@ -18,8 +20,10 @@ try:
     import matplotlib.pyplot as plt
 except ImportError:
     import matplotlib
+
     matplotlib.use("TkAgg")
     import matplotlib.pyplot as plt
+
 
 def find_cred(service):
     """
@@ -36,8 +40,9 @@ def find_cred(service):
             if service in lines[1]:
                 cred = str(lines[1].split(",")[1]) + "," + str(lines[1].split(",")[2])
                 # print(cred)
-                    # logins[username] = password
+                # logins[username] = password
     return cred
+
 
 def test_type(data, type):
     """
@@ -47,11 +52,11 @@ def test_type(data, type):
     :param type:
     :return:
     """
-    col1 = [ 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+    col1 = ['Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
             'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
 
-    col2 = [ 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+    col2 = ['Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
             'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
 
@@ -61,15 +66,16 @@ def test_type(data, type):
         data = data.reindex(columns=col2)
     return data
 
+
 ##Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file
 def fillForecastFile(places, filename):
     ##Gets the forecast data for every 4 hours. 
     fulldata = places.copy()
-    for i in range(0,25,4):
-        if i ==0:
+    for i in range(0, 25, 4):
+        if i == 0:
             pass
         else:
-            name = ('places'+str(i))
+            name = ('places' + str(i))
             print(name)
             if i == 24:
                 places.Hour = 23
@@ -86,8 +92,9 @@ def fillForecastFile(places, filename):
             print(places.Hour[0:5])
             fulldata = fulldata.append(places)
     fulldata = fulldata.drop_duplicates()
-    print("Finished data size:",fulldata.size)
+    print("Finished data size:", fulldata.size)
     fulldata.to_csv(filename, sep=",", index=False)
+
 
 ##Step 0 - ONLY IF NEEDED. Creates binary variables for weather if not already in data
 # Aggregates Event and Conditions
@@ -127,18 +134,20 @@ def finding_binaries(weatherFile):
 
 ##Step 1 - Connect Weather to Forecast
 def finding_weather(data, all_weather, yoa, moa, dayoa):
-    print("Finding Weather for Forecast date of:",moa,"/",dayoa,"/",yoa)
-    data['Unix'] = data['Hour'].map(lambda x : datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
-    data['hourbefore'] = data['Unix'].map(lambda x : int(x) - 60*60)
+    print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
+    data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
+    data['hourbefore'] = data['Unix'].map(lambda x: int(x) - 60 * 60)
     data['hourbefore'] = data['hourbefore'].astype(int)
     data['Unix'] = data['Unix'].astype(int)
     all_weather['hourbefore'] = all_weather['hourbefore'].astype(int)
     # Merge the event/conditions columns based on time and grid block
-    newdata = pandas.merge(data, all_weather[['cloudCover','dewPoint','humidity','precipIntensity',
-    'pressure','temperature','visibility','windGust','windSpeed','Rain','Cloudy','Foggy','Snow',
-    'Clear','Unix','Grid_Num']], on=['Unix','Grid_Num'])
+    newdata = pandas.merge(data, all_weather[['cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+                                              'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed', 'Rain',
+                                              'Cloudy', 'Foggy', 'Snow',
+                                              'Clear', 'Unix', 'Grid_Num']], on=['Unix', 'Grid_Num'])
     # Merge the event/conditions before columns based on hour before and grid block
-    newdata = pandas.merge(newdata, all_weather[['RainBefore','hourbefore','Grid_Num']], on=['hourbefore','Grid_Num'])
+    newdata = pandas.merge(newdata, all_weather[['RainBefore', 'hourbefore', 'Grid_Num']],
+                           on=['hourbefore', 'Grid_Num'])
     print("Weather fetch complete")
     # newdata = newdata[['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
     #    'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -148,6 +157,7 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
         print("Weather pull failed. Select Different Date")
         exit()
     return newdata
+
 
 def fetchWeather(date):
     """
@@ -161,10 +171,10 @@ def fetchWeather(date):
 
     ##First Batch Columns
     # columns = ['cloudCover','dewPoint','humidity','precipIntensity','pressure','temperature','visibility',
-            # 'windGust','windSpeed','icon','summary']
+    # 'windGust','windSpeed','icon','summary']
     ##Second Batch Columns 
-    columns = ['cloudCover', 'dewPoint','humidity', 'precipIntensity', 'precipProbability', 'pressure',
-       'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust','windSpeed', 'icon','summary']
+    columns = ['cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'precipProbability', 'pressure',
+               'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust', 'windSpeed', 'icon', 'summary']
 
     key = find_cred("darksky")
     for k, i in enumerate(forecastforum.Grid_Num.values):
@@ -191,7 +201,7 @@ def fetchWeather(date):
                                 forecastforum.at[k, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                    yesterday = datetime.datetime.strptime(date, '%Y-%m-%d')-timedelta(hours=1)
+                    yesterday = datetime.datetime.strptime(date, '%Y-%m-%d') - timedelta(hours=1)
                     t2 = yesterday.isoformat()
                     call = key, lati, longi
                     forecastcallyesterday = Forecast(*call, time=t2)
@@ -199,134 +209,137 @@ def fetchWeather(date):
                     entryyesterday = hourly_listyesterday[23]
                     if 'rain' in entryyesterday['icon'].lower() or 'rain' in entryyesterday['summary'].lower():
                         forecastforum.at[k, 'RainBefore'] = 1
-                    else: 
+                    else:
                         forecastforum.at[k, 'RainBefore'] = 0
-                elif l ==3: 
+                elif l == 3:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+1, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+1, 'RainBefore'] = 0
+                        forecastforum.at[k + 1, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 1, 'RainBefore'] = 0
                 elif l == 4:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+1, things] = entry[things]
+                                forecastforum.at[k + 1, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                elif l ==7: 
+                elif l == 7:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+2, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+2, 'RainBefore'] = 0
+                        forecastforum.at[k + 2, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 2, 'RainBefore'] = 0
                 elif l == 8:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+2, things] = entry[things]
+                                forecastforum.at[k + 2, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                elif l ==11: 
+                elif l == 11:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+3, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+3, 'RainBefore'] = 0
+                        forecastforum.at[k + 3, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 3, 'RainBefore'] = 0
                 elif l == 12:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+3, things] = entry[things]
+                                forecastforum.at[k + 3, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                elif l ==15: 
+                elif l == 15:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+4, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+4, 'RainBefore'] = 0
+                        forecastforum.at[k + 4, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 4, 'RainBefore'] = 0
                 elif l == 16:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+4, things] = entry[things]
+                                forecastforum.at[k + 4, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                elif l ==19: 
+                elif l == 19:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+5, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+5, 'RainBefore'] = 0
+                        forecastforum.at[k + 5, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 5, 'RainBefore'] = 0
                 elif l == 20:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+5, things] = entry[things]
+                                forecastforum.at[k + 5, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                elif l ==22: 
+                elif l == 22:
                     entry = hourly_list[l]
                     if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k+6, 'RainBefore'] = 1
-                    else: 
-                        forecastforum.at[k+6, 'RainBefore'] = 0
+                        forecastforum.at[k + 6, 'RainBefore'] = 1
+                    else:
+                        forecastforum.at[k + 6, 'RainBefore'] = 0
                 elif l == 23:
                     entry = hourly_list[l]
                     for d, things in enumerate(hourly_list[l]):
                         if things in columns:
                             try:
-                                forecastforum.at[k+6, things] = entry[things]
+                                forecastforum.at[k + 6, things] = entry[things]
                             except:
                                 print("Failure at DarkSky")
-                else: 
+                else:
                     pass
     # print(forecastforum.head())
-    forecastforum.columns = ['Event' if x=='icon' else 'Conditions' if x=='summary' else x for x in forecastforum.columns]
+    forecastforum.columns = ['Event' if x == 'icon' else 'Conditions' if x == 'summary' else x for x in
+                             forecastforum.columns]
     forecastforum = finding_binaries(forecastforum)
     # forecastforum.to_csv("/Users/peteway/Desktop/Testing_NS.csv")
     # exit()
     print("Forecast Fetched.")
     # exit()
     return forecastforum
-        # except: 
-        #     print("Error at Darksky:", call, t)
+    # except:
+    #     print("Error at Darksky:", call, t)
 
-##Step 2 - Standardize Data. 
+
+##Step 2 - Standardize Data.
 def standarize_data(data):
     data = data.drop_duplicates(keep='first')
     print("Scaling data")
     # Drop any empties now, since we don't want empties here!
     data = data.dropna()
-    
+
     # Create the Scaler object
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     scaled = scaler.fit_transform(data)
     scaled = pandas.DataFrame(scaled, columns=data.columns)
-    
+
     # Send it back
     print("Data Scale Complete")
     return scaled, data
+
 
 ##Step 3 - Predict for accidents
 ##Data is SCALED version of data, and modelname is the path to the model. 
 def predict_accidents(data, modelname):
     print("Predicting Accident Hotspots with model:", modelname)
-    
+
     ########################################################################################################################################################################
 
     ##This section makes sure that the correct columns are in the data files, just in case.
     data = data.dropna()
     X = data.columns.shape[0]
     ########################################################################################################################################################################
-    #Printing the size of the testing data, that is, the data file. 
+    # Printing the size of the testing data, that is, the data file.
     print("\tSize of data:", data.shape)
 
     # #Creating the framework for the model.
@@ -349,7 +362,7 @@ def predict_accidents(data, modelname):
     model.add(Dense(X, input_dim=X, activation='sigmoid'))
 
     # Use for standard sized variable set
-    model.add(Dense(X- 5, activation='sigmoid'))
+    model.add(Dense(X - 5, activation='sigmoid'))
     model.add(Dropout(.1))
     model.add(Dense(X - 10, activation='sigmoid'))
 
@@ -360,19 +373,20 @@ def predict_accidents(data, modelname):
     ########################################################################################################################################################################
     # Okay, now let's calculate predictions.
     probability = model.predict(data)
-    #Save the predicted values to the Probability column. 
-    data["Probability"] = probability 
+    # Save the predicted values to the Probability column.
+    data["Probability"] = probability
 
     # Then, let's round to either 0 or 1, since we have only two options (accident or no).
     predictions_round = [abs(round(x[0])) for x in probability]
     data["Prediction"] = predictions_round
- 
-    #Printing some of the found values, as well as the total number of predicted accidents for this data. 
-    print("\tMin probability: ",  round(float(min(probability)*100), 2))
-    print("\tMax probability: ",  round(float(max(probability)*100), 2))
+
+    # Printing some of the found values, as well as the total number of predicted accidents for this data.
+    print("\tMin probability: ", round(float(min(probability) * 100), 2))
+    print("\tMax probability: ", round(float(max(probability) * 100), 2))
     print("\tAccidents predicted: ", sum(data.Prediction))
 
     return data
+
 
 ##Step 3 - Predict for accidents (This version is slightly tweaked to work with the averaged weekday models)
 ##Data is SCALED version of data, filename is title to save predicted forecast under,
@@ -425,6 +439,7 @@ def predict_accidents_weekdays(data, modelname):
 
     return data
 
+
 ##Step 4 - Add results to unscaled version of data
 ##Add Prediction and Probability to the unscaled version of the data. 
 def add_Pred_andProb(data, scaled, folder, suffix):
@@ -437,12 +452,13 @@ def add_Pred_andProb(data, scaled, folder, suffix):
     data['Prediction'] = scaled['Prediction']
     data['Probability'] = scaled['Probability']
     missing = data['Probability'].isnull().sum()
-    print("\tLength of Data Probability:", len(data)-missing)
-    print("\tSaving forecasted data to: ", filename,scaledfile)
+    print("\tLength of Data Probability:", len(data) - missing)
+    print("\tSaving forecasted data to: ", filename, scaledfile)
     scaled.to_csv(scaledfile, sep=",", index=False)
     data.to_csv(filename, sep=",", index=False)
     return scaled, data
-    
+
+
 ##Step 5 - Find matches, using either the original DayFrames, or the alternate. 
 def finding_matches(accidents, data):
     data = data[data['Prediction'] == 1]
@@ -450,9 +466,11 @@ def finding_matches(accidents, data):
 
     for i, _ in enumerate(accidents.values):
         for j, _ in enumerate(data.values):
-            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrame.values[i] == data.DayFrame.values[j]):
+            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrame.values[i] ==
+                    data.DayFrame.values[j]):
                 match += 1
     print("This many matches were found:", match)
+
 
 def make_DayFrameAlt(data):
     data["DayFrameAlt"] = ""
@@ -464,7 +482,8 @@ def make_DayFrameAlt(data):
             data.DayFrameAlt.values[i] = 2
         elif 19 <= data.Hour.values[i] <= 23 or 0 <= data.Hour.values[i] <= 5:
             data.DayFrameAlt.values[i] = 3
-    return data 
+    return data
+
 
 def finding_matches_alt(accidents, data):
     data = make_DayFrameAlt(data)
@@ -473,56 +492,58 @@ def finding_matches_alt(accidents, data):
     altmatch = 0
     for i, _ in enumerate(accidents.values):
         for j, _ in enumerate(data.values):
-            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrameAlt.values[i] == data.DayFrameAlt.values[j]):
+            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrameAlt.values[i] ==
+                    data.DayFrameAlt.values[j]):
                 altmatch += 1
     print("This many ALT matches were found:", altmatch)
+
 
 def make_directory(model, batchnum, date):
     modeltype = (model.split("/")[-1]).split("_")[1]
     # print(modeltype)
     # exit()
     if "75-25" in model:
-        modelsplit = "75-25 Split" ##75-25
+        modelsplit = "75-25 Split"  ##75-25
     elif "50-50" in model:
-        modelsplit = "50-50 Split" ##50-50 
+        modelsplit = "50-50 Split"  ##50-50
     else:
-        modelsplit = "Test" ##Original
+        modelsplit = "Test"  ##Original
 
     if "GF" in model:
-        modeltype= "GF"
+        modeltype = "GF"
     elif "Ran" in model:
-        modeltype = "Ran" 
-    
+        modeltype = "Ran"
+
     if batchnum == 1:
-        suffix= modeltype +"_"+modelsplit+"_Test"+str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" +(date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/"
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 2:
-        suffix= "SecondBatch_" + modeltype +"_"+modelsplit+"_Test"+str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" +(date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/"
-    print("\tSaving Folder:",folder)
+        suffix = "SecondBatch_" + modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    print("\tSaving Folder:", folder)
 
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-    folderMMR = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/MMR/"
+    folderMMR = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
     if not os.path.exists(folderMMR):
         os.makedirs(folderMMR)
 
-    folderpred = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/TestingforPredictions/"
+    folderpred = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/TestingforPredictions/"
     if not os.path.exists(folderpred):
         os.makedirs(folderpred)
 
-    folderfore = "Excel & CSV Sheets/Forecasts/"+date+"/Hex/Forecast/"
+    folderfore = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/Forecast/"
     if not os.path.exists(folderfore):
         os.makedirs(folderfore)
 
     return folder, suffix
 
+
 # This version of make_directory is a little less specific with naming
 def make_directory_alt(model):
-
     modeltype = (model.split("/")[-1]).split(".")[0]
     folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
     suffix = modeltype + "_"
@@ -542,6 +563,8 @@ def return_empty_df(dataframe):
     """
     nullFile = dataframe[dataframe['Event'].isnull()]
     nullFile.to_csv("../")
+
+
 #######################################################################################################################
 start = datetime.datetime.now()
 date = "2020-01-23"
@@ -569,7 +592,6 @@ data = test_type(data, testnum)
 #            'Latitude', 'RainBefore', 'DayFrame', 'WeekDay', 'DayOfWeek']
 
 
-
 # data = data.reindex(columns = columns)
 
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
@@ -585,14 +607,15 @@ scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 # data.to_csv("/Users/peteway/Desktop/Testing.csv")
 end = datetime.datetime.now()
-print("Forecasting Completed in:", end-start)
+print("Forecasting Completed in:", end - start)
 exit()
 
 # Use this command and the two lines at the bottom of this file if you want to time this code
 # start = datetime.datetime.now()
 
 # This is a template for the forecasting file created with this code
-origdata = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Forecasting/Forecast Forum Hex Layout.csv", sep=",")
+origdata = pandas.read_csv(
+    "Excel & CSV Sheets/Hamilton County Accident System Hex/Forecasting/Forecast Forum Hex Layout.csv", sep=",")
 
 weather19 = feather.read_dataframe("../Ignore/HexWeather/2019 Weather Binaries.feather")
 weather18 = feather.read_dataframe("../Ignore/HexWeather/2018 Weather Binaries.feather")
@@ -617,13 +640,13 @@ origdata['Hour'] = origdata['Hour'].astype(int)
 
 
 models = ["Graphs & Images/Hex Grid/Grid Fix/Cut 75-25/model_GF_hex_uncut.h5",
-"Graphs & Images/Hex Grid/Grid Fix/Cut 50-50/model_GF_hex_uncut.h5",
-"Graphs & Images/Hex Grid/Grid Fix/Second Run/model_GF_hex_uncut.h5", 
-"Graphs & Images/Hex Grid/Random/Cut 50-50/model_rand_hex.h5",
-"Graphs & Images/Hex Grid/Random/Cut 75-25/model_rand_hex.h5",
-"Graphs & Images/Hex Grid/Random/First Run/model_rand_uncut.h5"]
-dates = ["1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","5/11/2019","5/16/2017","7/9/2017","8/16/2018"]
-
+          "Graphs & Images/Hex Grid/Grid Fix/Cut 50-50/model_GF_hex_uncut.h5",
+          "Graphs & Images/Hex Grid/Grid Fix/Second Run/model_GF_hex_uncut.h5",
+          "Graphs & Images/Hex Grid/Random/Cut 50-50/model_rand_hex.h5",
+          "Graphs & Images/Hex Grid/Random/Cut 75-25/model_rand_hex.h5",
+          "Graphs & Images/Hex Grid/Random/First Run/model_rand_uncut.h5"]
+dates = ["1/1/2019", "2/4/2018", "3/12/2017", "3/17/2019", "4/12/2019", "4/22/2018", "5/11/2019", "5/16/2017",
+         "7/9/2017", "8/16/2018"]
 
 # model = "Graphs & Images/Hex Grid/Grid Fix/Cut 75-25/model_GF_hex_uncut.h5"
 # model = "Graphs & Images/Hex Grid/Grid Fix/Cut 50-50/model_GF_hex_uncut.h5"
@@ -636,19 +659,18 @@ dates = ["1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","
 
 # date = "1/1/2019"
 columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-       'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-       'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-       'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
+           'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+           'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
+           'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
 accidentfile = "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Hex Forecast Accidents.csv"
 accidentfile = pandas.read_csv(accidentfile)
 # print(accidentfile.Date.values[0])
 # exit()
-for date in dates: 
+for date in dates:
     print("Date is ", date)
 
     accidents = accidentfile[accidentfile['Date'] == date]
     accidents = accidents.reindex(columns=columns)
-
 
     year = int(date.split("/")[2])
     month = int(date.split("/")[0])
@@ -657,16 +679,16 @@ for date in dates:
     # Read in the weather file you want to use
     if year == 2018:
         all_weather = weather18
-    elif year ==2017:
-        all_weather = weather17 
-    elif year == 2019: 
+    elif year == 2017:
+        all_weather = weather17
+    elif year == 2019:
         all_weather = weather19
-    else: 
-        print("Error with year:",year, date)
+    else:
+        print("Error with year:", year, date)
 
     # Based on how the file name has the date ordered, choose a date declaration to use
     # date = str(year)+"-"+str(month)+"-"+str(day)
-    date = str(month)+"-"+str(day)+"-"+str(year)
+    date = str(month) + "-" + str(day) + "-" + str(year)
 
     ##Step 1 - Add weather
     data = finding_weather(origdata, all_weather, year, month, day)
@@ -675,23 +697,22 @@ for date in dates:
     # exit()
 
     ##Step 3 - Predict for Accidents on Given Day - returns scaled version of data
-    #Order of parameters - Scaled, testnumber, modelfilename
-    for model in models: 
+    # Order of parameters - Scaled, testnumber, modelfilename
+    for model in models:
         print(model)
         ##Step 2 - Standardize Data - returns scaled version 
         columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-       'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-       'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-       'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
+                   'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+                   'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
+                   'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
         data = data[columns]
         scaled, data = standarize_data(data)
 
         scaled = scaled[columns]
         scaled = predict_accidents(scaled, model)  # This version is used for our original models
-     
 
         ##Step 4 - Add results to unscaled data - saves data to given filename. 
-        #Order of parameters - data, scaled, folder to save forecast under
+        # Order of parameters - data, scaled, folder to save forecast under
         # Choose which make_directory method you want to use, they both do the same thing but the alt version is simplified
         folder, suffix = make_directory(model)  # Use this method for the original models
         # folder, suffix = make_directory_alt(model)
