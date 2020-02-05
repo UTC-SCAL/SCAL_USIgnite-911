@@ -221,7 +221,7 @@ def get_negatives_master(calldata, compare):
     negative_samples.DayFrame = negative_samples.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
                         else(2 if 5 <= x <= 9 else(3 if 10 <= x <= 13 else 4)))
 
-    negative_samples.to_csv("../Excel & CSV Sheets/Hex_Grid/Negative Sample Data/Second Batch - All Vars/Spatial Shift/2017 NS p1.csv", index=False)
+    negative_samples.to_csv("../", index=False)
 
 
 ##Finding the 'true' negatives from a larger set. 
@@ -323,7 +323,3 @@ def combine_negatives(p1, p2, p3, p4):
     print("Dropped", beforeLen - len(negComb), "negatives")
     negComb.to_csv("../", index=False)
 
-calldata = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Negative Sample Data/Second Batch - All Vars/Spatial Shift/2017 Acc p1.csv")
-compare = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Accident Data/Accident2017 NoHighway.csv")
-
-get_negatives_master(calldata, compare)

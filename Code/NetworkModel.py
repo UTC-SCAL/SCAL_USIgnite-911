@@ -6,9 +6,6 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
-from sklearn import preprocessing
-from sklearn.preprocessing import MinMaxScaler
-import os
 
 # Import matplotlib pyplot safely
 try:
@@ -21,70 +18,9 @@ except ImportError:
 from os.path import exists
 import datetime
 
-def standardize(data):
-    columns = data.columns.values[0:len(data.columns.values)]
-    # Create the Scaler object
-    scaler = preprocessing.MinMaxScaler()
-    # Fit your data on the scaler object
-    dataScaled = scaler.fit_transform(dataset)
-    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
-    return dataScaled
 
-##modelname is the path to the h5 model file, and X is the number of variables that model uses. 
-def get_weights_and_biases(modelname, X):
-    model = Sequential()
+def fitting_loops(X, Y, dataset, folder, modelname):
 
-    # Input
-    # X is the number of columns inside of X
-    # Done to remove need to alter input values every time we alter variables used (simplicity)
-    model.add(Dense(X, input_dim=X, activation='sigmoid'))
-
-    # Hidden Layers
-    # Use for standard sized variable set
-    model.add(Dense(X- 5, activation='sigmoid'))
-    model.add(Dropout(.1))
-    model.add(Dense(X - 10, activation='sigmoid'))
-
-    # Output
-    model.add(Dense(1, activation='sigmoid'))
-
-    ##3. Compiling a model.
-    model.compile(loss='mse', optimizer='nadam', metrics=['accuracy'])
-    model.load_weights(modelname)
-
-    for layer in model.layers:
-        try: 
-            weights = layer.get_weights()[0]
-            biases = layer.get_weights()[1]
-            print("Weights: \n",weights, "\n\n")
-            print("Biases: \n",biases, "\n\n")
-        except: 
-            break
-
-def test_type(data, type):
-    """
-    An easy to use method for selecting which columns to use for the testing you do
-    Also serves as an easy way to find which variables are used in each test type
-    :param data:
-    :param type:
-    :return:
-    """
-    col1 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
-
-    col2 = ['Accident', 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
-
-    if type == 1:
-        data = data.reindex(columns=col1)
-    elif type == 2:
-        data = data.reindex(columns=col2)
-
-    return data
-
-def fitting_loops(X, Y,dataset, folder, modelname):
 
     ##2. Defining a Neural Network
     # Model creation
@@ -114,9 +50,12 @@ def fitting_loops(X, Y,dataset, folder, modelname):
     # Training Cycles
     # Each cycle's output is the next cycle's input, so the model learns for each new cycle
     for i in range(0, 50):
+        
+        ##Shuffling
+        dataset = shuffle(dataset)
         ##Creating X and Y. Accident is the first column, therefore it is 0.
-        X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-        Y = dataset.iloc[:, 0].values  # Our dependent variable
+        X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+        Y = dataset.ix[:, 0].values  # Our dependent variable
 
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -144,7 +83,7 @@ def fitting_loops(X, Y,dataset, folder, modelname):
         # If the model doesn't improve over the past X epochs, exit training
         patience = 30
         stopper = callbacks.EarlyStopping(monitor='accuracy', patience=patience)
-        hist = model.fit(X_train, y_train, epochs=8000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
+        hist = model.fit(X_train, y_train, epochs=1000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
                          callbacks=[stopper])
 
         # Save the weights for next run.
@@ -171,8 +110,12 @@ def fitting_loops(X, Y,dataset, folder, modelname):
 
         ##Finding the AUC for the cycle: 
         fpr, tpr, _ = roc_curve(y_test, predictions_round)
+        # try:
         roc_auc = auc(fpr, tpr)
         print('AUC: %f' % roc_auc)
+    # except:
+        #     print("ROC Error, FPR: ", tpr, "TPR: ", tpr)
+
 
         ##Confusion Matrix: 
         tn, fp, fn, tp = confusion_matrix(y_test, predictions_round).ravel()
@@ -183,7 +126,10 @@ def fitting_loops(X, Y,dataset, folder, modelname):
         avg_holder.at[j, 'Train_Loss'] = sum(hist.history['loss']) / len(hist.history['loss'])
         avg_holder.at[j, 'Test_Acc'] = accscore1 * 100
         avg_holder.at[j, 'Test_Loss'] = sum(hist.history['val_loss']) / len(hist.history['val_loss'])
-        avg_holder.at[j, 'AUC'] = roc_auc
+        try:
+            avg_holder.at[j, 'AUC'] = roc_auc
+        except:
+            avg_holder.at[j, 'AUC'] = 'error in the matrix'
         avg_holder.at[j, 'TP'] = tp
         avg_holder.at[j, 'TN'] = tn
         avg_holder.at[j, 'FP'] = fp
@@ -223,20 +169,26 @@ def fitting_loops(X, Y,dataset, folder, modelname):
         if i % 10 == 0 or i == 49:
             generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder)
 
+
 def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     font = {'family': 'serif',
             'weight': 'regular',
             'size': 14}
     plt.rc('font', **font)
     fig = plt.figure()
+    # print(fpr, tpr)
+    # exit()
+    # plt.subplot(211)
     plt.plot(fpr, tpr, label='Grid ROC curve (area = %0.2f)' % roc_auc)
     plt.plot([0, 1], [0, 1], 'k--')
     plt.yticks((0, .5, 1), (0, .5, 1))
     plt.xticks((0, .5, 1), (0, .5, 1))
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
+    # plt.title('Receiver operating characteristic curve')
     title = folder + str(datetime.datetime.today()) + 'roc' + str(i) + '.png'
     fig.savefig(title, bbox_inches='tight')
+    # plt.subplot(212)
     fig = plt.figure(figsize=(24.0, 8.0))
     plt.xticks(range(0, 100), range(0, 100), rotation=90)
     plt.yticks(range(0, 2), ['No', 'Yes', ''])
@@ -257,14 +209,19 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     plt.rc('font', **font)
     fig = plt.figure()
     a1 = fig.add_subplot(2, 1, 1)
-    a1.plot(hist.history['accuracy'])
-    a1.plot(hist.history['val_accuracy'])
+    a1.plot(hist.history['acc'])
+    a1.plot(hist.history['val_acc'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
     a1.set_yticks((.5, .75, 1), (.5, .75, 1))
-    a1.set_xticks((0, (len(hist.history['val_accuracy']) / 2), len(hist.history['val_accuracy'])))
+    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
+    # plt.show()
+    # fig.savefig('acc.png', bbox_inches='tight')
+    # summarize history for loss
+    # fig = plt.figure()
     a2 = fig.add_subplot(2, 1, 2)
+    # fig = plt.figure()
     a2.plot(hist.history['loss'])
     a2.plot(hist.history['val_loss'])
     a2.set_ylabel('Loss')
@@ -272,6 +229,7 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     a2.set_yticks((0,.25, .5), (0, .25, .5))
     a2.set_xticks((0, (len(hist.history['val_loss']) / 2), len(hist.history['val_loss'])))
     a2.legend(['Train Loss', 'Test Loss'], loc='upper right', fontsize='small')
+    # plt.show()
     title = folder + str(datetime.datetime.today()) + 'lossandacc' + str(
         i) + '.png'
     fig.savefig(title, bbox_inches='tight')
@@ -288,26 +246,23 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-filename = "Excel & CSV Sheets/Grid Hex Layout/Negative Sampling Data/Straight data/GridFix 50-50 Split.csv"
-testnum = 2
-dataset = pandas.read_csv(filename)
-modelname = ((filename.split("/")[-1]).split(".")[0] + " Model.h5").replace(" ", "_")
-foldername = modelname.split(".")[0]
-dataset = test_type(dataset, testnum)
-dataset = standardize(dataset)
+dataset = pandas.read_csv("../")
+# dataset = feather.read_dataframe("../")
+
+# Drop any columns from your dataset if you want
+# dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
+# Note, if the folder you specify doesn't exist, you'll have to create it
 # These are made for code automation later on
-folder = 'Graphs & Images/Hex Grid/Grid Fix/Test '+str(testnum)+'/'+foldername+"/"
-
-if not os.path.exists(folder):
-        os.makedirs(folder)
+folder = '../'
+modelname = ""
 
 ##Shuffling
 dataset = shuffle(dataset)
 ##Creating X and Y. Accident is the first column, therefore it is 0.
-X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-Y = dataset.iloc[:, 0].values  # Our dependent variable
+X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+Y = dataset.ix[:, 0].values  # Our dependent variable
 
 ##Steps 2-5 are inside the fitting loops method
 fitting_loops(X,Y, dataset, folder, modelname)
