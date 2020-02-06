@@ -444,8 +444,8 @@ def predict_accidents_weekdays(data, modelname):
 ##Add Prediction and Probability to the unscaled version of the data. 
 def add_Pred_andProb(data, scaled, folder, suffix):
     print("Adding Probability and Predicted Accidents to data file")
-    scaledfile = folder + "MMR/" + suffix + "MMR.csv"
-    filename = folder + "Forecast/" + suffix + "Forecast.csv"
+    scaledfile = "../" + folder + "MMR/" + suffix + "MMR.csv"
+    filename = "../" + folder + "Forecast/" + suffix + "Forecast.csv"
     scaled['Prediction'] = scaled['Prediction'].astype(int)
     scaled['Probability'] = scaled['Probability'].astype(float)
     missing = scaled['Probability'].isnull().sum()
@@ -527,15 +527,15 @@ def make_directory(model, batchnum, date):
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-    folderMMR = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
+    folderMMR = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
     if not os.path.exists(folderMMR):
         os.makedirs(folderMMR)
 
-    folderpred = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/TestingforPredictions/"
+    folderpred = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/TestingforPredictions/"
     if not os.path.exists(folderpred):
         os.makedirs(folderpred)
 
-    folderfore = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/Forecast/"
+    folderfore = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/Forecast/"
     if not os.path.exists(folderfore):
         os.makedirs(folderfore)
 
@@ -566,39 +566,21 @@ def return_empty_df(dataframe):
 
 
 #######################################################################################################################
-start = datetime.datetime.now()
+# start = datetime.datetime.now()
 date = "2020-01-23"
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # data = fetchWeather(date)
-data = pandas.read_csv("Excel & CSV Sheets/Forecast Accident Dates/01-23-2020.csv")
+# This is the file that has the accidents for the date you want to predict for
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020.csv")
 testnum = 2
 data = test_type(data, testnum)
-
-# batchnum = 2
-# if batchnum ==1: 
-#     # First Batch
-#     columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-#        'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-#        'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-#        'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
-# elif batchnum ==2: 
-#     ##Second Batch Columns
-#     columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
-#            'FUNC_CLASS', 'Hour', 'hourbefore', 'cloudCover', 'dewPoint',
-#            'humidity', 'precipIntensity', 'precipProbability', 'pressure',
-#            'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust',
-#            'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'Longitude',
-#            'Latitude', 'RainBefore', 'DayFrame', 'WeekDay', 'DayOfWeek']
-
-
-# data = data.reindex(columns = columns)
 
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
 
-modelname = "Graphs & Images/Hex Grid/Grid Fix/Test 2/GridFix_50-50_Split_Model/GridFix_50-50_Split_Model.h5"
+modelname = "../"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)
@@ -606,8 +588,8 @@ folder, suffix = make_directory(modelname, testnum, date)
 scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 # data.to_csv("/Users/peteway/Desktop/Testing.csv")
-end = datetime.datetime.now()
-print("Forecasting Completed in:", end - start)
+# end = datetime.datetime.now()
+# print("Forecasting Completed in:", end - start)
 exit()
 
 # Use this command and the two lines at the bottom of this file if you want to time this code

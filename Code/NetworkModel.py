@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix
+from sklearn import preprocessing
 
 # Import matplotlib pyplot safely
 try:
@@ -17,6 +18,43 @@ except ImportError:
     import matplotlib.pyplot as plt
 from os.path import exists
 import datetime
+
+
+def test_type(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    :param data:
+    :param type:
+    :return:
+    """
+    col1 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    col2 = ['Accident', 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    if type == 1:
+        data = data.reindex(columns=col1)
+    elif type == 2:
+        data = data.reindex(columns=col2)
+
+    return data
+
+
+def standardize(data):
+    """
+    This standardizes the data into the MinMaxReduced version used for model creation
+    """
+    columns = data.columns.values[0:len(data.columns.values)]
+    # Create the Scaler object
+    scaler = preprocessing.MinMaxScaler()
+    # Fit your data on the scaler object
+    dataScaled = scaler.fit_transform(dataset)
+    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    return dataScaled
 
 
 def fitting_loops(X, Y, dataset, folder, modelname):
@@ -247,10 +285,10 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
 dataset = pandas.read_csv("../")
-# dataset = feather.read_dataframe("../")
-
-# Drop any columns from your dataset if you want
-# dataset = dataset.drop(["DayFrame","Unix","Grid_Block", "Longitude", "Latitude", "Highway", "humidity"],axis=1)
+# Select which type of test you want to do: this determines what columns are used
+dataset = test_type(dataset, 1)
+# Standardize the data before modelling
+dataset = standardize(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it

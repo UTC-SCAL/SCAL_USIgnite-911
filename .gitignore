@@ -110,3 +110,5 @@ Excel & CSV Sheets/Forecasts/*
 Excel & CSV Sheets/Shapefiles/*
 Excel & CSV Sheets/Grid Hex Layout/Negative Sampling Data/*
 Graphs & Images/.DS_Store
+/Ignore/
+/Excel & CSV Sheets/Forecasts/
