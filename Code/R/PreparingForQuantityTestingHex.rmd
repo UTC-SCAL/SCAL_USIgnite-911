@@ -3,8 +3,19 @@ title: "PredictionCalculations"
 output: pdf_document
 ---
 ```{r}
-test = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfo.csv")
+library(sf)
+library(ggmap)
+library(ggplot2)
+test = read.csv("../../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
 accidents = read.csv("/Users/peteway/Documents/GitHub/Ignore/Hex Forecast Accidents.csv")
+blocks = st_read("../../Excel & CSV Sheets/Shapefiles/HexGrid/HexGrid.shp")
+
+#   box = st_bbox(blocks)
+#   register_google('AIzaSyCdi7_sZmNl3ost3hiex_IplIDS-WP1QHM')
+#   bb<- make_bbox(lat=c(box['ymin'],box['ymax']),lon=c(box['xmin'],box['xmax']), f=0.05)
+#   zoomed = calc_zoom(bb)
+#   cda<-get_map(bb,zoom=zoomed,maptype="roadmap", source='google')
+#   ggmap(cda)+  coord_sf(crs = st_crs(blocks)) + geom_sf(data = blocks,color = 'black', fill='NA', inherit.aes = FALSE)
 ```
 
 
@@ -63,6 +74,64 @@ for(date in dates){
 }
 # compare = merge(acc_grids, for_grids, by=c("Grid_Num","DayFrame"), all.x = TRUE)
 ```
+
+##For date not in main file 
+```{r}
+library(sf)
+library(sp)
+library(stringr)
+grids = unique(test$Grid_Num)
+dayframes = c(1,2,3,4)
+# hours = c(0,4,8,12,16,20,23)
+acc = read.csv("/Users/peteway/Downloads/Accident Report.csv")
+coordinates(acc)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(acc)<- CRS(geo.prj)
+acc = st_as_sf(acc)
+acc = st_intersection(acc, blocks)
+
+date = "01/23/2020"
+month= str_split(date, "/")[[1]][1]
+day = str_split(date, "/")[[1]][2]
+year = str_split(date, "/")[[1]][3]
+cat(month, day, year, "\n")
+
+acc$Hour = str_split_fixed(str_split_fixed(acc$Response.Date, " ", n=2)[,2], ":", n=2)[,1]
+acc$Hour = as.numeric(acc$Hour)
+acc$DayFrame = ifelse(acc$Hour <= 4 | acc$Hour >= 19, 1,ifelse(acc$Hour <= 9 & acc$Hour >= 5,2, ifelse(acc$Hour <= 13 & acc$Hour >= 10,3, 4 ) ) )
+
+for(modeltype in modeltypes){
+  
+forecast = read.csv(paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Hex/Forecast/",modeltype,"_Forecast.csv", sep=""))
+forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+forecast = forecast[which(forecast$Prediction == 1),]
+
+unique(forecast$Prediction)
+acc_grids = table(acc$Grid_Num, acc$DayFrame)
+acc_grids = as.data.frame(acc_grids)
+colnames(acc_grids) = c("Grid_Num","DayFrame","Accident")
+acc_grids = acc_grids[which(acc_grids$Accident != 0),]
+
+if(length(forecast$Grid_Num) != 0)
+  {
+    cat(date, modeltype, "\n")
+    for_grids = table(forecast$Grid_Num, forecast$DayFrame)
+    for_grids = as.data.frame(for_grids)
+    colnames(for_grids) = c("Grid_Num","DayFrame","Forecast")
+    for_grids = for_grids[which(for_grids$Forecast != 0),]
+    listing = expand.grid(grids, dayframes)
+    colnames(listing) = c("Grid_Num","DayFrame")
+    test = merge(listing, acc_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE)
+    test = merge(test, for_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE )
+    test[is.na(test)] <- 0
+    write.csv(test, paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Hex/TestingforPredictions/",modeltype,".csv", sep=""))
+  }
+}
+```
+
+
+
+
 
 ```{r}
 ##After finding the quantities, merge them here. 
