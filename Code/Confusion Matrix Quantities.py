@@ -110,29 +110,34 @@ def matrix_quantities_hex(accForCompare, date, saveFile, modelType):
 
 
 def main (): 
-    test = pandas.read_csv("Excel & CSV Sheets/Forecasts/1-1-2019/TestforPrediction.csv")
-    saveFile = 'Excel & CSV Sheets/Forecasts/1-1-2019/Confusion Matrix Quantities.csv'
+    # test = pandas.read_csv("Excel & CSV Sheets/Forecasts/1-1-2019/TestforPrediction.csv")
+    # saveFile = 'Excel & CSV Sheets/Forecasts/1-1-2019/Confusion Matrix Quantities.csv'
 
-    ##Grid layout
-    modeltypes = ["CutGF_50-50","CutGF_75-25","CutGF_Test","CutRan_50-50","CutRan_75-25",
-    "CutRan_Test","FullGF_50-50","FullGF_75-25","FullGF_Test","FullRan_50-50", "FullRan_75-25",
-    "FullRan_Test","Spatial_50-50","Spatial_75-25","Spatial_Test","Temporal_50-50","Temporal_75-25",
-    "Temporal_Test"]
-    dates = ["1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","5/11/2019",
-        "5/16/2017","7/9/2017","8/16/2018"]
+    # ##Grid layout
+    # modeltypes = ["CutGF_50-50","CutGF_75-25","CutGF_Test","CutRan_50-50","CutRan_75-25",
+    # "CutRan_Test","FullGF_50-50","FullGF_75-25","FullGF_Test","FullRan_50-50", "FullRan_75-25",
+    # "FullRan_Test","Spatial_50-50","Spatial_75-25","Spatial_Test","Temporal_50-50","Temporal_75-25",
+    # "Temporal_Test"]
+    # dates = ["1/1/2019","2/4/2018","3/12/2017","3/17/2019","4/12/2019","4/22/2018","5/11/2019",
+    #     "5/16/2017","7/9/2017","8/16/2018"]
 
-    for date in dates:
-        for modeltype in modeltypes: 
-            print(date, modeltype)
-            filedate = date.replace("/", "-")
-            filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/TestingforPredictions/TestforPrediction_"+modeltype+".csv"
-            if exists(filename):
-                test = pandas.read_csv(filename)
-                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/TestingforPredictions/Confusion Matrix Quantities.csv"
-                matrix_quantities_grid(test, date,saveFile, modeltype)
+    # for date in dates:
+    #     for modeltype in modeltypes: 
+    #         print(date, modeltype)
+    #         filedate = date.replace("/", "-")
+    #         filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/TestingforPredictions/TestforPrediction_"+modeltype+".csv"
+    #         if exists(filename):
+    #             test = pandas.read_csv(filename)
+    #             saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/TestingforPredictions/Confusion Matrix Quantities.csv"
+    #             matrix_quantities_grid(test, date,saveFile, modeltype)
 
     ##Hex layout
-    modeltypes = ["GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test"]
+    # modeltypes = ["GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test"]
+
+    modeltypes = ["GF_50-50 Split_Forecast","GF_75-25 Split_Forecast","GF_Test_Forecast","Ran_50-50 Split_Forecast","Ran_75-25 Split_Forecast",
+    "Ran_Test_Forecast","SecondBatch_GF_50-50 Split_Forecast","SecondBatch_GF_75-25 Split_Forecast","SecondBatch_GF_Test_Forecast",
+    "SecondBatch_Ran_50-50 Split_Forecast","SecondBatch_Ran_75-25 Split_Forecast","SecondBatch_Ran_Test_Forecast"]
+    dates = ['01/23/2020']
 
     for date in dates:
         for modeltype in modeltypes: 

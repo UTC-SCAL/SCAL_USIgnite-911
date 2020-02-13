@@ -163,6 +163,17 @@ for(frame in dayframes){
 
 
 ##Singular Model Test
+
+##Threshold amounts for Total Shift: 
+Test 1 
+75-25    .70 .80 .90 .85
+50-50    .55 .85 .95 .85
+No Split .50 .85 .85 .50
+Test 2 
+75-25    .95 .95 .95 .95
+50-50    .65 .50 .50 .85
+No Split  No threshold, only probability
+
 ```{r}
 library(anytime)
 library(tidyverse)
@@ -170,7 +181,8 @@ library(ggplot2)
 library(ggmap)
 
 title = "../../Excel & CSV Sheets/Forecasts/01-23-2020/Hex/Forecast/Dayframe Testing/SecondTest_GridFix_75-25 Split_Forecast.csv"
-limit = .70
+
+limit = .50
 titledate = c("01-23-2020")
 
 dayframes = c(1,2,3,4)
@@ -201,8 +213,10 @@ sum(forecast$Prediction)
 
 model  = str_split(str_split(title, "/")[[1]][9], "_Forecast.csv")[[1]][1]
 model = gsub("_", " ", model)
+
+print(model)
 for(frame in dayframes){
-  savename = paste("../../Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/DayFrame Testing/Grid Fix Predictions/PredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep="")
+  savename = paste("../../Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/DayFrame Testing/Grid Fix Predictions/ThresholdTesting/SecondTestDifferingThresholds/TESTINGPredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep="")
   
   cat(date, frame, model, "\n")
   keep <- c("Grid_Num", "Probability")
@@ -212,11 +226,15 @@ for(frame in dayframes){
   accframe = accidents[which(accidents$DayFrame == frame),]
 
   blocksdayframe = merge(blockstest, dayframe, by="Grid_Num")
-  blocksdayframe = blocksdayframe[which(blocksdayframe$Probability > limit),]
+  thresh = ifelse(frame==1, .62, ifelse(frame==2, .72, ifelse(frame==3, .92,.87)) )
+  # thresh = .5
+  print(thresh)
+  blocksdayframe = blocksdayframe[which(blocksdayframe$Probability > thresh),]
 
 
   png(savename, width=9,height=6,units='in', res=600,bg = 'transparent')
-  map = (ggmap(cda) + coord_sf(crs = st_crs(blockstest)) + geom_sf(data=blocksdayframe, aes(fill = blocksdayframe$Probability), alpha=.5, inherit.aes = FALSE) + scale_fill_gradient(low = "blue", high = "red","Probability", limits=c(limit,1)) + transparent  + xlab("Longitude") + ylab("Latitude") + geom_sf(data=accframe, color = 'black', shape = accframe$Shape,size=3,fill='black', inherit.aes = FALSE) + ggtitle(paste("Accident Prediction",titledate,model,"Dayframe",frame, sep=" ")))
+  map = (ggmap(cda) + coord_sf(crs = st_crs(blockstest)) + geom_sf(data=blocksdayframe, aes(fill = blocksdayframe$Probability), alpha=.5, inherit.aes = FALSE) + scale_fill_gradient(low = "blue", high = "red","Probability", limits=c(.5,1)) + xlab("Longitude") + ylab("Latitude") + geom_sf(data=accframe, color = 'black', shape = accframe$Shape,size=3,fill='black', inherit.aes = FALSE) + ggtitle(paste("Accident Prediction",titledate,model,"Dayframe",frame, sep=" ")))
+  # + transparent  + 
   print(map)
     dev.off()
 }
