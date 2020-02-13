@@ -36,10 +36,33 @@ def test_type(data, type):
             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
             'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
 
+    col3 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    col4 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+             'WeekDay', 'cloudCover', 'precipIntensity']
+
+    col5 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
+             'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
+             'WeekDay', 'cloudCover', 'precipIntensity']
+
+    col6 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
     if type == 1:
         data = data.reindex(columns=col1)
     elif type == 2:
         data = data.reindex(columns=col2)
+    elif type == 3:
+        data = data.reindex(columns=col3)
+    elif type == 4:
+        data = data.reindex(columns=col4)
+    elif type == 5:
+        data = data.reindex(columns=col5)
+    elif type == 6:
+        data = data.reindex(columns=col6)
 
     return data
 
@@ -92,8 +115,8 @@ def fitting_loops(X, Y, dataset, folder, modelname):
         ##Shuffling
         dataset = shuffle(dataset)
         ##Creating X and Y. Accident is the first column, therefore it is 0.
-        X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-        Y = dataset.ix[:, 0].values  # Our dependent variable
+        X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+        Y = dataset.iloc[:, 0].values  # Our dependent variable
 
         ##Splitting data into train and test. 
         X_train, X_test, y_train, y_test = train_test_split(
@@ -247,15 +270,15 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
     plt.rc('font', **font)
     fig = plt.figure()
     a1 = fig.add_subplot(2, 1, 1)
-    a1.plot(hist.history['acc'])
-    a1.plot(hist.history['val_acc'])
+    a1.plot(hist.history['accuracy'])
+    a1.plot(hist.history['val_accuracy'])
     a1.set_ylabel('Accuracy')
     a1.set_xlabel('Epoch')
     a1.set_yticks((.5, .75, 1), (.5, .75, 1))
-    a1.set_xticks((0, (len(hist.history['val_acc']) / 2), len(hist.history['val_acc'])))
+    a1.set_xticks((0, (len(hist.history['val_accuracy']) / 2), len(hist.history['val_accuracy'])))
     a1.legend(['Train Accuracy', 'Test Accuracy'], loc='lower right', fontsize='small')
     # plt.show()
-    # fig.savefig('acc.png', bbox_inches='tight')
+    # fig.savefig('accuracy.png', bbox_inches='tight')
     # summarize history for loss
     # fig = plt.figure()
     a2 = fig.add_subplot(2, 1, 2)
@@ -284,23 +307,23 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-dataset = pandas.read_csv("../")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives No Split.csv")
 # Select which type of test you want to do: this determines what columns are used
-dataset = test_type(dataset, 1)
+dataset = test_type(dataset, 6)
 # Standardize the data before modelling
 dataset = standardize(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it
 # These are made for code automation later on
-folder = '../'
-modelname = ""
+folder = '../Graphs & Images/Hex Grid/Total Shift/No Split/Test 6/'
+modelname = "model_TS_hex_NoSplit.h5"
 
 ##Shuffling
 dataset = shuffle(dataset)
 ##Creating X and Y. Accident is the first column, therefore it is 0.
-X = dataset.ix[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
-Y = dataset.ix[:, 0].values  # Our dependent variable
+X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
+Y = dataset.iloc[:, 0].values  # Our dependent variable
 
 ##Steps 2-5 are inside the fitting loops method
 fitting_loops(X,Y, dataset, folder, modelname)

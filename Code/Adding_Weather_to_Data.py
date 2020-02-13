@@ -94,23 +94,31 @@ def add_weather(data, weather):
 
     # Merge the weather variables for the hour of the accident based on time and grid block
     # Merge the event/conditions before columns based on hour before and grid block
-    newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
-                                          'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
-                                          'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
-                                          'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
-                                          'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
-                                          'EventBefore', 'ConditionBefore', 'hourbefore']],
-                           on=['Unix', 'Grid_Block'])
+    # newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
+    #                                       'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
+    #                                       'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
+    #                                       'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
+    #                                       'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
+    #                                       'EventBefore', 'ConditionBefore', 'hourbefore']],
+    #                        on=['Unix', 'Grid_Block'])
+
+    # Applying rain before to data
+    weather['hourbefore'] = weather.Unix.astype(int)
+    weather['RainBefore'] = weather.Rain.astype(int)
+    data.hourbefore = data.hourbefore.astype(int)
+    newdata = pandas.merge(data, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
+                           on=['hourbefore', 'Grid_Num'])
     # Code to aggregate weather #
     # newdata = aggregate_weather(newdata)
     return newdata
 
 def main():
     # Read in our data
-    weather = feather.read_dataframe("../Ignore/Weather/2019 Weather.feather")
-    data = pandas.read_csv("../Excel & CSV Sheets/ChattaData Accident System/ChattaDataAccidentsComplete.csv")
+    weather = feather.read_dataframe("../")
+    data = pandas.read_csv("../")
 
     data = add_weather(data, weather)
+    data.to_csv("../", index=False)
 
 if __name__ == "__main__":
     main()
