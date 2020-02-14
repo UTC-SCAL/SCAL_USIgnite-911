@@ -60,10 +60,34 @@ def test_type(data, type):
             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
             'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
 
+    col3 = ['Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
+            'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+
+    col4 = ['Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+             'WeekDay', 'cloudCover', 'precipIntensity']
+
+    col5 = ['Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
+             'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
+             'WeekDay', 'cloudCover', 'precipIntensity']
+
+    col6 = ['Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
+            'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
+            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
     if type == 1:
         data = data.reindex(columns=col1)
     elif type == 2:
         data = data.reindex(columns=col2)
+    elif type == 3:
+        data = data.reindex(columns=col3)
+    elif type == 4:
+        data = data.reindex(columns=col4)
+    elif type == 5:
+        data = data.reindex(columns=col5)
+    elif type == 6:
+        data = data.reindex(columns=col6)
+
     return data
 
 
@@ -453,8 +477,8 @@ def add_Pred_andProb(data, scaled, folder, suffix):
     data['Probability'] = scaled['Probability']
     missing = data['Probability'].isnull().sum()
     print("\tLength of Data Probability:", len(data) - missing)
-    print("\tSaving forecasted data to: ", filename, scaledfile)
-    scaled.to_csv(scaledfile, sep=",", index=False)
+    print("\tSaving forecasted data to: ", filename)
+    # scaled.to_csv(scaledfile, sep=",", index=False)
     data.to_csv(filename, sep=",", index=False)
     return scaled, data
 
@@ -500,28 +524,43 @@ def finding_matches_alt(accidents, data):
 
 def make_directory(model, batchnum, date):
     modeltype = (model.split("/")[-1]).split("_")[1]
-    # print(modeltype)
-    # exit()
-    if "75-25" in model:
+    if "75-25" in model or "7525" in model:
         modelsplit = "75-25 Split"  ##75-25
-    elif "50-50" in model:
+    elif "50-50" in model or "5050" in model:
         modelsplit = "50-50 Split"  ##50-50
     else:
-        modelsplit = "Test"  ##Original
+        modelsplit = "NoSplit"  ##Original
 
     if "GF" in model:
         modeltype = "GF"
-    elif "Ran" in model:
-        modeltype = "Ran"
+    elif "TS" in model:
+        modeltype = "TS"
 
     if batchnum == 1:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
         date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 2:
-        suffix = "SecondBatch_" + modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
         date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 3:
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 4:
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 5:
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 6:
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
+        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+
     print("\tSaving Folder:", folder)
 
     if not os.path.exists(folder):
@@ -573,12 +612,13 @@ date = "2020-01-23"
 # data = fetchWeather(date)
 # This is the file that has the accidents for the date you want to predict for
 data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020.csv")
-testnum = 2
+testnum = 6
 data = test_type(data, testnum)
 
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
+
 
 modelname = "../"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
