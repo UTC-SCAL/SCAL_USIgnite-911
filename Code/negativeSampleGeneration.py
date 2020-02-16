@@ -40,26 +40,26 @@ def get_negatives_master(calldata, compare):
     """
     # Blank csv file for formatting purposes and easily saving negative samples
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/Hex_Grid/Negative Sampling/Negative Sample Template.csv", sep=",")
+        "../Excel & CSV Sheets/Grid Hex Layout/Negative Sampling/Negative Sample Template.csv", sep=",")
 
     # The center points for our grid blocks for the current grid layout we are using
     # center_points = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv", sep=",")
 
     # This contains the information of each grid block, such as road count, lat/long, grid id, etc.
-    grid_info = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/HexGridInfo.csv")
+    grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
 
     # Select the range of grid numbers to use for getting new grid blocks
     # Depending on what version of the city layout you are using, there may be more or less grid values to go through
-    block_number = range(1, 695)
+    # block_number = range(1, 695)
 
     # The following files are used as an easy way to access the dates in certain years
     # They are separated due to the nature of negative samples by date
     # day_holder2017 = pandas.read_excel(
-    #     "../Excel & CSV Sheets/Hex_Grid/Negative Sampling/Day Holder 2017.xlsx")
+    #     "../Excel & CSV Sheets/Grid Hex Layout/Negative Sampling/Day Holder 2017.xlsx")
     # day_holder2018 = pandas.read_excel(
-    #     "../Excel & CSV Sheets/Hex_Grid/Negative Sampling/Day Holder 2018.xlsx")
+    #     "../Excel & CSV Sheets/Grid Hex Layout/Negative Sampling/Day Holder 2018.xlsx")
     # day_holder2019 = pandas.read_excel(
-    #     "../Excel & CSV Sheets/Hex_Grid/Negative Sampling/Day Holder 2019.xlsx")
+    #     "../Excel & CSV Sheets/Grid Hex Layout/Negative Sampling/Day Holder 2019.xlsx")
 
     # A negative sample location
     neg_loc = 0  # Used for positioning
@@ -74,11 +74,11 @@ def get_negatives_master(calldata, compare):
     # Lists to hold the values for each type of changed variable that shouldn't be chosen again
     # Ex: The block_list holds the block numbers that have been selected in the current loop so we don't
     # choose the same grid block again
-    block_list = []
+    # block_list = []
     # date_list_2017 = []
     # date_list_2018 = []
     # date_list_2019 = []
-    # hour_list = []
+    hour_list = []
 
     # Our main for loop: iterates through our accidents
     for j, values in enumerate(calldata.values):
@@ -95,8 +95,8 @@ def get_negatives_master(calldata, compare):
         # Based on what type of negative sampling you want to do, you would have these lines commented out
         # If you want to do grid_fixed or temporal negatives, then have these two lines commented out,
         # as well as the other lines in this file that have to do with altering grid num data
-        current_grid = calldata.Grid_Num.values[j]
-        block_list.append(current_grid)
+        # current_grid = calldata.Grid_Num.values[j]
+        # block_list.append(current_grid)
 
         # Append the current date (the first date for the main loop) to the list of dates that shouldn't be chosen
         # for finding negative samples
@@ -129,10 +129,10 @@ def get_negatives_master(calldata, compare):
             # Grid Block Changer #
             # list of random grid numbers that aren't in our block_number list
             # If you want to do grid_fixed or temporal negative sampling, then have these commented out
-            r_grid = [x for x in block_number if x not in block_list]
-            new_block = random.choice(r_grid)
-            copy_calldata.Grid_Num.values[0] = new_block
-            block_list.append(new_block)
+            # r_grid = [x for x in block_number if x not in block_list]
+            # new_block = random.choice(r_grid)
+            # copy_calldata.Grid_Num.values[0] = new_block
+            # block_list.append(new_block)
 
             # Date Changer #
             # accident_year = int(copy_calldata.Date.values[0].split("-")[0])
@@ -153,11 +153,11 @@ def get_negatives_master(calldata, compare):
             #     date_list_2017.append(copy_calldata.Date.values[0])
 
             # Hour Changer #
-            # hours = range(0, 24)
-            # r = [x for x in hours if x not in hour_list]  # A list of numbers without n
-            # new_hour = random.choice(r)
-            # hour_list.append(new_hour)
-            # copy_calldata.Hour.values[0] = new_hour
+            hours = range(0, 24)
+            r = [x for x in hours if x not in hour_list]  # A list of numbers without n
+            new_hour = random.choice(r)
+            hour_list.append(new_hour)
+            copy_calldata.Hour.values[0] = new_hour
 
             # Set a boolean value for finding matches
             # If a match is found, the value is set to false and the for loop below is broken
@@ -209,18 +209,17 @@ def get_negatives_master(calldata, compare):
         del copy_calldata
         del line_copy
         # Reset the do-not-use lists for the new accident record we'll be using
-        block_list = []
+        # block_list = []
         # date_list_2019 = []
         # date_list_2018 = []
         # date_list_2017 = []
-        # hour_list = []
+        hour_list = []
     # Some final variable additions before saving, these are saved for the end since they can have lambda statements
     # that apply to the whole column (ideally, this saves time)
     negative_samples['hourbefore'] = negative_samples['Unix'] - 60 * 60
     negative_samples.WeekDay = negative_samples.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
     negative_samples.DayFrame = negative_samples.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
                         else(2 if 5 <= x <= 9 else(3 if 10 <= x <= 13 else 4)))
-
     negative_samples.to_csv("../", index=False)
 
 

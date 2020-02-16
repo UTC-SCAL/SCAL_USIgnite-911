@@ -1,1 +1,1 @@
-City,Unix,Join_Count,GRID_ID,Grid_Num,NBR_LANES,TY_TERRAIN,FUNC_CLASS,Hour,Date,hourbefore,cloudCover,dewPoint,humidity,precipIntensity,precipProbability,precipType,pressure,temperature,uvIndex,visibility,windBearing,windGust,windSpeed,Event,Conditions,Rain,Cloudy,Foggy,Snow,Clear,Longitude,Latitude,RainBefore
+Accident,City,Unix,Join_Count,GRID_ID,Grid_Num,NBR_LANES,TY_TERRAIN,FUNC_CLASS,Hour,Date,hourbefore,Longitude,Latitude,RainBefore,DayOfWeek,WeekDay,DayFrame
