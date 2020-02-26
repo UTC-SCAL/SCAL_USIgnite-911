@@ -159,19 +159,41 @@ def finding_binaries(weatherFile):
 ##Step 1 - Connect Weather to Forecast
 def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
+    data['Unix'] = 0
+    data['hourbefore'] = 0
+    date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
+    data['Hour'] = data['Hour'].astype(int)
     data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
     data['hourbefore'] = data['Unix'].map(lambda x: int(x) - 60 * 60)
     data['hourbefore'] = data['hourbefore'].astype(int)
-    data['Unix'] = data['Unix'].astype(int)
-    all_weather['hourbefore'] = all_weather['hourbefore'].astype(int)
+    data.Unix = data.Unix.astype(int)
+    all_weather['hourbefore'] = all_weather.Unix.astype(int)
+    all_weather['RainBefore'] = all_weather.Rain.astype(int)
+    data['DayOfWeek'] = 0
+    data['WeekDay'] = 0
+    data['DayFrame'] = 0
+    data.DayFrame = data.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
+        else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
     # Merge the event/conditions columns based on time and grid block
     newdata = pandas.merge(data, all_weather[['cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
                                               'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed', 'Rain',
                                               'Cloudy', 'Foggy', 'Snow',
                                               'Clear', 'Unix', 'Grid_Num']], on=['Unix', 'Grid_Num'])
     # Merge the event/conditions before columns based on hour before and grid block
-    newdata = pandas.merge(newdata, all_weather[['RainBefore', 'hourbefore', 'Grid_Num']],
+
+    newdata = pandas.merge(newdata, all_weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
+    for i, values in enumerate(newdata.values):
+        timestamp = str(date) + " " + str(newdata.Hour.values[i])
+        # A try/except statement for taking in what format the date is in, because 911 are buttheads
+        try:
+            thisDate = datetime.datetime.strptime(timestamp, "%m/%d/%Y %H")
+        except:
+            thisDate = datetime.datetime.strptime(timestamp, "%m/%d/%y %H")
+        newdata.DayOfWeek.values[i] = thisDate.weekday()
+    newdata.WeekDay = newdata.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
+
     print("Weather fetch complete")
     # newdata = newdata[['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
     #    'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -538,27 +560,27 @@ def make_directory(model, batchnum, date):
 
     if batchnum == 1:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 2:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 3:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 4:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 5:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
     elif batchnum == 6:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
 
     print("\tSaving Folder:", folder)
@@ -606,21 +628,29 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "2020-01-23"
+date = "01-20-2020"
+# optional year month day variables for convenient, only if you need them
+# year = int(date.split("-")[2])
+# month = int(date.split("-")[0])
+# day = int(date.split("-")[1])
+# weather = feather.read_dataframe()
+# weather = pandas.read_csv("../Ignore/2020 Weather Feb 24.csv")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
-# data = fetchWeather(date)
 # This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020.csv")
-testnum = 6
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-20-2020 Forecast.csv")
+# data = finding_weather(data, weather, year, month, day)
+testnum = 1
 data = test_type(data, testnum)
-
+# Save the data with the added weather if you want/need to
+# data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
+# exit()
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
 
 
-modelname = "../"
+modelname = "../Graphs & Images/Hex Grid/Total Shift/5050 Split/Test 1/model_TS_hex_5050Split.h5"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)

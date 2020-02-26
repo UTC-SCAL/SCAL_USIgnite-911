@@ -195,9 +195,13 @@ def formatRawData(data):
     """
     Method for formatting the raw data taken from emails
     """
-    columns = ['Address', 'City', 'Latitude', 'Longitude', 'Date', 'Unix', 'Hour', 'DayFrame']
+    columns = ['Address', 'City', 'Latitude', 'Longitude', 'Date', 'Unix', 'Hour', 'DayFrame', 'Grid_Num', 'DayOfWeek',
+               'WeekDay']
     data['Date'] = data['Response Date'].astype(str)
     data['Unix'] = 0
+    data['WeekDay'] = 0
+    data['DayOfWeek'] = 0
+    data['DayFrame'] = 0
     # First, split the date time into date and hour
     data = splitTime(data)
     # Then, get dayframe and unix
@@ -206,5 +210,17 @@ def formatRawData(data):
     data = data.reindex(columns=columns)
     data.Latitude = data.Latitude/1000000
     data.Longitude = data.Longitude/-1000000
+    for i, values in enumerate(data.values):
+        timestamp = str(data.Date.values[i]) + " " + str(data.Hour.values[i])
+        # A try/except statement for taking in what format the date is in, because 911 are buttheads
+        try:
+            thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
+        except:
+            thisDate = datetime.strptime(timestamp, "%m/%d/%y %H")
+        data.DayOfWeek.values[i] = thisDate.weekday()
+    data.WeekDay = data.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
+    data.DayFrame = data.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
+    else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
     data.to_csv("../", index=False)
 
