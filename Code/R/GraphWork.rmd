@@ -4,7 +4,7 @@ output: pdf_document
 ---
 
 ```{r}
-acc_911 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData_DropDups.csv")
+acc_911 = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData2017-2019.csv")
 
 colnames(acc_911)
 ```
@@ -17,11 +17,11 @@ acc_911$Hour = strftime(as.POSIXlt(acc_911$Unix, origin="1970-01-01"), "%H")
 acc_911$Date = as.Date(as.POSIXct(acc_911$Unix, origin="1970-01-01"))
 acc_911$Weekday = as.POSIXlt(acc_911$Date)$wday
 
-tab = table(acc_911$Hour, acc_911$Weekday)
+tab = table(moon$Hour, moon$Weekday)
 tab = as.data.frame.matrix(tab) 
 names(tab) = c('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday')
-png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/After Duplicate Rework/AllAccidentsWeekdayHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
-plot(tab$Sunday, type="l", ylim=c(0,1500),col='pink', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Weekday and Hour")
+png("/Users/peteway/Documents/GitHub/Ignore/Thesis/AllAccidentsWeekdayHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
+plot(tab$Sunday, type="l", ylim=c(0,1000),col='pink', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Weekday and Hour")
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,las="2")
 lines(tab$Monday, col='red', lwd=4)
@@ -51,26 +51,27 @@ dev.off()
 ```
 
 ```{r}
-acc_911$Month = strftime(as.POSIXlt(acc_911$Unix, origin="1970-01-01"),"%B")
-acc_911 = acc_911[(acc_911$Year != 2016),]
-monthtab = table(acc_911$Hour, acc_911$Month)
+# moon$Month = strftime(as.POSIXlt(moon$DateTime),"%B")
+# acc_911 = acc_911[(acc_911$Year != 2016),]
+monthtab = table(moon$Hour, moon$Month)
 monthtab = as.data.frame.matrix(monthtab) 
+colnames(monthtab) = c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec")
 names(monthtab)
-png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/After Duplicate Rework/AllAccidentsMonthHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
-plot(monthtab$January, type="l", ylim=c(0,700),col='#469990', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Month and Hour")
+png("/Users/peteway/Documents/GitHub/Ignore/Thesis/AllAccidentsMonthHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
+plot(monthtab$Jan, type="l", ylim=c(0,500),col='#469990', lwd=4, ylab="Number of Accidents", xlab="Hour of Day", xlim=c(.5,24.5), xaxt="none", yaxt="none",main="Accidents by Month and Hour")
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,las="2")
-lines(monthtab$Feburary, col='#42d4f4', lwd=4)
-lines(monthtab$March, col='#4363d8', lwd=4)
-lines(monthtab$April, col='#3cb44b', lwd=4)
+lines(monthtab$Feb, col='#42d4f4', lwd=4)
+lines(monthtab$Mar, col='#4363d8', lwd=4)
+lines(monthtab$Apr, col='#3cb44b', lwd=4)
 lines(monthtab$May, col='#FF4340', lwd=4)
 lines(monthtab$June, col='#ffe119', lwd=4)
 lines(monthtab$July, col='#f58231', lwd=4)
-lines(monthtab$August, col='green', lwd=4)
-lines(monthtab$September, col='#aaffc3', lwd=4)
-lines(monthtab$October, col='#00bee0', lwd=4)
-lines(monthtab$November, col='purple', lwd=4)
-lines(monthtab$December, col='pink',lwd=4)
+lines(monthtab$Aug, col='green', lwd=4)
+lines(monthtab$Sep, col='#aaffc3', lwd=4)
+lines(monthtab$Oct, col='#00bee0', lwd=4)
+lines(monthtab$Nov, col='purple', lwd=4)
+lines(monthtab$Dec, col='pink',lwd=4)
 legend("topleft",c("Jan","Feb","Mar","Apr","May", "June","July","Aug","Sep","Oct","Nov","Dec"), fill=c('#469990','#42d4f4','#4363d8','#3cb44b','#FF4340','#ffe119','#f58231','green','#aaffc3','#00bee0','purple','pink'))
 dev.off()
 ```
@@ -78,13 +79,22 @@ dev.off()
 
 
 ```{r}
-hourtab = table(acc_911$Hour)
+hourtab = table(moon$Hour)
 hourtab = as.data.frame(hourtab) 
-png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/After Duplicate Rework/AllAccidentsHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
-plot(hourtab$Freq, type="l", lwd=4, col="red", xaxt="none", yaxt="none", ylab="Number of Accidents", xlab="Hour of Day", main="Accidents by Hour", ylim=c(0,9000))
+png("/Users/peteway/Documents/GitHub/Ignore/Thesis/AllAccidentsHourSplitNew.png", width=12,height=6,units='in', res=300,bg = 'transparent')
+plot(hourtab$Freq, type="l", lwd=4, col="red", xaxt="none", yaxt="none", ylab="Number of Accidents", xlab="Hour of Day", main="Accidents by Hour", ylim=c(0,5100))
 axis(1, c(1,7,13,19,24), c(0,6,12,18,23),las="2")
 axis(2,seq(0,9000, by= 1000), las="2")
-abline(v=c(1,4,7,10,13,16,19,22,24), col='grey')
+# rect(c(1,1), -1e6, c(6,6), 1e6, col='green', border=NA)
+# rect(c(20,20), -1e6, c(24,24), 1e6, col='green', border=NA)
+# rect(c(6,6), -1e6, c(10,10), 1e6, col='yellow', border=NA)
+# rect(c(10,10), -1e6, c(14,14), 1e6, col='orange', border=NA)
+# rect(c(14,14), -1e6, c(14,19), 1e6, col='yellow', border=NA)
+
+# abline(v=c(1,5,20,24), col='blue')
+# abline(v=c(6,10), col='green')
+# abline(v=c(11,14), col='yellow')
+# abline(v=c(15,19), col='orange')
 dev.off()
 ```
 
