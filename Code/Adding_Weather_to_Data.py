@@ -5,6 +5,7 @@ from darksky import forecast
 import feather
 import string
 
+
 # Method to log into the corresponding DarkSky or Etrims service through a file on this machine
 # The file itself isn't on GitHub, so if you don't have it message Jeremy or Pete for the file
 def find_cred(service):
@@ -20,6 +21,7 @@ def find_cred(service):
                 # print(cred)
                     # logins[username] = password
     return cred
+
 
 ##finds binary variables for the given event/conditions. 
 def finding_binaries(data):
@@ -49,6 +51,7 @@ def finding_binaries(data):
     data = data.drop_duplicates(subset=['Unix', 'Grid_Block'], keep='last')
     return data
 
+
 # Creates the unix time column for the provided file
 def make_unix_with_hour(data):
     # Taking the date and hour from the data file and converting it to the
@@ -58,16 +61,19 @@ def make_unix_with_hour(data):
     data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
     return data
 
+
 # Creates the unix time column for the weather file (same method as above)
 def make_unix_with_time(data):
     data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.time, "%Y-%m-%d %H:%M:%S"), axis=1)
     data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
     return data
 
+
 # Creates dt, which is the actual date time column, if we need it
 def create_datetime_from_unix(data):
     data['dt'] = pandas.to_datetime(data['time'],unit='s', utc=True)
     return data
+
 
 def get_gridcol_row(grid):
     for index, i in enumerate(grid.GRID_ID):
@@ -81,10 +87,12 @@ def get_gridcol_row(grid):
         
     return grid
 
+
 def create_hourbefore(data):
     data['time'] = data['time'].astype(int)
     data['hourbefore'] = data['time'] - 60*60  # changes the hourbefore column to be 1 hour before the time column
     return data
+
 
 # Adds weather from weather file into the data file. Assumes weather file is formatted
 def add_weather(data, weather):
@@ -112,6 +120,7 @@ def add_weather(data, weather):
     # newdata = aggregate_weather(newdata)
     return newdata
 
+
 def main():
     # Read in our data
     weather = feather.read_dataframe("../")
@@ -119,6 +128,7 @@ def main():
 
     data = add_weather(data, weather)
     data.to_csv("../", index=False)
+
 
 if __name__ == "__main__":
     main()

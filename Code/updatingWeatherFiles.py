@@ -31,6 +31,7 @@ def find_cred(service):
                     # logins[username] = password
     return cred
 
+
 # File for getting weather from DarkSky and adding it to our files
 def fetchWeather(weatherFile, beginDate, endDate):
     """
@@ -46,12 +47,12 @@ def fetchWeather(weatherFile, beginDate, endDate):
     print("Fetching Weather")
     dates = pandas.date_range(beginDate, endDate)
     # Read in the center points file to get the used grid locations and their lat/longs
-    centers = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv")
+    centers = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
     miss_loc = 0  # used for positioning values in the dataframe
 
-    start_block = 2
+    start_block = 0
     stop_block = start_block + 25
-    saveName = "../Ignore/Weather/Hex Layout/2019 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
+    saveName = "../Ignore/2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
 
     key = find_cred("darksky")
     for _, i in enumerate(centers.Grid_Num.values):
@@ -86,9 +87,11 @@ def fetchWeather(weatherFile, beginDate, endDate):
                     miss_loc += 1
             # Incremental saving, in case something goes wrong
             if i % 10 == 0:
-                feather.write_dataframe(weatherFile, saveName)
+                weatherFile.to_csv(saveName)
+                # feather.write_dataframe(weatherFile, saveName)
     # A final save for all the weather
-    feather.write_dataframe(weatherFile, saveName)
+    weatherFile.to_csv(saveName)
+    # feather.write_dataframe(weatherFile, saveName)
 
 
 # Aggregates Event and Conditions
@@ -475,7 +478,7 @@ def post_process_weather(columns):
 
     # Use these lines to combine weather files #
     # Based on how many different files were made when getting new weather, add or remove weather# files to be appended
-    weather1 = feather.read_dataframe("../")
+    weather1 = pandas.read_csv("../")
     weather2 = pandas.read_csv("../")
 
     # Create the Unix column for later use
@@ -489,8 +492,8 @@ def post_process_weather(columns):
     weather2.Conditions = weather2.summary.astype(str)
 
     # Lines for reindexing files if you need to
-    weather1 = weather1.reindex(columns=columns)
-    weather2 = weather2.reindex(columns=columns)
+    # weather1 = weather1.reindex(columns=columns)
+    # weather2 = weather2.reindex(columns=columns)
 
     # Append that shiz
     new_weather = pandas.concat([weather1, weather2], axis=0, join='outer', ignore_index=False)
@@ -499,7 +502,7 @@ def post_process_weather(columns):
     new_weather.drop_duplicates(keep="first", inplace=True)
 
     # convert the Event/Conditions to their respective binary values
-    # new_weather = finding_binaries(new_weather)
+    new_weather = finding_binaries(new_weather)
 
     # Converting Unix time to our local time
     new_weather.Date = pandas.to_datetime(new_weather['Unix'], unit='s', utc=False)
@@ -518,8 +521,8 @@ def post_process_weather(columns):
     # feather.write_dataframe(bigBOIweather, "../")
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
-    # new_weather.to_csv("../")
-    feather.write_dataframe(new_weather, "../")
+    new_weather.to_csv("../")
+    # feather.write_dataframe(new_weather, "../")
 
 
 def find_missing(lst):
@@ -550,11 +553,8 @@ def return_empty_df(dataframe):
 #        'Snow', 'Clear']
 # The new file to hold our weather
 # When fetching weather, darksky adds in its own columns, but this ensures we have the other columns we need later on
-# weatherFile = pandas.DataFrame(columns=missing_columns)
+# weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2019/12/18'
-# end = '2019/12/18'
-
-weatherFile = feather.read_dataframe("../")
-print(weatherFile.Rain.value_counts(dropna=False))
+# begin = '2020/1/01'
+# end = '2020/2/24'

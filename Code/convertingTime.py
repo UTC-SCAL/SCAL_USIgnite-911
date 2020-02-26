@@ -2,6 +2,7 @@ import pandas
 from datetime import datetime
 # import feather
 
+
 # Method to convert the variable Precipitation Time to a unix timestamp
 def convertPrecipTime(calldata):
     # Cast the column as a string
@@ -15,6 +16,7 @@ def convertPrecipTime(calldata):
 
     calldata.to_csv("../", index=False)
 
+
 # Method to convert a standard timestamp to a unix timestamp
 # Format of standard time used: month/day/year
 def unixFromStandard(calldata):
@@ -24,21 +26,23 @@ def unixFromStandard(calldata):
         print(k)
         # All variables are blank-of-accident, thus year is yoa.
         hoa = int(calldata.Hour.values[k])
-        toa = calldata.Time.values[k]
-        mioa = int(toa.split(':')[1])
-        soa = int(toa.split(':')[2])
+        # toa = calldata.Time.values[k]
+        # mioa = int(toa.split(':')[1])
+        # soa = int(toa.split(':')[2])
         doa = calldata.Date.values[k]
         yoa = int(doa.split('/')[2])
         moa = int(doa.split('/')[0])
         dayoa = int(doa.split('/')[1])
-        print(yoa, moa, dayoa, hoa, mioa, soa)
-        date = datetime(yoa, moa, dayoa, hoa, mioa, soa)
+        print(yoa, moa, dayoa, hoa, 0, 0)
+        date = datetime(yoa, moa, dayoa, hoa, 0, 0)
         print(date)
         unixtime = date.strftime('%s')
         calldata.Unix.values[k] = unixtime
     return calldata
 
-# Method to convert standard timestamp to a unix timestamp
+
+# Method t
+# o convert standard timestamp to a unix timestamp
 # Format of standard time used: year-month-day
 def unixFromStandardAlt(calldata):
 
@@ -61,6 +65,7 @@ def unixFromStandardAlt(calldata):
         calldata.Unix.values[k] = unixtime
     return calldata
 
+
 # Method to convert Unix timestamp to standard time stamp
 def standardFromUnix(data):
     # Cast the column as a string
@@ -77,6 +82,7 @@ def standardFromUnix(data):
 
     return data
 
+
 # This is a version of getting unix timestamp for windows matching, which Jeremy uses when he works from home
 def getUnixTimeWindows(calldata):
     calldata.Hour = calldata.Hour.astype(str)
@@ -88,6 +94,7 @@ def getUnixTimeWindows(calldata):
 
     return calldata
 
+
 # Method for splitting the Time column into separate date and hour columns
 # Example format of Time variable: 2018-3-5 12:13:45
 # It won't always be in that exact format, but that's the general format used in this method
@@ -95,8 +102,8 @@ def splitTime(data):
     data['Hour'] = 0
     for i, _ in enumerate(data.values):
         print(i)
-        data.Hour.values[i] = (data.time[i]).split(" ")[1].split(":")[0]
-        data.Date.values[i] = (data.time[i]).split(" ")[0]
+        data.Hour.values[i] = (data.Date[i]).split(" ")[1].split(":")[0]
+        data.Date.values[i] = (data.Date[i]).split(" ")[0]
     return data
 
 
@@ -162,6 +169,7 @@ def finding_holidays(data, holidays):
                 pass
     return data
 
+
 def finding_weekdays(data):
     """
     Quick, simple program that gets the day of the week value and the weekday value for our data
@@ -181,3 +189,22 @@ def finding_weekdays(data):
         else:
             data.WeekDay.values[i] = 1
     return data
+
+
+def formatRawData(data):
+    """
+    Method for formatting the raw data taken from emails
+    """
+    columns = ['Address', 'City', 'Latitude', 'Longitude', 'Date', 'Unix', 'Hour', 'DayFrame']
+    data['Date'] = data['Response Date'].astype(str)
+    data['Unix'] = 0
+    # First, split the date time into date and hour
+    data = splitTime(data)
+    # Then, get dayframe and unix
+    data = finding_Dayframe(data)
+    data = unixFromStandard(data)
+    data = data.reindex(columns=columns)
+    data.Latitude = data.Latitude/1000000
+    data.Longitude = data.Longitude/-1000000
+    data.to_csv("../", index=False)
+
