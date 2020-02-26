@@ -180,7 +180,7 @@ library(tidyverse)
 library(ggplot2)
 library(ggmap)
 
-title = "../../Excel & CSV Sheets/Forecasts/01-23-2020/Hex/Forecast/Dayframe Testing/SecondTest_GridFix_75-25 Split_Forecast.csv"
+title = "/Users/peteway/Downloads/PredictionsForNewTests/TS_50-50 Split_Test3Forecast.csv"
 
 limit = .50
 titledate = c("01-23-2020")
@@ -203,7 +203,7 @@ accidents$Hour = as.integer(accidents$Hour)
 accidents$DayFrame = ifelse(accidents$Hour <= 4 | accidents$Hour >= 19, 1,ifelse(accidents$Hour <= 9 & accidents$Hour >= 5,2, ifelse(accidents$Hour <= 13 & accidents$Hour >= 10,3, 4 ) ) )
 
 forecast =read.csv(title, header=T)
-forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+# forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
 forecast  = forecast[ , (names(forecast) %in% c("Grid_Num","DayFrame","Probability","Prediction"))]
 forecast$Grid_Num_DayFrame = paste(forecast$Grid_Num,forecast$DayFrame,sep=" ")
 forecast = aggregate(.~Grid_Num_DayFrame, data=forecast, mean)
@@ -211,12 +211,14 @@ forecast = aggregate(.~Grid_Num_DayFrame, data=forecast, mean)
 forecast$Prediction = ifelse(forecast$Probability > .5, 1,0)
 sum(forecast$Prediction)
 
-model  = str_split(str_split(title, "/")[[1]][9], "_Forecast.csv")[[1]][1]
+model  = str_split(str_split(title, "/")[[1]][6], "Forecast.csv")[[1]][1]
 model = gsub("_", " ", model)
 
 print(model)
 for(frame in dayframes){
-  savename = paste("../../Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/DayFrame Testing/Grid Fix Predictions/ThresholdTesting/SecondTestDifferingThresholds/TESTINGPredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep="")
+  # savename = paste("../../Excel & CSV Sheets/Forecasts/",titledate,"/Hex/Viz/DayFrame Testing/Grid Fix Predictions/ThresholdTesting/SecondTestDifferingThresholds/TESTINGPredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep="")
+  savename = paste("/Users/peteway/Downloads/PredictionsForNewTests/Viz/TESTINGPredictionMapfor_",titledate, "_",model,"_DayFrame",frame,".png",sep="")
+  
   
   cat(date, frame, model, "\n")
   keep <- c("Grid_Num", "Probability")
@@ -226,9 +228,8 @@ for(frame in dayframes){
   accframe = accidents[which(accidents$DayFrame == frame),]
 
   blocksdayframe = merge(blockstest, dayframe, by="Grid_Num")
-  thresh = ifelse(frame==1, .62, ifelse(frame==2, .72, ifelse(frame==3, .92,.87)) )
-  # thresh = .5
-  print(thresh)
+  # thresh = ifelse(frame==1, .62, ifelse(frame==2, .72, ifelse(frame==3, .92,.87)) )
+  thresh = .5
   blocksdayframe = blocksdayframe[which(blocksdayframe$Probability > thresh),]
 
 
