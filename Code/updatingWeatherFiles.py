@@ -106,8 +106,8 @@ def finding_binaries(weatherFile):
             It also sets the empty binary values to -1 so it's easy to find where any empty is in the dataframe.
     """
     print("Aggregating Weather")
-    # weatherFile['Event'] = weatherFile['icon']
-    # weatherFile['Conditions'] = weatherFile['summary']
+    weatherFile['Event'] = weatherFile['icon']
+    weatherFile['Conditions'] = weatherFile['summary']
     weatherFile.Event = weatherFile.Event.apply(lambda x: x.lower() if pandas.notnull(x) else "empty")
     weatherFile.Conditions = weatherFile.Conditions.apply(lambda x: x.lower() if pandas.notnull(x) else "empty")
     # Here, in the lambda functions, we use if, else, and elif statements for finding Event and Condition entries that
@@ -521,8 +521,8 @@ def post_process_weather(columns):
     # feather.write_dataframe(bigBOIweather, "../")
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
-    new_weather.to_csv("../")
-    # feather.write_dataframe(new_weather, "../")
+    # new_weather.to_csv("../")
+    feather.write_dataframe(new_weather, "../")
 
 
 def find_missing(lst):

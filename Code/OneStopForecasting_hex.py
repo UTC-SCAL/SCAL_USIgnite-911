@@ -15,6 +15,7 @@ from darksky.forecast import Forecast
 import time
 import pytz
 from datetime import timedelta
+import feather
 
 try:
     import matplotlib.pyplot as plt
@@ -164,9 +165,10 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
     data['Hour'] = data['Hour'].astype(int)
     data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
-    data['hourbefore'] = data['Unix'].map(lambda x: int(x) - 60 * 60)
-    data['hourbefore'] = data['hourbefore'].astype(int)
     data.Unix = data.Unix.astype(int)
+
+    data['hourbefore'] = data['Unix'].map(lambda x: x - 60 * 60)
+    data['hourbefore'] = data['hourbefore'].astype(int)
     all_weather['hourbefore'] = all_weather.Unix.astype(int)
     all_weather['RainBefore'] = all_weather.Rain.astype(int)
     data['DayOfWeek'] = 0
@@ -174,14 +176,15 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     data['DayFrame'] = 0
     data.DayFrame = data.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
         else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-
+    print("Beginning length:", len(data))
     # Merge the event/conditions columns based on time and grid block
     newdata = pandas.merge(data, all_weather[['cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
                                               'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed', 'Rain',
                                               'Cloudy', 'Foggy', 'Snow',
                                               'Clear', 'Unix', 'Grid_Num']], on=['Unix', 'Grid_Num'])
     # Merge the event/conditions before columns based on hour before and grid block
-
+    print("Mid length:", len(newdata))
+    # exit()
     newdata = pandas.merge(newdata, all_weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
     for i, values in enumerate(newdata.values):
@@ -193,7 +196,7 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
             thisDate = datetime.datetime.strptime(timestamp, "%m/%d/%y %H")
         newdata.DayOfWeek.values[i] = thisDate.weekday()
     newdata.WeekDay = newdata.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
-
+    print("Final length:", len(newdata))
     print("Weather fetch complete")
     # newdata = newdata[['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
     #    'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -628,23 +631,24 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "01-20-2020"
+date = "01-19-2020"
 # optional year month day variables for convenient, only if you need them
-# year = int(date.split("-")[2])
-# month = int(date.split("-")[0])
-# day = int(date.split("-")[1])
+year = int(date.split("-")[2])
+month = int(date.split("-")[0])
+day = int(date.split("-")[1])
 # weather = feather.read_dataframe()
-# weather = pandas.read_csv("../Ignore/2020 Weather Feb 24.csv")
+weather = feather.read_dataframe("../Ignore/2020 Weather Feb 24.feather")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-20-2020 Forecast.csv")
-# data = finding_weather(data, weather, year, month, day)
+# data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-25-2020 Forecast.csv")
+data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv")
+data = finding_weather(data, weather, year, month, day)
 testnum = 1
 data = test_type(data, testnum)
 # Save the data with the added weather if you want/need to
-# data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
-# exit()
+data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
+exit()
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
