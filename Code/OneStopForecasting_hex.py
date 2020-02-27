@@ -636,25 +636,23 @@ date = "01-19-2020"
 year = int(date.split("-")[2])
 month = int(date.split("-")[0])
 day = int(date.split("-")[1])
-# weather = feather.read_dataframe()
 weather = feather.read_dataframe("../Ignore/2020 Weather Feb 24.feather")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # This is the file that has the accidents for the date you want to predict for
-# data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-25-2020 Forecast.csv")
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv")
-data = finding_weather(data, weather, year, month, day)
-testnum = 1
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
+# data = finding_weather(data, weather, year, month, day)
+testnum = 6
 data = test_type(data, testnum)
 # Save the data with the added weather if you want/need to
-data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
-exit()
+# data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
+# exit()
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
 
 scaled, data = standarize_data(data)
 
 
-modelname = "../Graphs & Images/Hex Grid/Total Shift/5050 Split/Test 1/model_TS_hex_5050Split.h5"
+modelname = "../"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)
