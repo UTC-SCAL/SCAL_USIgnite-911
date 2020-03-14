@@ -1,0 +1,47 @@
+---
+title: "Untitled"
+output: pdf_document
+---
+
+```{r}
+library(sf)
+library(sp)
+grid = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/HexGrid/HexGrid.shp")
+
+othergrid = st_read("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/HexGrid/Hex_Centeriod_and_Info.shp")
+
+# othergrid = as.data.frame(othergrid)
+othergrid = othergrid[(names(othergrid) %in% c('Grid_Num','geometry'))]
+write.csv(othergrid, "/Users/peteway/Downloads/GridCenters.csv", sep=" ")
+
+
+allgrid = merge(grid, othergrid, by="GRID_ID")
+allgrid = st_as_sf(allgrid)
+allgrid = allgrid[(names(allgrid) %in% c("Grid_Num","geometry"))]
+
+hourcounts = read.csv("/Users/peteway/Downloads/HourHex.csv")
+
+merged = merge(hourcounts, allgrid, by = "Grid_Num")
+write.csv(merged, "/Users/peteway/Downloads/Test.csv", sep=" ")
+
+
+
+```
+
+```{r}
+# remove(grid, hourcounts, merged, othergrid)
+acc = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/01-25-2020.csv")
+coordinates(acc)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(acc)<- CRS(geo.prj)
+acc= st_as_sf(acc)
+
+acc = acc[allgrid,]
+
+
+acc <- st_intersection(acc, allgrid[,"Grid_Num"])
+acc = as.data.frame(acc)
+acc = acc[!names(acc) == "geometry"]
+write.csv(acc, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/01-25-2020.csv", row.names= FALSE)
+```
+

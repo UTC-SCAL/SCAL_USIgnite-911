@@ -134,19 +134,21 @@ def main ():
     ##Hex layout
     # modeltypes = ["GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test"]
 
-    modeltypes = ["GF_50-50 Split_Forecast","GF_75-25 Split_Forecast","GF_Test_Forecast","Ran_50-50 Split_Forecast","Ran_75-25 Split_Forecast",
-    "Ran_Test_Forecast","SecondBatch_GF_50-50 Split_Forecast","SecondBatch_GF_75-25 Split_Forecast","SecondBatch_GF_Test_Forecast",
-    "SecondBatch_Ran_50-50 Split_Forecast","SecondBatch_Ran_75-25 Split_Forecast","SecondBatch_Ran_Test_Forecast"]
-    dates = ['01/23/2020']
+    modeltypes = ["TS_50-50 Split_Test1Forecast","TS_50-50 Split_Test2Forecast","TS_50-50 Split_Test3Forecast","TS_50-50 Split_Test4Forecast", "TS_50-50 Split_Test5Forecast", 
+    "TS_75-25 Split_Test1Forecast", "TS_75-25 Split_Test2Forecast", "TS_75-25 Split_Test3Forecast", "TS_75-25 Split_Test4Forecast", "TS_75-25 Split_Test5Forecast", 
+    "TS_NoSplit_Test1Forecast","TS_NoSplit_Test2Forecast", "TS_NoSplit_Test3Forecast", "TS_NoSplit_Test4Forecast", "TS_NoSplit_Test5Forecast"]
+    filedates = ['01-19-2020','01-20-2020','01-21-2020','01-22-2020','01-24-2020','01-25-2020']
 
-    for date in dates:
+    for filedate in filedates:
         for modeltype in modeltypes: 
-            print(date, modeltype)
-            filedate = date.replace("/", "-")
-            filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/TestingforPredictions/"+modeltype+".csv"
+            # print(filedate, modeltype)
+            # filedate = date.replace("/", "-")
+            filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/"+modeltype+"Test.csv"
             if exists(filename):
                 test = pandas.read_csv(filename)
-                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/TestingforPredictions/Hex Confusion Matrix Quantities.csv"
+                # saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/TestingforPredictions/Hex Confusion Matrix Quantities.csv"
+                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/Week Hex Confusion Matrix Quantities.csv"
+                date = filedate.replace("-", "/")
                 matrix_quantities_hex(test, date,saveFile, modeltype)
 
 if __name__ == "__main__":
