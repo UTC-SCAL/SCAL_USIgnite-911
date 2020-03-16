@@ -1,6 +1,7 @@
 import pandas 
 from os.path import exists
 
+
 def matrix_quantities_grid(accForCompare, date, saveFile, modelType):
     tp = 0
     tn = 0
@@ -53,6 +54,7 @@ def matrix_quantities_grid(accForCompare, date, saveFile, modelType):
     appendSeries = pandas.Series(appendList, index=saveFrame.columns)
     saveFrame = saveFrame.append(appendSeries, ignore_index=True)
     saveFrame.to_csv(saveFile, index=False)
+
 
 def matrix_quantities_hex(accForCompare, date, saveFile, modelType):
     tp = 0
@@ -137,7 +139,7 @@ def main ():
     modeltypes = ["TS_50-50 Split_Test1Forecast","TS_50-50 Split_Test2Forecast","TS_50-50 Split_Test3Forecast","TS_50-50 Split_Test4Forecast", "TS_50-50 Split_Test5Forecast", 
     "TS_75-25 Split_Test1Forecast", "TS_75-25 Split_Test2Forecast", "TS_75-25 Split_Test3Forecast", "TS_75-25 Split_Test4Forecast", "TS_75-25 Split_Test5Forecast", 
     "TS_NoSplit_Test1Forecast","TS_NoSplit_Test2Forecast", "TS_NoSplit_Test3Forecast", "TS_NoSplit_Test4Forecast", "TS_NoSplit_Test5Forecast"]
-    filedates = ['01-19-2020','01-20-2020','01-21-2020','01-22-2020','01-24-2020','01-25-2020']
+    filedates = ['01-23-2020']
 
     for filedate in filedates:
         for modeltype in modeltypes: 
@@ -147,7 +149,7 @@ def main ():
             if exists(filename):
                 test = pandas.read_csv(filename)
                 # saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/TestingforPredictions/Hex Confusion Matrix Quantities.csv"
-                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/Week Hex Confusion Matrix Quantities.csv"
+                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/1-23-2020 Hex Confusion Matrix Quantities.csv"
                 date = filedate.replace("-", "/")
                 matrix_quantities_hex(test, date,saveFile, modeltype)
 

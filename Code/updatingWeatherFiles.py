@@ -522,7 +522,7 @@ def post_process_weather(columns):
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
     # new_weather.to_csv("../")
-    feather.write_dataframe(new_weather, "../")
+    # feather.write_dataframe(new_weather, "../")
 
 
 def find_missing(lst):
@@ -556,5 +556,5 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020/1/01'
-# end = '2020/2/24'
+# begin = '2020/2/24'
+# end = '2020/3/13'

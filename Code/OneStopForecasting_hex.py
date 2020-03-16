@@ -162,7 +162,11 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
     data['Unix'] = 0
     data['hourbefore'] = 0
-    date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
+    # If the data you are working with doesn't have an hour value, run the forloop below to create it
+    # data['Hour'] = 0
+    # date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
+    # for i, values in enumerate(data.values):
+    #     data.Hour.values[i] = data['Response.Date'].values[i].split(" ")[1].split(":")[0]
     data['Hour'] = data['Hour'].astype(int)
     data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
     data.Unix = data.Unix.astype(int)
@@ -631,18 +635,18 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "01-19-2020"
+date = "01-23-2020"
 # optional year month day variables for convenient, only if you need them
 year = int(date.split("-")[2])
 month = int(date.split("-")[0])
 day = int(date.split("-")[1])
-weather = feather.read_dataframe("../Ignore/2020 Weather Feb 24.feather")
+weather = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
 # data = finding_weather(data, weather, year, month, day)
-testnum = 6
+testnum = 4
 data = test_type(data, testnum)
 # Save the data with the added weather if you want/need to
 # data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
