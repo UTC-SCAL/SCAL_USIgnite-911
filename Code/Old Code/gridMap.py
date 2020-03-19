@@ -45,7 +45,7 @@ path = os.path.dirname(sys.argv[0])
 gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
 
 # This file contains the coordinates for the grid blocks
-gridCoords = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Vertices Oriented Layout.csv", sep=",")
+gridCoords = pandas.read_csv("/home/jeremy/PycharmProjects/SCAL_USIgnite-911/Ignore/School Work/Data/Vertices Oriented Layout.csv")
 # print(gridCoords.head())
 
 # This will hold the polygon versions of our grid blocks
@@ -157,10 +157,10 @@ for i, value in enumerate(gridCoords.values):
 #     gmap.marker(center_lat, center_long, '#FF0000', title=j)
 
 # Placing markers for predicted accidents
-predictions = pandas.read_csv("../Excel & CSV Sheets/Grid Oriented Layout Test Files/Forecast-for6-10-2019_2019-06-11_11.csv")
-for p, values in enumerate(predictions.values):
-    if predictions.Probability.values[p] >= .80 and 19 <= predictions.Hour.values[p] <= 23:
-        gmap.marker(predictions.Latitude.values[p], predictions.Longitude.values[p], '#FF0000', title=p)
+# predictions = pandas.read_csv("/home/jeremy/PycharmProjects/SCAL_USIgnite-911/Ignore/School Work/Data/Grid Oriented Data 2017+2018.csv")
+# for p, values in enumerate(predictions.values):
+#     if predictions.Probability.values[p] >= .80 and 19 <= predictions.Hour.values[p] <= 23:
+#         gmap.marker(predictions.Latitude.values[p], predictions.Longitude.values[p], '#FF0000', title=p)
 
 
 # This actually draws or "places" the map itself for viewing #

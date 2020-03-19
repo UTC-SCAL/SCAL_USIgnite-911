@@ -1,7 +1,5 @@
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
-from sklearn import preprocessing
-from sklearn.preprocessing import MinMaxScaler
 import pandas
 import os
 
