@@ -94,7 +94,7 @@ def matrix_quantities_hex(accForCompare, date, saveFile, modelType):
 
 
     appendList = [date, modelType, tp, tn, fp, fn, accuracy, precision, recall, fpr, specificity]
-
+    print(appendList)
             # If the average holder file exists, import it. If not, create it.
     if exists(saveFile):
         saveFrame = pandas.read_csv(saveFile,
@@ -134,6 +134,13 @@ def main ():
     ##Hex layout
     # modeltypes = ["GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test"]
 
+    forecast = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25 Split Test 4_Test2.csv")
+    # acc = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
+    saveFile = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25_Test42.csv"
+    modeltype = "75-25 Test 4"
+    matrix_quantities_hex(forecast, "1/23/2020", saveFile, modeltype)
+    exit()
+
     modeltypes = ["TS_50-50 Split_Test1Forecast","TS_50-50 Split_Test2Forecast","TS_50-50 Split_Test3Forecast","TS_50-50 Split_Test4Forecast", "TS_50-50 Split_Test5Forecast", 
     "TS_75-25 Split_Test1Forecast", "TS_75-25 Split_Test2Forecast", "TS_75-25 Split_Test3Forecast", "TS_75-25 Split_Test4Forecast", "TS_75-25 Split_Test5Forecast", 
     "TS_NoSplit_Test1Forecast","TS_NoSplit_Test2Forecast", "TS_NoSplit_Test3Forecast", "TS_NoSplit_Test4Forecast", "TS_NoSplit_Test5Forecast"]
@@ -150,6 +157,8 @@ def main ():
                 saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/Week Hex Confusion Matrix Quantities.csv"
                 date = filedate.replace("-", "/")
                 matrix_quantities_hex(test, date,saveFile, modeltype)
+
+
 
 if __name__ == "__main__":
     main()
