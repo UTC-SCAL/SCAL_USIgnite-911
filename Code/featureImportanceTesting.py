@@ -106,7 +106,7 @@ def featureSelection(data, testNum):
 
     # plot graph of feature importances for better visualization
     feat_importances = pandas.Series(model.feature_importances_, index=features)
-    feat_importances.nlargest(10).plot(kind='barh')
+    feat_importances.nlargest(20).plot(kind='barh')
     plt.xlim(0, .50)
     plt.title("Feature Selection Total Shift No Split Test % d MMR" % testNum)
     plt.show()
@@ -135,14 +135,14 @@ def correlationHeatmap(data):
     # This version allows for the creation of a heatmap that removes redundancy (takes away the top right half of the
     # heatmap for less noise)
     # Create the correlation dataframe
-    corr = data.corr()
+    corr = abs(data.corr())
     # Drop self-correlations
     dropSelf = numpy.zeros_like(corr)
     dropSelf[numpy.triu_indices_from(dropSelf)] = True
     # Generate color map
-    colormap = sns.diverging_palette(220, 10, as_cmap=True)
+    # colormap = sns.diverging_palette(220, 10, as_cmap=True)
     # Generate the heatmap, allowing annotations and place floats in the map
-    sns.heatmap(corr, cmap=colormap, annot=False, fmt='.2f', mask=dropSelf)
+    sns.heatmap(corr, cmap='Greens', annot=True, fmt='.2f', mask=dropSelf)
     # xticks
     plt.xticks(range(len(corr.columns)), corr.columns)
     # yticks
@@ -151,8 +151,15 @@ def correlationHeatmap(data):
 
 
 data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives No Split.csv")
-testNum = 5
-data = test_type(data, testNum)
+# data = data.drop(['City', 'Latitude', 'Longitude', 'precipProbability', 'precipType', 'Event', 'Conditions',
+#                   'hourbefore', 'Date', 'GRID_ID', 'windBearing', 'windGust', 'pressure', 'Unix', 'cloudCover',
+#                   'dewPoint'], axis=1)
+data = data.reindex(columns=['Accident', 'Join_Count', 'temperature', 'humidity', 'windSpeed', 'Hour', 'uvIndex',
+                             'Grid_Num', 'visibility', 'DayFrame', 'precipIntensity', 'DayOfWeek', 'FUNC_CLASS', 'NBR_LANES'])
+data.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 75-25 Split Top 13.csv")
+exit()
+testNum = 0
+# data = test_type(data, testNum)
 # PCA_testing(data)
 # univariateSelection(data)
 featureSelection(data, testNum)
