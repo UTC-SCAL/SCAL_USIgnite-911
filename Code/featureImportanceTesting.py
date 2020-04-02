@@ -150,7 +150,7 @@ def correlationHeatmap(data):
     plt.show()
 
 
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives No Split.csv")
+data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 75-25 Split.csv")
 # data = data.drop(['City', 'Latitude', 'Longitude', 'precipProbability', 'precipType', 'Event', 'Conditions',
 #                   'hourbefore', 'Date', 'GRID_ID', 'windBearing', 'windGust', 'pressure', 'Unix', 'cloudCover',
 #                   'dewPoint'], axis=1)

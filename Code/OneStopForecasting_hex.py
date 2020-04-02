@@ -565,7 +565,11 @@ def make_directory(model, batchnum, date):
     elif "TS" in model:
         modeltype = "TS"
 
-    if batchnum == 1:
+    if batchnum == 0:
+        suffix = modeltype + "_" + modelsplit + "_Top13Test" + str(batchnum)
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 1:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
         # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
@@ -635,7 +639,7 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "01-23-2020"
+date = "01-19-2020"
 # optional year month day variables for convenient, only if you need them
 year = int(date.split("-")[2])
 month = int(date.split("-")[0])
@@ -644,10 +648,15 @@ weather = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
-# data = finding_weather(data, weather, year, month, day)
-testnum = 4
-data = test_type(data, testnum)
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
+data = finding_weather(data, weather, year, month, day)
+testnum = 0
+
+# For the top 13 testing, reindex the columns
+data = data.reindex(columns=['Join_Count', 'temperature', 'humidity', 'windSpeed', 'Hour', 'uvIndex',
+                             'Grid_Num', 'visibility', 'DayFrame', 'precipIntensity', 'DayOfWeek', 'FUNC_CLASS', 'NBR_LANES'])
+
+# data = test_type(data, testnum)
 # Save the data with the added weather if you want/need to
 # data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
 # exit()
@@ -656,7 +665,7 @@ data = test_type(data, testnum)
 scaled, data = standarize_data(data)
 
 
-modelname = "../"
+modelname = "../Graphs & Images/Hex Grid/Total Shift/7525 Split/Top 13 Test/model_TS_hex_7525SplitTop13.h5"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)

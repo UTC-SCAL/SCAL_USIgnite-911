@@ -141,11 +141,11 @@ def fitting_loops(X, Y, dataset, folder, modelname):
 
     # Training Cycles
     # Each cycle's output is the next cycle's input, so the model learns for each new cycle
-    for i in range(0, 50):
+    for i in range(0, 10):
         
         ##Shuffling
         dataset = shuffle(dataset)
-        ##Creating X and Y. Accident is the first column, therefore it is 0.
+        #Creating X and Y. Accident is the first column, therefore it is 0.
         X = dataset.iloc[:, 1:(len(dataset.columns) + 1)].values  # Our independent variables
         Y = dataset.iloc[:, 0].values  # Our dependent variable
 
@@ -338,17 +338,17 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives No Split.csv")
+dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 50-50 Split Top 13.csv")
 # Select which type of test you want to do: this determines what columns are used
-dataset = test_type(dataset, 6)
+# dataset = test_type(dataset, 6)
 # Standardize the data before modelling
 dataset = standardize(dataset)
 
 # Choose a folder for storing all of the results of the code in, including the model itself
 # Note, if the folder you specify doesn't exist, you'll have to create it
 # These are made for code automation later on
-folder = '../Graphs & Images/Hex Grid/Total Shift/No Split/Test 6/'
-modelname = "model_TS_hex_NoSplit.h5"
+folder = '../Graphs & Images/Hex Grid/Total Shift/5050 Split/Top 13 Test/'
+modelname = "model_TS_hex_5050SplitTop13_sureRandom.h5"
 
 ##Shuffling
 dataset = shuffle(dataset)
