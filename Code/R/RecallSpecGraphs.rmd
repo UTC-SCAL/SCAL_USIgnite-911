@@ -1,0 +1,108 @@
+---
+title: "IEEEAccess"
+output: pdf_document
+---
+
+```{r}
+avg = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/WeekAveragePerformanceforHexwith5Tests.csv")
+```
+
+```{r}
+avg$Model = paste(avg$Split, avg$Test, sep = " ")
+pairs = avg[,c('Specificity', 'Recall','Model')]
+```
+
+```{r}
+plot(avg$Specificity, avg$Recall,col=factor(avg$Split), shape=factor(avg$Test), type='p', xlab='True Negative Rate', ylab='True Positive Rate')
+```
+
+```{r}
+library(ggplot2)
+avg$Split = as.factor(avg$Split)
+avg$Test = as.factor(avg$Test)
+ggplot(avg, aes(x=Specificity, y=Recall)) +
+  geom_point(aes(shape=Test, color=Split), size=3)
+
+```
+
+```{r}
+library(ggplot2)
+plotwithlegend = (ggplot(days, aes(x=Specificity, y=Recall)) +
+  geom_point(aes(shape=Split, color=Date), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=c('red','orange','yellow','green','blue','purple', 'pink'))) + theme(legend.box = "horizontal")
+  legend <- get_legend(plotwithlegend)
+# days = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/Week Testing/All Tests.csv")
+# days$Split = as.factor(days$Split)
+# days$Test = as.factor(days$Test)
+# days = days %>% separate(Date, c(NA, "Date", NA))
+# days$Date = as.factor(days$Date)
+tests = c(1,2,3,4,5)
+plots <- vector('list', length(tests))
+for(i in tests){
+  testnum = days[which(days$Test == i),]
+    plot = (ggplot(testnum, aes(x=Specificity, y=Recall)) +
+  geom_point(aes(shape=Split, color=Date), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=c('red','orange','yellow','green','blue','purple', 'pink'))) +theme(legend.position = 'none')
+# legend <- get_legend(plotwithlegend)
+plots[[i]] = plot
+}
+library(gridExtra)
+# png("/Users/peteway/Documents/GitHub/Ignore/ModelPerformanceGraph_TestFirstHalf.png", width=8,height=2,units='in', res=600,bg = 'transparent')
+# grid.arrange(plots[[1]],plots[[2]],plots[[3]], ncol=3)
+# dev.off()
+# png("/Users/peteway/Documents/GitHub/Ignore/ModelPerformanceGraph_TestSecondHalf.png", width=8,height=2,units='in', res=600,bg = 'transparent')
+# grid.arrange(plots[[4]],plots[[5]], ncol=2)
+# dev.off()
+
+png("/Users/peteway/Documents/GitHub/Ignore/ModelPerformanceGraph_Testing.png", width=12,height=4,units='in', res=600,bg = 'transparent')
+grid.arrange(plots[[1]],plots[[2]],plots[[3]], plots[[4]], legend, plots[[5]], ncol=3, widths=c(1,1,1), heights=c(1,1))
+dev.off()
+
+
+# plots[[1]]
+library(cowplot)
+png("/Users/peteway/Documents/GitHub/Ignore/ModelPerformanceGraph_Testing.png", width=12,height=5,units='in', res=600)
+plot_grid(plots[[1]],plots[[2]],plots[[3]],plots[[4]],legend,plots[[5]], nrow=2, labels = c("1", "2", "3", "4", "Legend", "5"))
+dev.off()
+```
+
+```{r}
+p <- ggplot(mapping = aes(x = Specificity, y = Recall)) +
+  facet_wrap(~Date) + 
+  geom_point(aes(shape=Split, color=Test), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=c('red','yellow','green','blue','pink')) + theme(legend.position = 'none') 
+
+cowplot::plot_grid(
+  p %+% subset(days, Date == '1/19/20'),
+  p %+% subset(days, Date == '1/20/20'),
+  p %+% subset(days, Date == '1/21/20'),
+  p %+% subset(days, Date == '1/22/20'),
+  p %+% subset(days, Date == '1/23/20'),
+  p %+% subset(days, Date == '1/24/20'),
+  p %+% subset(days, Date == '1/25/20'),
+  legend2, 
+  nrow = 2,align="h"
+)
+```
+
+```{r}
+test = ggplot(days, mapping = aes(x = Specificity, y = Recall)) +
+  geom_point(aes(shape=Split, color=Test), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=c('red','yellow','green','blue','pink')) +theme(legend.box = "horizontal")
+legend2 = get_legend(test)
+```
+
+```{r}
+p2 <- ggplot(mapping = aes(x = Specificity, y = Recall)) +
+  facet_wrap(~Test) + 
+  geom_point(aes(shape=Split, color=Date), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=c('red','orange','yellow','green','blue','purple', 'pink'))  + theme(legend.position = 'none') + xlim(0, 1) +ylim(0, 1)
+
+png("/Users/peteway/Documents/GitHub/Ignore/ModelPerformanceGraph_Testing2.png", width=12,height=5,units='in', res=600)
+cowplot::plot_grid(
+  p2 %+% subset(days, Test == 1),
+  p2 %+% subset(days, Test == 2),
+  p2 %+% subset(days, Test == 3),
+  p2 %+% subset(days, Test == 4),
+  legend,
+  p2 %+% subset(days, Test == 5),
+  nrow = 2,align="h"
+)
+dev.off()
+```
+
