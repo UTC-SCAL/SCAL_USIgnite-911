@@ -639,7 +639,7 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "01-19-2020"
+date = "01-25-2020"
 # optional year month day variables for convenient, only if you need them
 year = int(date.split("-")[2])
 month = int(date.split("-")[0])
@@ -648,8 +648,15 @@ weather = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
 # This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
-data = finding_weather(data, weather, year, month, day)
+data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-25-2020 Forecast Viz.csv")
+# data = finding_weather(data, weather, year, month, day)
+
+# Code to get an extra weather variable #
+# data.Unix = data.Unix.astype(int)
+# newdata = pandas.merge(data, weather[['uvIndex', 'Unix', 'Grid_Num']], on=['Unix', 'Grid_Num'])
+# newdata.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast Viz.csv", index=False)
+# exit()
+
 testnum = 0
 
 # For the top 13 testing, reindex the columns
@@ -665,7 +672,7 @@ data = data.reindex(columns=['Join_Count', 'temperature', 'humidity', 'windSpeed
 scaled, data = standarize_data(data)
 
 
-modelname = "../Graphs & Images/Hex Grid/Total Shift/7525 Split/Top 13 Test/model_TS_hex_7525SplitTop13.h5"
+modelname = "../Graphs & Images/Hex Grid/Total Shift/7525 Split/Top 13 Test/model_TS_hex_7525SplitTop13_sureRandom.h5"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)
