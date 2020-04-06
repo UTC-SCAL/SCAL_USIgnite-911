@@ -134,27 +134,39 @@ def main ():
     ##Hex layout
     # modeltypes = ["GF_50-50 Split","GF_75-25 Split","GF_Test","Ran_50-50 Split", "Ran_75-25 Split", "Ran_Test"]
 
-    forecast = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25 Split Test 4_Test2.csv")
-    # acc = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
-    saveFile = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25_Test42.csv"
-    modeltype = "75-25 Test 4"
-    matrix_quantities_hex(forecast, "1/23/2020", saveFile, modeltype)
-    exit()
+    # forecast = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25 Split Test 4_Test2.csv")
+    # # acc = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
+    # saveFile = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/01-23-2020/Hex/TestingforPredictions/75-25_Test42.csv"
+    # modeltype = "75-25 Test 4"
+    # matrix_quantities_hex(forecast, "1/23/2020", saveFile, modeltype)
+    # exit()
 
-    modeltypes = ["TS_50-50 Split_Test1Forecast","TS_50-50 Split_Test2Forecast","TS_50-50 Split_Test3Forecast","TS_50-50 Split_Test4Forecast", "TS_50-50 Split_Test5Forecast", 
-    "TS_75-25 Split_Test1Forecast", "TS_75-25 Split_Test2Forecast", "TS_75-25 Split_Test3Forecast", "TS_75-25 Split_Test4Forecast", "TS_75-25 Split_Test5Forecast", 
-    "TS_NoSplit_Test1Forecast","TS_NoSplit_Test2Forecast", "TS_NoSplit_Test3Forecast", "TS_NoSplit_Test4Forecast", "TS_NoSplit_Test5Forecast"]
+    # modeltypes = ["TS_50-50 Split_Test1Forecast","TS_50-50 Split_Test2Forecast","TS_50-50 Split_Test3Forecast","TS_50-50 Split_Test4Forecast", "TS_50-50 Split_Test5Forecast", 
+    # "TS_75-25 Split_Test1Forecast", "TS_75-25 Split_Test2Forecast", "TS_75-25 Split_Test3Forecast", "TS_75-25 Split_Test4Forecast", "TS_75-25 Split_Test5Forecast", 
+    # "TS_NoSplit_Test1Forecast","TS_NoSplit_Test2Forecast", "TS_NoSplit_Test3Forecast", "TS_NoSplit_Test4Forecast", "TS_NoSplit_Test5Forecast"]
     filedates = ['01-19-2020','01-20-2020','01-21-2020','01-22-2020','01-24-2020','01-25-2020']
+
+    # modeltypes = ["50-50 Split_Test1","50-50 Split_Test2","50-50 Split_Test3","50-50 Split_Test4","50-50 Split_Test5", 
+    # "75-25 Split_Test1","75-25 Split_Test2","75-25 Split_Test3","75-25 Split_Test4","75-25 Split_Test5", 
+    # "NoSplit_Test1","NoSplit_Test2","NoSplit_Test3","NoSplit_Test4","NoSplit_Test5"]
+    modeltypes = ['50-50 Split_NoShuffle_', '50-50 Split_sureRandom_','75-25 Split_NoShuffle_', '75-25 Split_sureRandom_',
+    'NoSplit_NoShuffle_', 'NoSplit_sureRandom_']
+    # filedates = ['02-10-2020','02-11-2020','02-12-2020' ]
 
     for filedate in filedates:
         for modeltype in modeltypes: 
             # print(filedate, modeltype)
             # filedate = date.replace("/", "-")
-            filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/"+modeltype+"Test.csv"
+            # filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/"+modeltype+"Test.csv"
+            # filename = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/Confusion Matrix/"+modeltype+".csv"
+            filename = "/Users/peteway/Downloads/Work/Top 13 Predictions/Confusion Matrix/"+modeltype+filedate+".csv"
+            print(filename)
             if exists(filename):
                 test = pandas.read_csv(filename)
                 # saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/TestingforPredictions/Hex Confusion Matrix Quantities.csv"
-                saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Confusion Matrix/Week Hex Confusion Matrix Quantities.csv"
+                # saveFile = "Excel & CSV Sheets/Forecasts/"+filedate+"/Hex/Confusion Matrix/"+filedate+"_Rainy Hex Confusion Matrix Quantities.csv"
+                saveFile = "/Users/peteway/Downloads/Work/Top 13 Predictions/Confusion Matrix/"+ filedate+ "Shuffle Hex Confusion Matrix Quantities.csv"
+
                 date = filedate.replace("-", "/")
                 matrix_quantities_hex(test, date,saveFile, modeltype)
 

@@ -1,4 +1,4 @@
-import geolocator as geolocator
+# import geolocator as geolocator
 import pandas
 import numpy
 import time
@@ -14,15 +14,18 @@ from datetime import timedelta
 import base64
 import geopandas
 from geopandas.tools import sjoin
+from datetime import datetime
 
+def clear():
+    os.system( 'clear' )
 
 def pull_emails(total, lastday):
     m = imaplib.IMAP4_SSL("imap.gmail.com")
     m.login('utcscal2018@gmail.com', 'EMCS 335')
     m.select("INBOX")  # here you a can choose a mail box like INBOX instead
-
+    lookfor = "UNANSWERED SENTSINCE "+str(lastday.strftime("%d-%b-%Y"))
     # you could filter using the IMAP rules here (check http://www.example-code.com/csharp/imap-search-critera.asp)
-    _, items = m.search(None, "ALL")
+    _, items = m.search(None, lookfor)
     items = items[0].split()  # getting the mails id
 
     for emailid in items:
@@ -67,9 +70,25 @@ def pull_emails(total, lastday):
                             file.write(part.get_payload(decode=True))
 
                         daypart = pandas.read_excel(filename)
+                    try: 
+                        daypart['Unix'] = daypart.apply(lambda x: datetime.strptime(
+                            str(x['Response Date']), "%Y-%m-%dT%H:%M:%S.%f").strftime("%Y-%m-%d %H:%M:%S"), axis=1)
 
-                    daypart['Unix'] = daypart.apply(lambda x: pandas.datetime.strptime(
-                        str(x['Response Date']), "%Y-%m-%d %H:%M:%S"), axis=1)
+                    except: 
+                        try:
+                            daypart['Unix'] = daypart.apply(lambda x: datetime.strptime(
+                            str(x['Response Date']), "%Y-%m-%d %H:%M:%S"), axis=1)
+                        except: 
+                            try: 
+                                daypart[['Response Date', _]] = daypart['Response Date'].apply(lambda x: pandas.Series(str(x).split(".")))
+                                daypart['Unix'] = daypart.apply(lambda x: datetime.strptime(
+                                    str(x['Response Date']), "%Y-%m-%d %H:%M:%S"), axis=1)
+                            except Exception as e:
+                                print(e)
+                                exit()
+
+
+                        
                     daypart['Unix'] = daypart.apply(
                         lambda x: x.Unix.strftime('%s'), axis=1)
                     daypart['Latitude'] = daypart["Latitude"]/1000000
@@ -77,7 +96,8 @@ def pull_emails(total, lastday):
                     # daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]).map(str)
                     total = pandas.concat([total, daypart])
         else:
-            print("...Looking for new accident reports")
+            clear()
+            print("...Looking for new accident reports, ", dateofemail)
     return total
 
 
@@ -110,20 +130,20 @@ def add_grid_to_accidents_sf(accpath, hexpath, savepath):
 def main():
     start = time.time()
 
-    # total = pandas.read_csv(
-    #     "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData.csv")
-    # lastday = pandas.Timestamp(
-    #     total['Response Date'].values[-1]).date() + timedelta(days=1)
+    total = pandas.read_csv(
+        "Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+    lastday = pandas.Timestamp(
+        total['Response Date'].values[-1]).date() + timedelta(days=1)
 
-    # total = pull_emails(total, lastday)
-    # total.to_csv(
-    #     "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData.csv", index=False)
+    total = pull_emails(total, lastday)
+    total.to_csv(
+        "Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_Test.csv", index=False)
 
 
-    hexpath = '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/HexGrid.shp'
-    accpath = 'Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_Full.shp'
-    savepath = 'Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/AccidentHex.csv'
-    add_grid_to_accidents_sf(accpath, hexpath, savepath)
+    # hexpath = '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/HexGrid.shp'
+    # accpath = 'Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_Full.shp'
+    # savepath = 'Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/AccidentHex.csv'
+    # add_grid_to_accidents_sf(accpath, hexpath, savepath)
 
     print("Total Process time:", time.time() - start)
 

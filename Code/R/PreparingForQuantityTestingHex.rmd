@@ -169,9 +169,11 @@ library(data.table)
 
 
 path = "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts"
+# path = "/Users/peteway/Downloads/Work/Top 13 Predictions/Confusion Matrix/Date Totals"
 files <-
-    list.files(pattern = "Week Hex Confusion Matrix Quantities.csv", path=path, recursive = TRUE, full.names = TRUE) 
-filedates = c('01-19-2020','01-20-2020','01-21-2020','01-22-2020','01-24-2020','01-25-2020')
+    list.files(pattern = "Hex Confusion Matrix Quantities", path=path, recursive = TRUE, full.names = TRUE) 
+# filedates = c('01-19-2020','01-20-2020','01-21-2020','01-22-2020','01-24-2020','01-25-2020')
+filedates = c('02-10-2020','02-11-2020','02-12-2020')
 
 allmatrix <- lapply(files, function(x) read.csv(x))
 
@@ -182,7 +184,8 @@ allmatrix = ldply(allmatrix, rbind)
 
 means = aggregate(. ~ ModelType, allmatrix, mean)
 
-write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformanceforHexwith5Tests.csv")
+write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformanceforHexwith5Tests_Rainy.csv")
+# write_csv(means, "/Users/peteway/Downloads/Work/Top 13 Predictions/Confusion Matrix/Date Totals/AveragesforShuffleTests.csv")
 ```
 
 
@@ -192,7 +195,6 @@ write_csv(means, "/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV 
 library(sf)
 library(sp)
 library(stringr)
-
 blocks = st_read("/Users/peteway/Documents/GitHub/Ignore/Thesis/Standardizing AccCount by AADT/Standardized Hex Grids/StandardizedHexgrids.shp")
 
 colnames(blocks) = c("Grid_Num", "AccCont","AccCntI","Jon_Cnt","AADT","SPD_LMT","Col","Row", "Rank", "StndrdC","StndrdI","StndrdJ", "geometry")
@@ -202,21 +204,23 @@ dayframes = c(1,2,3,4)
 thresholds = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/Thresholds.csv")
 
 # hours = c(0,4,8,12,16,20,23)
-date = "01-19-2020"
+date = "02-12-2020"
 month= str_split(date, "-")[[1]][1]
 day = str_split(date, "-")[[1]][2]
 year = str_split(date, "-")[[1]][3]
 
 acc = read.csv(paste("../../Excel & CSV Sheets/Forecast Accident Dates/",month,"-",day,"-",year,".csv", sep=""))
+acc$Latitude = acc$Latitude/1000000
+acc$Longitude = acc$Longitude/-1000000
 coordinates(acc)=~Longitude+Latitude
 geo.prj <- "+proj=longlat"
 proj4string(acc)<- CRS(geo.prj)
 acc = st_as_sf(acc)
 acc = st_intersection(acc, blocks)
 
-path = paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",date,"/Forecast",sep="")
+path = paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",date,"/Hex/Forecast",sep="")
 files <-
-    list.files(pattern = "Test2Forecast.csv", path=path, recursive = TRUE, full.names = TRUE) 
+    list.files(pattern = "Forecast.csv", path=path, recursive = TRUE, full.names = TRUE) 
 
 files
 # files <- Sys.glob(file.path(,"Test2Forecast.csv"))
@@ -224,10 +228,16 @@ files
 
 # modeltypes = str_split(files, "/")[9][]
 getmodel <- function(my.string){
-    unlist(strsplit((unlist(strsplit(my.string, "/"))[11]), ".csv"))
+    unlist(strsplit(unlist(strsplit((unlist(strsplit(my.string, "/"))[12]), "TS_")), "_"))[1]
+}
+
+gettest <- function(my.string){
+    unlist(strsplit(unlist(strsplit(unlist(strsplit((unlist(strsplit(my.string, "/"))[12]), "TS_")), "_"))[2], "Forecast.csv"))
 }
 modeltypes = sapply(files, getmodel)
+testtypes = sapply(files, gettest)
 modeltypes = unlist(str_split(modeltypes, "\""))
+testtypes = unlist(str_split(testtypes, "\""))
 
 models <- lapply(files, function(x) read.csv(x))
 
@@ -239,10 +249,11 @@ acc$DayFrame = ifelse(acc$Hour <= 4 | acc$Hour >= 19, 1,ifelse(acc$Hour <= 9 & a
 num=1
 
 for(forecast in models){
-clippedmodeltype = strsplit(modeltypes[num], "_Test")[[1]][1]
-
+  clippedmodeltype = modeltypes[num]
+  testnum = testtypes[num]
+  if(testnum != 'Test3' & testnum != 'Test5' ){
     forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
-    
+  }
 thresh4 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X4']    
 thresh3 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X3']
 thresh2 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X2']
@@ -272,12 +283,120 @@ if(length(forecast$Grid_Num) != 0)
     test = merge(listing, acc_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE)
     test = merge(test, for_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE )
     test[is.na(test)] <- 0
-    filename = paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Confusion Matrix/",modeltypes[num],"Test.csv", sep="")
+    filename = paste("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/",month,"-",day,"-",year,"/Hex/Confusion Matrix/",modeltypes[num],"_",testnum,".csv", sep="")
     write.csv(test, filename)
-    print(clippedmodeltype)
+    num = num+1
 }
-num = num+1
-}
+  }
+
+# filename
 ```
 
 
+```{r}
+library(sf)
+library(sp)
+library(stringr)
+blocks = st_read("/Users/peteway/Documents/GitHub/Ignore/Thesis/Standardizing AccCount by AADT/Standardized Hex Grids/StandardizedHexgrids.shp")
+
+colnames(blocks) = c("Grid_Num", "AccCont","AccCntI","Jon_Cnt","AADT","SPD_LMT","Col","Row", "Rank", "StndrdC","StndrdI","StndrdJ", "geometry")
+
+grids = unique(blocks$Grid_Num)
+dayframes = c(1,2,3,4)
+thresholds = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/Thresholds.csv")
+
+# hours = c(0,4,8,12,16,20,23)
+date = "01-19-2020"
+month= str_split(date, "-")[[1]][1]
+day = str_split(date, "-")[[1]][2]
+year = str_split(date, "-")[[1]][3]
+
+acc = read.csv(paste("../../Excel & CSV Sheets/Forecast Accident Dates/",month,"-",day,"-",year,".csv", sep=""))
+coordinates(acc)=~Longitude+Latitude
+geo.prj <- "+proj=longlat"
+proj4string(acc)<- CRS(geo.prj)
+acc = st_as_sf(acc)
+acc = st_intersection(acc, blocks)
+
+path = paste("/Users/peteway/Downloads/Work/Top 13 Predictions/",date,sep="")
+files <-
+    list.files(pattern = "*.csv", path=path, recursive = TRUE, full.names = TRUE) 
+
+files
+# files <- Sys.glob(file.path(,"Test2Forecast.csv"))
+
+# modeltypes = str_split(files, "/")[9][]
+getdate <- function(my.string){
+    (unlist(strsplit(my.string, "/"))[7])
+}
+
+getmodel <- function(my.string){
+    unlist(strsplit(unlist(strsplit(my.string, "/"))[8], "_"))[2]
+}
+
+gettype <- function(my.string){
+    unlist(strsplit(unlist(strsplit((unlist(strsplit(my.string, "/"))[8]), "_"))[4], ".csv"))[1]
+}
+
+modeltypes = sapply(files, getmodel)
+testtypes = sapply(files, gettype)
+dates = sapply(files, getdate)
+modeltypes = unlist(str_split(modeltypes, "\""))
+testtypes = unlist(str_split(testtypes, "\""))
+
+testtypes[is.na(testtypes)] <- 'NoShuffle'
+
+models <- lapply(files, function(x) read.csv(x))
+
+cat(month, day, year, "\n")
+
+acc$Hour = str_split_fixed(str_split_fixed(acc$Response.Date, " ", n=2)[,2], ":", n=2)[,1]
+acc$Hour = as.numeric(acc$Hour)
+acc$DayFrame = ifelse(acc$Hour <= 4 | acc$Hour >= 19, 1,ifelse(acc$Hour <= 9 & acc$Hour >= 5,2, ifelse(acc$Hour <= 13 & acc$Hour >= 10,3, 4 ) ) )
+num=1
+
+for(forecast in models){
+  clippedmodeltype = modeltypes[num]
+  testnum = testtypes[num]
+  datenum = dates[num]
+  
+  cat(clippedmodeltype, testnum, datenum)
+  if(!("DayFrame" %in% colnames(forecast))){
+    forecast$DayFrame = ifelse(forecast$Hour <= 4 | forecast$Hour >= 19, 1,ifelse(forecast$Hour <= 9 & forecast$Hour >= 5,2, ifelse(forecast$Hour <= 13 & forecast$Hour >= 10,3, 4 ) ) )
+  }
+thresh4 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X4']    
+thresh3 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X3']
+thresh2 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X2']
+thresh1 = thresholds[which(thresholds$ModelType == clippedmodeltype), 'X1']
+
+forecast$Threshold = ifelse(forecast$DayFrame == 4, thresh4,
+                            ifelse(forecast$DayFrame == 3, thresh3,
+                                   ifelse(forecast$DayFrame == 2,thresh2, thresh1)))
+
+
+forecast = forecast[which(forecast$Probability > forecast$Threshold),]
+
+acc_grids = table(acc$Grid_Num, acc$DayFrame)
+acc_grids = as.data.frame(acc_grids)
+colnames(acc_grids) = c("Grid_Num","DayFrame","Accident")
+acc_grids = acc_grids[which(acc_grids$Accident != 0),]
+
+if(length(forecast$Grid_Num) != 0)
+  {
+    cat(date, modeltypes[num], "\n")
+    for_grids = table(forecast$Grid_Num, forecast$DayFrame)
+    for_grids = as.data.frame(for_grids)
+    colnames(for_grids) = c("Grid_Num","DayFrame","Forecast")
+    for_grids = for_grids[which(for_grids$Forecast != 0),]
+    listing = expand.grid(grids, dayframes)
+    colnames(listing) = c("Grid_Num","DayFrame")
+    test = merge(listing, acc_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE)
+    test = merge(test, for_grids, by=c("Grid_Num","DayFrame"), all.x=TRUE )
+    test[is.na(test)] <- 0
+    filename = paste("/Users/peteway/Downloads/Work/Top 13 Predictions/Confusion Matrix/",modeltypes[num],"_",testnum,"_",datenum,".csv", sep="")
+    write.csv(test, filename)
+}
+  num = num+1
+  }
+
+```

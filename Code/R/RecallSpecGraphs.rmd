@@ -4,16 +4,22 @@ output: pdf_document
 ---
 
 ```{r}
-avg = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/WeekAveragePerformanceforHexwith5Tests.csv")
+# avg = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/WeekAveragePerformanceforHexwith5Tests.csv")
+avg = read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/AveragePerformanceforHexwith5Tests_Rainy.csv")
 ```
 
 ```{r}
-avg$Model = paste(avg$Split, avg$Test, sep = " ")
-pairs = avg[,c('Specificity', 'Recall','Model')]
+# avg$Model = paste(avg$Split, avg$Test, sep = "_")
+# pairs = avg[,c('Specificity', 'Recall','Model')]
+pairs = avg[,c('Specificity', 'Recall','ModelType')]
+avg = avg %>% separate(ModelType, c("Split", "Test"), sep="_")
+gsub("Test", "", avg$Test)
+gsub(" Split", "", avg$Split)
+
 ```
 
 ```{r}
-plot(avg$Specificity, avg$Recall,col=factor(avg$Split), shape=factor(avg$Test), type='p', xlab='True Negative Rate', ylab='True Positive Rate')
+ggplot(avg, aes(x= Specificity, y= Recall, col=factor(avg$Split),shape=factor(avg$Test)), type='p', xlab='True Negative Rate', ylab='True Positive Rate')
 ```
 
 ```{r}
@@ -21,7 +27,9 @@ library(ggplot2)
 avg$Split = as.factor(avg$Split)
 avg$Test = as.factor(avg$Test)
 ggplot(avg, aes(x=Specificity, y=Recall)) +
-  geom_point(aes(shape=Test, color=Split), size=3)
+  geom_point(aes(shape=Test, color=Split), size=3) + geom_vline(xintercept = .5, linetype="dotted", 
+                color = "blue", size=1.5) + geom_hline(yintercept = .5, linetype="dotted", 
+                color = "blue", size=1.5) + xlim(0, 1) + ylim(0, 1)
 
 ```
 

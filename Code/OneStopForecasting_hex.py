@@ -350,8 +350,8 @@ def fetchWeather(date):
     forecastforum.columns = ['Event' if x == 'icon' else 'Conditions' if x == 'summary' else x for x in
                              forecastforum.columns]
     forecastforum = finding_binaries(forecastforum)
-    # forecastforum.to_csv("/Users/peteway/Desktop/Testing_NS.csv")
-    # exit()
+    forecastforum.to_csv("Excel & CSV Sheets/Forecasts/"+date+"/"+date+"Forecast.csv")
+    exit()
     print("Forecast Fetched.")
     # exit()
     return forecastforum
@@ -618,6 +618,15 @@ def make_directory_alt(model):
 
     return folder, suffix
 
+# This version of make_directory is a little less specific with naming
+def make_directory_date(date):
+    folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
+    print("\tSaving Folder:", folder)
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    return folder
+
 
 def return_empty_df(dataframe):
     """
@@ -631,28 +640,36 @@ def return_empty_df(dataframe):
 
 #######################################################################################################################
 # start = datetime.datetime.now()
-date = "01-19-2020"
+date = "02-10-2020"
+testnum = 1
+split = "No"
 # optional year month day variables for convenient, only if you need them
 year = int(date.split("-")[2])
 month = int(date.split("-")[0])
 day = int(date.split("-")[1])
-weather = feather.read_dataframe("../Ignore/2020 Weather Feb 24.feather")
+folder = make_directory_date(date)
+# weather = feather.read_dataframe("../Ignore/Hex Weather/2020 Weather Mar 13.feather")
+
+
+##If the date is question is in the weather file, run this section. It saves a single copy of the forecast for that day, and saves time!
+# forum = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv")
+# data = finding_weather(forum, weather, year, month, day)
+# data.to_csv(folder+"ForecastForum.csv", index=False)
+# exit()
 
 ##REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
-# This is the file that has the accidents for the date you want to predict for
-data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
-# data = finding_weather(data, weather, year, month, day)
-testnum = 6
-data = test_type(data, testnum)
-# Save the data with the added weather if you want/need to
-# data.to_csv("../Excel & CSV Sheets/Forecast Accident Dates/" + date + " Forecast.csv", index=False)
-# exit()
+# This is the file that has the forecast for the date you want to predict for
+# data = pandas.read_csv(folder+"ForecastForum.csv")
+# data = test_type(data, testnum)
 # print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column 
+# scaled, data = standarize_data(data)
+# data.to_csv(folder+"ForecastForumScaled_Test"+str(testnum)+"Original.csv", index=False)
 
-scaled, data = standarize_data(data)
+scaled = pandas.read_csv(str(folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+".csv"))
+data = pandas.read_csv(str(folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+"Original.csv"))
 
+modelname = "Graphs & Images/Hex Grid/Total Shift/"+split+" Split/Test "+str(testnum)+"/model_TS_hex_"+split+"Split.h5"
 
-modelname = "../"
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
 folder, suffix = make_directory(modelname, testnum, date)
