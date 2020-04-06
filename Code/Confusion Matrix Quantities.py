@@ -1,6 +1,7 @@
 import pandas 
 from os.path import exists
 
+
 def matrix_quantities_grid(accForCompare, date, saveFile, modelType):
     tp = 0
     tn = 0
@@ -53,6 +54,7 @@ def matrix_quantities_grid(accForCompare, date, saveFile, modelType):
     appendSeries = pandas.Series(appendList, index=saveFrame.columns)
     saveFrame = saveFrame.append(appendSeries, ignore_index=True)
     saveFrame.to_csv(saveFile, index=False)
+
 
 def matrix_quantities_hex(accForCompare, date, saveFile, modelType):
     tp = 0

@@ -162,7 +162,11 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
     data['Unix'] = 0
     data['hourbefore'] = 0
-    date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
+    # If the data you are working with doesn't have an hour value, run the forloop below to create it
+    # data['Hour'] = 0
+    # date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
+    # for i, values in enumerate(data.values):
+    #     data.Hour.values[i] = data['Response.Date'].values[i].split(" ")[1].split(":")[0]
     data['Hour'] = data['Hour'].astype(int)
     data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
     data.Unix = data.Unix.astype(int)
@@ -561,7 +565,11 @@ def make_directory(model, batchnum, date):
     elif "TS" in model:
         modeltype = "TS"
 
-    if batchnum == 1:
+    if batchnum == 0:
+        suffix = modeltype + "_" + modelsplit + "_Top13Test" + str(batchnum)
+        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
+        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    elif batchnum == 1:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
         # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
         folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
