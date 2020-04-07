@@ -1,0 +1,45 @@
+---
+title: "AccidentsDuetoCovid"
+output: pdf_document
+---
+
+```{r}
+library(lubridate)
+test = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_Test.csv")
+```
+
+```{r}
+# 10/25/16 21:34
+test$Date = as.Date(test$Response.Date, "%m/%d/%y %H:%M")
+test$Month = month(test$Date)
+test$Year = year(test$Date)
+test = test[which(test$Month %in% c(3,4)),]
+tab = as.data.frame(table(test$Date))
+colnames(tab) = c('Date','Accidents')
+tab$Month = month(tab$Date)
+tab$Year = year(tab$Date)
+acc17 = tab[which(tab$Year == 2017),]
+acc18 = tab[which(tab$Year == 2018),]
+acc19 = tab[which(tab$Year == 2019),]
+acc20 = tab[which(tab$Year == 2020),]
+
+dates = as.Date(seq(as.Date("2017/3/1"), as.Date("2017/4/30"), "days"))
+dates = format(dates, format="%m-%d")
+
+plot(acc17$Accidents[1:36], col='green', ylim=c(25,150), xaxt="n", ylab="Accidents per Day", xlab="Date", lwd=2, type="l")
+abline(v=seq(0:36), col = 'lightgray')
+lines(acc18$Accidents[1:36], col='blue', lwd=2)
+lines(acc19$Accidents[1:36], col='purple', lwd=2)
+lines(acc20$Accidents[1:36], col = 'red', lwd=4)
+axis(1, a = seq(0:35), labels = dates[1:36], las="2")
+legend('topright',fill=c('green','blue','purple','red'), legend = c('2017','2018','2019','2020'))
+
+avg = (acc17$Accidents + acc18$Accidents + acc19$Accidents) / 3
+
+plot(avg[1:36], col='blue', ylim=c(25,150), xaxt="n", ylab="Accidents per Day", xlab="Date", lwd=2, type="l")
+abline(v=seq(0:36), col = 'lightgray')
+lines(acc20$Accidents[1:36], col = 'red', lwd=4)
+axis(1, a = seq(0:35), labels = dates[1:36], las="2")
+legend('topright',fill=c('blue','red'), legend = c('Average of 2017-2019','2020'))
+```
+
