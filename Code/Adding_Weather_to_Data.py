@@ -85,27 +85,30 @@ def create_hourbefore(data):
 # Adds weather from weather file into the data file. Assumes weather file is formatted
 def add_weather(data, weather):
     print("Adding Weather")
+    data.Unix = data.Unix.astype(int)
+    weather.Unix = weather.Unix.astype(int)
+    data.Grid_Num = data.Grid_Num.astype(int)
+    weather.Grid_Num = weather.Grid_Num.astype(int)
     ##Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out.
     # data = data.drop(['precipIntensity'], axis=1)
 
     # Merge the weather variables for the hour of the accident based on time and grid block
     # Merge the event/conditions before columns based on hour before and grid block
-    newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
-                                          'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
-                                          'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
-                                          'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
-                                          'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
-                                          'EventBefore', 'ConditionBefore', 'hourbefore']],
-                           on=['Unix', 'Grid_Block'])
+    newdata = pandas.merge(data, weather[['Grid_Num', 'cloudCover', 'dewPoint',
+                                           'humidity', 'precipIntensity', 'precipProbability', 'precipType',
+                                           'pressure', 'temperature', 'Unix', 'uvIndex',
+                                           'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event',
+                                           'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
+                           on=['Unix', 'Grid_Num'])
 
     # Applying rain before to data
     weather['hourbefore'] = weather.Unix.astype(int)
     weather['RainBefore'] = weather.Rain.astype(int)
     newdata.hourbefore = newdata.hourbefore.astype(int)
-    newdata = pandas.merge(data, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
+    newdata = pandas.merge(newdata, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
     # Code to aggregate weather #
-    newdata = finding_binaries(newdata)
+    # newdata = finding_binaries(newdata)
     return newdata
 
 
@@ -113,9 +116,9 @@ def main():
     # Read in our data
     weather = feather.read_dataframe("../")
     data = pandas.read_csv("../")
+    newData = add_weather(data, weather)
 
-    data = add_weather(data, weather)
-    data.to_csv("../", index=False)
+    newData.to_csv("../", index=False)
 
 
 if __name__ == "__main__":

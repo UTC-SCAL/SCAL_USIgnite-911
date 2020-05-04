@@ -673,10 +673,10 @@ folder = make_directory_date(date)
 # scaled, data = standarize_data(data)
 # data.to_csv(folder+"ForecastForumScaled_Test"+str(testnum)+"Original.csv", index=False)
 
-scaled = pandas.read_csv(str(folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+".csv"))
-data = pandas.read_csv(str(folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+"Original.csv"))
+scaled = pandas.read_csv(str("../"+folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+".csv"))
+data = pandas.read_csv(str("../"+folder+"ForecastForums/ForecastForumScaled_Test"+str(testnum)+"Original.csv"))
 
-modelname = "Graphs & Images/Hex Grid/Total Shift/"+split+" Split/Test "+str(testnum)+"/model_TS_hex_"+split+"Split.h5"
+modelname = "../Graphs & Images/Hex Grid/Total Shift/"+split+" Split/Test "+str(testnum)+"/model_TS_hex_"+split+"Split.h5"
 
 scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
 
