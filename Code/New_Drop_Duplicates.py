@@ -4,31 +4,18 @@ import time
 import math
 import geopy.distance
 import swifter
+from datetime import datetime
 
-# accidents = pandas.read_csv("Excel & CSV Sheets/Accidents/2017-2019 Accidents Old Style.csv")
 
-accidents = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData.csv")
+accidents = pandas.read_csv("Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
 
-# print(len([i for i in accidents.Latitude if i > 36]) )
-# exit()
-
-cleaned = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData_DropDups.csv")
+cleaned = pandas.read_csv("Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_DropDups.csv")
 
 lastcleaned = pandas.Timestamp(cleaned['Response Date'].values[-1]).date()
+
 accidents['Date'] = accidents.apply(lambda x : pandas.Timestamp(x['Response Date']).date(), axis=1)
-
-# print(type(lastcleaned))
-# print(type(accidents['Response Date'].values[0]))
-# exit()
-# accidents['Unix'] = accidents.swifter.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Time).zfill(2), "%m/%d/%y %H:%M:%S"), axis=1)
-# accidents['Unix'] = accidents.swifter.apply(lambda x : x.Unix.strftime('%s'), axis=1)
-
-# accidents['Unix'] = accidents.swifter.apply(lambda x : pandas.datetime.strptime(x.Response_Date, "%m/%d/%y %H:%M"), axis=1)
-# accidents['Unix'] = accidents.swifter.apply(lambda x : x.Unix.strftime('%s'), axis=1)
-
-# accidents['Unix'] = accidents['Unix'].astype(str).astype(int)
+accidents['Hour'] = accidents.apply(lambda x : pandas.Timestamp(x['Response Date']).hour, axis=1)
 accidents['Coords'] = accidents['Latitude'].astype(str) + " , " +accidents['Longitude'].astype(str)
-# print(accidents.tail())
 
 start = time.time()
 drops = list()
@@ -44,9 +31,17 @@ for i, _ in enumerate(accidents.values):
                     drops.append(j)
 keeps = accidents.drop(drops)
 end = time.time()
+keeps = keeps.drop(['Coords', 'OK'], axis=1)
+
+##Getting the hour/date combo of the unix time here to avoid any missed duplicates. 
+keeps['Unix'] = keeps.apply(lambda x : pandas.datetime.strptime(str(x.Date) + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
+keeps['Unix'] = keeps.apply(lambda x : x.UnixTest.strftime('%s'), axis=1)
+
 print("Time taken:",round(((end-start)/60),2))
 print("Total Accidents Begin", len(accidents.values))
 print("Total Accidents End", len(keeps.values))
 print("Difference of:", int(len(accidents.values)-len(keeps.values)), "and percent of:",\
      round(100*len(keeps.values)/len(accidents.values),2))
-keeps.to_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/RawAccidentData_DropDupsTest.csv")
+
+
+keeps.to_csv("Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_DropDupsTest.csv", index=False)
