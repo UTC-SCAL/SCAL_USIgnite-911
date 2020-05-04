@@ -25,30 +25,18 @@ def find_cred(service):
 
 ##finds binary variables for the given event/conditions. 
 def finding_binaries(data):
-    # starttime = datetime.datetime.now()
-    # print("Beginning Lowercase conversion at:", starttime)
     data.Event = data.Event.apply(lambda x: x.lower())
     data.Conditions = data.Conditions.apply(lambda x: x.lower())
-    data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
-    data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
-    # lowertime = datetime.datetime.now()
-    # print("Lowercase conversion done, Beginning Binary Lambdas at:", lowertime - starttime)
-    data['Rain'] = data.apply(lambda x : 1 if ("rain" in x.Event or "rain" in x.Conditions) else 0, axis=1)
-    # raintime = datetime.datetime.now()
-    # print("Rain completed in:", raintime - lowertime)
-    data['Cloudy'] = data.apply(lambda x : 1 if ("cloud" in x.Event or "cloud" in x.Conditions) else 0, axis=1)
-    # cloudtime = datetime.datetime.now()
-    # print("Cloudy completed in:", cloudtime - raintime)
-    data['Foggy'] = data.apply(lambda x : 1 if ("fog" in x.Event or "fog" in x.Conditions) else 0, axis=1)
-    # fogtime = datetime.datetime.now()
-    # print("Foggy completed in:", fogtime - cloudtime)
-    data['Snow'] = data.apply(lambda x : 1 if ("snow" in x.Event or "snow" in x.Conditions) else 0, axis=1)
-    # snowtime = datetime.datetime.now()
-    # print("Snow completed in:", snowtime - fogtime)
-    data['Clear'] = data.apply(lambda x : 1 if ("clear" in x.Event or "clear" in x.Conditions) else 0, axis=1)
-    # cleartime = datetime.datetime.now()
-    # print("Clear completed in:", cleartime - snowtime)
-    data = data.drop_duplicates(subset=['Unix', 'Grid_Block'], keep='last')
+    # data.EventBefore = data.EventBefore.apply(lambda x: x.lower())
+    # data.ConditionBefore = data.ConditionBefore.apply(lambda x: x.lower())
+
+    data['Rain'] = data.apply(lambda x: 1 if ("rain" in x.Event or "rain" in x.Conditions) else 0, axis=1)
+    data['Cloudy'] = data.apply(lambda x: 1 if ("cloud" in x.Event or "cloud" in x.Conditions) else 0, axis=1)
+    data['Foggy'] = data.apply(lambda x: 1 if ("fog" in x.Event or "fog" in x.Conditions) else 0, axis=1)
+    data['Snow'] = data.apply(lambda x: 1 if ("snow" in x.Event or "snow" in x.Conditions) else 0, axis=1)
+    data['Clear'] = data.apply(lambda x: 1 if ("clear" in x.Event or "clear" in x.Conditions) else 0, axis=1)
+
+    # data = data.drop_duplicates(subset=['Unix', 'Grid_Block'], keep='last')
     return data
 
 
@@ -102,22 +90,22 @@ def add_weather(data, weather):
 
     # Merge the weather variables for the hour of the accident based on time and grid block
     # Merge the event/conditions before columns based on hour before and grid block
-    # newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
-    #                                       'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
-    #                                       'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
-    #                                       'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
-    #                                       'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
-    #                                       'EventBefore', 'ConditionBefore', 'hourbefore']],
-    #                        on=['Unix', 'Grid_Block'])
+    newdata = pandas.merge(data, weather[['Grid_Block', 'Unix', 'humidity', 'windSpeed', 'windBearing', 'uvIndex',
+                                          'precipIntensity', 'apparentTemperature', 'windGust', 'cloudCover', 'temperature',
+                                          'dewPoint', 'visibility', 'precipType', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear',
+                                          'RainBefore', 'cloudCover', 'dewPoint', 'ozone', 'precipAccumulation',
+                                          'precipIntensity', 'precipProbability', 'pressure', 'Event', 'Conditions',
+                                          'EventBefore', 'ConditionBefore', 'hourbefore']],
+                           on=['Unix', 'Grid_Block'])
 
     # Applying rain before to data
     weather['hourbefore'] = weather.Unix.astype(int)
     weather['RainBefore'] = weather.Rain.astype(int)
-    data.hourbefore = data.hourbefore.astype(int)
+    newdata.hourbefore = newdata.hourbefore.astype(int)
     newdata = pandas.merge(data, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
     # Code to aggregate weather #
-    # newdata = aggregate_weather(newdata)
+    newdata = finding_binaries(newdata)
     return newdata
 
 

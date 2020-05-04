@@ -106,9 +106,9 @@ def featureSelection(data, testNum):
 
     # plot graph of feature importances for better visualization
     feat_importances = pandas.Series(model.feature_importances_, index=features)
-    feat_importances.nlargest(20).plot(kind='barh')
+    feat_importances.nlargest(15).plot(kind='barh')
     plt.xlim(0, .50)
-    plt.title("Feature Selection Total Shift No Split Test % d MMR" % testNum)
+    plt.title("Feature Selection Temporal 7525 Split")
     plt.show()
 
 
@@ -150,14 +150,8 @@ def correlationHeatmap(data):
     plt.show()
 
 
-data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 75-25 Split.csv")
-# data = data.drop(['City', 'Latitude', 'Longitude', 'precipProbability', 'precipType', 'Event', 'Conditions',
-#                   'hourbefore', 'Date', 'GRID_ID', 'windBearing', 'windGust', 'pressure', 'Unix', 'cloudCover',
-#                   'dewPoint'], axis=1)
-data = data.reindex(columns=['Accident', 'Join_Count', 'temperature', 'humidity', 'windSpeed', 'Hour', 'uvIndex',
-                             'Grid_Num', 'visibility', 'DayFrame', 'precipIntensity', 'DayOfWeek', 'FUNC_CLASS', 'NBR_LANES'])
-data.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 75-25 Split Top 13.csv")
-exit()
+data = pandas.read_csv("../")
+# data = data.drop([], axis=1)
 testNum = 0
 # data = test_type(data, testNum)
 # PCA_testing(data)

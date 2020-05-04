@@ -3,7 +3,7 @@ import os, sys
 import random
 import time
 from datetime import datetime
-import feather
+# import feather
 path = os.path.dirname(sys.argv[0])
 folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
@@ -223,7 +223,7 @@ def get_negatives_master(calldata, compare):
     negative_samples.to_csv("../", index=False)
 
 
-##Finding the 'true' negatives from a larger set. 
+# Finding the 'true' negatives from a larger set
 def cut_negatives(negatives, accidents):
     """
     This cuts our negative samples down to what we call "true" negatives. The idea behind this is using the DayFrame
@@ -322,3 +322,9 @@ def combine_negatives(p1, p2, p3, p4):
     print("Dropped", beforeLen - len(negComb), "negatives")
     negComb.to_csv("../", index=False)
 
+
+negatives = pandas.read_csv("../")
+accidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/All Accidents Formatted.csv")
+negatives = negatives.reindex(columns=accidents.columns)
+newData = dividing_data(accidents, negatives, 50)
+newData.to_csv("../")
