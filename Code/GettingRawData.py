@@ -98,6 +98,8 @@ def pull_emails(total, lastday):
         else:
             clear()
             print("...Looking for new accident reports, ", dateofemail)
+    if os.path.exists("tmp.xlsx"):
+        os.remove("tmp.xlsx")
     return total
 
 
@@ -119,7 +121,6 @@ def add_grid_to_accidents_sf(accpath, hexpath, savepath):
     point = geopandas.GeoDataFrame.from_file(accpath) 
     poly  = geopandas.GeoDataFrame.from_file(hexpath)
     pointInPolys = sjoin(point, poly)
-    # print(type(pointInPolys))
     del pointInPolys['index_right']
     gridinfo = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfoComplete.csv")
     newdata = pandas.merge(pointInPolys, gridinfo,
