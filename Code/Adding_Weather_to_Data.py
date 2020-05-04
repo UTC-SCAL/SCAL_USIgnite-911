@@ -114,11 +114,11 @@ def add_weather(data, weather):
 
 def main():
     # Read in our data
-    weather = feather.read_dataframe("../")
-    data = pandas.read_csv("../")
+    weather = feather.read_dataframe("../Ignore/2019 Weather.feather")
+    data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Grid Fix/GF 2019 Negatives.csv")
     newData = add_weather(data, weather)
 
-    newData.to_csv("../", index=False)
+    newData.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Grid Fix/GF 2019 Negatives Weather.csv", index=False)
 
 
 if __name__ == "__main__":
