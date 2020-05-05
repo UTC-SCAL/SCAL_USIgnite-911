@@ -106,7 +106,7 @@ def standardize(data):
     # Create the Scaler object
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
-    dataScaled = scaler.fit_transform(dataset)
+    dataScaled = scaler.fit_transform(data)
     dataScaled = pandas.DataFrame(dataScaled, columns=columns)
     return dataScaled
 

@@ -1,0 +1,17 @@
+General Test Layout:
+	I've got 5 models, each with 3 splits, and of those splits I've got 4 test types each with it's own reduced version using feature importance.
+
+Tests:
+	1: All variables
+		- Rationale: to see how an all in variable test performs 
+	2: No redundant variables
+		- Rationale: I manually removed the variables I know to be redundant to one another, such as Lat/long as it's covered by Grid Num, or Unix since it's a unique value per entry 
+		- Variables removed: dew point, unix, lat/long, hour
+	3: No weather variables
+		- Rationale: wanted to see how the model would do with only temporal and spatial info
+	4: No spatial variables (aside from grid num)
+		- Rationale: wanted to see how the model would do with limited spatial info
+
+Notes:
+	- Talking point: discuss why test 1 feature importance isn't trustworthy/valuable since it covers variables like Unix, which is such a specific variable 
+	- Basically, tests 3 and 4 are used to see how strong weather and roadway geometrics are on their own for accident prediction 

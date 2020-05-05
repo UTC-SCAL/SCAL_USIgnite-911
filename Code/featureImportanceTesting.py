@@ -19,43 +19,36 @@ def test_type(data, type):
     :param type:
     :return:
     """
-    col1 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+    col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
 
-    col2 = ['Accident', 'Clear', 'Cloudy', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-            'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+    col2 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
 
-    col3 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
-            'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+    col3 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek']
 
-    col4 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-             'Grid_Num', 'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-             'WeekDay', 'cloudCover', 'precipIntensity']
-
-    col5 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'FUNC_CLASS', 'Foggy',
-             'Grid_Num', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN',
-             'WeekDay', 'cloudCover', 'precipIntensity']
-
-    col6 = ['Accident', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'FUNC_CLASS', 'Foggy',
-            'Hour', 'Join_Count', 'NBR_LANES', 'Rain', 'RainBefore', 'Snow', 'TY_TERRAIN', 'Unix',
-            'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed']
+    col4 = ['Accident', 'Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
     if type == 1:
-        data = data.reindex(columns=col1)
+        dataChanged = data.reindex(columns=col1)
     elif type == 2:
-        data = data.reindex(columns=col2)
+        dataChanged = data.reindex(columns=col2)
     elif type == 3:
-        data = data.reindex(columns=col3)
+        dataChanged = data.reindex(columns=col3)
     elif type == 4:
-        data = data.reindex(columns=col4)
-    elif type == 5:
-        data = data.reindex(columns=col5)
-    elif type == 6:
-        data = data.reindex(columns=col6)
+        dataChanged = data.reindex(columns=col4)
 
-    return data
+    return dataChanged
 
 
 def univariateSelection(data):
@@ -108,7 +101,7 @@ def featureSelection(data, testNum):
     feat_importances = pandas.Series(model.feature_importances_, index=features)
     feat_importances.nlargest(15).plot(kind='barh')
     plt.xlim(0, .50)
-    plt.title("Feature Selection Temporal 7525 Split")
+    plt.title("Feature Selection Date Shift 75-25 Split Test % d" % testNum)
     plt.show()
 
 
@@ -150,10 +143,10 @@ def correlationHeatmap(data):
     plt.show()
 
 
-data = pandas.read_csv("../")
-# data = data.drop([], axis=1)
-testNum = 0
-# data = test_type(data, testNum)
+data = pandas.read_csv("../Jeremy Thesis/Date Shift/Data/DS Data 75-25 Split.csv")
+# data = data.drop([""], axis=1)
+testNum = 4
+data = test_type(data, testNum)
 # PCA_testing(data)
 # univariateSelection(data)
 featureSelection(data, testNum)
