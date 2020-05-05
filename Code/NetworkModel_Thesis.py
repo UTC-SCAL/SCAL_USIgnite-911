@@ -104,7 +104,7 @@ def standardize(data):
     return dataScaled
 
 
-def fitting_loops(X, Y, folder, modelname):
+def fitting_loops(X, Y, folder, modelname, avgHolderName):
     # 2 Defining a Neural Network
     # Model creation
     model = Sequential()
@@ -118,7 +118,10 @@ def fitting_loops(X, Y, folder, modelname):
     # Use for standard sized variable set
     model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
     model.add(Dropout(.1))
-    model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
+    try:
+        model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
+    except:
+        model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
 
     # Output
     model.add(Dense(1, activation='sigmoid'))
@@ -128,7 +131,7 @@ def fitting_loops(X, Y, folder, modelname):
     print(model.summary())
 
     # File path to hold results of learning cycle
-    file = folder + str(datetime.date.today()) + "AverageHolder.csv"
+    file = folder + avgHolderName + "Averages.csv"
 
     # Training Cycles
     # Each cycle's output is the next cycle's input, so the model learns for each new cycle
@@ -159,7 +162,7 @@ def fitting_loops(X, Y, folder, modelname):
         # If the model doesn't improve over the past X epochs, exit training
         patience = 30
         stopper = callbacks.EarlyStopping(monitor='accuracy', patience=patience)
-        hist = model.fit(X_train, y_train, epochs=1000, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
+        hist = model.fit(X_train, y_train, epochs=500, batch_size=5000, validation_data=(X_test, y_test), verbose=1,
                          callbacks=[stopper])
 
         # Save the weights for next run.
@@ -248,24 +251,50 @@ def fitting_loops(X, Y, folder, modelname):
 # 5. Evaluate that model on some data!
 
 
-# 1. Load Data
-data = pandas.read_csv("../")
-# Select which type of test you want to do: this determines what columns are used
-data = test_type(data, 1)
-# Standardize the data before modelling
-data = standardize(data)
+files = ['Jeremy Thesis/Grid Fix/Data/GF Data No Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 50-50 Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 75-25 Split.csv',
+         'Jeremy Thesis/Hour Shift/Data/HS Data No Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 50-50 Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 75-25 Split.csv',
+         'Jeremy Thesis/Spatial Shift/Data/SS Data No Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 75-25 Split.csv',
+         'Jeremy Thesis/Total Shift/Data/TS Data No Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 75-25 Split.csv',
+         'Jeremy Thesis/Date Shift/Data/DS Data No Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 50-50 Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 75-25 Split.csv']
 
-# Choose a folder for storing all of the results of the code in, including the model itself
-# Note, if the folder you specify doesn't exist, you'll have to create it
-# These are made for code automation later on
-folder = '../'
-modelname = ".h5"
+for file in files:
+    # 1. Load Data
+    data = pandas.read_csv("../%s" % file)
+    for i in range(1, 5):
+        # Select which type of test you want to do: this determines what columns are used
+        cutData = test_type(data, i)
+        # Standardize the data before modelling
+        cutData = standardize(cutData)
 
-# Shuffling
-data = shuffle(data)
-# Creating X and Y. Accident is the first column, therefore it is 0
-X = data.iloc[:, 1:(len(data.columns) + 1)].values  # Our independent variables
-Y = data.iloc[:, 0].values  # Our dependent variable
+        if "Grid Fix" in file:
+            modelType = "Grid Fix"
+            modelname = "model_GF_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            avgHolderName = "GF " + file.split(" ")[4] + " Split Test %d" % i
+        elif "Hour Shift" in file:
+            modelType = "Hour Shift"
+            modelname = "model_HS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            avgHolderName = "HS " + file.split(" ")[4] + " Split Test %d" % i
+        elif "Spatial Shift" in file:
+            modelType = "Spatial Shift"
+            modelname = "model_SS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            avgHolderName = "SS " + file.split(" ")[4] + " Split Test %d" % i
+        elif "Total Shift" in file:
+            modelType = "Total Shift"
+            modelname = "model_TS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            avgHolderName = "TS " + file.split(" ")[4] + " Split Test %d" % i
+        else:
+            print("Model naming error")
+            exit()
+        # Choose a folder for storing all of the results of the code in, including the model itself
+        # Note, if the folder you specify doesn't exist, you'll have to create it
+        # These are made for code automation later on
+        folder = '../Jeremy Thesis/'+modelType+'/Model Results/'
 
-# Steps 2-5 are inside the fitting loops method
-fitting_loops(X, Y, data, folder, modelname)
+        # Shuffling
+        cutData = shuffle(cutData)
+        # Creating X and Y. Accident is the first column, therefore it is 0
+        X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values  # Our independent variables
+        Y = cutData.iloc[:, 0].values  # Our dependent variable
+
+        # Steps 2-5 are inside the fitting loops method
+        fitting_loops(X, Y, folder, modelname, avgHolderName)
