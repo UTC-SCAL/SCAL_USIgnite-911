@@ -79,7 +79,7 @@ def univariateSelection(data):
     print(featureScores.nlargest(10,'Score'))  # print 10 best features
 
 
-def featureSelection(data, testNum):
+def featureSelection(data, figName, modelName):
     # If we want to MinMaxReduce the data (normalize it)
     # Get the columns of the data
     columns = data.columns.values[0:len(data.columns.values)]
@@ -101,8 +101,9 @@ def featureSelection(data, testNum):
     feat_importances = pandas.Series(model.feature_importances_, index=features)
     feat_importances.nlargest(15).plot(kind='barh')
     plt.xlim(0, .50)
-    plt.title("Feature Selection Date Shift 75-25 Split Test % d" % testNum)
-    plt.show()
+    plt.title(figName)
+    plt.savefig("../Jeremy Thesis/"+modelName+"/Feature Selection/"+figName+".png", bbox_inches='tight')
+    # plt.show()
 
 
 def correlationHeatmap(data):
@@ -143,11 +144,38 @@ def correlationHeatmap(data):
     plt.show()
 
 
-data = pandas.read_csv("../Jeremy Thesis/Date Shift/Data/DS Data 75-25 Split.csv")
-# data = data.drop([""], axis=1)
-testNum = 4
-data = test_type(data, testNum)
+def automatedRunner():
+    """
+    An automated code runner to go through a list of files and runs feature selection for those files
+    I made this for my thesis, but I thought I'd save it just for potential future use
+    """
+    files = ['Jeremy Thesis/Grid Fix/Data/GF Data No Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 50-50 Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 75-25 Split.csv',
+             'Jeremy Thesis/Hour Shift/Data/HS Data No Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 50-50 Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 75-25 Split.csv',
+             'Jeremy Thesis/Spatial Shift/Data/SS Data No Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 75-25 Split.csv',
+             'Jeremy Thesis/Total Shift/Data/TS Data No Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 75-25 Split.csv', ]
+    for file in files:
+        data = pandas.read_csv("../%s" % file)
+        for i in range(1, 5):
+            testNum = i
+            cutData = test_type(data, testNum)
+            if "Grid Fix" in file:
+                modelName = "Grid Fix"
+                figName = "Feature Selection GF " + file.split(" ")[4] + " Split Test %d" % testNum
+            elif "Hour Shift" in file:
+                modelName = "Hour Shift"
+                figName = "Feature Selection HS " + file.split(" ")[4] + " Split Test %d" % testNum
+            elif "Spatial Shift" in file:
+                modelName = "Spatial Shift"
+                figName = "Feature Selection SS " + file.split(" ")[4] + " Split Test %d" % testNum
+            elif "Total Shift" in file:
+                modelName = "Total Shift"
+                figName = "Feature Selection TS " + file.split(" ")[4] + " Split Test %d" % testNum
+            else:
+                modelName = 0
+            featureSelection(cutData, figName, modelName)
+
+
 # PCA_testing(data)
 # univariateSelection(data)
-featureSelection(data, testNum)
+# featureSelection(cutData, figName, modelName)
 # correlationHeatmap(data)
