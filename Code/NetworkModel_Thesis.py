@@ -251,11 +251,7 @@ def fitting_loops(X, Y, folder, modelname, avgHolderName):
 # 5. Evaluate that model on some data!
 
 
-files = ['Jeremy Thesis/Grid Fix/Data/GF Data No Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 50-50 Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 75-25 Split.csv',
-         'Jeremy Thesis/Hour Shift/Data/HS Data No Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 50-50 Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 75-25 Split.csv',
-         'Jeremy Thesis/Spatial Shift/Data/SS Data No Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 75-25 Split.csv',
-         'Jeremy Thesis/Total Shift/Data/TS Data No Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 75-25 Split.csv',
-         'Jeremy Thesis/Date Shift/Data/DS Data No Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 50-50 Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 75-25 Split.csv']
+files = []
 
 for file in files:
     # 1. Load Data
@@ -282,6 +278,10 @@ for file in files:
             modelType = "Total Shift"
             modelname = "model_TS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
             avgHolderName = "TS " + file.split(" ")[4] + " Split Test %d" % i
+        elif "Date Shift" in file:
+            modelType = "Date Shift"
+            modelname = "model_DS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            avgHolderName = "DS " + file.split(" ")[4] + " Split Test %d" % i
         else:
             print("Model naming error")
             exit()

@@ -144,38 +144,32 @@ def correlationHeatmap(data):
     plt.show()
 
 
-def automatedRunner():
-    """
-    An automated code runner to go through a list of files and runs feature selection for those files
-    I made this for my thesis, but I thought I'd save it just for potential future use
-    """
-    files = ['Jeremy Thesis/Grid Fix/Data/GF Data No Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 50-50 Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 75-25 Split.csv',
-             'Jeremy Thesis/Hour Shift/Data/HS Data No Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 50-50 Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 75-25 Split.csv',
-             'Jeremy Thesis/Spatial Shift/Data/SS Data No Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 75-25 Split.csv',
-             'Jeremy Thesis/Total Shift/Data/TS Data No Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 75-25 Split.csv', ]
-    for file in files:
-        data = pandas.read_csv("../%s" % file)
-        for i in range(1, 5):
-            testNum = i
-            cutData = test_type(data, testNum)
-            if "Grid Fix" in file:
-                modelName = "Grid Fix"
-                figName = "Feature Selection GF " + file.split(" ")[4] + " Split Test %d" % testNum
-            elif "Hour Shift" in file:
-                modelName = "Hour Shift"
-                figName = "Feature Selection HS " + file.split(" ")[4] + " Split Test %d" % testNum
-            elif "Spatial Shift" in file:
-                modelName = "Spatial Shift"
-                figName = "Feature Selection SS " + file.split(" ")[4] + " Split Test %d" % testNum
-            elif "Total Shift" in file:
-                modelName = "Total Shift"
-                figName = "Feature Selection TS " + file.split(" ")[4] + " Split Test %d" % testNum
-            else:
-                modelName = 0
-            featureSelection(cutData, figName, modelName)
+# Read in the file and set what the test number is, that's all you've gotta change
+file = ""
+testNum = 4
 
+data = pandas.read_csv("../%s" % file)
+cutData = test_type(data, testNum)
 
-# PCA_testing(data)
-# univariateSelection(data)
-# featureSelection(cutData, figName, modelName)
+if "Grid Fix" in file:
+    modelName = "Grid Fix"
+    figName = "Feature Selection GF " + file.split(" ")[4] + " Split Test %d" % testNum
+elif "Hour Shift" in file:
+    modelName = "Hour Shift"
+    figName = "Feature Selection HS " + file.split(" ")[4] + " Split Test %d" % testNum
+elif "Spatial Shift" in file:
+    modelName = "Spatial Shift"
+    figName = "Feature Selection SS " + file.split(" ")[4] + " Split Test %d" % testNum
+elif "Total Shift" in file:
+    modelName = "Total Shift"
+    figName = "Feature Selection TS " + file.split(" ")[4] + " Split Test %d" % testNum
+elif "Date Shift" in file:
+    modelName = "Date Shift"
+    figName = "Feature Selection DS " + file.split(" ")[4] + " Split Test %d" % testNum
+else:
+    modelName = 0
+
+featureSelection(cutData, figName, modelName)
 # correlationHeatmap(data)
+# PCA_testing(data)
+# # univariateSelection(data)

@@ -1,0 +1,14 @@
+DS 5050 T1,Unix,uvIndex,Longitude,Latitude,humidity,windSpeed,temperature,dewPoint,pressure,Join_Count,Grid_Num,Hour,visibility,cloudCover,DayOfWeek
+DS 5050 T2,temperature,windSpeed,humidity,pressure,Join_Count,Grid_Num,uvIndex,visibility,cloudCover,DayFrame,DayOfWeek,precipIntensity,FUNC_CLASS,NBR_LANES,WeekDay
+DS 5050 T3,Grid_Num,Join_Count,DayOfWeek,DayFrame,WeekDay,FUNC_CLASS,NBR_LANES,TY_TERRAIN,,,,,,,
+DS 5050 T4,temperature,windSpeed,humidity,Grid_Num,pressure,visibility,cloudCover,uvIndex,precipIntensity,DayFrame,DayOfWeek,WeekDay,RainBefore,Cloudy,Clear
+DS 7525 T1,Latitude,Longitude,Unix,humidity,uvIndex,temperature,dewPoint,windSpeed,pressure,Join_Count,Hour,Grid_Num,visibility,cloudCover,DayFrame
+DS 7525 T2,temperature,windSpeed,humidity,pressure,Join_Count,Grid_Num,visibility,uvIndex,cloudCover,DayFrame,precipIntensity,DayOfWeek,FUNC_CLASS,NBR_LANES,WeekDay
+DS 7525 T3,Grid_Num,Join_Count,DayOfWeek,DayFrame,WeekDay,FUNC_CLASS,NBR_LANES,TY_TERRAIN,,,,,,,
+DS 7525 T4,temperature,windSpeed,Grid_Num,humidity,pressure,visibility,cloudCover,uvIndex,DayFrame,precipIntensity,DayOfWeek,WeekDay,RainBefore,Cloudy,Clear
+DS NoS T1,Latitude,Longitude,temperature,dewPoint,humidity,windSpeed,Unix,uvIndex,Hour,Join_Count,Grid_Num,pressure,visibility,cloudCover,DayFrame
+DS NoS T2,temperature,windSpeed,humidity,pressure,Grid_Num,Join_Count,visibility,cloudCover,uvIndex,DayFrame,precipIntensity,DayOfWeek,FUNC_CLASS,NBR_LANES,WeekDay
+DS NoS T3,Grid_Num,Join_Count,DayFrame,DayOfWeek,WeekDay,FUNC_CLASS,NBR_LANES,TY_TERRAIN,,,,,,,
+DS NoS T4,temperature,windSpeed,Grid_Num,humidity,pressure,visibility,cloudCover,uvIndex,DayFrame,precipIntensity,DayOfWeek,WeekDay,RainBefore,Cloudy,Clear
+GF 5050 T1,Hour,DayFrame,Unix,Longitude,humidity,temperature,Latitude,windSpeed,dewPoint,pressure,uvIndex,Join_Count,Grid_Num,visibility,cloudCover
+GF 5050 T2,,,,,,,,,,,,,,,
