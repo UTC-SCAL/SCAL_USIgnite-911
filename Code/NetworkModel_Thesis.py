@@ -243,6 +243,20 @@ def fitting_loops(X, Y, folder, modelname, avgHolderName):
         # Save the average holder file:
         avg_holder.to_csv(file, sep=",")
 
+
+def featureSelectionColumns(data, modelRow):
+    """
+    A method for getting what columns to keep for the feature selection tests done for the different datasets
+    It reads in the file that has the most important variables per test
+    Then, cleans the list to remove any empties (since some tests have a smaller number of variables)
+    Then, converts the values in the list to strings, then sets the columns of the data
+    """
+    columnData = pandas.read_csv("../Jeremy Thesis/Feature Selection Results.csv")
+    rowNum = columnData[columnData["Model"] == str(modelRow)].index[0]  # get the actual row number based on the model
+    columns = list(columnData.iloc[rowNum, ])  # get the row
+    columns = [x for x in columns if str(x) != 'nan']  # clean the list of empties
+    return data.reindex(columns=columns[1:])  # set the columns of the data
+
 # The steps of creating a neural network or deep learning model
 # 1. Load Data
 # 2. Defining a neural network
@@ -251,7 +265,11 @@ def fitting_loops(X, Y, folder, modelname, avgHolderName):
 # 5. Evaluate that model on some data!
 
 
-files = []
+files = ['Jeremy Thesis/Date Shift/Data/DS Data No Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 50-50 Split.csv', 'Jeremy Thesis/Date Shift/Data/DS Data 75-25 Split.csv',
+         'Jeremy Thesis/Grid Fix/Data/GF Data No Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 50-50 Split.csv', 'Jeremy Thesis/Grid Fix/Data/GF Data 75-25 Split.csv',
+         'Jeremy Thesis/Hour Shift/Data/HS Data No Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 50-50 Split.csv', 'Jeremy Thesis/Hour Shift/Data/HS Data 75-25 Split.csv',
+         'Jeremy Thesis/Spatial Shift/Data/SS Data No Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv', 'Jeremy Thesis/Spatial Shift/Data/SS Data 75-25 Split.csv',
+         'Jeremy Thesis/Total Shift/Data/TS Data No Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv', 'Jeremy Thesis/Total Shift/Data/TS Data 75-25 Split.csv']
 
 for file in files:
     # 1. Load Data
@@ -264,24 +282,59 @@ for file in files:
 
         if "Grid Fix" in file:
             modelType = "Grid Fix"
-            modelname = "model_GF_" + file.split(" ")[4] + "Split_Test%d.h5" % i
-            avgHolderName = "GF " + file.split(" ")[4] + " Split Test %d" % i
+            # Use thse two lines for models not using the feature selection variables
+            # modelname = "model_GF_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            # avgHolderName = "GF " + file.split(" ")[4] + " Split Test %d" % i
+
+            # Use these tree lines for models using the feature selection variables
+            fsModel = "GF " + file.split(" ")[4] + " T%d" % i
+            modelname = "model_GF_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "GF " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+
         elif "Hour Shift" in file:
             modelType = "Hour Shift"
-            modelname = "model_HS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
-            avgHolderName = "HS " + file.split(" ")[4] + " Split Test %d" % i
+            # Use thse two lines for models not using the feature selection variables
+            # modelname = "model_HS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            # avgHolderName = "HS " + file.split(" ")[4] + " Split Test %d" % i
+
+            # Use these tree lines for models using the feature selection variables
+            fsModel = "HS " + file.split(" ")[4] + " T%d" % i
+            modelname = "model_HS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "HS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+
         elif "Spatial Shift" in file:
             modelType = "Spatial Shift"
-            modelname = "model_SS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
-            avgHolderName = "SS " + file.split(" ")[4] + " Split Test %d" % i
+            # Use thse two lines for models not using the feature selection variables
+            # modelname = "model_SS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            # avgHolderName = "SS " + file.split(" ")[4] + " Split Test %d" % i
+
+            # Use these tree lines for models using the feature selection variables
+            fsModel = "SS " + file.split(" ")[4] + " T%d" % i
+            modelname = "model_SS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "SS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+
         elif "Total Shift" in file:
             modelType = "Total Shift"
-            modelname = "model_TS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
-            avgHolderName = "TS " + file.split(" ")[4] + " Split Test %d" % i
+            # Use thse two lines for models not using the feature selection variables
+            # modelname = "model_TS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            # avgHolderName = "TS " + file.split(" ")[4] + " Split Test %d" % i
+
+            # Use these tree lines for models using the feature selection variables
+            fsModel = "TS " + file.split(" ")[4] + " T%d" % i
+            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+
         elif "Date Shift" in file:
             modelType = "Date Shift"
-            modelname = "model_DS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
-            avgHolderName = "DS " + file.split(" ")[4] + " Split Test %d" % i
+            # Use thse two lines for models not using the feature selection variables
+            # modelname = "model_DS_" + file.split(" ")[4] + "Split_Test%d.h5" % i
+            # avgHolderName = "DS " + file.split(" ")[4] + " Split Test %d" % i
+
+            # Use these tree lines for models using the feature selection variables
+            fsModel = "DS " + file.split(" ")[4] + " T%d" % i
+            modelname = "model_DS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "DS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+
         else:
             print("Model naming error")
             exit()
@@ -289,6 +342,9 @@ for file in files:
         # Note, if the folder you specify doesn't exist, you'll have to create it
         # These are made for code automation later on
         folder = '../Jeremy Thesis/'+modelType+'/Model Results/'
+
+        # If making models based on feature selection results, use this lines
+        cutData = featureSelectionColumns(cutData, fsModel)
 
         # Shuffling
         cutData = shuffle(cutData)
