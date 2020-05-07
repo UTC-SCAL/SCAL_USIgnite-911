@@ -1,0 +1,64 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+avg = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/RainyVSClearTesting.csv")
+avg$Split = as.factor(avg$Split)
+avg$Status = as.factor(avg$Status)
+png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/Hex Grid/RainyTesting/RainyVersusClearBoth.png", width=8.5,height=4.5,units='in', res=600,bg = 'transparent')
+ggplot(avg, aes(x=Specificity, y=Recall)) +
+  geom_point(aes(shape=Split, color=Status), size=4) + geom_vline(xintercept = .5, linetype="dotted", 
+                color = "blue", size=1) + geom_hline(yintercept = .5, linetype="dotted", 
+                color = "blue", size=1) + xlim(0, 1) + ylim(0, 1) 
+# + scale_color_manual(values= c('red','orange','yellow','green','pink','darkblue','blue','purple','darkgreen','darkgray'))
+dev.off()
+```
+
+```{r}
+colors = list("1"=c('red','orange','yellow','green','blue'), "2"= c('pink','darkblue','purple','darkgreen','darkgray'))
+status = c('Clear','Rainy')
+plots <- vector('list', length(status))
+j = 1
+for(i in status){
+  testnum = avg[which(avg$Status == i),]
+    plot = (ggplot(testnum, aes(x=Specificity, y=Recall)) +
+  geom_point(aes(shape=Split, color=Date), size=5) + scale_shape_manual(values=c(19,18,15,17,25,3,8)) + scale_color_manual(values=colors[[j]])) +theme(legend.position = 'right')  + xlim(0, 1) + ylim(0, 1) + ggtitle(paste(i," Predictions",sep=""))
+
+plots[[j]] = plot
+j=j+1
+}
+library(gridExtra)
+# library(grid)
+png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/Hex Grid/RainyTesting/RainyVersusClear.png", width=9,height=4.25,units='in', res=600,bg = 'transparent')
+grid.arrange(grobs = plots, ncol = 2)
+dev.off()
+```
+
+```{r}
+stats = read.csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Forecasts/RainyVersusClearStats.csv")
+# stats = stats[which(stats$Stat != 'Range'),]
+# x_points = c('Clear Accuracy', 'Rain Accuracy','Clear Precision',
+# 'Rain Precision','Clear Recall', 'Rain Recall', 'Clear FPR', 'Rain FPR', 'Clear Specificity', 'Rain Specificity')
+x_points = c('Accuracy','Precision','Recall','FPR',' Specificity')
+
+png("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Graphs & Images/Hex Grid/RainyTesting/RainyVersusClearMinMax.png", width=9,height=4.25,units='in', res=600,bg = 'transparent')
+par(mar=c(3,2.1,1,1))
+plot(x=stats$Num_Met, y=stats$Max, pch= 6, col = stats$Color, xaxt="n", xlab= "")
+segments(stats$Num_Met, stats$Min, stats$Num_Met, stats$Max, col= stats$Color, lwd=2)
+points(x=stats$Num_Met, y = stats$Min, pch = 2, col = stats$Color)
+points(x=stats$Num_Met, y = stats$Average, pch=8, col = stats$Color)
+xtick<-seq(1.25, 5.25, by=1)
+axis(side=1, at=xtick, labels = x_points)
+dev.off()
+# text(x=xtick,  par("usr")[3], labels = x_points, srt = 90, pos = 1, xpd = TRUE)
+
+# 
+# ggplot(stats, aes(x=Num_Met,y=Max)) +
+#   geom_point(aes(shape=Metric, color=Status), size=4) + geom_vline(xintercept = .5, linetype="dotted",
+#                 color = "blue", size=1) + geom_hline(yintercept = .5, linetype="dotted",
+#                 color = "blue", size=1) + xlim(0, 1) + ylim(0, 1)
+```
+
