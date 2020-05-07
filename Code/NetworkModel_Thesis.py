@@ -252,10 +252,13 @@ def featureSelectionColumns(data, modelRow):
     Then, converts the values in the list to strings, then sets the columns of the data
     """
     columnData = pandas.read_csv("../Jeremy Thesis/Feature Selection Results.csv")
+    columns = ["Accident"]  # columns we'll be appending
     rowNum = columnData[columnData["Model"] == str(modelRow)].index[0]  # get the actual row number based on the model
-    columns = list(columnData.iloc[rowNum, ])  # get the row
-    columns = [x for x in columns if str(x) != 'nan']  # clean the list of empties
-    return data.reindex(columns=columns[1:])  # set the columns of the data
+    dataRow = list(columnData.iloc[rowNum, ])  # get the row that corresponds to the row number
+    dataRow = [x for x in dataRow if str(x) != 'nan']  # clean the list of empties
+    dataRow = dataRow[1:]
+    columns = columns + dataRow
+    return data.reindex(columns=columns)  # set the columns of the data
 
 # The steps of creating a neural network or deep learning model
 # 1. Load Data
