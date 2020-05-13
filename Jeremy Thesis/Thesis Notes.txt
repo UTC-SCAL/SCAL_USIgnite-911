@@ -15,3 +15,86 @@ Tests:
 Notes:
 	- Talking point: discuss why test 1 feature importance isn't trustworthy/valuable since it covers variables like Unix, which is such a specific variable 
 	- Basically, tests 3 and 4 are used to see how strong weather and roadway geometrics are on their own for accident prediction 
+
+Results from applying Feature Selection to Models:
+	- For 50-50 Models:
+		- 4/20 models saw a decrease in Recall
+		- 8/20 models saw a decrease in Specificity
+		- 4/20 models saw no change in Recall
+		- 5/20 models saw no change in Specificity
+	- For 75-25 Models:
+		- 4/20 models saw a decrease in Recall
+		- 3/20 models saw a decrease in Specificity
+		- 5/20 models saw no change in Recall
+		- 16/20 models saw no change in Specificity
+	- For No Shift Models:
+		- 3/20 models saw a decrease in Recall
+		- 0/20 models saw a decrease in Specificity
+		- 6/20 models saw no change in Recall
+		- 20/20 models saw no change in Specificity
+	- Overall, Feature Selection was good to apply, as it benefited more models than it hurt.
+Results for Tests:
+	- For T1:
+		- For DS:
+			- Avg Recall is 32%
+			- Avg Specificity is 92%
+		- For GF:
+			- Avg Recall is 42%
+			- Avg Specificity is 88%
+		- For HS:
+			- Avg Recall is 38%
+			- Avg Specificity is 89%
+		- For SS:
+			- Avg Recall is 57%
+			- Avg Specificity is 89%
+		- For TS:
+			- Avg Recall is 61%
+			- Avg Specificity is 91%
+	- For T2:
+		- For DS:
+			- Avg Recall is 25%
+			- Avg Specificity is 94% 
+		- For GF:
+			- Avg Recall is 36%
+			- Avg Specificity is 89% 
+		- For HS:
+			- Avg Recall is 34%
+			- Avg Specificity is 90% 
+		- For SS:
+			- Avg Recall is 53%
+			- Avg Specificity is 89% 
+		- For TS:
+			- Avg Recall is 57%
+			- Avg Specificity is 90% 
+	- For T3:
+		- For DS:
+			- Avg Recall is 23%
+			- Avg Specificity is 80% 
+		- For GF:
+			- Avg Recall is 23%
+			- Avg Specificity is 87% 
+		- For HS:
+			- Avg Recall is 22%
+			- Avg Specificity is 88% 
+		- For SS:
+			- Avg Recall is 43%
+			- Avg Specificity is 87% 
+		- For TS:
+			- Avg Recall is 51%
+			- Avg Specificity is 88%
+	- For T4:
+		- For DS: 
+			- Avg Recall is 26%
+			- Avg Specificity is 94%
+		- For GF:
+			- Avg Recall is 35%
+			- Avg Specificity is 89%
+		- For HS:
+			- Avg Recall is 33%
+			- Avg Specificity is 91%
+		- For SS:
+			- Avg Recall is 39%
+			- Avg Specificity is 89%
+		- For TS:
+			- Avg Recall is 39%
+			- Avg Specificity is 89%
