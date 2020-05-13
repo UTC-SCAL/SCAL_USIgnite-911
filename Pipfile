@@ -22,6 +22,7 @@ swifter = "*"
 geopandas = "*"
 darksky = "*"
 tensorflow = "*"
+arcgis = "*"
 
 [dev-packages]
 autopep8 = "*"
