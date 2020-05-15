@@ -444,90 +444,54 @@ def finding_matches(accidents, data):
     print("This many matches were found: ", match)
 
 
-def make_directory(model, batchnum, date):
-    modeltype = (model.split("/")[-1]).split("_")[1]
+def make_directory(model, testType, date):
+    # Get the model's split
     if "75-25" in model or "7525" in model:
-        modelsplit = "75-25 Split"  ##75-25
+        modelsplit = "7525 Split"
     elif "50-50" in model or "5050" in model:
-        modelsplit = "50-50 Split"  ##50-50
+        modelsplit = "5050 Split"
     else:
-        modelsplit = "NoSplit"  ##Original
-
+        modelsplit = "NoSplit"
+    # Get the model's type
     if "GF" in model:
         modeltype = "GF"
     elif "TS" in model:
         modeltype = "TS"
+    elif "DS" in model:
+        modeltype = "DS"
+    elif "HS" in model:
+        modeltype = 'HS'
+    elif "SS" in model:
+        modeltype = "SS"
+    else:
+        print("Error in make_directory modeltype name")
+        exit()
+    # Check if the model used had feature selection or not
+    if 'FeatSelect' in model:
+        suffix = modeltype + "_" + modelsplit + "_FeatSelect_Test" + str(testType)
+    else:
+        suffix = modeltype + "_" + modelsplit + "_Test" + str(testType)
 
-    if batchnum == 0:
-        suffix = modeltype + "_" + modelsplit + "_Top13Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 1:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 2:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 3:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 4:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 5:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
-    elif batchnum == 6:
-        suffix = modeltype + "_" + modelsplit + "_Test" + str(batchnum)
-        # date = (date.split("-")[1]) + "-" + (date.split("-")[2]) + "-" + (date.split("-")[0])
-        folder = "Excel & CSV Sheets/Forecasts/" + date + "/Hex/"
+    folder = "../Jeremy Thesis/Forecasting/" + date + "/"
 
-    print("\tSaving Folder:", folder)
+    print("\tSaving Folder: ", folder)
 
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-    folderMMR = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
-    if not os.path.exists(folderMMR):
-        os.makedirs(folderMMR)
+    # folderMMR = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
+    # if not os.path.exists(folderMMR):
+    #     os.makedirs(folderMMR)
 
-    folderpred = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/TestingforPredictions/"
+    folderpred = folder + date + "/TestingforPredictions/"
     if not os.path.exists(folderpred):
         os.makedirs(folderpred)
 
-    folderfore = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/Forecast/"
+    folderfore = folder + date + "/Forecast/"
     if not os.path.exists(folderfore):
         os.makedirs(folderfore)
 
     return folder, suffix
-
-
-# This version of make_directory is a little less specific with naming
-def make_directory_alt(model):
-    modeltype = (model.split("/")[-1]).split(".")[0]
-    folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
-    suffix = modeltype + "_"
-    print("\tSaving Folder:", folder)
-
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-
-    return folder, suffix
-
-
-# This version of make_directory is a little less specific with naming
-def make_directory_date(date):
-    folder = "Excel & CSV Sheets/Forecasts/" + date + "/"
-    print("\tSaving Folder:", folder)
-
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-    return folder
 
 
 def return_empty_df(dataframe):
@@ -541,14 +505,14 @@ def return_empty_df(dataframe):
 
 
 #######################################################################################################################
-date = "02-10-2020"
-testnum = 1
-split = "No"
+# date = "02-10-2020"
+# testnum = 1
+# split = "No"
 # optional year month day variables for convenience, only if you need them
-year = int(date.split("-")[2])
-month = int(date.split("-")[0])
-day = int(date.split("-")[1])
-folder = make_directory_date(date)
+# year = int(date.split("-")[2])
+# month = int(date.split("-")[0])
+# day = int(date.split("-")[1])
+# folder = make_directory_date(date)
 # weather = feather.read_dataframe("../Ignore/Hex Weather/2020 Weather Mar 13.feather")
 
 
@@ -567,127 +531,89 @@ folder = make_directory_date(date)
 # scaled, data = standarize_data(data)
 # data.to_csv(folder+"ForecastForumScaled_Test"+str(testnum)+"Original.csv", index=False)
 
-scaled = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + ".csv"))
-data = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + "Original.csv"))
+# scaled = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + ".csv"))
+# data = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + "Original.csv"))
+#
+# modelname = "../"
 
-modelname = "../"
-
-scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
-
-folder, suffix = make_directory(modelname, testnum, date)
-
-scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
+# scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
+#
+# folder, suffix = make_directory(modelname, testnum, date)
+#
+# scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
 # data.to_csv("/Users/peteway/Desktop/Testing.csv")
 # end = datetime.datetime.now()
 # print("Forecasting Completed in:", end - start)
-exit()
+# exit()
 
 # Use this command and the two lines at the bottom of this file if you want to time this code
 # start = datetime.datetime.now()
 
 # This is a template for the forecasting file created with this code
-origdata = pandas.read_csv(
-    "Excel & CSV Sheets/Hamilton County Accident System Hex/Forecasting/Forecast Forum Hex Layout.csv", sep=",")
+forecastForum = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv", sep=",")
+forecastForum['Hour'] = forecastForum['Hour'].astype(int)
 
-weather20 = pandas.read_csv("../")
+weatherData = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
+weatherData["Grid_Num"] = weatherData["Grid_Num"].astype(int)
+weatherData['hourbefore'] = weatherData['Unix']
+weatherData['RainBefore'] = weatherData['Rain']
 
-# weather19["Grid_Num"] = weather19["Grid_Num"].astype(int)
-# weather19['hourbefore'] = weather19['Unix']
-# weather19['RainBefore'] = weather19['Rain']
+models = []
+dates = ['01-19-2020', '01-20-2020', '01-21-2020', '01-22-2020', '01-23-2020', '01-24-2020', '01-25-2020']
 
-# weather18["Grid_Num"] = weather18["Grid_Num"].astype(int)
-# weather18['hourbefore'] = weather18['Unix']
-# weather18['RainBefore'] = weather18['Rain']
-
-# weather17["Grid_Num"] = weather17["Grid_Num"].astype(int)
-# weather17['hourbefore'] = weather17['Unix']
-# weather17['RainBefore'] = weather17['Rain']
-
-##Adjusting column types and such
-origdata['Hour'] = origdata['Hour'].astype(int)
-
-##Which test version to run the model on, date wanted to predict for.
-
-
-models = ["Graphs & Images/Hex Grid/Grid Fix/Cut 75-25/model_GF_hex_uncut.h5",
-          "Graphs & Images/Hex Grid/Grid Fix/Cut 50-50/model_GF_hex_uncut.h5",
-          "Graphs & Images/Hex Grid/Grid Fix/Second Run/model_GF_hex_uncut.h5",
-          "Graphs & Images/Hex Grid/Random/Cut 50-50/model_rand_hex.h5",
-          "Graphs & Images/Hex Grid/Random/Cut 75-25/model_rand_hex.h5",
-          "Graphs & Images/Hex Grid/Random/First Run/model_rand_uncut.h5"]
-dates = ["1/1/2019", "2/4/2018", "3/12/2017", "3/17/2019", "4/12/2019", "4/22/2018", "5/11/2019", "5/16/2017",
-         "7/9/2017", "8/16/2018"]
-
-# model = "Graphs & Images/Hex Grid/Grid Fix/Cut 75-25/model_GF_hex_uncut.h5"
-# model = "Graphs & Images/Hex Grid/Grid Fix/Cut 50-50/model_GF_hex_uncut.h5"
-# model = "Graphs & Images/Hex Grid/Grid Fix/Second Run/model_GF_hex_uncut.h5"
-
-##Full Ran
-# model = "Graphs & Images/Hex Grid/Random/Cut 50-50/model_rand_hex.h5"
-# model = "Graphs & Images/Hex Grid/Random/Cut 75-25/model_rand_hex.h5"
-# model = "Graphs & Images/Hex Grid/Random/First Run/model_rand_uncut.h5"
-
-# date = "1/1/2019"
-columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-           'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-           'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-           'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
-accidentfile = "Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Hex Forecast Accidents.csv"
+accidentfile = "../Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Hex Forecast Accidents.csv"
 accidentfile = pandas.read_csv(accidentfile)
-# print(accidentfile.Date.values[0])
-# exit()
+
 for date in dates:
     print("Date is ", date)
 
     accidents = accidentfile[accidentfile['Date'] == date]
-    accidents = accidents.reindex(columns=columns)
+    # accidents = accidents.reindex(columns=columns)
 
-    year = int(date.split("/")[2])
-    month = int(date.split("/")[0])
-    day = int(date.split("/")[1])
+    year = int(date.split("-")[2])
+    month = int(date.split("-")[0])
+    day = int(date.split("-")[1])
 
-    all_weather = weather20
-
-    # Based on how the file name has the date ordered, choose a date declaration to use
-    # date = str(year)+"-"+str(month)+"-"+str(day)
     date = str(month) + "-" + str(day) + "-" + str(year)
 
     # Step 1 - Add weather
-    data = finding_weather(origdata, all_weather, year, month, day)
-
-    # print(scaled.columns)
-    # exit()
+    data = finding_weather(forecastForum, weatherData, year, month, day)
 
     # Step 3 - Predict for Accidents on Given Day - returns scaled version of data
     # Order of parameters - Scaled, testnumber, modelfilename
     for model in models:
         print(model)
         # Step 2 - Standardize Data - returns scaled version
-        columns = ['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-                   'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-                   'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-                   'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
-        data = data[columns]
-        scaled, data = standarize_data(data)
+        if 'Test1' in model:
+            data = test_type(data, 1)
+            testType = 1
+        elif 'Test2' in model:
+            data = test_type(data, 2)
+            testType = 2
+        elif 'Test3' in model:
+            data = test_type(data, 3)
+            testType = 3
+        elif 'Test4' in model:
+            data = test_type(data, 4)
+            tesType = 4
+        else:
+            print("Error in Test type assignment")
+            exit()
 
-        scaled = scaled[columns]
+        scaled, data = standarize_data(data)
         scaled = predict_accidents(scaled, model)  # This version is used for our original models
 
-        ##Step 4 - Add results to unscaled data - saves data to given filename.
+        # Step 4 - Add results to unscaled data - saves data to given filename.
         # Order of parameters - data, scaled, folder to save forecast under
-        # Choose which make_directory method you want to use, they both do the same thing but the alt version is simplified
-        folder, suffix = make_directory(model)  # Use this method for the original models
-        # folder, suffix = make_directory_alt(model)
-
+        # Choose which make_directory method you want to use,
+        # they both do the same thing but the alt version is simplified
+        folder, suffix = make_directory(model, date, testType)
         scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
 
-        ##Step 5 - Finding matches:
+        # Step 5 - Finding matches:
         print("Accidents Occurred: ", len(accidents))
         # finding_matches(accidents, data)
         # finding_matches_alt(accidents, data)
 
-        # Timing the code, if you want
-        # end = datetime.datetime.now()
-        # print("Testing completed in:", end-start)
-    data = origdata
+    data = forecastForum
