@@ -89,7 +89,7 @@ def add_weather(data, weather):
     weather.Unix = weather.Unix.astype(int)
     data.Grid_Num = data.Grid_Num.astype(int)
     weather.Grid_Num = weather.Grid_Num.astype(int)
-    ##Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out.
+    # Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out.
     # data = data.drop(['precipIntensity'], axis=1)
 
     # Merge the weather variables for the hour of the accident based on time and grid block

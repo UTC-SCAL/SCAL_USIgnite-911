@@ -152,11 +152,6 @@ def finding_weather(data, all_weather, yoa, moa, dayoa):
     print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
     data['Unix'] = 0
     data['hourbefore'] = 0
-    # If the data you are working with doesn't have an hour value, run the forloop below to create it
-    # data['Hour'] = 0
-    # date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
-    # for i, values in enumerate(data.values):
-    #     data.Hour.values[i] = data['Response.Date'].values[i].split(" ")[1].split(":")[0]
     data['Hour'] = data['Hour'].astype(int)
     data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
     data.Unix = data.Unix.astype(int)
@@ -362,12 +357,11 @@ def standarize_data(data):
     print("Scaling data")
     # Drop any empties now, since we don't want empties here!
     dataDropped = dataDropped.dropna()
-    columns = dataDropped.columns.values[0:len(dataDropped.columns.values)]
     # Create the Scaler object
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     dataScaled = scaler.fit_transform(dataDropped)
-    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    dataScaled = pandas.DataFrame(dataScaled, columns=dataDropped.columns)
     return dataScaled
 
 
@@ -551,8 +545,8 @@ def return_empty_df(dataframe):
 # start = datetime.datetime.now()
 
 # This is a template for the forecasting file created with this code
-forecastForum = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv", sep=",")
-forecastForum['Hour'] = forecastForum['Hour'].astype(int)
+# forecastForum = pandas.read_csv("../Jeremy Thesis/Forecast Forum Hex Layout.csv", sep=",")
+# forecastForum['Hour'] = forecastForum['Hour'].astype(int)
 
 weatherData = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
 weatherData["Grid_Num"] = weatherData["Grid_Num"].astype(int)
@@ -582,8 +576,24 @@ for date in dates:
     date = str(month) + "-" + str(day) + "-" + str(year)
 
     # Step 1 - Add weather
-    data = finding_weather(forecastForum, weatherData, year, month, day)
-
+    # data = finding_weather(forecastForum, weatherData, year, month, day)
+    if '19' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
+    elif '20' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-20-2020 Forecast.csv")
+    elif '21' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-21-2020 Forecast.csv")
+    elif '22' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-22-2020 Forecast.csv")
+    elif '23' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
+    elif '24' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-24-2020 Forecast.csv")
+    elif '25' in date:
+        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-25-2020 Forecast.csv")
+    else:
+        print("Error in forecast form assignment")
+        exit()
     # Step 3 - Predict for Accidents on Given Day - returns scaled version of data
     # Order of parameters - Scaled, testnumber, modelfilename
     for model in models:
@@ -604,6 +614,7 @@ for date in dates:
         else:
             print("Error in Test type assignment")
             exit()
+        exit()
 
         scaled, data = standarize_data(data)
         scaled = predict_accidents(scaled, model)  # This version is used for our original models
@@ -620,4 +631,4 @@ for date in dates:
         # finding_matches(accidents, data)
         # finding_matches_alt(accidents, data)
 
-    data = forecastForum
+    # data = forecastForum

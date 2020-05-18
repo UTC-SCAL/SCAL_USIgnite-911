@@ -2,6 +2,9 @@
 A general file to hold all of my misc methods I've made during my thesis research
 """
 import pandas
+import feather
+import time
+from datetime import datetime
 
 
 def automatedModelAverageAggregator():
@@ -67,3 +70,79 @@ def automatedModelAverageAggregator():
         rowNum = rowNum + 1
 
     averageFile.to_excel("../Jeremy Thesis/Model Result Averages.xlsx")
+
+
+def add_weather(data, weather):
+    print("Adding Weather")
+    data.Unix = data.Unix.astype(int)
+    weather.Unix = weather.Unix.astype(int)
+    data.Grid_Num = data.Grid_Num.astype(int)
+    weather.Grid_Num = weather.Grid_Num.astype(int)
+    # Merge the weather variables for the hour of the accident based on time and grid block
+    # Merge the event/conditions before columns based on hour before and grid block
+    newdata = pandas.merge(data, weather[['Grid_Num', 'cloudCover', 'dewPoint',
+                                           'humidity', 'precipIntensity', 'precipProbability', 'precipType',
+                                           'pressure', 'temperature', 'Unix', 'uvIndex',
+                                           'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event',
+                                           'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
+                           on=['Unix', 'Grid_Num'])
+
+    # Applying rain before to data
+    weather['hourbefore'] = weather.Unix.astype(int)
+    weather['RainBefore'] = weather.Rain.astype(int)
+    newdata['hourbefore'] = newdata['Unix'] - 60 * 60
+    newdata.hourbefore = newdata.hourbefore.astype(int)
+    newdata = pandas.merge(newdata, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
+                           on=['hourbefore', 'Grid_Num'])
+    return newdata
+
+
+def forecastDate(rawData, date):
+    """
+    Method to split a range of accidents for a date from RawAccidentData.csv
+    parameter rawData: the RawAccidentData.csv
+    parameter date: date you want, have it in a format that matches the format of the rawData. At time of writing this,
+        the date format is m/d/yyyy
+    """
+    cutData = rawData[rawData['Date'] == date]
+    year = int(date.split("/")[2])
+    month = int(date.split("/")[0])
+    day = int(date.split("/")[1])
+    saveDate = str(month) + "-" + str(day) + "-" + str(year)
+    # This generalizes the Unix time for matching with weather
+    cutData['Unix'] = cutData.apply(lambda x: time.mktime(datetime.strptime(str(x.Date) + " " + str(x.Hour),
+                                                                            "%m/%d/%Y %H").timetuple()), axis=1)
+
+    cutData.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s.csv" % saveDate, index=False)
+
+
+def createForecastForum(rawAccidents, saveDate, weather):
+    """
+    Method to create a filled out forecast forum that has all the variables you'd need
+    """
+    # Information about each grid number
+    grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
+
+    columns = ['Accident', 'Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
+               'FUNC_CLASS', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'Foggy', 'Rain', 'RainBefore', 'Snow',
+               'Unix', 'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed',
+               'visibility', 'uvIndex', 'Probability', 'Prediction']
+    forumFile = add_weather(rawAccidents, weather)
+    forumFile = forumFile.reindex(columns=columns)
+
+    forumFile.WeekDay = forumFile.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
+    forumFile.DayFrame = forumFile.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+                                                (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    for i, values in enumerate(forumFile.values):
+        timestamp = str(saveDate) + " " + str(forumFile.Hour.values[i])
+        thisDate = datetime.strptime(timestamp, "%m-%d-%Y %H")
+        forumFile.at[i, "DayOfWeek"] = thisDate.weekday()
+
+        row_num = grid_info.loc[grid_info["Grid_Num"] == forumFile.Grid_Num.values[i]].index[0]
+        forumFile.at[i, 'Accident'] = 1
+        forumFile.at[i, 'Join_Count'] = grid_info.Join_Count.values[row_num]
+        forumFile.at[i, 'NBR_LANES'] = grid_info.NBR_LANES.values[row_num]
+        forumFile.at[i, 'TY_TERRAIN'] = grid_info.TY_TERRAIN.values[row_num]
+        forumFile.at[i, 'FUNC_CLASS'] = grid_info.FUNC_CLASS.values[row_num]
+
+    forumFile.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
