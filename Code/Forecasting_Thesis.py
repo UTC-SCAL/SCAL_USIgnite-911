@@ -559,10 +559,14 @@ weatherData["Grid_Num"] = weatherData["Grid_Num"].astype(int)
 weatherData['hourbefore'] = weatherData['Unix']
 weatherData['RainBefore'] = weatherData['Rain']
 
-models = []
-dates = ['01-19-2020', '01-20-2020', '01-21-2020', '01-22-2020', '01-23-2020', '01-24-2020', '01-25-2020']
+models = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5', 
+          'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5', 
+          'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5', 
+          'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5', 
+          'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
+dates = ['1/19/2020', '1/20/2020', '1/21/2020', '1/22/2020', '1/23/2020', '1/24/2020', '1/25/2020']
 
-accidentfile = "../Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Hex Forecast Accidents.csv"
+accidentfile = "../Jeremy Thesis/RawAccidentData.csv"
 accidentfile = pandas.read_csv(accidentfile)
 
 for date in dates:
@@ -571,9 +575,9 @@ for date in dates:
     accidents = accidentfile[accidentfile['Date'] == date]
     # accidents = accidents.reindex(columns=columns)
 
-    year = int(date.split("-")[2])
-    month = int(date.split("-")[0])
-    day = int(date.split("-")[1])
+    year = int(date.split("/")[2])
+    month = int(date.split("/")[0])
+    day = int(date.split("/")[1])
 
     date = str(month) + "-" + str(day) + "-" + str(year)
 
