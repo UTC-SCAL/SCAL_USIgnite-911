@@ -558,7 +558,7 @@ models = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5'
           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5', 
           'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5', 
           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
-dates = ['1/19/2020', '1/20/2020', '1/21/2020', '1/22/2020', '1/23/2020', '1/24/2020', '1/25/2020']
+dates = ['1/1/2020', '1/2/2020', '1/3/2020', '1/4/2020', '1/5/2020', '1/6/2020', '1/7/2020']
 
 accidentfile = "../Jeremy Thesis/RawAccidentData.csv"
 accidentfile = pandas.read_csv(accidentfile)
@@ -577,20 +577,20 @@ for date in dates:
 
     # Step 1 - Add weather
     # data = finding_weather(forecastForum, weatherData, year, month, day)
-    if '19' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-19-2020 Forecast.csv")
-    elif '20' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-20-2020 Forecast.csv")
-    elif '21' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-21-2020 Forecast.csv")
-    elif '22' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-22-2020 Forecast.csv")
-    elif '23' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-23-2020 Forecast.csv")
-    elif '24' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-24-2020 Forecast.csv")
-    elif '25' in date:
-        data = pandas.read_csv("../Excel & CSV Sheets/Forecast Accident Dates/01-25-2020 Forecast.csv")
+    if '1-1' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-1-2020-Filled.csv")
+    elif '1-2' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-2-2020-Filled.csv")
+    elif '1-3' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-3-2020-Filled.csv")
+    elif '1-4' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-4-2020-Filled.csv")
+    elif '1-5' in date:
+        data = pandas.read_csv("../EJeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-5-2020-Filled.csv")
+    elif '1-6' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-6-2020-Filled.csv")
+    elif '1-7' in date:
+        data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum 1-7-2020-Filled.csv")
     else:
         print("Error in forecast form assignment")
         exit()
