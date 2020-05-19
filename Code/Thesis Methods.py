@@ -97,28 +97,10 @@ def add_weather(data, weather):
     return newdata
 
 
-def forecastDate(rawData, date):
-    """
-    Method to split a range of accidents for a date from RawAccidentData.csv
-    parameter rawData: the RawAccidentData.csv
-    parameter date: date you want, have it in a format that matches the format of the rawData. At time of writing this,
-        the date format is m/d/yyyy
-    """
-    cutData = rawData[rawData['Date'] == date]
-    year = int(date.split("/")[2])
-    month = int(date.split("/")[0])
-    day = int(date.split("/")[1])
-    saveDate = str(month) + "-" + str(day) + "-" + str(year)
-    # This generalizes the Unix time for matching with weather
-    cutData['Unix'] = cutData.apply(lambda x: time.mktime(datetime.strptime(str(x.Date) + " " + str(x.Hour),
-                                                                            "%m/%d/%Y %H").timetuple()), axis=1)
-
-    cutData.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s.csv" % saveDate, index=False)
-
-
-def createForecastForum(rawAccidents, saveDate, weather):
+def createForecastForum(rawData, saveDate, weather):
     """
     Method to create a filled out forecast forum that has all the variables you'd need
+    saveDate format can be whatever you want it to be, a standard we use is m-d-yyyy
     """
     # Information about each grid number
     grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
@@ -126,23 +108,53 @@ def createForecastForum(rawAccidents, saveDate, weather):
     columns = ['Accident', 'Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
                'FUNC_CLASS', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'Foggy', 'Rain', 'RainBefore', 'Snow',
                'Unix', 'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed',
-               'visibility', 'uvIndex', 'Probability', 'Prediction']
-    forumFile = add_weather(rawAccidents, weather)
+               'visibility', 'uvIndex', 'pressure']
+
+    for j, _ in enumerate(rawData.values):
+        timestamp = str(saveDate) + " " + str(rawData.Hour.values[j])
+        unixTime = time.mktime(datetime.strptime(timestamp, "%m-%d-%Y %H").timetuple())
+        rawData.at[j, "Unix"] = unixTime
+
+    forumFile = add_weather(rawData, weather)
     forumFile = forumFile.reindex(columns=columns)
 
     forumFile.WeekDay = forumFile.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
     forumFile.DayFrame = forumFile.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
                                                 (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-    for i, values in enumerate(forumFile.values):
+    for i, _ in enumerate(forumFile.values):
         timestamp = str(saveDate) + " " + str(forumFile.Hour.values[i])
         thisDate = datetime.strptime(timestamp, "%m-%d-%Y %H")
         forumFile.at[i, "DayOfWeek"] = thisDate.weekday()
 
         row_num = grid_info.loc[grid_info["Grid_Num"] == forumFile.Grid_Num.values[i]].index[0]
         forumFile.at[i, 'Accident'] = 1
+        forumFile.at[i, 'Latitude'] = grid_info.Center_Lat.values[row_num]
+        forumFile.at[i, 'Longitude'] = grid_info.Center_Long.values[row_num]
         forumFile.at[i, 'Join_Count'] = grid_info.Join_Count.values[row_num]
         forumFile.at[i, 'NBR_LANES'] = grid_info.NBR_LANES.values[row_num]
         forumFile.at[i, 'TY_TERRAIN'] = grid_info.TY_TERRAIN.values[row_num]
         forumFile.at[i, 'FUNC_CLASS'] = grid_info.FUNC_CLASS.values[row_num]
-
     forumFile.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
+
+
+# Find matches, using either the original DayFrames, or the alternate.
+def finding_matches(accidents, data, date):
+    data = data[data['Prediction'] == 1]
+    match = 0
+    accCut = accidents[accidents['Date'] == date]
+    accCut['DayFrame'] = 0
+    accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+                                                (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
+    for i, _ in enumerate(accCut.values):
+        for j, _ in enumerate(data.values):
+            if (accCut.Grid_Num.values[i] == data.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
+                    data.DayFrame.values[j]):
+                match += 1
+    print("There were ", match, " out of ", len(accCut), " matches.")
+
+
+rawAccidents = pandas.read_csv("../Jeremy Thesis/RawAccidentData.csv")
+dateCut = '1/1/2020'
+predictions = pandas.read_csv("../Jeremy Thesis/Forecasting/1-1-2020/TS_5050 Split_Test2Forecast.csv")
+finding_matches(rawAccidents, predictions, dateCut)
