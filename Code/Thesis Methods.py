@@ -139,22 +139,30 @@ def createForecastForum(rawData, saveDate, weather):
 
 # Find matches, using either the original DayFrames, or the alternate.
 def finding_matches(accidents, data, date):
-    data = data[data['Prediction'] == 1]
-    match = 0
+    posData = data[data['Prediction'] == 1]
+    negData = data[data['Prediction'] == 0]
+    TP = 0
+    FN = 0
     accCut = accidents[accidents['Date'] == date]
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
                                                 (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
 
     for i, _ in enumerate(accCut.values):
-        for j, _ in enumerate(data.values):
-            if (accCut.Grid_Num.values[i] == data.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
-                    data.DayFrame.values[j]):
-                match += 1
-    print("There were ", match, " out of ", len(accCut), " matches.")
+        for j, _ in enumerate(posData.values):
+            if (accCut.Grid_Num.values[i] == posData.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
+                    posData.DayFrame.values[j]):
+                TP += 1
+        for n, _ in enumerate(negData.values):
+            if (accCut.Grid_Num.values[i] == negData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
+                    negData.DayFrame.values[n]):
+                FN += 1
+    TN = len(negData) - FN
+    FP = len(posData) - TP
+    print("\tTrue Positives: ", TP)
+    print("\tFalse Negatives: ", FN)
+    print("\tTrue Negatives: ", TN)
+    print("\tFalse Positives: ", FP)
+    print("\tRecall: ", TP/(TP+FN))
+    print("\tSpecificity: ", TN/(FP+TN))
 
-
-rawAccidents = pandas.read_csv("../Jeremy Thesis/RawAccidentData.csv")
-dateCut = '1/1/2020'
-predictions = pandas.read_csv("../Jeremy Thesis/Forecasting/1-1-2020/TS_5050 Split_Test2Forecast.csv")
-finding_matches(rawAccidents, predictions, dateCut)
