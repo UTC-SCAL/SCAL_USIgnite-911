@@ -1,4 +1,7 @@
-import datetime
+"""
+This is a heavily altered version of Pete's OneStopForecasting_hex.py code. I've changed it to suit my needs for thesis
+This version is much less generalized and requires specific file naming schemes
+"""
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -9,11 +12,6 @@ import pandas
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from sklearn import preprocessing
-from darksky.forecast import Forecast
-import time
-import pytz
-from datetime import timedelta
-import feather
 
 try:
     import matplotlib.pyplot as plt
@@ -24,25 +22,6 @@ except ImportError:
     import matplotlib.pyplot as plt
 
 
-def find_cred(service):
-    """
-        A method to call in the username and password for certain authentication requiring services
-        If you don't have the login.csv file for it, then ask Jeremy or Peter to send it to you
-    """
-    file = "../Ignore/logins.csv"
-    if os.path.exists(file):
-        with open(file, "r") as file:
-            lines = file.readlines()
-            if service in lines[0]:
-                cred = lines[0].split(",")[1]
-                # print(cred)
-            if service in lines[1]:
-                cred = str(lines[1].split(",")[1]) + "," + str(lines[1].split(",")[2])
-                # print(cred)
-                # logins[username] = password
-    return cred
-
-
 def test_type(data, type):
     """
     An easy to use method for selecting which columns to use for the testing you do
@@ -51,23 +30,23 @@ def test_type(data, type):
     :param type:
     :return:
     """
-    col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+    col1 = ['Longitude', 'Latitude', 'Unix', 'Hour',
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
             'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
 
-    col2 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+    col2 = ['Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'cloudCover', 'humidity', 'precipIntensity',
             'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
 
-    col3 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+    col3 = ['Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek']
 
-    col4 = ['Accident', 'Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
+    col4 = ['Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
             'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
@@ -83,295 +62,26 @@ def test_type(data, type):
     return dataChanged
 
 
-# Step 0 - ONLY IF NEEDED. This takes a listing of gridblocks and creates the full forecast file
-def fillForecastFile(places, filename):
-    # Gets the forecast data for every 4 hours.
-    fulldata = places.copy()
-    for i in range(0, 25, 4):
-        if i == 0:
-            pass
-        else:
-            name = ('places' + str(i))
-            print(name)
-            if i == 24:
-                places.Hour = 23
-            else:
-                places.Hour = i
-            # if 0<=i<7 or 19<=i<=23:
-            #     places.DayFrame = 1
-            # elif 7<=i<10:
-            #     places.DayFrame = 2
-            # elif 10<=i<13:
-            #     places.DayFrame = 3
-            # elif 13<=i<19:
-            #     places.DayFrame = 4
-            print(places.Hour[0:5])
-            fulldata = fulldata.append(places)
-    fulldata = fulldata.drop_duplicates()
-    print("Finished data size:", fulldata.size)
-    fulldata.to_csv(filename, sep=",", index=False)
-
-
-# Step 0 - ONLY IF NEEDED. Creates binary variables for weather if not already in data
-def finding_binaries(weatherFile):
-    """
-        Takes the Event and Conditions variables provided by DarkSky and aggregates them into binary values for
-            certain weather events
-        By default, DarkSky returns icon and summary, which are Event and Conditions respectively. If the file you
-            are using already has Event and Conditions, then comment out those two lines
-        In the lambda statements, you'll see a lot of "empty" conditions. Sometimes DarkSky doesn't return any Event or
-            Conditions for the time we want, so this code works around any empty values it returns so it doesn't break.
-            It also sets the empty binary values to -1 so it's easy to find where any empty is in the dataframe.
-    """
-    print("Aggregating Weather")
-    weatherFile.Event = weatherFile.Event.apply(lambda x: x.lower() if pandas.notnull(x) else "empty")
-    weatherFile.Conditions = weatherFile.Conditions.apply(lambda x: x.lower() if pandas.notnull(x) else "empty")
-    # Here, in the lambda functions, we use if, else, and elif statements for finding Event and Condition entries that
-    # are NoneType, as darksky doesn't always have the answer for us.
-    weatherFile['Rain'] = weatherFile.apply(lambda x: 1 if ("rain" in x.Event or "rain" in x.Conditions)
-    else ("-1" if "empty" in x.Event and "empty" in x.Conditions else 0), axis=1)
-    weatherFile['Cloudy'] = weatherFile.apply(lambda x: 1 if ("cloud" in x.Event or "cloud" in x.Conditions)
-    else ("-1" if "empty" in x.Event and "empty" in x.Conditions else 0), axis=1)
-    weatherFile['Foggy'] = weatherFile.apply(lambda x: 1 if ("fog" in x.Event or "fog" in x.Conditions)
-    else ("-1" if "empty" in x.Event and "empty" in x.Conditions else 0), axis=1)
-    weatherFile['Snow'] = weatherFile.apply(lambda x: 1 if ("snow" in x.Event or "snow" in x.Conditions)
-    else ("-1" if "empty" in x.Event and "empty" in x.Conditions else 0), axis=1)
-    weatherFile['Clear'] = weatherFile.apply(lambda x: 1 if ("clear" in x.Event or "clear" in x.Conditions)
-    else ("-1" if "empty" in x.Event and "empty" in x.Conditions else 0), axis=1)
-
-    weatherFile.Rain = weatherFile.Rain.astype(int)
-    weatherFile.Cloudy = weatherFile.Cloudy.astype(int)
-    weatherFile.Foggy = weatherFile.Foggy.astype(int)
-    weatherFile.Snow = weatherFile.Snow.astype(int)
-    weatherFile.Clear = weatherFile.Clear.astype(int)
-    return weatherFile
-
-
-# Step 1 - Connect Weather to Forecast
-def finding_weather(data, all_weather, yoa, moa, dayoa):
-    print("Finding Weather for Forecast date of:", moa, "/", dayoa, "/", yoa)
-    data['Unix'] = 0
-    data['hourbefore'] = 0
-    # If the data you are working with doesn't have an hour value, run the forloop below to create it
-    # data['Hour'] = 0
-    # date = str(moa) + "/" + str(dayoa) + "/" + str(yoa)
-    # for i, values in enumerate(data.values):
-    #     data.Hour.values[i] = data['Response.Date'].values[i].split(" ")[1].split(":")[0]
-    data['Hour'] = data['Hour'].astype(int)
-    data['Unix'] = data['Hour'].map(lambda x: datetime.datetime(yoa, moa, dayoa, x, 0, 0).strftime('%s'))
-    data.Unix = data.Unix.astype(int)
-
-    data['hourbefore'] = data['Unix'].map(lambda x: x - 60 * 60)
-    data['hourbefore'] = data['hourbefore'].astype(int)
-    all_weather['hourbefore'] = all_weather.Unix.astype(int)
-    all_weather['RainBefore'] = all_weather.Rain.astype(int)
-    data['DayOfWeek'] = 0
-    data['WeekDay'] = 0
-    data['DayFrame'] = 0
-    data.DayFrame = data.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
-    else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-    print("Beginning length:", len(data))
-    # Merge the event/conditions columns based on time and grid block
-    newdata = pandas.merge(data, all_weather[['cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-                                              'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed', 'Rain',
-                                              'Cloudy', 'Foggy', 'Snow',
-                                              'Clear', 'Unix', 'Grid_Num']], on=['Unix', 'Grid_Num'])
-    # Merge the event/conditions before columns based on hour before and grid block
-    print("Mid length:", len(newdata))
-    # exit()
-    newdata = pandas.merge(newdata, all_weather[['Grid_Num', 'hourbefore', 'RainBefore']],
-                           on=['hourbefore', 'Grid_Num'])
-    for i, values in enumerate(newdata.values):
-        timestamp = str(date) + " " + str(newdata.Hour.values[i])
-        # A try/except statement for taking in what format the date is in, because 911 are buttheads
-        try:
-            thisDate = datetime.datetime.strptime(timestamp, "%m/%d/%Y %H")
-        except:
-            thisDate = datetime.datetime.strptime(timestamp, "%m/%d/%y %H")
-        newdata.DayOfWeek.values[i] = thisDate.weekday()
-    newdata.WeekDay = newdata.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
-    print("Final length:", len(newdata))
-    print("Weather fetch complete")
-    # newdata = newdata[['Unix', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'FUNC_CLASS',
-    #    'Hour', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-    #    'pressure', 'temperature', 'visibility', 'windGust', 'windSpeed',
-    #    'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']]
-    if len(newdata) == 0:
-        print("Weather pull failed. Select Different Date")
-        exit()
-    return newdata
-
-
-def fetchWeather(date):
-    """
-        Ok, so, this code is a modified version of Jeremy's from updatingWeatherFiles. However, this one is adjusted for use in fetching weather we don't have yet.
-        (So future predictions.)
-    """
-    print("Fetching Weather")
-
-    # Read in the center points file to get the used grid locations and their lat/longs
-    forecastforum = pandas.read_csv("Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv")
-
-    ##First Batch Columns
-    # columns = ['cloudCover','dewPoint','humidity','precipIntensity','pressure','temperature','visibility',
-    # 'windGust','windSpeed','icon','summary']
-    ##Second Batch Columns
-    columns = ['cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'precipProbability', 'pressure',
-               'temperature', 'uvIndex', 'visibility', 'windBearing', 'windGust', 'windSpeed', 'icon', 'summary']
-
-    key = find_cred("darksky")
-    for k, i in enumerate(forecastforum.Grid_Num.values):
-        lati = forecastforum.Latitude.values[k]
-        longi = forecastforum.Longitude.values[k]
-        j = str(date)
-        year = int(j.split("-")[0])
-        month = int(j.split("-")[1])
-        day = int(j.split("-")[2])
-        hour = forecastforum.Hour.values[k]
-        if hour == 0:
-            print(i)
-            t = datetime.datetime(year, month, day, hour, 0, 0).isoformat()
-            call = key, lati, longi
-            # try:
-            forecastcall = Forecast(*call, time=t)
-            hourly_list = [item._data for item in forecastcall.hourly]
-            for l, _ in enumerate(hourly_list):
-                if l == 0:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                    yesterday = datetime.datetime.strptime(date, '%Y-%m-%d') - timedelta(hours=1)
-                    t2 = yesterday.isoformat()
-                    call = key, lati, longi
-                    forecastcallyesterday = Forecast(*call, time=t2)
-                    hourly_listyesterday = [item._data for item in forecastcallyesterday.hourly]
-                    entryyesterday = hourly_listyesterday[23]
-                    if 'rain' in entryyesterday['icon'].lower() or 'rain' in entryyesterday['summary'].lower():
-                        forecastforum.at[k, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k, 'RainBefore'] = 0
-                elif l == 3:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 1, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 1, 'RainBefore'] = 0
-                elif l == 4:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 1, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                elif l == 7:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 2, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 2, 'RainBefore'] = 0
-                elif l == 8:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 2, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                elif l == 11:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 3, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 3, 'RainBefore'] = 0
-                elif l == 12:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 3, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                elif l == 15:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 4, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 4, 'RainBefore'] = 0
-                elif l == 16:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 4, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                elif l == 19:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 5, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 5, 'RainBefore'] = 0
-                elif l == 20:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 5, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                elif l == 22:
-                    entry = hourly_list[l]
-                    if 'rain' in entry['icon'].lower() or 'rain' in entry['summary'].lower():
-                        forecastforum.at[k + 6, 'RainBefore'] = 1
-                    else:
-                        forecastforum.at[k + 6, 'RainBefore'] = 0
-                elif l == 23:
-                    entry = hourly_list[l]
-                    for d, things in enumerate(hourly_list[l]):
-                        if things in columns:
-                            try:
-                                forecastforum.at[k + 6, things] = entry[things]
-                            except:
-                                print("Failure at DarkSky")
-                else:
-                    pass
-    # print(forecastforum.head())
-    forecastforum.columns = ['Event' if x == 'icon' else 'Conditions' if x == 'summary' else x for x in
-                             forecastforum.columns]
-    forecastforum = finding_binaries(forecastforum)
-    forecastforum.to_csv("Excel & CSV Sheets/Forecasts/" + date + "/" + date + "Forecast.csv")
-    exit()
-    print("Forecast Fetched.")
-    # exit()
-    return forecastforum
-    # except:
-    #     print("Error at Darksky:", call, t)
-
-
-# Step 2 - Standardize Data.
+# Standardize Data.
 def standarize_data(data):
     """
     This standardizes the data into the MinMaxReduced version used for model creation
     """
+    beginLen = len(data.values)
     dataDropped = data.drop_duplicates(keep='first')
+    print("Dropped ", beginLen - len(dataDropped) , " duplicates")
     print("Scaling data")
     # Drop any empties now, since we don't want empties here!
     dataDropped = dataDropped.dropna()
-    columns = dataDropped.columns.values[0:len(dataDropped.columns.values)]
     # Create the Scaler object
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     dataScaled = scaler.fit_transform(dataDropped)
-    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    dataScaled = pandas.DataFrame(dataScaled, columns=dataDropped.columns)
     return dataScaled
 
 
-# Step 3 - Predict for accidents
+# Predict for accidents
 # Data is SCALED version of data, and modelname is the path to the model.
 def predict_accidents(data, modelname):
     print("Predicting Accident Hotspots with model: ", modelname)
@@ -389,17 +99,17 @@ def predict_accidents(data, modelname):
     #  These lines are used for the forecasting, because for some reason the above code doesn't like to work
     #  for any files that I try to run, so I'm keeping this here for future use
     model = Sequential()
-    model.add(Dense(X.shape[1], input_dim=X.shape[1], activation='sigmoid'))
-    model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
+    model.add(Dense(X, input_dim=X, activation='sigmoid'))
+    model.add(Dense(X - 5, activation='sigmoid'))
     model.add(Dropout(.1))
     try:
-        model.add(Dense(X.shape[1] - 10, activation='sigmoid'))
+        model.add(Dense(X - 10, activation='sigmoid'))
     except:
-        model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
+        model.add(Dense(X - 5, activation='sigmoid'))
     model.add(Dense(1, activation='sigmoid'))
 
     # Our current set model.
-    model.load_weights(modelname)
+    model.load_weights("../" + modelname)
     ##################################################################################################################
     # Okay, now let's calculate predictions.
     probability = model.predict(data)
@@ -418,33 +128,9 @@ def predict_accidents(data, modelname):
     return data
 
 
-# Step 4 - Add prediction and probability to unscaled version of data
-def add_Pred_andProb(data, scaled, folder, suffix):
-    print("Adding Probability and Predicted Accidents to data file")
-    filename = "../" + folder + "Forecast/" + suffix + "Forecast.csv"
-    data['Prediction'] = scaled['Prediction'].astype(float)
-    data['Probability'] = scaled['Probability'].astype(float)
-    missing = data['Probability'].isnull().sum()
-    print("\tLength of Data Probability:", len(data) - missing)
-    print("\tSaving forecasted data to: ", filename)
-    data.to_csv(filename, sep=",", index=False)
-    return scaled, data
+# Add prediction and probability to unscaled version of data
+def add_Pred_andProb(data, scaled, date):
 
-
-# Step 5 - Find matches, using either the original DayFrames, or the alternate.
-def finding_matches(accidents, data):
-    data = data[data['Prediction'] == 1]
-    match = 0
-
-    for i, _ in enumerate(accidents.values):
-        for j, _ in enumerate(data.values):
-            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrame.values[i] ==
-                    data.DayFrame.values[j]):
-                match += 1
-    print("This many matches were found: ", match)
-
-
-def make_directory(model, testType, date):
     # Get the model's split
     if "75-25" in model or "7525" in model:
         modelsplit = "7525 Split"
@@ -472,148 +158,79 @@ def make_directory(model, testType, date):
     else:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(testType)
 
-    folder = "../Jeremy Thesis/Forecasting/" + date + "/"
+    # folder = "../Jeremy Thesis/Forecasting/" + str(date) + "/"
+    folder = "../Jeremy Thesis/Forecasting/"
 
-    print("\tSaving Folder: ", folder)
-
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-
-    # folderMMR = "../Excel & CSV Sheets/Forecasts/" + date + "/Hex/MMR/"
-    # if not os.path.exists(folderMMR):
-    #     os.makedirs(folderMMR)
-
-    folderpred = folder + date + "/TestingforPredictions/"
-    if not os.path.exists(folderpred):
-        os.makedirs(folderpred)
-
-    folderfore = folder + date + "/Forecast/"
-    if not os.path.exists(folderfore):
-        os.makedirs(folderfore)
-
-    return folder, suffix
+    print("Adding Probability and Predicted Accidents to data file")
+    filename = folder + suffix + "Forecast_" + str(date) + ".csv"
+    data['Prediction'] = scaled['Prediction'].astype(float)
+    data['Probability'] = scaled['Probability'].astype(float)
+    missing = data['Probability'].isnull().sum()
+    print("\tLength of Data Probability:", len(data) - missing)
+    print("\tSaving forecasted data to: ", filename)
+    data.to_csv(filename, sep=",", index=False)
+    return scaled, data
 
 
-def return_empty_df(dataframe):
-    """
-    A quick utility method to return a sub dataframe that only has the rows that are missing values in a certain column
-    :param dataframe: the dataframe you want to search through
-    :return: a smaller dataframe containing the rows with missing values in the desired column
-    """
-    nullFile = dataframe[dataframe['Event'].isnull()]
-    nullFile.to_csv("../")
+# Find matches, using either the original DayFrames, or the alternate.
+def finding_matches(accidents, data):
+    data = data[data['Prediction'] == 1]
+    match = 0
+
+    for i, _ in enumerate(accidents.values):
+        for j, _ in enumerate(data.values):
+            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrame.values[i] ==
+                    data.DayFrame.values[j]):
+                match += 1
+    print("This many matches were found: ", match)
 
 
-#######################################################################################################################
-# date = "02-10-2020"
-# testnum = 1
-# split = "No"
-# optional year month day variables for convenience, only if you need them
-# year = int(date.split("-")[2])
-# month = int(date.split("-")[0])
-# day = int(date.split("-")[1])
-# folder = make_directory_date(date)
-# weather = feather.read_dataframe("../Ignore/Hex Weather/2020 Weather Mar 13.feather")
-
-
-# If the date in question is in the weather file, run this section.
-# It saves a single copy of the forecast for that day, and saves time!
-# forum = pandas.read_csv("/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv")
-# data = finding_weather(forum, weather, year, month, day)
-# data.to_csv(folder+"ForecastForum.csv", index=False)
-# exit()
-
-# REMEMBER TO SET WHICH BATCH COLUMN VERISON!!!
-# This is the file that has the forecast for the date you want to predict for
-# data = pandas.read_csv(folder+"ForecastForum.csv")
-# data = test_type(data, testnum)
-# print(data.isnull().sum(axis = 0))    ##Finds number of NAs per column
-# scaled, data = standarize_data(data)
-# data.to_csv(folder+"ForecastForumScaled_Test"+str(testnum)+"Original.csv", index=False)
-
-# scaled = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + ".csv"))
-# data = pandas.read_csv(str("../" + folder + "ForecastForums/ForecastForumScaled_Test" + str(testnum) + "Original.csv"))
-#
-# modelname = "../"
-
-# scaled = predict_accidents(scaled, modelname)  # This version is used for our original models
-#
-# folder, suffix = make_directory(modelname, testnum, date)
-#
-# scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
-
-# data.to_csv("/Users/peteway/Desktop/Testing.csv")
-# end = datetime.datetime.now()
-# print("Forecasting Completed in:", end - start)
-# exit()
-
-# Use this command and the two lines at the bottom of this file if you want to time this code
-# start = datetime.datetime.now()
-
-# This is a template for the forecasting file created with this code
-forecastForum = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Forecast Forum Hex Layout.csv", sep=",")
-forecastForum['Hour'] = forecastForum['Hour'].astype(int)
-
-weatherData = feather.read_dataframe("../Ignore/2020 Weather Mar 13.feather")
-weatherData["Grid_Num"] = weatherData["Grid_Num"].astype(int)
-weatherData['hourbefore'] = weatherData['Unix']
-weatherData['RainBefore'] = weatherData['Rain']
-
-models = []
-dates = ['01-19-2020', '01-20-2020', '01-21-2020', '01-22-2020', '01-23-2020', '01-24-2020', '01-25-2020']
-
-accidentfile = "../Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/Hex Forecast Accidents.csv"
-accidentfile = pandas.read_csv(accidentfile)
+# Just a commented out list to remind myself what models I want to use
+# modelsForThesis = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5',
+#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5',
+#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5',
+#           'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5',
+#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
+# Read in the model you want to use
+model = ''
+# Have a list of the days you want to predict for
+# Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
+dates = []
 
 for date in dates:
     print("Date is ", date)
+    # This file read-in requires that the date provided match the format of the date in the file name
+    data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % str(date))
 
-    accidents = accidentfile[accidentfile['Date'] == date]
-    # accidents = accidents.reindex(columns=columns)
+    print(model)
+    # These determine what variables to keep
+    if 'Test1' in model:
+        data = test_type(data, 1)
+        testType = 1
+    elif 'Test2' in model:
+        data = test_type(data, 2)
+        testType = 2
+    elif 'Test3' in model:
+        data = test_type(data, 3)
+        testType = 3
+    elif 'Test4' in model:
+        data = test_type(data, 4)
+        tesType = 4
+    else:
+        print("Error in Test type assignment")
+        exit()
+    # This conditional changes the column values for the two feature selection based models I was using. It's very
+    # situational, so I'm not going to bother generalizing it for any model that used feature selection
+    if 'FeatSelect' in model:
+        if "TS" and "50-50" and "Test1" in model:
+            data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num',
+                                         'Unix', 'humidity', 'windSpeed', 'uvIndex', 'temperature', 'dewPoint',
+                                         'pressure', 'visibility', 'cloudCover'])
+        elif "TS" and "50-50" and "Test2" in model:
+            data = data.reindex(columns=['Join_Count', 'DayFrame', 'Grid_Num', 'temperature', 'humidity',
+                                         'windSpeed', 'pressure', 'visibility', 'cloudCover', 'uvIndex',
+                                         'DayOfWeek', 'precipIntensity', 'FUNC_CLASS', 'NBR_LANES',	'WeekDay'])
 
-    year = int(date.split("-")[2])
-    month = int(date.split("-")[0])
-    day = int(date.split("-")[1])
-
-    date = str(month) + "-" + str(day) + "-" + str(year)
-
-    # Step 1 - Add weather
-    data = finding_weather(forecastForum, weatherData, year, month, day)
-
-    # Step 3 - Predict for Accidents on Given Day - returns scaled version of data
-    # Order of parameters - Scaled, testnumber, modelfilename
-    for model in models:
-        print(model)
-        # Step 2 - Standardize Data - returns scaled version
-        if 'Test1' in model:
-            data = test_type(data, 1)
-            testType = 1
-        elif 'Test2' in model:
-            data = test_type(data, 2)
-            testType = 2
-        elif 'Test3' in model:
-            data = test_type(data, 3)
-            testType = 3
-        elif 'Test4' in model:
-            data = test_type(data, 4)
-            tesType = 4
-        else:
-            print("Error in Test type assignment")
-            exit()
-
-        scaled, data = standarize_data(data)
-        scaled = predict_accidents(scaled, model)  # This version is used for our original models
-
-        # Step 4 - Add results to unscaled data - saves data to given filename.
-        # Order of parameters - data, scaled, folder to save forecast under
-        # Choose which make_directory method you want to use,
-        # they both do the same thing but the alt version is simplified
-        folder, suffix = make_directory(model, date, testType)
-        scaled, data = add_Pred_andProb(data, scaled, folder, suffix)
-
-        # Step 5 - Finding matches:
-        print("Accidents Occurred: ", len(accidents))
-        # finding_matches(accidents, data)
-        # finding_matches_alt(accidents, data)
-
-    data = forecastForum
+    scaled = standarize_data(data)
+    scaled = predict_accidents(scaled, model)
+    scaled, data = add_Pred_andProb(data, scaled, date)

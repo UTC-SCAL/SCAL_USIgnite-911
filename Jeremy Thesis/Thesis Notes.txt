@@ -15,6 +15,7 @@ Tests:
 Notes:
 	- Talking point: discuss why test 1 feature importance isn't trustworthy/valuable since it covers variables like Unix, which is such a specific variable 
 	- Basically, tests 3 and 4 are used to see how strong weather and roadway geometrics are on their own for accident prediction 
+	- The paper: Predicting the Risk of Injury of Pro Football Players with ML has a few paragraphs in the Evaluation section that talk about class imbalance. It would be a solid reference to point to when talking about class imbalance
 
 Results from applying Feature Selection to Models:
 	- For 50-50 Models:
