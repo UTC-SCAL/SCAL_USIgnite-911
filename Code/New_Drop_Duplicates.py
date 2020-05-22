@@ -35,7 +35,7 @@ keeps = keeps.drop(['Coords', 'OK'], axis=1)
 
 ##Getting the hour/date combo of the unix time here to avoid any missed duplicates. 
 keeps['Unix'] = keeps.apply(lambda x : pandas.datetime.strptime(str(x.Date) + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
-keeps['Unix'] = keeps.apply(lambda x : x.UnixTest.strftime('%s'), axis=1)
+keeps['Unix'] = keeps.apply(lambda x : x.Unix.strftime('%s'), axis=1)
 
 print("Time taken:",round(((end-start)/60),2))
 print("Total Accidents Begin", len(accidents.values))
