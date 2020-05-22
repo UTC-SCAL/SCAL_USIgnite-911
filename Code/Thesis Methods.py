@@ -97,7 +97,7 @@ def add_weather(data, weather):
     return newdata
 
 
-def createForecastForum(rawData, saveDate, weather):
+def createForecastForum(forumTemplate, saveDate, weather):
     """
     Method to create a filled out forecast forum that has all the variables you'd need
     saveDate format can be whatever you want it to be, a standard we use is m-d-yyyy
@@ -105,17 +105,17 @@ def createForecastForum(rawData, saveDate, weather):
     # Information about each grid number
     grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
 
-    columns = ['Accident', 'Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
+    columns = ['Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
                'FUNC_CLASS', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'Foggy', 'Rain', 'RainBefore', 'Snow',
                'Unix', 'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed',
                'visibility', 'uvIndex', 'pressure']
 
-    for j, _ in enumerate(rawData.values):
-        timestamp = str(saveDate) + " " + str(rawData.Hour.values[j])
+    for j, _ in enumerate(forumTemplate.values):
+        timestamp = str(saveDate) + " " + str(forumTemplate.Hour.values[j])
         unixTime = time.mktime(datetime.strptime(timestamp, "%m-%d-%Y %H").timetuple())
-        rawData.at[j, "Unix"] = unixTime
+        forumTemplate.at[j, "Unix"] = unixTime
 
-    forumFile = add_weather(rawData, weather)
+    forumFile = add_weather(forumTemplate, weather)
     forumFile = forumFile.reindex(columns=columns)
 
     forumFile.WeekDay = forumFile.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
@@ -127,7 +127,6 @@ def createForecastForum(rawData, saveDate, weather):
         forumFile.at[i, "DayOfWeek"] = thisDate.weekday()
 
         row_num = grid_info.loc[grid_info["Grid_Num"] == forumFile.Grid_Num.values[i]].index[0]
-        forumFile.at[i, 'Accident'] = 1
         forumFile.at[i, 'Latitude'] = grid_info.Center_Lat.values[row_num]
         forumFile.at[i, 'Longitude'] = grid_info.Center_Long.values[row_num]
         forumFile.at[i, 'Join_Count'] = grid_info.Join_Count.values[row_num]
@@ -138,9 +137,12 @@ def createForecastForum(rawData, saveDate, weather):
 
 
 # Find matches, using either the original DayFrames, or the alternate.
-def finding_matches(accidents, data, date):
-    posData = data[data['Prediction'] == 1]
-    negData = data[data['Prediction'] == 0]
+def finding_matches(accidents, forecastData, date):
+    """
+    Date format: m/d/yyyy
+    """
+    posData = forecastData[forecastData['Prediction'] == 1]
+    negData = forecastData[forecastData['Prediction'] == 0]
     TP = 0
     FN = 0
     accCut = accidents[accidents['Date'] == date]

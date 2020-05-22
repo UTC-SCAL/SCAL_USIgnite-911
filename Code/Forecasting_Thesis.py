@@ -129,7 +129,7 @@ def predict_accidents(data, modelname):
 
 
 # Add prediction and probability to unscaled version of data
-def add_Pred_andProb(data, scaled,date):
+def add_Pred_andProb(data, scaled, date):
 
     # Get the model's split
     if "75-25" in model or "7525" in model:
@@ -158,10 +158,11 @@ def add_Pred_andProb(data, scaled,date):
     else:
         suffix = modeltype + "_" + modelsplit + "_Test" + str(testType)
 
-    folder = "../Jeremy Thesis/Forecasting/" + str(date) + "/"
+    # folder = "../Jeremy Thesis/Forecasting/" + str(date) + "/"
+    folder = "../Jeremy Thesis/Forecasting/"
 
     print("Adding Probability and Predicted Accidents to data file")
-    filename = folder + suffix + "Forecast.csv"
+    filename = folder + suffix + "Forecast_" + str(date) + ".csv"
     data['Prediction'] = scaled['Prediction'].astype(float)
     data['Probability'] = scaled['Probability'].astype(float)
     missing = data['Probability'].isnull().sum()
@@ -194,7 +195,7 @@ def finding_matches(accidents, data):
 model = ''
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
+dates = []
 
 for date in dates:
     print("Date is ", date)
@@ -233,7 +234,3 @@ for date in dates:
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)
     scaled, data = add_Pred_andProb(data, scaled, date)
-
-    # Finding matches:
-    # finding_matches(accidents, data)
-    # finding_matches_alt(accidents, data)
