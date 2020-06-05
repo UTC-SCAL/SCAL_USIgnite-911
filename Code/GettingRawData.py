@@ -1,4 +1,4 @@
-# import geolocator as geolocator
+import geolocator as geolocator
 import pandas
 import numpy
 import time
@@ -16,8 +16,10 @@ import geopandas
 from geopandas.tools import sjoin
 from datetime import datetime
 
+
 def clear():
     os.system( 'clear' )
+
 
 def pull_emails(total, lastday):
     m = imaplib.IMAP4_SSL("imap.gmail.com")
@@ -103,23 +105,26 @@ def pull_emails(total, lastday):
     return total
 
 
-def fill_empty_latlongs(x):
-    i = x[0]
-    try:
-        location = geolocator.geocode(x.Address)
-        add.Latitude.values[i] = location.latitude
-        add.Longitude.values[i] = location.longitude
-        print(i, add.Latitude[i], add.Longitude[i])
-    # exit()
-    # return add
-    except:
-        print(i)
-        pass
+# def fill_empty_latlongs(x):
+#     i = x[0]
+#     try:
+#         location = geolocator.geocode(x.Address)
+#         add.Latitude.values[i] = location.latitude
+#         add.Longitude.values[i] = location.longitude
+#         print(i, add.Latitude[i], add.Longitude[i])
+#     # exit()
+#     # return add
+#     except:
+#         print(i)
+#         pass
 
-##This requires a shapefile. Different than the previous process, but requires less work beforehand.
+
+# This requires a shapefile. Different than the previous process, but requires less work beforehand
+
+
 def add_grid_to_accidents_sf(accpath, hexpath, savepath):
     point = geopandas.GeoDataFrame.from_file(accpath) 
-    poly  = geopandas.GeoDataFrame.from_file(hexpath)
+    poly = geopandas.GeoDataFrame.from_file(hexpath)
     pointInPolys = sjoin(point, poly)
     del pointInPolys['index_right']
     gridinfo = pandas.read_csv("Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfoComplete.csv")

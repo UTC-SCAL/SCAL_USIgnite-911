@@ -168,3 +168,38 @@ def finding_matches(accidents, forecastData, date):
     print("\tRecall: ", TP/(TP+FN))
     print("\tSpecificity: ", TN/(FP+TN))
 
+
+def basicFormat(rawAcc):
+    """
+    A basic method to add in some essential data to newly fetched accidents
+    """
+    columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay', 'DayOfWeek',
+               'DayFrame']
+    # weather = feather.read_dataframe("../")
+    rawAcc = rawAcc.reindex(columns=columns)
+    rawAcc.Hour = rawAcc.Hour.astype(str)
+    rawAcc.Date = rawAcc.Date.astype(str)
+    for i, _ in enumerate(rawAcc.values):
+        rawAcc.Hour.values[i] = rawAcc.Response_Date.values[i].split(" ")[1].split(":")[0]
+        rawAcc.Date.values[i] = rawAcc.Response_Date.values[i].split(" ")[0]
+        rawAcc.Month.values[i] = rawAcc.Date.values[i].split("/")[0]
+        rawAcc.Day.values[i] = rawAcc.Date.values[i].split("/")[1]
+        rawAcc.Year.values[i] = rawAcc.Date.values[i].split("/")[2]
+        timestamp = str(rawAcc.Date.values[i]) + " " + str(rawAcc.Hour.values[i])
+
+        thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
+        rawAcc.at[i, "DayOfWeek"] = thisDate.weekday()
+
+        unixTime = time.mktime(datetime.strptime(timestamp, "%m/%d/%Y %H").timetuple())
+        rawAcc.at[i, "Unix"] = unixTime
+
+    rawAcc.Hour = rawAcc.Hour.astype(int)
+
+    # rawAcc = add_weather(rawAcc, weather)
+
+    rawAcc.WeekDay = rawAcc.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
+    rawAcc.DayFrame = rawAcc.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+                                                    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
+    rawAcc.to_csv("../", index=False)
+
