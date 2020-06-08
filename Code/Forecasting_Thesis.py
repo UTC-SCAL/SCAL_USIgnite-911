@@ -172,26 +172,62 @@ def add_Pred_andProb(data, scaled, date):
     return scaled, data
 
 
-# Find matches, using either the original DayFrames, or the alternate.
-def finding_matches(accidents, data):
-    data = data[data['Prediction'] == 1]
-    match = 0
-
-    for i, _ in enumerate(accidents.values):
-        for j, _ in enumerate(data.values):
-            if (accidents.Grid_Num.values[i] == data.Grid_Num.values[j] and accidents.DayFrame.values[i] ==
-                    data.DayFrame.values[j]):
-                match += 1
-    print("This many matches were found: ", match)
+def featureSelectionAlter(data, model):
+    """
+    A method to change the columns based on the model type, split, and test type
+    NOTE: this only covers the models I wanted to test for Thesis work, which are the models in the main section
+        of the code
+    """
+    if "TS" and "50-50" and "Test1" in model:
+        fs_data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num',
+                                     'Unix', 'humidity', 'windSpeed', 'uvIndex', 'temperature', 'dewPoint',
+                                     'pressure', 'visibility', 'cloudCover'])
+    elif "TS" and "50-50" and "Test2" in model:
+        fs_data = data.reindex(columns=['Join_Count', 'DayFrame', 'Grid_Num', 'temperature', 'humidity',
+                                     'windSpeed', 'pressure', 'visibility', 'cloudCover', 'uvIndex',
+                                     'DayOfWeek', 'precipIntensity', 'FUNC_CLASS', 'NBR_LANES', 'WeekDay'])
+    elif "TS" and "75-25" and "Test1" in model:
+        fs_data = data.reindex(columns=['Join_Count', 'Latitude', 'Hour', 'Longitude', 'DayFrame', 'uvIndex', 'Unix',
+                                        'Grid_Num', 'humidity', 'windSpeed', 'temperature', 'dewPoint', 'pressure',
+                                        'visibility', 'cloudCover'])
+    elif "SS" and "75-25" and "Test1" in model:
+        fs_data = data.reindex(columns=['Join_Count', 'Latitude','Longitude','Unix','uvIndex','Grid_Num','humidity',
+                                        'windSpeed','temperature','Hour','dewPoint','pressure','visibility', 'DayFrame',
+                                        'cloudCover'])
+    elif "TS" and "NoSplit" and "Test1" in model:
+        fs_data = data.reindex(columns=['Join_Count'	'Latitude', 'Longitude', 'Hour', 'uvIndex', 'Unix', 'humidity',
+                                        'DayFrame', 'temperature', 'Grid_Num', 'dewPoint', 'windSpeed', 'pressure',
+                                        'visibility', 'cloudCover'])
+    elif "TS" and "NoSplit" and "Test2" in model:
+        fs_data = data.reindex(columns=['Join_Count', 'temperature', 'humidity', 'windSpeed', 'pressure', 'DayFrame',
+                                        'uvIndex', 'Grid_Num', 'visibility', 'cloudCover', 'DayOfWeek',
+                                        'precipIntensity', 'FUNC_CLASS', 'NBR_LANES', 'WeekDay'])
+    else:
+        print("Error in determining which feature selection is applied")
+        print(model)
+        exit()
+    return fs_data
 
 
 # Just a commented out list to remind myself what models I want to use
-# modelsForThesis = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5',
-#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5',
-#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5',
-#           'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5',
-#           'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
+# models5050Best = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5',
+#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5',
+#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5',
+#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5',
+#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
 # Read in the model you want to use
+# models7525Best = ['Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_FeatSelect_Test1.h5',
+#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_Test1.h5',
+#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_75-25Split_Test1.h5',
+#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_Test2.h5',
+#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_75-25Split_FeatSelect_Test1.h5']
+
+# modelsNoSplitBest = ['Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test1.h5',
+#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_FeatSelect_Test1.h5',
+#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_FeatSelect_Test2.h5',
+#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
+#                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
+
 model = ''
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
@@ -219,17 +255,9 @@ for date in dates:
     else:
         print("Error in Test type assignment")
         exit()
-    # This conditional changes the column values for the two feature selection based models I was using. It's very
-    # situational, so I'm not going to bother generalizing it for any model that used feature selection
+    # Code to alter the columns of the data if the model being used has feature selection applied
     if 'FeatSelect' in model:
-        if "TS" and "50-50" and "Test1" in model:
-            data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num',
-                                         'Unix', 'humidity', 'windSpeed', 'uvIndex', 'temperature', 'dewPoint',
-                                         'pressure', 'visibility', 'cloudCover'])
-        elif "TS" and "50-50" and "Test2" in model:
-            data = data.reindex(columns=['Join_Count', 'DayFrame', 'Grid_Num', 'temperature', 'humidity',
-                                         'windSpeed', 'pressure', 'visibility', 'cloudCover', 'uvIndex',
-                                         'DayOfWeek', 'precipIntensity', 'FUNC_CLASS', 'NBR_LANES',	'WeekDay'])
+        data = featureSelectionAlter(data, model)
 
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)

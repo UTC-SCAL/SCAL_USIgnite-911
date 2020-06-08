@@ -136,7 +136,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
     forumFile.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
 
 
-# Find matches, using either the original DayFrames, or the alternate.
+# Find matches using DayFrames
 def finding_matches(accidents, forecastData, date):
     """
     Date format: m/d/yyyy
@@ -165,8 +165,14 @@ def finding_matches(accidents, forecastData, date):
     print("\tFalse Negatives: ", FN)
     print("\tTrue Negatives: ", TN)
     print("\tFalse Positives: ", FP)
-    print("\tRecall: ", TP/(TP+FN))
-    print("\tSpecificity: ", TN/(FP+TN))
+    try:
+        print("\tRecall: ", TP/(TP+FN))
+    except:
+        print("\tRecall Calc Error")
+    try:
+        print("\tSpecificity: ", TN/(FP+TN))
+    except:
+        print("\tSpecificity Calc Error")
 
 
 def basicFormat(rawAcc):
