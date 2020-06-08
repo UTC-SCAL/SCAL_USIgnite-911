@@ -90,7 +90,7 @@ def fetchWeather(weatherFile, beginDate, endDate):
                 weatherFile.to_csv(saveName)
                 # feather.write_dataframe(weatherFile, saveName)
     # A final save for all the weather
-    weatherFile.to_csv(saveName)
+    weatherFile.to_csv(saveName, index=False)
     # feather.write_dataframe(weatherFile, saveName)
 
 
@@ -481,20 +481,6 @@ def post_process_weather(columns):
     weather1 = pandas.read_csv("../")
     weather2 = pandas.read_csv("../")
 
-    # Create the Unix column for later use
-    weather1.Unix = weather1.time.astype(int)
-    weather2.Unix = weather2.time.astype(int)
-
-    # Ensure the event and conditions are carried over, since they are the most important weather feature we use
-    weather1.Event = weather1.icon.astype(str)
-    weather2.Event = weather2.icon.astype(str)
-    weather1.Conditions = weather1.summary.astype(str)
-    weather2.Conditions = weather2.summary.astype(str)
-
-    # Lines for reindexing files if you need to
-    # weather1 = weather1.reindex(columns=columns)
-    # weather2 = weather2.reindex(columns=columns)
-
     # Append that shiz
     new_weather = pandas.concat([weather1, weather2], axis=0, join='outer', ignore_index=False)
 
@@ -503,6 +489,8 @@ def post_process_weather(columns):
 
     # convert the Event/Conditions to their respective binary values
     new_weather = finding_binaries(new_weather)
+    new_weather['Unix'] = new_weather['time'].astype(int)
+    new_weather = new_weather.reindex(columns=columns)
 
     # Converting Unix time to our local time
     new_weather.Date = pandas.to_datetime(new_weather['Unix'], unit='s', utc=False)
@@ -511,17 +499,18 @@ def post_process_weather(columns):
     new_weather.Date = new_weather['Date'].dt.date
 
     # Reindex our fetched weather to have the columns we want
-    new_weather = new_weather.reindex(columns=columns)
+    # new_weather = new_weather.reindex(columns=columns)
 
     # If you want to append your newly fetched weather to an existing weather file, then run these lines
     # Read in the main weather file you'll be appending to
     # main_weather = feather.read_dataframe("../")
     # bigBOIweather = pandas.concat([main_weather, new_weather], axis=0, join='outer', ignore_index=False)
     # After the main appending, save the file
+    # bigBOIweather.to_csv("../Ignore/2020 Weather June 7.csv")
     # feather.write_dataframe(bigBOIweather, "../")
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
-    # new_weather.to_csv("../")
+    # new_weather.to_csv("../", index=False)
     # feather.write_dataframe(new_weather, "../")
 
 
@@ -541,10 +530,7 @@ def return_empty_df(dataframe):
 
 
 # The columns we want for our weather file
-# columns = ['Center_Lat', 'Center_Long', 'Grid_Num', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
-#                'precipProbability', 'precipType', 'pressure', 'temperature', 'Unix', 'Date', 'Hour', 'uvIndex',
-#                'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event', 'Conditions', 'Rain', 'Cloudy',
-#                'Foggy', 'Snow', 'Clear']
+# columns = ['Center_Lat', 'Center_Long', 'Grid_Num']
 # Columns to use for finding missing weather
 # missing_columns = ['Grid_Num', 'Unix', 'Event', 'Conditions', 'timereadable', 'cloudCover',
 #        'dewPoint', 'humidity', 'precipIntensity', 'precipProbability',
@@ -556,5 +542,5 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020/2/24'
-# end = '2020/3/13'
+# begin = '2020/3/13'
+# end = '2020/6/7'
