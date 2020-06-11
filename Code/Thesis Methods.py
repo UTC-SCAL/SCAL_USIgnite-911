@@ -5,6 +5,9 @@ import pandas
 import feather
 import time
 from datetime import datetime
+import plotly.express as px
+import plotly.graph_objects as go
+from IPython.display import Image
 
 
 def automatedModelAverageAggregator():
@@ -208,4 +211,13 @@ def basicFormat(rawAcc):
                                                     (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
 
     rawAcc.to_csv("../", index=False)
+
+
+def modelResultGraph(data):
+    data5050 = data[data['Model'].str.contains("5050")]
+    data7525 = data[data['Model'].str.contains("7525")]
+    dataNoSplit = data[data['Model'].str.contains("No")]
+
+    fig = px.line(dataNoSplit, x="Date", y="Specificity", color='Model')
+    fig.show()
 
