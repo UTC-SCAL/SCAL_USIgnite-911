@@ -102,8 +102,8 @@ def featureSelection(data, figName, modelName):
     feat_importances.nlargest(15).plot(kind='barh')
     plt.xlim(0, .50)
     plt.title(figName)
-    plt.savefig("../Jeremy Thesis/"+modelName+"/Feature Selection/"+figName+".png", bbox_inches='tight')
-    # plt.show()
+    # plt.savefig("../Jeremy Thesis/"+modelName+"/Feature Selection/"+figName+".png", bbox_inches='tight')
+    plt.show()
 
 
 def correlationHeatmap(data):
@@ -145,8 +145,8 @@ def correlationHeatmap(data):
 
 
 # Read in the file and set what the test number is, that's all you've gotta change
-file = ""
-testNum = 4
+file = "Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv"
+testNum = 1
 
 data = pandas.read_csv("../%s" % file)
 cutData = test_type(data, testNum)
@@ -172,4 +172,4 @@ else:
 featureSelection(cutData, figName, modelName)
 # correlationHeatmap(data)
 # PCA_testing(data)
-# # univariateSelection(data)
+# univariateSelection(data)

@@ -251,7 +251,7 @@ def featureSelectionColumns(data, modelRow):
     Then, cleans the list to remove any empties (since some tests have a smaller number of variables)
     Then, converts the values in the list to strings, then sets the columns of the data
     """
-    columnData = pandas.read_csv("../Jeremy Thesis/Feature Selection Results.csv")
+    columnData = pandas.read_excel("../Jeremy Thesis/Feature Selection Results.xlsx")
     columns = ["Accident"]  # columns we'll be appending
     rowNum = columnData[columnData["Model"] == str(modelRow)].index[0]  # get the actual row number based on the model
     dataRow = list(columnData.iloc[rowNum, ])  # get the row that corresponds to the row number
@@ -268,7 +268,7 @@ def featureSelectionColumns(data, modelRow):
 # 5. Evaluate that model on some data!
 
 
-files = []
+files = ['Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv']
 
 for file in files:
     # 1. Load Data
@@ -320,8 +320,8 @@ for file in files:
 
             # Use these tree lines for models using the feature selection variables
             fsModel = "TS " + file.split(" ")[4] + " T%d" % i
-            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
-            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d_top7.h5" % i
+            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d_top7" % i
 
         elif "Date Shift" in file:
             modelType = "Date Shift"
@@ -344,12 +344,20 @@ for file in files:
 
         # If making models based on feature selection results, use this lines
         cutData = featureSelectionColumns(cutData, fsModel)
+        print(cutData.columns)
+        top7Vars = cutData.drop(['humidity', 'windSpeed', 'uvIndex', 'temperature', 'dewPoint', 'pressure',
+                                 'visibility', 'cloudCover'], axis=1)
+        print(top7Vars.head())
 
         # Shuffling
-        cutData = shuffle(cutData)
+        top7Vars = shuffle(top7Vars)
+        # cutData = shuffle(cutData)
         # Creating X and Y. Accident is the first column, therefore it is 0
-        X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values  # Our independent variables
-        Y = cutData.iloc[:, 0].values  # Our dependent variable
+        # X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values  # Our independent variables
+        # Y = cutData.iloc[:, 0].values  # Our dependent variable
+        X = top7Vars.iloc[:, 1:(len(top7Vars.columns) + 1)].values  # Our independent variables
+        Y = top7Vars.iloc[:, 0].values  # Our dependent variable
 
         # Steps 2-5 are inside the fitting loops method
         fitting_loops(X, Y, folder, modelname, avgHolderName)
+        exit()

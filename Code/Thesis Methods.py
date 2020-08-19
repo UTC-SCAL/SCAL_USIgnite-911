@@ -139,7 +139,6 @@ def createForecastForum(forumTemplate, saveDate, weather):
     forumFile.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
 
 
-# Find matches using DayFrames
 def finding_matches(accidents, forecastData, date):
     """
     Date format: m/d/yyyy
@@ -218,6 +217,17 @@ def modelResultGraph(data):
     data7525 = data[data['Model'].str.contains("7525")]
     dataNoSplit = data[data['Model'].str.contains("No")]
 
-    fig = px.line(dataNoSplit, x="Date", y="Specificity", color='Model')
+    fig = px.line(data7525, x="Date", y="Recall", color='Model')
     fig.show()
 
+
+# Code for finding matches from the forecasts
+# rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
+# forecasts = []
+#
+# for forecast in forecasts:
+#     forecastFile = pandas.read_csv("../%s" % forecast)
+#     date = forecast.split("_")[4].replace("-", "/")
+#     cutRawAcc = rawAcc[rawAcc['Date'] == date]
+#     print("Forecast on ", date)
+#     finding_matches(cutRawAcc, forecastFile, date)
