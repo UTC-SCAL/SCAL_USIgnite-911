@@ -162,7 +162,7 @@ def add_Pred_andProb(data, scaled, date):
     folder = "../Jeremy Thesis/Forecasting/"
 
     print("Adding Probability and Predicted Accidents to data file")
-    filename = folder + suffix + "Forecast_" + str(date) + "_top7.csv"
+    filename = folder + suffix + "Forecast_" + str(date) + ".csv"
     data['Prediction'] = scaled['Prediction'].astype(float)
     data['Probability'] = scaled['Probability'].astype(float)
     missing = data['Probability'].isnull().sum()
@@ -228,7 +228,7 @@ def featureSelectionAlter(data, model):
 #                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
 #                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
 
-model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1_top7.h5'
+model = ''
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
 dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']

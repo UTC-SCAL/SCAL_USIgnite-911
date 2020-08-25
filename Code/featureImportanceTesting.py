@@ -52,9 +52,6 @@ def test_type(data, type):
 
 
 def univariateSelection(data):
-    # Drop this column since it has a negative in it, and feature selection doesn't accept negatives
-    # data = data.drop(['ConflictEffect'], axis=1)
-
     # If we want to MinMaxReduce the data (normalize it)
     # Get the columns of the data
     columns = data.columns.values[0:len(data.columns.values)]
@@ -62,21 +59,21 @@ def univariateSelection(data):
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     scaled_df = scaler.fit_transform(data)
-    data = pandas.DataFrame(scaled_df, columns=columns)
+    scaledData = pandas.DataFrame(scaled_df, columns=columns)
 
-    features = data.columns.values[1:len(data.columns.values)]
-    X = data.loc[:, features].values  # Separating out the target variables
-    y = data.loc[:, ['Accident']].values  # dependent variable
+    features = scaledData.columns.values[1:len(scaledData.columns.values)]
+    X = scaledData.loc[:, features].values  # Separating out the target variables
+    y = scaledData.loc[:, ['Accident']].values  # dependent variable
 
-    bestFeatures = SelectKBest(score_func=chi2, k=10)
+    bestFeatures = SelectKBest(score_func=chi2, k=15)
     fit = bestFeatures.fit(X, y)
     dfScores = pandas.DataFrame(fit.scores_)
     dfColumns = pandas.DataFrame(features)
 
-    #concat two dataframes for better visualization
+    # concat two dataframes for better visualization
     featureScores = pandas.concat([dfColumns, dfScores], axis=1)
-    featureScores.columns = ['Specs','Score']  # naming the dataframe columns
-    print(featureScores.nlargest(10,'Score'))  # print 10 best features
+    featureScores.columns = ['Specs', 'Score']  # naming the dataframe columns
+    print(featureScores.nlargest(15, 'Score'))  # print 10 best features
 
 
 def featureSelection(data, figName, modelName):
@@ -87,11 +84,11 @@ def featureSelection(data, figName, modelName):
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     scaled_df = scaler.fit_transform(data)
-    data = pandas.DataFrame(scaled_df, columns=columns)
+    scaledData = pandas.DataFrame(scaled_df, columns=columns)
 
-    features = data.columns.values[1:len(data.columns.values)]
-    X = data.loc[:, features].values  # Separating out the target variables
-    y = data.loc[:, ['Accident']].values  # dependent variable
+    features = scaledData.columns.values[1:len(scaledData.columns.values)]
+    X = scaledData.loc[:, features].values  # Separating out the target variables
+    y = scaledData.loc[:, ['Accident']].values  # dependent variable
 
     model = ExtraTreesClassifier()
     model.fit(X, y)
@@ -114,11 +111,11 @@ def correlationHeatmap(data):
     scaler = preprocessing.MinMaxScaler()
     # Fit your data on the scaler object
     scaled_df = scaler.fit_transform(data)
-    data = pandas.DataFrame(scaled_df, columns=columns)
+    scaledData = pandas.DataFrame(scaled_df, columns=columns)
 
     # Version 1
     # get correlations of each features in dataset
-    # corrmat = data.corr()
+    # corrmat = scaledData.corr()
     # top_corr_features = corrmat.index
     # plt.figure(figsize=(30, 30))
     # #plot heat map
@@ -129,7 +126,7 @@ def correlationHeatmap(data):
     # This version allows for the creation of a heatmap that removes redundancy (takes away the top right half of the
     # heatmap for less noise)
     # Create the correlation dataframe
-    corr = abs(data.corr())
+    corr = abs(scaledData.corr())
     # Drop self-correlations
     dropSelf = numpy.zeros_like(corr)
     dropSelf[numpy.triu_indices_from(dropSelf)] = True
@@ -169,7 +166,6 @@ elif "Date Shift" in file:
 else:
     modelName = 0
 
-featureSelection(cutData, figName, modelName)
-# correlationHeatmap(data)
-# PCA_testing(data)
-# univariateSelection(data)
+# featureSelection(cutData, figName, modelName)
+# correlationHeatmap(cutData)
+univariateSelection(cutData)

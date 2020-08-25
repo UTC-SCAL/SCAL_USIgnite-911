@@ -163,18 +163,28 @@ def finding_matches(accidents, forecastData, date):
                 FN += 1
     TN = len(negData) - FN
     FP = len(posData) - TP
+    recall = TP/(TP+FN)
+    precision = TP/(TP+FP)
     print("\tTrue Positives: ", TP)
     print("\tFalse Negatives: ", FN)
     print("\tTrue Negatives: ", TN)
     print("\tFalse Positives: ", FP)
     try:
-        print("\tRecall: ", TP/(TP+FN))
+        print("\tRecall: ", recall)
     except:
         print("\tRecall Calc Error")
     try:
         print("\tSpecificity: ", TN/(FP+TN))
     except:
         print("\tSpecificity Calc Error")
+    try:
+        print("\tPrecision: ", precision)
+    except:
+        print("\tRecision Calc Error")
+    try:
+        print("\tF1 Score: ", 2*((recall*precision)/(recall+precision)))
+    except:
+        print("\tF1 Score Calc Error")
 
 
 def basicFormat(rawAcc):
@@ -212,12 +222,17 @@ def basicFormat(rawAcc):
     rawAcc.to_csv("../", index=False)
 
 
-def modelResultGraph(data):
+def modelResultGraph_oneWeek(data):
     data5050 = data[data['Model'].str.contains("5050")]
     data7525 = data[data['Model'].str.contains("7525")]
     dataNoSplit = data[data['Model'].str.contains("No")]
 
-    fig = px.line(data7525, x="Date", y="Recall", color='Model')
+    fig = px.line(data5050, x="Date", y="F1 Score", color='Model')
+    fig.show()
+
+
+def modelResultGraph_oneMonth(data):
+    fig = px.line(data, x="Date", y="F1 Score", color='FS')
     fig.show()
 
 

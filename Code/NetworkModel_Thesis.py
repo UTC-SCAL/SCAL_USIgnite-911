@@ -17,7 +17,6 @@ except ImportError:
     matplotlib.use("TkAgg")
     import matplotlib.pyplot as plt
 from os.path import exists
-import datetime
 
 
 def test_type(data, type):
@@ -320,8 +319,8 @@ for file in files:
 
             # Use these tree lines for models using the feature selection variables
             fsModel = "TS " + file.split(" ")[4] + " T%d" % i
-            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d_top7.h5" % i
-            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d_top7" % i
+            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
+            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
 
         elif "Date Shift" in file:
             modelType = "Date Shift"
@@ -343,21 +342,18 @@ for file in files:
         folder = '../Jeremy Thesis/'+modelType+'/Model Results/'
 
         # If making models based on feature selection results, use this lines
-        cutData = featureSelectionColumns(cutData, fsModel)
-        print(cutData.columns)
-        top7Vars = cutData.drop(['humidity', 'windSpeed', 'uvIndex', 'temperature', 'dewPoint', 'pressure',
-                                 'visibility', 'cloudCover'], axis=1)
-        print(top7Vars.head())
+        # cutData = featureSelectionColumns(cutData, fsModel)
 
+        # This column reset is for testing Select K best results 
+        cutData = cutData.reindex(columns=['Accident', 'Join_Count', "DayFrame", 'Hour', 'uvIndex', 'Grid_Num', 'WeekDay', 'Rain',
+                                        'Latitude', 'RainBefore', 'NBR_LANES', 'DayOfWeek', 'Foggy', 'precipIntensity',
+                                        'humidity', 'temperature'])
         # Shuffling
-        top7Vars = shuffle(top7Vars)
-        # cutData = shuffle(cutData)
+        cutData = shuffle(cutData)
         # Creating X and Y. Accident is the first column, therefore it is 0
-        # X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values  # Our independent variables
-        # Y = cutData.iloc[:, 0].values  # Our dependent variable
-        X = top7Vars.iloc[:, 1:(len(top7Vars.columns) + 1)].values  # Our independent variables
-        Y = top7Vars.iloc[:, 0].values  # Our dependent variable
+        X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values  # Our independent variables
+        Y = cutData.iloc[:, 0].values  # Our dependent variable
 
         # Steps 2-5 are inside the fitting loops method
         fitting_loops(X, Y, folder, modelname, avgHolderName)
-        exit()
+        exit()  # using this to do tests for only Test 1
