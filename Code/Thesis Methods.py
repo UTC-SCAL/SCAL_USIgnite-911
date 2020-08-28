@@ -1,13 +1,14 @@
 """
 A general file to hold all of my misc methods I've made during my thesis research
 """
-import pandas
-import feather
 import time
 from datetime import datetime
 import plotly.express as px
-import plotly.graph_objects as go
-from IPython.display import Image
+import pandas
+from xgboost import XGBClassifier
+from xgboost import plot_importance
+from matplotlib import pyplot
+from sklearn import preprocessing
 
 
 def automatedModelAverageAggregator():
@@ -234,6 +235,78 @@ def modelResultGraph_oneWeek(data):
 def modelResultGraph_oneMonth(data):
     fig = px.line(data, x="Date", y="F1 Score", color='FS')
     fig.show()
+
+
+def test_type(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    :param data:
+    :param type:
+    :return:
+    """
+    col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+
+    col2 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+
+    col3 = ['Accident', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek']
+
+    col4 = ['Accident', 'Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+    if type == 1:
+        dataChanged = data.reindex(columns=col1)
+    elif type == 2:
+        dataChanged = data.reindex(columns=col2)
+    elif type == 3:
+        dataChanged = data.reindex(columns=col3)
+    elif type == 4:
+        dataChanged = data.reindex(columns=col4)
+
+    return dataChanged
+
+
+def standardize(data):
+    """
+    This standardizes the data into the MinMaxReduced version used for model creation
+    """
+    columns = data.columns.values[0:len(data.columns.values)]
+    # Create the Scaler object
+    scaler = preprocessing.MinMaxScaler()
+    # Fit your data on the scaler object
+    dataScaled = scaler.fit_transform(data)
+    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    return dataScaled
+
+
+def xgBoostFeatureImportance(data):
+    """
+    A method to compute the variable importance scores
+    """
+    cutData = test_type(data, 1)
+    standData = standardize(cutData)
+
+    print(standData.columns)
+    # split data into X and y
+    X = standData.iloc[:, 1:(len(standData.columns) + 1)].values  # Our independent variables
+    Y = standData.iloc[:, 0].values  # Our dependent variable
+    # fit model no training data
+    model = XGBClassifier()
+    model.fit(X, Y)
+    # plot feature importance
+    plot_importance(model)
+    pyplot.show()
 
 
 # Code for finding matches from the forecasts
