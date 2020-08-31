@@ -189,7 +189,7 @@ def add_Pred_andProb(data, scaled, date):
     print("Adding Probability and Predicted Accidents to data file")
 
     # Be sure to change this to reflect what model you are using
-    filename = folder + suffix + "Forecast_" + str(date) + ".csv"
+    filename = folder + suffix + "Forecast_" + str(date) + "_top7.csv"
 
     data['Prediction'] = scaled['Prediction'].astype(float)
     data['Probability'] = scaled['Probability'].astype(float)
@@ -277,7 +277,7 @@ def featureSelectionTest(data, testName):
 #                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
 #                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
 
-model = ''
+model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1_top7.h5'
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
 dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
@@ -316,6 +316,9 @@ for date in dates:
             # this is the extratreesclassifier feature selection, which is the default feature selection
             # used in this project
             data = featureSelectionAlter(data, model)
+            # Use this line for doing the top 7 model, which only uses the top 7 variables from Test 1 with
+            # extratreesclassifier feature selection
+            data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num', 'Unix'])
 
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)

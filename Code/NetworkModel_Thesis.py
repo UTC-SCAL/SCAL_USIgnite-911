@@ -393,6 +393,8 @@ for file in files:
 
         # If making models based on feature selection results, use this lines
         # cutData = featureSelectionColumns(cutData, fsModel)
+        # Use this line if doing tests using the top 7 variables from the TS 5050 T1 using ExtraTreesClassifier
+        # data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num', 'Unix'])
 
         # If you want to do some testing between different feature selection algorithms, use this
         # Currently uses: xgboost, chi2
