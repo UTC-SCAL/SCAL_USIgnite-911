@@ -26,6 +26,7 @@ def test_type(data, type):
     """
     An easy to use method for selecting which columns to use for the testing you do
     Also serves as an easy way to find which variables are used in each test type
+    Remember: For forecasting, you DON'T need Accident as the first variable
     :param data:
     :param type:
     :return:
@@ -55,6 +56,30 @@ def test_type(data, type):
     elif type == 2:
         dataChanged = data.reindex(columns=col2)
     elif type == 3:
+        dataChanged = data.reindex(columns=col3)
+    elif type == 4:
+        dataChanged = data.reindex(columns=col4)
+
+    return dataChanged
+
+
+def test_type_alt(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    This method differs from test_type in that tests 3 and 4 include the redundant variables that were removed from
+    test 2
+    Remember: For forecasting, you DON'T need Accident as the first variable
+    """
+    col3 = ['Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek']
+
+    col4 = ['Unix', 'Hour', 'Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+
+    if type == 3:
         dataChanged = data.reindex(columns=col3)
     elif type == 4:
         dataChanged = data.reindex(columns=col4)
@@ -162,7 +187,10 @@ def add_Pred_andProb(data, scaled, date):
     folder = "../Jeremy Thesis/Forecasting/"
 
     print("Adding Probability and Predicted Accidents to data file")
+
+    # Be sure to change this to reflect what model you are using
     filename = folder + suffix + "Forecast_" + str(date) + ".csv"
+
     data['Prediction'] = scaled['Prediction'].astype(float)
     data['Probability'] = scaled['Probability'].astype(float)
     missing = data['Probability'].isnull().sum()
@@ -177,6 +205,7 @@ def featureSelectionAlter(data, model):
     A method to change the columns based on the model type, split, and test type
     NOTE: this only covers the models I wanted to test for Thesis work, which are the models in the main section
         of the code
+    Remember: For forecasting, you DON'T need Accident as the first variable
     """
     if "TS" and "50-50" and "Test1" in model:
         fs_data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num',
@@ -195,7 +224,7 @@ def featureSelectionAlter(data, model):
                                         'windSpeed','temperature','Hour','dewPoint','pressure','visibility', 'DayFrame',
                                         'cloudCover'])
     elif "TS" and "NoSplit" and "Test1" in model:
-        fs_data = data.reindex(columns=['Join_Count'	'Latitude', 'Longitude', 'Hour', 'uvIndex', 'Unix', 'humidity',
+        fs_data = data.reindex(columns=['Join_Count', 'Latitude', 'Longitude', 'Hour', 'uvIndex', 'Unix', 'humidity',
                                         'DayFrame', 'temperature', 'Grid_Num', 'dewPoint', 'windSpeed', 'pressure',
                                         'visibility', 'cloudCover'])
     elif "TS" and "NoSplit" and "Test2" in model:
@@ -207,6 +236,26 @@ def featureSelectionAlter(data, model):
         print(model)
         exit()
     return fs_data
+
+
+def featureSelectionTest(data, testName):
+    """
+    A method to change variables used based on the feature selection used
+    Remember: For forecasting, you DON'T need Accident as the first variable
+    """
+    if 'chi2' in testName:
+        testData = data.reindex(columns=['Join_Count', "DayFrame", 'Hour', 'uvIndex', 'Grid_Num',
+                                           'WeekDay', 'Rain', 'Latitude', 'RainBefore', 'NBR_LANES', 'DayOfWeek',
+                                           'Foggy', 'precipIntensity', 'humidity', 'temperature'])
+    elif 'xgboost' in testName:
+        # This column reset is for testing XGBoost feature importance
+        testData = data.reindex(columns=['Longitude', 'Latitude', 'Join_Count', 'Hour', 'DayFrame', 'Unix',
+                                         'uvIndex', 'temperature', 'humidity', 'WeekDay', 'dewPoint', 'precipIntensity',
+                                         'pressure', 'FUNC_CLASS', 'visibility', 'Grid_Num'])
+    else:
+        print("Error in selecting which feature selection test to apply")
+        exit()
+    return testData
 
 
 # Just a commented out list to remind myself what models I want to use
@@ -248,16 +297,25 @@ for date in dates:
         testType = 2
     elif 'Test3' in model:
         data = test_type(data, 3)
+        # data = test_type_alt(data, 3)
         testType = 3
     elif 'Test4' in model:
         data = test_type(data, 4)
-        tesType = 4
+        # data = test_type_alt(data, 4)
+        testType = 4
     else:
         print("Error in Test type assignment")
         exit()
     # Code to alter the columns of the data if the model being used has feature selection applied
     if 'FeatSelect' in model:
-        data = featureSelectionAlter(data, model)
+        if 'chi2' in model:
+            data = featureSelectionTest(data, 'chi2')
+        elif 'xgBoost' in model:
+            data = featureSelectionTest(data, 'xgboost')
+        else:
+            # this is the extratreesclassifier feature selection, which is the default feature selection
+            # used in this project
+            data = featureSelectionAlter(data, model)
 
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)

@@ -312,10 +312,14 @@ def xgBoostFeatureImportance(data):
 # Code for finding matches from the forecasts
 # rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
 # forecasts = []
-#
 # for forecast in forecasts:
 #     forecastFile = pandas.read_csv("../%s" % forecast)
-#     date = forecast.split("_")[4].replace("-", "/")
+#
+#     if 'FeatSelect' in forecast:
+#         date = forecast.split("_")[4].replace("-", "/")
+#     else:
+#         date = forecast.split("_")[3].replace("-", "/")
+#
 #     cutRawAcc = rawAcc[rawAcc['Date'] == date]
-#     print("Forecast on ", date)
+#     print("Forecast on ", forecast)
 #     finding_matches(cutRawAcc, forecastFile, date)

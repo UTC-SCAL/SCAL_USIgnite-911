@@ -59,6 +59,29 @@ def test_type(data, type):
     return dataChanged
 
 
+def test_type_alt(data, type):
+    """
+    An easy to use method for selecting which columns to use for the testing you do
+    Also serves as an easy way to find which variables are used in each test type
+    This method differs from test_type in that tests 3 and 4 include the redundant variables that were removed from
+    test 2
+    """
+    col3 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek']
+
+    col4 = ['Accident', 'Unix', 'Hour', 'Grid_Num', 'cloudCover', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+
+    if type == 3:
+        dataChanged = data.reindex(columns=col3)
+    elif type == 4:
+        dataChanged = data.reindex(columns=col4)
+
+    return dataChanged
+
+
 def get_difference():
     """
     A utility method for finding what variables were dropped between tests
@@ -147,13 +170,14 @@ def fitting_loops(X, Y, folder, modelname, avgHolderName):
         if exists(file):
             avg_holder = pandas.read_csv(file,
                                          usecols=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP",
-                                                  "FN", "TP", "Accuracy", "Precision", "Recall", "Specificity", "FPR"])
+                                                  "FN", "TP", "Accuracy", "Precision", "Recall", "Specificity", "FPR",
+                                                  "F1 Score"])
             j = avg_holder.shape[0]
 
         else:
             avg_holder = pandas.DataFrame(
                 columns=["Train_Acc", "Train_Loss", "Test_Acc", "Test_Loss", "AUC", "TN", "FP", "FN", "TP", "Accuracy",
-                         "Precision", "Recall", "Specificity", "FPR"])
+                         "Precision", "Recall", "Specificity", "FPR", "F1 Score"])
             j = avg_holder.shape[0]
 
         print("Cycle: ", i)
@@ -238,6 +262,10 @@ def fitting_loops(X, Y, folder, modelname, avgHolderName):
         avg_holder.at[j, 'Recall'] = recall
         avg_holder.at[j, 'Specificity'] = specificity
         avg_holder.at[j, 'FPR'] = fprate
+        try:
+            avg_holder.at[j, 'F1 Score'] = 2*((recall * precision)/(recall + precision))
+        except:
+            avg_holder.at[j, 'F1 Score'] = 0
 
         # Save the average holder file:
         avg_holder.to_csv(file, sep=",")
@@ -259,6 +287,27 @@ def featureSelectionColumns(data, modelRow):
     columns = columns + dataRow
     return data.reindex(columns=columns)  # set the columns of the data
 
+
+def featureSelectionTest(data, testName):
+    """
+    A method to change variables used based on the feature selection used
+    Remember: for this version, you DO need accident as the first variable
+    """
+    if 'chi2' in testName:
+        testData = data.reindex(columns=['Accident', 'Join_Count', "DayFrame", 'Hour', 'uvIndex', 'Grid_Num',
+                                           'WeekDay', 'Rain', 'Latitude', 'RainBefore', 'NBR_LANES', 'DayOfWeek',
+                                           'Foggy', 'precipIntensity', 'humidity', 'temperature'])
+    elif 'xgboost' in testName:
+        # This column reset is for testing XGBoost feature importance
+        testData = data.reindex(columns=['Accident', 'Longitude', 'Latitude', 'Join_Count', 'Hour', 'DayFrame', 'Unix',
+                                         'uvIndex', 'temperature', 'humidity', 'WeekDay', 'dewPoint', 'precipIntensity',
+                                         'pressure', 'FUNC_CLASS', 'visibility', 'Grid_Num'])
+    else:
+        print("Error in selecting which feature selection test to apply")
+        exit()
+    return testData
+
+
 # The steps of creating a neural network or deep learning model
 # 1. Load Data
 # 2. Defining a neural network
@@ -275,6 +324,7 @@ for file in files:
     for i in range(1, 5):
         # Select which type of test you want to do: this determines what columns are used
         cutData = test_type(data, i)
+        # cutData = test_type_alt(data, i)
         # Standardize the data before modelling
         cutData = standardize(cutData)
 
@@ -319,8 +369,8 @@ for file in files:
 
             # Use these tree lines for models using the feature selection variables
             fsModel = "TS " + file.split(" ")[4] + " T%d" % i
-            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d.h5" % i
-            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d" % i
+            modelname = "model_TS_" + file.split(" ")[4] + "Split_FeatSelect_Test%d_xgBoost.h5" % i
+            avgHolderName = "TS " + file.split(" ")[4] + " Split FeatSelect Test %d_xgBoost" % i
 
         elif "Date Shift" in file:
             modelType = "Date Shift"
@@ -344,10 +394,10 @@ for file in files:
         # If making models based on feature selection results, use this lines
         # cutData = featureSelectionColumns(cutData, fsModel)
 
-        # This column reset is for testing Select K best results 
-        cutData = cutData.reindex(columns=['Accident', 'Join_Count', "DayFrame", 'Hour', 'uvIndex', 'Grid_Num', 'WeekDay', 'Rain',
-                                        'Latitude', 'RainBefore', 'NBR_LANES', 'DayOfWeek', 'Foggy', 'precipIntensity',
-                                        'humidity', 'temperature'])
+        # If you want to do some testing between different feature selection algorithms, use this
+        # Currently uses: xgboost, chi2
+        cutData = featureSelectionTest(cutData, 'xgboost')
+
         # Shuffling
         cutData = shuffle(cutData)
         # Creating X and Y. Accident is the first column, therefore it is 0
@@ -356,4 +406,4 @@ for file in files:
 
         # Steps 2-5 are inside the fitting loops method
         fitting_loops(X, Y, folder, modelname, avgHolderName)
-        exit()  # using this to do tests for only Test 1
+        exit()  # use this for only doing tests on Test 1
