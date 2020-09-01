@@ -18,7 +18,7 @@ def find_cred(service):
         A method to call in the username and password for certain authentication requiring services
         If you don't have the login.csv file for it, then ask Jeremy or Peter to send it to you
     """
-    file = "../Ignore/login.csv"
+    file = "../Ignore/logins.csv"
     if os.path.exists(file):
         with open(file, "r") as file:
             lines = file.readlines()
@@ -37,7 +37,7 @@ def fetchWeather(weatherFile, beginDate, endDate):
     """
         Ok, so, the way this code works is each fetching run of the code only gets 25 grid locations worth of weather
         for the date range provided.
-        The longer this code runs, the slower it gets. For 25 grid locations it takes about 3-4 hours
+        The longer this code runs, the slower it gets
         start_block: this is the grid location where the fetching should start. The for loop below starts on the next
             grid location. So, for start_block = 25, the code would start fetching on grid location 26.
         stop_block: the last block the loop should fetch weather for.
@@ -51,7 +51,7 @@ def fetchWeather(weatherFile, beginDate, endDate):
     miss_loc = 0  # used for positioning values in the dataframe
 
     start_block = 0
-    stop_block = start_block + 25
+    stop_block = start_block + 50
     saveName = "../Ignore/2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
 
     key = find_cred("darksky")
@@ -478,11 +478,12 @@ def post_process_weather(columns):
 
     # Use these lines to combine weather files #
     # Based on how many different files were made when getting new weather, add or remove weather# files to be appended
-    weather1 = pandas.read_csv("../")
-    weather2 = pandas.read_csv("../")
-
-    # Append that shiz
-    new_weather = pandas.concat([weather1, weather2], axis=0, join='outer', ignore_index=False)
+    weathers = []
+    weather1 = pandas.read_csv("../Ignore/2020 Weather 1-25.csv")
+    for weather in weathers:
+        weather2 = pandas.read_csv("../%s" % weather)
+        # Append that shiz
+        new_weather = pandas.concat([weather1, weather2], axis=0, join='outer', ignore_index=False)
 
     # Drop duplicates if there are any
     new_weather.drop_duplicates(keep="first", inplace=True)
@@ -542,5 +543,5 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020/3/13'
-# end = '2020/6/7'
+# begin = '2020-6-8'
+# end = '2020-8-30'

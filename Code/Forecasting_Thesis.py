@@ -189,7 +189,7 @@ def add_Pred_andProb(data, scaled, date):
     print("Adding Probability and Predicted Accidents to data file")
 
     # Be sure to change this to reflect what model you are using
-    filename = folder + suffix + "Forecast_" + str(date) + "_top7.csv"
+    filename = folder + suffix + "Forecast_" + str(date) + "_alt.csv"
 
     data['Prediction'] = scaled['Prediction'].astype(float)
     data['Probability'] = scaled['Probability'].astype(float)
@@ -277,7 +277,7 @@ def featureSelectionTest(data, testName):
 #                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
 #                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
 
-model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1_top7.h5'
+model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test4_alt.h5'
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
 dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
@@ -300,8 +300,8 @@ for date in dates:
         # data = test_type_alt(data, 3)
         testType = 3
     elif 'Test4' in model:
-        data = test_type(data, 4)
-        # data = test_type_alt(data, 4)
+        # data = test_type(data, 4)
+        data = test_type_alt(data, 4)
         testType = 4
     else:
         print("Error in Test type assignment")
@@ -318,7 +318,7 @@ for date in dates:
             data = featureSelectionAlter(data, model)
             # Use this line for doing the top 7 model, which only uses the top 7 variables from Test 1 with
             # extratreesclassifier feature selection
-            data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num', 'Unix'])
+            # data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num', 'Unix'])
 
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)
