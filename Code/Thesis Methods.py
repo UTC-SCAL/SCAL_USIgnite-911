@@ -323,5 +323,5 @@ def xgBoostFeatureImportance(data):
 #         date = forecast.split("_")[3].replace("-", "/")
 #
 #     cutRawAcc = rawAcc[rawAcc['Date'] == date]
-#     print("Forecast on ", forecast.split("/")[1])
+#     print("Forecast on ", forecast)
 #     finding_matches(cutRawAcc, forecastFile, date)
