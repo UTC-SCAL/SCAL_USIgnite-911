@@ -8,6 +8,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 import matplotlib.pyplot as plt
+from sklearn.utils import shuffle
 
 
 def test_type(data, type):
@@ -49,6 +50,10 @@ def test_type(data, type):
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
 
+    col8 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'precipIntensity', 'pressure',  'DayFrame', 'WeekDay', 'DayOfWeek']
+
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 2:
@@ -63,6 +68,8 @@ def test_type(data, type):
         dataChanged = data.reindex(columns=col6)
     elif type == 7:
         dataChanged = data.reindex(columns=col7)
+    elif type == 8:
+        dataChanged = data.reindex(columns=col8)
 
     return dataChanged
 
@@ -92,7 +99,7 @@ def logRegForecast(X, Y, newColumns):
         predictData = predictData.dropna()
 
         X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
-        logreg = LogisticRegression()
+        logreg = LogisticRegression(solver='newton-cg', class_weight='balanced')
         logreg.fit(X_train, y_train)
 
         # These determine what variables to keep
@@ -105,17 +112,15 @@ def logRegForecast(X, Y, newColumns):
 
 
 data = pandas.read_csv("../Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv")
-cutData = test_type(data, 7)  # set what variables to use
+cutData = test_type(data, 1)  # set what variables to use
 standData = standardize(cutData)  # standardize the data
 
 # Dropping columns per Logit Table Results #
-# All vars dropped variables
-# standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
-
-# No weather dropped variables
+# All vars dropped variables (Test Type 1)
+standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
+# No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix'], axis=1)
-
-# No location dropped variables
+# No location dropped variables (Test Type 4)
 # standData = standData.drop(['pressure', 'RainBefore'], axis=1)
 
 newColumns = list(standData.columns[1:(len(standData.columns) + 1)])
@@ -124,7 +129,7 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 
 # Perform predictions
 logRegForecast(X, Y, newColumns)
-
+exit()
 # Make a Logic Table
 # logit_model = sm.Logit(Y, X)
 # result = logit_model.fit()
@@ -132,7 +137,7 @@ logRegForecast(X, Y, newColumns)
 
 # Split the data and create the model
 # X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
-# logreg = LogisticRegression()
+# logreg = LogisticRegression(solver='newton-cg', class_weight='balanced')
 # logreg.fit(X_train, y_train)
 
 # Predicting on the training set and printing the accruacy
