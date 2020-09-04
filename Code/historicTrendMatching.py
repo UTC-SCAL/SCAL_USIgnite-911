@@ -108,7 +108,7 @@ def logRegForecast(X, Y, newColumns):
 
         y_pred = logreg.predict(standPredictData)
         predictData["Prediction"] = y_pred
-        predictData.to_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_%s.csv" % date)
+        predictData.to_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_%s.csv" % date, index=False)
 
 
 data = pandas.read_csv("../Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv")

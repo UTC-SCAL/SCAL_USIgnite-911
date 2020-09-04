@@ -9,6 +9,7 @@ from xgboost import XGBClassifier
 from xgboost import plot_importance
 from matplotlib import pyplot
 from sklearn import preprocessing
+import geopy.distance
 
 
 def automatedModelAverageAggregator():
@@ -85,10 +86,10 @@ def add_weather(data, weather):
     # Merge the weather variables for the hour of the accident based on time and grid block
     # Merge the event/conditions before columns based on hour before and grid block
     newdata = pandas.merge(data, weather[['Grid_Num', 'cloudCover', 'dewPoint',
-                                           'humidity', 'precipIntensity', 'precipProbability', 'precipType',
-                                           'pressure', 'temperature', 'Unix', 'uvIndex',
-                                           'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event',
-                                           'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
+                                          'humidity', 'precipIntensity', 'precipProbability', 'precipType',
+                                          'pressure', 'temperature', 'Unix', 'uvIndex',
+                                          'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event',
+                                          'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
                            on=['Unix', 'Grid_Num'])
 
     # Applying rain before to data
@@ -124,7 +125,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
 
     forumFile.WeekDay = forumFile.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
     forumFile.DayFrame = forumFile.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                                (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
     for i, _ in enumerate(forumFile.values):
         timestamp = str(saveDate) + " " + str(forumFile.Hour.values[i])
         thisDate = datetime.strptime(timestamp, "%m-%d-%Y %H")
@@ -151,7 +152,7 @@ def finding_matches(accidents, forecastData, date):
     accCut = accidents[accidents['Date'] == date]
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                                (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
 
     for i, _ in enumerate(accCut.values):
         for j, _ in enumerate(posData.values):
@@ -175,7 +176,7 @@ def finding_matches(accidents, forecastData, date):
     except:
         print("\tRecall Calc Error")
     try:
-        print("\tSpecificity: ", TN/(FP+TN))
+        print("\tSpecificity: ", TN / (FP + TN))
     except:
         print("\tSpecificity Calc Error")
     try:
@@ -183,16 +184,82 @@ def finding_matches(accidents, forecastData, date):
     except:
         print("\tRecision Calc Error")
     try:
-        print("\tF1 Score: ", 2*((recall*precision)/(recall+precision)))
+        print("\tF1 Score: ", 2 * ((recall * precision) / (recall + precision)))
     except:
         print("\tF1 Score Calc Error")
 
+
+def matchAccidentsWithDistance(predictions, accidents, date):
+    # Read in the grid info
+    gridInfo = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
+    # Cut your predictions to only the accidents
+    posPredictions = predictions[predictions["Prediction"] == 1]
+    negPredictions = predictions[predictions["Prediction"] == 0]
+    # Cut your accident file to only the date you want to look at
+    accCut = accidents[accidents['Date'] == date]
+    accCut['DayFrame'] = 0
+    accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+                                        (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
+    # These for loops handle the straight forward DayFrame and Grid Num matching for accidents and predictions
+    TP = 0
+    FN = 0
+    # distTP = 0
+    for i, _ in enumerate(accCut.values):
+        for j, _ in enumerate(posPredictions.values):
+            if (accCut.Grid_Num.values[i] == posPredictions.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
+                    posPredictions.DayFrame.values[j]):
+                TP += 1
+            else:
+                accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
+                predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
+                # Note: the predicitonGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+                # since python does counting like [0...max], we need to decrease our look up number by 1
+                # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+                centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
+                centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
+                predictionCoords = (float(centerLat), float(centerLong))
+                distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
+                if distance <= 0.50 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
+                    TP += 1
+        for n, _ in enumerate(negPredictions.values):
+            if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
+                    negPredictions.DayFrame.values[n]):
+                FN += 1
+
+    TN = len(negPredictions) - FN
+    FP = len(posPredictions) - TP
+    recall = TP / (TP + FN)
+    precision = TP / (TP + FP)
+    print("\tTrue Positives: ", TP)
+    # print("\tTrue Positives from Distance: ", distTP)
+    print("\tFalse Negatives: ", FN)
+    print("\tTrue Negatives: ", TN)
+    print("\tFalse Positives: ", FP)
+    try:
+        print("\tRecall: ", recall)
+    except:
+        print("\tRecall Calc Error")
+    try:
+        print("\tSpecificity: ", TN / (FP + TN))
+    except:
+        print("\tSpecificity Calc Error")
+    try:
+        print("\tPrecision: ", precision)
+    except:
+        print("\tRecision Calc Error")
+    try:
+        print("\tF1 Score: ", 2 * ((recall * precision) / (recall + precision)))
+    except:
+        print("\tF1 Score Calc Error")
+        
 
 def basicFormat(rawAcc):
     """
     A basic method to add in some essential data to newly fetched accidents
     """
-    columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay', 'DayOfWeek',
+    columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay',
+               'DayOfWeek',
                'DayFrame']
     # weather = feather.read_dataframe("../")
     rawAcc = rawAcc.reindex(columns=columns)
@@ -218,7 +285,7 @@ def basicFormat(rawAcc):
 
     rawAcc.WeekDay = rawAcc.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
     rawAcc.DayFrame = rawAcc.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                                    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
 
     rawAcc.to_csv("../", index=False)
 
@@ -312,22 +379,23 @@ def xgBoostFeatureImportance(data):
 # Code for finding matches from the forecasts
 rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
 forecasts = ['Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-1-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-2-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-3-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-4-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-5-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-6-2020.csv',
-                'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-7-2020.csv']
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-2-2020.csv',
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-3-2020.csv',
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-4-2020.csv',
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-5-2020.csv',
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-6-2020.csv',
+             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-7-2020.csv']
 for forecast in forecasts:
     forecastFile = pandas.read_csv("../%s" % forecast)
 
     if 'FeatSelect' in forecast:
-        date = forecast.split("_")[4].replace("-", "/")
+        date = forecast.split("_")[4].split(".")[0].replace("-", "/")
     elif 'LogReg' in forecast:
         date = forecast.split("_")[2].split(".")[0].replace("-", "/")
     else:
         date = forecast.split("_")[3].replace("-", "/")
-
+    # print(date)
     cutRawAcc = rawAcc[rawAcc['Date'] == date]
     print("Forecast on ", forecast)
-    finding_matches(cutRawAcc, forecastFile, date)
+    # finding_matches(cutRawAcc, forecastFile, date)
+    matchAccidentsWithDistance(forecastFile, cutRawAcc, date)

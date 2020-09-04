@@ -98,26 +98,4 @@
 import pandas
 
 data = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
-thing = list(data.coords.values)
-longList = []
-latList = []
-longSaveList = []
-latSaveList = []
-for j, _ in enumerate(thing):
-    thingList = thing[j]
-    myList = thingList.replace(" ", "").split(",")
-    # Longs are even values
-    # Lats are odd values
-    for i, _ in enumerate(myList):
-        if i % 2 == 0:
-            longList.append(myList[i])
-            if len(longList) > 6:
-                longSaveList.append(longList)
-                longList = []
-        else:
-            latList.append(myList[i])
-            if len(latList) > 6:
-                latSaveList.append(latList)
-                latList = []
-print(len(longSaveList))
-print(len(latSaveList))
+print(data.Grid_Num.values[693])

@@ -208,15 +208,18 @@ def matchAccidentsWithDistance(predictions, accidents, date):
             if (accCut.Grid_Num.values[i] == posPredictions.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
                     posPredictions.DayFrame.values[j]):
                 TP += 1
-            else:
-                accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
-                predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
-                centerLat = gridInfo.Center_Lat.values[predictionGrid]
-                centerLong = gridInfo.Center_Long.values[predictionGrid]
-                predictionCoords = (float(centerLat), float(centerLong))
-                distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
-                if distance <= 0.25:
-                    TP += 1
+            # else:
+            #     accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
+            #     predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
+            #     # Note: the predicitonGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+            #     # since python does counting like [0...max], we need to decrease our look up number by 1
+            #     # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+            #     centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
+            #     centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
+            #     predictionCoords = (float(centerLat), float(centerLong))
+            #     distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
+            #     if distance <= 0.25 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
+            #         TP += 1
         for n, _ in enumerate(negPredictions.values):
             if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
                     negPredictions.DayFrame.values[n]):
@@ -250,6 +253,7 @@ def matchAccidentsWithDistance(predictions, accidents, date):
 
 
 def makePredictionMap(predictions, accidents, date, dayFrameCut):
+    gridCoords = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
     m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
     folium.LatLngPopup().add_to(m)
     posPredictions = predictions[predictions['Prediction'] == 1]
@@ -278,12 +282,3 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
                ' DayFrame %d.html' % dayFrameCut
     m.save(saveName)
 
-
-# This file contains the coordinates for the grid blocks
-gridCoords = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
-
-predictionFile = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-1-2020.csv")
-accidentFile = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
-date = "1/1/2020"
-# matchAccidentsWithDistance(predictionFile, accidentFile, date)
-# makePredictionMap(predictionFile, accidentFile, date, 3)
