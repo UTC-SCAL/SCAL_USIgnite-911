@@ -1,50 +1,9 @@
-import gmplot
 from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
 import pandas
 from folium.plugins import HeatMap
 import folium
-import geopandas
-import matplotlib.pyplot as plt
 from shapely.geometry import Polygon
 import geopy.distance
-
-
-def midpoint(x1, x2, y1, y2):
-    mid_lat = (x1 + x2) / 2
-    mid_long = (y1 + y2) / 2
-    return mid_lat, mid_long
-
-
-# Creating and plotting the ghost point
-# Lat_list and long_list hold the latitudes and longitudes for the current grid block's 5 points
-def find_ghost(lat_list, long_list, center_lat, center_long):
-    # These two lists hold the "ghost" latitude and longitudes
-    # By "ghost", we mean they are superficial extensions to a grid block
-    # This more or less acts as an overlapping mechanism for blocks in the grid for prediction purposes
-    ghost_lats = []
-    ghost_longs = []
-
-    gmap = gmplot.GoogleMapPlotter(35.14, -85.17, 11)
-
-    for i in range(0, 5):
-        # Some simple math to get the middle point between the current point and the center point
-        # This middle point is then added to the original point to create the ghost point
-        # I realize now this is far easier to show than explain
-        ghost_lat, ghost_long = ((lat_list[i] - center_lat) / 2) + lat_list[i], \
-                                ((long_list[i] - center_long) / 2) + long_list[i]
-        ghost_lats.append(ghost_lat)
-        ghost_longs.append(ghost_long)
-
-    # Now we actually make ghost polygon with the newly calculated ghost points
-    # I used set numbers here since each of the grid blocks only have 5 points, as each grid block is a square
-    grid_ghost_lats, grid_ghost_longs = zip(*[(ghost_lats[0], ghost_longs[0]),
-                                              (ghost_lats[1], ghost_longs[1]),
-                                              (ghost_lats[2], ghost_longs[2]),
-                                              (ghost_lats[3], ghost_longs[3]),
-                                              (ghost_lats[4], ghost_longs[4])])
-    gmap.plot(grid_ghost_lats, grid_ghost_longs, 'white', edge_width=2)
-    return grid_ghost_lats, grid_ghost_longs
 
 
 def getLatLongColumns(gridCoords):
@@ -243,6 +202,7 @@ def matchAccidentsWithDistance(predictions, accidents, date):
     # These for loops handle the straight forward DayFrame and Grid Num matching for accidents and predictions
     TP = 0
     FN = 0
+    # distTP = 0
     for i, _ in enumerate(accCut.values):
         for j, _ in enumerate(posPredictions.values):
             if (accCut.Grid_Num.values[i] == posPredictions.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
@@ -255,20 +215,75 @@ def matchAccidentsWithDistance(predictions, accidents, date):
                 centerLong = gridInfo.Center_Long.values[predictionGrid]
                 predictionCoords = (float(centerLat), float(centerLong))
                 distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
-                if distance <= 0.5:
+                if distance <= 0.25:
                     TP += 1
         for n, _ in enumerate(negPredictions.values):
             if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
                     negPredictions.DayFrame.values[n]):
                 FN += 1
-    print("True Positives: ", TP)
-    print("False Negatives: ", FN)
+
+    TN = len(negPredictions) - FN
+    FP = len(posPredictions) - TP
+    recall = TP / (TP + FN)
+    precision = TP / (TP + FP)
+    print("\tTrue Positives: ", TP)
+    # print("\tTrue Positives from Distance: ", distTP)
+    print("\tFalse Negatives: ", FN)
+    print("\tTrue Negatives: ", TN)
+    print("\tFalse Positives: ", FP)
+    try:
+        print("\tRecall: ", recall)
+    except:
+        print("\tRecall Calc Error")
+    try:
+        print("\tSpecificity: ", TN / (FP + TN))
+    except:
+        print("\tSpecificity Calc Error")
+    try:
+        print("\tPrecision: ", precision)
+    except:
+        print("\tRecision Calc Error")
+    try:
+        print("\tF1 Score: ", 2 * ((recall * precision) / (recall + precision)))
+    except:
+        print("\tF1 Score Calc Error")
+
+
+def makePredictionMap(predictions, accidents, date, dayFrameCut):
+    m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
+    folium.LatLngPopup().add_to(m)
+    posPredictions = predictions[predictions['Prediction'] == 1]
+    accCut = accidents[accidents['Date'] == date]
+    accCut['DayFrame'] = 0
+    accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    posPredictions = posPredictions[posPredictions['DayFrame'] == dayFrameCut]
+    accCut = accCut[accCut['DayFrame'] == dayFrameCut]
+    for i, _ in enumerate(posPredictions.values):
+        predictionGrid = posPredictions.Grid_Num.values[i]
+        latList = gridCoords.Y.values[predictionGrid].split(",")
+        longList = gridCoords.X.values[predictionGrid].split(",")
+        longList = list(map(lambda x: float(x), longList))
+        latList = list(map(lambda x: float(x), latList))
+
+        polygon = Polygon(zip(longList, latList))
+        folium.GeoJson(polygon, name=predictionGrid,
+                       style_function=lambda x: {'fillColor': 'purple', 'color': 'black'}).add_to(m)
+
+    for j, _ in enumerate(accCut.values):
+        folium.Marker(location=[float(accCut.Latitude.values[j]), float(accCut.Longitude.values[j])],
+                      fill_color='#43d9de', radius=8).add_to(m)
+
+    saveName = '../Jeremy Thesis/Prediction Maps/Prediction for ' + date.replace("/", "-") + \
+               ' DayFrame %d.html' % dayFrameCut
+    m.save(saveName)
 
 
 # This file contains the coordinates for the grid blocks
-# gridCoords = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
+gridCoords = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
 
 predictionFile = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-1-2020.csv")
 accidentFile = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
 date = "1/1/2020"
-matchAccidentsWithDistance(predictionFile, accidentFile, date)
+# matchAccidentsWithDistance(predictionFile, accidentFile, date)
+# makePredictionMap(predictionFile, accidentFile, date, 3)
