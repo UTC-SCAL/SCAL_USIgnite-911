@@ -51,6 +51,8 @@ def test_type(data, type):
             'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
+    col8 = ['Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN', 'FUNC_CLASS',
+            'precipIntensity', 'visibility', 'DayFrame', 'WeekDay', 'DayOfWeek']
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 2:
@@ -95,7 +97,7 @@ def standarize_data(data):
     beginLen = len(data.values)
     dataDropped = data.drop_duplicates(keep='first')
     print("Dropped ", beginLen - len(dataDropped) , " duplicates")
-    print("Scaling data")
+    # print("Scaling data")
     # Drop any empties now, since we don't want empties here!
     dataDropped = dataDropped.dropna()
     # Create the Scaler object
@@ -117,7 +119,7 @@ def predict_accidents(data, modelname):
     X = data.columns.shape[0]
     ##################################################################################################################
     # Printing the size of the testing data, that is, the data file.
-    print("\tSize of data: ", data.shape)
+    # print("\tSize of data: ", data.shape)
 
     # Creating the framework for the model.
 
@@ -146,9 +148,9 @@ def predict_accidents(data, modelname):
     data["Prediction"] = predictions_round
 
     # Printing some of the found values, as well as the total number of predicted accidents for this data.
-    print("\tMin probability: ", round(float(min(probability) * 100), 2))
-    print("\tMax probability: ", round(float(max(probability) * 100), 2))
-    print("\tAccidents predicted: ", sum(data.Prediction))
+    # print("\tMin probability: ", round(float(min(probability) * 100), 2))
+    # print("\tMax probability: ", round(float(max(probability) * 100), 2))
+    # print("\tAccidents predicted: ", sum(data.Prediction))
 
     return data
 
@@ -186,15 +188,17 @@ def add_Pred_andProb(data, scaled, date):
     # folder = "../Jeremy Thesis/Forecasting/" + str(date) + "/"
     folder = "../Jeremy Thesis/Forecasting/"
 
-    print("Adding Probability and Predicted Accidents to data file")
+    # print("Adding Probability and Predicted Accidents to data file")
 
     # Be sure to change this to reflect what model you are using
     filename = folder + suffix + "Forecast_" + str(date) + ".csv"
 
-    data['Prediction'] = scaled['Prediction'].astype(float)
+    data['Prediction'] = scaled['Prediction'].astype(int)
     data['Probability'] = scaled['Probability'].astype(float)
-    missing = data['Probability'].isnull().sum()
-    print("\tLength of Data Probability:", len(data) - missing)
+    # Include this to drop any potential predictions that didn't go through
+    # This mainly would be used if the data you use causes some variables to be dropped, making the code think there
+    # are duplicates
+    data.dropna(subset=['Prediction'], inplace=True)
     print("\tSaving forecasted data to: ", filename)
     data.to_csv(filename, sep=",", index=False)
     return scaled, data
@@ -277,17 +281,17 @@ def featureSelectionTest(data, testName):
 #                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
 #                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
 
-model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5'
+model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5'
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
+dates = []
 
 for date in dates:
     print("Date is ", date)
     # This file read-in requires that the date provided match the format of the date in the file name
     data = pandas.read_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % str(date))
 
-    print(model)
+    # print(model)
     # These determine what variables to keep
     if 'Test1' in model:
         data = test_type(data, 1)

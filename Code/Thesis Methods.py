@@ -163,30 +163,38 @@ def finding_matches(accidents, forecastData, date):
             if (accCut.Grid_Num.values[i] == negData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
                     negData.DayFrame.values[n]):
                 FN += 1
-    TN = len(negData) - FN
-    FP = len(posData) - TP
-    recall = TP/(TP+FN)
-    precision = TP/(TP+FP)
-    print("\tTrue Positives: ", TP)
-    print("\tFalse Negatives: ", FN)
-    print("\tTrue Negatives: ", TN)
-    print("\tFalse Positives: ", FP)
     try:
-        print("\tRecall: ", recall)
+        TN = len(negData) - FN
+        FP = len(posData) - TP
+        recall = TP/(TP+FN)
+        specificity = TN / (FP + TN)
+        precision = TP/(TP+FP)
+        f1Score = 2 * ((recall * precision) / (recall + precision))
+
+        return TP, FN, TN, FP, recall, specificity, precision, f1Score
     except:
-        print("\tRecall Calc Error")
-    try:
-        print("\tSpecificity: ", TN / (FP + TN))
-    except:
-        print("\tSpecificity Calc Error")
-    try:
-        print("\tPrecision: ", precision)
-    except:
-        print("\tRecision Calc Error")
-    try:
-        print("\tF1 Score: ", 2 * ((recall * precision) / (recall + precision)))
-    except:
-        print("\tF1 Score Calc Error")
+        print("Error in calculating confusion matrix values")
+
+    # print("\tTrue Positives: ", TP)
+    # print("\tFalse Negatives: ", FN)
+    # print("\tTrue Negatives: ", TN)
+    # print("\tFalse Positives: ", FP)
+    # try:
+    #     print("\tRecall: ", recall)
+    # except:
+    #     print("\tRecall Calc Error")
+    # try:
+    #     print("\tSpecificity: ", TN / (FP + TN))
+    # except:
+    #     print("\tSpecificity Calc Error")
+    # try:
+    #     print("\tPrecision: ", precision)
+    # except:
+    #     print("\tRecision Calc Error")
+    # try:
+    #     print("\tF1 Score: ", f1Score)
+    # except:
+    #     print("\tF1 Score Calc Error")
 
 
 def matchAccidentsWithDistance(predictions, accidents, date):
@@ -227,31 +235,17 @@ def matchAccidentsWithDistance(predictions, accidents, date):
                     negPredictions.DayFrame.values[n]):
                 FN += 1
 
-    TN = len(negPredictions) - FN
-    FP = len(posPredictions) - TP
-    recall = TP / (TP + FN)
-    precision = TP / (TP + FP)
-    print("\tTrue Positives: ", TP)
-    # print("\tTrue Positives from Distance: ", distTP)
-    print("\tFalse Negatives: ", FN)
-    print("\tTrue Negatives: ", TN)
-    print("\tFalse Positives: ", FP)
     try:
-        print("\tRecall: ", recall)
+        TN = len(negPredictions) - FN
+        FP = len(posPredictions) - TP
+        recall = TP / (TP + FN)
+        specificity = TN / (FP + TN)
+        precision = TP / (TP + FP)
+        f1Score = 2 * ((recall * precision) / (recall + precision))
+
+        return TP, FN, TN, FP, recall, specificity, precision, f1Score
     except:
-        print("\tRecall Calc Error")
-    try:
-        print("\tSpecificity: ", TN / (FP + TN))
-    except:
-        print("\tSpecificity Calc Error")
-    try:
-        print("\tPrecision: ", precision)
-    except:
-        print("\tRecision Calc Error")
-    try:
-        print("\tF1 Score: ", 2 * ((recall * precision) / (recall + precision)))
-    except:
-        print("\tF1 Score Calc Error")
+        print("Error in calculating confusion matrix values")
         
 
 def basicFormat(rawAcc):
@@ -378,13 +372,10 @@ def xgBoostFeatureImportance(data):
 
 # Code for finding matches from the forecasts
 rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
-forecasts = ['Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-1-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-2-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-3-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-4-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-5-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-6-2020.csv',
-             'Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_1-7-2020.csv']
+forecasts = []
+saveIterator = 0
+saveDF = pandas.DataFrame(columns=['Model', 'Date', 'TP', 'FN', 'TN', 'FP', 'Recall', 'Specificity', 'Precision',
+                                   'F1 Score'])
 for forecast in forecasts:
     forecastFile = pandas.read_csv("../%s" % forecast)
 
@@ -393,9 +384,21 @@ for forecast in forecasts:
     elif 'LogReg' in forecast:
         date = forecast.split("_")[2].split(".")[0].replace("-", "/")
     else:
-        date = forecast.split("_")[3].replace("-", "/")
-    # print(date)
+        date = forecast.split("_")[3].split(".")[0].replace("-", "/")
+    print(date)
+    # exit()
     cutRawAcc = rawAcc[rawAcc['Date'] == date]
     print("Forecast on ", forecast)
-    # finding_matches(cutRawAcc, forecastFile, date)
-    matchAccidentsWithDistance(forecastFile, cutRawAcc, date)
+    TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
+    saveDF.at[saveIterator, 'Model'] = forecast.split(".")[0]
+    saveDF.at[saveIterator, 'Date'] = date
+    saveDF.at[saveIterator, 'TP'] = TP
+    saveDF.at[saveIterator, 'FN'] = FN
+    saveDF.at[saveIterator, 'TN'] = TN
+    saveDF.at[saveIterator, 'FP'] = FP
+    saveDF.at[saveIterator, 'Recall'] = recall
+    saveDF.at[saveIterator, 'Specificity'] = specificity
+    saveDF.at[saveIterator, 'Precision'] = precision
+    saveDF.at[saveIterator, 'F1 Score'] = f1Score
+    saveIterator += 1
+saveDF.to_csv("../", index=False)

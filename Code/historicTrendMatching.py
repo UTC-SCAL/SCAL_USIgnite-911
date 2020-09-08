@@ -50,9 +50,8 @@ def test_type(data, type):
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
 
-    col8 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
-            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
-            'FUNC_CLASS', 'precipIntensity', 'pressure',  'DayFrame', 'WeekDay', 'DayOfWeek']
+    col8 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'precipIntensity', 'visibility',  'DayFrame', 'WeekDay', 'DayOfWeek']
 
     if type == 1:
         dataChanged = data.reindex(columns=col1)
@@ -112,12 +111,12 @@ def logRegForecast(X, Y, newColumns):
 
 
 data = pandas.read_csv("../Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv")
-cutData = test_type(data, 1)  # set what variables to use
+cutData = test_type(data, 8)  # set what variables to use
 standData = standardize(cutData)  # standardize the data
 
 # Dropping columns per Logit Table Results #
 # All vars dropped variables (Test Type 1)
-standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
+# standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
 # No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix'], axis=1)
 # No location dropped variables (Test Type 4)
