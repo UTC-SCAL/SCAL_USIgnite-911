@@ -10,6 +10,10 @@ from xgboost import plot_importance
 from matplotlib import pyplot
 from sklearn import preprocessing
 import geopy.distance
+from sklearn.decomposition import PCA
+from keras.layers import Dense, Dropout
+from keras.models import Sequential
+from sklearn.utils import shuffle
 
 
 def automatedModelAverageAggregator():
@@ -368,6 +372,60 @@ def xgBoostFeatureImportance(data):
     # plot feature importance
     plot_importance(model)
     pyplot.show()
+
+
+def featureSelectionColumns(data, modelRow):
+    """
+    A method for getting what columns to keep for the feature selection tests done for the different datasets
+    It reads in the file that has the most important variables per test
+    Then, cleans the list to remove any empties (since some tests have a smaller number of variables)
+    Then, converts the values in the list to strings, then sets the columns of the data
+    """
+    columnData = pandas.read_excel("../Jeremy Thesis/Feature Selection Results.xlsx")
+    columns = ["Accident"]  # columns we'll be appending
+    rowNum = columnData[columnData["Model"] == str(modelRow)].index[0]  # get the actual row number based on the model
+    dataRow = list(columnData.iloc[rowNum,])  # get the row that corresponds to the row number
+    dataRow = [x for x in dataRow if str(x) != 'nan']  # clean the list of empties
+    dataRow = dataRow[1:]
+    columns = columns + dataRow
+    return data.reindex(columns=columns)  # set the columns of the data
+
+
+def pcaOnModelWeights(file, modelPath):
+    """
+    A method to get the weights for the different layers in the MLP model and apply PCA to them
+    Simply supply the file you need and the saved .h5 model file for loading in weights
+    Comment out any of the methods below you may or may not need to get your data in the proper format
+    """
+    data = pandas.read_csv("../%s" % file)
+    fsModel = "TS 50-50 T1"  # used for selecting columns if using ExtraTreesClassifier for feature selection
+    cutData = test_type(data, 1)  # selecting test type
+    cutData = standardize(cutData)  # standardize data
+    # cutData = featureSelectionColumns(cutData, fsModel)
+    cutData = shuffle(cutData)  # shuffle the data
+    X = cutData.iloc[:, 1:(len(cutData.columns) + 1)].values
+    Y = cutData.iloc[:, 0].values
+
+    # Make the model
+    model = Sequential()
+    model.add(Dense(X.shape[1], input_dim=X.shape[1], activation='sigmoid'))
+    model.add(Dense(X.shape[1] - 5, activation='sigmoid'))
+    model.add(Dropout(.1))
+    try:
+        model.add(Dense(X - 10, activation='sigmoid'))
+    except:
+        model.add(Dense(X - 5, activation='sigmoid'))
+    model.add(Dense(1, activation='sigmoid'))
+    model.load_weights("../%s" % modelPath)
+    # Get the weights of the model's first layer
+    weights = model.layers[0].get_weights()[0]
+    # Apply PCA to those weights and save them to a file
+    pca = PCA(n_components=len(cutData.columns[1:len(cutData.columns)]))
+    principalComponents = pca.fit_transform(weights)
+    principalDf = pandas.DataFrame(data=principalComponents, columns=cutData.columns[1:len(cutData.columns)])
+    principalDf.to_csv("../", index=False)
+    # variance explained if you want it
+    print(pca.explained_variance_ratio_)
 
 
 # Code for finding matches from the forecasts
