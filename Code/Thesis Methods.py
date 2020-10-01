@@ -201,7 +201,7 @@ def finding_matches(accidents, forecastData, date):
     #     print("\tF1 Score Calc Error")
 
 
-def matchAccidentsWithDistance(predictions, accidents, date):
+def matchAccidentsWithDistance(accidents, predictions, date):
     # Read in the grid info
     gridInfo = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
     # Cut your predictions to only the accidents
@@ -232,7 +232,7 @@ def matchAccidentsWithDistance(predictions, accidents, date):
                 centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
                 predictionCoords = (float(centerLat), float(centerLong))
                 distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
-                if distance <= 0.50 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
+                if distance <= 0.3 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
                     TP += 1
         for n, _ in enumerate(negPredictions.values):
             if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
@@ -293,7 +293,7 @@ def modelResultGraph_oneWeek(data):
     data7525 = data[data['Model'].str.contains("7525")]
     dataNoSplit = data[data['Model'].str.contains("No")]
 
-    fig = px.line(data5050, x="Date", y="F1 Score", color='Model')
+    fig = px.line(data7525, x="Date", y="Specificity", color='Model')
     fig.show()
 
 
@@ -429,34 +429,39 @@ def pcaOnModelWeights(file, modelPath):
 
 
 # Code for finding matches from the forecasts
-rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
-forecasts = []
-saveIterator = 0
-saveDF = pandas.DataFrame(columns=['Model', 'Date', 'TP', 'FN', 'TN', 'FP', 'Recall', 'Specificity', 'Precision',
-                                   'F1 Score'])
-for forecast in forecasts:
-    forecastFile = pandas.read_csv("../%s" % forecast)
+# rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
+# forecasts = []
+# saveIterator = 0
+# saveDF = pandas.DataFrame(columns=['Model', 'Date', 'TP', 'FN', 'TN', 'FP', 'Recall', 'Specificity', 'Precision',
+#                                    'F1 Score'])
+# for forecast in forecasts:
+#     forecastFile = pandas.read_csv("../%s" % forecast)
+#
+#     if 'FeatSelect' in forecast:
+#         date = forecast.split("_")[4].split(".")[0].replace("-", "/")
+#     elif 'LogReg' in forecast:
+#         date = forecast.split("_")[4].split(".")[0].replace("-", "/")
+#         modelName = forecast.split("/")[2].split(".")[0]
+#     else:
+#         date = forecast.split("_")[3].split(".")[0].replace("-", "/")
+#     # print(date)
+#     # print(modelName)
+#     # exit()
+#     cutRawAcc = rawAcc[rawAcc['Date'] == date]
+#     print("Forecast on ", forecast)
+#     TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
+#     saveDF.at[saveIterator, 'Model'] = modelName
+#     saveDF.at[saveIterator, 'Date'] = date
+#     saveDF.at[saveIterator, 'TP'] = TP
+#     saveDF.at[saveIterator, 'FN'] = FN
+#     saveDF.at[saveIterator, 'TN'] = TN
+#     saveDF.at[saveIterator, 'FP'] = FP
+#     saveDF.at[saveIterator, 'Recall'] = recall
+#     saveDF.at[saveIterator, 'Specificity'] = specificity
+#     saveDF.at[saveIterator, 'Precision'] = precision
+#     saveDF.at[saveIterator, 'F1 Score'] = f1Score
+#     saveIterator += 1
+# saveDF.to_csv("../", index=False)
 
-    if 'FeatSelect' in forecast:
-        date = forecast.split("_")[4].split(".")[0].replace("-", "/")
-    elif 'LogReg' in forecast:
-        date = forecast.split("_")[2].split(".")[0].replace("-", "/")
-    else:
-        date = forecast.split("_")[3].split(".")[0].replace("-", "/")
-    print(date)
-    # exit()
-    cutRawAcc = rawAcc[rawAcc['Date'] == date]
-    print("Forecast on ", forecast)
-    TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
-    saveDF.at[saveIterator, 'Model'] = forecast.split(".")[0]
-    saveDF.at[saveIterator, 'Date'] = date
-    saveDF.at[saveIterator, 'TP'] = TP
-    saveDF.at[saveIterator, 'FN'] = FN
-    saveDF.at[saveIterator, 'TN'] = TN
-    saveDF.at[saveIterator, 'FP'] = FP
-    saveDF.at[saveIterator, 'Recall'] = recall
-    saveDF.at[saveIterator, 'Specificity'] = specificity
-    saveDF.at[saveIterator, 'Precision'] = precision
-    saveDF.at[saveIterator, 'F1 Score'] = f1Score
-    saveIterator += 1
-saveDF.to_csv("../", index=False)
+data = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg Forecast Results No Dist.csv")
+modelResultGraph_oneWeek(data)
