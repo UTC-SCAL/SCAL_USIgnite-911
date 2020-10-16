@@ -281,10 +281,13 @@ def featureSelectionTest(data, testName):
 #                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
 #                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
 
-model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5'
+model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5'
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-dates = []
+dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020', '1-8-2020', '1-9-2020',
+             '1-10-2020', '1-11-2020', '1-12-2020', '1-13-2020', '1-14-2020', '1-15-2020', '1-16-2020', '1-17-2020',
+             '1-18-2020', '1-19-2020', '1-20-2020', '1-21-2020', '1-22-2020', '1-23-2020', '1-24-2020', '1-25-2020',
+             '1-26-2020', '1-27-2020', '1-28-2020', '1-29-2020', '1-30-2020', '1-31-2020']
 
 for date in dates:
     print("Date is ", date)

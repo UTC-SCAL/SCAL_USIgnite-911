@@ -293,12 +293,15 @@ def modelResultGraph_oneWeek(data):
     data7525 = data[data['Model'].str.contains("7525")]
     dataNoSplit = data[data['Model'].str.contains("No")]
 
-    fig = px.line(data7525, x="Date", y="Specificity", color='Model')
-    fig.show()
+    specFig = px.line(dataNoSplit, x="Date", y="Specificity", color='Model')
+    specFig.show()
+
+    recFig = px.line(dataNoSplit, x="Date", y="Recall", color='Model')
+    recFig.show()
 
 
 def modelResultGraph_oneMonth(data):
-    fig = px.line(data, x="Date", y="F1 Score", color='FS')
+    fig = px.line(data, x="Date", y="F1 Score", color='ModelType')
     fig.show()
 
 
@@ -463,5 +466,8 @@ def pcaOnModelWeights(file, modelPath):
 #     saveIterator += 1
 # saveDF.to_csv("../", index=False)
 
-data = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg Forecast Results No Dist.csv")
-modelResultGraph_oneWeek(data)
+# lrData = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg Forecast Results No Dist.csv")
+# mlpData = pandas.read_csv("../Jeremy Thesis/Forecasting/MLP Top 5 Splits Forecast Results.csv")
+# modelResultGraph_oneWeek(lrData)
+data = pandas.read_csv("../Jeremy Thesis/January Forecasts (LR vs MLP Best Models).csv")
+modelResultGraph_oneMonth(data)
