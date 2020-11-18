@@ -1,4 +1,4 @@
-import geolocator as geolocator
+# import geolocator as geolocator
 import pandas
 import numpy
 import time
@@ -137,13 +137,13 @@ def main():
     start = time.time()
 
     total = pandas.read_csv(
-        "Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+        "../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
     lastday = pandas.Timestamp(
         total['Response Date'].values[-1]).date() + timedelta(days=1)
 
     total = pull_emails(total, lastday)
     total.to_csv(
-        "Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_Test.csv", index=False)
+        "../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
 
 
     # hexpath = '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/HexGrid.shp'
