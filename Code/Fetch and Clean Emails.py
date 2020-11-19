@@ -15,6 +15,7 @@ import geopandas
 from geopandas.tools import sjoin
 from datetime import datetime
 import geopy.distance
+import time
 
 
 def clear():
@@ -118,36 +119,42 @@ def main():
     # This is the beginning of the fetching emails code lines #
 
     # Read in the file that has all of our accident records
-    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-18-20.csv")
     # Get the last day our accident records cover
     lastday = pandas.Timestamp(total['Response Date'].values[-1]).date() + timedelta(days=1)
 
     total = pull_emails(total, lastday)
+    total.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
 
     # This is the beginning of the cleaning of the fetched emails code lines #
 
+    # The file containing the newly fetched accident records
+    fetchedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
     # The file containing our cleaned list of raw accident records
-    cleanedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+    cleanedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-18-20.csv")
     # Gets the date of the last record in our raw accident data
     lastcleaned = pandas.Timestamp(cleanedAccidents['Response Date'].values[-1]).date()
 
-    total['Date'] = total.apply(lambda x: pandas.Timestamp(x['Response Date']).date(), axis=1)
-    total['Hour'] = total.apply(lambda x: pandas.Timestamp(x['Response Date']).hour, axis=1)
-    total['Coords'] = total['Latitude'].astype(str) + " , " + total['Longitude'].astype(str)
+    fetchedAccidents['Date'] = fetchedAccidents.apply(lambda x: pandas.Timestamp(x['Response Date']).date(), axis=1)
+    fetchedAccidents['Hour'] = fetchedAccidents.apply(lambda x: pandas.Timestamp(x['Response Date']).hour, axis=1)
+    fetchedAccidents['Coords'] = fetchedAccidents['Latitude'].astype(str) + " , " + fetchedAccidents[
+        'Longitude'].astype(str)
+    fetchedAccidents['OK'] = 0
 
     drops = list()
-    for i, _ in enumerate(total.values):
-        if total.Date.values[i] >= lastcleaned:
+    for i, _ in enumerate(fetchedAccidents.values):
+        if fetchedAccidents.Date.values[i] >= lastcleaned:
             # if i % 2000 == 0:
             #     print(i, round(((time.time()-start)/60),2), len(drops))
-            timematches = total.loc[(total['Unix'].between((int(total.Unix[i]) - 900),
-                                                           (int(total.Unix[i]) + 900)))].index.tolist()
+            timematches = fetchedAccidents.loc[(fetchedAccidents['Unix'].between((int(fetchedAccidents.Unix[i]) - 900),
+                                                                                 (int(fetchedAccidents.Unix[
+                                                                                          i]) + 900)))].index.tolist()
             if len(timematches) > 1:
                 for j in timematches:
-                    dist = geopy.distance.distance(total.Coords[i], total.Coords[j]).miles
+                    dist = geopy.distance.distance(fetchedAccidents.Coords[i], fetchedAccidents.Coords[j]).miles
                     if dist < .25 and (int(i) != int(j)) and j not in drops and (j > i):
                         drops.append(j)
-    keeps = total.drop(drops)
+    keeps = fetchedAccidents.drop(drops)
     keeps = keeps.drop(['Coords', 'OK'], axis=1)
 
     # Getting the hour/date combo of the unix time here to avoid any missed duplicates.
@@ -157,9 +164,10 @@ def main():
     # keeps['Unix'] = keeps.apply(lambda x: x.Unix.strftime('%s'), axis=1)  # For Unix or Mac
     keeps['Unix'] = keeps.apply(lambda x: x.Unix.timestamp(), axis=1)  # For Windows
 
-    print("Duplicates Removed:", int(len(total.values) - len(keeps.values)))
+    print("Duplicates Removed:", int(len(fetchedAccidents.values) - len(keeps.values)))
     # Save the dropped duplicates version
-    keeps.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_DropDupsTest.csv", index=False)
+    thisDate = time.strftime("%m-%d-%y")
+    keeps.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_%s.csv" % thisDate, index=False)
 
 
 if __name__ == "__main__":
