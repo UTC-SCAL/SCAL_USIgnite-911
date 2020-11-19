@@ -1,3 +1,9 @@
+"""
+Authors: Jin Cho and Pete Way
+Purpose: Automated version of fetching emails from our account that gets the daily accident reports
+Note: I was only able to get this running on my work laptop, and others have reported issues of having this run on their
+    personal machines.
+"""
 # import geolocator as geolocator
 import pandas
 import numpy
@@ -88,11 +94,7 @@ def pull_emails(total, lastday):
                             except Exception as e:
                                 print(e)
                                 exit()
-
-
-                        
-                    daypart['Unix'] = daypart.apply(
-                        lambda x: x.Unix.strftime('%s'), axis=1)
+                    daypart['Unix'] = daypart.apply(lambda x: x.Unix.strftime('%s'), axis=1)
                     daypart['Latitude'] = daypart["Latitude"]/1000000
                     daypart['Longitude'] = daypart["Longitude"]/-1000000
                     # daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]).map(str)
@@ -134,24 +136,19 @@ def add_grid_to_accidents_sf(accpath, hexpath, savepath):
 
 
 def main():
-    start = time.time()
-
-    total = pandas.read_csv(
-        "../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
-    lastday = pandas.Timestamp(
-        total['Response Date'].values[-1]).date() + timedelta(days=1)
+    # Read in the file that has all of our accident records
+    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+    # Get the last day our accident records cover
+    lastday = pandas.Timestamp(total['Response Date'].values[-1]).date() + timedelta(days=1)
 
     total = pull_emails(total, lastday)
-    total.to_csv(
-        "../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
+    total.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
 
-
+    # The below lines are optional when fetching accident record emails
     # hexpath = '/Users/peteway/Documents/GitHub/SCAL_USIgnite-911/Excel & CSV Sheets/Shapefiles/Rework_HexGridpoint2sqmi/HexGrid.shp'
     # accpath = 'Excel & CSV Sheets/Shapefiles/New 911 Accident Shapefiles/Accidents_Full.shp'
     # savepath = 'Excel & CSV Sheets/Hamilton County Accident System Hex/Accidents/AccidentHex.csv'
     # add_grid_to_accidents_sf(accpath, hexpath, savepath)
-
-    print("Total Process time:", time.time() - start)
 
 
 if __name__ == "__main__":
