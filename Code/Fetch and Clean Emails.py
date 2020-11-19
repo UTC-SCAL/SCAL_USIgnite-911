@@ -2,7 +2,8 @@
 Author: Pete Way and Jin Cho
 Editor: Jeremy Roland
 Purpose: A combined file of GettingRawData.py and New_Drop_Duplicates.py. This was made to make it easier to have
-    the code running each day on the MDRB servers to fetch and clean emails
+    the code running each day on the MDRB servers to fetch and clean emails. The way I combined them may not be the
+    most efficient, but some of the other methods I tried were having issues.
 """
 import pandas
 import imaplib
@@ -103,18 +104,6 @@ def pull_emails(total, lastday):
     return total
 
 
-def add_grid_to_accidents_sf(accpath, hexpath, savepath):
-    point = geopandas.GeoDataFrame.from_file(accpath)
-    poly = geopandas.GeoDataFrame.from_file(hexpath)
-    pointInPolys = sjoin(point, poly)
-    del pointInPolys['index_right']
-    gridinfo = pandas.read_csv(
-        "Excel & CSV Sheets/Hamilton County Accident System Hex/Hex_Grid/HexGridInfoComplete.csv")
-    newdata = pandas.merge(pointInPolys, gridinfo,
-                           on=['GRID_ID', 'Join_Count'])
-    newdata.to_csv(savepath, index=False)
-
-
 def main():
     # This is the beginning of the fetching emails code lines #
 
@@ -127,7 +116,7 @@ def main():
     total.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
 
     # This is the beginning of the cleaning of the fetched emails code lines #
-
+    # I get it may not be the best way to combine these files, but this method works
     # The file containing the newly fetched accident records
     fetchedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
     # The file containing our cleaned list of raw accident records
@@ -144,11 +133,9 @@ def main():
     drops = list()
     for i, _ in enumerate(fetchedAccidents.values):
         if fetchedAccidents.Date.values[i] >= lastcleaned:
-            # if i % 2000 == 0:
-            #     print(i, round(((time.time()-start)/60),2), len(drops))
             timematches = fetchedAccidents.loc[(fetchedAccidents['Unix'].between((int(fetchedAccidents.Unix[i]) - 900),
-                                                                                 (int(fetchedAccidents.Unix[
-                                                                                          i]) + 900)))].index.tolist()
+                                                                                 (int(fetchedAccidents.Unix[i]) +
+                                                                                  900)))].index.tolist()
             if len(timematches) > 1:
                 for j in timematches:
                     dist = geopy.distance.distance(fetchedAccidents.Coords[i], fetchedAccidents.Coords[j]).miles
