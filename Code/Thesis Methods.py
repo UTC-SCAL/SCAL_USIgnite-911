@@ -14,6 +14,7 @@ from sklearn.decomposition import PCA
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from sklearn.utils import shuffle
+import numpy
 
 
 def automatedModelAverageAggregator():
@@ -301,7 +302,7 @@ def modelResultGraph_oneWeek(data):
 
 
 def modelResultGraph_oneMonth(data):
-    fig = px.line(data, x="Date", y="F1 Score", color='ModelType')
+    fig = px.line(data, x="Date", y="Specificity", color='ModelType')
     fig.show()
 
 
@@ -469,5 +470,5 @@ def pcaOnModelWeights(file, modelPath):
 # lrData = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg Forecast Results No Dist.csv")
 # mlpData = pandas.read_csv("../Jeremy Thesis/Forecasting/MLP Top 5 Splits Forecast Results.csv")
 # modelResultGraph_oneWeek(lrData)
-data = pandas.read_csv("../Jeremy Thesis/January Forecasts (LR vs MLP Best Models).csv")
+data = pandas.read_csv("../Jeremy Thesis/Best Model Statistics/January Forecasts (LR vs MLP Best Models).csv")
 modelResultGraph_oneMonth(data)
