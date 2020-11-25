@@ -14,7 +14,7 @@ import string
 # Method to log into the corresponding DarkSky or Etrims service through a file on this machine
 # The file itself isn't on GitHub, so if you don't have it message Jeremy or Pete for the file
 def find_cred(service):
-    file = "../Excel & CSV Sheets/login.csv"
+    file = "../Pre Thesis/login.csv"
     if os.path.exists(file):
         with open(file, "r") as file:
             lines = file.readlines()

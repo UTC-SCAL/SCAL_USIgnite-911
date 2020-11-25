@@ -48,7 +48,7 @@ def fetchWeather(weatherFile, beginDate, endDate):
     print("Fetching Weather")
     dates = pandas.date_range(beginDate, endDate)
     # Read in the center points file to get the used grid locations and their lat/longs
-    centers = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
+    centers = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
     miss_loc = 0  # used for positioning values in the dataframe
 
     start_block = 0
@@ -233,7 +233,7 @@ def get_missing_weather(missingWeather):
         need certain variables for your call, just comment out those variables below
     """
     # If you want to use gridLocations, then remember to alter some lat/long code in for loop # 2
-    centers = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv")
+    centers = pandas.read_csv("../Pre Thesis/Hex_Grid/Hex_GridInfo.csv")
     gridLocations = []
 
     # You will likely have to convert some columns to the appropriate type, just fyi

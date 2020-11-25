@@ -8,9 +8,9 @@ import time
 import geopy.distance
 
 # The file containing the newly fetched accident records
-fetchedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
+fetchedAccidents = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
 # The file containing our cleaned list of raw accident records
-cleanedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+cleanedAccidents = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData.csv")
 # Gets the date of the last record in our raw accident data
 lastcleaned = pandas.Timestamp(cleanedAccidents['Response Date'].values[-1]).date()
 

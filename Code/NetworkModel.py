@@ -343,7 +343,8 @@ def generate_results(y_test, predictions, hist, fpr, tpr, roc_auc, i, folder):
 # Depending on the size of your dataset that you're reading in, you choose either csv or feather
 # Feather files are typically any file > 800 mb
 # This is done because Pycharm doesn't like CSV files above a certain size (it freezes the system)
-dataset = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 50-50 Split Top 13.csv")
+dataset = pandas.read_csv(
+    "../Pre Thesis/Grid Hex Layout/Negative Sample Data/Total Shift/TS Negatives 50-50 Split Top 13.csv")
 # Select which type of test you want to do: this determines what columns are used
 # dataset = test_type(dataset, 6)
 # Standardize the data before modelling

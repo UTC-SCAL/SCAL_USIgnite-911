@@ -13,7 +13,7 @@ folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 
 def find_cred(service):
-    file = "../Excel & CSV Sheets/login.csv"
+    file = "../Pre Thesis/login.csv"
     if os.path.exists(file):
         with open(file, "r") as file:
             lines = file.readlines()
@@ -44,13 +44,13 @@ def get_negatives_master(calldata, compare):
     """
     # Blank csv file for formatting purposes and easily saving negative samples
     negative_samples = pandas.read_csv(
-        "../Excel & CSV Sheets/Grid Hex Layout/Negative Sampling/Negative Sample Template.csv", sep=",")
+        "../Pre Thesis/Grid Hex Layout/Negative Sampling/Negative Sample Template.csv", sep=",")
 
     # The center points for our grid blocks for the current grid layout we are using
     # center_points = pandas.read_csv("../Excel & CSV Sheets/Hex_Grid/Hex_GridInfo.csv", sep=",")
 
     # This contains the information of each grid block, such as road count, lat/long, grid id, etc.
-    grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
+    grid_info = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
 
     # Select the range of grid numbers to use for getting new grid blocks
     # Depending on what version of the city layout you are using, there may be more or less grid values to go through

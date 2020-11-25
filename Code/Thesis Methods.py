@@ -114,7 +114,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
     saveDate format can be whatever you want it to be, a standard we use is m-d-yyyy
     """
     # Information about each grid number
-    grid_info = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/HexGridInfo.csv")
+    grid_info = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
 
     columns = ['Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
                'FUNC_CLASS', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'Foggy', 'Rain', 'RainBefore', 'Snow',

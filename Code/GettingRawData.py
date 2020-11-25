@@ -137,7 +137,7 @@ def add_grid_to_accidents_sf(accpath, hexpath, savepath):
 
 def main():
     # Read in the file that has all of our accident records
-    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData.csv")
+    total = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData.csv")
     # Get the last day our accident records cover
     lastday = pandas.Timestamp(total['Response Date'].values[-1]).date() + timedelta(days=1)
 
