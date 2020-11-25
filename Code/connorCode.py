@@ -1,5 +1,6 @@
 """
-Code file for finding the important features of the dataset
+Author: Jeremy Roland
+Purpose: Code file for finding the important features of the dataset, specifically made for Connor
 """
 import pandas
 from sklearn.preprocessing import StandardScaler
@@ -144,6 +145,7 @@ def correlationHeatmap(data):
 
 
 def appendingAccidentFiles():
+    # A method to append accident files. Add in more files if you have more than 3 to append together
     # Read in the files you want to append together
     acc1 = pandas.read_csv("../")
     acc2 = pandas.read_csv("../")

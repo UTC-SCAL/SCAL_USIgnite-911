@@ -1,3 +1,8 @@
+"""
+Author: Pete Way
+Purpose: Pete was doing some traffic testing during the beginning of the pandemic
+"""
+
 import os
 import datetime 
 import pandas 

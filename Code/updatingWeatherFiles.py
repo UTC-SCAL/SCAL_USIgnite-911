@@ -1,5 +1,6 @@
 """
-    This file is meant to fetch weather for our Grid Block and Grid Hex city layouts for the 911 project
+Authors: Jeremy Roland and Pete Way
+Purpose: This file is meant to fetch weather for our Grid Block and Grid Hex city layouts for the 911 project
     I use this as a sort of bootleg parallelization of the code, as I simply copy the code from this file and paste
         it in 3 other temporary files
 """

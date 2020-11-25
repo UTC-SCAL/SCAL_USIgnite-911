@@ -1,3 +1,9 @@
+"""
+Author: Pete Way
+Purpose: Predict the accident hotspots. I (Jeremy) find this overly long and complicated, but use whatever forecasting
+    file you wish
+"""
+
 import datetime
 import os
 
@@ -625,6 +631,7 @@ def make_directory_alt(model):
         os.makedirs(folder)
 
     return folder, suffix
+
 
 # This version of make_directory is a little less specific with naming
 def make_directory_date(date):

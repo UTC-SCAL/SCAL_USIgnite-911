@@ -1,6 +1,7 @@
 """
-This is a heavily altered version of Pete's OneStopForecasting_hex.py code. I've changed it to suit my needs for thesis
-This version is much less generalized and requires specific file naming schemes
+Author: Jeremy Roland
+Purpose: This is a heavily altered version of Pete's OneStopForecasting_hex.py code. I've changed it to suit my needs
+for thesis. This version is much less generalized and requires specific file naming schemes
 """
 import os
 
@@ -27,9 +28,6 @@ def test_type(data, type):
     An easy to use method for selecting which columns to use for the testing you do
     Also serves as an easy way to find which variables are used in each test type
     Remember: For forecasting, you DON'T need Accident as the first variable
-    :param data:
-    :param type:
-    :return:
     """
     col1 = ['Longitude', 'Latitude', 'Unix', 'Hour',
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
@@ -165,7 +163,7 @@ def add_Pred_andProb(data, scaled, date):
         modelsplit = "5050 Split"
     else:
         modelsplit = "NoSplit"
-    # Get the model's type
+    # Get the model's negative sampling type
     if "GF" in model:
         modeltype = "GF"
     elif "TS" in model:
@@ -190,7 +188,7 @@ def add_Pred_andProb(data, scaled, date):
 
     # print("Adding Probability and Predicted Accidents to data file")
 
-    # Be sure to change this to reflect what model you are using
+    ## Be sure to change this to reflect what model you are using ##
     filename = folder + suffix + "Forecast_" + str(date) + ".csv"
 
     data['Prediction'] = scaled['Prediction'].astype(int)
@@ -242,52 +240,10 @@ def featureSelectionAlter(data, model):
     return fs_data
 
 
-def featureSelectionTest(data, testName):
-    """
-    A method to change variables used based on the feature selection used
-    Remember: For forecasting, you DON'T need Accident as the first variable
-    """
-    if 'chi2' in testName:
-        testData = data.reindex(columns=['Join_Count', "DayFrame", 'Hour', 'uvIndex', 'Grid_Num',
-                                           'WeekDay', 'Rain', 'Latitude', 'RainBefore', 'NBR_LANES', 'DayOfWeek',
-                                           'Foggy', 'precipIntensity', 'humidity', 'temperature'])
-    elif 'xgboost' in testName:
-        # This column reset is for testing XGBoost feature importance
-        testData = data.reindex(columns=['Longitude', 'Latitude', 'Join_Count', 'Hour', 'DayFrame', 'Unix',
-                                         'uvIndex', 'temperature', 'humidity', 'WeekDay', 'dewPoint', 'precipIntensity',
-                                         'pressure', 'FUNC_CLASS', 'visibility', 'Grid_Num'])
-    else:
-        print("Error in selecting which feature selection test to apply")
-        exit()
-    return testData
-
-
-# Just a commented out list to remind myself what models I want to use
-# models5050Best = ['Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test1.h5',
-#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5',
-#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_Test2.h5',
-#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_50-50Split_Test1.h5',
-#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test2.h5']
-# Read in the model you want to use
-# models7525Best = ['Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_FeatSelect_Test1.h5',
-#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_Test1.h5',
-#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_75-25Split_Test1.h5',
-#                   'Jeremy Thesis/Total Shift/Model Results/model_TS_75-25Split_Test2.h5',
-#                   'Jeremy Thesis/Spatial Shift/Model Results/model_SS_75-25Split_FeatSelect_Test1.h5']
-
-# modelsNoSplitBest = ['Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test1.h5',
-#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_FeatSelect_Test1.h5',
-#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_FeatSelect_Test2.h5',
-#                      'Jeremy Thesis/Total Shift/Model Results/model_TS_NoSplit_Test2.h5',
-#                      'Jeremy Thesis/Spatial Shift/Model Results/model_SS_NoSplit_Test1.h5']
-
-model = 'Jeremy Thesis/Total Shift/Model Results/model_TS_50-50Split_FeatSelect_Test1.h5'
+model = ''
 # Have a list of the days you want to predict for
 # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020', '1-8-2020', '1-9-2020',
-             '1-10-2020', '1-11-2020', '1-12-2020', '1-13-2020', '1-14-2020', '1-15-2020', '1-16-2020', '1-17-2020',
-             '1-18-2020', '1-19-2020', '1-20-2020', '1-21-2020', '1-22-2020', '1-23-2020', '1-24-2020', '1-25-2020',
-             '1-26-2020', '1-27-2020', '1-28-2020', '1-29-2020', '1-30-2020', '1-31-2020']
+dates = []
 
 for date in dates:
     print("Date is ", date)
@@ -315,17 +271,8 @@ for date in dates:
         exit()
     # Code to alter the columns of the data if the model being used has feature selection applied
     if 'FeatSelect' in model:
-        if 'chi2' in model:
-            data = featureSelectionTest(data, 'chi2')
-        elif 'xgBoost' in model:
-            data = featureSelectionTest(data, 'xgboost')
-        else:
-            # this is the extratreesclassifier feature selection, which is the default feature selection
-            # used in this project
-            data = featureSelectionAlter(data, model)
-            # Use this line for doing the top 7 model, which only uses the top 7 variables from Test 1 with
-            # extratreesclassifier feature selection
-            # data = data.reindex(columns=['Join_Count', 'Hour', 'DayFrame', 'Latitude', 'Longitude', 'Grid_Num', 'Unix'])
+        # this is the extratreesclassifier feature selection, which is the default feature selection for our MLP model
+        data = featureSelectionAlter(data, model)
 
     scaled = standarize_data(data)
     scaled = predict_accidents(scaled, model)

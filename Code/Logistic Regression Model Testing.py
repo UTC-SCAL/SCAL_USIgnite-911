@@ -1,3 +1,8 @@
+"""
+Author: Jeremy Roland
+Purpose: This was a testing run to create a logistic regression model to predict where our accident hotspots were
+"""
+
 from sklearn import preprocessing
 import pandas
 import statsmodels.api as sm
@@ -15,9 +20,6 @@ def test_type(data, type):
     """
     An easy to use method for selecting which columns to use for the testing you do
     Also serves as an easy way to find which variables are used in each test type
-    :param data:
-    :param type:
-    :return:
     """
     col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
@@ -73,6 +75,7 @@ def test_type(data, type):
     return dataChanged
 
 
+# A test type method specific for the logistic regression testing
 def logReg_test_type(data, type):
     col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
@@ -118,10 +121,11 @@ def standardize(data):
     return dataScaled
 
 
+# This performs the actual predictions
 def logRegForecast(X, Y, newColumns):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
+    dates = []
     for date in dates:
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
@@ -129,26 +133,30 @@ def logRegForecast(X, Y, newColumns):
             "../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % str(date))
         predictData = predictData.dropna()
 
+        # Split the data into training and testing
         X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
+        # Create our logistic regression model
         logreg = LogisticRegression(solver='newton-cg', class_weight='balanced')
+        # Fit the model to our training data
         logreg.fit(X_train, y_train)
 
         # These determine what variables to keep
         predictData = predictData.reindex(columns=newColumns)
+        # Standardize the data
         standPredictData = standardize(predictData)
-
+        # Perform predictions
         y_pred = logreg.predict(standPredictData)
         predictData["Prediction"] = y_pred
         predictData.to_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_%s.csv" % date, index=False)
 
 
-data = pandas.read_csv("../Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv")
+data = pandas.read_csv("../")
 cutData = test_type(data, 1)  # set what variables to use
 standData = standardize(cutData)  # standardize the data
 
 # Dropping columns per Logit Table Results #
 # All vars dropped variables (Test Type 1)
-standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
+# standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
 # No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix'], axis=1)
 # No location dropped variables (Test Type 4)
@@ -159,12 +167,15 @@ X = standData.iloc[:, 1:(len(standData.columns) + 1)].values  # Our independent 
 Y = standData.iloc[:, 0].values  # Our dependent variable
 
 # Perform predictions
+# In general, I think it's a good idea to run the other code below this method first to get a better understanding
+# of your data
 # logRegForecast(X, Y, newColumns)
 # exit()
+
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)
 result = logit_model.fit()
-# print(result.summary(xname=newColumns))
+print(result.summary(xname=newColumns))
 
 # Split the data and create the model
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
@@ -174,7 +185,7 @@ logreg.fit(X_train, y_train)
 # Predicting on the training set and printing the accruacy
 y_pred = logreg.predict(X_test)
 logAcc = logreg.score(X_test, y_test) * 100
-# print('Accuracy of logistic regression classifier on test set: ', round(logAcc, 2))
+print('Accuracy of logistic regression classifier on test set: ', round(logAcc, 2))
 
 # Getting the confusion matrix values for the predictions (TN, FP, FN, TN)
 confusion_matrix = confusion_matrix(y_test, y_pred)

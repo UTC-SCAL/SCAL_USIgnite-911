@@ -1,3 +1,8 @@
+"""
+Authors: Jeremy Roland and Pete Way
+Purpose: To match our weather data to our accident data
+"""
+
 import pandas
 import os, sys
 from datetime import datetime, timedelta
@@ -23,7 +28,7 @@ def find_cred(service):
     return cred
 
 
-##finds binary variables for the given event/conditions. 
+# Finds binary variables for the given event/conditions.
 def finding_binaries(data):
     data.Event = data.Event.apply(lambda x: x.lower())
     data.Conditions = data.Conditions.apply(lambda x: x.lower())
@@ -43,26 +48,21 @@ def finding_binaries(data):
 # Creates the unix time column for the provided file
 def make_unix_with_hour(data):
     # Taking the date and hour from the data file and converting it to the
-    # year-month-day hour:minute:second format (note: apparently it assumes minute and second are 0 if not supplied)
-    data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
+    # year-month-day hour:minute:second format (note: it assumes minute and second are 0 if not supplied)
+    data['time'] = data.apply(lambda x: pandas.datetime.strptime(x.Date + " " + str(x.Hour).zfill(2), "%Y-%m-%d %H"), axis=1)
     # This actually makes the column
-    data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
+    data['time'] = data.apply(lambda x: x.time.strftime('%s'), axis=1)
     return data
 
 
-# Creates the unix time column for the weather file (same method as above)
-def make_unix_with_time(data):
-    data['time'] = data.apply(lambda x : pandas.datetime.strptime(x.time, "%Y-%m-%d %H:%M:%S"), axis=1)
-    data['time'] = data.apply(lambda x : x.time.strftime('%s'), axis=1)
-    return data
-
-
-# Creates dt, which is the actual date time column, if we need it
+# Creates datetime, which is the actual date time column, if we need it
 def create_datetime_from_unix(data):
-    data['dt'] = pandas.to_datetime(data['time'],unit='s', utc=True)
+    data['dt'] = pandas.to_datetime(data['time'], unit='s', utc=True)
     return data
 
 
+# Get the grid column and row of a grid block
+# This was only used for the grid block layout of our grid layout, the hex layout doesn't use this
 def get_gridcol_row(grid):
     for index, i in enumerate(grid.GRID_ID):
         alpha = i.split("-")[0].lower()
@@ -76,15 +76,17 @@ def get_gridcol_row(grid):
     return grid
 
 
+# A quick method to create an hourbefore column, used in the creation of the RainBefore variable
 def create_hourbefore(data):
     data['time'] = data['time'].astype(int)
     data['hourbefore'] = data['time'] - 60*60  # changes the hourbefore column to be 1 hour before the time column
     return data
 
 
-# Adds weather from weather file into the data file. Assumes weather file is formatted
+# Adds weather from weather file into the accident file. Assumes weather file is formatted
 def add_weather(data, weather):
     print("Adding Weather")
+    # Set the variable types to these, as they can be finicky if not set correctly
     data.Unix = data.Unix.astype(int)
     weather.Unix = weather.Unix.astype(int)
     data.Grid_Num = data.Grid_Num.astype(int)
@@ -92,8 +94,7 @@ def add_weather(data, weather):
     # Drop this column if the data already has it, as we will be replacing it later. Otherwise, comment this out.
     # data = data.drop(['precipIntensity'], axis=1)
 
-    # Merge the weather variables for the hour of the accident based on time and grid block
-    # Merge the event/conditions before columns based on hour before and grid block
+    # Merge the data between the weather file and the accident file based on the hour, date, and grid num variables
     newdata = pandas.merge(data, weather[['Grid_Num', 'cloudCover', 'dewPoint',
                                            'humidity', 'precipIntensity', 'precipProbability', 'precipType',
                                            'pressure', 'temperature', 'Unix', 'uvIndex',
@@ -101,24 +102,26 @@ def add_weather(data, weather):
                                            'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
                            on=['Unix', 'Grid_Num'])
 
-    # Applying rain before to data
+    # Getting the RainBefore variable
     weather['hourbefore'] = weather.Unix.astype(int)
     weather['RainBefore'] = weather.Rain.astype(int)
     newdata.hourbefore = newdata.hourbefore.astype(int)
     newdata = pandas.merge(newdata, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
-    # Code to aggregate weather #
+    # Code to aggregate weather if it isn't already #
     # newdata = finding_binaries(newdata)
     return newdata
 
 
 def main():
     # Read in our data
-    weather = feather.read_dataframe("../Ignore/2019 Weather.feather")
-    data = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Grid Fix/GF 2019 Negatives.csv")
+    # Our weather files are in a feather format, as it is much faster to read in than if using a csv because the file
+    # size is so large
+    weather = feather.read_dataframe("../")
+    data = pandas.read_csv("../")
     newData = add_weather(data, weather)
 
-    newData.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Negative Sample Data/Grid Fix/GF 2019 Negatives Weather.csv", index=False)
+    newData.to_csv("../", index=False)
 
 
 if __name__ == "__main__":

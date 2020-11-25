@@ -1,3 +1,8 @@
+"""
+Author: Pete Way
+Purpose: The code to create our MLP model
+"""
+
 import pandas
 from keras.layers import Dense, Dropout
 from keras.models import Sequential

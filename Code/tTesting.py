@@ -1,3 +1,8 @@
+"""
+Author: Jeremy Roland
+Purpose: A quick few methods to do some T testing on our prediction models for the Elsevier 2020 paper
+"""
+
 from math import sqrt
 from numpy import mean
 from scipy.stats import sem

@@ -1,3 +1,9 @@
+"""
+Author: Jeremy Roland
+Purpose: This is a more automated version of Logistic Regression Model Testing.py, so you can create multiple different
+    models with different data files in a single execution
+"""
+
 from sklearn import preprocessing
 import pandas
 import statsmodels.api as sm
@@ -63,10 +69,7 @@ def dropCols(data, testType):
 def logRegForecast(X, Y, newColumns, testType, modelName):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020', '1-8-2020', '1-9-2020',
-             '1-10-2020', '1-11-2020', '1-12-2020', '1-13-2020', '1-14-2020', '1-15-2020', '1-16-2020', '1-17-2020',
-             '1-18-2020', '1-19-2020', '1-20-2020', '1-21-2020', '1-22-2020', '1-23-2020', '1-24-2020', '1-25-2020',
-             '1-26-2020', '1-27-2020', '1-28-2020', '1-29-2020', '1-30-2020', '1-31-2020']
+    dates = []
     for date in dates:
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
@@ -88,8 +91,8 @@ def logRegForecast(X, Y, newColumns, testType, modelName):
         predictData.to_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg_Forecast_%s.csv" % saveName, index=False)
 
 
-dataFiles = ['Jeremy Thesis/Spatial Shift/Data/SS Data 50-50 Split.csv']
-testTypes = [3]
+dataFiles = []
+testTypes = []
 
 for dataFile in dataFiles:
     for testType in testTypes:

@@ -1,5 +1,6 @@
 """
-A general file to hold all of my misc methods I've made during my thesis research
+Author: Jeremy Roland
+Purpose: A general file to hold all of my misc methods I've made during my thesis research
 """
 import time
 from datetime import datetime

@@ -1,3 +1,8 @@
+"""
+Authors: Jeremy Roland and Pete Way
+Purpose: Generate negative samples
+"""
+
 import pandas
 import os, sys
 import random

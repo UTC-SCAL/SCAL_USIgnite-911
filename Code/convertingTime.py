@@ -1,6 +1,10 @@
+"""
+Authors: Jeremy Roland and Pete Way
+Purpose: A one stop shop of methods Pete and Jeremy used that all relate to working with time variables
+"""
+
 import pandas
 from datetime import datetime
-# import feather
 
 
 # Method to convert the variable Precipitation Time to a unix timestamp
@@ -41,8 +45,7 @@ def unixFromStandard(calldata):
     return calldata
 
 
-# Method t
-# o convert standard timestamp to a unix timestamp
+# Method to convert standard timestamp to a unix timestamp
 # Format of standard time used: year-month-day
 def unixFromStandardAlt(calldata):
 
@@ -84,6 +87,7 @@ def standardFromUnix(data):
 
 
 # This is a version of getting unix timestamp for windows matching, which Jeremy uses when he works from home
+# Windows machines need this version, because Windows sucks when working with code
 def getUnixTimeWindows(calldata):
     calldata.Hour = calldata.Hour.astype(str)
     calldata.Date = calldata.Date.astype(str)
@@ -107,6 +111,7 @@ def splitTime(data):
     return data
 
 
+# Method for creating the DayFrame variable from the provided hour
 def finding_Dayframe(data):
     data['DayFrame'] = 0
     for i, value in enumerate(data.values):
@@ -121,29 +126,9 @@ def finding_Dayframe(data):
     return data
 
 
-def finding_DayframeALT(data):
-    """
-    I, jeremy, was looking into an alternative form of dayframe
-    """
-    data["DayFrameAlt"] = ""
-    for i, value in enumerate(data.values):
-        if 6 <= data.Hour.values[i] <= 12:
-            data.DayFrameAlt.values[i] = 1
-        elif 13 <= data.Hour.values[i] <= 18:
-            data.DayFrameAlt.values[i] = 2
-        elif 19 <= data.Hour.values[i] <= 23 or 0 <= data.Hour.values[i] <= 5:
-            data.DayFrameAlt.values[i] = 3
-    return data
-
-
+# This is an older method we used when we were thinking of including holiday as a variable
+# This expects you to have a file that has the dates of the year that are holidays
 def finding_holidays(data, holidays):
-    """
-    This is an older method we used when we were thinking of including holiday as a variable, we haven't used it in a
-        while, so I won't go into details
-    :param data:
-    :param holidays:
-    :return:
-    """
     data.Date = data.Date.astype(str)
     holidays.Dates = holidays.Dates.astype(str)
     for i, value in enumerate(data.values):
@@ -154,13 +139,12 @@ def finding_holidays(data, holidays):
             data.TravelDay.values[i] = 0
             data.WeekEnd.values[i] = 0
             data.WeekDay.values[i] = 1
-            # if data.Date.values[i] == holidays.Dates.values[j]:
-            #     data.TravelDay.values[i] = 1
-            #     data.WeekEnd.values[i] = 0
-            #     data.WeekDay.values[i] = 0
-            #     break
-            # elif data.Weekday.values[i] == 5 or data.Weekday.values[i] == 6:
-            if data.Weekday.values[i] == 5 or data.Weekday.values[i] == 6:
+            if data.Date.values[i] == holidays.Dates.values[j]:
+                data.TravelDay.values[i] = 1
+                data.WeekEnd.values[i] = 0
+                data.WeekDay.values[i] = 0
+                break
+            elif data.Weekday.values[i] == 5 or data.Weekday.values[i] == 6:
                 data.TravelDay.values[i] = 0
                 data.WeekEnd.values[i] = 1
                 data.WeekDay.values[i] = 0

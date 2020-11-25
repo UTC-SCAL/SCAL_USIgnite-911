@@ -1,5 +1,6 @@
 """
-Code file for finding the important features of the dataset
+Author: Jeremy Roland
+Purpose: Code file for finding the important features of the dataset
 """
 import pandas
 from sklearn import preprocessing
@@ -13,11 +14,8 @@ import numpy
 
 def test_type(data, type):
     """
-    An easy to use method for selecting which columns to use for the testing you do
+    An easy to use method for selecting which variables to use for the testing you do
     Also serves as an easy way to find which variables are used in each test type
-    :param data:
-    :param type:
-    :return:
     """
     col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
@@ -76,7 +74,7 @@ def univariateSelection(data):
     print(featureScores.nlargest(15, 'Score'))  # print 10 best features
 
 
-def featureSelection(data, figName, modelName):
+def featureSelection(data):
     # If we want to MinMaxReduce the data (normalize it)
     # Get the columns of the data
     columns = data.columns.values[0:len(data.columns.values)]
@@ -98,8 +96,7 @@ def featureSelection(data, figName, modelName):
     feat_importances = pandas.Series(model.feature_importances_, index=features)
     feat_importances.nlargest(15).plot(kind='barh')
     plt.xlim(0, .50)
-    plt.title(figName)
-    # plt.savefig("../Jeremy Thesis/"+modelName+"/Feature Selection/"+figName+".png", bbox_inches='tight')
+    plt.title("")
     plt.show()
 
 
@@ -142,30 +139,12 @@ def correlationHeatmap(data):
 
 
 # Read in the file and set what the test number is, that's all you've gotta change
-file = "Jeremy Thesis/Total Shift/Data/TS Data 50-50 Split.csv"
+file = ""
 testNum = 1
 
 data = pandas.read_csv("../%s" % file)
 cutData = test_type(data, testNum)
 
-if "Grid Fix" in file:
-    modelName = "Grid Fix"
-    figName = "Feature Selection GF " + file.split(" ")[4] + " Split Test %d" % testNum
-elif "Hour Shift" in file:
-    modelName = "Hour Shift"
-    figName = "Feature Selection HS " + file.split(" ")[4] + " Split Test %d" % testNum
-elif "Spatial Shift" in file:
-    modelName = "Spatial Shift"
-    figName = "Feature Selection SS " + file.split(" ")[4] + " Split Test %d" % testNum
-elif "Total Shift" in file:
-    modelName = "Total Shift"
-    figName = "Feature Selection TS " + file.split(" ")[4] + " Split Test %d" % testNum
-elif "Date Shift" in file:
-    modelName = "Date Shift"
-    figName = "Feature Selection DS " + file.split(" ")[4] + " Split Test %d" % testNum
-else:
-    modelName = 0
-
-# featureSelection(cutData, figName, modelName)
+# featureSelection(cutData)
 # correlationHeatmap(cutData)
-univariateSelection(cutData)
+# univariateSelection(cutData)

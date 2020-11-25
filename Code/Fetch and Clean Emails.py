@@ -108,7 +108,7 @@ def main():
     # This is the beginning of the fetching emails code lines #
 
     # Read in the file that has all of our accident records
-    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-18-20.csv")
+    total = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-19-20.csv")
     # Get the last day our accident records cover
     lastday = pandas.Timestamp(total['Response Date'].values[-1]).date() + timedelta(days=1)
 
@@ -120,7 +120,7 @@ def main():
     # The file containing the newly fetched accident records
     fetchedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
     # The file containing our cleaned list of raw accident records
-    cleanedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-18-20.csv")
+    cleanedAccidents = pandas.read_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_11-19-20.csv")
     # Gets the date of the last record in our raw accident data
     lastcleaned = pandas.Timestamp(cleanedAccidents['Response Date'].values[-1]).date()
 

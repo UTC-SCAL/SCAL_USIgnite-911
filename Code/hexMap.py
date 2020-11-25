@@ -1,3 +1,8 @@
+"""
+Author: Jeremy Roland
+Purpose: A collection of methods I used to create maps to map out our accidents and predictions
+"""
+
 from shapely.geometry import Point
 import pandas
 from folium.plugins import HeatMap
@@ -37,10 +42,10 @@ def getLatLongColumns(gridCoords):
     # print(len(latSaveList))
     gridCoords['X'] = longSaveList
     gridCoords['Y'] = latSaveList
-    gridCoords.to_csv("../Jeremy Thesis/HexGrid Shape Data_fill.csv")
-    exit()
+    gridCoords.to_csv("../")
 
 
+# Create a folium heatmap of the accidents in our accident file
 def accidentHeatmap(accidents):
     # Place map
     m = folium.Map(location=[35.14, -85.17], tiles='Stamen Terrain', zoom_start=13)
@@ -55,6 +60,7 @@ def accidentHeatmap(accidents):
     m.save("../")
 
 
+# Draw our hex grid on a folium map
 def drawHexGrid(gridCoords):
     m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
     folium.LatLngPopup().add_to(m)
@@ -75,6 +81,7 @@ def drawHexGrid(gridCoords):
     m.save('../Jeremy Thesis/Hex Layout.html')
 
 
+# A testing method that draws only a single hex from our hex grid
 def drawSingleHex(gridCoords, grid_num):
     m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
     folium.LatLngPopup().add_to(m)
@@ -94,6 +101,7 @@ def drawSingleHex(gridCoords, grid_num):
     m.save('../Jeremy Thesis/Single Hex.html')
 
 
+# A testing method to draw a single ghost hex around one of the hexes in our hex grid
 def drawSingleGhostHex(gridCoords, grid_num):
     m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
     folium.LatLngPopup().add_to(m)
@@ -132,6 +140,7 @@ def drawSingleGhostHex(gridCoords, grid_num):
     m.save('../Jeremy Thesis/Ghost Hex.html')
 
 
+# A method to match accidents with predictions that implement the ghost hexes
 def matchAccidentsWithGhost(predictions, accidents, date):
     # Read in the grid infor
     gridInfo = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
@@ -187,6 +196,8 @@ def matchAccidentsWithGhost(predictions, accidents, date):
     print("False Negatives: ", FN)
 
 
+# A method to match accidents with predictions that takes distance in miles into account
+# Basically, if the accident is within a certain mileage distance from the center of a prediction hex, it's a match
 def matchAccidentsWithDistance(predictions, accidents, date):
     # Read in the grid info
     gridInfo = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
@@ -208,18 +219,18 @@ def matchAccidentsWithDistance(predictions, accidents, date):
             if (accCut.Grid_Num.values[i] == posPredictions.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
                     posPredictions.DayFrame.values[j]):
                 TP += 1
-            # else:
-            #     accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
-            #     predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
-            #     # Note: the predicitonGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
-            #     # since python does counting like [0...max], we need to decrease our look up number by 1
-            #     # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
-            #     centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
-            #     centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
-            #     predictionCoords = (float(centerLat), float(centerLong))
-            #     distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
-            #     if distance <= 0.25 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
-            #         TP += 1
+            else:
+                accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
+                predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
+                # Note: the predicitonGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+                # since python does counting like [0...max], we need to decrease our look up number by 1
+                # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+                centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
+                centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
+                predictionCoords = (float(centerLat), float(centerLong))
+                distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
+                if distance <= 0.25 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
+                    TP += 1
         for n, _ in enumerate(negPredictions.values):
             if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
                     negPredictions.DayFrame.values[n]):
@@ -252,6 +263,7 @@ def matchAccidentsWithDistance(predictions, accidents, date):
         print("\tF1 Score Calc Error")
 
 
+# Create a folium map that shows the predictions for a given dayframe of a day
 def makePredictionMap(predictions, accidents, date, dayFrameCut):
     gridCoords = pandas.read_csv("../Jeremy Thesis/HexGrid Shape Data.csv")
     m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')

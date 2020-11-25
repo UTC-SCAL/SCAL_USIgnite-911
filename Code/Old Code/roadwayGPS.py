@@ -1,7 +1,12 @@
+"""
+Author: Pete Way (probably)
+Purpose: Retrieve the GPS lat/long coords for a provided route and logmile. This was before we started using a grid
+    layout of Chatt. Similar to other Old Code files, this is kept in case it has any useful bits of info in it
+"""
+
 import pandas
 from selenium import webdriver
 
-## This file retrieves the GPS lat/long coords provided a route and logmile. 
 
 segments = pandas.read_csv("../Excel & CSV Sheets/ETRIMS/Roadway_Geometrics_New.csv", sep=",")
 

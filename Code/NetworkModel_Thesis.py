@@ -1,3 +1,9 @@
+"""
+Author: Jeremy Roland
+Purpose: A heavily altered version of Pete's NetworkModel.py code to suit my needs for my thesis. It's highly specific
+    to the testing I was doing for the thesis
+"""
+
 import pandas
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
