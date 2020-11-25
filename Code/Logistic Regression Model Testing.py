@@ -13,7 +13,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
 import matplotlib.pyplot as plt
-from sklearn.utils import shuffle
 
 
 def test_type(data, type):
@@ -156,7 +155,7 @@ standData = standardize(cutData)  # standardize the data
 
 # Dropping columns per Logit Table Results #
 # All vars dropped variables (Test Type 1)
-# standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
+standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
 # No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix'], axis=1)
 # No location dropped variables (Test Type 4)
