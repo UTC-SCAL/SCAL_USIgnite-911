@@ -144,7 +144,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
         forumFile.at[i, 'NBR_LANES'] = grid_info.NBR_LANES.values[row_num]
         forumFile.at[i, 'TY_TERRAIN'] = grid_info.TY_TERRAIN.values[row_num]
         forumFile.at[i, 'FUNC_CLASS'] = grid_info.FUNC_CLASS.values[row_num]
-    forumFile.to_csv("../Jeremy Thesis/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
+    forumFile.to_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
 
 
 def finding_matches(accidents, forecastData, date):
@@ -259,8 +259,7 @@ def basicFormat(rawAcc):
     A basic method to add in some essential data to newly fetched accidents
     """
     columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay',
-               'DayOfWeek',
-               'DayFrame']
+               'DayOfWeek', 'DayFrame']
     # weather = feather.read_dataframe("../")
     rawAcc = rawAcc.reindex(columns=columns)
     rawAcc.Hour = rawAcc.Hour.astype(str)
@@ -434,42 +433,48 @@ def pcaOnModelWeights(file, modelPath):
 
 
 # Code for finding matches from the forecasts
-# rawAcc = pandas.read_csv("../Jeremy Thesis/2020 Accidents to 6-4-2020.csv")
-# forecasts = []
-# saveIterator = 0
-# saveDF = pandas.DataFrame(columns=['Model', 'Date', 'TP', 'FN', 'TN', 'FP', 'Recall', 'Specificity', 'Precision',
-#                                    'F1 Score'])
-# for forecast in forecasts:
-#     forecastFile = pandas.read_csv("../%s" % forecast)
-#
-#     if 'FeatSelect' in forecast:
-#         date = forecast.split("_")[4].split(".")[0].replace("-", "/")
-#     elif 'LogReg' in forecast:
-#         date = forecast.split("_")[4].split(".")[0].replace("-", "/")
-#         modelName = forecast.split("/")[2].split(".")[0]
-#     else:
-#         date = forecast.split("_")[3].split(".")[0].replace("-", "/")
-#     # print(date)
-#     # print(modelName)
-#     # exit()
-#     cutRawAcc = rawAcc[rawAcc['Date'] == date]
-#     print("Forecast on ", forecast)
-#     TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
-#     saveDF.at[saveIterator, 'Model'] = modelName
-#     saveDF.at[saveIterator, 'Date'] = date
-#     saveDF.at[saveIterator, 'TP'] = TP
-#     saveDF.at[saveIterator, 'FN'] = FN
-#     saveDF.at[saveIterator, 'TN'] = TN
-#     saveDF.at[saveIterator, 'FP'] = FP
-#     saveDF.at[saveIterator, 'Recall'] = recall
-#     saveDF.at[saveIterator, 'Specificity'] = specificity
-#     saveDF.at[saveIterator, 'Precision'] = precision
-#     saveDF.at[saveIterator, 'F1 Score'] = f1Score
-#     saveIterator += 1
-# saveDF.to_csv("../", index=False)
+rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
+forecasts = ['Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-1-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-2-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-3-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-4-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-5-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-6-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-7-2020.csv']
+saveIterator = 0
+saveDF = pandas.DataFrame(columns=['Model', 'Date', 'TP', 'FN', 'TN', 'FP', 'Recall', 'Specificity', 'Precision',
+                                   'F1 Score'])
+for forecast in forecasts:
+    forecastFile = pandas.read_csv("../%s" % forecast)
+
+    if 'FeatSelect' in forecast:
+        date = forecast.split("_")[4].split(".")[0].replace("-", "/")
+    elif 'LogReg' in forecast:
+        date = forecast.split("_")[3].split(".")[0].replace("-", "/")
+        modelName = forecast.split("/")[2].split("_")[1]
+    else:
+        date = forecast.split("_")[3].split(".")[0].replace("-", "/")
+    # print(date)
+    # print(modelName)
+    # exit()
+    cutRawAcc = rawAcc[rawAcc['Date'] == date]
+    print("Forecast on ", forecast)
+    TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
+    saveDF.at[saveIterator, 'Model'] = modelName
+    saveDF.at[saveIterator, 'Date'] = date
+    saveDF.at[saveIterator, 'TP'] = TP
+    saveDF.at[saveIterator, 'FN'] = FN
+    saveDF.at[saveIterator, 'TN'] = TN
+    saveDF.at[saveIterator, 'FP'] = FP
+    saveDF.at[saveIterator, 'Recall'] = recall
+    saveDF.at[saveIterator, 'Specificity'] = specificity
+    saveDF.at[saveIterator, 'Precision'] = precision
+    saveDF.at[saveIterator, 'F1 Score'] = f1Score
+    saveIterator += 1
+saveDF.to_csv("../Main Dir/Logistic Regression Tests/Logistic Regression Forecast Averages.csv", index=False)
 
 # lrData = pandas.read_csv("../Jeremy Thesis/Logistic Regression Tests/LogReg Forecast Results No Dist.csv")
 # mlpData = pandas.read_csv("../Jeremy Thesis/Forecasting/MLP Top 5 Splits Forecast Results.csv")
 # modelResultGraph_oneWeek(lrData)
-data = pandas.read_csv("../Jeremy Thesis/Best Model Statistics/January Forecasts (LR vs MLP Best Models).csv")
-modelResultGraph_oneMonth(data)
+# data = pandas.read_csv("../Jeremy Thesis/Best Model Statistics/January Forecasts (LR vs MLP Best Models).csv")
+# modelResultGraph_oneMonth(data)
