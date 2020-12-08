@@ -9,6 +9,8 @@ from sklearn.feature_selection import chi2
 from sklearn.ensemble import ExtraTreesClassifier
 import matplotlib.pyplot as plt
 import seaborn as sns
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.formula.api import ols
 import numpy
 
 
@@ -47,6 +49,53 @@ def test_type(data, type):
         dataChanged = data.reindex(columns=col4)
 
     return dataChanged
+
+
+# A test type method specific for the logistic regression testing
+def logReg_test_type(data, type):
+    # All variables
+    col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+    # No weather variables
+    col3 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS',  'DayFrame', 'WeekDay',
+            'DayOfWeek']
+    # No roadway variables, except grid num
+    col4 = ['Accident', 'Unix', 'Hour',
+            'Grid_Num', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+            'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+            'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+    # Variables included after the OLS testing
+    col5 = ['Accident', 'Longitude','Latitude','Unix','Join_Count','Grid_Num','TY_TERRAIN','cloudCover','dewPoint',
+            'humidity', 'precipIntensity','temperature','uvIndex','visibility','windSpeed','Rain','Cloudy','DayFrame']
+    if type == 1:
+        dataChanged = data.reindex(columns=col1)
+    elif type == 3:
+        dataChanged = data.reindex(columns=col3)
+    elif type == 4:
+        dataChanged = data.reindex(columns=col4)
+    elif type == 5:
+        dataChanged = data.reindex(columns=col5)
+    return dataChanged
+
+
+def standardize(data):
+    """
+    This standardizes the data into the MinMaxReduced version used for model creation
+    """
+    columns = data.columns.values[0:len(data.columns.values)]
+    # Create the Scaler object
+    scaler = preprocessing.MinMaxScaler()
+    # Fit your data on the scaler object
+    dataScaled = scaler.fit_transform(data)
+    dataScaled = pandas.DataFrame(dataScaled, columns=columns)
+    return dataScaled
 
 
 def univariateSelection(data):
@@ -138,13 +187,26 @@ def correlationHeatmap(data):
     plt.show()
 
 
+def calculate_vif(data):
+    vif = pandas.DataFrame()
+    vif["variables"] = data.columns
+    vif["VIF"] = [variance_inflation_factor(data.values, i) for i in range(data.shape[1])]
+    print(vif)
+
+
+def ols(formula, data):
+    """
+    Formula should be in the following form: 'dependentVariable~indepVar+indepVar+indepVar+...'
+    """
+    mlr = ols(formula, data)
+    estimates = mlr.fit()
+    print(estimates.summary())
+
+
 # Read in the file and set what the test number is, that's all you've gotta change
 file = ""
-testNum = 1
+testNum = 3
 
 data = pandas.read_csv("../%s" % file)
-cutData = test_type(data, testNum)
-
-# featureSelection(cutData)
-# correlationHeatmap(cutData)
-# univariateSelection(cutData)
+cutData = logReg_test_type(data, testNum)
+cutData = standardize(cutData)

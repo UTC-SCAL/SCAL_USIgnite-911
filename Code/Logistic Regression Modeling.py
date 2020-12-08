@@ -35,12 +35,17 @@ def logReg_test_type(data, type):
             'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
             'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
+    # Variables included after the OLS testing
+    col5 = ['Accident', 'Longitude','Latitude','Unix','Join_Count','Grid_Num','TY_TERRAIN','cloudCover','dewPoint',
+            'humidity', 'precipIntensity','temperature','uvIndex','visibility','windSpeed','Rain','Cloudy','DayFrame']
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 3:
         dataChanged = data.reindex(columns=col3)
     elif type == 4:
         dataChanged = data.reindex(columns=col4)
+    elif type == 5:
+        dataChanged = data.reindex(columns=col5)
     return dataChanged
 
 
@@ -61,7 +66,11 @@ def standardize(data):
 def logRegForecast(X, Y, newColumns, modelType):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020']
+    dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020',
+             '1-8-2020', '1-9-2020', '1-10-2020', '1-11-2020', '1-12-2020', '1-13-2020', '1-14-2020',
+             '1-15-2020', '1-16-2020', '1-17-2020', '1-18-2020', '1-19-2020', '1-20-2020', '1-21-2020',
+             '1-22-2020', '1-23-2020', '1-24-2020', '1-25-2020', '1-26-2020', '1-27-2020', '1-28-2020',
+             '1-29-2020', '1-30-2020', '1-31-2020']
     for date in dates:
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
@@ -89,19 +98,20 @@ def logRegForecast(X, Y, newColumns, modelType):
 
 
 # The data to create the model from
-data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv")
+data = pandas.read_csv("../")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
-cutData = logReg_test_type(data, 3)
+cutData = logReg_test_type(data, 1)
 # standardize the data
 standData = standardize(cutData)
 
 # Dropping columns per Logit Table Results #
 # All vars dropped variables (Test Type 1)
-# standData = standData.drop(['Unix', 'NBR_LANES', 'dewPoint', 'pressure', 'temperature', 'RainBefore'], axis=1)
+standData = standData.drop(['Unix', 'Hour', 'WeekDay', 'DayOfWeek', 'NBR_LANES', "RainBefore", 'pressure', 'dewPoint'],
+                            axis=1)
 # No weather dropped variables (Test Type 3)
-standData = standData.drop(['Unix', 'FUNC_CLASS'], axis=1)
+# standData = standData.drop(['Unix', 'FUNC_CLASS'], axis=1)
 # No location dropped variables (Test Type 4)
 # standData = standData.drop(['pressure', 'RainBefore'], axis=1)
 
@@ -112,13 +122,13 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-# logRegForecast(X, Y, newColumns, modelType)
-# exit()
+logRegForecast(X, Y, newColumns, modelType)
+exit()
 
 # Make a Logic Table
-logit_model = sm.Logit(Y, X)
-result = logit_model.fit()
-print(result.summary(xname=newColumns))
+# logit_model = sm.Logit(Y, X)
+# result = logit_model.fit()
+# print(result.summary(xname=newColumns))
 
 # Split the data and create the model
 # X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)

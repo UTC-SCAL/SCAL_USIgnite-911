@@ -265,11 +265,10 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'FN'] = FN
         saveDF.at[saveIterator, 'TN'] = TN
         saveDF.at[saveIterator, 'FP'] = FP
-        saveDF.at[saveIterator, 'Recall'] = recall
-        saveDF.at[saveIterator, 'Specificity'] = specificity
-        saveDF.at[saveIterator, 'Precision'] = precision
-        saveDF.at[saveIterator, 'F1 Score'] = f1Score
+        saveDF.at[saveIterator, 'Recall'] = recall * 100
+        saveDF.at[saveIterator, 'Specificity'] = specificity * 100
+        saveDF.at[saveIterator, 'Precision'] = precision * 100
+        saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
     saveDF.to_csv("../", index=False)
-
 
