@@ -271,4 +271,3 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
     saveDF.to_csv("../", index=False)
-

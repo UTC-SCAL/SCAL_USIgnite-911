@@ -38,6 +38,8 @@ def logReg_test_type(data, type):
     # Variables included after the OLS testing
     col5 = ['Accident', 'Longitude','Latitude','Unix','Join_Count','Grid_Num','TY_TERRAIN','cloudCover','dewPoint',
             'humidity', 'precipIntensity','temperature','uvIndex','visibility','windSpeed','Rain','Cloudy','DayFrame']
+    # Variables included after the OLS testing, without weather
+    col6 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Join_Count', 'Grid_Num', 'TY_TERRAIN', 'DayFrame']
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 3:
@@ -46,6 +48,9 @@ def logReg_test_type(data, type):
         dataChanged = data.reindex(columns=col4)
     elif type == 5:
         dataChanged = data.reindex(columns=col5)
+    elif type == 6:
+        dataChanged = data.reindex(columns=col6)
+
     return dataChanged
 
 
@@ -98,18 +103,20 @@ def logRegForecast(X, Y, newColumns, modelType):
 
 
 # The data to create the model from
-data = pandas.read_csv("../")
+data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
-cutData = logReg_test_type(data, 1)
+cutData = logReg_test_type(data, 6)
 # standardize the data
 standData = standardize(cutData)
 
 # Dropping columns per Logit Table Results #
 # All vars dropped variables (Test Type 1)
-standData = standData.drop(['Unix', 'Hour', 'WeekDay', 'DayOfWeek', 'NBR_LANES', "RainBefore", 'pressure', 'dewPoint'],
-                            axis=1)
+# standData = standData.drop(['Unix', 'Hour', 'WeekDay', 'DayOfWeek', 'NBR_LANES', "RainBefore", 'pressure', 'dewPoint'],
+#                             axis=1)
+# Col 6 variables dropped (OLS without weather)
+standData = standData.drop(['Unix'], axis=1)
 # No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix', 'FUNC_CLASS'], axis=1)
 # No location dropped variables (Test Type 4)
