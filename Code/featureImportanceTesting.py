@@ -65,6 +65,11 @@ def logReg_test_type(data, type):
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS',  'DayFrame', 'WeekDay',
             'DayOfWeek']
+    # Same as col3, but with aggregated weather added in
+    col7 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS',  'DayFrame', 'WeekDay',
+            'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
     # No roadway variables, except grid num
     col4 = ['Accident', 'Unix', 'Hour',
             'Grid_Num', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -74,6 +79,8 @@ def logReg_test_type(data, type):
     # Variables included after the OLS testing
     col5 = ['Accident', 'Longitude','Latitude','Unix','Join_Count','Grid_Num','TY_TERRAIN','cloudCover','dewPoint',
             'humidity', 'precipIntensity','temperature','uvIndex','visibility','windSpeed','Rain','Cloudy','DayFrame']
+    # Variables included after the OLS testing, without weather
+    col6 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Join_Count', 'Grid_Num', 'TY_TERRAIN', 'DayFrame']
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 3:
@@ -82,6 +89,11 @@ def logReg_test_type(data, type):
         dataChanged = data.reindex(columns=col4)
     elif type == 5:
         dataChanged = data.reindex(columns=col5)
+    elif type == 6:
+        dataChanged = data.reindex(columns=col6)
+    elif type == 7:
+        dataChanged = data.reindex(columns=col7)
+
     return dataChanged
 
 
@@ -204,9 +216,11 @@ def ols(formula, data):
 
 
 # Read in the file and set what the test number is, that's all you've gotta change
-file = ""
-testNum = 3
+file = "Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv"
+testNum = 7
 
 data = pandas.read_csv("../%s" % file)
 cutData = logReg_test_type(data, testNum)
+cutData = cutData.drop([], axis=1)
 cutData = standardize(cutData)
+calculate_vif(cutData)

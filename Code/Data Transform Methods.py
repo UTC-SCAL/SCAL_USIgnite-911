@@ -270,4 +270,39 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../", index=False)
+    saveDF.to_csv("../Main Dir/Logistic Regression Tests/Weather Testing.csv", index=False)
+
+
+rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
+forecasts = ['Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-1-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-2-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-3-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-4-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-5-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-6-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-7-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-8-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-9-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-10-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-11-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-12-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-13-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-14-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-15-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-16-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-17-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-18-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-19-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-20-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-21-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-22-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-23-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-24-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-25-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-26-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-27-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-28-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-29-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-30-2020.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_1-31-2020.csv']
+forecastMatchingFormatter(rawAcc, forecasts)

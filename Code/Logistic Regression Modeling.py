@@ -29,6 +29,11 @@ def logReg_test_type(data, type):
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS',  'DayFrame', 'WeekDay',
             'DayOfWeek']
+    # Same as col3, but with aggregated weather added in
+    col7 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS',  'DayFrame', 'WeekDay',
+            'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
     # No roadway variables, except grid num
     col4 = ['Accident', 'Unix', 'Hour',
             'Grid_Num', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -50,6 +55,8 @@ def logReg_test_type(data, type):
         dataChanged = data.reindex(columns=col5)
     elif type == 6:
         dataChanged = data.reindex(columns=col6)
+    elif type == 7:
+        dataChanged = data.reindex(columns=col7)
 
     return dataChanged
 
@@ -107,7 +114,7 @@ data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
-cutData = logReg_test_type(data, 6)
+cutData = logReg_test_type(data, 7)
 # standardize the data
 standData = standardize(cutData)
 
@@ -115,12 +122,26 @@ standData = standardize(cutData)
 # All vars dropped variables (Test Type 1)
 # standData = standData.drop(['Unix', 'Hour', 'WeekDay', 'DayOfWeek', 'NBR_LANES', "RainBefore", 'pressure', 'dewPoint'],
 #                             axis=1)
-# Col 6 variables dropped (OLS without weather)
-standData = standData.drop(['Unix'], axis=1)
+
 # No weather dropped variables (Test Type 3)
 # standData = standData.drop(['Unix', 'FUNC_CLASS'], axis=1)
+# Test Type 3 alternate drops based on VIF scores
+# standData = standData.drop(['Latitude', 'Longitude', 'Unix', 'FUNC_CLASS'], axis=1)
+
+# Test Type 7 variable drops based on VIF scores
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow'], axis=1)
+standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+                            'Foggy', 'Rain', 'RainBefore'], axis=1)
+
 # No location dropped variables (Test Type 4)
 # standData = standData.drop(['pressure', 'RainBefore'], axis=1)
+
+# Col 5 vars to drop based on VIF scores
+# standData = standData.drop(['dewPoint', 'Latitude', 'Longitude'], axis=1)
+# standData = standData.drop(['cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'uvIndex',
+#                             'visibility', 'windSpeed'], axis=1)
+# Col 6 variables dropped (OLS without weather)
+# standData = standData.drop(['Unix'], axis=1)
 
 newColumns = list(standData.columns[1:(len(standData.columns) + 1)])
 X = standData.iloc[:, 1:(len(standData.columns) + 1)].values  # Our independent variables
@@ -133,9 +154,9 @@ logRegForecast(X, Y, newColumns, modelType)
 exit()
 
 # Make a Logic Table
-# logit_model = sm.Logit(Y, X)
-# result = logit_model.fit()
-# print(result.summary(xname=newColumns))
+logit_model = sm.Logit(Y, X)
+result = logit_model.fit()
+print(result.summary(xname=newColumns))
 
 # Split the data and create the model
 # X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
