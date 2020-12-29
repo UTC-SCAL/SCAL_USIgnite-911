@@ -270,7 +270,7 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../Main Dir/Logistic Regression Tests/Weather Testing.csv", index=False)
+    saveDF.to_csv("../", index=False)
 
 
 rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")

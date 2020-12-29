@@ -206,7 +206,7 @@ def calculate_vif(data):
     print(vif)
 
 
-def ols(formula, data):
+def get_ols(formula, data):
     """
     Formula should be in the following form: 'dependentVariable~indepVar+indepVar+indepVar+...'
     """
@@ -223,4 +223,3 @@ data = pandas.read_csv("../%s" % file)
 cutData = logReg_test_type(data, testNum)
 cutData = cutData.drop([], axis=1)
 cutData = standardize(cutData)
-calculate_vif(cutData)

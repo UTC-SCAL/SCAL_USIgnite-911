@@ -129,9 +129,11 @@ standData = standardize(cutData)
 # standData = standData.drop(['Latitude', 'Longitude', 'Unix', 'FUNC_CLASS'], axis=1)
 
 # Test Type 7 variable drops based on VIF scores
-# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow'], axis=1)
-standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
-                            'Foggy', 'Rain', 'RainBefore'], axis=1)
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow'], axis=1) # v1
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+#                             'Foggy', 'Rain', 'RainBefore'], axis=1) # v2
+standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'NBR_LANES',
+                        'Clear', 'Foggy'], axis=1)  # v3
 
 # No location dropped variables (Test Type 4)
 # standData = standData.drop(['pressure', 'RainBefore'], axis=1)
@@ -150,8 +152,8 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-logRegForecast(X, Y, newColumns, modelType)
-exit()
+# logRegForecast(X, Y, newColumns, modelType)
+# exit()
 
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)
