@@ -161,24 +161,24 @@ result = logit_model.fit()
 print(result.summary(xname=newColumns))
 
 # Split the data and create the model
-# X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
-# logreg = LogisticRegression(solver='newton-cg', class_weight='balanced')
-# logreg.fit(X_train, y_train)
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=7)
+logreg = LogisticRegression(solver='newton-cg', class_weight='balanced')
+logreg.fit(X_train, y_train)
 
 # Predicting on the training set and printing the accuracy
-# y_pred = logreg.predict(X_test)
-# logAcc = logreg.score(X_test, y_test) * 100
-# print('Accuracy of logistic regression classifier on test set: ', round(logAcc, 2))
+y_pred = logreg.predict(X_test)
+logAcc = logreg.score(X_test, y_test) * 100
+print('Accuracy of logistic regression classifier on test set: ', round(logAcc, 2))
 
 # Getting the confusion matrix values for the predictions (TN, FP, FN, TN)
 # confusion_matrix = confusion_matrix(y_test, y_pred)
-# print("TP: ", confusion_matrix[0][0])
-# print("FP: ", confusion_matrix[0][1])
-# print("FN: ", confusion_matrix[1][0])
-# print("TN: ", confusion_matrix[1][1])
+print("TP: ", confusion_matrix[0][0])
+print("FP: ", confusion_matrix[0][1])
+print("FN: ", confusion_matrix[1][0])
+print("TN: ", confusion_matrix[1][1])
 
 # Getting the Precision, Recall, F1 Score, and Support
-# print(classification_report(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 
 # Plotting the ROC curve
 # logit_roc_auc = roc_auc_score(y_test, logreg.predict(X_test))
