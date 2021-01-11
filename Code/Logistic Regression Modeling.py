@@ -167,8 +167,8 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-logRegForecast(X, Y, newColumns, modelType)
-exit()
+# logRegForecast(X, Y, newColumns, modelType)
+# exit()
 
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)
@@ -196,56 +196,56 @@ logreg.fit(X_train, y_train)
 # print(classification_report(y_test, y_pred))
 
 # The following code is used to perform predictions directly on future accidents, not potential hotspots #
-# Data may require additional tweaking to work well, as it's only tested on 1-1-2020, and 1-2-2020
-# dateSelect = '1/1/2020'  # Select what date you want to use
-#
-# rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
-# weather = feather.read_dataframe("../Ignore/2020 Weather Aug 30.feather")
-# grid_info = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
-#
-# cutAcc = rawAcc[rawAcc['Date'] == dateSelect]  # cut the accidents to the date you want
-# cutAcc = cutAcc[cutAcc['Grid_Num'].notna()]  # drop accidents with missing Grid_Num
-# # Add in necessary variables
-# cutAcc['Join_Count'] = 0
-# cutAcc['NBR_LANES'] = 0
-# cutAcc['DayFrame'] = 0
-# cutAcc['DayOfWeek'] = 0
-#
-# cutAcc.DayFrame = cutAcc.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
-# else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-# cutAcc.Hour = cutAcc.Hour.astype(int)
-# cutAcc.Date = cutAcc.Date.astype(str)
-#
-# for i, _ in enumerate(cutAcc.values):
-#     timestamp = str(cutAcc.Date.values[i]) + " " + str(int(cutAcc.Hour.values[i]))
-#     thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
-#     cutAcc.DayOfWeek.values[i] = thisDate.weekday()
-#     # Adding in roadway info
-#     info_row_num = grid_info.loc[grid_info["Grid_Num"] == cutAcc.Grid_Num.values[i]].index[0]
-#     cutAcc.Join_Count.values[i] = grid_info.Join_Count.values[info_row_num]
-#     cutAcc.NBR_LANES.values[i] = grid_info.NBR_LANES.values[info_row_num]
-# Adding in weather, we only need 1 weather variable
-# cutAcc = add_weather(cutAcc, weather)
-# Reset our columns
-# foreColumns = ['Accident', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'DayFrame', 'DayOfWeek', 'Clear']
-# cutAcc['Accident'] = 1
-# cutAcc = cutAcc.reindex(columns=foreColumns)
-# Standardize our data
-# standAcc = standardize(cutAcc)
-# Reset the accident column to be all 1's, bc for some reason the standardize function sets its values to 0.0
-# standAcc['Accident'] = 1.0
+dateSelect = '1/31/2020'  # Select what date you want to use
 
-# fore_X_test = standAcc.iloc[:, 1:(len(standAcc.columns) + 1)].values  # Our independent variables
-# fore_Y_test = standAcc.iloc[:, 0].values  # Our dependent variable
+rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
+weather = feather.read_dataframe("../Ignore/2020 Weather Aug 30.feather")
+grid_info = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
+
+cutAcc = rawAcc[rawAcc['Date'] == dateSelect]  # cut the accidents to the date you want
+cutAcc = cutAcc[cutAcc['Grid_Num'].notna()]  # drop accidents with missing Grid_Num
+# Add in necessary variables
+cutAcc['Join_Count'] = 0
+cutAcc['NBR_LANES'] = 0
+cutAcc['DayFrame'] = 0
+cutAcc['DayOfWeek'] = 0
+
+cutAcc.DayFrame = cutAcc.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
+else (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+cutAcc.Hour = cutAcc.Hour.astype(int)
+cutAcc.Date = cutAcc.Date.astype(str)
+
+for i, _ in enumerate(cutAcc.values):
+    timestamp = str(cutAcc.Date.values[i]) + " " + str(int(cutAcc.Hour.values[i]))
+    thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
+    cutAcc.DayOfWeek.values[i] = thisDate.weekday()
+    # Adding in roadway info
+    try:
+        info_row_num = grid_info.loc[grid_info["Grid_Num"] == cutAcc.Grid_Num.values[i]].index[0]
+        cutAcc.Join_Count.values[i] = grid_info.Join_Count.values[info_row_num]
+        cutAcc.NBR_LANES.values[i] = grid_info.NBR_LANES.values[info_row_num]
+    except:
+        print("Error in assigning roadway info")
+# Adding in weather, we only need 1 weather variable
+cutAcc = add_weather(cutAcc, weather)
+# Reset our columns
+foreColumns = ['Accident', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'DayFrame', 'DayOfWeek', 'Clear']
+cutAcc['Accident'] = 1
+cutAcc = cutAcc.reindex(columns=foreColumns)
+# Standardize our data
+standAcc = standardize(cutAcc)
+# Reset the accident column to be all 1's, bc for some reason the standardize function sets its values to 0.0
+standAcc['Accident'] = 1.0
+
+fore_X_test = standAcc.iloc[:, 1:(len(standAcc.columns) + 1)].values  # Our independent variables
+fore_Y_test = standAcc.iloc[:, 0].values  # Our dependent variable
 
 # Predicting on the training set and printing the accuracy
-# fore_y_pred = logreg.predict(fore_X_test)
-# logAcc = logreg.score(fore_X_test, fore_Y_test) * 100
-# print('Accuracy of logistic regression classifier on test set: ', round(logAcc, 2))
+fore_y_pred = logreg.predict(fore_X_test)
+logAcc = logreg.score(fore_X_test, fore_Y_test) * 100
+print('Accuracy: ', round(logAcc, 2))
 
 # Getting the confusion matrix values for the predictions (TN, FP, FN, TN)
-# confusion_matrix = confusion_matrix(fore_Y_test, fore_y_pred)
-# print("TP: ", confusion_matrix[1][1])
-# print("FP: ", confusion_matrix[0][1])
-# print("FN: ", confusion_matrix[1][0])
-# print("TN: ", confusion_matrix[0][0])
+confusion_matrix = confusion_matrix(fore_Y_test, fore_y_pred)
+print("TP: ", confusion_matrix[1][1])
+print("FN: ", confusion_matrix[1][0])
