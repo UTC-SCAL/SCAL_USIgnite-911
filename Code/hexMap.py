@@ -69,8 +69,8 @@ def drawHexGrid():
 
     # Iterate through our grid coordinate file, and set polygon objects down on our map
     for i, _ in enumerate(gridCoords.values):
-        latList = gridCoords.Y.values[i].split(",")
-        longList = gridCoords.X.values[i].split(",")
+        latList = gridCoords.Latitudes.values[i].split(",")
+        longList = gridCoords.Longitudes.values[i].split(",")
         longList = list(map(lambda x: float(x), longList))
         latList = list(map(lambda x: float(x), latList))
 

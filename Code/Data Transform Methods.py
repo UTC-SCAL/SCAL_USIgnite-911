@@ -20,8 +20,8 @@ def matchAccidentToGridNum(hexShapeFile, accDataFile):
         accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
         # Iterate over our grid hexes
         for i, _ in enumerate(hexShapeFile.values):
-            latList = hexShapeFile.Y.values[i].split(",")
-            longList = hexShapeFile.X.values[i].split(",")
+            latList = hexShapeFile.Latitudes.values[i].split(",")
+            longList = hexShapeFile.Longitudes.values[i].split(",")
             longList = list(map(lambda x: float(x), longList))
             latList = list(map(lambda x: float(x), latList))
             # A polygon object made of the GPS coords of the hex shape
