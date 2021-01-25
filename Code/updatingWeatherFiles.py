@@ -48,11 +48,11 @@ def fetchWeather(weatherFile, beginDate, endDate):
     print("Fetching Weather")
     dates = pandas.date_range(beginDate, endDate)
     # Read in the center points file to get the used grid locations and their lat/longs
-    centers = pandas.read_csv("../Pre Thesis/Grid Hex Layout/HexGridInfo.csv")
+    centers = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
     miss_loc = 0  # used for positioning values in the dataframe
 
-    start_block = 0
-    stop_block = start_block + 50
+    start_block = 600
+    stop_block = start_block + 25
     saveName = "../Ignore/2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
 
     key = find_cred("darksky")
@@ -479,8 +479,30 @@ def post_process_weather(columns):
 
     # Use these lines to combine weather files #
     # Based on how many different files were made when getting new weather, add or remove weather# files to be appended
-    weathers = []
-    weather1 = pandas.read_csv("../Ignore/2020 Weather 1-25.csv")
+    weathers = ['Ignore/2020 Weather 51-100.csv',
+'Ignore/2020 Weather 101-150.csv',
+'Ignore/2020 Weather 151-200.csv',
+'Ignore/2020 Weather 201-225.csv',
+'Ignore/2020 Weather 226-250.csv',
+'Ignore/2020 Weather 251-275.csv',
+'Ignore/2020 Weather 276-300.csv',
+'Ignore/2020 Weather 301-325.csv',
+'Ignore/2020 Weather 326-350.csv',
+'Ignore/2020 Weather 351-375.csv',
+'Ignore/2020 Weather 376-400.csv',
+'Ignore/2020 Weather 401-425.csv',
+'Ignore/2020 Weather 426-450.csv',
+'Ignore/2020 Weather 451-475.csv',
+'Ignore/2020 Weather 476-500.csv',
+'Ignore/2020 Weather 501-525.csv',
+'Ignore/2020 Weather 526-550.csv',
+'Ignore/2020 Weather 551-575.csv',
+'Ignore/2020 Weather 576-600.csv',
+'Ignore/2020 Weather 601-625.csv',
+'Ignore/2020 Weather 626-650.csv',
+'Ignore/2020 Weather 651-675.csv',
+'Ignore/2020 Weather 676-694.csv']
+    weather1 = pandas.read_csv("../Ignore/2020 Weather 1-50.csv")
     for weather in weathers:
         weather2 = pandas.read_csv("../%s" % weather)
         # Append that shiz
@@ -505,11 +527,12 @@ def post_process_weather(columns):
 
     # If you want to append your newly fetched weather to an existing weather file, then run these lines
     # Read in the main weather file you'll be appending to
-    # main_weather = feather.read_dataframe("../")
-    # bigBOIweather = pandas.concat([main_weather, new_weather], axis=0, join='outer', ignore_index=False)
+    main_weather = feather.read_dataframe("../Ignore/2020 Weather Aug 30.feather")
+    bigBOIweather = pandas.concat([main_weather, new_weather], axis=0, join='outer', ignore_index=False)
     # After the main appending, save the file
-    # bigBOIweather.to_csv("../Ignore/2020 Weather June 7.csv")
-    # feather.write_dataframe(bigBOIweather, "../")
+    # bigBOIweather.to_csv("../")
+    bigBOIweather.Date = bigBOIweather.Date.astype(str)
+    feather.write_dataframe(bigBOIweather, "../Ignore/2020 Weather.feather")
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
     # new_weather.to_csv("../", index=False)
@@ -544,5 +567,13 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020-6-8'
-# end = '2020-8-30'
+# begin = '2020-8-31'
+# end = '2020-12-31'
+# fetchWeather(weatherFile, begin, end)
+
+columns = ['Center_Lat', 'Center_Long', 'Grid_Num', 'cloudCover',
+       'dewPoint', 'humidity', 'precipIntensity', 'precipProbability',
+       'precipType', 'pressure', 'temperature', 'Unix', 'Date', 'Hour',
+       'uvIndex', 'visibility', 'windBearing', 'windGust', 'windSpeed',
+       'Event', 'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']
+post_process_weather(columns)

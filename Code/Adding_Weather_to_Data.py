@@ -105,6 +105,8 @@ def add_weather(data, weather):
     # Getting the RainBefore variable
     weather['hourbefore'] = weather.Unix.astype(int)
     weather['RainBefore'] = weather.Rain.astype(int)
+    newdata['Unix'] = newdata['Unix'].astype(int)
+    newdata['hourbefore'] = newdata['Unix'] - 60*60  # changes the hourbefore column to be 1 hour before the unix column
     newdata.hourbefore = newdata.hourbefore.astype(int)
     newdata = pandas.merge(newdata, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
