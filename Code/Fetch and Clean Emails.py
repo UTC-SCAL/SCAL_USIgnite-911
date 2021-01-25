@@ -108,19 +108,19 @@ def main():
     # This is the beginning of the fetching emails code lines #
 
     # Read in the file that has all of our accident records
-    total = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData_11-19-20.csv")
+    total = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_11-19-20.csv")
     # Get the last day our accident records cover
     lastday = pandas.Timestamp(total['Response Date'].values[-1]).date() + timedelta(days=1)
 
     total = pull_emails(total, lastday)
-    total.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv", index=False)
+    total.to_csv("../Main Dir/Accident Data/RawAccidentData_NewFetch.csv", index=False)
 
     # This is the beginning of the cleaning of the fetched emails code lines #
     # I get it may not be the best way to combine these files, but this method works
     # The file containing the newly fetched accident records
-    fetchedAccidents = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData_NewFetch.csv")
+    fetchedAccidents = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_NewFetch.csv")
     # The file containing our cleaned list of raw accident records
-    cleanedAccidents = pandas.read_csv("../Pre Thesis/Grid Hex Layout/Accidents/RawAccidentData_11-19-20.csv")
+    cleanedAccidents = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_11-19-20.csv")
     # Gets the date of the last record in our raw accident data
     lastcleaned = pandas.Timestamp(cleanedAccidents['Response Date'].values[-1]).date()
 
@@ -154,7 +154,7 @@ def main():
     print("Duplicates Removed:", int(len(fetchedAccidents.values) - len(keeps.values)))
     # Save the dropped duplicates version
     thisDate = time.strftime("%m-%d-%y")
-    keeps.to_csv("../Excel & CSV Sheets/Grid Hex Layout/Accidents/RawAccidentData_%s.csv" % thisDate, index=False)
+    keeps.to_csv("../Main Dir/Accident Data/RawAccidentData_%s.csv" % thisDate, index=False)
 
 
 if __name__ == "__main__":

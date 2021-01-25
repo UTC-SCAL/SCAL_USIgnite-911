@@ -274,6 +274,6 @@ def forecastMatchingFormatter(rawAcc, forecasts):
     saveDF.to_csv("../", index=False)
 
 
-# rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
-# forecasts = []
-# forecastMatchingFormatter(rawAcc, forecasts)
+rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
+forecasts = []
+forecastMatchingFormatter(rawAcc, forecasts)
