@@ -87,11 +87,10 @@ def standardize(data):
 def logRegForecast(X, Y, newColumns, modelType):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    dates = ['1-1-2020', '1-2-2020', '1-3-2020', '1-4-2020', '1-5-2020', '1-6-2020', '1-7-2020',
-             '1-8-2020', '1-9-2020', '1-10-2020', '1-11-2020', '1-12-2020', '1-13-2020', '1-14-2020',
-             '1-15-2020', '1-16-2020', '1-17-2020', '1-18-2020', '1-19-2020', '1-20-2020', '1-21-2020',
-             '1-22-2020', '1-23-2020', '1-24-2020', '1-25-2020', '1-26-2020', '1-27-2020', '1-28-2020',
-             '1-29-2020', '1-30-2020', '1-31-2020']
+    dates = ['1-1-2021', '1-2-2021', '1-3-2021', '1-4-2021', '1-5-2021', '1-6-2021', '1-7-2021',
+             '1-8-2021', '1-9-2021', '1-10-2021', '1-11-2021', '1-12-2021', '1-13-2021', '1-14-2021',
+             '1-15-2021', '1-16-2021', '1-17-2021', '1-18-2021', '1-19-2021', '1-20-2021', '1-21-2021',
+             '1-22-2021', '1-23-2021', '1-24-2021']
     for date in dates:
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
@@ -132,11 +131,11 @@ def add_weather(data, weather):
 
 
 # The data to create the model from
-data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split with RA.csv")
+data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
-cutData = logReg_test_type(data, 8)
+cutData = logReg_test_type(data, 7)
 # standardize the data
 standData = standardize(cutData)
 

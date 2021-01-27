@@ -4,12 +4,10 @@ Purpose: Generate negative samples
 """
 
 import pandas
-import os, sys
+import os
 import random
 import time
 from datetime import datetime
-path = os.path.dirname(sys.argv[0])
-folderpath = '/'.join(path.split('/')[0:-1]) + '/'
 
 
 def find_cred(service):
@@ -328,6 +326,6 @@ def combine_negatives(p1, p2, p3, p4):
     negComb.to_csv("../", index=False)
 
 
-mainData = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents.csv")
-compare = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents.csv")
-get_negatives_master(mainData, compare)
+accidents = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv")
+compare = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv")
+get_negatives_master(accidents, compare)

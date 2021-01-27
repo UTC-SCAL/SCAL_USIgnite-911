@@ -16,22 +16,50 @@ import feather
 def matchAccidentToGridNum(hexShapeFile, accDataFile):
     # Iterate over our accidents
     for j, _ in enumerate(accDataFile.values):
-        # Our accident GPS coords as a Point object
-        accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
-        # Iterate over our grid hexes
-        for i, _ in enumerate(hexShapeFile.values):
-            latList = hexShapeFile.Latitudes.values[i].split(",")
-            longList = hexShapeFile.Longitudes.values[i].split(",")
-            longList = list(map(lambda x: float(x), longList))
-            latList = list(map(lambda x: float(x), latList))
-            # A polygon object made of the GPS coords of the hex shape
-            gridHex = Polygon(zip(longList, latList))
-            # Check if the accident point object is within the hex shape polygon
-            if accPoint.within(gridHex):
-                accDataFile.Grid_Num.values[j] = hexShapeFile.Grid_Num.values[i]
-                break
+        print(j, "/", len(accDataFile))
+        if accDataFile.Grid_Num.values[j] >= 0:
+            pass
+        else:
+            # Our accident GPS coords as a Point object
+            accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
+            # Iterate over our grid hexes
+            for i, _ in enumerate(hexShapeFile.values):
+                latList = hexShapeFile.Latitudes.values[i].split(",")
+                longList = hexShapeFile.Longitudes.values[i].split(",")
+                longList = list(map(lambda x: float(x), longList))
+                latList = list(map(lambda x: float(x), latList))
+                # A polygon object made of the GPS coords of the hex shape
+                gridHex = Polygon(zip(longList, latList))
+                # Check if the accident point object is within the hex shape polygon
+                if accPoint.within(gridHex):
+                    accDataFile.Grid_Num.values[j] = hexShapeFile.Grid_Num.values[i]
+                    break
     # Save the newly altered accident file that now should have grid nums
     accDataFile.to_csv("../", index=False)
+
+
+# Add roadway information to the accidents
+def add_roadwayInfo(data, gridInfo):
+    print("Adding Roadway Info")
+    data.GRID_ID = data.GRID_ID.astype(str)  # cast as a string to avoid error
+    for i, _ in enumerate(data.values):
+        timestamp = str(data.Date.values[i]) + " " + str(data.Hour.values[i])
+        # Create the day of the week variable, 0 = Monday, 6 = Sunday
+        # The date can be in a different format, so change to the according format
+        thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
+        # thisDate = datetime.strptime(timestamp, "%Y-%m-%d %H")
+        data.DayOfWeek.values[i] = thisDate.weekday()
+        # for each grid block
+        # Get the row number to use in grid info based on the grid number of the accident
+        # The basic idea here is to match row numbers based on grid number numbers
+        info_row_num = gridInfo.loc[gridInfo["Grid_Num"] == data.Grid_Num.values[i]].index[0]
+        data.Join_Count.values[i] = gridInfo.Join_Count.values[info_row_num]
+        data.NBR_LANES.values[i] = gridInfo.NBR_LANES.values[info_row_num]
+        data.TY_TERRAIN.values[i] = gridInfo.TY_TERRAIN.values[info_row_num]
+        data.FUNC_CLASS.values[i] = gridInfo.FUNC_CLASS.values[info_row_num]
+        data.GRID_ID.values[i] = gridInfo.GRID_ID.values[info_row_num]
+
+    return data
 
 
 # Add weather to accidents
@@ -191,7 +219,8 @@ def matchAccidentsWithDistance(accidents, predictions, date):
         print("Error in calculating confusion matrix values")
 
 
-# A method to add in essential variables to newly fetched accidents
+# A method to add in only essential variables to newly fetched accidents
+# This is for quickly adding in some variables to raw accident data
 def newAccidentFormatter(rawAcc):
     # The columns we want
     columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay',
@@ -199,13 +228,14 @@ def newAccidentFormatter(rawAcc):
     rawAcc = rawAcc.reindex(columns=columns)
     rawAcc.Hour = rawAcc.Hour.astype(str)
     rawAcc.Date = rawAcc.Date.astype(str)
+    rawAcc.Response_Date = rawAcc.Response_Date.astype(str)
     for i, _ in enumerate(rawAcc.values):
         # Manipulate the existing variables into the formats we want them in
         rawAcc.Hour.values[i] = rawAcc.Response_Date.values[i].split(" ")[1].split(":")[0]
         rawAcc.Date.values[i] = rawAcc.Response_Date.values[i].split(" ")[0]
-        rawAcc.Month.values[i] = rawAcc.Date.values[i].split("/")[0]
-        rawAcc.Day.values[i] = rawAcc.Date.values[i].split("/")[1]
-        rawAcc.Year.values[i] = rawAcc.Date.values[i].split("/")[2]
+        # rawAcc.Month.values[i] = rawAcc.Date.values[i].split("/")[2]
+        # rawAcc.Day.values[i] = rawAcc.Date.values[i].split("/")[1]
+        # rawAcc.Year.values[i] = rawAcc.Date.values[i].split("/")[0]
         timestamp = str(rawAcc.Date.values[i]) + " " + str(rawAcc.Hour.values[i])
 
         thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
@@ -271,9 +301,29 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../", index=False)
+    saveDF.to_csv("../Main Dir/Logistic Regression Tests/LR SS 5050 2021 Test.csv", index=False)
 
 
-rawAcc = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents to 11-18-2020.csv")
-forecasts = []
-forecastMatchingFormatter(rawAcc, forecasts)
+# Add in the required variables to accidents to be appended to the main accident dataset
+# This is for when you are updating the main dataset that has all of our formatted accident entries
+def formatAccidentsMain(newAccidents):
+    # Read in the main accident dataset, we only need the columns here. Ideally, this is the file you'll be appending
+    # your new accidents to
+    mainData = pandas.read_csv("../Main Dir/Accident Data/All Accidents Formatted (2017 - 2020).csv")
+    # Weather for the accidents. Will likely be in a feather format, but can be in a csv format. Choose which option
+    # applies
+    weather = feather.read_dataframe("../Ignore/2020 Weather.feather")
+    # Read in the file that has the roadway information we want
+    gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
+    # Data adding time
+    newAccidents['Accident'] = 1  # Add in our accident variable, which is 1 for all entries
+    accWeathered = add_weather(newAccidents, weather)  # Add in weather to the accidents
+    accReset = accWeathered.reindex(columns=mainData.columns)  # Reset columns to the ones we want
+    accRoaded = add_roadwayInfo(accReset, gridInfo)  # Add in roadway info to the accidents
+    # Add in WeekDay and DayFrame variables. These can be done with a lambda statement, so they're separate
+    accRoaded.WeekDay = accRoaded.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
+    accRoaded.DayFrame = accRoaded.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
+                        else(2 if 5 <= x <= 9 else(3 if 10 <= x <= 13 else 4)))
+
+    accRoaded.to_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv", index=False)
+
