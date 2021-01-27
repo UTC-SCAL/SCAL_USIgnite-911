@@ -16,24 +16,20 @@ import feather
 def matchAccidentToGridNum(hexShapeFile, accDataFile):
     # Iterate over our accidents
     for j, _ in enumerate(accDataFile.values):
-        print(j, "/", len(accDataFile))
-        if accDataFile.Grid_Num.values[j] >= 0:
-            pass
-        else:
-            # Our accident GPS coords as a Point object
-            accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
-            # Iterate over our grid hexes
-            for i, _ in enumerate(hexShapeFile.values):
-                latList = hexShapeFile.Latitudes.values[i].split(",")
-                longList = hexShapeFile.Longitudes.values[i].split(",")
-                longList = list(map(lambda x: float(x), longList))
-                latList = list(map(lambda x: float(x), latList))
-                # A polygon object made of the GPS coords of the hex shape
-                gridHex = Polygon(zip(longList, latList))
-                # Check if the accident point object is within the hex shape polygon
-                if accPoint.within(gridHex):
-                    accDataFile.Grid_Num.values[j] = hexShapeFile.Grid_Num.values[i]
-                    break
+        # Our accident GPS coords as a Point object
+        accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
+        # Iterate over our grid hexes
+        for i, _ in enumerate(hexShapeFile.values):
+            latList = hexShapeFile.Latitudes.values[i].split(",")
+            longList = hexShapeFile.Longitudes.values[i].split(",")
+            longList = list(map(lambda x: float(x), longList))
+            latList = list(map(lambda x: float(x), latList))
+            # A polygon object made of the GPS coords of the hex shape
+            gridHex = Polygon(zip(longList, latList))
+            # Check if the accident point object is within the hex shape polygon
+            if accPoint.within(gridHex):
+                accDataFile.Grid_Num.values[j] = hexShapeFile.Grid_Num.values[i]
+                break
     # Save the newly altered accident file that now should have grid nums
     accDataFile.to_csv("../", index=False)
 
