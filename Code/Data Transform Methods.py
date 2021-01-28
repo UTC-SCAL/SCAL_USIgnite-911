@@ -71,12 +71,14 @@ def add_weather(data, weather):
                                           'uvIndex', 'visibility', 'windBearing', 'windGust', 'windSpeed', 'Event',
                                           'Conditions', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear']],
                            on=['Unix', 'Grid_Num'])
+    # Drop any duplicates that the above statement may make
+    newdata.drop_duplicates(keep="first", inplace=True)
 
     # Applying rain before to data
     weather['hourbefore'] = weather.Unix.astype(int)
     weather['RainBefore'] = weather.Rain.astype(int)
     newdata['hourbefore'] = newdata['Unix'] - 60 * 60
-    newdata.hourbefore = newdata.hourbefore.astype(int)
+    newdata['hourbefore'] = newdata.hourbefore.astype(int)
     newdata = pandas.merge(newdata, weather[['Grid_Num', 'hourbefore', 'RainBefore']],
                            on=['hourbefore', 'Grid_Num'])
     return newdata
@@ -94,7 +96,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
     columns = ['Latitude', 'Longitude', 'Hour', 'Grid_Num', 'Join_Count', 'NBR_LANES', 'TY_TERRAIN',
                'FUNC_CLASS', 'Clear', 'Cloudy', 'DayFrame', 'DayOfWeek', 'Foggy', 'Rain', 'RainBefore', 'Snow',
                'Unix', 'WeekDay', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'temperature', 'windSpeed',
-               'visibility', 'uvIndex', 'pressure']
+               'visibility', 'uvIndex', 'pressure', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount']
     # Set Unix timestamps
     for j, _ in enumerate(forumTemplate.values):
         timestamp = str(saveDate) + " " + str(forumTemplate.Hour.values[j])
@@ -109,6 +111,7 @@ def createForecastForum(forumTemplate, saveDate, weather):
                                              (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
     for i, _ in enumerate(forumFile.values):
         # Iterate through our file and add in the final time, location, and roadway variables
+        # hourThing = int(forumFile.Hour.values[i])  # have to do this step bc code is being a finicky d-bag
         timestamp = str(saveDate) + " " + str(forumFile.Hour.values[i])
         thisDate = datetime.strptime(timestamp, "%m-%d-%Y %H")
         forumFile.at[i, "DayOfWeek"] = thisDate.weekday()
@@ -120,7 +123,12 @@ def createForecastForum(forumTemplate, saveDate, weather):
         forumFile.at[i, 'NBR_LANES'] = grid_info.NBR_LANES.values[row_num]
         forumFile.at[i, 'TY_TERRAIN'] = grid_info.TY_TERRAIN.values[row_num]
         forumFile.at[i, 'FUNC_CLASS'] = grid_info.FUNC_CLASS.values[row_num]
+        forumFile.at[i, 'RoadwayFeatureMode'] = grid_info.RoadwayFeatureMode.values[row_num]
+        forumFile.at[i, 'yieldSignCount'] = grid_info.yieldSignCount.values[row_num]
+        forumFile.at[i, 'stopSignCount'] = grid_info.stopSignCount.values[row_num]
     # A new forecast forum will be saved for each date, which is what the saveDate variable is used for
+    # Drop any duplicates that the above statement may make
+    forumFile.drop_duplicates(keep="first", inplace=True)
     forumFile.to_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
 
 
@@ -297,7 +305,7 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../Main Dir/Logistic Regression Tests/LR SS 5050 2021 Test.csv", index=False)
+    saveDF.to_csv("../", index=False)
 
 
 # Add in the required variables to accidents to be appended to the main accident dataset
@@ -323,3 +331,8 @@ def formatAccidentsMain(newAccidents):
 
     accRoaded.to_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv", index=False)
 
+
+rawAcc = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_01-25-21 Formatted.csv")
+forecasts = []
+
+forecastMatchingFormatter(rawAcc, forecasts)

@@ -41,6 +41,11 @@ def logReg_test_type(data, type):
             'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'roundAbout', 'DayFrame', 'WeekDay',
             'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
+    # Same as col7, but with some added roadway info
+    col9 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount'
+            'FUNC_CLASS', 'DayFrame', 'WeekDay',
+            'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
     # No roadway variables, except grid num
     col4 = ['Accident', 'Unix', 'Hour',
             'Grid_Num', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
@@ -66,6 +71,8 @@ def logReg_test_type(data, type):
         dataChanged = data.reindex(columns=col7)
     elif type == 8:
         dataChanged = data.reindex(columns=col8)
+    elif type == 9:
+        dataChanged = data.reindex(columns=col9)
 
     return dataChanged
 
