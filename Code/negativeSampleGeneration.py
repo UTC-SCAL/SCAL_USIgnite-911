@@ -326,6 +326,3 @@ def combine_negatives(p1, p2, p3, p4):
     negComb.to_csv("../", index=False)
 
 
-accidents = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv")
-compare = pandas.read_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv")
-get_negatives_master(accidents, compare)
