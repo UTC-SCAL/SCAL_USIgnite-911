@@ -94,11 +94,15 @@ def standardize(data):
 def logRegForecast(X, Y, newColumns, modelType):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    dates = ['1-1-2021', '1-2-2021', '1-3-2021', '1-4-2021', '1-5-2021', '1-6-2021', '1-7-2021',
-             '1-8-2021', '1-9-2021', '1-10-2021', '1-11-2021', '1-12-2021', '1-13-2021', '1-14-2021',
-             '1-15-2021', '1-16-2021', '1-17-2021', '1-18-2021', '1-19-2021', '1-20-2021', '1-21-2021',
-             '1-22-2021', '1-23-2021', '1-24-2021']
+    beginDate = '2020-01-01'
+    endDate = '2020-12-31'
+    dates = pandas.date_range(beginDate, endDate)
+    # dates = ['1-1-2021', '1-2-2021', '1-3-2021', '1-4-2021', '1-5-2021', '1-6-2021', '1-7-2021',
+    #          '1-8-2021', '1-9-2021', '1-10-2021', '1-11-2021', '1-12-2021', '1-13-2021', '1-14-2021',
+    #          '1-15-2021', '1-16-2021', '1-17-2021', '1-18-2021', '1-19-2021', '1-20-2021', '1-21-2021',
+    #          '1-22-2021', '1-23-2021', '1-24-2021']
     for date in dates:
+        date = str(date).split(" ")[0]
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
         predictData = pandas.read_csv(
@@ -138,7 +142,7 @@ def add_weather(data, weather):
 
 
 # The data to create the model from
-data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv")
+data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use

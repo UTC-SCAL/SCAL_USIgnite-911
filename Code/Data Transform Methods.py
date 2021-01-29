@@ -100,7 +100,8 @@ def createForecastForum(forumTemplate, saveDate, weather):
     # Set Unix timestamps
     for j, _ in enumerate(forumTemplate.values):
         timestamp = str(saveDate) + " " + str(forumTemplate.Hour.values[j])
-        unixTime = time.mktime(datetime.strptime(timestamp, "%m-%d-%Y %H").timetuple())
+        # unixTime = time.mktime(datetime.strptime(timestamp, "%m-%d-%Y %H").timetuple())
+        unixTime = time.mktime(datetime.strptime(timestamp, "%Y-%m-%d %H").timetuple())
         forumTemplate.at[j, "Unix"] = unixTime
     # Add weather variables and reset the columns
     forumFile = add_weather(forumTemplate, weather)
@@ -111,9 +112,8 @@ def createForecastForum(forumTemplate, saveDate, weather):
                                              (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
     for i, _ in enumerate(forumFile.values):
         # Iterate through our file and add in the final time, location, and roadway variables
-        # hourThing = int(forumFile.Hour.values[i])  # have to do this step bc code is being a finicky d-bag
         timestamp = str(saveDate) + " " + str(forumFile.Hour.values[i])
-        thisDate = datetime.strptime(timestamp, "%m-%d-%Y %H")
+        thisDate = datetime.strptime(timestamp, "%Y-%m-%d %H")
         forumFile.at[i, "DayOfWeek"] = thisDate.weekday()
 
         row_num = grid_info.loc[grid_info["Grid_Num"] == forumFile.Grid_Num.values[i]].index[0]
@@ -129,7 +129,8 @@ def createForecastForum(forumTemplate, saveDate, weather):
     # A new forecast forum will be saved for each date, which is what the saveDate variable is used for
     # Drop any duplicates that the above statement may make
     forumFile.drop_duplicates(keep="first", inplace=True)
-    forumFile.to_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate, index=False)
+    forumFile.to_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % saveDate,
+                     index=False)
 
 
 # The standard method to match actual accidents to our predicted hotspots
@@ -289,6 +290,8 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         # exit()
 
         # Cut our raw accident file to cover only the date we predicted for
+        # Depending on the format of your date variable, you may have to change it
+        date = date.replace("/", '-')
         cutRawAcc = rawAcc[rawAcc['Date'] == date]
         print("Forecast on ", forecast)
         # If you want to use the distance matching version of finding_matches, then change what method is called
@@ -305,7 +308,7 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../", index=False)
+    saveDF.to_csv("../Main Dir/Logistic Regression Tests/2020 Forecasts.csv", index=False)
 
 
 # Add in the required variables to accidents to be appended to the main accident dataset
@@ -332,7 +335,26 @@ def formatAccidentsMain(newAccidents):
     accRoaded.to_csv("../Main Dir/Accident Data/2020 Accidents Filled.csv", index=False)
 
 
-rawAcc = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_01-25-21 Formatted.csv")
-forecasts = []
+########################################## Creating New Forecasting Files ##############################################
+# Read in the template file
+# template = pandas.read_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum Template.csv")
+# Read in your weather
+# weather = feather.read_dataframe("../Ignore/2020 Weather.feather")
+# A nifty pandas feature that enables you to select a range of dates, instead of listing them all out
+# Format: yyyy-mm-dd
+# beginDate = '2020-01-01'
+# endDate = '2020-01-31'
+# dates = pandas.date_range(beginDate, endDate)
+# Iterate through our dates list, and make a forecast file for each date
+# for date in dates:
+#     date = str(date).split(" ")[0]
+#     createForecastForum(template, date, weather)
+########################################################################################################################
 
-forecastMatchingFormatter(rawAcc, forecasts)
+################################# Matching Forecast Predictions to Actual Accidents ####################################
+# Read in the raw accidents file
+rawAccidents = pandas.read_csv("../Main Dir/Accident Data/RawAccidentData_01-25-21.csv")
+# Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
+forecastFiles = []
+forecastMatchingFormatter(rawAccidents, forecastFiles)
+########################################################################################################################

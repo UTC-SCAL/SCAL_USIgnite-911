@@ -51,9 +51,9 @@ def fetchWeather(weatherFile, beginDate, endDate):
     centers = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
     miss_loc = 0  # used for positioning values in the dataframe
 
-    start_block = 650
-    stop_block = start_block + 25
-    saveName = "../Ignore/Rest 2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
+    start_block = 550
+    stop_block = start_block + 50
+    saveName = "../Ignore/June 2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
 
     key = find_cred("darksky")
     for _, i in enumerate(centers.Grid_Num.values):
@@ -485,21 +485,15 @@ def post_process_weather(columns):
         weather2 = pandas.read_csv("../%s" % weather)
         # Append that shiz
         weather1 = pandas.concat([weather1, weather2], axis=0, join='outer', ignore_index=False)
-
-    # Drop duplicates if there are any
-    weather1.drop_duplicates(keep="first", inplace=True)
-
     # convert the Event/Conditions to their respective binary values
     new_weather = finding_binaries(weather1)
     new_weather['Unix'] = new_weather['time'].astype(int)
     new_weather = new_weather.reindex(columns=columns)
-
     # Converting Unix time to our local time
     new_weather.Date = pandas.to_datetime(new_weather['Unix'], unit='s', utc=False)
     new_weather.Date = new_weather.Date.dt.tz_localize('UTC').dt.tz_convert('US/Eastern')
     new_weather.Hour = new_weather['Date'].dt.hour
     new_weather.Date = new_weather['Date'].dt.date
-
     # Reindex our fetched weather to have the columns we want
     # new_weather = new_weather.reindex(columns=columns)
 
@@ -546,8 +540,8 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020-11-01'
-# end = '2020-12-31'
+# begin = '2020-6-01'
+# end = '2020-6-30'
 # fetchWeather(weatherFile, begin, end)
 
 # columns = ['Center_Lat', 'Center_Long', 'Grid_Num', 'cloudCover',
