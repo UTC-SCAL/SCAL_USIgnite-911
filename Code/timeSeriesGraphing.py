@@ -50,7 +50,7 @@ def incidents_by_year(data):
     plt.xticks(ticks, labels, rotation=45)
     plt.xlabel('Month')
     plt.ylabel('Accidents')
-    plt.title("Accidents by Year")
+    plt.title("Our Accidents by Year")
     plt.legend()
     # Save the Image
     # plt.savefig("")
@@ -73,6 +73,7 @@ def reformatData(data):
     # Needs to be independently saved
     data.to_csv("../", index=False)
 
+
 # data = pandas.read_csv("../")
 # For some reason, the graphing code won't work on the data unless it's been saved to a file, so create a save file of
 # the data you want to use, then read in that data
@@ -84,5 +85,9 @@ def reformatData(data):
 # data2018 = formattedData[formattedData['Date'].str.contains('2018')]
 # data2019 = formattedData[formattedData['Date'].str.contains('2019')]
 # data2020 = formattedData[formattedData['Date'].str.contains('2020')]
+# print('Accident entries for 2017: ', len(data2017))
+# print('Accident entries for 2018: ', len(data2018))
+# print('Accident entries for 2019: ', len(data2019))
+# print('Accident entries for 2020: ', len(data2020))
 
 # incidents_by_year(formattedData)
