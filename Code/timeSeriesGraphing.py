@@ -28,22 +28,22 @@ def incidents_by_year(data):
     :param data: the data you are using
     """
     # Cut the dataframe down to the columns we want
-    # data2017cut = data[data['Date'].str.contains('2017')]
-    # data2018cut = data[data['Date'].str.contains('2018')]
-    # data2019cut = data[data['Date'].str.contains('2019')]
+    data2017cut = data[data['Date'].str.contains('2017')]
+    data2018cut = data[data['Date'].str.contains('2018')]
+    data2019cut = data[data['Date'].str.contains('2019')]
     data2020cut = data[data['Date'].str.contains('2020')]
-    # accFreq2017 = data2017cut.Month.value_counts().sort_index()
-    # accFreq2018 = data2018cut.Month.value_counts().sort_index()
-    # accFreq2019 = data2019cut.Month.value_counts().sort_index()
+    accFreq2017 = data2017cut.Month.value_counts().sort_index()
+    accFreq2018 = data2018cut.Month.value_counts().sort_index()
+    accFreq2019 = data2019cut.Month.value_counts().sort_index()
     accFreq2020 = data2020cut.Month.value_counts().sort_index()
 
-    # x0 = accFreq2017
-    # x1 = accFreq2018
-    # x2 = accFreq2019
+    x0 = accFreq2017
+    x1 = accFreq2018
+    x2 = accFreq2019
     x3 = accFreq2020
-    # plt.plot(x0, label="2017", linewidth=2)
-    # plt.plot(x1, label="2018", linewidth=2)
-    # plt.plot(x2, label="2019", linewidth=2)
+    plt.plot(x0, label="2017", linewidth=2)
+    plt.plot(x1, label="2018", linewidth=2)
+    plt.plot(x2, label="2019", linewidth=2)
     plt.plot(x3, label="2020", linewidth=2)
 
     # If graphing months on X axis
@@ -66,6 +66,7 @@ def incidents_by_year(data):
 # the data you want to use, then read in that data
 # reformatData(data)
 
+# formattedData = pandas.read_csv("../")
 # If you want to split the data into distinct dataframes per year
 # data2017 = formattedData[formattedData['Date'].str.contains('2017')]
 # data2018 = formattedData[formattedData['Date'].str.contains('2018')]
@@ -75,5 +76,8 @@ def incidents_by_year(data):
 # print('Accident entries for 2018: ', len(data2018))
 # print('Accident entries for 2019: ', len(data2019))
 # print('Accident entries for 2020: ', len(data2020))
+
+# If you want to see the number of entries for each month in your dataset
+# print(data2020.Month.value_counts())
 
 # incidents_by_year(formattedData)

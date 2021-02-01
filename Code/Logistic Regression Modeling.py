@@ -43,8 +43,8 @@ def logReg_test_type(data, type):
             'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
     # Same as col7, but with some added roadway info
     col9 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
-            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount'
-            'FUNC_CLASS', 'DayFrame', 'WeekDay',
+            'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN', 'RoadwayFeatureMode', 'yieldSignCount',
+            'stopSignCount', 'speedMode', 'FUNC_CLASS', 'DayFrame', 'WeekDay',
             'DayOfWeek', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
     # No roadway variables, except grid num
     col4 = ['Accident', 'Unix', 'Hour',
@@ -97,10 +97,6 @@ def logRegForecast(X, Y, newColumns, modelType):
     beginDate = '2020-01-01'
     endDate = '2020-12-31'
     dates = pandas.date_range(beginDate, endDate)
-    # dates = ['1-1-2021', '1-2-2021', '1-3-2021', '1-4-2021', '1-5-2021', '1-6-2021', '1-7-2021',
-    #          '1-8-2021', '1-9-2021', '1-10-2021', '1-11-2021', '1-12-2021', '1-13-2021', '1-14-2021',
-    #          '1-15-2021', '1-16-2021', '1-17-2021', '1-18-2021', '1-19-2021', '1-20-2021', '1-21-2021',
-    #          '1-22-2021', '1-23-2021', '1-24-2021']
     for date in dates:
         date = str(date).split(" ")[0]
         print("Date is ", date)
@@ -142,11 +138,11 @@ def add_weather(data, weather):
 
 
 # The data to create the model from
-data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv")
+data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split new Roadway Data.csv")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
-cutData = logReg_test_type(data, 7)
+cutData = logReg_test_type(data, 9)
 # standardize the data
 standData = standardize(cutData)
 
@@ -162,10 +158,16 @@ standData = standardize(cutData)
 
 # Test Type 7 variable drops based on VIF scores
 # standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow'], axis=1) # v1
-standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
-                            'Foggy', 'Rain', 'RainBefore'], axis=1) # v2
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+#                             'Foggy', 'Rain', 'RainBefore'], axis=1) # v2
 # standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'NBR_LANES',
 #                         'Clear', 'Foggy'], axis=1)  # v3
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+#                             'Foggy', 'Rain', 'RainBefore', 'speedMode'], axis=1) # v4
+standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+                            'Foggy', 'Rain', 'RainBefore', 'yieldSignCount', 'stopSignCount'], axis=1) # v5
+# standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_TERRAIN', 'WeekDay', 'Snow', 'Cloudy',
+#                             'Foggy', 'Rain', 'RainBefore', 'yieldSignCount', 'stopSignCount', 'speedMode'], axis=1) # v6
 
 # No location dropped variables (Test Type 4)
 # standData = standData.drop(['pressure', 'RainBefore'], axis=1)
@@ -177,6 +179,10 @@ standData = standData.drop(['Unix', 'FUNC_CLASS', 'Latitude', 'Longitude', 'TY_T
 # Col 6 variables dropped (OLS without weather)
 # standData = standData.drop(['Unix'], axis=1)
 
+# Statement to cut out the entries that have a speedMode of -1, meaning no speed information was available for the
+# associated grid num
+standData = standData[standData['speedMode'] > 0]
+
 newColumns = list(standData.columns[1:(len(standData.columns) + 1)])
 X = standData.iloc[:, 1:(len(standData.columns) + 1)].values  # Our independent variables
 Y = standData.iloc[:, 0].values  # Our dependent variable
@@ -184,8 +190,8 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-logRegForecast(X, Y, newColumns, modelType)
-exit()
+# logRegForecast(X, Y, newColumns, modelType)
+# exit()
 
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)
