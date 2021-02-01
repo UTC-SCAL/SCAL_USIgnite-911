@@ -94,8 +94,8 @@ def standardize(data):
 def logRegForecast(X, Y, newColumns, modelType):
     # Have a list of the days you want to predict for
     # Have them in m-d-yyyy format, or a format that follows the date format of the files you want to read in
-    beginDate = '2020-01-01'
-    endDate = '2020-12-31'
+    beginDate = '2021-01-01'
+    endDate = '2021-01-31'
     dates = pandas.date_range(beginDate, endDate)
     for date in dates:
         date = str(date).split(" ")[0]
@@ -138,7 +138,7 @@ def add_weather(data, weather):
 
 
 # The data to create the model from
-data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split new Roadway Data.csv")
+data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv")
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
@@ -190,8 +190,8 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-# logRegForecast(X, Y, newColumns, modelType)
-# exit()
+logRegForecast(X, Y, newColumns, modelType)
+exit()
 
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)

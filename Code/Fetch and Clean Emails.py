@@ -154,7 +154,7 @@ def main():
     print("Duplicates Removed:", int(len(fetchedAccidents.values) - len(keeps.values)))
     # Save the dropped duplicates version
     thisDate = time.strftime("%m-%d-%y")
-    keeps.to_csv("../Main Dir/Accident Data/RawAccidentData_%s.csv" % thisDate, index=False)
+    keeps.to_csv("../Main Dir/Accident Data/EmailAccidentData_%s.csv" % thisDate, index=False)
 
 
 if __name__ == "__main__":

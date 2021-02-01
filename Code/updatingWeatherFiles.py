@@ -52,8 +52,8 @@ def fetchWeather(weatherFile, beginDate, endDate):
     miss_loc = 0  # used for positioning values in the dataframe
 
     start_block = 550
-    stop_block = start_block + 50
-    saveName = "../Ignore/June 2020 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
+    stop_block = start_block + 100
+    saveName = "../Ignore/2021 Weather " + str(start_block+1) + "-" + str(stop_block) + ".csv"
 
     key = find_cred("darksky")
     for _, i in enumerate(centers.Grid_Num.values):
@@ -499,13 +499,13 @@ def post_process_weather(columns):
 
     # If you want to append your newly fetched weather to an existing weather file, then run these lines
     # Read in the main weather file you'll be appending to
-    # main_weather = pandas.read_csv("../Ignore/")
-    main_weather = feather.read_dataframe("../")
-    bigBOIweather = pandas.concat([main_weather, new_weather], axis=0, join='outer', ignore_index=False)
+    # main_weather = pandas.read_csv("../")
+    # main_weather = feather.read_dataframe("../")
+    # bigBOIweather = pandas.concat([main_weather, new_weather], axis=0, join='outer', ignore_index=False)
     # After the main appending, save the file
-    bigBOIweather.Date = bigBOIweather.Date.astype(str)
-    # bigBOIweather.to_csv("../Ignore/")
-    feather.write_dataframe(bigBOIweather, "../")
+    # bigBOIweather.Date = bigBOIweather.Date.astype(str)
+    # bigBOIweather.to_csv("../")
+    # feather.write_dataframe(bigBOIweather, "../")
 
     # If you are just fetching new weather and don't want to append it to any current weather file, then just save it
     # new_weather.to_csv("../", index=False)
@@ -540,8 +540,8 @@ def return_empty_df(dataframe):
 # weatherFile = pandas.DataFrame(columns=columns)
 # Set the start and end date for the weather file to be updated
 # For the fetchWeather method, it follows this format: yyyy-m-dd
-# begin = '2020-6-01'
-# end = '2020-6-30'
+# begin = '2021-1-25'
+# end = '2021-1-31'
 # fetchWeather(weatherFile, begin, end)
 
 # columns = ['Center_Lat', 'Center_Long', 'Grid_Num', 'cloudCover',
