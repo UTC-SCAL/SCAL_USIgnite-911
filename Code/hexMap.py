@@ -147,3 +147,7 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     saveName = '../Main Dir/Prediction Maps/Prediction for %s DayFrame %d.html' % (date.replace("/", "-"), dayFrameCut)
     m.save(saveName)
 
+
+data = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_02-01-21.csv")
+data = data[data['Date'].str.contains("2021")]
+accidentHeatmap(data)
