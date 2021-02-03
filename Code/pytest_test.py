@@ -5,10 +5,11 @@ Purpose: A template for using pytest, a tool that, at it's simplest level, can d
 Note: run pip install -U pytest in your python console to install. You can run pytest via the console by typing pytest
     Pytest will run any file that follows this naming format: test_*.py or *_test.py
 """
+import pytest
 
 
 # A basic function to return a value
-def func(x):
+def func(x):  # doesn't test this method since it doesn't start with test
     return x + 1
 
 
@@ -31,3 +32,30 @@ class TestClass:
     def test_two(self):
         x = "hello"
         assert hasattr(x, "check")  # this assertion is false, so it won't pass
+
+
+# Fixtures
+class Fruit:
+    def __init__(self, name):
+        self.name = name
+
+    def __eq__(self, other):
+        return self.name == other.name
+
+
+@pytest.fixture
+def my_fruit():
+    return Fruit("apple")
+
+
+@pytest.fixture
+def fruit_basket(my_fruit):
+    return [Fruit("banana"), my_fruit]
+
+
+# By passing the fixtures in as arguments, we say that this method needs these variables/data
+# Any future tests we run with this method, we won't have to worry about supplying those arguments, since now they're
+# fixtures
+def test_my_fruit_in_basket(my_fruit, fruit_basket):
+    assert my_fruit in fruit_basket
+
