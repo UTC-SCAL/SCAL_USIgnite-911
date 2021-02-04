@@ -91,7 +91,11 @@ def pull_emails(total, lastday):
                             except Exception as e:
                                 print(e)
                                 exit()
-                    daypart['Unix'] = daypart.apply(lambda x: x.Unix.strftime('%s'), axis=1)
+                    try:
+                        daypart['Unix'] = daypart.apply(lambda x: x.Unix.strftime('%s'), axis=1)
+                    except:
+                        # This version is for when the code wouldn't work on windows machines
+                        daypart['Unix'] = daypart.apply(lambda x: x.Unix.strftime('%S'), axis=1)
                     daypart['Latitude'] = daypart["Latitude"] / 1000000
                     daypart['Longitude'] = daypart["Longitude"] / -1000000
                     # daypart['Coords'] = (daypart["Latitude"]).map(str) + " , " + (daypart["Longitude"]).map(str)
