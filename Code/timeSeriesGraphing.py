@@ -9,11 +9,11 @@ def reformatData(data):
     graphCols = ['Date', 'DayOfWeek', 'Hour', 'Latitude', 'Longitude', 'Unix', 'WeekDay', 'Year', 'Month']
     data = data.reindex(columns=graphCols)
     # Add in missing data
-    data.Year = data.Date.apply(lambda x: x.split("/")[2])
-    data.Month = data.Date.apply(lambda x: x.split('/')[0])
+    data.Year = data.Date.apply(lambda x: x.split("-")[0])
+    data.Month = data.Date.apply(lambda x: x.split('-')[1])
     for i, _ in enumerate(data.values):
         timestamp = str(data.Date.values[i]) + " " + str(data.Hour.values[i])
-        thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
+        thisDate = datetime.strptime(timestamp, "%Y-%m-%d %H")
         data.DayOfWeek.values[i] = thisDate.weekday()
 
     data.WeekDay = data.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
@@ -36,6 +36,10 @@ def incidents_by_year(data):
     accFreq2018 = data2018cut.Month.value_counts().sort_index()
     accFreq2019 = data2019cut.Month.value_counts().sort_index()
     accFreq2020 = data2020cut.Month.value_counts().sort_index()
+    # accFreq2017 = data2017cut.DayOfWeek.value_counts().sort_index()
+    # accFreq2018 = data2018cut.DayOfWeek.value_counts().sort_index()
+    # accFreq2019 = data2019cut.DayOfWeek.value_counts().sort_index()
+    # accFreq2020 = data2020cut.DayOfWeek.value_counts().sort_index()
 
     x0 = accFreq2017
     x1 = accFreq2018
@@ -49,15 +53,17 @@ def incidents_by_year(data):
     # If graphing months on X axis
     ticks = list(range(1, 13, 1))
     labels = "Jan Feb Mar Apr May Jun July Aug Sep Oct Nov Dec".split()
+    # ticks = list(range(1, 8, 1))
+    # labels = "Mon Tue Wed Thu Fri Sat Sun".split()
 
     plt.xticks(ticks, labels, rotation=45)
     plt.xlabel('Month')
     plt.ylabel('Accidents')
-    plt.ylim(0, 3000)
-    plt.title("Our Accidents by Year")
+    plt.ylim(1000, 2500)
+    plt.title("Accidents by Year")
     plt.legend()
     # Save the Image
-    # plt.savefig("")
+    # plt.savefig("../", transparent=True)
     plt.show()
 
 
