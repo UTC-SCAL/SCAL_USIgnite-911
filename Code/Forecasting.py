@@ -1,68 +1,15 @@
 """
 Author: Jeremy Roland
-Purpose: A one stop place to find all the needed methods to work with the accident data. Here you can add in any
-    variables you may need, and even match up predictions with accidents
+Purpose: A one stop place to find all needed methods for forecasting
 """
 
 import pandas
-from shapely.geometry import Point, Polygon
 from datetime import datetime
 import time
-import geopy.distance
 import feather
 
 
-# Match up accidents to their grid numbers
-def matchAccidentToGridNum(hexShapeFile, accDataFile):
-    # Iterate over our accidents
-    for j, _ in enumerate(accDataFile.values):
-        # Our accident GPS coords as a Point object
-        accPoint = Point(accDataFile.Longitude.values[j], accDataFile.Latitude.values[j])
-        # Iterate over our grid hexes
-        for i, _ in enumerate(hexShapeFile.values):
-            latList = hexShapeFile.Latitudes.values[i].split(",")
-            longList = hexShapeFile.Longitudes.values[i].split(",")
-            longList = list(map(lambda x: float(x), longList))
-            latList = list(map(lambda x: float(x), latList))
-            # A polygon object made of the GPS coords of the hex shape
-            gridHex = Polygon(zip(longList, latList))
-            # Check if the accident point object is within the hex shape polygon
-            if accPoint.within(gridHex):
-                accDataFile.Grid_Num.values[j] = hexShapeFile.Grid_Num.values[i]
-                break
-    # Save the newly altered accident file that now should have grid nums
-    accDataFile.to_csv("../", index=False)
-
-
-# Add roadway information to the accidents
-def add_roadwayInfo(data, gridInfo):
-    print("Adding Roadway Info")
-    data.GRID_ID = data.GRID_ID.astype(str)  # cast as a string to avoid error
-    for i, _ in enumerate(data.values):
-        timestamp = str(data.Date.values[i]) + " " + str(data.Hour.values[i])
-        # Create the day of the week variable, 0 = Monday, 6 = Sunday
-        # The date can be in a different format, so change to the according format
-        thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
-        # thisDate = datetime.strptime(timestamp, "%Y-%m-%d %H")
-        data.DayOfWeek.values[i] = thisDate.weekday()
-        # for each grid block
-        # Get the row number to use in grid info based on the grid number of the accident
-        # The basic idea here is to match row numbers based on grid number numbers
-        info_row_num = gridInfo.loc[gridInfo["Grid_Num"] == data.Grid_Num.values[i]].index[0]
-        data.Join_Count.values[i] = gridInfo.Join_Count.values[info_row_num]
-        data.NBR_LANES.values[i] = gridInfo.NBR_LANES.values[info_row_num]
-        data.TY_TERRAIN.values[i] = gridInfo.TY_TERRAIN.values[info_row_num]
-        data.FUNC_CLASS.values[i] = gridInfo.FUNC_CLASS.values[info_row_num]
-        data.GRID_ID.values[i] = gridInfo.GRID_ID.values[info_row_num]
-        data.RoadwayFeatureMode.values[i] = gridInfo.RoadwayFeatureMode.values[info_row_num]
-        data.yieldSignCount.values[i] = gridInfo.yieldSignCount.values[info_row_num]
-        data.stopSignCount.values[i] = gridInfo.stopSignCount.values[info_row_num]
-        data.speedMode.values[i] = gridInfo.speedMode.values[info_row_num]
-
-    return data
-
-
-# Add weather to accidents
+# Matches up entries to existing weather from a weather file
 def add_weather(data, weather):
     print("Adding Weather")
     data.Unix = data.Unix.astype(int)
@@ -187,90 +134,6 @@ def finding_matches(accidents, forecastData, date):
         return TP, FN, TN, FP, recall, specificity, precision, f1Score
 
 
-# An alternate method of matching actual accidents to our predicted hotspots
-# This method goes for a more lax approach to matching, simply testing if an accident was within a certain mileage
-# distance from the center of one of our hotspots
-def matchAccidentsWithDistance(accidents, predictions, date):
-    # Read in the grid info
-    gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
-    # Cut your predictions to only the accidents
-    posPredictions = predictions[predictions["Prediction"] == 1]
-    negPredictions = predictions[predictions["Prediction"] == 0]
-    # Cut your accident file to only the date you want to look at
-    accCut = accidents[accidents['Date'] == date]
-    accCut['DayFrame'] = 0
-    accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                        (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-
-    # These for loops handle the straight forward DayFrame and Grid Num matching for accidents and predictions
-    TP = 0
-    FN = 0
-    for i, _ in enumerate(accCut.values):
-        for j, _ in enumerate(posPredictions.values):
-            accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
-            predictionGrid = posPredictions.Grid_Num.values[j]  # Prediction Grid Num
-            # Note: the predictionGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
-            # since python does counting like [0...max], we need to decrease our look up number by 1
-            # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
-            centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
-            centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
-            predictionCoords = (float(centerLat), float(centerLong))
-            # Get the distance in miles between the centerpoint of our hotspot and the actual accident
-            # The distance used can be altered accordingly
-            distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
-            if distance <= 0.3 and accCut.DayFrame.values[i] == posPredictions.DayFrame.values[j]:
-                TP += 1
-        for n, _ in enumerate(negPredictions.values):
-            if (accCut.Grid_Num.values[i] == negPredictions.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
-                    negPredictions.DayFrame.values[n]):
-                FN += 1
-    # Calculate our confusion matrix values
-    try:
-        TN = len(negPredictions) - FN
-        FP = len(posPredictions) - TP
-        recall = TP / (TP + FN)
-        specificity = TN / (FP + TN)
-        precision = TP / (TP + FP)
-        f1Score = 2 * ((recall * precision) / (recall + precision))
-
-        return TP, FN, TN, FP, recall, specificity, precision, f1Score
-    except:
-        print("Error in calculating confusion matrix values")
-
-
-# A method to add in only essential variables to newly fetched accidents
-# This is for quickly adding in some variables to raw accident data
-def newAccidentFormatter(rawAcc):
-    # The columns we want
-    columns = ['Response_Date', 'Month', 'Day', 'Year', 'Hour', 'Date', 'Grid_Num', 'Longitude', 'Latitude', 'WeekDay',
-               'DayOfWeek', 'DayFrame']
-    rawAcc = rawAcc.reindex(columns=columns)
-    rawAcc.Hour = rawAcc.Hour.astype(str)
-    rawAcc.Date = rawAcc.Date.astype(str)
-    rawAcc.Response_Date = rawAcc.Response_Date.astype(str)
-    for i, _ in enumerate(rawAcc.values):
-        # Manipulate the existing variables into the formats we want them in
-        rawAcc.Hour.values[i] = rawAcc.Response_Date.values[i].split(" ")[1].split(":")[0]
-        rawAcc.Date.values[i] = rawAcc.Response_Date.values[i].split(" ")[0]
-        # rawAcc.Month.values[i] = rawAcc.Date.values[i].split("/")[2]
-        # rawAcc.Day.values[i] = rawAcc.Date.values[i].split("/")[1]
-        # rawAcc.Year.values[i] = rawAcc.Date.values[i].split("/")[0]
-        timestamp = str(rawAcc.Date.values[i]) + " " + str(rawAcc.Hour.values[i])
-
-        thisDate = datetime.strptime(timestamp, "%m/%d/%Y %H")
-        rawAcc.at[i, "DayOfWeek"] = thisDate.weekday()
-
-        unixTime = time.mktime(datetime.strptime(timestamp, "%m/%d/%Y %H").timetuple())
-        rawAcc.at[i, "Unix"] = unixTime
-
-    rawAcc.Hour = rawAcc.Hour.astype(int)
-    rawAcc.WeekDay = rawAcc.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
-    rawAcc.DayFrame = rawAcc.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
-
-    rawAcc.to_csv("../", index=False)
-
-
 # A formatting method to be used when you are matching actual accidents to our prediction hotspots
 # If you are going to be matching some predictions to their actual accidents, use this method
 def forecastMatchingFormatter(rawAcc, forecasts):
@@ -322,29 +185,30 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../Main Dir/Logistic Regression Tests/2021 Jan Forecasts.csv", index=False)
+    saveDF.to_csv("../", index=False)
 
 
-# Add in the required variables to accidents to be appended to the main accident dataset
-# This is for when you are updating the main dataset that has all of our formatted accident entries
-def formatAccidentsMain(newAccidents):
-    # Read in the main accident dataset, we only need the columns here. Ideally, this is the file you'll be appending
-    # your new accidents to
-    mainData = pandas.read_csv("../Main Dir/Accident Data/All Accidents Formatted (2017 - 2020).csv")
-    # Weather for the accidents. Will likely be in a feather format, but can be in a csv format. Choose which option
-    # applies
-    weather = feather.read_dataframe("../Ignore/2020 Weather.feather")
-    # Read in the file that has the roadway information we want
-    gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
-    # Data adding time
-    newAccidents['Accident'] = 1  # Add in our accident variable, which is 1 for all entries
-    accWeathered = add_weather(newAccidents, weather)  # Add in weather to the accidents
-    accReset = accWeathered.reindex(columns=mainData.columns)  # Reset columns to the ones we want
-    accRoaded = add_roadwayInfo(accReset, gridInfo)  # Add in roadway info to the accidents
-    # Add in WeekDay and DayFrame variables. These can be done with a lambda statement, so they're separate
-    accRoaded.WeekDay = accRoaded.DayOfWeek.apply(lambda x: 0 if x >= 5 else 1)
-    accRoaded.DayFrame = accRoaded.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23
-                        else(2 if 5 <= x <= 9 else(3 if 10 <= x <= 13 else 4)))
+########################################## Creating New Forecasting Files ##############################################
+# Read in the template file
+# template = pandas.read_csv("../Main Dir/Forecasting/Forecast Files/Forecast Forum Template.csv")
+# Read in your weather
+# weather = feather.read_dataframe("../")
+# weather = pandas.read_csv("../")
+# A nifty pandas feature that enables you to select a range of dates, instead of listing them all out
+# Format: yyyy-mm-dd
+# beginDate = '2021-01-01'
+# endDate = '2021-01-31'
+# dates = pandas.date_range(beginDate, endDate)
+# Iterate through our dates list, and make a forecast file for each date
+# for date in dates:
+#     date = str(date).split(" ")[0]
+#     createForecastForum(template, date, weather)
+########################################################################################################################
 
-    accRoaded.to_csv("../", index=False)
-
+################################# Matching Forecast Predictions to Actual Accidents ####################################
+# Read in the file that has the accidents retrieved from the email fetching code
+# rawAccidents = pandas.read_csv("../")
+# Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
+# forecastFiles = []
+# forecastMatchingFormatter(rawAccidents, forecastFiles)
+########################################################################################################################
