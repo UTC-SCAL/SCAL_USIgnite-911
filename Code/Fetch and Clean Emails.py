@@ -187,6 +187,7 @@ def main():
                     drops.append(j)
     keeps = fetchedAccidents.drop(drops)
     keeps = keeps.drop(['Coords', 'OK'], axis=1)
+    keeps = keeps.drop_duplicates(subset=['Response Date', 'Grid_Num'])
 
     # Getting the hour/date combo of the unix time here to avoid any missed duplicates.
     keeps['Unix'] = keeps.apply(lambda x: pandas.datetime.strptime(str(x.Date) + " " +

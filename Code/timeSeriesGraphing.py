@@ -59,7 +59,7 @@ def incidents_by_year(data):
     plt.xticks(ticks, labels, rotation=45)
     plt.xlabel('Month')
     plt.ylabel('Accidents')
-    plt.ylim(1000, 2500)
+    plt.ylim(800, 2500)
     plt.title("Accidents by Year")
     plt.legend()
     # Save the Image
