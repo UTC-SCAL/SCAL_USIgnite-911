@@ -53,9 +53,13 @@ def add_weather(data, weather):
 
 def main():
     # Read in our data
-    # Our weather files are in a feather format, as it is much faster to read in than if using a csv because the file
-    # size is so large
+    # The weather file can be in either feather or csv. Feather files are used for very large files (>1 GB or so)
+    # Depending on what the format of your weather file is, you'll read it in using either weather assignment line
     weather = feather.read_dataframe("../")
+    # weather = pandas.read_csv("../")
+    # NOTE: the add_weather method adds in any potentially missing variables, so if you already have weather variables
+    # in your data file, you'll get duplicates of those columns, marked as weatherCol_x and weatherCol_y.
+    # Simply remove the weather variables listed in the add_weather from your data file to avoid this
     data = pandas.read_csv("../")
     newData = add_weather(data, weather)
 
