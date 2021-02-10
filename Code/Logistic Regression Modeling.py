@@ -153,7 +153,9 @@ def logRegForecast(X, Y, newColumns, modelType):
         standPredictData = standardize(predictData)
         # Perform predictions
         y_pred = logreg.predict(standPredictData)
+        y_prob = logreg.predict_proba(standPredictData)[:, 1]  # get the actual probabilities
         predictData["Prediction"] = y_pred
+        predictData['Probability'] = y_prob
         predictData.to_csv("../Main Dir/Logistic Regression Tests/LogReg_%s_Forecast_%s.csv" % (modelType, date),
                            index=False)
 

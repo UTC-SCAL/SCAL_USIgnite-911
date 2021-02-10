@@ -68,10 +68,12 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     # Iterate through our predictions, and layout our grid
     # Essentially, if a grid num has a corresponding prediction, it's colored in and the transparency of the color
     # reflects the probability tied to the prediction
+    # Cut our predictions down to just the values with a probability above some threshold
+    posPredictions = posPredictions[posPredictions['Probability'] >= .60]
     for i, _ in enumerate(posPredictions.values):
-        predictionGrid = posPredictions.Grid_Num.values[i]
-        latList = gridCoords.Y.values[predictionGrid].split(",")
-        longList = gridCoords.X.values[predictionGrid].split(",")
+        predictionGrid = posPredictions.Grid_Num.values[i] - 1
+        latList = gridCoords.Latitudes.values[predictionGrid].split(",")
+        longList = gridCoords.Longitudes.values[predictionGrid].split(",")
         longList = list(map(lambda x: float(x), longList))
         latList = list(map(lambda x: float(x), latList))
 
@@ -94,7 +96,7 @@ predictions = pandas.read_csv("../")
 accidents = pandas.read_csv("../")
 # date is the date that the prediction file has predictions for. Make sure its format matches the date format of the
 # accidents file
-date = ''
+date = '2021-01-01'
 # dayFramecut is the aggregated hour you want the prediction map to cover (1, 2, 3, 4)
 dayFrameCut = 1
 
@@ -103,8 +105,8 @@ makePredictionMap(predictions, accidents, date, dayFrameCut)
 
 ################################################ Create a Heatmap ######################################################
 # accidents is the file that has our accidents fetched through the email code
-accidents = pandas.read_csv("../")
+# accidents = pandas.read_csv("../")
 # Use this or a new statement to cut your data that you want to create a heat map of
-accCut = accidents[accidents['Date'].str.contains('2020')]
-accidentHeatmap(accidents)
+# accCut = accidents[accidents['Date'].str.contains('2020')]
+# accidentHeatmap(accidents)
 ########################################################################################################################

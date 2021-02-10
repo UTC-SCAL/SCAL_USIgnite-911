@@ -92,7 +92,9 @@ def finding_matches(accidents, forecastData, date):
     Date format: m/d/yyyy
     """
     # Split the data into accident predictions and non accident predictions
-    posData = forecastData[forecastData['Prediction'] == 1]
+    # posData = forecastData[forecastData['Prediction'] == 1]
+    # Cut the positive predictions to only those that have a probability over a certain threshold
+    posData = forecastData[forecastData['Probability'] >= .60]
     negData = forecastData[forecastData['Prediction'] == 0]
     TP = 0
     FN = 0
@@ -208,7 +210,7 @@ def forecastMatchingFormatter(rawAcc, forecasts):
 ################################# Matching Forecast Predictions to Actual Accidents ####################################
 # Read in the file that has the accidents retrieved from the email fetching code
 # Ensure the date format of the rawAccidents file is yyyy-mm-dd
-rawAccidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
+rawAccidents = pandas.read_csv("../")
 # Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
 forecastFiles = []
 forecastMatchingFormatter(rawAccidents, forecastFiles)
