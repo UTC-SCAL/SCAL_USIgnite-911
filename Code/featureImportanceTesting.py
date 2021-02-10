@@ -51,6 +51,39 @@ def test_type(data, type):
     return dataChanged
 
 
+def logReg_test_type_2(data, type):
+    # All variables
+    col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'pressure', 'temperature', 'uvIndex',
+            'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'speedMode']
+    # No weather variables
+    col2 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
+            'speedMode']
+    # Same as col2, but with aggregated weather added in
+    col3 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+            'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
+            'speedMode', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore']
+    # No roadway variables, except grid num
+    col4 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Grid_Num', 'cloudCover', 'dewPoint', 'humidity',
+            'precipIntensity', 'pressure', 'temperature', 'uvIndex',
+            'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+            'DayOfWeek']
+    # Variables included after the OLS testing
+    col5 = []
+    if type == 1:
+        dataChanged = data.reindex(columns=col1)
+    elif type == 2:
+        dataChanged = data.reindex(columns=col2)
+    elif type == 3:
+        dataChanged = data.reindex(columns=col3)
+    elif type == 4:
+        dataChanged = data.reindex(columns=col4)
+
+    return dataChanged
+
+
 # A test type method specific for the logistic regression testing
 def logReg_test_type(data, type):
     # All variables
@@ -216,10 +249,14 @@ def get_ols(formula, data):
 
 
 # Read in the file and set what the test number is, that's all you've gotta change
-file = "Main Dir/Spatial Shift Negatives/SS Data 50-50 Split.csv"
-testNum = 7
+file = "Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv"
+testNum = 1
 
 data = pandas.read_csv("../%s" % file)
-cutData = logReg_test_type(data, testNum)
+cutData = logReg_test_type_2(data, testNum)
 cutData = cutData.drop([], axis=1)
+
+if "speedMode" in cutData.columns:
+    cutData = cutData[cutData['speedMode'] > 0]
+
 cutData = standardize(cutData)

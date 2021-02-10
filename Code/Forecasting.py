@@ -185,7 +185,7 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         saveDF.at[saveIterator, 'Precision'] = precision * 100
         saveDF.at[saveIterator, 'F1 Score'] = f1Score * 100
         saveIterator += 1
-    saveDF.to_csv("../", index=False)
+    saveDF.to_csv("../Main Dir/Logistic Regression Tests/2021 Tests.csv", index=False)
 
 
 ########################################## Creating New Forecasting Files ##############################################
@@ -207,8 +207,9 @@ def forecastMatchingFormatter(rawAcc, forecasts):
 
 ################################# Matching Forecast Predictions to Actual Accidents ####################################
 # Read in the file that has the accidents retrieved from the email fetching code
-# rawAccidents = pandas.read_csv("../")
+# Ensure the date format of the rawAccidents file is yyyy-mm-dd
+rawAccidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
 # Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
-# forecastFiles = []
-# forecastMatchingFormatter(rawAccidents, forecastFiles)
+forecastFiles = []
+forecastMatchingFormatter(rawAccidents, forecastFiles)
 ########################################################################################################################
