@@ -93,9 +93,11 @@ def finding_matches(accidents, forecastData, date):
     """
     # Split the data into accident predictions and non accident predictions
     # posData = forecastData[forecastData['Prediction'] == 1]
+    # negData = forecastData[forecastData['Prediction'] == 0]
     # Cut the positive predictions to only those that have a probability over a certain threshold
     posData = forecastData[forecastData['Probability'] >= .60]
-    negData = forecastData[forecastData['Prediction'] == 0]
+    negData = forecastData[forecastData['Probability'] < .60]
+
     TP = 0
     FN = 0
     # Cut our file of all our accidents (future dates not included in our training/testing dataset) to the date we want

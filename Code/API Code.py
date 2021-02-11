@@ -67,6 +67,10 @@ def flattenJSONTemplate(responseData):
     # Based on the directory names seen from the jPrint method, change the column names below to flatten what you want
     flattenedData1 = pandas.json_normalize(responseData['column name'])
     flattenedData2 = pandas.json_normalize(responseData['column name'])
+    # This line is for if a record path is proving difficult and uncooperative
+    # flattenedData3 = pandas.concat([pandas.DataFrame(pandas.json_normalize(x)) for x in data['column name']],
+    #                                ignore_index=True)
+
     # Print them out to double check everything's ok
     print(flattenedData1)
     print(flattenedData2)
