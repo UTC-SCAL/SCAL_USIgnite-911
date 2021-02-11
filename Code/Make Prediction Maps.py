@@ -69,7 +69,17 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     # Essentially, if a grid num has a corresponding prediction, it's colored in and the transparency of the color
     # reflects the probability tied to the prediction
     # Cut our predictions down to just the values with a probability above some threshold
-    posPredictions = posPredictions[posPredictions['Probability'] >= .60]
+    if dayFrameCut == 1:
+        posPredictions = posPredictions[posPredictions['Probability'] >= .80]
+    elif dayFrameCut == 2:
+        posPredictions = posPredictions[posPredictions['Probability'] >= .75]
+    elif dayFrameCut == 3:
+        posPredictions = posPredictions[posPredictions['Probability'] >= .50]
+    elif dayFrameCut == 4:
+        posPredictions = posPredictions[posPredictions['Probability'] >= .60]
+    else:
+        print("You entered the wrong dayFrame, fool")
+        exit()
     for i, _ in enumerate(posPredictions.values):
         predictionGrid = posPredictions.Grid_Num.values[i] - 1
         latList = gridCoords.Latitudes.values[predictionGrid].split(",")
@@ -91,14 +101,15 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
 
 ################################################ Make a Prediction Map #################################################
 # predictions is a forecast file that has the accident predictions performed for a given day
-predictions = pandas.read_csv("../")
+predictionPath = 'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-02.csv'
+predictions = pandas.read_csv("../%s" % predictionPath)
 # accidents is the file that has our accidents fetched through the email code
-accidents = pandas.read_csv("../")
+accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
 # date is the date that the prediction file has predictions for. Make sure its format matches the date format of the
 # accidents file
-date = '2021-01-01'
+date = predictionPath.split("_")[3].split(".")[0]
 # dayFramecut is the aggregated hour you want the prediction map to cover (1, 2, 3, 4)
-dayFrameCut = 1
+dayFrameCut = 4
 
 makePredictionMap(predictions, accidents, date, dayFrameCut)
 ########################################################################################################################

@@ -2,6 +2,7 @@
 Author: Jeremy Roland
 Purpose: Have some basic API calling methods that can be reused later, also some additional methods that convert the
     typical JSON formatted response to a DataFrame and csv file
+Reading: https://www.dataquest.io/blog/python-api-tutorial/, a site with straight forward explanations
 """
 import requests
 import json
