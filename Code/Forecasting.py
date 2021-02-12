@@ -7,6 +7,7 @@ import pandas
 from datetime import datetime
 import time
 import feather
+import geopy.distance
 
 
 # Matches up entries to existing weather from a weather file
@@ -95,6 +96,8 @@ def finding_matches(accidents, forecastData, date):
     # posData = forecastData[forecastData['Prediction'] == 1]
     # negData = forecastData[forecastData['Prediction'] == 0]
     # Cut the positive predictions to only those that have a probability over a certain threshold
+    # posData = forecastData[forecastData['Probability'] >= .75]
+    # negData = forecastData[forecastData['Probability'] < .75]
     posData = forecastData[forecastData['Probability'] >= .60]
     negData = forecastData[forecastData['Probability'] < .60]
 
@@ -111,6 +114,75 @@ def finding_matches(accidents, forecastData, date):
         for j, _ in enumerate(posData.values):
             if (accCut.Grid_Num.values[i] == posData.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
                     posData.DayFrame.values[j]):
+                TP += 1
+        for n, _ in enumerate(negData.values):
+            if (accCut.Grid_Num.values[i] == negData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
+                    negData.DayFrame.values[n]):
+                FN += 1
+    # Calculate our confusion matrix values
+    try:
+        TN = len(negData) - FN
+        FP = len(posData) - TP
+        recall = TP/(TP+FN)
+        specificity = TN / (FP + TN)
+        precision = TP/(TP+FP)
+        f1Score = 2 * ((recall * precision) / (recall + precision))
+
+        return TP, FN, TN, FP, recall, specificity, precision, f1Score
+    except:
+        print("Error in calculating confusion matrix values")
+        TN = len(negData) - FN
+        FP = len(posData) - TP
+        recall = -1
+        specificity = -1
+        precision = -1
+        f1Score = -1
+
+        return TP, FN, TN, FP, recall, specificity, precision, f1Score
+
+
+# The standard method to match actual accidents to our predicted hotspots
+# This version of finding_matches uses mileage distance to match an accident to a grid num
+def finding_matches_distance(accidents, forecastData, date):
+    """
+    Date format: m/d/yyyy
+    """
+    gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
+    # Split the data into accident predictions and non accident predictions
+    # posData = forecastData[forecastData['Prediction'] == 1]
+    # negData = forecastData[forecastData['Prediction'] == 0]
+    # Cut the positive predictions to only those that have a probability over a certain threshold
+    # posData = forecastData[forecastData['Probability'] >= .75]
+    # negData = forecastData[forecastData['Probability'] < .75]
+    posData = forecastData[forecastData['Probability'] >= .60]
+    negData = forecastData[forecastData['Probability'] < .60]
+
+    TP = 0
+    FN = 0
+    # Cut our file of all our accidents (future dates not included in our training/testing dataset) to the date we want
+    accCut = accidents[accidents['Date'] == date]
+    # Add in the dayframe variable
+    accCut['DayFrame'] = 0
+    accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
+                                       (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+    # Iterate through our actual accidents and our predictions to find matches
+    for i, _ in enumerate(accCut.values):
+        for j, _ in enumerate(posData.values):
+            accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
+            predictionGrid = posData.Grid_Num.values[j]  # Prediction Grid Num
+            # Note: the predictionGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+            # since python does counting like [0...max], we need to decrease our look up number by 1
+            # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+            centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
+            centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
+            predictionCoords = (float(centerLat), float(centerLong))
+            # Get the distance in miles between the centerpoint of our hotspot and the actual accident
+            # The distance used can be altered accordingly
+            distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
+            if (accCut.Grid_Num.values[i] == posData.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
+                    posData.DayFrame.values[j]):
+                TP += 1
+            elif distance <= 0.4 and accCut.DayFrame.values[i] == posData.DayFrame.values[j]:
                 TP += 1
         for n, _ in enumerate(negData.values):
             if (accCut.Grid_Num.values[i] == negData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
@@ -176,7 +248,9 @@ def forecastMatchingFormatter(rawAcc, forecasts):
         cutRawAcc = rawAcc[rawAcc['Date'] == date]
         print("Forecast on ", forecast)
         # If you want to use the distance matching version of finding_matches, then change what method is called
-        TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
+        # TP, FN, TN, FP, recall, specificity, precision, f1Score = finding_matches(cutRawAcc, forecastFile, date)
+        TP, FN, TN, FP, recall, specificity, precision, f1Score = \
+            finding_matches_distance(cutRawAcc, forecastFile, date)
         # Save all of our confusion matrix values, date of prediction, and model name to the dataframe
         saveDF.at[saveIterator, 'Model'] = modelName
         saveDF.at[saveIterator, 'Date'] = date
