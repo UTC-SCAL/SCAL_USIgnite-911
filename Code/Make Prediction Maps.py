@@ -91,9 +91,29 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
         folium.GeoJson(polygon, name=predictionGrid,
                        style_function=lambda x: {'fillColor': 'purple', 'color': 'black'}).add_to(m)
     # Place markers on our map for the actual accidents
+    # Split the Join Count variable into chunks, and based on the grid num of the accident we're mapping, we'll
+    # select the color and icon to use based on that join count
+    histMax = gridCoords.Join_Count.max()  # highest join count value
+    histMin = gridCoords.Join_Count.min()  # lowest join count value
+    histFirstThird = int(histMax * .33)  # first quarter join count value
+    histLastThird = int(histMax * .66)  # last quarter join count value
     for j, _ in enumerate(accCut.values):
+        info_row_num = gridCoords.loc[gridCoords["Grid_Num"] == accCut.Grid_Num.values[j]].index[0]
+        accHistoricRisk = gridCoords.Join_Count.values[info_row_num]
+        if histMin <= accHistoricRisk <= histFirstThird:
+            colorSelect = 'blue'
+            iconSelect = 'arrow-down'
+        elif histFirstThird < accHistoricRisk <= histLastThird:
+            colorSelect = 'purple'
+            iconSelect = 'minus'
+        elif histLastThird < accHistoricRisk <= histMax:
+            colorSelect = 'red'
+            iconSelect = 'arrow-up'
+        else:
+            print("error in assigning colorSelect for accident points")
+            exit()
         folium.Marker(location=[float(accCut.Latitude.values[j]), float(accCut.Longitude.values[j])],
-                      fill_color='#43d9de', radius=8).add_to(m)
+                      icon=folium.Icon(color=colorSelect, icon=iconSelect)).add_to(m)
 
     saveName = '../Main Dir/Prediction Maps/Prediction for %s DayFrame %d.html' % (date.replace("/", "-"), dayFrameCut)
     m.save(saveName)
@@ -101,7 +121,7 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
 
 ################################################ Make a Prediction Map #################################################
 # predictions is a forecast file that has the accident predictions performed for a given day
-predictionPath = 'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-02.csv'
+predictionPath = 'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-01.csv'
 predictions = pandas.read_csv("../%s" % predictionPath)
 # accidents is the file that has our accidents fetched through the email code
 accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
