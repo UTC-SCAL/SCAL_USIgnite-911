@@ -7,6 +7,7 @@ from shapely.geometry import Polygon
 import pandas
 from folium.plugins import HeatMap
 import folium
+import geopy.distance
 
 
 # Create a folium heatmap of the accidents in our accident file
@@ -60,7 +61,7 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     # Add DayFrame to our actual accidents
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-    (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+                                       (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
     # Cut our predictions down to the dayframe we want to show
     posPredictions = posPredictions[posPredictions['DayFrame'] == dayFrameCut]
     accCut = accCut[accCut['DayFrame'] == dayFrameCut]
@@ -80,6 +81,37 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     else:
         print("You entered the wrong dayFrame, fool")
         exit()
+
+    # These lists are for finding neighboring grids to map a different color
+    predictionGrids = posPredictions.Grid_Num.unique()  # Our list of grids that have predictions for accidents
+    # Get a list of accident grids that are not in our list of prediction grids
+    accNoMatchGrids = [i for i in accCut.Grid_Num.values if i not in predictionGrids]
+    # Save this list for appending matched neighboring grids
+    neighborMatchGrids = []
+    # Get neighboring grids
+    for accGrid in accNoMatchGrids:
+        # Iterate through our list of accident grids and get the center point for the grid num
+        # Note: the grid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+        # since python does counting like [0...max], we need to decrease our look up number by 1
+        # The way the gridCoords file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+        accCenterLat = gridCoords.Center_Lat.values[accGrid - 1]
+        accCenterLong = gridCoords.Center_Long.values[accGrid - 1]
+        accCoords = (float(accCenterLat), float(accCenterLong))
+
+        for predGrid in predictionGrids:
+            # Iterate through our list of prediction grids and get the center point for the grid num
+            predCenterLat = gridCoords.Center_Lat.values[predGrid - 1]
+            predCenterLong = gridCoords.Center_Long.values[predGrid - 1]
+            predCoords = (float(predCenterLat), float(predCenterLong))
+            # Get the distance in miles between the center point of our hotspot and the actual accident
+            # The distance used can be altered accordingly
+            # The distance between each hexagon in our grid is 0.509... miles, so round it up to 0.51 to find out if
+            # the grids are neighbors
+            distance = geopy.distance.vincenty(accCoords, predCoords).miles
+            if distance <= 0.51:
+                neighborMatchGrids.append(accGrid)
+
+    # Place our predicted grids on the map
     for i, _ in enumerate(posPredictions.values):
         predictionGrid = posPredictions.Grid_Num.values[i] - 1
         latList = gridCoords.Latitudes.values[predictionGrid].split(",")
@@ -90,6 +122,7 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
         polygon = Polygon(zip(longList, latList))
         folium.GeoJson(polygon, name=predictionGrid,
                        style_function=lambda x: {'fillColor': 'purple', 'color': 'black'}).add_to(m)
+
     # Place markers on our map for the actual accidents
     # Split the Join Count variable into chunks, and based on the grid num of the accident we're mapping, we'll
     # select the color and icon to use based on that join count
@@ -98,7 +131,10 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     histFirstThird = int(histMax * .33)  # first quarter join count value
     histLastThird = int(histMax * .66)  # last quarter join count value
     for j, _ in enumerate(accCut.values):
+        # Get the row number of the corresponding grid number for our accident in our grid data file
         info_row_num = gridCoords.loc[gridCoords["Grid_Num"] == accCut.Grid_Num.values[j]].index[0]
+        # Get the associated join count for our accident record, then base the color and icon of the map marker based
+        # on it
         accHistoricRisk = gridCoords.Join_Count.values[info_row_num]
         if histMin <= accHistoricRisk <= histFirstThird:
             colorSelect = 'blue'
@@ -112,8 +148,19 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
         else:
             print("error in assigning colorSelect for accident points")
             exit()
+        # Place a marker on the map for the current accident record we're looking at
         folium.Marker(location=[float(accCut.Latitude.values[j]), float(accCut.Longitude.values[j])],
                       icon=folium.Icon(color=colorSelect, icon=iconSelect)).add_to(m)
+    # Place the matched neighboring grids on our map, with a different color to distinguish them
+    for grid in neighborMatchGrids:
+        latList = gridCoords.Latitudes.values[grid - 1].split(",")
+        longList = gridCoords.Longitudes.values[grid - 1].split(",")
+        longList = list(map(lambda x: float(x), longList))
+        latList = list(map(lambda x: float(x), latList))
+
+        polygon = Polygon(zip(longList, latList))
+        folium.GeoJson(polygon, name=grid,
+                       style_function=lambda x: {'fillColor': 'yellow', 'color': 'black'}).add_to(m)
 
     saveName = '../Main Dir/Prediction Maps/Prediction for %s DayFrame %d.html' % (date.replace("/", "-"), dayFrameCut)
     m.save(saveName)
@@ -129,7 +176,7 @@ accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02
 # accidents file
 date = predictionPath.split("_")[3].split(".")[0]
 # dayFramecut is the aggregated hour you want the prediction map to cover (1, 2, 3, 4)
-dayFrameCut = 4
+dayFrameCut = 3
 
 makePredictionMap(predictions, accidents, date, dayFrameCut)
 ########################################################################################################################

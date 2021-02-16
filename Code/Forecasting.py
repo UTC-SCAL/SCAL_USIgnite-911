@@ -148,49 +148,64 @@ def finding_matches_distance(accidents, forecastData, date):
     """
     gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
     # Split the data into accident predictions and non accident predictions
-    # posPredictData = forecastData[forecastData['Prediction'] == 1]
-    # negPredictData = forecastData[forecastData['Prediction'] == 0]
+    posPredictData = forecastData[forecastData['Prediction'] == 1]
+    negPredictData = forecastData[forecastData['Prediction'] == 0]
     # Cut the positive predictions to only those that have a probability over a certain threshold
     # posPredictData = forecastData[forecastData['Probability'] >= .75]
     # negPredictData = forecastData[forecastData['Probability'] < .75]
-    posPredictData = forecastData[forecastData['Probability'] >= .60]
-    negPredictData = forecastData[forecastData['Probability'] < .60]
+    # posPredictData = forecastData[forecastData['Probability'] >= .60]
+    # negPredictData = forecastData[forecastData['Probability'] < .60]
 
-    TP = 0
-    NTP = 0
-    FN = 0
+    TP = 0  # True Positive
+    NTP = 0  # Neighbor True Positive
+    FN = 0  # False Negative
     # Cut our file of all our accidents (future dates not included in our training/testing dataset) to the date we want
     accCut = accidents[accidents['Date'] == date]
     # Add in the dayframe variable
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
                                        (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+
     # Iterate through our actual accidents and our predictions to find matches
     for i, _ in enumerate(accCut.values):
         for j, _ in enumerate(posPredictData.values):
-            accCoords = (float(accCut.Latitude.values[i]), float(accCut.Longitude.values[i]))
-            predictionGrid = posPredictData.Grid_Num.values[j]  # Prediction Grid Num
-            # Note: the predictionGrid value needs to be reduced by 1 since the Grid_Num is being used as a row num
+            # Note: the grid value needs to be reduced by 1 since the Grid_Num is being used as a row num
             # since python does counting like [0...max], we need to decrease our look up number by 1
-            # The way the gridInfo file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
-            centerLat = gridInfo.Center_Lat.values[predictionGrid - 1]
-            centerLong = gridInfo.Center_Long.values[predictionGrid - 1]
-            predictionCoords = (float(centerLat), float(centerLong))
-            # Get the distance in miles between the centerpoint of our hotspot and the actual accident
+            # The way the gridCoords file is set up, Grid_Num 1 has row 0, and Grid_Num 694 has row 693
+
+            # Get our accident's grid number, then get the center point of that grid number from our grid info file
+            accGridNum = accCut.Grid_Num.values[i]
+            accCenterLat = gridInfo.Center_Lat.values[accGridNum - 1]
+            accCenterLong = gridInfo.Center_Long.values[accGridNum - 1]
+            # Make that center point into a gps point object
+            accCoords = (float(accCenterLat), float(accCenterLong))
+
+            # Get our prediction grid's grid number, then get the center point of that grid number
+            predGridNum = posPredictData.Grid_Num.values[j]
+            predCenterLat = gridInfo.Center_Lat.values[predGridNum - 1]
+            predCenterLong = gridInfo.Center_Long.values[predGridNum - 1]
+            # Make the center point into a gps point object
+            predCoords = (float(predCenterLat), float(predCenterLong))
+
+            # Get the distance in miles between the center point of our hotspot and the actual accident
             # The distance used can be altered accordingly
-            distance = geopy.distance.vincenty(accCoords, predictionCoords).miles
+            # The distance between each hexagon in our grid is 0.509... miles,
+            # so round it up to 0.51 to find out if the grids are neighbors
+            distance = geopy.distance.vincenty(accCoords, predCoords).miles
+
             if (accCut.Grid_Num.values[i] == posPredictData.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
                     posPredictData.DayFrame.values[j]):
                 TP += 1
-                # break
-            elif distance <= 0.35 and accCut.DayFrame.values[i] == posPredictData.DayFrame.values[j]:
+                break
+            elif distance <= 0.51 and accCut.DayFrame.values[i] == posPredictData.DayFrame.values[j]:
                 NTP += 1
-                # break
+                break
         for n, _ in enumerate(negPredictData.values):
             if (accCut.Grid_Num.values[i] == negPredictData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
                     negPredictData.DayFrame.values[n]):
                 FN += 1
-                # break
+                break
+
     # Calculate our confusion matrix values
     TP = TP + NTP
     FN = FN - NTP

@@ -136,7 +136,7 @@ def logRegForecast(X, Y, newColumns, modelType):
         print("Date is ", date)
         # This file read-in requires that the date provided match the format of the date in the file name
         predictData = pandas.read_csv(
-            "../Main Dir/Forecasting/Forecast Files/Forecast Forum %s-Filled.csv" % str(date))
+            "../Main Dir/Forecasting/Forecast Files Trimmed/Forecast Forum %s-Filled.csv" % str(date))
         # Drop rows with empty values, otherwise it throws off our accuracies
         predictData = predictData.dropna()
 
@@ -222,7 +222,7 @@ standData = standardize(cutData)
 ###################################### Dropping Variables for logReg_test_type_2 #######################################
 # (Test Type 1)
 # Dropping variables based on logit table
-# standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES'], axis=1)
+standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES'], axis=1)
 # Dropping variables based on VIF scores (dropped until all scores were < 10) then dropping more based on logit table
 # standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES', 'temperature', 'Latitude', 'Longitude', 'Cloudy',
 #                             'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint', 'RainBefore', 'Unix', 'speedMode',
@@ -237,9 +237,9 @@ standData = standardize(cutData)
 #                             'yieldSignCount'], axis=1)  # T1 v4
 # T1 V4, but dropping variables based on VIF score (dropped until all scores were < 5) then dropping more vars based
 # on logit table
-standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES', 'temperature', 'Latitude', 'Longitude', 'Cloudy',
-                            'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint', 'RainBefore', 'Unix', 'stopSignCount',
-                            'yieldSignCount', 'Hour', 'cloudCover', 'WeekDay', 'Clear'], axis=1)  # T1 v5
+# standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES', 'temperature', 'Latitude', 'Longitude', 'Cloudy',
+#                             'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint', 'RainBefore', 'Unix', 'stopSignCount',
+#                             'yieldSignCount', 'Hour', 'cloudCover', 'WeekDay', 'Clear'], axis=1)  # T1 v5
 
 ########################################################################################################################
 # Statement to cut out the entries that have a speedMode of -1, meaning no speed information was available for the
