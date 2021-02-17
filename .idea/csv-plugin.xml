@@ -3,6 +3,20 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\Code\Forecasting 60.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Code\Forecasting 75.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Code\Forecasting.py">
           <value>
             <Attribute>
@@ -31,7 +45,49 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Main Dir\Forecasting\Forecast Files Trimmed\Forecast Forum 2021-01-01-Filled.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Main Dir\Forecasting\Forecast Forum Template.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\HexGrid Shape Data 2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\HexGrid Shape Data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\road_desc gridNum cleaned.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\road_desc gridNum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\road_desc.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -176,7 +176,7 @@ accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02
 # accidents file
 date = predictionPath.split("_")[3].split(".")[0]
 # dayFramecut is the aggregated hour you want the prediction map to cover (1, 2, 3, 4)
-dayFrameCut = 3
+dayFrameCut = 4
 
 makePredictionMap(predictions, accidents, date, dayFrameCut)
 ########################################################################################################################

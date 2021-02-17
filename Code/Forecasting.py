@@ -161,10 +161,13 @@ def finding_matches_distance(accidents, forecastData, date):
     FN = 0  # False Negative
     # Cut our file of all our accidents (future dates not included in our training/testing dataset) to the date we want
     accCut = accidents[accidents['Date'] == date]
+    # Create a match found variable to mark an accident record as having found a matching prediction for
+    # This is used to cut our accident list down to the non matches for finding false negatives later on
+    accCut['MatchFound'] = 0
     # Add in the dayframe variable
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                       (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+                                        (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
 
     # Iterate through our actual accidents and our predictions to find matches
     for i, _ in enumerate(accCut.values):
@@ -196,19 +199,29 @@ def finding_matches_distance(accidents, forecastData, date):
             if (accCut.Grid_Num.values[i] == posPredictData.Grid_Num.values[j] and accCut.DayFrame.values[i] ==
                     posPredictData.DayFrame.values[j]):
                 TP += 1
+                accCut.MatchFound.values[i] = 1
+                # print("Direct Matches")
+                # print("Acc Grid Num: ", accCut.Grid_Num.values[i])
+                # print("Pred Grid Num: ", posPredictData.Grid_Num.values[j])
+                # print("Acc DayFrame: ", accCut.DayFrame.values[i], accCut.Hour.values[i])
+                # print("Pred DayFrame: ", posPredictData.DayFrame.values[j])
                 break
             elif distance <= 0.51 and accCut.DayFrame.values[i] == posPredictData.DayFrame.values[j]:
                 NTP += 1
+                accCut.MatchFound.values[i] = 1
                 break
+    # Cut our accidents to only those records where a matching grid num and dayframe wasn't found
+    accCut = accCut[accCut['MatchFound'] == 0]
+    for b, _ in enumerate(accCut.values):
         for n, _ in enumerate(negPredictData.values):
-            if (accCut.Grid_Num.values[i] == negPredictData.Grid_Num.values[n] and accCut.DayFrame.values[i] ==
+            if (accCut.Grid_Num.values[b] == negPredictData.Grid_Num.values[n] and accCut.DayFrame.values[b] ==
                     negPredictData.DayFrame.values[n]):
                 FN += 1
                 break
 
     # Calculate our confusion matrix values
     TP = TP + NTP
-    FN = FN - NTP
+    # FN = FN - NTP
     try:
         TN = len(negPredictData) - FN
         FP = len(posPredictData) - TP
@@ -309,6 +322,36 @@ def forecastMatchingFormatter(rawAcc, forecasts):
 # Ensure the date format of the rawAccidents file is yyyy-mm-dd
 rawAccidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
 # Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
-forecastFiles = []
+forecastFiles = ['Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-01.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-02.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-03.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-04.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-05.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-06.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-07.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-08.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-09.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-10.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-11.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-12.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-13.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-14.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-15.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-16.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-17.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-18.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-19.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-20.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-21.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-22.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-23.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-24.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-25.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-26.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-27.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-28.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-29.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-30.csv',
+'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-31.csv']
 forecastMatchingFormatter(rawAccidents, forecastFiles)
 ########################################################################################################################
