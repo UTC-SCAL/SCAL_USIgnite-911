@@ -322,36 +322,6 @@ def forecastMatchingFormatter(rawAcc, forecasts):
 # Ensure the date format of the rawAccidents file is yyyy-mm-dd
 rawAccidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
 # Make a list of the file paths for the forecasts you've made, this will be passed in as a method parameter
-forecastFiles = ['Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-01.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-02.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-03.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-04.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-05.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-06.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-07.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-08.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-09.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-10.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-11.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-12.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-13.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-14.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-15.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-16.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-17.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-18.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-19.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-20.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-21.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-22.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-23.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-24.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-25.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-26.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-27.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-28.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-29.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-30.csv',
-'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-31.csv']
+forecastFiles = []
 forecastMatchingFormatter(rawAccidents, forecastFiles)
 ########################################################################################################################

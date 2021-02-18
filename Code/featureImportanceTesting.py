@@ -266,9 +266,7 @@ testNum = 5
 
 data = pandas.read_csv("../%s" % file)
 cutData = logReg_test_type_2(data, testNum)
-cutData = cutData.drop(['RoadwayFeatureMode', 'oneWayStop', 'twoWayStop', 'oneWayYield', 'twoWayYield',
-                            'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure', 'TY_TERRAIN', 'NBR_LANES',
-                            'oneWayYieldCount', 'fourWayStopCount'], axis=1)
+cutData = cutData.drop([], axis=1)
 
 if "speedMode" in cutData.columns:
     cutData = cutData[cutData['speedMode'] > 0]

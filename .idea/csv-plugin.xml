@@ -66,6 +66,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Main Dir\Shapefiles\Grid Num Data Check.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Shapefiles\Grid Num Diffs Top 5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Main Dir\Shapefiles\HexGrid Shape Data 2.csv">
           <value>
             <Attribute>

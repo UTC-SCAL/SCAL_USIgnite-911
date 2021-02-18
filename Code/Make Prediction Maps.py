@@ -25,6 +25,36 @@ def accidentHeatmap(accidents):
     m.save("../Main Dir/Prediction Maps/Accident Heatmap.html")
 
 
+def graphCdotEtrimsData(gridNum):
+    cdotStops = pandas.read_csv("../Main Dir/Shapefiles/CDOT Stop Sign Data.csv")
+    etrimsStops = pandas.read_csv("../Main Dir/Shapefiles/road_desc.csv")
+
+    # Set our map
+    m = folium.Map([35.0899, -85.2505], zoom_start=12, tiles='Stamen Terrain')
+    folium.LatLngPopup().add_to(m)
+
+    cdotStopsCut = cdotStops[cdotStops['Grid_Num'] == gridNum]
+    etrimsStopsCut = etrimsStops[etrimsStops['Grid_Num'] == gridNum]
+
+    for i, _ in enumerate(cdotStopsCut.values):
+        folium.Marker(location=[float(cdotStopsCut.Latitude.values[i]), float(cdotStopsCut.Longitude.values[i])],
+                      icon=folium.Icon(color='green', icon='asterisk')).add_to(m)
+    for j, _ in enumerate(etrimsStopsCut.values):
+        if 'TRAFFIC SIGNAL' in etrimsStopsCut.Description.values[j]:
+            iconSelect = 'arrow-up'
+        elif 'STOP' in etrimsStopsCut.Description.values[j]:
+            iconSelect = 'asterisk'
+        elif 'YIELD' in etrimsStopsCut.Description.values[j]:
+            iconSelect = 'arrow-down'
+        else:
+            iconSelect = 'heart'
+        folium.Marker(location=[float(etrimsStopsCut.Latitude.values[j]), float(etrimsStopsCut.Longitude.values[j])],
+                      icon=folium.Icon(color='blue', icon=iconSelect)).add_to(m)
+
+    saveName = '../Main Dir/Prediction Maps/CDOT vs Etrims Stop Signs.html'
+    m.save(saveName)
+
+
 # Draw our hex grid on a folium map
 def drawHexGrid():
     # Set our map
@@ -166,19 +196,23 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
     m.save(saveName)
 
 
+#################################### Graphing CDOT data and ETRIMS On a Folium Map #####################################
+# Just supply the grid number you want to graph data for
+graphCdotEtrimsData(48)
+########################################################################################################################
 ################################################ Make a Prediction Map #################################################
 # predictions is a forecast file that has the accident predictions performed for a given day
-predictionPath = 'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-01.csv'
-predictions = pandas.read_csv("../%s" % predictionPath)
+# predictionPath = 'Main Dir/Logistic Regression Tests/LogReg_SS 5050_Forecast_2021-01-01.csv'
+# predictions = pandas.read_csv("../%s" % predictionPath)
 # accidents is the file that has our accidents fetched through the email code
-accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
+# accidents = pandas.read_csv("../Main Dir/Accident Data/EmailAccidentData_2021-02-08.csv")
 # date is the date that the prediction file has predictions for. Make sure its format matches the date format of the
 # accidents file
-date = predictionPath.split("_")[3].split(".")[0]
+# date = predictionPath.split("_")[3].split(".")[0]
 # dayFramecut is the aggregated hour you want the prediction map to cover (1, 2, 3, 4)
-dayFrameCut = 4
+# dayFrameCut = 4
 
-makePredictionMap(predictions, accidents, date, dayFrameCut)
+# makePredictionMap(predictions, accidents, date, dayFrameCut)
 ########################################################################################################################
 
 ################################################ Create a Heatmap ######################################################
