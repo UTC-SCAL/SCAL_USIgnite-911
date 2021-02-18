@@ -51,12 +51,24 @@ def test_type(data, type):
     return dataChanged
 
 
+# A new version of determining test types, to avoid over cluttering the previous method
 def logReg_test_type_2(data, type):
     # All variables
     col1 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'pressure', 'temperature', 'uvIndex',
             'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'speedMode']
+    # All variables, but with the newly added specific roadway/intersection variables
+    col5 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+               'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+               'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+               'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+               'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+               'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
+               'speedMode', 'oneWayStop', 'oneWayStopCount', 'twoWayStop',
+               'twoWayStopCount', 'oneWayYield', 'oneWayYieldCount', 'twoWayYield',
+               'twoWayYieldCount', 'threeWayStop', 'threeWayStopCount', 'fourWayStop',
+               'fourWayStopCount', 'trafficSignal', 'trafficSignalCount']
     # No weather variables
     col2 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
@@ -70,8 +82,6 @@ def logReg_test_type_2(data, type):
             'precipIntensity', 'pressure', 'temperature', 'uvIndex',
             'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
-    # Variables included after the OLS testing
-    col5 = []
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 2:
@@ -80,6 +90,8 @@ def logReg_test_type_2(data, type):
         dataChanged = data.reindex(columns=col3)
     elif type == 4:
         dataChanged = data.reindex(columns=col4)
+    elif type == 5:
+        dataChanged = data.reindex(columns=col5)
 
     return dataChanged
 
@@ -250,13 +262,16 @@ def get_ols(formula, data):
 
 # Read in the file and set what the test number is, that's all you've gotta change
 file = "Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv"
-testNum = 1
+testNum = 5
 
 data = pandas.read_csv("../%s" % file)
 cutData = logReg_test_type_2(data, testNum)
-cutData = cutData.drop([], axis=1)
+cutData = cutData.drop(['RoadwayFeatureMode', 'oneWayStop', 'twoWayStop', 'oneWayYield', 'twoWayYield',
+                            'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure', 'TY_TERRAIN', 'NBR_LANES',
+                            'oneWayYieldCount', 'fourWayStopCount'], axis=1)
 
 if "speedMode" in cutData.columns:
     cutData = cutData[cutData['speedMode'] > 0]
 
 cutData = standardize(cutData)
+calculate_vif(cutData)

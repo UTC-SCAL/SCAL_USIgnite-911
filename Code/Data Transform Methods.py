@@ -48,6 +48,7 @@ def add_roadwayInfo(data, gridInfo):
         # for each grid block
         # Get the row number to use in grid info based on the grid number of the accident
         # The basic idea here is to match row numbers based on grid number numbers
+        # NOTE: you may not need all of these variables, just comment out the variables you don't need
         info_row_num = gridInfo.loc[gridInfo["Grid_Num"] == data.Grid_Num.values[i]].index[0]
         data.Join_Count.values[i] = gridInfo.Join_Count.values[info_row_num]
         data.NBR_LANES.values[i] = gridInfo.NBR_LANES.values[info_row_num]
@@ -58,6 +59,20 @@ def add_roadwayInfo(data, gridInfo):
         data.yieldSignCount.values[i] = gridInfo.yieldSignCount.values[info_row_num]
         data.stopSignCount.values[i] = gridInfo.stopSignCount.values[info_row_num]
         data.speedMode.values[i] = gridInfo.speedMode.values[info_row_num]
+        data.oneWayStop.values[i] = gridInfo.oneWayStop.values[info_row_num]
+        data.oneWayStopCount.values[i] = gridInfo.oneWayStopCount.values[info_row_num]
+        data.twoWayStop.values[i] = gridInfo.twoWayStop.values[info_row_num]
+        data.twoWayStopCount.values[i] = gridInfo.twoWayStopCount.values[info_row_num]
+        data.oneWayYield.values[i] = gridInfo.oneWayYield.values[info_row_num]
+        data.oneWayYieldCount.values[i] = gridInfo.oneWayYieldCount.values[info_row_num]
+        data.twoWayYield.values[i] = gridInfo.twoWayYield.values[info_row_num]
+        data.twoWayYieldCount.values[i] = gridInfo.twoWayYieldCount.values[info_row_num]
+        data.threeWayStop.values[i] = gridInfo.threeWayStop.values[info_row_num]
+        data.threeWayStopCount.values[i] = gridInfo.threeWayStopCount.values[info_row_num]
+        data.fourWayStop.values[i] = gridInfo.fourWayStop.values[info_row_num]
+        data.fourWayStopCount.values[i] = gridInfo.fourWayStopCount.values[info_row_num]
+        data.trafficSignal.values[i] = gridInfo.trafficSignal.values[info_row_num]
+        data.trafficSignalCount.values[i] = gridInfo.trafficSignalCount.values[info_row_num]
 
     return data
 

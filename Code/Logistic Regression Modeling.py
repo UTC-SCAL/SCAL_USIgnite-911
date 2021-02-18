@@ -84,6 +84,17 @@ def logReg_test_type_2(data, type):
             'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity', 'pressure', 'temperature', 'uvIndex',
             'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'speedMode']
+    # All variables, but with the newly added specific roadway/intersection variables
+    col5 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+               'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+               'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+               'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+               'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+               'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
+               'speedMode', 'oneWayStop', 'oneWayStopCount', 'twoWayStop',
+               'twoWayStopCount', 'oneWayYield', 'oneWayYieldCount', 'twoWayYield',
+               'twoWayYieldCount', 'threeWayStop', 'threeWayStopCount', 'fourWayStop',
+               'fourWayStopCount', 'trafficSignal', 'trafficSignalCount']
     # No weather variables
     col2 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
@@ -97,8 +108,6 @@ def logReg_test_type_2(data, type):
             'precipIntensity', 'pressure', 'temperature', 'uvIndex',
             'visibility', 'windSpeed', 'Rain', 'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
             'DayOfWeek']
-    # Variables included after the OLS testing
-    col5 = []
     if type == 1:
         dataChanged = data.reindex(columns=col1)
     elif type == 2:
@@ -107,6 +116,8 @@ def logReg_test_type_2(data, type):
         dataChanged = data.reindex(columns=col3)
     elif type == 4:
         dataChanged = data.reindex(columns=col4)
+    elif type == 5:
+        dataChanged = data.reindex(columns=col5)
 
     return dataChanged
 
@@ -183,7 +194,7 @@ data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split 
 modelType = 'SS 5050'
 # set what variables to use
 # cutData = logReg_test_type(data, 1)
-cutData = logReg_test_type_2(data, 1)
+cutData = logReg_test_type_2(data, 5)
 # standardize the data
 standData = standardize(cutData)
 
@@ -241,11 +252,31 @@ standData = standardize(cutData)
 #                             'yieldSignCount'], axis=1)  # T1 v4
 # T1 V4, but dropping variables based on VIF score (dropped until all scores were < 5) then dropping more vars based
 # on logit table
-standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES', 'temperature', 'Latitude', 'Longitude', 'Cloudy',
-                            'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint', 'RainBefore', 'Unix', 'stopSignCount',
-                            'yieldSignCount', 'Hour', 'cloudCover', 'WeekDay', 'Clear'], axis=1)  # T1 v5
+# standData = standData.drop(['pressure', 'TY_TERRAIN', 'NBR_LANES', 'temperature', 'Latitude', 'Longitude', 'Cloudy',
+#                             'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint', 'RainBefore', 'Unix', 'stopSignCount',
+#                             'yieldSignCount', 'Hour', 'cloudCover', 'WeekDay', 'Clear'], axis=1)  # T1 v5
 
 ########################################################################################################################
+
+################ Dropping Variables for logReg_test_type_2 with new roadway/intersection variables #####################
+# Dropping variables based on logit table
+# standData = standData.drop(['RoadwayFeatureMode', 'oneWayStop', 'twoWayStop', 'oneWayYield', 'twoWayYield',
+#                             'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure', 'TY_TERRAIN', 'NBR_LANES',
+#                             'oneWayYieldCount', 'fourWayStopCount'], axis=1)  # V1
+# Dropping more vars based on VIF scores (dropped until all scores were < 10), then dropping more based on logit table
+# standData = standData.drop(['RoadwayFeatureMode', 'oneWayStop', 'twoWayStop', 'oneWayYield', 'twoWayYield',
+#                             'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure', 'TY_TERRAIN', 'NBR_LANES',
+#                             'oneWayYieldCount', 'fourWayStopCount', 'temperature', 'Latitude', 'Longitude',
+#                             'Cloudy', 'stopSignCount', 'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint',
+#                             'RainBefore', 'twoWayYieldCount', 'Unix'], axis=1)  # V2
+# Dropping more vars based on VIF scores (dropped until all scores were < 5)
+standData = standData.drop(['RoadwayFeatureMode', 'oneWayStop', 'twoWayStop', 'oneWayYield', 'twoWayYield',
+                        'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure', 'TY_TERRAIN', 'NBR_LANES',
+                        'oneWayYieldCount', 'fourWayStopCount', 'temperature', 'Latitude', 'Longitude',
+                        'Cloudy', 'stopSignCount', 'FUNC_CLASS', 'humidity', 'visibility', 'dewPoint',
+                        'RainBefore', 'twoWayYieldCount', 'Unix', 'cloudCover', 'Hour', 'WeekDay'], axis=1)  # V3
+########################################################################################################################
+
 # Statement to cut out the entries that have a speedMode of -1, meaning no speed information was available for the
 # associated grid num
 # only triggers if speedMode is in the list of columns being used
@@ -259,8 +290,8 @@ Y = standData.iloc[:, 0].values  # Our dependent variable
 # Perform predictions
 # In general, I think it's a good idea to run the other code below this method first to get a better understanding
 # of your data
-logRegForecast(X, Y, newColumns, modelType)
-exit()
+# logRegForecast(X, Y, newColumns, modelType)
+# exit()
 
 # Make a Logic Table
 logit_model = sm.Logit(Y, X)
