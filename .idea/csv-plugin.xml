@@ -66,6 +66,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Main Dir\Logistic Regression Tests\LogReg_SS 5050_Forecast_2021-01-01.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Main Dir\Shapefiles\Grid Num Data Check.csv">
           <value>
             <Attribute>

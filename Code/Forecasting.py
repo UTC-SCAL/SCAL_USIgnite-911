@@ -148,13 +148,13 @@ def finding_matches_distance(accidents, forecastData, date):
     """
     gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
     # Split the data into accident predictions and non accident predictions
-    posPredictData = forecastData[forecastData['Prediction'] == 1]
-    negPredictData = forecastData[forecastData['Prediction'] == 0]
+    # posPredictData = forecastData[forecastData['Prediction'] == 1]
+    # negPredictData = forecastData[forecastData['Prediction'] == 0]
     # Cut the positive predictions to only those that have a probability over a certain threshold
     # posPredictData = forecastData[forecastData['Probability'] >= .75]
     # negPredictData = forecastData[forecastData['Probability'] < .75]
-    # posPredictData = forecastData[forecastData['Probability'] >= .60]
-    # negPredictData = forecastData[forecastData['Probability'] < .60]
+    posPredictData = forecastData[forecastData['Probability'] >= .60]
+    negPredictData = forecastData[forecastData['Probability'] < .60]
 
     TP = 0  # True Positive
     NTP = 0  # Neighbor True Positive
