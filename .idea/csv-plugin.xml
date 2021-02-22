@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Code\mysite\manage.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Code\scratchSheet.py">
           <value>
             <Attribute>
