@@ -69,6 +69,13 @@ def logReg_test_type_2(data, type):
                'twoWayStopCount', 'oneWayYield', 'oneWayYieldCount', 'twoWayYield',
                'twoWayYieldCount', 'threeWayStop', 'threeWayStopCount', 'fourWayStop',
                'fourWayStopCount', 'trafficSignal', 'trafficSignalCount']
+    # Same as col5, but with no etrims roadway/intersection variables or cdot data
+    col6 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+               'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+               'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+               'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+               'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+               'DayOfWeek', 'speedMode']
     # No weather variables
     col2 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
@@ -92,6 +99,8 @@ def logReg_test_type_2(data, type):
         dataChanged = data.reindex(columns=col4)
     elif type == 5:
         dataChanged = data.reindex(columns=col5)
+    elif type == 6:
+        dataChanged = data.reindex(columns=col6)
 
     return dataChanged
 

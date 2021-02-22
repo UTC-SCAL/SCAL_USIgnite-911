@@ -95,6 +95,13 @@ def logReg_test_type_2(data, type):
                'twoWayStopCount', 'oneWayYield', 'oneWayYieldCount', 'twoWayYield',
                'twoWayYieldCount', 'threeWayStop', 'threeWayStopCount', 'fourWayStop',
                'fourWayStopCount', 'trafficSignal', 'trafficSignalCount']
+    # Same as col5, but with no etrims roadway/intersection variables or cdot data
+    col6 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour',
+               'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
+               'FUNC_CLASS', 'cloudCover', 'dewPoint', 'humidity', 'precipIntensity',
+               'pressure', 'temperature', 'uvIndex', 'visibility', 'windSpeed', 'Rain',
+               'Cloudy', 'Foggy', 'Snow', 'Clear', 'RainBefore', 'DayFrame', 'WeekDay',
+               'DayOfWeek', 'speedMode']
     # No weather variables
     col2 = ['Accident', 'Longitude', 'Latitude', 'Unix', 'Hour', 'Join_Count', 'Grid_Num', 'NBR_LANES', 'TY_TERRAIN',
             'FUNC_CLASS', 'DayFrame', 'WeekDay', 'DayOfWeek', 'RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount',
@@ -118,6 +125,8 @@ def logReg_test_type_2(data, type):
         dataChanged = data.reindex(columns=col4)
     elif type == 5:
         dataChanged = data.reindex(columns=col5)
+    elif type == 6:
+        dataChanged = data.reindex(columns=col6)
 
     return dataChanged
 
@@ -190,8 +199,6 @@ def add_weather(data, weather):
 
 # The data to create the model from
 data = pandas.read_csv("../Main Dir/Spatial Shift Negatives/SS Data 50-50 Split (2020 Update).csv")
-print(data.columns)
-exit()
 # The type model, it reflects the negative sampling used and the data ratio split
 modelType = 'SS 5050'
 # set what variables to use
@@ -274,11 +281,47 @@ standData = standardize(cutData)
 #                             'Cloudy', 'humidity', 'FUNC_CLASS', 'visibility', 'dewPoint', 'RainBefore', 'Unix',
 #                             'fourWayStopCount'], axis=1)  # V2
 # Dropped more variables based on VIF scores (dropped til all scores were < 5)
-standData = standData.drop(['RoadwayFeatureMode', 'stopSignCount', 'yieldSignCount', 'oneWayStop','twoWayStop',
-                            'oneWayYield', 'twoWayYield', 'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure',
-                            'NBR_LANES', 'TY_TERRAIN', 'twoWayYieldCount', 'temperature', 'Latitude', 'Longitude',
-                            'Cloudy', 'humidity', 'FUNC_CLASS', 'visibility', 'dewPoint', 'RainBefore', 'Unix',
-                            'fourWayStopCount', 'cloudCover', 'Hour', 'WeekDay'], axis=1)  # V3
+# standData = standData.drop(['RoadwayFeatureMode', 'stopSignCount', 'yieldSignCount', 'oneWayStop','twoWayStop',
+#                             'oneWayYield', 'twoWayYield', 'threeWayStop', 'fourWayStop', 'trafficSignal', 'pressure',
+#                             'NBR_LANES', 'TY_TERRAIN', 'twoWayYieldCount', 'temperature', 'Latitude', 'Longitude',
+#                             'Cloudy', 'humidity', 'FUNC_CLASS', 'visibility', 'dewPoint', 'RainBefore', 'Unix',
+#                             'fourWayStopCount', 'cloudCover', 'Hour', 'WeekDay'], axis=1)  # V3
+########################################################################################################################
+
+################ Dropping Variables for logReg_test_type_2 with new roadway/intersection variables #####################
+# Dropping variables based on logit table, focusing on binary version of etrims data, dropped additional vars based on
+# VIF scores (dropped until all values were < 10)
+# standData = standData.drop(['RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'oneWayStopCount',
+#                             'twoWayStopCount', 'oneWayYieldCount', 'twoWayYieldCount', 'threeWayStopCount',
+#                             'fourWayStopCount', 'trafficSignalCount', 'pressure', 'Longitude', 'Latitude',
+#                             'TY_TERRAIN', 'temperature', 'Cloudy', 'FUNC_CLASS', 'humidity', 'visibility',
+#                             'dewPoint'], axis=1)  # V1
+# Dropping more variables based on logit table
+# standData = standData.drop(['RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'oneWayStopCount',
+#                             'twoWayStopCount', 'oneWayYieldCount', 'twoWayYieldCount', 'threeWayStopCount',
+#                             'fourWayStopCount', 'trafficSignalCount', 'pressure', 'Longitude', 'Latitude',
+#                             'TY_TERRAIN', 'temperature', 'Cloudy', 'FUNC_CLASS', 'humidity', 'visibility',
+#                             'dewPoint', 'RainBefore', 'Unix', 'fourWayStop'], axis=1)  # V2
+# Dropping more variables based on VIF scores (dropped until all scores < 5), then dropping more based on logit table
+# standData = standData.drop(['RoadwayFeatureMode', 'yieldSignCount', 'stopSignCount', 'oneWayStopCount',
+#                             'twoWayStopCount', 'oneWayYieldCount', 'twoWayYieldCount', 'threeWayStopCount',
+#                             'fourWayStopCount', 'trafficSignalCount', 'pressure', 'Longitude', 'Latitude',
+#                             'TY_TERRAIN', 'temperature', 'Cloudy', 'FUNC_CLASS', 'humidity', 'visibility',
+#                             'dewPoint', 'RainBefore', 'Unix', 'fourWayStop', 'cloudCover', 'Hour', 'oneWayStop',
+#                             'WeekDay', 'NBR_LANES', 'Clear'], axis=1)  # V3
+########################################################################################################################
+
+########### Dropping Variables for logReg_test_type_2, without etrims intersection or cdot variables ###################
+# Variables dropped based on logit table the VIF scores (til all scores were < 10), then more dropped on logit table
+# standData = standData.drop(['pressure', 'temperature', 'Latitude', 'Longitude', 'Cloudy', 'TY_TERRAIN', 'humidity',
+#                             'FUNC_CLASS', 'visibility', 'dewPoint'], axis=1)  # V1
+# Dropped more variables based on logit table
+# standData = standData.drop(['pressure', 'temperature', 'Latitude', 'Longitude', 'Cloudy', 'TY_TERRAIN', 'humidity',
+#                             'FUNC_CLASS', 'visibility', 'dewPoint', 'RainBefore'], axis=1)  # V2
+# Dropped more variables based on VIF scores (dropped until all scores were < 5)
+# standData = standData.drop(['pressure', 'temperature', 'Latitude', 'Longitude', 'Cloudy', 'TY_TERRAIN', 'humidity',
+#                             'FUNC_CLASS', 'visibility', 'dewPoint', 'RainBefore', 'cloudCover', 'Hour', 'WeekDay',
+#                             'Clear'], axis=1)  # V3
 ########################################################################################################################
 
 # Statement to cut out the entries that have a speedMode of -1, meaning no speed information was available for the

@@ -107,7 +107,7 @@ def finding_matches(accidents, forecastData, date):
     # Add in the dayframe variable
     accCut['DayFrame'] = 0
     accCut.DayFrame = accCut.Hour.apply(lambda x: 1 if 0 <= x <= 4 or 19 <= x <= 23 else
-                                       (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
+                                        (2 if 5 <= x <= 9 else (3 if 10 <= x <= 13 else 4)))
     # Iterate through our actual accidents and our predictions to find matches
     for i, _ in enumerate(accCut.values):
         for j, _ in enumerate(posPredictData.values):
@@ -148,13 +148,13 @@ def finding_matches_distance(accidents, forecastData, date):
     """
     gridInfo = pandas.read_csv("../Main Dir/Shapefiles/HexGrid Shape Data.csv")
     # Split the data into accident predictions and non accident predictions
-    # posPredictData = forecastData[forecastData['Prediction'] == 1]
-    # negPredictData = forecastData[forecastData['Prediction'] == 0]
+    posPredictData = forecastData[forecastData['Prediction'] == 1]
+    negPredictData = forecastData[forecastData['Prediction'] == 0]
     # Cut the positive predictions to only those that have a probability over a certain threshold
     # posPredictData = forecastData[forecastData['Probability'] >= .75]
     # negPredictData = forecastData[forecastData['Probability'] < .75]
-    posPredictData = forecastData[forecastData['Probability'] >= .60]
-    negPredictData = forecastData[forecastData['Probability'] < .60]
+    # posPredictData = forecastData[forecastData['Probability'] >= .60]
+    # negPredictData = forecastData[forecastData['Probability'] < .60]
 
     TP = 0  # True Positive
     NTP = 0  # Neighbor True Positive

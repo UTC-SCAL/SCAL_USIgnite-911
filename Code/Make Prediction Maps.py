@@ -198,7 +198,7 @@ def makePredictionMap(predictions, accidents, date, dayFrameCut):
 
 #################################### Graphing CDOT data and ETRIMS On a Folium Map #####################################
 # Just supply the grid number you want to graph data for
-graphCdotEtrimsData(48)
+graphCdotEtrimsData(58)
 ########################################################################################################################
 ################################################ Make a Prediction Map #################################################
 # predictions is a forecast file that has the accident predictions performed for a given day
