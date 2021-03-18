@@ -52,7 +52,49 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Code\mysite\scratchSheet.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Code\parkVisitData_Splicing.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Code\pytest_test.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Code\scratchSheet.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Code\test_pytest_test.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Chatt_CBlocks_Road_Fields Altered.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Chatt_CBlocks_Road_Fields.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -73,7 +115,42 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Main Dir\Logistic Regression Tests\2021 Tests.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Main Dir\Logistic Regression Tests\LogReg_SS 5050_Forecast_2021-01-01.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Park Visit Data Formatted Checkpoint.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Park Visit Data Formatted v2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Park Visit Data Formatted v3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Main Dir\Park Visit Data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

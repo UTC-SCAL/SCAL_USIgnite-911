@@ -4,6 +4,7 @@ Purpose: A template for using pytest, a tool that, at it's simplest level, can d
     of your code to make sure everything works as it should
 Note: run pip install -U pytest in your python console to install. You can run pytest via the console by typing pytest
     Pytest will run any file that follows this naming format: test_*.py or *_test.py
+Url example: https://www.jetbrains.com/help/pycharm/pytest.html
 """
 import pytest
 
